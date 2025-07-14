@@ -9338,6 +9338,7 @@
   }]
 
   const exports = items
+
   if (self) {
     self.sotnRando = Object.assign(self.sotnRando || {}, {
       items: exports,

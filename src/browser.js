@@ -537,6 +537,7 @@ function displayRandomSplashText(seasonalEvent) {
     elems.immunityPotionMode.checked = !!options.immunityPotionMode
     elems.godspeedMode.checked = !!options.godspeedMode
     elems.libraryShortcut.checked = !!options.libraryShortcut
+    elems.elemChaosMode.checked = !!options.elemChaosMode
     elems.devStashMode.checked = !!options.devStashMode
     elems.bossMusicSeparation.checked = !!options.bossMusicSeparation
   }
@@ -964,6 +965,10 @@ function displayRandomSplashText(seasonalEvent) {
     localStorage.setItem('libraryShortcut', elems.libraryShortcut.checked)
   }
 
+  function elemChaosModeChange() {
+    localStorage.setItem('elemChaosMode', elems.elemChaosMode.checked)
+  }
+
   function devStashModeChange() {
     localStorage.setItem('devStashMode', elems.devStashMode.checked)
   }
@@ -1180,6 +1185,9 @@ function displayRandomSplashText(seasonalEvent) {
     }
     if (elems.libraryShortcut.checked) {
       options.libraryShortcut = true
+    }
+    if (elems.elemChaosMode.checked) {
+      options.elemChaosMode = true
     }
     if (elems.devStashMode.checked) {
       options.devStashMode = true
@@ -1600,7 +1608,11 @@ function displayRandomSplashText(seasonalEvent) {
         }
         // Apply enemy stat rando patches.
         if (options.enemyStatRandoMode || applied.enemyStatRandoMode) {
-          check.apply(util.applyenemyStatRandoPatches(rng))
+          let chaosFlag = false
+          if (options.elemChaosMode || applied.elemChaosMode) {
+            chaosFlag = true
+          }
+          check.apply(util.applyenemyStatRandoPatches(rng,chaosFlag))
         }
         // Apply shop price rando patches.
         if (options.shopPriceRandoMode || applied.shopPriceRandoMode) {
@@ -1632,6 +1644,10 @@ function displayRandomSplashText(seasonalEvent) {
         // Apply library shortcut patches.
         if (options.libraryShortcut || applied.libraryShortcut) {
           check.apply(util.applyLibraryShortcutPatches())
+        }
+        // Apply elemental chaos patches.
+        if (options.elemChaosMode || applied.elemChaosMode) {
+          check.apply(util.applyElemChaosPatches(rng))
         }
         // Apply dev stash patches.
         if (options.devStashMode || applied.devStashMode) {
@@ -1816,7 +1832,7 @@ function displayRandomSplashText(seasonalEvent) {
         )
       }).then(function(result) {
         const duration = new Date().getTime() - start
-        console.log('Seed generation took ' + (duration / 1000) + 's')
+        // console.log('Seed generation took ' + (duration / 1000) + 's')
         if(selectedPreset !== null){
           doApiRequest("/data/presets", "POST", {
             "preset": selectedPreset,
@@ -1928,6 +1944,7 @@ function displayRandomSplashText(seasonalEvent) {
     elems.immunityPotionMode.disabled = false
     elems.godspeedMode.disabled = false
     elems.libraryShortcut.disabled = false
+    elems.elemChaosMode.disabled = false
     elems.devStashMode.disabled = false
     elems.seasonalPhrasesMode.disabled = false
     elems.seasonalPhrasesMode.value = true
@@ -2181,6 +2198,7 @@ function displayRandomSplashText(seasonalEvent) {
     immunityPotionMode: document.getElementById('immunity-potion-mode'),
     godspeedMode: document.getElementById('godspeed-mode'),
     libraryShortcut: document.getElementById('library-shortcut'),
+    elemChaosMode: document.getElementById('elem-chaos'),
     devStashMode: document.getElementById('dev-stash'),
     seasonalPhrasesMode: document.getElementById('seasonal-phrases'),
     bossMusicSeparation: document.getElementById('boss-music-separation'),
@@ -2274,6 +2292,7 @@ function displayRandomSplashText(seasonalEvent) {
   elems.immunityPotionMode.addEventListener('change', immunityPotionModeChange)
   elems.godspeedMode.addEventListener('change', godspeedModeChange)
   elems.libraryShortcut.addEventListener('change', libraryShortcutChange)
+  elems.elemChaosMode.addEventListener('change', elemChaosModeChange)
   elems.devStashMode.addEventListener('change', devStashModeChange)
   elems.seasonalPhrasesMode.addEventListener('change', seasonalPhrasesModeChange)
   elems.bossMusicSeparation.addEventListener('change', bossMusicSeparationChange)
@@ -2615,6 +2634,7 @@ function displayRandomSplashText(seasonalEvent) {
   loadOption('immunityPotionMode', immunityPotionModeChange, false)
   loadOption('godspeedMode', godspeedModeChange, false)
   loadOption('libraryShortcut', libraryShortcutChange, false)
+  loadOption('elemChaosMode', elemChaosModeChange, false)
   loadOption('devStashMode', devStashModeChange, false)
   loadOption('seasonalPhrasesMode', seasonalPhrasesModeChange, true)
   loadOption('bossMusicSeparation', bossMusicSeparationChange, true)

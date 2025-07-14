@@ -666,6 +666,11 @@ const yargs = require('yargs')
     describe: 'Opens a shortcut to allow players to swiftly exit the Long Library.',
     type: 'boolean',
   })
+  .option('elemChaos', {
+    alias: 'ec',
+    describe: 'Randomizes almost every element in the game.',
+    type: 'boolean',
+  })
   .option('devStash', {
     alias: 'dev',
     describe: '???',
@@ -1179,6 +1184,11 @@ if ('debug' in argv) {console.log('randomize | Set libShort')}
 if (argv.libShort) {
   options.libraryShortcut = true
 }
+if ('debug' in argv) {console.log('randomize | Set elemChaos')}
+// Enable elemental chaos if specified. - eldri7ch
+if (argv.elemChaos) {
+  options.elemChaosMode = true
+}
 if ('debug' in argv) {console.log('randomize | Set devStash')}
 // Enable Dev's Stash if specified. - eldri7ch
 if (argv.devStash) {
@@ -1507,7 +1517,11 @@ if ('debug' in argv) {console.log('randomize | Start randomization')}
             seed,
             0,
           ))
-          check.apply(util.applyenemyStatRandoPatches(rng))
+          let chaosFlag = false
+          if (options.elemChaosMode || applied.elemChaosMode) {
+            chaosFlag = true
+          }
+          check.apply(util.applyenemyStatRandoPatches(rng,chaosFlag))
         }
         if ('debug' in argv) {console.log('randomize | function: randomize | Enemy Stat Randomizer Mode | ' + optFlag)}
         optFlag = false
@@ -1575,6 +1589,18 @@ if ('debug' in argv) {console.log('randomize | Start randomization')}
           check.apply(util.applyLibraryShortcutPatches())
         }
         if ('debug' in argv) {console.log('randomize | function: randomize | Library Shortcut | ' + optFlag)}
+        optFlag = false
+        if (options.elemChaosMode || applied.elemChaosMode) { // elemental chaos - eldrich
+          optFlag = true
+          rng = new require('seedrandom')(util.saltSeed(
+            version,
+            options,
+            seed,
+            0,
+          ))
+          check.apply(util.applyElemChaosPatches(rng))
+        }
+        if ('debug' in argv) {console.log('randomize | function: randomize | Elemental Chaos | ' + optFlag)}
         optFlag = false
         if (options.devStashMode || applied.devStashMode) { // dev's stash - eldrich
           optFlag = true

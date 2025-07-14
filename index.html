@@ -685,9 +685,7 @@
                       <span class="tooltip-indicator">?</span>
                       <span class="tooltip hidden">
                         <span>
-                          Guarantees drops from every enemy that has one. Ring of
-                          Arcana makes them drop their rare item instead of the 
-                          uncommon.
+                          Guarantees drops from every enemy that has one. Rarity changes based on kill count odd / even.
                         </span>
                       </span>
                     </span>
@@ -755,7 +753,19 @@
                   </label>
                 </div>
                 <div>     </div>
-                <div>     </div>
+                <div>     
+                  <input id="elem-chaos" type="checkbox">
+                  <label for="elem-chaos">Elemental Chaos
+                    <span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>
+                          Randomizes almost every single element in the game.
+                        </span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
                 <div>     </div>
                 <div>     </div>
                 <div>     </div>
@@ -886,71 +896,85 @@
         <div id="notification">Copied to clipboard</div>
         <hr>
         <h2><a id="changelog">Changelog</a></h2>
-        <h3>July 14, 2025</h3>
+        <h3>August 11, 2025</h3>
           <h4>Preset Changes</h4>
             <ul>
-              <li>Removed $700 and $5000 drops from Rat Race.</li>
-              <li>Guaranteed drops for Hitman, Target Confirmed, and Rampage.</li>
-              <li>Has anyone really been far even as decided to use even go fix to do Glitch more like?</li>
+              <li>The time of the eldri7ch is over, the age of the Glitch has come.</li>
             </ul>
           <h4>Option Changes</h4>
             <ul>
-              <li>Removed game freeze in Colosseum room with Valhalla Knights.</li>
+              <li>Added Elemental Chaos Mode.</li>
+              <li>Re-worked many enemies in Enemy Stat Randomizer.</li>
+              <li>Added enemy projectiles to Enemy Stat Randomizer.</li>
+              <li>Randomized certain bosses' attack elements in Enemy Stat Randomizer.</li>
+              <li>Corrected a lot of name card issues in Enemy Stat Randomizer.</li>
+              <li>Removed ability for enemy weakness to also be their resist, immunity, or absorb.</li>
             </ul>
         <a id="show-older" href="#older">Show older changes</a>
         <div id="older" class="hidden">
+          <h3>July 14, 2025</h3>
+            <h4>Preset Changes</h4>
+              <ul>
+                <li>Removed $700 and $5000 drops from Rat Race.</li>
+                <li>Guaranteed drops for Hitman, Target Confirmed, and Rampage.</li>
+                <li>Has anyone really been far even as decided to use even go fix to do Glitch more like?</li>
+              </ul>
+            <h4>Option Changes</h4>
+              <ul>
+                <li>Removed game freeze in Colosseum room with Valhalla Knights.</li>
+              </ul>
           <h3>June 9, 2025</h3>
-          <h4>Some Notes On This Month's Changes</h4>
-            <ul>          
-              <li>
-                This month marks the beginning of a new initiative with the SOTN Randomizer to start auditing and operating some 
-                quality control on the presets being included in the Randomizer or on the website. Certain presets will be "deprecated" 
-                and removed from the ranbdomizer website while still being included in the Randomizer's files for offline generation. 
-                This is all in an effort to maintain a simpler list for the players to interact with while we build-out our new 
-                filtration systems which will actively edit the list based on selections made by users. We will be calling out which 
-                presets are being removed from where and indicatin how they can be accessed in the change log to help users find them 
-                in the future. On top of this, we will be auditing preset files, themselves, and ordering the JSON data so that everything 
-                becomes easier to understand for would-be developers. We appreciate your patience with our housekeeping initiatives.
-              </li>
-            </ul>
-          <h4>Preset Changes</h4>
-            <ul>
-              <li>Added Seeker preset.</li>
-              <li>Added Oracle preset.</li>
-              <li>Added Mirror Breaker preset.</li>
-              <li>Added All Bosses preset.</li>
-              <li>Added Nimble-Lite preset.</li>
-              <li>Added Rampage preset.</li>
-              <li>Added Cornivus preset.</li>
-              <li>Added Max Rando preset.</li>
-              <li>Added Recycler preset.</li>
-              <li>Bounty Hunter, Hitman, Target Confirmed, Chaos Lite, and Rampage no longer require the Bounty Hunter Tool.</li>
-              <li>Added Item Stat and Item Name Randomizer to Chaos-Lite.</li>
-              <li>Lookingglass is now Deprecated. This can still be generated through Command Line Interface (CLI) and will still build en masse.</li>
-              <li>Crash Coarse is now Deprecated. This can still be generated through Command Line Interface (CLI) and will still build en masse.</li>
-              <li>Skinwalker is now Deprecated. This can still be generated through Command Line Interface (CLI) and will still build en masse.</li>
-              <li>Re-added Glitch Legacy as Deprecated. This can now be generated through Command Line Interface (CLI) and will be built en masse.</li>
-              <li>Re-named Bounty Hunter: TC to Target Confirmed.</li>
-              <li>Fixed a bug created at the end of Boss Rush because of the splash phrases.</li>
-              <li>Fixed a bug that caused a game crash if the player left the CD room at the start of a second-castle start seed to the left.</li>
-              <li>The preset audit was successful. Almost every preset has been re-weighted and had the keys sorted to create a uniform order to them.</li>
-              <li>How do I fixed Glitch?</li>
-            </ul>
-          <h4>Program Updates</h4>
-            <ul>
-              <li>Incorporated Bounty Hunter tool function into the Randomizer.</li>
-              <li>Removed bug that wouldn't allow Vanilla or Agonize 2020 to generate.</li>
-            </ul>
-          <h4>Options Changes</h4>
-            <ul>
-              <li>Added new Separate Boss Music Randomizer mode for music randomization.</li>
-              <li>Added Song Exclusion to the website.</li>
-              <li>Removed Nocturne from the songs to be randomized.</li>
-              <li>Added Immunity Potions option.</li>
-              <li>Added Godspeed Shoes option.</li>
-              <li>Added Library Shortcut option.</li>
-              <li>Added an option to enable seasonal splash phrases on the start screen.</li>
-            </ul>
+            <h4>Some Notes On This Month's Changes</h4>
+              <ul>          
+                <li>
+                  This month marks the beginning of a new initiative with the SOTN Randomizer to start auditing and operating some 
+                  quality control on the presets being included in the Randomizer or on the website. Certain presets will be "deprecated" 
+                  and removed from the ranbdomizer website while still being included in the Randomizer's files for offline generation. 
+                  This is all in an effort to maintain a simpler list for the players to interact with while we build-out our new 
+                  filtration systems which will actively edit the list based on selections made by users. We will be calling out which 
+                  presets are being removed from where and indicatin how they can be accessed in the change log to help users find them 
+                  in the future. On top of this, we will be auditing preset files, themselves, and ordering the JSON data so that everything 
+                  becomes easier to understand for would-be developers. We appreciate your patience with our housekeeping initiatives.
+                </li>
+              </ul>
+            <h4>Preset Changes</h4>
+              <ul>
+                <li>Added Seeker preset.</li>
+                <li>Added Oracle preset.</li>
+                <li>Added Mirror Breaker preset.</li>
+                <li>Added All Bosses preset.</li>
+                <li>Added Nimble-Lite preset.</li>
+                <li>Added Rampage preset.</li>
+                <li>Added Cornivus preset.</li>
+                <li>Added Max Rando preset.</li>
+                <li>Added Recycler preset.</li>
+                <li>Bounty Hunter, Hitman, Target Confirmed, Chaos Lite, and Rampage no longer require the Bounty Hunter Tool.</li>
+                <li>Added Item Stat and Item Name Randomizer to Chaos-Lite.</li>
+                <li>Lookingglass is now Deprecated. This can still be generated through Command Line Interface (CLI) and will still build en masse.</li>
+                <li>Crash Coarse is now Deprecated. This can still be generated through Command Line Interface (CLI) and will still build en masse.</li>
+                <li>Skinwalker is now Deprecated. This can still be generated through Command Line Interface (CLI) and will still build en masse.</li>
+                <li>Re-added Glitch Legacy as Deprecated. This can now be generated through Command Line Interface (CLI) and will be built en masse.</li>
+                <li>Re-named Bounty Hunter: TC to Target Confirmed.</li>
+                <li>Fixed a bug created at the end of Boss Rush because of the splash phrases.</li>
+                <li>Fixed a bug that caused a game crash if the player left the CD room at the start of a second-castle start seed to the left.</li>
+                <li>The preset audit was successful. Almost every preset has been re-weighted and had the keys sorted to create a uniform order to them.</li>
+                <li>How do I fixed Glitch?</li>
+              </ul>
+            <h4>Program Updates</h4>
+              <ul>
+                <li>Incorporated Bounty Hunter tool function into the Randomizer.</li>
+                <li>Removed bug that wouldn't allow Vanilla or Agonize 2020 to generate.</li>
+              </ul>
+            <h4>Options Changes</h4>
+              <ul>
+                <li>Added new Separate Boss Music Randomizer mode for music randomization.</li>
+                <li>Added Song Exclusion to the website.</li>
+                <li>Removed Nocturne from the songs to be randomized.</li>
+                <li>Added Immunity Potions option.</li>
+                <li>Added Godspeed Shoes option.</li>
+                <li>Added Library Shortcut option.</li>
+                <li>Added an option to enable seasonal splash phrases on the start screen.</li>
+              </ul>
           <h3>May 12, 2025</h3>
             <h4>Preset Changes</h4>
               <ul>            
