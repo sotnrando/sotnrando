@@ -7086,6 +7086,18 @@ function applyBountyHunterTargets(rng,bhmode) {
 	function enemyHasVlad(enemyId)
 	{
 		let VladReturn = 0
+		// Handle Duplicates
+		if(enemyId == 246) { enemyId = 6 }	// Axe Knight
+		if(enemyId == 15) { enemyId = 14 }	// Flying Zombie
+		if(enemyId == 29) { enemyId = 27 }	// Merman
+		if(enemyId == 136 || enemyId == 138) { enemyId = 129 }	// Spectral sword
+		if(enemyId == 159) { enemyId = 158 }	// CORPSEWEED
+		if(enemyId == 162) { enemyId = 161 }	// VENUS WEED
+		if(enemyId == 304) { enemyId = 303 }	// Medusa head
+		if(enemyId == 393) { enemyId = 392 }	// Blue Venus WEED
+		if(enemyId == 46) { enemyId = 45 }		// Bone ARK
+		if(enemyId == 142 || enemyId == 143) { enemyId = 141 }	// OROBOUROUS
+		
 		if(TargetHeartEnemyId == enemyId) { VladReturn = 1 }
 		if(TargetToothEnemyId == enemyId) { VladReturn = 2 }
 		if(TargetRibEnemyId == enemyId) { VladReturn = 3 }
