@@ -5,6 +5,7 @@
   let errors
   let extension
   let items
+  let equipment
   let relics
   let fs
   let crypto
@@ -16,6 +17,7 @@
     errors = self.sotnRando.errors
     extension = self.sotnRando.extension
     items = self.sotnRando.items
+    equipment = self.sotnRando.equipment
     relics = self.sotnRando.relics
     crypto = self.crypto
     goals = self.goals
@@ -25,6 +27,7 @@
     errors = require('./errors')
     extension = require('./extension')
     items = require('./items')
+    equipment = require('./equipment')
     relics = require('./relics')
     crypto = require('crypto').webcrypto
     fs = require('fs')
@@ -7306,8 +7309,8 @@ function hexValueToDamageString(hexValue) {
 
   function applyElemChaosPatches(rng) {
     const data = new checked()
-    const handItems = constants.handItems
-    const wearItems = constants.wearableItems
+    const handItems = equipment.handItems
+    const wearItems = equipment.wearableItems
     let offset
     let newElem                                                                 // first weapon element offset
     let weakElem
