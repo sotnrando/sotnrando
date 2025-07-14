@@ -7086,6 +7086,18 @@ function applyBountyHunterTargets(rng,bhmode) {
 	function enemyHasVlad(enemyId)
 	{
 		let VladReturn = 0
+		// Handle Duplicates
+		if(enemyId == 246) { enemyId = 6 }	// Axe Knight
+		if(enemyId == 15) { enemyId = 14 }	// Flying Zombie
+		if(enemyId == 29) { enemyId = 27 }	// Merman
+		if(enemyId == 136 || enemyId == 138) { enemyId = 129 }	// Spectral sword
+		if(enemyId == 159) { enemyId = 158 }	// CORPSEWEED
+		if(enemyId == 162) { enemyId = 161 }	// VENUS WEED
+		if(enemyId == 304) { enemyId = 303 }	// Medusa head
+		if(enemyId == 393) { enemyId = 392 }	// Blue Venus WEED
+		if(enemyId == 46) { enemyId = 45 }		// Bone ARK
+		if(enemyId == 142 || enemyId == 143) { enemyId = 141 }	// OROBOUROUS
+		
 		if(TargetHeartEnemyId == enemyId) { VladReturn = 1 }
 		if(TargetToothEnemyId == enemyId) { VladReturn = 2 }
 		if(TargetRibEnemyId == enemyId) { VladReturn = 3 }
@@ -7423,147 +7435,12 @@ function applyBountyHunterTargets(rng,bhmode) {
 
   function applyDominoPatches() {
     const data = new checked()
-    const nopLine = 0x00000000
-    const alwaysDrop = 0x1800000D
     let offset
     
-    // Patch drops to always be items
-    offset = 0x440413C    // Colosseum
-    data.writeWord(offset, nopLine)       // Removes failures
-    offset += 0x1c 
-    data.writeWord(offset, nopLine)       // Removes second roll failures
-    offset += 0x10
-    data.writeWord(offset, alwaysDrop)    // Forces an item drop
-    
-    offset = 0x44D514C    // Catacombs
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x460C4BC    // Abandoned Mine
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x46C78F0    // Royal Chapel
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x47EB5D8    // Long Library
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4948630    // Marble Gallery
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4A1E258    // Outer Wall
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4AE259C    // Olrox's Quarters
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4BB2DE4    // Entrance (2nd)
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4C871B8    // Underground Caverns
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4D36FA8    // Floating Catacombs
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4DC486C    // Cave
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4E6EA24    // Anti-Chapel
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4F0B388    // Forbidden Library
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x4FC540C    // Black Marble Gallery
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x50808A4    // Reverse Outer Wall
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x5137BC8    // Death Wing's Lair
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x51E95A8    // Reverse Entrance
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x52C0E2C    // Reverse Caverns
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x5437344    // Entrance (1st)
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x54F3CDC    // Alchemy Laboratory
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x55A6968    // Clock Tower
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x5643CE8    // Castle Keep
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x577E4B8    // Reverse Colosseum
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x580836C    // Reverse Keep
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x5936C4C    // Necromancy Laboratory
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
-    
-    offset = 0x59EFE78    // Reverse Clock Tower
-    data.writeWord(offset, nopLine)
-    offset += 0x2c
-    data.writeWord(offset, alwaysDrop)
+    offset = 0x119128
+    offset = data.writeWord(offset, 0x34020100) // mov r2,100h
+    offset = data.writeWord(offset, 0x03E00008) // ret
+    offset = data.writeWord(offset, 0x00000000) // nop
 
     // Alternate between Rare and Uncommon Drops based on Kill Count - MottZilla
     offset = 0x119188 				// PSX MainRam 800FF4C0h

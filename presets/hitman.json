@@ -21,6 +21,9 @@
   },
 
   "inherits": "casual",
+  "fastwarpMode": true,
+  "antiFreezeMode": true,
+  "rlbcMode": true,
   "stats": false,
   "newGoalsSet": "w",
   
@@ -1153,5 +1156,252 @@
     "type": "char",
     "address": "0x5A78FE4",
     "value": "0x02"
-  }]
+  },
+  
+{
+    "comment": "Al Dr",
+    "type": "word",
+    "address": "0x119128",
+    "value": "0x34020100"
+}, {
+	"type": "word",
+	"value": "0x03E00008"
+}, {
+	"type": "word",
+	"value": "0x00000000"
+},
+
+{
+	"comment": "Menu HK",
+	"address": "0x4390560",
+	"type": "word",
+	"value": "0x0C06F600"
+},
+
+{
+    "comment": "Menu",
+	"address": "0x43A2FF8",
+    "type": "word",
+    "value": "0x27BDFFE0"
+},
+{
+    "type": "word",
+    "value": "0xAFBF0010"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x0C06B498"
+},
+{
+    "type": "word",
+    "value": "0x34040004"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C04800E"
+},
+{
+    "type": "word",
+    "value": "0x3484023F"
+},
+{
+    "type": "word",
+    "value": "0x0C004657"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C04801B"
+},
+{
+    "type": "word",
+    "value": "0x3484D8DC"
+},
+{
+    "type": "word",
+    "value": "0x0C004657"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C04800E"
+},
+{
+    "type": "word",
+    "value": "0x3484026B"
+},
+{
+    "type": "word",
+    "value": "0x0C004657"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C04801B"
+},
+{
+    "type": "word",
+    "value": "0x3484D8DC"
+},
+{
+    "type": "word",
+    "value": "0x0C004657"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C04800E"
+},
+{
+    "type": "word",
+    "value": "0x34840297"
+},
+{
+    "type": "word",
+    "value": "0x0C004657"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C04801B"
+},
+{
+    "type": "word",
+    "value": "0x3484D8DC"
+},
+{
+    "type": "word",
+    "value": "0x0C004657"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C04800E"
+},
+{
+    "type": "word",
+    "value": "0x348402C7"
+},
+{
+    "type": "word",
+    "value": "0x0C004657"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C04801B"
+},
+{
+    "type": "word",
+    "value": "0x3484D8DC"
+},
+{
+    "type": "word",
+    "value": "0x0C004657"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C04800E"
+},
+{
+    "type": "word",
+    "value": "0x348402F3"
+},
+{
+    "type": "word",
+    "value": "0x0C004657"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x0C0045BF"
+},
+{
+    "type": "word",
+    "value": "0x2404FFFF"
+},
+{
+    "type": "word",
+    "value": "0x3C048002"
+},
+{
+    "type": "word",
+    "value": "0x3484B768"
+},
+{
+    "type": "word",
+    "value": "0x34050008"
+},
+{
+    "type": "word",
+    "value": "0x34060080"
+},
+{
+    "type": "word",
+    "value": "0xA4850000"
+},
+{
+    "type": "word",
+    "value": "0xA4860002"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x8FBF0010"
+},
+{
+    "type": "word",
+    "value": "0x27BD0020"
+},
+{
+    "type": "word",
+    "value": "0x03E00008"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x00000A0D"
+}]
 }

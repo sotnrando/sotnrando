@@ -21,6 +21,9 @@
   },
 
   "inherits": "casual",
+  "fastwarpMode": true,
+  "antiFreezeMode": true,
+  "rlbcMode": true,
   "stats": false,
   "newGoalsSet": "t",
   
@@ -1341,5 +1344,18 @@
     "type": "char",
     "address": "0x5A78FE4",
     "value": "0x02"
+  },
+  
+  {
+    "comment": "Al Dr",
+    "type": "word",
+    "address": "0x119128",
+    "value": "0x34020100"
+  }, {
+	"type": "word",
+	"value": "0x03E00008"
+  }, {
+	"type": "word",
+	"value": "0x00000000"
   }]
 }
