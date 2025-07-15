@@ -21,7 +21,7 @@
     items = self.sotnRando.items
     equipment = self.sotnRando.equipment
     spells = self.sotnRando.spells
-    subWeapons = self.sotnRando.subweapons
+    subWeapons = self.sotnRando.subWeapons
     relics = self.sotnRando.relics
     crypto = self.crypto
     goals = self.goals
