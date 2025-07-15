@@ -7379,6 +7379,13 @@ function hexValueToDamageString(hexValue) {
       data.writeShort(offset,newElem)                                           // Commit writes
     })
 
+    subWeapons.forEach(function(subWea) {                                       // cycle through spells (and familiar and xform damages)
+      // console.log(subWea.subWeaName)
+      newElem = weaponElemRando(rng)                                            // identify new element
+      offset = subWea.elemOffset                                                // assign offset to update
+      data.writeShort(offset,newElem)                                           // Commit writes
+    })
+
     return data
   }
 
