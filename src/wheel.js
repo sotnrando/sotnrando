@@ -1,5 +1,5 @@
 const presetsByCategory = {    
-    tournament: ['big-toss', 'recycler', 'hitman', 'seeker', ],
+    tournament: ['big-toss', 'recycler', 'hitman', 'seeker', 'battle-mage'],
     allPresets: [
         "adventure", "agonize-twtw", "all-bosses", "any-percent", "aperture", "bat-master", "battle-mage",
         "beyond", "big-toss", "boss-rush", "bounty-hunter", "brawler", "breach", "casual", "chaos-lite", "chimera",
