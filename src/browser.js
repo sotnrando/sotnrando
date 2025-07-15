@@ -416,6 +416,8 @@ function displayRandomSplashText(seasonalEvent) {
     if (["big-toss"].includes(preset.id)) {                                                         // Remove ESR mode for incompatible presets. - eldri7ch
       elems.enemyStatRandoMode.checked = false
       elems.enemyStatRandoMode.disabled = true
+      elems.elemChaosMode.checked = false
+      elems.elemChaosMode.disabled = true
     } else {
       elems.enemyStatRandoMode.disabled = false
     }
@@ -907,6 +909,9 @@ function displayRandomSplashText(seasonalEvent) {
   }
 
   function itemNameRandoModeChange() {
+    if (elems.itemNameRandoMode.checked === true) {
+      elems.stats.checked = true
+    }
     localStorage.setItem('itemNameRandoMode', elems.itemNameRandoMode.checked)
   }
 
@@ -923,6 +928,12 @@ function displayRandomSplashText(seasonalEvent) {
   }
 
   function enemyStatRandoModeChange() {
+    if (elems.enemyStatRandoMode.checked) {
+      elems.elemChaosMode.disabled = false
+    } else {
+      elems.elemChaosMode.checked = false
+      elems.elemChaosMode.disabled = true
+    }
     localStorage.setItem('enemyStatRandoMode', elems.enemyStatRandoMode.checked)
   }
 
@@ -959,6 +970,9 @@ function displayRandomSplashText(seasonalEvent) {
   }
 
   function elemChaosModeChange() {
+    if (elems.elemChaosMode.checked === true) {
+      elems.enemyStatRandoMode.checked = true
+    }
     localStorage.setItem('elemChaosMode', elems.elemChaosMode.checked)
   }
 
