@@ -7,6 +7,7 @@
   let items
   let equipment
   let spells
+  let subWeapons
   let relics
   let fs
   let crypto
@@ -20,6 +21,7 @@
     items = self.sotnRando.items
     equipment = self.sotnRando.equipment
     spells = self.sotnRando.spells
+    subWeapons = self.sotnRando.subweapons
     relics = self.sotnRando.relics
     crypto = self.crypto
     goals = self.goals
@@ -31,6 +33,7 @@
     items = require('./items')
     equipment = require('./equipment')
     spells = require('./spells')
+    subWeapons = require('./subweapons')
     relics = require('./relics')
     crypto = require('crypto').webcrypto
     fs = require('fs')
