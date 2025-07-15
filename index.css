@@ -305,6 +305,10 @@ h3 time {
 input[type="number"] {
     width: 2.5em;
 }
+new::after{           /* Creates a *New label to mark what is new on the website*/
+    content: "*New";
+    color: green;
+}
 
 /* Menu mode */
 
