@@ -81,12 +81,7 @@ function displayRandomSplashText(seasonalEvent) {
   const safe = presets.filter(function(preset) {
     return preset.id === 'safe'
   }).pop()
-
-  const selectElement = (element) => document.querySelector(element)
-
-  selectElement('.menu-icons').addEventListener('click', () => {
-    selectElement('nav').classList.toggle('active')
-  })
+    
   function cloneItems(items) {                                                              //Saves previous selections
     return items.map(function(item) {
       const clone = Object.assign({}, item)
@@ -246,7 +241,6 @@ function displayRandomSplashText(seasonalEvent) {
     var linerIndex = linerSelect.selectedIndex;
     paletteDisplay.style.backgroundPositionX = (768 - (paletteIndex * 96)) + "px";
     linerDisplay.style.backgroundPositionX = (768 - (linerIndex * 96)) + "px";
-    console.log(paletteDisplay.style.backgroundPositionX);
   };
  
   updateAlucardPreview();
@@ -263,7 +257,6 @@ function displayRandomSplashText(seasonalEvent) {
     // Calculate current position based on the selected options
     var mapColorIndex = mapColorSelect.selectedIndex;
     mapColorDisplay.style.backgroundPositionX = (432 - (mapColorIndex * 48)) + "px";
-    console.log(mapColorDisplay.style.backgroundPositionX);
   };
 
   mapColorSelect.onclick = function() {

@@ -1,0 +1,62 @@
+.wheelPicks{
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 1em;
+    color: white;
+}
+button{
+    margin: 1em;
+    width: 125px;
+    height: 25px;
+}
+iframe{
+    margin: 1em;
+    height: 550px;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+.categoryFilter {
+    margin: 20px 0;
+    text-align: center;
+    color: white;
+}
+
+.categoryFilter label,
+.categoryFilter select {
+    font-size: 1rem;
+    padding: 5px 10px;
+}
+
+.filter-btn {
+    margin: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 2px solid white;
+    background-color: blue;
+    color: #eee;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.filter-btn.active {
+    background-color: blue;
+    color: yellow;
+    border-color: yellow;
+}
+
+
+
+@media only screen and (min-width: 900px){
+    body{ 
+        width: 70vw
+    }
+    main{
+        flex-direction: column;
+    }
+}
+@media only screen and (min-width:580px) {
+    .wheelPicks {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}

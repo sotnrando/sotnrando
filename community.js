@@ -31,10 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error fetching presets:", error);
         }
     };
-
-    selectElement('.menu-icons').addEventListener('click', () => {                            //Watchs for the click on navbar when in mobile mode
-        selectElement('nav').classList.toggle('active')
-      })
     
     // Load Leaderboard
     const loadLeaderboard = async () => {

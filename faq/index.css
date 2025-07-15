@@ -1,7 +1,0 @@
-h3::before {
-    content: '> ';
-}
-
-p {
-    margin-left: 1em;
-}

@@ -4,45 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SotN Randomizer Leaderboards</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="images/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="community.css">
 </head>
-<body class="menu text-white">
-    <div class="container">
-        <nav>
-          <div class="menu-icons">
-            <i class="icon ion-md-menu"></i>
-            <i class="icon ion-md-close"></i>
-          </div>
-        
-        <ul class="nav-list">
-            <li><a href="index.html">Randomizer</a></li>
-            <li><a href="/faq">FAQ</a></li>
+<body>
+    <header>
+        <h1>Castlevania: Symphony of the Night</h1>
+    </header>    
+    <nav class="nav-bar">
+        <input type="checkbox" id="checkbox-toggle">
+        <label for="checkbox-toggle" class="menu-btn"></label>
+        <ul class="menu-list">
+            <li><a href="index.html">Randomizer</i></a></li>
+            <li><a href="faq/index.html">FAQ</a></li>
             <li><a href="https://ppf.sotn.io">PPF Patcher</a></li>
-            <li><a href="community.html">Leaderboards</a></li>
-                <li>
-                      <a href="#">Community & News ▼</a>
-                    <ul class="sub-menu">
-                      <li><a href="https://discord.gg/dzbKhQDjrs">Long Library Discord</a></li>
-                      <li><a href="https://www.symphonyrando.fun">Knowledge Database (sr.f)</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Tools ▼</a>
-                    <ul class="sub-menu">
-                      <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
-                      <li><a href="https://taliczealot.github.io/#/apps/sotnrandotools">Rando Tools</a></li>
-                      <li><a href="https://github.com/MottZilla/BountyHunterTool/releases/">Bounty Hunter Tool</a></li>
-                    </ul>
-                </li>
-          
-          </ul>
-        </nav>
-      </div>
+            <li><a class="current">Leaderboards</a></li>
+            <li><a href="wheel.html">Wheel of Fun</a></li>
+            <li><a href="tips&tricks/index.html">Tips and Tricks<small></small></a>
+                <ul class="submenu">
+                    <li><a href="tips&tricks/generalRando.html">General Randomizer</a></li>
+                    <li><a href="tips&tricks/presetSpecific.html">Preset Specific</a></li>
+                </ul>
+            </li>
+            <li><a>Community & News<small></small></a>
+                <ul class="submenu">
+                    <li><a href="https://discord.com/invite/dzbKhQDjrs">Long Library Discord</a></li>
+                    <li><a href="https://www.symphonyrando.fun">Knowledge Database (sr.f)</a></li>
+                    <li><a href="https://www.speedrun.com/sotn">Speedrun Leaderboards</a></li>
+                </ul>
+            </li>
+            <li><a>Tools<small></small></a>
+                <ul class="submenu">
+                    <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
+                    <li><a href="https://taliczealot.github.io/#/apps/sotnrandotools">Rando Tools</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </nav>
     <div class="container my-5">
-        <h1 class="text-center mb-4">Leaderboards</h1>
+        <h1 class="text-center mb-4">Randomizer Leaderboards</h1>
         <div class="d-flex justify-content-between mb-3">
             <div>
                 <select id="modeSelector" class="form-select form-select-sm">

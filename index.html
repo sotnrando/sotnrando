@@ -2,48 +2,15 @@
 <html lang="en">
   <head>
     <title>Castlevania: Symphony of the Night Randomizer</title>
-    <link rel="icon" href="images/ICON.jpg" type="image/png">
+    <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet"
           href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
-    <link rel="stylesheet"
-          href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
     <link rel="stylesheet" href="index.css">
-    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/randomizations.css">
   </head>
   <body>
-    <div>
-      <nav>
-        <div class="menu-icons">
-          <i class="icon ion-md-menu"></i>
-          <i class="icon ion-md-close"></i>
-        </div>      
-      <ul class="nav-list">
-          <li><a href="#">Randomizer</a></li>
-          <li><a href="/faq">FAQ</a></li>
-          <li><a href="https://ppf.sotn.io">PPF Patcher</a></li>
-          <li><a href="community.html">Leaderboards</a></li>
-              <li>
-                    <a href="#">Community & News ▼</a>
-                  <ul class="sub-menu">
-                    <li><a href="https://discord.gg/dzbKhQDjrs">Long Library Discord</a></li>
-                    <li><a href="https://www.symphonyrando.fun">Knowledge Database (sr.f)</a></li>
-                  </ul>
-              </li>
-              <li>
-                  <a href="#">Tools ▼</a>
-                  <ul class="sub-menu">
-                    <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
-                    <li><a href="https://taliczealot.github.io/#/apps/sotnrandotools">Rando Tools</a></li>
-                  </ul>
-              </li>        
-        </ul>
-      </nav>
-    </div>
-    <div id="version"></div> 
     <main>     
       <header>
-      <div> 
         <p id="splashTextDisplay" class="splash-text"></p>       
           <img src = "images/logo.png" alt= "RandomizerLogo" class = "center" id="pageLogo">
           <div class = "center-text">
@@ -61,7 +28,7 @@
               <span class="tooltip hidden">
                 <span>
                   <input id="dev-stash" type="checkbox">
-                  <label for="dev-stash">Dev's Stash
+                  <label for="dev-stash">Dev's Stash</label>
                 </span>
               </span>
             </span>
@@ -84,9 +51,39 @@
             <a class="contact" href="https://twitch.tv/crazy4bladestv">
               <img height="16" width="16"
                   src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg" alt = "TwitchIcon"></a>
-          </div>
-        </div>
+          </div><div id="version"></div>
       </header>
+    <nav class="navbar">
+        <input type="checkbox" id="checkbox-toggle">
+        <label for="checkbox-toggle" class="menu-btn"></label>
+        <ul class="menu-list">
+            <li><a class="current">Randomizer</a></li>
+            <li><a href="faq/index.html">FAQ</a></li>
+            <li><a href="https://ppf.sotn.io">PPF Patcher</a></li>
+            <li><a href="community.html">Leaderboards</a></li>
+            <li><a href="wheel.html">Wheel of Fun</a></li>
+            <li><a href="tips&tricks/index.html">Tips and Tricks<small></small></a>
+                <ul class="submenu">
+                    <li><a href="tips&tricks/generalRando.html">General Randomizer</a></li>
+                    <li><a href="tips&tricks/presetSpecific.html">Preset Specific</a></li>
+                </ul>
+            </li>
+            <li><a>Community & News<small></small></a>
+                <ul class="submenu">
+                    <li><a href="https://discord.com/invite/dzbKhQDjrs">Long Library Discord</a></li>
+                    <li><a href="https://www.symphonyrando.fun">Knowledge Database (sr.f)</a></li>
+                    <li><a href="https://www.speedrun.com/sotn">Speedrun Leaderboards</a></li>
+                </ul>
+            </li>
+            <li><a>Tools<small></small></a>
+                <ul class="submenu">
+                    <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
+                    <li><a href="https://taliczealot.github.io/#/apps/sotnrandotools">Rando Tools</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>      
+      <section>
         <fieldset class = "body-pos">
         <form id="form">
           <fieldset>
@@ -350,444 +347,430 @@
             </fieldset>
             <fieldset class="input-box">
               <legend>Options</legend>
-              <div class = "checkboxes">                
+              <div class = "checkboxes">
+                <div class="left-column-options">
+                  <div>
+                    <label for="newGoals">Change Goals</label><span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>
+                          Changes the goals of the seed but does not affect relic distribution.
+                          All Bosses requires all 20 bosses to be defeated and Richter to be saved.
+                          All Relics requires all 28 relics from the North American PSX version of the game.
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                  <div>
+                    <input id="append-seed" type="checkbox">
+                    <label for="append-seed">Append seed to filename
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Appends the seed to the filename of the randomized bin.
+                            You will need to modify your cue file track listing to
+                            reference the new filename.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div> 
+                  <div>
+                    <input id="tournament-mode" type="checkbox">
+                    <label for="tournament-mode">Tournament Mode
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Prevents displaying the relic locations and solutions.
+                            Sets the library shop relic cost to 0.
+                            Permanently opens the clock room statue.
+                            For use when racing.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="accessibility-patches" type="checkbox">
+                    <label for="accessibility-patches">Accessibility Patches
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Reduces screen flashing from use items, adjusts some 
+                            relics for better visibility and patches some softlocks.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div >
+                    <input id="show-spoilers" type="checkbox">
+                    <label for="show-spoilers">Show Spoilers</label>
+                  </div>
+                  <div >
+                    <input id="show-relics" type="checkbox">
+                    <label for="show-relics">Show Relic Locations</label>
+                  </div>
+                  <div>
+                    <input id="show-solutions" type="checkbox">
+                    <label for="show-solutions">Show solutions</label>
+                  </div>
+                  <div >
+                    <input id="enemy-drops" type="checkbox">
+                    <label for="enemy-drops">Enemy Drops</label>
+                  </div>
+                  <div >
+                    <input id="stats" type="checkbox">
+                    <label for="stats">Item Stats</label>
+                  </div>
+                  <div>
+                    <input id="itemnamerando-mode" type="checkbox">
+                    <label for="itemnamerando-mode">Item Names
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Randomize item names when using Item Stat Rando.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="turkey-mode" type="checkbox">
+                    <label for="turkey-mode">Turkey Mode
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Replaces the subweapons in the glass vats at Alchemy Lab 
+                            and Black Marble Gallery with useless turkeys.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="item-locations" type="checkbox">
+                    <label for="item-locations">Item locations</label>
+                  </div>
+                  <div>
+                    <input id="starting-equipment" type="checkbox" disabled>
+                    <label for="starting-equipment">Starting Equipment</label>
+                  </div>
+                  <div>
+                    <input id="prologue-rewards" type="checkbox">
+                    <label for="prologue-rewards">Prologue Rewards</label>
+                  </div>
+                  <div>
+                    <input id="seasonal-phrases" type="checkbox">
+                    <label for="seasonal-phrases">Seasonal Splash Phrases
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Allow seasonal and holiday-based splash phrases on the "Press Start" screen.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="right-column-options">
+                  <div>
+                    <select id="newGoals">
+                      <option value="default">Default</option>
+                      <option value="allBoss">All Bosses</option>
+                      <option value="allRelic">All Relics</option>
+                      <option value="abrsr">All Bosses & Relics</option>
+                      <option value="vladBoss">All Bosses & Vlad Relics</option>
+                      <option value="bhNorm">Bounty Hunter</option>
+                      <option value="bhAdvanced">Target Confirmed</option>
+                      <option value="bhHitman">Hitman</option>
+                      <option value="bhBoss">All Bosses & Bounties</option>
+                    </select>                  
+                  </div>
+                  <div>
+                    <input id="colorrando-mode" type="checkbox">
+                    <label for="colorrando-mode">Color Randomizer
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Randomize various color palettes. Ex: Cape colors, 
+                            gravity boots trails, hydrostorm.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>               
+                  <div>
+                    <input id="magicmax-mode" type="checkbox">
+                    <label for="magicmax-mode">Magic Vessels
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Replace Heart Max Up with Magic Max Up.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="antifreeze-mode" type="checkbox">
+                    <label for="antifreeze-mode">Anti-Freeze
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Remove screen freezes on level-up, relic and vessel 
+                            acquisition.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div >
+                    <input id="mypurse-mode" type="checkbox">
+                    <label for="mypurse-mode">That's my purse!
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Prevents Death from stealing your gear.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div >
+                    <input id="iws-mode" type="checkbox">
+                    <label for="iws-mode">Infinite Wing Smash
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Enables infinite Wing Smash for one input.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="fastwarp-mode" type="checkbox">
+                    <label for="fastwarp-mode">Fast Warps
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Quickens warp animation when using teleporters.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="noprologue-mode" type="checkbox">
+                    <label for="noprologue-mode">Remove Prologue
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Removes the Prologue from being required to play. 
+                            <span style="color: red;">(Will remove potential prologue rewards.)</span>
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div >
+                    <input id="unlocked-mode" type="checkbox">
+                    <label for="unlocked-mode">Unlocked Mode
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Opens all five shortcuts in first castle and one in 
+                            second castle. <span style="color: red;">(Will break logic for most 
+                            presets.)</span>
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="surprise-mode" type="checkbox">
+                    <label for="surprise-mode">Relic Surprise!
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            All relics are hidden behind the same sprite and palette. 
+                            The player cannot tell what the relic is until they 
+                            collect it.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div >
+                    <input id="enemyStatRando-mode" type="checkbox">
+                    <label for="enemyStatRando-mode">Enemy Stats
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Enemy stats are randomized ranging from 25% to 200% of 
+                            their original value and their attack and defense types 
+                            are randomized to include random elements.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>                
+                  <div>
+                    <input id="shopPriceRando-mode" type="checkbox">
+                    <label for="shopPriceRando-mode">Shop Prices
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Shop prices are randomized ranging from 50% to 150% of 
+                            their original value and they are shuffled between each 
+                            other.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="startRoomRando-mode" type="checkbox">
+                    <label for="startRoomRando-mode">Starting Zone 1st Castle
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Start in the entrance as usual but after the first Warg, 
+                            you are teleported to a random zone to start the rest of 
+                            your run. (Select both to have full-range starting rando)
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
                 <div>
-                  <label for="newGoals">Change Goals</label><span class="tooltip-wrapper">
-                    <span class="tooltip-indicator">?</span>
-                    <span class="tooltip hidden">
-                      <span>
-                        Changes the goals of the seed but does not affect relic distribution.
-                        All Bosses requires all 20 bosses to be defeated and Richter to be saved.
-                        All Relics requires all 28 relics from the North American PSX version of the game.
-                      </span>
-                    </span>
-                  </span>
-                </div>
-                <div>
-                  <select id="newGoals">
-                    <option value="default">Default</option>
-                    <option value="allBoss">All Bosses</option>
-                    <option value="allRelic">All Relics</option>
-                    <option value="abrsr">All Bosses & Relics</option>
-                    <option value="vladBoss">All Bosses & Vlad Relics</option>
-                    <option value="bhNorm">Bounty Hunter</option>
-                    <option value="bhAdvanced">Target Confirmed</option>
-                    <option value="bhHitman">Hitman</option>
-                    <option value="bhBoss">All Bosses & Bounties</option>
-                  </select>                  
-                </div>
-                <div>
-                  <input id="append-seed" type="checkbox">
-                  <label for="append-seed">Append seed to filename
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Appends the seed to the filename of the randomized bin.
-                          You will need to modify your cue file track listing to
-                          reference the new filename.
+                    <input id="startRoomRando2nd-mode" type="checkbox">
+                    <label for="startRoomRando2nd-mode">Starting Zone 2nd Castle
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Start in the entrance as usual but after the first Warg, 
+                            you are teleported to a random zone in second castle to 
+                            start the rest of your run. (Select both to have full-
+                            range starting rando)
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="colorrando-mode" type="checkbox">
-                  <label for="colorrando-mode">Color Randomizer
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Randomize various color palettes. Ex: Cape colors, 
-                          gravity boots trails, hydrostorm.
+                    </label>
+                  </div>
+                  <div>
+                    <input id="domino-mode" type="checkbox">
+                    <label for="domino-mode">Guaranteed Drops
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Guarantees drops from every enemy that has one. Ring of
+                            Arcana makes them drop their rare item instead of the 
+                            uncommon.
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="tournament-mode" type="checkbox">
-                  <label for="tournament-mode">Tournament Mode
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Prevents displaying the relic locations and solutions.
-                          Sets the library shop relic cost to 0.
-                          Permanently opens the clock room statue.
-                          For use when racing.
+                    </label>
+                  </div>
+                  <div>
+                    <input id="rlbc-mode" type="checkbox">
+                    <label for="rlbc-mode">Reverse Library Card
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Adds a new function to Library Cards. Hold Down while 
+                            using them to take Alucard to the second castle Library 
+                            after Richter is saved.
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="magicmax-mode" type="checkbox">
-                  <label for="magicmax-mode">Magic Vessels
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Replace Heart Max Up with Magic Max Up.
+                    </label>
+                  </div>
+                  <div>     
+                    <input id="immunity-potion-mode" type="checkbox">
+                    <label for="immunity-potion-mode">Immunity Potions
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Converts Resist Fire, Resist Ice, etc. potions to grant 
+                            Immunity to the element in question and allows them to grant 
+                            invincibility frames.
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="accessibility-patches" type="checkbox">
-                  <label for="accessibility-patches">Accessibility Patches
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Reduces screen flashing from use items, adjusts some 
-                          relics for better visibility and patches some softlocks.
+                    </label>
+                  </div>
+                  <div>     
+                    <input id="godspeed-mode" type="checkbox">
+                    <label for="godspeed-mode">Godspeed Shoes
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Allows Alucard to run by double-pressing in the direction you intend to move in.
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="antifreeze-mode" type="checkbox">
-                  <label for="antifreeze-mode">Anti-Freeze
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Remove screen freezes on level-up, relic and vessel 
-                          acquisition.
+                    </label>
+                  </div>
+                  <div>
+                    <input id="library-shortcut" type="checkbox">
+                    <label for="library-shortcut">Library Shortcut
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Opens a shortcut to allow players to swiftly exit the Long Library.
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </label>
-                </div>
-                <div >
-                  <input id="show-spoilers" type="checkbox">
-                  <label for="show-spoilers">Show Spoilers</label>
-                </div>
-                <div >
-                  <input id="mypurse-mode" type="checkbox">
-                  <label for="mypurse-mode">That's my purse!
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Prevents Death from stealing your gear.
+                    </label>
+                  </div>                
+                  <div>     
+                    <input id="elem-chaos" type="checkbox">
+                    <label for="elem-chaos">Elemental Chaos
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Randomizes almost every single element in the game.
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </label>
+                    </label>
+                  </div>
                 </div>
-                <div >
-                  <input id="show-relics" type="checkbox">
-                  <label for="show-relics">Show Relic Locations</label>
-                </div>
-                <div >
-                  <input id="iws-mode" type="checkbox">
-                  <label for="iws-mode">Infinite Wing Smash
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Enables infinite Wing Smash for one input.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="show-solutions" type="checkbox">
-                  <label for="show-solutions">Show solutions</label>
-                </div>
-                <div>
-                  <input id="fastwarp-mode" type="checkbox">
-                  <label for="fastwarp-mode">Fast Warps
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Quickens warp animation when using teleporters.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div >
-                  <input id="enemy-drops" type="checkbox">
-                  <label for="enemy-drops">Enemy Drops</label>
-                </div>
-                <div>
-                  <input id="noprologue-mode" type="checkbox">
-                  <label for="noprologue-mode">Remove Prologue
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Removes the Prologue from being required to play. 
-                          <span style="color: red;">(Will remove potential prologue rewards.)</span>
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div >
-                  <input id="stats" type="checkbox">
-                  <label for="stats">Item Stats</label>
-                </div>
-                <div >
-                  <input id="unlocked-mode" type="checkbox">
-                  <label for="unlocked-mode">Unlocked Mode
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Opens all five shortcuts in first castle and one in 
-                          second castle. <span style="color: red;">(Will break logic for most 
-                          presets.)</span>
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="itemnamerando-mode" type="checkbox">
-                  <label for="itemnamerando-mode">Item Names
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Randomize item names when using Item Stat Rando.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="surprise-mode" type="checkbox">
-                  <label for="surprise-mode">Relic Surprise!
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          All relics are hidden behind the same sprite and palette. 
-                          The player cannot tell what the relic is until they 
-                          collect it.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="turkey-mode" type="checkbox">
-                  <label for="turkey-mode">Turkey Mode
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Replaces the subweapons in the glass vats at Alchemy Lab 
-                          and Black Marble Gallery with useless turkeys.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div >
-                  <input id="enemyStatRando-mode" type="checkbox">
-                  <label for="enemyStatRando-mode">Enemy Stats
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Enemy stats are randomized ranging from 25% to 200% of 
-                          their original value and their attack and defense types 
-                          are randomized to include random elements.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="item-locations" type="checkbox">
-                  <label for="item-locations">Item locations</label>
-                </div>                
-                <div>
-                  <input id="shopPriceRando-mode" type="checkbox">
-                  <label for="shopPriceRando-mode">Shop Prices
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Shop prices are randomized ranging from 50% to 150% of 
-                          their original value and they are shuffled between each 
-                          other.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="starting-equipment" type="checkbox" disabled>
-                  <label for="starting-equipment">Starting Equipment</label>
-                </div>
-                 <div>
-                  <input id="startRoomRando-mode" type="checkbox">
-                  <label for="startRoomRando-mode">Starting Zone 1st Castle
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Start in the entrance as usual but after the first Warg, 
-                          you are teleported to a random zone to start the rest of 
-                          your run. (Select both to have full-range starting rando)
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="prologue-rewards" type="checkbox">
-                  <label for="prologue-rewards">Prologue Rewards</label>
-                </div>
-               <div>
-                  <input id="startRoomRando2nd-mode" type="checkbox">
-                  <label for="startRoomRando2nd-mode">Starting Zone 2nd Castle
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Start in the entrance as usual but after the first Warg, 
-                          you are teleported to a random zone in second castle to 
-                          start the rest of your run. (Select both to have full-
-                          range starting rando)
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <input id="seasonal-phrases" type="checkbox">
-                  <label for="seasonal-phrases">Seasonal Splash Phrases
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Allow seasonal and holiday-based splash phrases on the "Press Start" screen.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                 <div>
-                  <input id="domino-mode" type="checkbox">
-                  <label for="domino-mode">Guaranteed Drops
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Guarantees drops from every enemy that has one. Rarity changes based on kill count odd / even.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>
-                </div>
-                <div>
-                  <input id="rlbc-mode" type="checkbox">
-                  <label for="rlbc-mode">Reverse Library Card
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Adds a new function to Library Cards. Hold Down while 
-                          using them to take Alucard to the second castle Library 
-                          after Richter is saved.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>     </div>
-                <div>     
-                  <input id="immunity-potion-mode" type="checkbox">
-                  <label for="immunity-potion-mode">Immunity Potions
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Converts Resist Fire, Resist Ice, etc. potions to grant 
-                          Immunity to the element in question and allows them to grant 
-                          invincibility frames.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>     </div>
-                <div>     
-                  <input id="godspeed-mode" type="checkbox">
-                  <label for="godspeed-mode">Godspeed Shoes
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Allows Alucard to run by double-pressing in the direction you intend to move in.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>     </div>
-                <div>
-                  <input id="library-shortcut" type="checkbox">
-                  <label for="library-shortcut">Library Shortcut
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Opens a shortcut to allow players to swiftly exit the Long Library.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>     </div>
-                <div>     
-                  <input id="elem-chaos" type="checkbox">
-                  <label for="elem-chaos">Elemental Chaos
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Randomizes almost every single element in the game.
-                        </span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-                <div>     </div>
-              </div>
+              </div>                
             </fieldset>
           <fieldset class="input-box">
               <legend>Customizations</legend>
-              <div class = "checkboxes">
-                 <div id = "map-dropdown">Map Color:                                   
+              <div class="customizations">
+                <div>
+                  <div class="mapColor-dropdown">
+                    <label>Map Color:</label>
                     <select id="mapColor">
                       <option value="normal">Normal</option>
                       <option value="blue">Dark Blue</option>
@@ -798,9 +781,8 @@
                       <option value="purple">Purple</option>
                       <option value="pink">Pink</option>
                       <option value="black">Black</option>
-                    </select>                  
+                    </select>
                   </div>
-                </div>
                 <div id="mapColorDisplay" class= "map-color" style="background: url(https://i.servimg.com/u/f81/20/40/06/51/map_pa10.png);"></div>              
                 <div id = "alucard-palette-container">
                   <label>Alucard Palette:</label>
@@ -870,7 +852,8 @@
                     <select id="excludeList" class="listbox" multiple>
                     </select>
                   </div>
-                </div>  
+                </div>
+              </div>  </div>
             </fieldset>
            
         </div>               
@@ -1622,6 +1605,7 @@
               <li>Incorrect default icons when starting with "null" equipment.</li>
             </ul> 
          </fieldset>
+        </section>
     </main>
     <div id="dev-border"></div>
     <a id="fork" href="https://github.com/sotnrando/sotnrando"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
