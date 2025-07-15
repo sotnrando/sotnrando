@@ -6,6 +6,8 @@
   let extension
   let items
   let equipment
+  let spells
+  let subWeapons
   let relics
   let fs
   let crypto
@@ -18,6 +20,8 @@
     extension = self.sotnRando.extension
     items = self.sotnRando.items
     equipment = self.sotnRando.equipment
+    spells = self.sotnRando.spells
+    subWeapons = self.sotnRando.subWeapons
     relics = self.sotnRando.relics
     crypto = self.crypto
     goals = self.goals
@@ -28,6 +32,8 @@
     extension = require('./extension')
     items = require('./items')
     equipment = require('./equipment')
+    spells = require('./spells')
+    subWeapons = require('./subweapons')
     relics = require('./relics')
     crypto = require('crypto').webcrypto
     fs = require('fs')
@@ -7311,6 +7317,7 @@ function hexValueToDamageString(hexValue) {
     const data = new checked()
     const handItems = equipment.handItems
     const wearItems = equipment.wearableItems
+    const spellsArr = spells
     let offset
     let newElem                                                                 // first weapon element offset
     let weakElem
@@ -7320,7 +7327,7 @@ function hexValueToDamageString(hexValue) {
 
     handItems.forEach(function(item) {
       // console.log(item.index + ' ' + item.itemName)
-      newElem = weaponElemRando(rng)                                            // assign a new element picked by 50% to be nothing
+      newElem = weaponElemRando(rng)                                            // assign a new element
       if (item.categoryHex === 0x09) {                                          // special circumstance where we re-roll cut and bludgeon off of shields
         while ([0x0040,0x0020].includes(newElem)) {
           newElem = weaponElemRando(rng)
@@ -7366,6 +7373,20 @@ function hexValueToDamageString(hexValue) {
       }
       offset = item.elemAbsorbOffset
       data.writeShort(offset,absorbElem)                                        // Commit writes
+    })
+
+    spellsArr.forEach(function(spell) {                                         // cycle through spells (and familiar and xform damages)
+      console.log(spell.spellName)
+      newElem = weaponElemRando(rng)                                            // identify new element
+      offset = spell.spellElementOffset                                         // assign offset to update
+      data.writeShort(offset,newElem)                                           // Commit writes
+    })
+
+    subWeapons.forEach(function(subWea) {                                       // cycle through spells (and familiar and xform damages)
+      // console.log(subWea.subWeaName)
+      newElem = weaponElemRando(rng)                                            // identify new element
+      offset = subWea.elemOffset                                                // assign offset to update
+      data.writeShort(offset,newElem)                                           // Commit writes
     })
 
     return data

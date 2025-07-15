@@ -33,6 +33,7 @@
   "startRoomRandoMode": true,
   "startRoomRando2ndMode": true,
   "immunityPotionMode": true,
+  "elemChaosMode": true,
 
   "complexityGoal": {
     "min": 1,
