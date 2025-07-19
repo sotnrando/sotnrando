@@ -520,6 +520,9 @@ function displayRandomSplashText(seasonalEvent) {
     elems.iwsMode.checked = !!options.iwsMode
     elems.fastwarpMode.checked = !!options.fastwarpMode
     elems.itemNameRandoMode.checked = !!options.itemNameRandoMode
+    if (elems.stats.checked === true) {
+      elems.itemNameRandoMode.disabled = false
+    }
     elems.noprologueMode.checked = !!options.noprologueMode
     elems.unlockedMode.checked = !!options.unlockedMode
     elems.surpriseMode.checked = !!options.surpriseMode

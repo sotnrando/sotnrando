@@ -7317,6 +7317,7 @@ function hexValueToDamageString(hexValue) {
     const data = new checked()
     const handItems = equipment.handItems
     const wearItems = equipment.wearableItems
+    const specials = equipment.weaponSpecials
     const spellsArr = spells
     let offset
     let newElem                                                                 // first weapon element offset
@@ -7386,6 +7387,13 @@ function hexValueToDamageString(hexValue) {
       // console.log(subWea.subWeaName)
       newElem = weaponElemRando(rng)                                            // identify new element
       offset = subWea.elemOffset                                                // assign offset to update
+      data.writeShort(offset,newElem)                                           // Commit writes
+    })
+
+    specials.forEach(function(special) {                                        // cycle through weapon specials (and shield spells)
+      // console.log(special.itemName)
+      newElem = weaponElemRando(rng)                                            // identify new element
+      offset = special.elementOffset                                            // assign offset to update
       data.writeShort(offset,newElem)                                           // Commit writes
     })
 
