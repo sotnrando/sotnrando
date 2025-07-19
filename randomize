@@ -1230,10 +1230,10 @@ if ('newGoals' in argv && typeof(argv.newGoals) !== 'undefined') {
 }
 if ('debug' in argv) {console.log('randomize | Alucard\'s palette')}
 if ('alucardPalette' in argv && typeof(argv.alucardPalette) !== 'undefined') {
-  let termsAllowed = 'd,r,b,g,w,l,p,s'
+  let termsAllowed = 'd,r,b,m,g,w,l,p,s'
   if (!(termsAllowed.includes(argv.alucardPalette))) {
     yargs.showHelp()
-    console.error('\nMust contain a letter \'d\'(Default), \'r\'(Bloody Tears), \'b\'(Blue Danube), \'g\'(Swamp Thing), \'w\'(White Knight), \'l\'(Royal Purple), \'p\'(Pink Passion), \'s\'(Shadow Prince)')
+    console.error('\nMust contain a letter \'d\'(Default), \'r\'(Bloody Tears), \'b\'(Blue Danube), \'m\'(Mint Alucard)\'g\'(Swamp Thing), \'w\'(White Knight), \'l\'(Royal Purple), \'p\'(Pink Passion), \'s\'(Shadow Prince)')
     process.exit(1)
   } else {
     options.alucardPaletteSet = argv.alucardPalette.toString()

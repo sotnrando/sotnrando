@@ -239,7 +239,7 @@ function displayRandomSplashText(seasonalEvent) {
     // Calculate current position based on the selected options
     var paletteIndex = paletteSelect.selectedIndex;
     var linerIndex = linerSelect.selectedIndex;
-    paletteDisplay.style.backgroundPositionX = (768 - (paletteIndex * 96)) + "px";
+    paletteDisplay.style.backgroundPositionX = (864 - (paletteIndex * 96)) + "px";
     linerDisplay.style.backgroundPositionX = (768 - (linerIndex * 96)) + "px";
   };
  
@@ -1280,6 +1280,9 @@ function displayRandomSplashText(seasonalEvent) {
         case 'bluedanube':
           alucardPaletteSet = 'b'
           break
+        case 'mint':
+          alucardPaletteSet = 'm'
+          break
         case 'swampthing':
           alucardPaletteSet = 'g'
           break
@@ -1297,6 +1300,7 @@ function displayRandomSplashText(seasonalEvent) {
           break
 
       }
+      
     }
     if(elems.alucardLiner != 'default'){
       switch(elems.alucardLiner.value){
@@ -1758,6 +1762,10 @@ function displayRandomSplashText(seasonalEvent) {
               break
             case 'bluedanube':
               alColP = 'b'
+              check.apply(util.applyAlucardPalette(alColP))
+              break
+            case 'mint':
+              alColP = 'm'
               check.apply(util.applyAlucardPalette(alColP))
               break
             case 'swampthing':
