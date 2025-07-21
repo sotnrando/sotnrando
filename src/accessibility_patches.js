@@ -121,6 +121,13 @@
     data.writeWord(0x119090,0x00000000)
   }
 
+  // Prevent Softlock if you fall down after doing Death Skip in Entrance. - MottZilla
+  function patchDeathSkipSoftlock(data) {
+    let offset = 0x4BAFC68
+    offset = data.writeWord(offset,0x34020000)
+    offset = data.writeWord(offset,0xAE22B98C)
+  }
+
   function applyAccessibilityPatches() {
     const data = new util.checked()
     patchPowerOfSireFlashing(data)
@@ -136,6 +143,7 @@
     patchClearGame(data)
     patchRockKnightRoom(data)
     patchLuckCriticalCrash(data)
+    patchDeathSkipSoftlock(data)
     return data
   }
 
