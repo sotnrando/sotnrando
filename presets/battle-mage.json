@@ -8552,5 +8552,20 @@
     "address": "0x4608BE4",
     "type": "word",
     "value": "0x00000000"
+  },{
+    "comment": "Reverse Demon card open door A",
+    "address": "0x4DC225C",
+    "type": "word",
+    "value": "0x34020001"
+  },{
+    "comment": "Reverse Demon card open door B",
+    "address": "0x4DC22C4",
+    "type": "word",
+    "value": "0x34020001"
+  },{
+    "comment": "Reverse Demon card open door C",
+    "address": "0x4DC22E4",
+    "type": "word",
+    "value": "0x34020001"
   }]
 }
