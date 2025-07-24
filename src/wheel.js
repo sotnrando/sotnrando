@@ -1,4 +1,4 @@
-const presetsByCategory = {
+let presetsByCategory = {
     tournament: ['Big Toss', 'Recycler', 'Hitman', 'Seeker', 'Battle Mage'],
     evergreen: [
         'Adventure', 'Bat Master', 'Boss Rush', 'Bounty Hunter', 'Casual',
@@ -61,6 +61,46 @@ function applyCategoryFilters() {
     });
 
     generateCheckboxesFromList(combinedPresets);
+}
+
+function deleteCustomWheels() {
+    // Clear the custom categories from localStorage
+    localStorage.removeItem('customCategories');
+    location.reload();
+}
+
+function cancelWheelSave() {
+    document.getElementById("overlay").style.display = 'none';
+}
+
+function startWheelSave(){
+    document.getElementById("overlay").style.display = 'flex';
+}
+
+function submitWheelSave(){
+    // Reads all the checkboxes inside the checkboxesContainer and saves the checked ones to localStorage
+    const checkboxesContainer = document.getElementById("checkboxesContainer");
+    const checkboxes = checkboxesContainer.querySelectorAll('input[type="checkbox"]');
+    // Convert it into an array of objects with id and checked properties
+    // Then store it in localStorage as a JSON string with the key from the customWheelName textbox
+    const customWheelName = document.getElementById("customWheelName").value;
+    let customCategories = localStorage.getItem('customCategories');
+    if (!customCategories) {
+        customCategories = {};
+    }else{
+        customCategories = JSON.parse(customCategories);
+    }
+    // Add the custom wheel name to the customCategories array if it doesn't already exist
+    let customWheel = [];
+    for (const checkbox of checkboxes) {
+        if (checkbox.checked) {
+            customWheel.push(checkbox.value);
+        }
+    }
+    customCategories[customWheelName] = customWheel;
+    localStorage.setItem('customCategories', JSON.stringify(customCategories));
+    document.getElementById("overlay").style.display = 'none';
+    location.reload();
 }
 
 function generateCheckboxesFromList(presetList) {
@@ -141,10 +181,25 @@ function loadHandler() {
     document.getElementById("btnGenerate").addEventListener("click", generateWheel);
 }
 
+function loadCustomCategories() {
+    let customCategories = localStorage.getItem('customCategories');
+    if (!customCategories) {
+        return;
+    }
+    customCategories = JSON.parse(customCategories);
+    for(const key in customCategories) {
+        presetsByCategory[key] = customCategories[key];
+        const button = document.createElement('button');
+        button.classList.add('filter-btn');
+        button.setAttribute('data-category', key);
+        button.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+        // Add to the filter section
+        const filterSection = document.getElementById('categoryButtons');
+        filterSection.appendChild(button);
+    }
+}
 
-let activeCategories = [];
-
-document.addEventListener('DOMContentLoaded', () => {
+function loadEvents(){
     document.querySelectorAll('.filter-btn').forEach(button => {
         button.addEventListener('click', () => {
             const cat = button.getAttribute('data-category');
@@ -166,10 +221,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+}
+
+
+let activeCategories = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+
 });
 
 // Load everything when the window loads
 window.addEventListener("load", () => {
+    loadCustomCategories(); // Load custom categories from localStorage
+    loadEvents(); // Setup event listeners for category buttons
     generateCheckboxes(); // Generate checkboxes
     loadHandler(); // Setup generate button event
 })

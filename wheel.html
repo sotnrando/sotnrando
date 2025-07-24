@@ -47,6 +47,15 @@
         </ul>
     </nav>
     <main>
+        <div id="overlay" >
+            <div id="prompt-box">
+                <p>Enter List Name:</p>
+                <input type="text" id="customWheelName" />
+                <br />
+                <button onclick="submitWheelSave()">Save</button>
+                <button onclick="cancelWheelSave()">Cancel</button>
+            </div>
+        </div>
         <iframe id="presetWheel" src="" scrolling="no" frameborder="0"></iframe>
         <div class="categoryFilter">
             <strong>Select Categories:</strong>
@@ -69,6 +78,8 @@
             <button id="btnGenerate">Generate Wheel</button>
             <button onclick="clearAllCheckboxes()">Clear All</button>
             <button onclick="selectAllCheckboxes()">Select All</button>
+            <button onclick="startWheelSave()">Save as new Wheel</button>
+            <button onclick="deleteCustomWheels()">Delete Custom Wheels</button>
         </div>
     </main>
 </body>
