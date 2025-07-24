@@ -1,7 +1,7 @@
 const presetsByCategory = {
     tournament: ['Big Toss', 'Recycler', 'Hitman', 'Seeker', 'Battle Mage'],
     evergreen: [
-        'Adventure', 'Bat Master', 'Boss Rush', 'Bounty Hunter', 'Casual', 'Crash Course',
+        'Adventure', 'Bat Master', 'Boss Rush', 'Bounty Hunter', 'Casual',
         'Expedition', 'Glitch', 'Guarded Og', 'Lycanthrope', 'Nimble', 'Og', 'Safe',
         'Warlock'
     ],
