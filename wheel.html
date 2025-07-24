@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SotN | Wheel of Fun</title>
-    <link rel="icon" href="images/favicon.ico">
+    <link rel="icon" href="images/ICON.jpg">
     <script src="src/wheel.js"></script>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/wheel.css">
 </head>
+
 <body>
     <header>
         <h1>Castlevania: Symphony of the Night</h1>
@@ -37,27 +39,38 @@
             </li>
             <li><a>Tools<small></small></a>
                 <ul class="submenu">
-                    <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
+                    <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a>
+                    </li>
                     <li><a href="https://taliczealot.github.io/#/apps/sotnrandotools">Rando Tools</a></li>
                 </ul>
             </li>
         </ul>
     </nav>
     <main>
-    <iframe id="presetWheel" src="" scrolling="no" frameborder="0"></iframe>
-    <div class="categoryFilter">
-    <strong>Select Categories:</strong>
-    <div id="categoryButtons">
-        <button class="filter-btn" data-category="allPresets">All Presets</button>
-        <button class="filter-btn" data-category="tournament">Tournament</button>
-    </div>
-</div>
-    <div id="checkboxesContainer" class="wheelPicks"></div>
-    <div>
-        <button id="btnGenerate">Generate Wheel</button>
-        <button onclick="clearAllCheckboxes()">Clear All</button>
-        <button onclick="selectAllCheckboxes()">Select All</button>
-    </div>
-</main>
+        <iframe id="presetWheel" src="" scrolling="no" frameborder="0"></iframe>
+        <div class="categoryFilter">
+            <strong>Select Categories:</strong>
+            <div id="categoryButtons">
+                <button class="filter-btn" data-category="allPresets">All Presets</button>
+                <button class="filter-btn" data-category="tournament">Tournament</button>
+                <button class="filter-btn" data-category="evergreen">Evergreen</button>
+                <button class="filter-btn" data-category="bountyHunter">Bounty Hunter Presets</button>
+            </div>
+        </div>
+        <div class="customListInput">
+            <label for="customPresets">Add Custom Preset List:</label>
+            <textarea id="customPresets" placeholder="e.g. Nimble, Lycanthrope, Warlock,..."></textarea>
+            <div class="wheelButtons">
+                <button onclick="applyCustomPresets()">Apply Custom List</button>
+            </div>
+        </div>
+        <div id="checkboxesContainer" class="wheelPicks"></div>
+        <div class="wheelButtons">
+            <button id="btnGenerate">Generate Wheel</button>
+            <button onclick="clearAllCheckboxes()">Clear All</button>
+            <button onclick="selectAllCheckboxes()">Select All</button>
+        </div>
+    </main>
 </body>
+
 </html>
