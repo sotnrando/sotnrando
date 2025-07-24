@@ -1,16 +1,33 @@
-const presetsByCategory = {    
-    tournament: ['big-toss', 'recycler', 'hitman', 'seeker', 'battle-mage'],
+let presetsByCategory = {
+    tournament: ['Big Toss', 'Recycler', 'Hitman', 'Seeker', 'Battle Mage'],
+    evergreen: [
+        'Adventure', 'Bat Master', 'Boss Rush', 'Bounty Hunter', 'Casual',
+        'Expedition', 'Glitch', 'Guarded Og', 'Lycanthrope', 'Nimble', 'Og', 'Safe',
+        'Warlock'
+    ],
+    bountyHunter: [
+        'Bounty Hunter', 'Target Confirmed', 'Hitman', 'Cornivus', 'Rampage', 'Chaos Lite'
+    ],
     allPresets: [
-        "adventure", "agonize-twtw", "all-bosses", "any-percent", "aperture", "bat-master", "battle-mage",
-        "beyond", "big-toss", "boss-rush", "bounty-hunter", "brawler", "breach", "casual", "chaos-lite", "chimera",
-        "cornivus", "cursed-night", "dog-life", "empty-hand", "expedition", "first-castle", "gem-farmer",
-        "glitch", "glitchmaster", "grand-tour", "guarded-og", "hitman", "leg-day", "lucky-sevens", "lycanthrope",
-        "magic-mirror", "max-rando", "mirror-breaker", "mobility", "nimble", "nimble-lite", "og", "open", "oracle",
-        "rat-race", "rampage", "recycler", "safe", "safe-stwo", "scavenger", "seeker", "sequence-breaker",
-        "sight-seer", "spellbound", "summoner", "target-confirmed", "third-castle", "timeline", "vanilla",
-        "warlock"
+        'Adventure', 'Agonize 2020', 'All Bosses', 'Any Percent', 'Aperture', 'Bat Master', 'Battle Mage',
+        'Beyond', 'Big Toss', 'Boss Rush', 'Bounty Hunter', 'Brawler', 'Breach', 'Casual', 'Chaos Lite', 'Chimera',
+        'Cornivus', 'Cursed Night', 'Dog Life', 'Empty Hand', 'Expedition', 'First Castle', 'Gem Farmer',
+        'Glitch', 'Glitchmaster', 'Grand Tour', 'Guarded Og', 'Hitman', 'Leg Day', 'Lucky Sevens', 'Lycanthrope',
+        'Magic Mirror', 'Max Rando', 'Mirror Breaker', 'Mobility', 'Nimble', 'Nimble Lite', 'Og', 'Open', 'Oracle',
+        'Rat Race', 'Rampage', 'Recycler', 'Safe', 'Safe Season 2', 'Scavenger', 'Seeker', 'Sequence Breaker',
+        'Sight Seer', 'Spellbound', 'Summoner', 'Target Confirmed', 'Third Castle', 'Timeline', 'Vanilla',
+        'Warlock'
     ]
 };
+function applyCustomPresets() {
+    const input = document.getElementById('customPresets').value;
+    const customList = input
+        .split(',')
+        .map(str => str.trim())
+        .filter(str => str.length > 0);
+
+    generateCheckboxesFromList(customList);
+}
 function generateCheckboxes() {
     const container = document.getElementById('checkboxesContainer');
     container.innerHTML = '';
@@ -46,17 +63,60 @@ function applyCategoryFilters() {
     generateCheckboxesFromList(combinedPresets);
 }
 
+function deleteCustomWheels() {
+    // Clear the custom categories from localStorage
+    localStorage.removeItem('customCategories');
+    location.reload();
+}
+
+function cancelWheelSave() {
+    document.getElementById("overlay").style.display = 'none';
+}
+
+function startWheelSave(){
+    document.getElementById("overlay").style.display = 'flex';
+}
+
+function submitWheelSave(){
+    // Reads all the checkboxes inside the checkboxesContainer and saves the checked ones to localStorage
+    const checkboxesContainer = document.getElementById("checkboxesContainer");
+    const checkboxes = checkboxesContainer.querySelectorAll('input[type="checkbox"]');
+    // Convert it into an array of objects with id and checked properties
+    // Then store it in localStorage as a JSON string with the key from the customWheelName textbox
+    const customWheelName = document.getElementById("customWheelName").value;
+    let customCategories = localStorage.getItem('customCategories');
+    if (!customCategories) {
+        customCategories = {};
+    }else{
+        customCategories = JSON.parse(customCategories);
+    }
+    // Add the custom wheel name to the customCategories array if it doesn't already exist
+    let customWheel = [];
+    for (const checkbox of checkboxes) {
+        if (checkbox.checked) {
+            customWheel.push(checkbox.value);
+        }
+    }
+    customCategories[customWheelName] = customWheel;
+    localStorage.setItem('customCategories', JSON.stringify(customCategories));
+    document.getElementById("overlay").style.display = 'none';
+    location.reload();
+}
+
 function generateCheckboxesFromList(presetList) {
     const container = document.getElementById('checkboxesContainer');
     container.innerHTML = '';
 
-    // Remove duplicates while preserving original order
+    // Remove duplicates
     const seen = new Set();
     const uniquePresets = presetList.filter(preset => {
         if (seen.has(preset)) return false;
         seen.add(preset);
         return true;
     });
+
+    // Sort alphabetically
+    uniquePresets.sort((a, b) => a.localeCompare(b));
 
     uniquePresets.forEach((preset, index) => {
         const div = document.createElement('div');
@@ -121,10 +181,25 @@ function loadHandler() {
     document.getElementById("btnGenerate").addEventListener("click", generateWheel);
 }
 
+function loadCustomCategories() {
+    let customCategories = localStorage.getItem('customCategories');
+    if (!customCategories) {
+        return;
+    }
+    customCategories = JSON.parse(customCategories);
+    for(const key in customCategories) {
+        presetsByCategory[key] = customCategories[key];
+        const button = document.createElement('button');
+        button.classList.add('filter-btn');
+        button.setAttribute('data-category', key);
+        button.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+        // Add to the filter section
+        const filterSection = document.getElementById('categoryButtons');
+        filterSection.appendChild(button);
+    }
+}
 
-let activeCategories = [];
-
-document.addEventListener('DOMContentLoaded', () => {
+function loadEvents(){
     document.querySelectorAll('.filter-btn').forEach(button => {
         button.addEventListener('click', () => {
             const cat = button.getAttribute('data-category');
@@ -146,10 +221,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+}
+
+
+let activeCategories = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+
 });
 
 // Load everything when the window loads
 window.addEventListener("load", () => {
+    loadCustomCategories(); // Load custom categories from localStorage
+    loadEvents(); // Setup event listeners for category buttons
     generateCheckboxes(); // Generate checkboxes
     loadHandler(); // Setup generate button event
 })

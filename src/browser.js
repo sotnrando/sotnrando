@@ -1788,7 +1788,7 @@ function displayRandomSplashText(seasonalEvent) {
               check.apply(util.applyAlucardPalette(alColP))
               break
             case 'shadowp':
-              alcolP = 's'
+              alColP = 's'
               check.apply(util.applyAlucardPalette(alColP))
               break
           }

@@ -1,26 +1,34 @@
-.wheelPicks{
+.wheelPicks {
     display: grid;
     grid-auto-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     margin: 1em;
     color: white;
 }
-button{
+
+.wheelPicks input[type="checkbox"]+label {
+    margin-left: 0.4em;
+}
+
+.wheelButtons button {
     margin: 1em;
-    width: 125px;
+    width: 140px;
     height: 25px;
 }
-iframe{
+
+iframe {
     margin: 1em;
     height: 550px;
     border: 2px solid white;
     border-radius: 20px;
 }
+
 .categoryFilter {
     margin: 20px 0;
     text-align: center;
     color: white;
 }
+
 
 .categoryFilter label,
 .categoryFilter select {
@@ -29,7 +37,8 @@ iframe{
 }
 
 .filter-btn {
-    margin: 10px;
+    height: 40px;
+    margin: auto;
     padding: 6px 12px;
     cursor: pointer;
     border: 2px solid white;
@@ -45,16 +54,55 @@ iframe{
     border-color: yellow;
 }
 
+.customListInput {
+    margin: 1em;
+}
+.customListInput label{
+    color: white;
+}
+
+#customPresets {
+    width: 100%;
+    height: 4em;
+    margin-top: 0.5em;
+    padding: 0.5em;
+    font-family: inherit;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Prompt Box */
+#prompt-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
 
 
-@media only screen and (min-width: 900px){
-    body{ 
+@media only screen and (min-width: 900px) {
+    body {
         width: 70vw
     }
-    main{
+
+    main {
         flex-direction: column;
     }
 }
+
 @media only screen and (min-width:580px) {
     .wheelPicks {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
