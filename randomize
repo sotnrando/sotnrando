@@ -671,6 +671,11 @@ const yargs = require('yargs')
     describe: 'Randomizes almost every element in the game.',
     type: 'boolean',
   })
+  .option('simpleInput', {
+    alias: 'si',
+    describe: 'Simplifies inputs so spells no longer need complex sequences to execute.',
+    type: 'boolean',
+  })
   .option('devStash', {
     alias: 'dev',
     describe: '???',
@@ -1189,6 +1194,11 @@ if ('debug' in argv) {console.log('randomize | Set elemChaos')}
 if (argv.elemChaos) {
   options.elemChaosMode = true
 }
+if ('debug' in argv) {console.log('randomize | Set simpleInput')}
+// Enable elemental chaos if specified. - eldri7ch
+if (argv.simpleInput) {
+  options.simpleInputMode = true
+}
 if ('debug' in argv) {console.log('randomize | Set devStash')}
 // Enable Dev's Stash if specified. - eldri7ch
 if (argv.devStash) {
@@ -1601,6 +1611,13 @@ if ('debug' in argv) {console.log('randomize | Start randomization')}
           check.apply(util.applyElemChaosPatches(rng))
         }
         if ('debug' in argv) {console.log('randomize | function: randomize | Elemental Chaos | ' + optFlag)}
+        optFlag = false
+        if (options.simpleInput || applied.simpleInput) { // Simplifies spell inputs - eldrich
+          // Apply simple input patches. - eldri7ch
+          optFlag = true
+          check.apply(util.applySimpleInputPatches())
+        }
+        if ('debug' in argv) {console.log('randomize | function: randomize | Simplified Input Mode | ' + optFlag)}
         optFlag = false
         if (options.devStashMode || applied.devStashMode) { // dev's stash - eldrich
           optFlag = true

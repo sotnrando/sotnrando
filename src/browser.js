@@ -536,6 +536,7 @@ function displayRandomSplashText(seasonalEvent) {
     elems.godspeedMode.checked = !!options.godspeedMode
     elems.libraryShortcut.checked = !!options.libraryShortcut
     elems.elemChaosMode.checked = !!options.elemChaosMode
+    elems.simpleInputMode.checked = !!options.simpleInputMode
     elems.devStashMode.checked = !!options.devStashMode
     elems.bossMusicSeparation.checked = !!options.bossMusicSeparation
   }
@@ -979,6 +980,10 @@ function displayRandomSplashText(seasonalEvent) {
     localStorage.setItem('elemChaosMode', elems.elemChaosMode.checked)
   }
 
+  function simpleInputModeChange() {
+    localStorage.setItem('simpleInputMode', elems.simpleInputMode.checked)
+  }
+
   function devStashModeChange() {
     localStorage.setItem('devStashMode', elems.devStashMode.checked)
   }
@@ -1198,6 +1203,9 @@ function displayRandomSplashText(seasonalEvent) {
     }
     if (elems.elemChaosMode.checked) {
       options.elemChaosMode = true
+    }
+    if (elems.simpleInputMode.checked) {
+      options.simpleInputMode = true
     }
     if (elems.devStashMode.checked) {
       options.devStashMode = true
@@ -1663,6 +1671,10 @@ function displayRandomSplashText(seasonalEvent) {
         if (options.elemChaosMode || applied.elemChaosMode) {
           check.apply(util.applyElemChaosPatches(rng))
         }
+        // Apply simple input patches.
+        if (options.simpleInputMode || applied.simpleInputMode) {
+          check.apply(util.applySimpleInputPatches())
+        }
         // Apply dev stash patches.
         if (options.devStashMode || applied.devStashMode) {
           check.apply(util.applyDevsStashPatches())
@@ -1963,6 +1975,7 @@ function displayRandomSplashText(seasonalEvent) {
     elems.godspeedMode.disabled = false
     elems.libraryShortcut.disabled = false
     elems.elemChaosMode.disabled = false
+    elems.simpleInputMode.disabled = false
     elems.devStashMode.disabled = false
     elems.seasonalPhrasesMode.disabled = false
     elems.seasonalPhrasesMode.value = true
@@ -2217,6 +2230,7 @@ function displayRandomSplashText(seasonalEvent) {
     godspeedMode: document.getElementById('godspeed-mode'),
     libraryShortcut: document.getElementById('library-shortcut'),
     elemChaosMode: document.getElementById('elem-chaos'),
+    simpleInputMode: document.getElementById('simple-input'),
     devStashMode: document.getElementById('dev-stash'),
     seasonalPhrasesMode: document.getElementById('seasonal-phrases'),
     bossMusicSeparation: document.getElementById('boss-music-separation'),
@@ -2311,6 +2325,7 @@ function displayRandomSplashText(seasonalEvent) {
   elems.godspeedMode.addEventListener('change', godspeedModeChange)
   elems.libraryShortcut.addEventListener('change', libraryShortcutChange)
   elems.elemChaosMode.addEventListener('change', elemChaosModeChange)
+  elems.simpleInputMode.addEventListener('change', simpleInputModeChange)
   elems.devStashMode.addEventListener('change', devStashModeChange)
   elems.seasonalPhrasesMode.addEventListener('change', seasonalPhrasesModeChange)
   elems.bossMusicSeparation.addEventListener('change', bossMusicSeparationChange)
@@ -2653,6 +2668,7 @@ function displayRandomSplashText(seasonalEvent) {
   loadOption('godspeedMode', godspeedModeChange, false)
   loadOption('libraryShortcut', libraryShortcutChange, false)
   loadOption('elemChaosMode', elemChaosModeChange, false)
+  loadOption('simpleInputMode', simpleInputModeChange, false)
   loadOption('devStashMode', devStashModeChange, false)
   loadOption('seasonalPhrasesMode', seasonalPhrasesModeChange, true)
   loadOption('bossMusicSeparation', bossMusicSeparationChange, true)
