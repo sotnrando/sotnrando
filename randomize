@@ -1612,7 +1612,7 @@ if ('debug' in argv) {console.log('randomize | Start randomization')}
         }
         if ('debug' in argv) {console.log('randomize | function: randomize | Elemental Chaos | ' + optFlag)}
         optFlag = false
-        if (options.simpleInput || applied.simpleInput) { // Simplifies spell inputs - eldrich
+        if (options.simpleInputMode || applied.simpleInputMode) { // Simplifies spell inputs - eldrich
           // Apply simple input patches. - eldri7ch
           optFlag = true
           check.apply(util.applySimpleInputPatches())
