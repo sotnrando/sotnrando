@@ -782,6 +782,12 @@ if ('debug' in argv) {
     console.log('Begin Debug output:')
   }
 }
+if ('simpleInput' in argv) {
+  if ('tournament' in argv) {
+    console.error('\nYou cannot run simplified inputs at the same time as tournament mode.')
+    process.exit(1)
+  }
+}
 if ('debug' in argv) {console.log('randomize | Checking for help flags')}
 // Check for help.
 if ('help' in argv) {

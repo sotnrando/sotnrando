@@ -890,8 +890,11 @@
       elems.showRelics.disabled = true
       elems.showSolutions.checked = false
       elems.showSolutions.disabled = true
+      elems.simpleInputMode.checked = false
+      elems.simpleInputMode.disabled = true
     } else {
       elems.showRelics.disabled = false
+      elems.simpleInputMode.disabled = false
     }
     localStorage.setItem('tournamentMode', elems.tournamentMode.checked)
   }
