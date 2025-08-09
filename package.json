@@ -5,6 +5,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "hygen": "^6.2.11",
+    "ignore-walk": "^8.0.0",
     "seedrandom": "^3.0.1",
     "yargs": "^17.7.2"
   },
