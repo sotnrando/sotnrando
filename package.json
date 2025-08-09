@@ -5,7 +5,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "hygen": "^6.2.11",
-    "ignore-walk": "^8.0.0",
+    "npm-force-resolutions": "^0.0.10",
     "seedrandom": "^3.0.1",
     "yargs": "^17.7.2"
   },
@@ -13,7 +13,11 @@
     "type": "git",
     "url": "git+https://github.com/3snowp7im/SotN-Randomizer.git"
   },
+  "resolutions": {
+    "brace-expansion": "1.1.12"
+  },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "build-presets": "node tools/build-presets",
     "postinstall": "npm run build-presets"
   },
