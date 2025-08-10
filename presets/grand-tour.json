@@ -23,7 +23,6 @@
   "inherits": "casual",
   "relicLocationsExtension": "scenic",
   "music": false,
-  "colorrandoMode": true,
 
   "complexityGoal": {
     "min": 8,

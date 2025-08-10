@@ -24,7 +24,6 @@
   "preventLeaks": false,
   "stats": false,
   "music": false,
-  "colorrandoMode": true,
   
   "complexityGoal": {
     "min": 1,

@@ -24,7 +24,6 @@
   
   "relicLocationsExtension": "extended",
   "stats": false,
-  "colorrandoMode": true,
   "antiFreezeMode": true,
   "fastwarpMode": true,
   "magicmaxMode": true,

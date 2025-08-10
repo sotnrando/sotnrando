@@ -21,7 +21,6 @@
 
   "relicLocationsExtension": "guarded",
   "stats": false,
-  "colorrandoMode": true,
   "fastwarpMode": true,
   "magicmaxMode": true,
   "noprologueMode": true,

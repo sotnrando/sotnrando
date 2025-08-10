@@ -20,7 +20,6 @@
   },
 
   "thrustSwordAbility": true,
-  "colorrandoMode": true,
   
   "complexityGoal": {
     "min": 8,

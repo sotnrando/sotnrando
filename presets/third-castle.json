@@ -20,7 +20,7 @@
   },
 
   "inherits": "safe",
-  "colorrandoMode": true,
+  
   
   "writes": [{
     "address": "0x043f0448",

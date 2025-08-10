@@ -22,7 +22,6 @@
   },
 
   "inherits": "casual",
-  "colorrandoMode": true,
 
   "complexityGoal": {
     "min": 9,

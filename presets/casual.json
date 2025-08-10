@@ -21,7 +21,6 @@
     "winCondition": "Normal"
   },
 
-  "colorrandoMode": true,
 
   "complexityGoal": {
     "min": 1,

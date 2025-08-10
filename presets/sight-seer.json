@@ -22,7 +22,6 @@
   
   "relicLocationsExtension": "extended",
   "stats": false,
-  "colorrandoMode": true,
 
   "complexityGoal": {
     "min": 7,
