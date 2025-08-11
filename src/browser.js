@@ -249,10 +249,10 @@
   linerSelect.onchange = updateAlucardPreview;
 
   window.onload = function () {
-  if (paletteSelect.value || linerSelect.value) {
-    updateAlucardPreview();
-  }
-};
+    if (paletteSelect.value || linerSelect.value) {
+      updateAlucardPreview();
+    }
+  };
 
 
 
@@ -266,287 +266,202 @@
     updateMapColorPreview();
   }
 
-  window.onload = function() {
-    if (mapColorSelect.value){
+  window.onload = function () {
+    if (mapColorSelect.value) {
       updateMapColorPreview();
     }
   }
-  function presetIdChange() {                                                                       // auto checks modes and options that presets use
+  
+  function presetIdChange() {
+    // Refactored for ease of alteration and maintainability -crazy4blades
+    const BH_COMPAT = new Set([
+      "bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage"
+    ]);
+    const BOSS_COMPAT = new Set([
+      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
+      "expedition", "bat-master", "glitch", "scavenger", "empty-hand", "third-castle", "magic-mirror", "leg-day",
+      "big-toss", "grand-tour", "crash-course", "any-percent", "lookingglass", "skinwalker", "summoner", "safe-stwo",
+      "open", "brawler", "lucky-sevens", "sight-seer", "cursed-night", "spellbound", "mobility", "glitchmaster",
+      "dog-life", "battle-mage", "timeline", "chimera", "vanilla", "all-bosses", "rampage", "nimble-lite", "oracle",
+      "boss-reflector", "cornivus", "mirror-breaker"
+    ]);
+    const RELIC_COMPAT = new Set([
+      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
+      "expedition", "bat-master", "scavenger", "empty-hand", "gem-farmer", "third-castle", "rat-race", "magic-mirror",
+      "bounty-hunter", "target-confirmed", "hitman", "beyond", "grand-tour", "crash-course", "lookingglass", "skinwalker",
+      "summoner", "agonize-twtw", "safe-stwo", "open", "lucky-sevens", "sight-seer", "cursed-night", "spellbound",
+      "mobility", "timeline", "chimera", "vanilla", "nimble-lite", "all-bosses", "cornivus", "mirror-breaker"
+    ]);
+
+    const ALL_TOGGLES = [
+      "antiFreezeMode", "startRoomRando2ndMode", "relicLocations", "relicLocationsSet", "startRoomRandoMode",
+      "unlockedMode", "enemyStatRandoMode", "elemChaosMode", "rlbcMode", "godspeedMode", "dominoMode"
+    ];
+
+    const DISABLE_RULES = [
+      { ids: ["glitch", "glitchmaster", "any-percent"], elems: ["antiFreezeMode"] },
+      { ids: ["dog-life", "magic-mirror", "mobility", "lookingglass", "boss-rush", "beyond", "first-castle"], elems: ["startRoomRando2ndMode"] },
+      { ids: ["boss-rush", "first-castle"], elems: ["relicLocations", "relicLocationsSet"] },
+      { ids: ["boss-rush", "beyond"], elems: ["startRoomRandoMode"] },
+      { ids: ["boss-rush"], elems: ["unlockedMode"] },
+      { ids: ["big-toss"], elems: ["enemyStatRandoMode", "elemChaosMode"] },
+      { ids: ["boss-rush", "first-castle", "beyond", "seeker", "recycler"], elems: ["rlbcMode"] },
+      { ids: ["battle-mage"], elems: ["godspeedMode"] },
+      { ids: ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "oracle"], elems: ["dominoMode"] }
+    ];
+
+    const BH_GOAL_PRESETS = {
+      bhNorm: new Set(["bounty-hunter", "chaos-lite"]),
+      bhAdvanced: new Set(["target-confirmed"]),
+      bhHitman: new Set(["hitman"]),
+      bhBoss: new Set(["rampage"])
+    };
+    const GOAL_PRESETS = {
+      allBoss: new Set(["all-bosses", "mirror-breaker"]),
+      vladBoss: new Set(["boss-reflector", "cornivus"])
+    };
+
+    const enableAll = () => {
+      for (const key of ALL_TOGGLES) {
+        const el = elems[key];
+        if (!el) continue;
+        el.disabled = false;
+      }
+    };
+
+    const computeGoal = (presetId) => {
+      for (const [goal, set] of Object.entries(BH_GOAL_PRESETS)) {
+        if (set.has(presetId)) return goal;
+      }
+      for (const [goal, set] of Object.entries(GOAL_PRESETS)) {
+        if (set.has(presetId)) return goal;
+      }
+      return "default";
+    };
+
+    const validateGoal = (presetId, goal) => {
+      const isBossGoal = goal === "allBoss" || goal === "abrsr" || goal === "vladBoss";
+      const isRelicGoal = goal === "allRelic" || goal === "abrsr";
+      const isBhGoal = goal === "bhNorm" || goal === "bhAdvanced" || goal === "bhBoss" || goal === "bhHitman";
+
+      if (isBossGoal && !BOSS_COMPAT.has(presetId)) return "default";
+      if (isRelicGoal && !RELIC_COMPAT.has(presetId)) return "default";
+      if (isBhGoal && !BH_COMPAT.has(presetId)) return "default";
+      return goal;
+    };
+
     let idx = elems.presetId.selectedIndex;
-    let bhCompatible = [
-      "bounty-hunter",
-      "target-confirmed",
-      "hitman",
-      "chaos-lite",
-      "rampage"
-    ]
-    let bossCompatible = [
-      "casual",
-      "safe",
-      "adventure",
-      "og",
-      "guarded-og",
-      "sequence-breaker",
-      "lycanthrope",
-      "warlock",
-      "nimble",
-      "expedition",
-      "bat-master",
-      "glitch",
-      "scavenger",
-      "empty-hand",
-      "third-castle",
-      "magic-mirror",
-      "leg-day",
-      "big-toss",
-      "grand-tour",
-      "crash-course",
-      "any-percent",
-      "lookingglass",
-      "skinwalker",
-      "summoner",
-      "safe-stwo",
-      "open",
-      "brawler",
-      "lucky-sevens",
-      "sight-seer",
-      "cursed-night",
-      "spellbound",
-      "mobility",
-      "glitchmaster",
-      "dog-life",
-      "battle-mage",
-      "timeline",
-      "chimera",
-      "vanilla",
-      "all-bosses",
-      "rampage",
-      "nimble-lite",
-      "oracle",
-      "boss-reflector",
-      "cornivus",
-      "mirror-breaker"
-    ]
-    let relicCompatible = [
-      "casual",
-      "safe",
-      "adventure",
-      "og",
-      "guarded-og",
-      "sequence-breaker",
-      "lycanthrope",
-      "warlock",
-      "nimble",
-      "expedition",
-      "bat-master",
-      "scavenger",
-      "empty-hand",
-      "gem-farmer",
-      "third-castle",
-      "rat-race",
-      "magic-mirror",
-      "bountyhunter",
-      "bountyhuntertc",
-      "hitman",
-      "beyond",
-      "grand-tour",
-      "crash-course",
-      "lookingglass",
-      "skinwalker",
-      "summoner",
-      "agonize-twtw",
-      "safe-stwo",
-      "open",
-      "lucky-sevens",
-      "sight-seer",
-      "cursed-night",
-      "spellbound",
-      "mobility",
-      "timeline",
-      "chimera",
-      "vanilla",
-      "nimble-lite",
-      "all-bosses",
-      "cornivus",
-      "mirror-breaker"
-    ]
     if (idx < 0) idx = 0;
-    const id = elems.presetId.childNodes[idx].value
-    const preset = presets.filter(function (preset) {
-      return preset.id === id
-    }).pop()
-    elems.presetDescription.innerText = preset.description                                          // setting metadata exposition for the user - eldri7ch
-    elems.presetAuthor.innerText = preset.author
-    elems.presetKnowledgeCheck.innerText = preset.knowledgeCheck
-    elems.presetExtension.innerText = preset.metaExtension
-    elems.presetComplexity.innerText = preset.metaComplexity
-    elems.presetItemStats.innerText = preset.itemStats
-    elems.presetTimeFrame.innerText = preset.timeFrame
-    elems.presetModdedLevel.innerText = preset.moddedLevel
-    elems.presetCastleType.innerText = preset.castleType
-    elems.presetTransformEarly.innerText = preset.transformEarly
-    elems.presetTransformFocus.innerText = preset.transformFocus
-    elems.presetWinCondition.innerText = preset.winCondition
-    localStorage.setItem('presetId', preset.id)
-    if (["glitch", "glitchmaster", "any-percent"].includes(preset.id)) {                          // Remove anti-freeze mode for incompatible presets. - eldri7ch
-      elems.antiFreezeMode.checked = false
-      elems.antiFreezeMode.disabled = true
-    } else {
-      elems.antiFreezeMode.disabled = false
-    }
-    if (["dog-life", "magic-mirror", "mobility", "lookingglass", "boss-rush", "beyond", "first-castle"].includes(preset.id)) {
-      elems.startRoomRando2ndMode.checked = false                                                   // Remove 2nd castle starting room rando for listed presets. - crazy4blades
-      elems.startRoomRando2ndMode.disabled = true                                                   // Dog Life, Magic Mirror, Mobility, Looking Glass, Boss Rush and Beyond
-    } else {
-      elems.startRoomRando2ndMode.disabled = false
-    }
-    if (["boss-rush", "first-castle"].includes(preset.id)) {
-      elems.relicLocations.checked = false
-      elems.relicLocations.disabled = true
-      elems.relicLocationsSet.checked = false
-      elems.relicLocationsSet.disabled = true
-    } else {
-      elems.relicLocations.disabled = false
-      elems.relicLocationsSet.disabled = false
-    }
-    if (["boss-rush", "beyond"].includes(preset.id)) {                                              // Remove start room rando mode for incompatible presets. - eldri7ch
-      elems.startRoomRandoMode.checked = false
-      elems.startRoomRandoMode.disabled = true
-    } else {
-      elems.startRoomRandoMode.disabled = false
-    }
-    if (["boss-rush"].includes(preset.id)) {                                                        // Remove unlocked mode for incompatible presets. - eldri7ch
-      elems.unlockedMode.checked = false
-      elems.unlockedMode.disabled = true
-    } else {
-      elems.unlockedMode.disabled = false
-    }
-    if (["big-toss"].includes(preset.id)) {                                                         // Remove ESR mode for incompatible presets. - eldri7ch
-      elems.enemyStatRandoMode.checked = false
-      elems.enemyStatRandoMode.disabled = true
-      elems.elemChaosMode.checked = false
-      elems.elemChaosMode.disabled = true
-    } else {
-      elems.enemyStatRandoMode.disabled = false
-    }
-    if (["boss-rush", "first-castle", "beyond", "seeker", "recycler"].includes(preset.id)) {            // Remove rlbc mode for incompatible presets. - eldri7ch
-      elems.rlbcMode.checked = false
-      elems.rlbcMode.disabled = true
-    } else {
-      elems.rlbcMode.disabled = false
-    }
-    if (["battle-mage"].includes(preset.id)) {                                                      // Remove godspeed mode for incompatible presets. - eldri7ch
-      elems.godspeedMode.checked = false
-      elems.godspeedMode.disabled = true
-    } else {
-      elems.godspeedMode.disabled = false
-    }
-    if (["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "oracle"].includes(preset.id)) {              // Remove guaranteed drops mode for incompatible presets. - eldri7ch
-      elems.dominoMode.checked = false
-      elems.dominoMode.disabled = true
-    } else {
-      elems.dominoMode.disabled = false
-    }
-    if (["all-bosses", "mirror-breaker"].includes(preset.id)) {                                                       // set all bosses goals. - eldri7ch
-      elems.newGoals.value = "allBoss"
-    } else if (["boss-reflector", "rampage", "cornivus"].includes(preset.id)) {
-      elems.newGoals.value = "vladBoss"
-    } else {
-      elems.newGoals.value = "default"
-    }
-    if (!bossCompatible.includes(preset.id) && ["allBoss", "abrsr", "vladBoss"].includes(elems.newGoals.value)) {
-      elems.newGoals.value = "default"                                                              // Remove all boss mode for incompatible presets. - eldri7ch
-    }
-    if (!relicCompatible.includes(preset.id) && ["allRelic", "abrsr"].includes(elems.newGoals.value)) {
-      elems.newGoals.value = "default"                                                              // Remove all relic mode for incompatible presets. - eldri7ch
-    }
-    if (!bhCompatible.includes(preset.id) && ["bhNorm", "bhAdvanced", "bhBoss", "bhHitman"].includes(elems.newGoals.value)) {
-      elems.newGoals.value = "default"                                                              // Remove all relic mode for incompatible presets. - eldri7ch
-    } else {
-      if (["bounty-hunter", "chaos-lite"].includes(preset.id)) {                                     // set Bounty hunter menu
-        elems.newGoals.value = "bhNorm"
-      } else if (["target-confirmed"].includes(preset.id)) {                                        // set Target Confirmed menu
-        elems.newGoals.value = "bhAdvanced"
-      } else if (["hitman"].includes(preset.id)) {                                                  // set Hitman menu
-        elems.newGoals.value = "bhHitman"
-      } else if (["rampage"].includes(preset.id)) {                                                 // set All Bosses and Bounties menu
-        elems.newGoals.value = "bhBoss"
+
+    const id = elems.presetId.options ? elems.presetId.options[idx].value : elems.presetId.childNodes[idx].value;
+    const preset = presets.find(p => p.id === id) || presets[0];
+
+    // Metadata
+    elems.presetDescription.innerText = preset.description;
+    elems.presetAuthor.innerText = preset.author;
+    elems.presetKnowledgeCheck.innerText = preset.knowledgeCheck;
+    elems.presetExtension.innerText = preset.metaExtension;
+    elems.presetComplexity.innerText = preset.metaComplexity;
+    elems.presetItemStats.innerText = preset.itemStats;
+    elems.presetTimeFrame.innerText = preset.timeFrame;
+    elems.presetModdedLevel.innerText = preset.moddedLevel;
+    elems.presetCastleType.innerText = preset.castleType;
+    elems.presetTransformEarly.innerText = preset.transformEarly;
+    elems.presetTransformFocus.innerText = preset.transformFocus;
+    elems.presetWinCondition.innerText = preset.winCondition;
+
+    localStorage.setItem("presetId", preset.id);
+
+    enableAll();
+
+    let goal = computeGoal(preset.id);
+    goal = validateGoal(preset.id, goal);
+    elems.newGoals.value = goal;
+
+    localStorage.setItem("newGoals", elems.newGoals.value);
+    newGoalsLock = elems.newGoals.value;
+
+    const options = preset.options();
+    let complexity = Object.keys(options.relicLocations || {}).reduce((acc, key) => {
+      return /^[0-9]+(-[0-9]+)?/.test(key) ? key.split("-").shift() : acc;
+    }, 1);
+
+    relicLocationsExtensionCache = options.relicLocations && options.relicLocations.extension;
+    adjustMaxComplexity();
+
+    // Unified logic with disable options merged -crazy4blades
+    const applyOptions = (options = {}, presetId) => {
+      elems.complexity.value = complexity;
+      elems.complexityCurrentValue.innerText = `(${complexity})`;
+
+      const setCheckDisable = (key, condition) => {
+        const el = elems[key];
+        if (!el) return;
+        el.checked = !!condition;
+        el.disabled = condition != null && typeof condition === "object";
+      };
+
+      setCheckDisable("enemyDrops", options.enemyDrops);
+      setCheckDisable("startingEquipment", options.startingEquipment);
+      setCheckDisable("itemLocations", options.itemLocations);
+      setCheckDisable("prologueRewards", options.prologueRewards);
+
+      elems.relicLocations.checked = !!options.relicLocations;
+
+      const ext = options.relicLocations?.extension;
+      const extSet = elems.relicLocationsExtension;
+      if (extSet) {
+        extSet.guarded.checked = ext === constants.EXTENSION.GUARDED;
+        extSet.guardedplus.checked = ext === constants.EXTENSION.GUARDEDPLUS;
+        extSet.equipment.checked = ext === constants.EXTENSION.EQUIPMENT;
+        extSet.scenic.checked = ext === constants.EXTENSION.SCENIC;
+        extSet.extended.checked = ext === constants.EXTENSION.EXTENDED;
+        extSet.classic.checked = !ext;
       }
-    }
 
-    localStorage.setItem('newGoals', elems.newGoals.value)
-    newGoalsLock = elems.newGoals.value
+      const allKeys = [
+        "stats", "music", "turkeyMode", "magicmaxMode", "colorrandoMode",
+        "antiFreezeMode", "mypurseMode", "iwsMode", "fastwarpMode",
+        "itemNameRandoMode", "noprologueMode", "unlockedMode", "surpriseMode",
+        "enemyStatRandoMode", "shopPriceRandoMode", "startRoomRandoMode",
+        "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
+        "godspeedMode", "libraryShortcut", "elemChaosMode", "simpleInputMode",
+        "devStashMode", "bossMusicSeparation"
+      ];
+      // Options you don't want to get disabled -crazy4blades
+      const keysToRemove = ["music", "bossMusicSeparation"];
+      // Array of the options that will get disabled if checked -crazy4blades
+      const filteredKeys = allKeys.filter(key => !keysToRemove.includes(key));
 
-    const options = preset.options()
-    let complexity = 1
-    Object.getOwnPropertyNames(options.relicLocations).forEach(
-      function (key) {
-        if (/^[0-9]+(-[0-9]+)?/.test(key)) {
-          complexity = key.split('-').shift()
+      filteredKeys.forEach(key => {
+        const el = elems[key];
+        if (!el) return;
+        el.checked = !!options[key];
+        if (key === "itemNameRandoMode" && elems.stats?.checked) {
+          el.disabled = false;
+        } else {
+          el.disabled = !!options[key];
         }
-      }
-    )
-    relicLocationsExtensionCache = options.relicLocations
-      && options.relicLocations.extension
-    adjustMaxComplexity()
-    elems.complexity.value = complexity
-    elems.complexityCurrentValue.innerText = `(${elems.complexity.value})`;
-    elems.enemyDrops.checked = !!options.enemyDrops
-    elems.enemyDrops.disabled = options.enemyDrops != null && typeof (options.enemyDrops) == 'object'
-    elems.startingEquipment.checked = !!options.startingEquipment
-    elems.startingEquipment.disabled = options.startingEquipment != null && typeof (options.startingEquipment) == 'object'
-    elems.itemLocations.checked = !!options.itemLocations
-    elems.itemLocations.disabled = options.itemLocations != null && typeof (options.itemLocations) == 'object'
-    elems.prologueRewards.checked = !!options.prologueRewards
-    elems.prologueRewards.disabled = options.prologueRewards != null && typeof (options.startingEquipment) == 'object'
-    elems.relicLocations.checked = !!options.relicLocations
-    elems.relicLocationsExtension.guarded.checked =
-      options.relicLocations
-      && options.relicLocations.extension === constants.EXTENSION.GUARDED
-    elems.relicLocationsExtension.guardedplus.checked =
-      options.relicLocations
-      && options.relicLocations.extension === constants.EXTENSION.GUARDEDPLUS
-    elems.relicLocationsExtension.equipment.checked =
-      options.relicLocations
-      && options.relicLocations.extension === constants.EXTENSION.EQUIPMENT
-    elems.relicLocationsExtension.scenic.checked =
-      options.relicLocations
-      && options.relicLocations.extension === constants.EXTENSION.SCENIC
-    elems.relicLocationsExtension.extended.checked =
-      options.relicLocations
-      && options.relicLocations.extension === constants.EXTENSION.EXTENDED
-    elems.relicLocationsExtension.classic.checked =
-      options.relicLocations
-      && !options.relicLocations.extension
-    elems.stats.checked = !!options.stats
-    elems.music.checked = !!options.music
-    elems.turkeyMode.checked = !!options.turkeyMode
-    elems.magicmaxMode.checked = !!options.magicmaxMode
-    elems.colorrandoMode.checked = !!options.colorrandoMode
-    elems.antiFreezeMode.checked = !!options.antiFreezeMode
-    elems.mypurseMode.checked = !!options.mypurseMode
-    elems.iwsMode.checked = !!options.iwsMode
-    elems.fastwarpMode.checked = !!options.fastwarpMode
-    elems.itemNameRandoMode.checked = !!options.itemNameRandoMode
-    if (elems.stats.checked === true) {
-      elems.itemNameRandoMode.disabled = false
-    }
-    elems.noprologueMode.checked = !!options.noprologueMode
-    elems.unlockedMode.checked = !!options.unlockedMode
-    elems.surpriseMode.checked = !!options.surpriseMode
-    elems.enemyStatRandoMode.checked = !!options.enemyStatRandoMode
-    elems.shopPriceRandoMode.checked = !!options.shopPriceRandoMode
-    elems.startRoomRandoMode.checked = !!options.startRoomRandoMode
-    elems.startRoomRando2ndMode.checked = !!options.startRoomRando2ndMode
-    elems.dominoMode.checked = !!options.dominoMode
-    elems.rlbcMode.checked = !!options.rlbcMode
-    elems.immunityPotionMode.checked = !!options.immunityPotionMode
-    elems.godspeedMode.checked = !!options.godspeedMode
-    elems.libraryShortcut.checked = !!options.libraryShortcut
-    elems.elemChaosMode.checked = !!options.elemChaosMode
-    elems.simpleInputMode.checked = !!options.simpleInputMode
-    elems.devStashMode.checked = !!options.devStashMode
-    elems.bossMusicSeparation.checked = !!options.bossMusicSeparation
+      });
+
+      // Disables the options based on compatability -crazy4blades
+      DISABLE_RULES.forEach(rule => {
+        if (rule.ids.includes(presetId)) {
+          rule.elems.forEach(key => {
+            const el = elems[key];
+            if (!el) {
+              console.warn(`Element not found for key '${key}'`);
+            } else {
+              el.checked = false;
+              el.disabled = true;
+            }
+          });
+        }
+      });
+    };
+
+    // Apply the unified logic
+    applyOptions(options, preset.id);
   }
 
   function complexityChange() {
