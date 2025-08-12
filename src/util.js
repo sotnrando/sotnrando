@@ -5,6 +5,9 @@
   let errors
   let extension
   let items
+  let equipment
+  let spells
+  let subWeapons
   let relics
   let fs
   let crypto
@@ -16,6 +19,9 @@
     errors = self.sotnRando.errors
     extension = self.sotnRando.extension
     items = self.sotnRando.items
+    equipment = self.sotnRando.equipment
+    spells = self.sotnRando.spells
+    subWeapons = self.sotnRando.subWeapons
     relics = self.sotnRando.relics
     crypto = self.crypto
     goals = self.goals
@@ -25,6 +31,9 @@
     errors = require('./errors')
     extension = require('./extension')
     items = require('./items')
+    equipment = require('./equipment')
+    spells = require('./spells')
+    subWeapons = require('./subweapons')
     relics = require('./relics')
     crypto = require('crypto').webcrypto
     fs = require('fs')
@@ -542,11 +551,9 @@
     oldStr.substring(0,index) + newStr + oldStr.substring(index + newStr.length)
   }
 
-  function enemyNumStatRand(rng,statAmt) {                                      // a function to return a new value for a stat based on the stat's original value
-    let randomFloat                                                             // set aside for floating decimal
+  function enemyNumStatRand(randomFloat,statAmt) {                              // a function to return a new value for a stat based on the stat's original value
     let tempAmt                                                                 // temp holding space for the number to be converted
     let newAmt                                                                  // this will ultimately be our output
-    randomFloat = ((Math.floor(rng() * 175) +25)/ 100)                          // select a random % between 25% and 200%
     tempAmt = Math.round(randomFloat * statAmt)                                 // set the temp to the new value for the stat
     newAmt = numToHex(tempAmt,4)                                                // convert the new stat amount to hex width 4 to avoid giving large HP enemies 15k+ HP
     return newAmt                                                               // return the resulting hex for implementation
@@ -573,11 +580,71 @@
     return array;
   }
 
-  function enemyResistTypeStatRand(rng) {
+  function halfChanceElementRando(rng) {
     let newType
     // We want nothing 50% of the time, and a random type all other times
     if(rng() >= 0.5) return 0x0000;
     
+    let typeList = [
+      0x0020, // hit
+      0x0040, // cut
+      0x0080, // poison
+      0x8000, // Fire
+      0x2000, // Ice
+      0x1000, // Holy
+      0x4000, // Lightning
+      0x0100, // Curse
+      0x0200, // Stone
+      0x0800  // Dark
+    ]
+    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
+    return newType
+  }
+
+  function thirdChanceElementRando(rng) {
+    let newType
+    // We want nothing 33% of the time, and a random type all other times
+    if(rng() >= 0.33) return 0x0000;
+    
+    let typeList = [
+      0x0020, // hit
+      0x0040, // cut
+      0x0080, // poison
+      0x8000, // Fire
+      0x2000, // Ice
+      0x1000, // Holy
+      0x4000, // Lightning
+      0x0100, // Curse
+      0x0200, // Stone
+      0x0800  // Dark
+    ]
+    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
+    return newType
+  }
+
+  function quarterChanceElementRando(rng) {
+    let newType
+    // We want nothing 50% of the time, and a random type all other times
+    if(rng() >= 0.25) return 0x0000;
+    
+    let typeList = [
+      0x0020, // hit
+      0x0040, // cut
+      0x0080, // poison
+      0x8000, // Fire
+      0x2000, // Ice
+      0x1000, // Holy
+      0x4000, // Lightning
+      0x0100, // Curse
+      0x0200, // Stone
+      0x0800  // Dark
+    ]
+    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
+    return newType
+  }
+
+  function weaponElemRando(rng) {
+    let newType
     let typeList = [
       0x0020, // hit
       0x0040, // cut
@@ -2597,6 +2664,16 @@ function hexValueToDamageString(hexValue) {
           randomize.push('ls')
         }
         delete options.libraryShortcut
+      } else if ('elemChaosMode' in options) { // elemental chaos - eldri7ch
+        if (options.elemChaosMode) {
+          randomize.push('ec')
+        }
+        delete options.elemChaosMode
+      } else if ('simpleInputMode' in options) { // simple input - eldri7ch
+        if (options.simpleInputMode) {
+          randomize.push('si')
+        }
+        delete options.simpleInputMode
       } else if ('devStashMode' in options) { // dev's stash - eldri7ch
         if (options.devStashMode) {
           randomize.push('dev')
@@ -3871,6 +3948,8 @@ function hexValueToDamageString(hexValue) {
     immunityPotionMode,
     godspeedMode,
     libraryShortcut,
+    elemChaosMode,
+    simpleInputMode,
     devStashMode,
     seasonalPhrasesMode,
     bossMusicSeparation,
@@ -3922,6 +4001,8 @@ function hexValueToDamageString(hexValue) {
     this.immunityPotionMode = immunityPotionMode
     this.godspeedMode = godspeedMode
     this.libraryShortcut = libraryShortcut
+    this.elemChaosMode = elemChaosMode
+    this.simpleInputMode = simpleInputMode
     this.devStashMode = devStashMode
     this.seasonalPhrasesMode = seasonalPhrasesMode
     this.bossMusicSeparation = bossMusicSeparation
@@ -4096,6 +4177,10 @@ function hexValueToDamageString(hexValue) {
     this.godspeed = false
     // library shortcut.
     this.libShort = false
+    // elemental chaos.
+    this.elemChaos = false
+    // simple input.
+    this.simpleInput = false
     // dev's stash mode.
     this.devStash = false
     // seasonal phrases mode.
@@ -4441,6 +4526,12 @@ function hexValueToDamageString(hexValue) {
     }
     if ('libraryShortcut' in json) {
       builder.libraryShortcut(json.libraryShortcut)
+    }
+    if ('elemChaosMode' in json) {
+      builder.elemChaosMode(json.elemChaosMode)
+    }
+    if ('simpleInputMode' in json) {
+      builder.simpleInputMode(json.simpleInputMode)
     }
     if ('devStashMode' in json) {
       builder.devStashMode(json.devStashMode)
@@ -4797,6 +4888,12 @@ function hexValueToDamageString(hexValue) {
     }
     if ('libraryShortcut' in preset) {
       this.libShort = preset.libraryShortcut
+    }
+    if ('elemChaosMode' in preset) {
+      this.elemChaos = preset.elemChaosMode
+    }
+    if ('simpleInputMode' in preset) {
+      this.simpleInput = preset.simpleInputMode
     }
     if ('devStashMode' in preset) {
       this.devStash = preset.devStashMode
@@ -5566,6 +5663,16 @@ function hexValueToDamageString(hexValue) {
   PresetBuilder.prototype.libraryShortcut = function libraryShortcut(enabled) {
     this.libShort = enabled
   }
+  
+  // Enable Elemental Chaos - eldri7ch
+  PresetBuilder.prototype.elemChaosMode = function elemChaosMode(enabled) {
+    this.elemChaos = enabled
+  }
+
+  // Enable Simplified Inputs - eldri7ch
+  PresetBuilder.prototype.simpleInputMode = function simpleInputMode(enabled) {
+    this.simpleInput = enabled
+  }
 
   // Enable Dev's Stash - eldri7ch
   PresetBuilder.prototype.devStashMode = function devStashMode(enabled) {
@@ -5907,6 +6014,8 @@ function hexValueToDamageString(hexValue) {
     const immunityPotion = self.immunityPotion
     const godspeed = self.godspeed
     const libShort = self.libShort
+    const elemChaos = self.elemChaos
+    const simpleInput = self.simpleInput
     const devStash = self.devStash
     const seasonalPhrases = self.seasonalPhrases
     const bossMusic = self.bossMusic
@@ -5958,6 +6067,8 @@ function hexValueToDamageString(hexValue) {
       immunityPotion,
       godspeed,
       libShort,
+      elemChaos,
+      simpleInput,
       devStash,
       seasonalPhrases,
       bossMusic,
@@ -6026,189 +6137,265 @@ function hexValueToDamageString(hexValue) {
     offset = 0x3711A68                                // Start the master function with jump tables
 
     offset = data.writeWord(offset, optWrite)         // optionWrite is a bit indicator of all options marked for reading later by ASM or tracker
-	offset = data.writeWord(offset,0x08026233)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x08026251)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x27bdffe0)
-	offset = data.writeWord(offset,0xafbf0010)
-	offset = data.writeWord(offset,0x0c03c182)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x3c048009)
-	offset = data.writeWord(offset,0x348488b0)
-	offset = data.writeWord(offset,0x8c860000)
-	offset = data.writeWord(offset,0x3c058000)
-	offset = data.writeWord(offset,0x34a50000)
-	offset = data.writeWord(offset,0x0c53024)
-	offset = data.writeWord(offset,0x10c00003)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x0c026270)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x3c048009)
-	offset = data.writeWord(offset,0x348488b0)
-	offset = data.writeWord(offset,0x8c850014)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x34a60000)
-	offset = data.writeWord(offset,0x3c078000)
-	offset = data.writeWord(offset,0x34e70000)
-	offset = data.writeWord(offset,0x0c73024)
-	offset = data.writeWord(offset,0x10c00003)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x0a0f809)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x8fbf0010)
-	offset = data.writeWord(offset,0x27bd0020)
-	offset = data.writeWord(offset,0x03e00008)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x3c028004)
-	offset = data.writeWord(offset,0x9045925d)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x38a500ff)
-	offset = data.writeWord(offset,0x30a50040)
-	offset = data.writeWord(offset,0x10a00008)
-	offset = data.writeWord(offset,0x3c028007)
-	offset = data.writeWord(offset,0x9042bbfb)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x10400004)
-	offset = data.writeWord(offset,0x34180022)
-	offset = data.writeWord(offset,0x341988be)
-	offset = data.writeWord(offset,0x18000003)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x34180002)
-	offset = data.writeWord(offset,0x34197c0e)
-	offset = data.writeWord(offset,0x3c02800f)
-	offset = data.writeWord(offset,0xa0581724)
-	offset = data.writeWord(offset,0x3b180020)
-	offset = data.writeWord(offset,0xa05832a4)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x3c02800a)
-	offset = data.writeWord(offset,0xa4593c98)
-	offset = data.writeWord(offset,0x34040000)
-	offset = data.writeWord(offset,0x0804390b)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x27bdffe0)
-	offset = data.writeWord(offset,0xafbf0004)
-	offset = data.writeWord(offset,0x3c068009)
-	offset = data.writeWord(offset,0x34c689ac)
-	offset = data.writeWord(offset,0x3c078009)
-	offset = data.writeWord(offset,0x8cc40000)
-	offset = data.writeWord(offset,0x34e77490)
-	offset = data.writeWord(offset,0x94e50000)
-	offset = data.writeWord(offset,0x10800007)
-	offset = data.writeWord(offset,0x30a5a000)
-	offset = data.writeWord(offset,0x14a00039)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x0c0262b9)
-	offset = data.writeWord(offset,0x34040000)
-	offset = data.writeWord(offset,0x080262b4)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x94e40004)
-	offset = data.writeWord(offset,0x94e20004)
-	offset = data.writeWord(offset,0x3c068009)
-	offset = data.writeWord(offset,0x34c689b0)
-	offset = data.writeWord(offset,0x30848000)
-	offset = data.writeWord(offset,0x10800005)
-	offset = data.writeWord(offset,0x8cc50000)
-	offset = data.writeWord(offset,0x34040010)
-	offset = data.writeWord(offset,0x24a50001)
-	offset = data.writeWord(offset,0xacc50000)
-	offset = data.writeWord(offset,0xacc40004)
-	offset = data.writeWord(offset,0x30422000)
-	offset = data.writeWord(offset,0x10400006)
-	offset = data.writeWord(offset,0x8cc50008)
-	offset = data.writeWord(offset,0x34040010)
-	offset = data.writeWord(offset,0x24a50001)
-	offset = data.writeWord(offset,0xacc50008)
-	offset = data.writeWord(offset,0x34050010)
-	offset = data.writeWord(offset,0xacc4000c)
-	offset = data.writeWord(offset,0x8cc50004)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x10a00005)
-	offset = data.writeWord(offset,0x24a5ffff)
-	offset = data.writeWord(offset,0xacc50004)
-	offset = data.writeWord(offset,0x14a00002)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0xacc00000)
-	offset = data.writeWord(offset,0x8cc5000c)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x10a00005)
-	offset = data.writeWord(offset,0x24a5ffff)
-	offset = data.writeWord(offset,0xacc5000c)
-	offset = data.writeWord(offset,0x14a00002)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0xacc00008)
-	offset = data.writeWord(offset,0x8cc50000)
-	offset = data.writeWord(offset,0x8cc20008)
-	offset = data.writeWord(offset,0x34070002)
-	offset = data.writeWord(offset,0x10a70004)
-	offset = data.writeWord(offset,0x10470003)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x080262b4)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0xacc00000)
-	offset = data.writeWord(offset,0xacc00004)
-	offset = data.writeWord(offset,0xacc00008)
-	offset = data.writeWord(offset,0xacc0000c)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x0c0262b9)
-	offset = data.writeWord(offset,0x34040001)
-	offset = data.writeWord(offset,0x080262b4)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x8fbf0004)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x27bd0020)
-	offset = data.writeWord(offset,0x03e00008)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x3c068009)
-	offset = data.writeWord(offset,0x34c689ac)
-	offset = data.writeWord(offset,0xacc40000)
-	offset = data.writeWord(offset,0x10800008)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x34050002)
-	offset = data.writeWord(offset,0x34044000)
-	offset = data.writeWord(offset,0x3408c000)
-	offset = data.writeWord(offset,0x3407fffd)
-	offset = data.writeWord(offset,0x34020002)
-	offset = data.writeWord(offset,0x080262ca)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x34050001)
-	offset = data.writeWord(offset,0x34048000)
-	offset = data.writeWord(offset,0x34084000)
-	offset = data.writeWord(offset,0x3407fffe)
-	offset = data.writeWord(offset,0x34020003)
-	offset = data.writeWord(offset,0x3c068011)
-	offset = data.writeWord(offset,0xa4c52b7c)
-	offset = data.writeWord(offset,0xa4c42b84)
-	offset = data.writeWord(offset,0xa4c52d8c)
-	offset = data.writeWord(offset,0xa4c42d94)
-	offset = data.writeWord(offset,0xa4c52cdc)
-	offset = data.writeWord(offset,0xa4c42ce4)
-	offset = data.writeWord(offset,0xa4c52f84)
-	offset = data.writeWord(offset,0xa4c42f88)
-	offset = data.writeWord(offset,0xa4c82f68)
-	offset = data.writeWord(offset,0xa4c72f64)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x3c06800a)
-	offset = data.writeWord(offset,0x34c6e000)
-	offset = data.writeWord(offset,0xa4c20488)
-	offset = data.writeWord(offset,0xa4c20490)
-	offset = data.writeWord(offset,0xa4c20498)
-	offset = data.writeWord(offset,0xa4c204a0)
-	offset = data.writeWord(offset,0xa4c204a8)
-	offset = data.writeWord(offset,0xa4c204b0)
-	offset = data.writeWord(offset,0xa4c204b8)
-	offset = data.writeWord(offset,0xa4c204c0)
-	offset = data.writeWord(offset,0x03e00008)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
+	  offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08026237)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08026255)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x080262E7)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x080262F6)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27BDFFE0)
+    offset = data.writeWord(offset, 0xAFBF0010)
+    offset = data.writeWord(offset, 0x0C03C182)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C048009)
+    offset = data.writeWord(offset, 0x348488B0)
+    offset = data.writeWord(offset, 0x8C860000)
+    offset = data.writeWord(offset, 0x3C058000)
+    offset = data.writeWord(offset, 0x34A50000)
+    offset = data.writeWord(offset, 0x00C53024)
+    offset = data.writeWord(offset, 0x10C00003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0C026274)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C048009)
+    offset = data.writeWord(offset, 0x348488B0)
+    offset = data.writeWord(offset, 0x8C850014)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34A60000)
+    offset = data.writeWord(offset, 0x3C078000)
+    offset = data.writeWord(offset, 0x34E70000)
+    offset = data.writeWord(offset, 0x00C73024)
+    offset = data.writeWord(offset, 0x10C00003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00A0F809)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8FBF0010)
+    offset = data.writeWord(offset, 0x27BD0020)
+    offset = data.writeWord(offset, 0x03E00008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C028004)
+    offset = data.writeWord(offset, 0x9045925D)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x38A500FF)
+    offset = data.writeWord(offset, 0x30A50040)
+    offset = data.writeWord(offset, 0x10A00008)
+    offset = data.writeWord(offset, 0x3C028007)
+    offset = data.writeWord(offset, 0x9042BBFB)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x10400004)
+    offset = data.writeWord(offset, 0x34180022)
+    offset = data.writeWord(offset, 0x341988BE)
+    offset = data.writeWord(offset, 0x18000003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34180002)
+    offset = data.writeWord(offset, 0x34197C0E)
+    offset = data.writeWord(offset, 0x3C02800F)
+    offset = data.writeWord(offset, 0xA0581724)
+    offset = data.writeWord(offset, 0x3B180020)
+    offset = data.writeWord(offset, 0xA05832A4)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C02800A)
+    offset = data.writeWord(offset, 0xA4593C98)
+    offset = data.writeWord(offset, 0x34040000)
+    offset = data.writeWord(offset, 0x0804390B)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27BDFFE0)
+    offset = data.writeWord(offset, 0xAFBF0004)
+    offset = data.writeWord(offset, 0x3C068009)
+    offset = data.writeWord(offset, 0x34C689BC)
+    offset = data.writeWord(offset, 0x3C078009)
+    offset = data.writeWord(offset, 0x8CC40000)
+    offset = data.writeWord(offset, 0x34E77490)
+    offset = data.writeWord(offset, 0x94E50000)
+    offset = data.writeWord(offset, 0x10800007)
+    offset = data.writeWord(offset, 0x30A5A000)
+    offset = data.writeWord(offset, 0x14A00039)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0C0262BD)
+    offset = data.writeWord(offset, 0x34040000)
+    offset = data.writeWord(offset, 0x080262B8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x94E40004)
+    offset = data.writeWord(offset, 0x94E20004)
+    offset = data.writeWord(offset, 0x3C068009)
+    offset = data.writeWord(offset, 0x34C689C0)
+    offset = data.writeWord(offset, 0x30848000)
+    offset = data.writeWord(offset, 0x10800005)
+    offset = data.writeWord(offset, 0x8CC50000)
+    offset = data.writeWord(offset, 0x34040010)
+    offset = data.writeWord(offset, 0x24A50001)
+    offset = data.writeWord(offset, 0xACC50000)
+    offset = data.writeWord(offset, 0xACC40004)
+    offset = data.writeWord(offset, 0x30422000)
+    offset = data.writeWord(offset, 0x10400006)
+    offset = data.writeWord(offset, 0x8CC50008)
+    offset = data.writeWord(offset, 0x34040010)
+    offset = data.writeWord(offset, 0x24A50001)
+    offset = data.writeWord(offset, 0xACC50008)
+    offset = data.writeWord(offset, 0x34050010)
+    offset = data.writeWord(offset, 0xACC4000C)
+    offset = data.writeWord(offset, 0x8CC50004)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x10A00005)
+    offset = data.writeWord(offset, 0x24A5FFFF)
+    offset = data.writeWord(offset, 0xACC50004)
+    offset = data.writeWord(offset, 0x14A00002)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xACC00000)
+    offset = data.writeWord(offset, 0x8CC5000C)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x10A00005)
+    offset = data.writeWord(offset, 0x24A5FFFF)
+    offset = data.writeWord(offset, 0xACC5000C)
+    offset = data.writeWord(offset, 0x14A00002)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xACC00008)
+    offset = data.writeWord(offset, 0x8CC50000)
+    offset = data.writeWord(offset, 0x8CC20008)
+    offset = data.writeWord(offset, 0x34070002)
+    offset = data.writeWord(offset, 0x10A70004)
+    offset = data.writeWord(offset, 0x10470003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x080262B8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xACC00000)
+    offset = data.writeWord(offset, 0xACC00004)
+    offset = data.writeWord(offset, 0xACC00008)
+    offset = data.writeWord(offset, 0xACC0000C)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0C0262BD)
+    offset = data.writeWord(offset, 0x34040001)
+    offset = data.writeWord(offset, 0x080262B8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8FBF0004)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27BD0020)
+    offset = data.writeWord(offset, 0x03E00008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C068009)
+    offset = data.writeWord(offset, 0x34C689BC)
+    offset = data.writeWord(offset, 0xACC40000)
+    offset = data.writeWord(offset, 0x10800008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34050002)
+    offset = data.writeWord(offset, 0x34044000)
+    offset = data.writeWord(offset, 0x3408C000)
+    offset = data.writeWord(offset, 0x3407FFFD)
+    offset = data.writeWord(offset, 0x34020002)
+    offset = data.writeWord(offset, 0x080262CE)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34050001)
+    offset = data.writeWord(offset, 0x34048000)
+    offset = data.writeWord(offset, 0x34084000)
+    offset = data.writeWord(offset, 0x3407FFFE)
+    offset = data.writeWord(offset, 0x34020003)
+    offset = data.writeWord(offset, 0x3C068011)
+    offset = data.writeWord(offset, 0xA4C52B7C)
+    offset = data.writeWord(offset, 0xA4C42B84)
+    offset = data.writeWord(offset, 0xA4C52D8C)
+    offset = data.writeWord(offset, 0xA4C42D94)
+    offset = data.writeWord(offset, 0xA4C52CDC)
+    offset = data.writeWord(offset, 0xA4C42CE4)
+    offset = data.writeWord(offset, 0xA4C52F84)
+    offset = data.writeWord(offset, 0xA4C42F88)
+    offset = data.writeWord(offset, 0xA4C82F68)
+    offset = data.writeWord(offset, 0xA4C72F64)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C06800A)
+    offset = data.writeWord(offset, 0x34C6E000)
+    offset = data.writeWord(offset, 0xA4C20488)
+    offset = data.writeWord(offset, 0xA4C20490)
+    offset = data.writeWord(offset, 0xA4C20498)
+    offset = data.writeWord(offset, 0xA4C204A0)
+    offset = data.writeWord(offset, 0xA4C204A8)
+    offset = data.writeWord(offset, 0xA4C204B0)
+    offset = data.writeWord(offset, 0xA4C204B8)
+    offset = data.writeWord(offset, 0xA4C204C0)
+    offset = data.writeWord(offset, 0x03E00008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C028007)
+    offset = data.writeWord(offset, 0x8C422EEC)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34430000)
+    offset = data.writeWord(offset, 0x30630001)
+    offset = data.writeWord(offset, 0x10600007)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0C03F8EA)
+    offset = data.writeWord(offset, 0x3404000C)
+    offset = data.writeWord(offset, 0x10400003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08044185)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0804414A)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C028009)
+    offset = data.writeWord(offset, 0x94437494)
+    offset = data.writeWord(offset, 0x94427490)
+    offset = data.writeWord(offset, 0x34050002)
+    offset = data.writeWord(offset, 0x10850013)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34050003)
+    offset = data.writeWord(offset, 0x10850021)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x30420400)
+    offset = data.writeWord(offset, 0x10400008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34041000)
+    offset = data.writeWord(offset, 0x14640005)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27BDFFE8)
+    offset = data.writeWord(offset, 0xAFBF0010)
+    offset = data.writeWord(offset, 0x08044527)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C028007)
+    offset = data.writeWord(offset, 0x8C422EE8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x080444AD)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x30420400)
+    offset = data.writeWord(offset, 0x1040000A)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34044000)
+    offset = data.writeWord(offset, 0x14640007)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34050002)
+    offset = data.writeWord(offset, 0xAC453404)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xAFBF0010)
+    offset = data.writeWord(offset, 0x0804448E)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C028007)
+    offset = data.writeWord(offset, 0x8C422EE8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08044409)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x30420400)
+    offset = data.writeWord(offset, 0x10400008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3063A000)
+    offset = data.writeWord(offset, 0x10600005)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27BDFFE0)
+    offset = data.writeWord(offset, 0xAFBF0018)
+    offset = data.writeWord(offset, 0x080443E0)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3C028007)
+    offset = data.writeWord(offset, 0x8C422EE8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08044381)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
 	
 	// Hook Master function into gameplay loop.
 	data.writeWord(0xFAA38,0x0C02622D)
@@ -6818,7 +7005,7 @@ function hexValueToDamageString(hexValue) {
     return data
   }
 
-  function applyenemyStatRandoPatches(rng) {
+  function applyenemyStatRandoPatches(rng,chaos) {
     const enemyStats = enemies.enemyStats
     const data = new checked()
     // Patch the enemy stats being randomized
@@ -6837,47 +7024,222 @@ function hexValueToDamageString(hexValue) {
     let newImmuneType                                                           // The new damage type for Guard / Absorb stat
     let newDisclosure                                                           // this is a holding spot for re-formatting before inclusion into the main disclosure
     let newResistDisclosure                                                     // Adding new disclosure info for the weakness resist
+    let childIter                                                               // The counter for iterating through child entities of an enemy
+    let childrenType                                                            // Stores the type of variable returned for "children" flag
+    let bossChildAtkType                                                        // Randomizing the elements of certain boss 
+    let newHpMod
+    let newAtkMod
+    let newDefMod
 
     enemyStats.forEach(function(enemy) {
       statHp = enemy.hpValue                                                    // obtain the HP value from the enemy data
       statAtk = enemy.atkValue                                                  // obtain the Atk value from the enemy data
       statDef = enemy.defValue                                                  // obtain the Def value from the enemy data
-      
-      newHp = enemyNumStatRand(rng,statHp)                                      // Randomly adjust by 25%-200%
-      data.writeWord(enemy.hpOffset,newHp)                                      // Write the HP
 
-      newAtk = enemyNumStatRand(rng,statAtk)                                    // Randomly adjust by 25%-200%
-      data.writeWord(enemy.atkOffset,newAtk)                                    // Write the Atk
-      if(enemy.index === 379) {                                                 // special condition for Dracula
-        statAtk = 70                                                            // Hand attack = 70
-        newAtk = enemyNumStatRand(rng,statAtk)                                  // Randomize Hand attack
-        data.writeWord(0x0b9c0e,newAtk)                                         // Assign the new attack value
+      // console.log(enemy.index + ' ' + enemy.name)
+      
+      newHpMod = ((Math.floor(rng() * 175) +25)/ 100)                           // select a random % between 25% and 200%
+      newHp = enemyNumStatRand(newHpMod,statHp)                                 // Randomly adjust by 25%-200%
+      data.writeShort(enemy.hpOffset,newHp)                                     // Write the HP
+      switch(enemy.index){
+        case 27:                                                                // special condition for Merman
+          statHp = 10                                                           // HP = 10
+          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
+          data.writeShort(0x0b5ce4,newHp)                                       // Assign the new HP value
+          break
+        case 14:                                                                // special condition for Flying Zombie
+          statHp = 190                                                          // HP = 190
+          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
+          data.writeShort(0x0b5ab4,newHp)                                       // Assign the new HP value
+          break
+        case 45:                                                                // special condition for Bone ark
+          statHp = 140                                                          // HP = 140
+          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
+          data.writeShort(0x0b60bc,newHp)                                       // Assign the new HP value
+          break
+        case 158:                                                               // special condition for Corpse weed
+          statHp = 20                                                           // HP = 20
+          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
+          data.writeShort(0x0b74c4,newHp)                                       // Assign the new HP value
+          break
+        case 161:                                                               // special condition for venus weed
+          statHp = 500                                                          // HP = 500
+          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
+          data.writeShort(0x0b753c,newHp)                                       // Assign the new HP value
+          break
+        case 392:                                                               // special condition for blue venus weed
+          statHp = 550                                                          // HP = 500
+          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
+          data.writeShort(0x0b9e14,newHp)                                       // Assign the new HP value
+          break
       }
 
-      newDef = enemyNumStatRand(rng,statDef)                                    // Randomly adjust by 25%-200%
-      data.writeWord(enemy.defOffset,newDef)                                    // Write the Def
-      if(enemy.index === 379) {                                                 // special condition for Dracula
-        statDef = 20                                                            // Hand defense = 20
-        newDef = enemyNumStatRand(rng,statDef)                                  // Randomize Hand defense
-        data.writeWord(0x0b9c12,newDef)                                         // Assign the new defense value
+      newAtkMod = ((Math.floor(rng() * 175) +25)/ 100)                          // select a random % between 25% and 200%
+      newAtk = enemyNumStatRand(newAtkMod,statAtk)                              // Randomly adjust by 25%-200%
+      data.writeShort(enemy.atkOffset,newAtk)                                   // Write the Atk
+      switch (enemy.index){
+        case 379:                                                               // special condition for Dracula
+          statAtk = 70                                                          // Hand attack = 70
+          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
+          data.writeShort(0x0b9c0e,newAtk)                                      // Assign the new attack value
+          break
+        case 27:                                                                // special condition for Merman
+          statAtk = 14                                                          // Hand attack = 70
+          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
+          data.writeShort(0x0b5ce6,newAtk)                                      // Assign the new attack value
+          break
+        case 14:                                                                // special condition for Flying Zombie
+          statAtk = 37                                                          // Hand attack = 37
+          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
+          data.writeShort(0x0b5ab6,newAtk)                                      // Assign the new attack value
+          break
+        case 45:                                                                // special condition for Bone ark
+          statAtk = 20                                                          // Hand attack = 20
+          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
+          data.writeShort(0x0b60be,newAtk)                                      // Assign the new attack value
+          break
+        case 158:                                                               // special condition for Corpse weed
+          statAtk = 20                                                          // Hand attack = 20
+          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
+          data.writeShort(0x0b74c6,newAtk)                                      // Assign the new attack value
+          break
+        case 161:                                                               // special condition for venus weed
+          statAtk = 28                                                          // Hand attack = 28
+          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
+          data.writeShort(0x0b753e,newAtk)                                      // Assign the new attack value
+          break
+        case 392:                                                               // special condition for blue venus weed
+          statAtk = 45                                                          // Hand attack = 28
+          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
+          data.writeShort(0x0b9e16,newAtk)                                      // Assign the new attack value
+          break
+      }
+
+      newDefMod = ((Math.floor(rng() * 175) +25)/ 100)                          // select a random % between 25% and 200%
+      newDef = enemyNumStatRand(newDefMod,statDef)                              // Randomly adjust by 25%-200%
+      data.writeShort(enemy.defOffset,newDef)                                   // Write the Def
+      switch (enemy.index) {
+        case 379:                                                               // special condition for Dracula
+          statDef = 20                                                          // Hand defense = 20
+          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize Hand defense
+          data.writeShort(0x0b9c12,newDef)                                      // Assign the new defense value
+          break
+        case 27:                                                                // special condition for Merman
+          statDef = 1                                                           // Defense = 1
+          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
+          data.writeShort(0x0b5ce6,newDef)                                      // Assign the new defense value
+          break
+        case 14:                                                                // special condition for Flying Zombie
+          statDef = 10                                                          // Defense = 10
+          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
+          data.writeShort(0x0b5aba,newDef)                                      // Assign the new defense value
+          break
+        case 45:                                                                // special condition for Bone ark
+          statDef = 2                                                           // Defense = 2
+          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
+          data.writeShort(0x0b60c2,newDef)                                      // Assign the new defense value
+          break
+        case 158:                                                               // special condition for corpse weed
+          statDef = 1                                                           // Defense = 1
+          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
+          data.writeShort(0x0b74ca,newDef)                                      // Assign the new defense value
+          break
+        case 161:                                                               // special condition for venus weed
+          statDef = 1                                                           // Defense = 1
+          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
+          data.writeShort(0x0b7542,newDef)                                      // Assign the new defense value
+          break
+        case 392:                                                               // special condition for blue venus weed
+          statDef = 1                                                           // Defense = 1
+          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
+          data.writeShort(0x0b9e1a,newDef)                                      // Assign the new defense value
+          break
       }
 
       newAtkType = enemyAtkTypeStatRand(rng)                                    // Select a random attack type
-      data.writeWord(enemy.atkTypeOffset,newAtkType)                            // Write the attack type
-      if(enemy.index === 379) {                                                 // special condition for Dracula
-        data.writeWord(0x0b9c10,newAtkType)                                     // Assign the new attack type
+      data.writeShort(enemy.atkTypeOffset,newAtkType)                           // Write the attack type
+      switch (enemy.index) {
+        case 279:                                                               // special condition for Dracula
+          data.writeShort(0x0b9c10,newAtkType)                                  // Assign the new attack type
+          break
+        case 246:                                                               // Special case for axe knights
+          data.writeShort(0x0b9f08,newAtkType)                                  // Assign the new attack type to the Green Axe Knights as well
+          break
+        case 146:                                                               // special condition for Dhuron
+          data.writeShort(0x0b72e8,newAtkType)                                  // Assign the new attack type
+          break
+      }
+      childrenType = typeof enemy.children
+      if(childrenType !== 'undefined') {                                        // Start the process of assigning the new damage type to the child entities of an enemy
+        childIter = 1                                                           // Minimum jump will be 0x28 which is 40 in dec. 1 * 40
+        offset = enemy.atkTypeOffset + (childIter * 0x28)                       // now we're writing to the offset set to 0x28 * [ordinal of children] plus the base address
+        while(childIter <= enemy.children){                                     // make this a while loop so that it should include the max
+          if ([55,71,233,253,287,296,300,307,324,342,351,356,372,379].includes(enemy.index) || chaos === true) { // Certain bosses will have non-uniform attack elements
+            bossChildAtkType = enemyAtkTypeStatRand(rng)                        // Establish a new attack type for each child
+            data.writeShort(offset,bossChildAtkType)                             // make sure that new attack elements are used for all children by writing
+            offset += 0x28                                                      // advance offset by 0x28
+            childIter++                                                         // advance the iteration once every time this loops
+          } else {                                                              // Normal enemies will have their other attacks share a type with their body
+            data.writeShort(offset,newAtkType)                                   // make sure that the same attack element is used for all children by writing
+            offset += 0x28                                                      // advance offset by 0x28
+            childIter++                                                         // advance the iteration once every time this loops
+          }
+        }
       }
 
       newWeakType = enemyWeakTypeStatRand(rng)                                  // Select a random weakness type
-      data.writeWord(enemy.weakOffset,newWeakType)                              // Write the weakness type
-      if(enemy.index === 379) {                                                 // special condition for Dracula
-        data.writeWord(0x0b9c16,newWeakType)                                    // Assign the new weakness type
+      data.writeShort(enemy.weakOffset,newWeakType)                             // Write the weakness type
+      switch (enemy.index) {
+        case 379:                                                               // special condition for Dracula
+          data.writeShort(0x0b9c16,newWeakType)                                 // Assign the new weakness type
+          break
+        case 27:                                                                // special condition for Merman
+          data.writeShort(0x0b5cee,newWeakType)                                 // Assign the new weakness type
+          break
+        case 14:                                                                // special condition for Flying Zombie
+          data.writeShort(0x0b5abe,newWeakType)                                 // Assign the new weakness type
+          break
+        case 45:                                                                // special condition for Bone ark
+          data.writeShort(0x0b60c6,newWeakType)                                 // Assign the new weakness type
+          break
+        case 158:                                                               // special condition for Corpse weed
+          data.writeShort(0x0b74ce,newWeakType)                                 // Assign the new weakness type
+          break
+        case 161:                                                               // special condition for venus weed
+          data.writeShort(0x0b7546,newWeakType)                                 // Assign the new weakness type
+          break
+        case 392:                                                               // special condition for blue venus weed
+          data.writeShort(0x0b9e1e,newWeakType)                                 // Assign the new weakness type
+          break
       }
 
-      newResistType = enemyResistTypeStatRand(rng)                              // Select a random resist type
-      data.writeWord(enemy.resistOffset,newResistType)                          // Write the resist type
-      if(enemy.index === 379) {                                                 // special condition for Dracula
-        data.writeWord(0x0b9c18,newResistType)                                  // Assign the new resist type
+      newResistType = halfChanceElementRando(rng)                              // Select a random resist type
+      while(newResistType === newWeakType){                                     // resist / immunity overlap removal
+        newResistType = halfChanceElementRando(rng)
+      }
+      data.writeShort(enemy.resistOffset,newResistType)                         // Write the resist type
+      switch (enemy.index) {
+        case 379:                                                               // special condition for Dracula
+          data.writeShort(0x0b9c18,newResistType)                               // Assign the new resist type
+          break
+        case 27:                                                                // special condition for Merman
+          data.writeShort(0x0b5cf0,newResistType)                               // Assign the new weakness type
+          break
+        case 14:                                                                // special condition for Flying Zombie
+          data.writeShort(0x0b5ac0,newResistType)                               // Assign the new weakness type
+          break
+        case 45:                                                                // special condition for Bone ark
+          data.writeShort(0x0b60c8,newResistType)                                // Assign the new weakness type
+          break
+        case 158:                                                               // special condition for Corpse weed
+          data.writeShort(0x0b74d0,newResistType)                               // Assign the new weakness type
+          break
+        case 161:                                                               // special condition for venus weed
+          data.writeShort(0x0b7548,newResistType)                               // Assign the new weakness type
+          break
+        case 392:                                                               // special condition for blue venus weed
+          data.writeShort(0x0b9e20,newResistType)                               // Assign the new weakness type
+          break
       }
 
       switch (newResistType) {                                                  // create a new code for disclosure card based on weakness value
@@ -6894,24 +7256,72 @@ function hexValueToDamageString(hexValue) {
       switch (resIndex) {                                                       // start selection and execution process based on teh random selection
         case false: 
           offset = enemy.guardOffset                                            // Goto guard
-          newImmuneType = enemyResistTypeStatRand(rng)                          // Select a random guard type
-          data.writeWord(offset,newImmuneType)                                  // Write the guard type
-          if(enemy.index === 379) {                                             // special condition for Dracula
-            data.writeWord(0x0b9c1a,newImmuneType)                              // Assign the new guard type
+          newImmuneType = halfChanceElementRando(rng)                          // Select a random guard type
+          while(newImmuneType === newWeakType){                                 // weakness / immunity overlap removal
+            newImmuneType = halfChanceElementRando(rng)
           }
+          data.writeShort(offset,newImmuneType)                                 // Write the guard type
+          switch (enemy.index) {
+            case 379:                                                           // special condition for Dracula
+              data.writeShort(0x0b9c1a,newImmuneType)                           // Assign the new guard type
+              break
+            case 27:                                                            // special condition for Merman
+              data.writeShort(0x0b5cf2,newImmuneType)                           // Assign the new weakness type
+              break
+            case 14:                                                            // special condition for Flying zombie
+              data.writeShort(0x0b5ac2,newImmuneType)                           // Assign the new weakness type
+              break
+            case 45:                                                            // special condition for Bone ark
+              data.writeShort(0x0b60ca,newImmuneType)                           // Assign the new weakness type
+              break
+            case 158:                                                           // special condition for corpse weed
+              data.writeShort(0x0b74d2,newImmuneType)                           // Assign the new weakness type
+              break
+            case 161:                                                           // special condition for venus weed
+              data.writeShort(0x0b754a,newImmuneType)                           // Assign the new weakness type
+              break
+            case 392:                                                           // special condition for blue venus weed
+              data.writeShort(0x0b9e22,newImmuneType)                           // Assign the new weakness type
+              break
+          }
+          data.writeShort(enemy.absorbOffset,0x0000)                            // remove absorbs
           break
         case true:
           offset = enemy.absorbOffset                                           // Goto absorb
-          newImmuneType = enemyResistTypeStatRand(rng)                          // Select a random absorb type
-          data.writeWord(offset,newImmuneType)                                  // Write the absorb type
-          if(enemy.index === 379) {                                             // special condition for Dracula
-            data.writeWord(0x0b9c1c,newImmuneType)                              // Assign the new absorb type
+          newImmuneType = halfChanceElementRando(rng)                          // Select a random absorb type
+          while(newImmuneType === newWeakType){                                 // weakness / immunity overlap removal
+            newImmuneType = halfChanceElementRando(rng)
           }
+          data.writeShort(offset,newImmuneType)                                 // Write the absorb type
+          switch (enemy.index) {
+            case 379:                                                           // special condition for Dracula
+              data.writeShort(0x0b9c1c,newImmuneType)                           // Assign the new absorb type
+              break
+            case 27:                                                            // special condition for Merman
+              data.writeShort(0x0b5cf4,newImmuneType)                           // Assign the new weakness type
+              break
+            case 14:                                                            // special condition for Flying zombie
+              data.writeShort(0x0b5ac4,newImmuneType)                           // Assign the new weakness type
+              break
+            case 45:                                                            // special condition for Bone ark
+              data.writeShort(0x0b60cc,newImmuneType)                           // Assign the new weakness type
+              break
+            case 158:                                                           // special condition for Corpse weed
+              data.writeShort(0x0b74d4,newImmuneType)                           // Assign the new weakness type
+              break
+            case 161:                                                           // special condition for venus weed
+              data.writeShort(0x0b754c,newImmuneType)                           // Assign the new weakness type
+              break
+            case 392:                                                           // special condition for blue venus weed
+              data.writeShort(0x0b9e24,newImmuneType)                           // Assign the new weakness type
+              break
+          }
+          data.writeShort(enemy.guardOffset,0x0000)                             // remove immunities
           break
       }
 
       disclosureCard = 'f0'                                                     // start the Disclosure with the attack elements by indicating a sword.
-      newDisclosure = hexValueToDamageString(newAtkType)                        // store the values from hex being converted
+      newDisclosure = hexValueToDamageString(newAtkType)
       if (newDisclosure.startsWith('05')) {                                     // if the attack type is a 16% hit or cut, use %dam indicator
         replaceTextAtIndex(newDisclosure,'00',0)
         disclosureCard += '05'                                                  // if the % is used, space out the %
@@ -6924,7 +7334,7 @@ function hexValueToDamageString(hexValue) {
         disclosureCard += 'e6'
       }
       disclosureCard += newDisclosure + 'f1'                                    // continue the Disclosure with the defense elements by indicating a shield.
-      if (newDef > statDef) {                                                   // Determine the direction of the arrow based on the attack stat differences
+      if (((newHpMod + newDefMod) / 2) > 1) {                                   // Determine the direction of the arrow based on the attack stat differences
         disclosureCard += 'e2'
       } else {
         disclosureCard += 'e6'
@@ -6934,12 +7344,12 @@ function hexValueToDamageString(hexValue) {
       newDisclosure = hexValueToDefenceString(newResistType).slice(-2)          // create a new code for disclosure card based on Resist value
       disclosureCard += newDisclosure
       switch (resIndex) {                                                       // This is already selected above between guard and absorb
-        case false:                                                                 // Process if Guard
+        case false:                                                             // Process if Guard
           disclosureCard += 'f7'                                                // add final character to Disclosure Card 3
           newDisclosure = hexValueToDefenceString(newImmuneType).slice(-2)      // indicate that this is a guard
           disclosureCard += newDisclosure                                       // adds indicators to tell the player what guard the monster has
           break
-        case true:                                                                 // Process if Absorb
+        case true:                                                              // Process if Absorb
           disclosureCard += 'f6'                                                // add final character to Disclosure Card 3
           newDisclosure = hexValueToDefenceString(newImmuneType).slice(-2)      // indicate that this is an absorb ex: é↓#!HLâ↑I/FàS (11)
           disclosureCard += newDisclosure                                       // adds indicators to tell the player what absorb the monster has
@@ -6949,10 +7359,13 @@ function hexValueToDamageString(hexValue) {
       while (disclosureCard.length < 24) {                                      // add zeroes to space out different names from before
         disclosureCard += '00'
       }
-      offset = enemy.newNameText                                                // pull enemy name location in BIN
-      for (let i = 0; i < disclosureCard.length; i += 2) {                      // write 1 byte at a time
-        const twoChars = '0x' + disclosureCard.slice(i, i + 2)
-        offset = data.writeChar(offset,twoChars)
+      if ([55,295,356,379].includes(enemy.index)) {                             // exclude enemies who cannot have new name data written
+      } else {
+        offset = enemy.newNameText                                              // pull enemy name location in BIN
+        for (let i = 0; i < disclosureCard.length; i += 2) {                    // write 1 byte at a time
+          const twoChars = '0x' + disclosureCard.slice(i, i + 2)
+          offset = data.writeChar(offset,twoChars)
+        }
       }
       data.writeWord(enemy.nameOffset,enemy.newNameReference)                   // Change the reference for the name to match the new address for the disclosure.
     })
@@ -6968,9 +7381,23 @@ function hexValueToDamageString(hexValue) {
     offset = 0x0b9ca8                                                           // Fix Stone Skull reference
     data.writeWord(offset,0x800e0cf4)                                           // Shows Immune All
 
-    offset = 0x0b6220                                                           // fix Olrox second phase name
-    data.writeWord(offset,0x800e0cfb)                                           // Shows "Good Luck"
+    offset = 0x0b5ce0                                                           // fix Merman Name reference
+    data.writeWord(offset,0x800e0c5c)                                           // Make both mermen use the same name
 
+    offset = 0x0b5ab0                                                           // fix Flying zombie Name reference
+    data.writeWord(offset,0x800e0c98)                                           // Make both halves use the same name
+
+    offset = 0x0b60b8                                                           // fix Bone ark Name reference
+    data.writeWord(offset,0x800e0bfc)                                           // Make both Bone ark sections use the same name
+    
+    offset = 0x0b74c0                                                           // fix corpse weed Name reference
+    data.writeWord(offset,0x800e092c)                                           // Make both corpse weed use the same name
+
+    offset = 0x0b7538                                                           // fix venus weed Name reference
+    data.writeWord(offset,0x800e0920)                                           // Make both venus weed use the same name
+
+    offset = 0x0b9e10                                                           // fix blue venus weed Name reference
+    data.writeWord(offset,0x800e05e4)                                           // Make both blue venus weed use the same name
 
     const faerieScrollForceAddresses = constants.faerieScrollForceAddresses     // summon the faerie scroll force on locations
 
@@ -6981,6 +7408,93 @@ function hexValueToDamageString(hexValue) {
 
       offset = data.writeWord(offset,forceOn)                                   // Overwrite the first half of the movbp instr
       data.writeWord(offset,forceNop)                                           // Overwrite the second half of the movbp instr
+    })
+
+    return data
+  }
+
+  function applyElemChaosPatches(rng) {
+    const data = new checked()
+    const handItems = equipment.handItems
+    const wearItems = equipment.wearableItems
+    const specials = equipment.weaponSpecials
+    const spellsArr = spells
+    let offset
+    let newElem                                                                 // first weapon element offset
+    let weakElem
+    let resistElem
+    let guardElem
+    let absorbElem
+
+    handItems.forEach(function(item) {
+      // console.log(item.index + ' ' + item.itemName)
+      newElem = weaponElemRando(rng)                                            // assign a new element
+      if (item.categoryHex === 0x09) {                                          // special circumstance where we re-roll cut and bludgeon off of shields
+        while ([0x0040,0x0020].includes(newElem)) {
+          newElem = weaponElemRando(rng)
+        }
+      }
+      offset = item.elementOffset
+      data.writeShort(offset,newElem)                                           // write the new elemental value
+    })
+
+    // this process will randomize wearable items weak / resist / guard / absorb. it is intended that we will have very few absorbs compared to anything else by the 
+    // nature of the fact that it is the last thing rolled. Each of these has a 50% chance to be nothing each time it is rolled, so if it initially rolls something 
+    // that is the same as a previous element then it has another 66%/50%/66%/75% chance to roll nothing. This also means that Alucard will invariably become weak to more things.
+    
+    wearItems.forEach(function(item) {                                          // start the randomization process for armor, helms, capes, and rings to have random attributes.
+      // console.log(item.index + ' ' + item.itemName)
+      weakElem = thirdChanceElementRando(rng)                                    // Assign a random element to potentially be weak to
+      offset = item.elemWeakOffset
+      data.writeShort(offset,weakElem)                                          // Commit writes
+
+      resistElem = halfChanceElementRando(rng)                                  // initial randomization of resist
+      if (resistElem !== 0x0000) {                                              // don't re-randomize if resist is nothing
+        while ([weakElem].includes(resistElem)) {                               // If it's not nothing, then change what it is if it's the same as weak
+          resistElem = halfChanceElementRando(rng)
+        }
+      }
+      offset = item.elemResistOffset
+      data.writeShort(offset,resistElem)                                        // Commit writes
+
+      guardElem = thirdChanceElementRando(rng)                                  // initial randomization of guard
+      if (guardElem !== 0x0000) {                                               // don't re-randomize if guard is nothing
+        while ([weakElem,resistElem].includes(guardElem)) {                     // If it's not nothing, then change what it is if it's the same as anything before
+          guardElem = halfChanceElementRando(rng)
+        }
+      }
+      offset = item.elemGuardOffset
+      data.writeShort(offset,guardElem)                                         // Commit writes
+
+      absorbElem = quarterChanceElementRando(rng)                               // initial randomization of absorb
+      if (absorbElem !== 0x0000) {                                              // don't re-randomize if guard is nothing
+        while ([weakElem,resistElem,guardElem].includes(absorbElem)) {          // If it's not nothing, then change what it is if it's the same as anything before
+          absorbElem = halfChanceElementRando(rng)
+        }
+      }
+      offset = item.elemAbsorbOffset
+      data.writeShort(offset,absorbElem)                                        // Commit writes
+    })
+
+    spellsArr.forEach(function(spell) {                                         // cycle through spells (and familiar and xform damages)
+      console.log(spell.spellName)
+      newElem = weaponElemRando(rng)                                            // identify new element
+      offset = spell.spellElementOffset                                         // assign offset to update
+      data.writeShort(offset,newElem)                                           // Commit writes
+    })
+
+    subWeapons.forEach(function(subWea) {                                       // cycle through spells (and familiar and xform damages)
+      // console.log(subWea.subWeaName)
+      newElem = weaponElemRando(rng)                                            // identify new element
+      offset = subWea.elemOffset                                                // assign offset to update
+      data.writeShort(offset,newElem)                                           // Commit writes
+    })
+
+    specials.forEach(function(special) {                                        // cycle through weapon specials (and shield spells)
+      // console.log(special.itemName)
+      newElem = weaponElemRando(rng)                                            // identify new element
+      offset = special.elementOffset                                            // assign offset to update
+      data.writeShort(offset,newElem)                                           // Commit writes
     })
 
     return data
@@ -7494,6 +8008,7 @@ function applyBountyHunterTargets(rng,bhmode) {
       [0x9063, 0x94a5, 0xa12a, 0xb9f0, 0xd674, 0xeb5b, 0xf39c], // White Knight
       [0x8c02, 0x9c04, 0xac88, 0xbd0a, 0xcdad, 0xc655, 0xcf18], // Royal Purple
       [0x9024, 0x9867, 0xa8ac, 0xbd31, 0xcdf5, 0xeabb, 0xfb1d], // Pink Passion
+      [0x8841, 0x9482, 0x9502, 0x9964, 0x9e07, 0xcef5, 0xf7bd], // Mint
       [0x8000, 0x8c42, 0x98a5, 0xa0e9, 0xa96d, 0xb9f1, 0xc655]  // Shadow Prince
     ]
     const palettesWolfCloth = [
@@ -7503,6 +8018,7 @@ function applyBountyHunterTargets(rng,bhmode) {
       [0x8c64,0xa0e8,0xad6b,0xde52,0xb4e0,0xfb9a,0xe5e0,0xfe27,0xfea0,0x8422,0x8c64,0x9484,0xb129,0xd1ef],
       [0xa465,0xb447,0xb88b,0xd94f,0x98c7,0xd9d8,0xad8e,0xca75,0xbe36,0x9802,0x9423,0xa445,0xa067,0xb0cd],
       [0x9826,0xa46c,0xb8f2,0xe1d8,0x8422,0xfaba,0x8844,0x9086,0x90cb,0x8c03,0x8c24,0x9c69,0xb50d,0xcd2f],
+      [0x8c61,0x9502,0xa183,0xae4a,0xa427,0xbed6,0xc80a,0xcc8c,0xec16,0x8841,0x8841,0x90a2,0x98e4,0x9d65],
       [0x8822,0x8c43,0x98a5,0xa0e9,0x808d,0xa96d,0x80f9,0x8d9e,0x813f,0x8421,0x8822,0x8822,0x9063,0x9484]
     ]
     switch (alColP){
@@ -7524,8 +8040,11 @@ function applyBountyHunterTargets(rng,bhmode) {
       case 'p':
         colorAlucardSet = 5
         break
-      case 's':
+      case 'm':
         colorAlucardSet = 6
+        break
+      case 's':
+        colorAlucardSet = 7
         break
     }
         
@@ -7860,6 +8379,29 @@ function applyBountyHunterTargets(rng,bhmode) {
     offset = data.writeWord(offset,0x02280228)
     offset = data.writeWord(offset,0x0200022A)
     data.writeShort(offset,0x01F3)
+
+    return data
+  }
+
+  function applySimpleInputPatches() {
+    const data = new checked()
+    let offset
+    
+    offset = 0x0012ca48                                                         // Address for adding new inputs to gravity boots
+    offset = data.writeWord(offset,0x08026232)                                  // instructs the game to jump to the new command detection code
+    data.writeWord(offset,0x00000000)
+
+    offset = 0x0012da34                                                         // Address for adding new inputs to soul steal
+    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
+    data.writeWord(offset,0x34040001)
+
+    offset = 0x0012d7a4                                                         // Address for adding new inputs to tetra spirit
+    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
+    data.writeWord(offset,0x34040002)
+
+    offset = 0x0012d454                                                         // Address for adding new inputs to hellfire
+    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
+    data.writeWord(offset,0x34040003)
 
     return data
   }
@@ -8885,6 +9427,8 @@ function applyBountyHunterTargets(rng,bhmode) {
     applyRLBCPatches: applyRLBCPatches,
 	  applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
+    applyElemChaosPatches: applyElemChaosPatches,
+    applySimpleInputPatches: applySimpleInputPatches,
     applyDevsStashPatches: applyDevsStashPatches,
     applyMapColor: applyMapColor,
     applyNewGoals: applyNewGoals,

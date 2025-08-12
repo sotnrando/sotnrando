@@ -22,7 +22,6 @@
 
   "relicLocationsExtension": "guarded",
   "stats": false,
-  "colorrandoMode": true,
   "fastwarpMode": true,
   "mypurseMode": true,
   "surpriseMode": true,

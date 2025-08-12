@@ -21,7 +21,6 @@
   },
 
   "stats": false,
-  "colorrandoMode": true,
   "antiFreezeMode": true,
   "fastwarpMode": true,
   "startRoomRando2ndMode": true,
@@ -1636,7 +1635,7 @@
     "value": "0x00000000"
   }, {
     "type": "word",
-    "value": "0x2508FFFB"
+    "value": "0x2508FFFA"
   }, {
     "type": "word",
     "value": "0x05000008"

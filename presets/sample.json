@@ -29,7 +29,6 @@
   "music": false,
   "turkeyMode": false,
   "tournamentMode": true,
-  "colorrandoMode": true,
   "antiFreezeMode": true,
   "fastwarpMode": true,
   "magicmaxMode": true,
@@ -68,6 +67,11 @@
     "comment": "Alias Nosedevil Card as Heart Refresh",
     "relic": "Nosedevil Card",
     "alias": "Heart Refresh"
+  }],
+
+  "relicName": [{
+    "relic": "Faerie Scroll",
+    "newName": "Portal Spell"
   }],
 
   "complexityGoal": {

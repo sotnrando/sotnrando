@@ -1,5 +1,6 @@
 #seed-container,
 #preset-dropdown,
+#mapColor-dropdown,
 #complexity-slider {
   display: flex;
   align-items: center;
@@ -20,12 +21,14 @@
 #alucard-liner-dropdown label,
 #seed-container label,
 #preset-dropdown label,
+#mapColor label,
 #complexity-slider label {
   flex-basis: 25%;
 }
 
 #seed-container input,
 #preset-select select,
+#mapColor select,
 #complexity-slider > #complexity-slider-details {
   padding: 0.25rem 0.5rem;
   width: 100%;
@@ -40,7 +43,7 @@
   width: 100%;
 }
 
-#preset-select {
+#newGoals, #preset-select, #mapColor{
   width: 100%;
 }
 

@@ -22,7 +22,6 @@
   
   "relicLocationsExtension": "guardedplus",
   "stats": false,
-  "colorrandoMode": true,
   "fastwarpMode": true,
   "magicmaxMode": true,
   "mypurseMode": true,
@@ -1173,10 +1172,10 @@
     "location": "Ring of Ares",
     "comment": "Requires Jewel of Open + Demon Card + at least Leap Stone",
     "locks": [
-      "Jewel of Open + Demon Card + Soul of Bat + Missile",
-      "Jewel of Open + Demon Card + Leap Stone + Missile",
-      "Jewel of Open + Demon Card + Form of Mist + Power of Mist + Missile",
-      "Jewel of Open + Demon Card + Soul of Wolf + Power of Wolf + Missile"
+      "Jewel of Open + Soul of Bat + Missile",
+      "Jewel of Open + Leap Stone + Missile",
+      "Jewel of Open + Form of Mist + Power of Mist + Missile",
+      "Jewel of Open + Soul of Wolf + Power of Wolf + Missile"
     ],
     "comment": "Access must also give at least Leap Stone",
     "escapeRequires": [
@@ -8542,6 +8541,30 @@
   }, {
     "type": "word",
     "value": "0x00000000"
-        }
-    ]
+  }, {
+    "comment": "Demon card open door A",
+    "address": "0x4608B84",
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "comment": "Demon card open door B",
+    "address": "0x4608BE4",
+    "type": "word",
+    "value": "0x00000000"
+  },{
+    "comment": "Reverse Demon card open door A",
+    "address": "0x4DC225C",
+    "type": "word",
+    "value": "0x34020001"
+  },{
+    "comment": "Reverse Demon card open door B",
+    "address": "0x4DC22C4",
+    "type": "word",
+    "value": "0x34020001"
+  },{
+    "comment": "Reverse Demon card open door C",
+    "address": "0x4DC22E4",
+    "type": "word",
+    "value": "0x34020001"
+  }]
 }

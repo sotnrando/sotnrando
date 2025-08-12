@@ -666,6 +666,16 @@ const yargs = require('yargs')
     describe: 'Opens a shortcut to allow players to swiftly exit the Long Library.',
     type: 'boolean',
   })
+  .option('elemChaos', {
+    alias: 'ec',
+    describe: 'Randomizes almost every element in the game.',
+    type: 'boolean',
+  })
+  .option('simpleInput', {
+    alias: 'si',
+    describe: 'Simplifies inputs so spells no longer need complex sequences to execute.',
+    type: 'boolean',
+  })
   .option('devStash', {
     alias: 'dev',
     describe: '???',
@@ -770,6 +780,12 @@ if ('debug' in argv) {
     process.exit(1)
   } else {
     console.log('Begin Debug output:')
+  }
+}
+if ('simpleInput' in argv) {
+  if ('tournament' in argv) {
+    console.error('\nYou cannot run simplified inputs at the same time as tournament mode.')
+    process.exit(1)
   }
 }
 if ('debug' in argv) {console.log('randomize | Checking for help flags')}
@@ -1179,6 +1195,16 @@ if ('debug' in argv) {console.log('randomize | Set libShort')}
 if (argv.libShort) {
   options.libraryShortcut = true
 }
+if ('debug' in argv) {console.log('randomize | Set elemChaos')}
+// Enable elemental chaos if specified. - eldri7ch
+if (argv.elemChaos) {
+  options.elemChaosMode = true
+}
+if ('debug' in argv) {console.log('randomize | Set simpleInput')}
+// Enable elemental chaos if specified. - eldri7ch
+if (argv.simpleInput) {
+  options.simpleInputMode = true
+}
 if ('debug' in argv) {console.log('randomize | Set devStash')}
 // Enable Dev's Stash if specified. - eldri7ch
 if (argv.devStash) {
@@ -1220,10 +1246,10 @@ if ('newGoals' in argv && typeof(argv.newGoals) !== 'undefined') {
 }
 if ('debug' in argv) {console.log('randomize | Alucard\'s palette')}
 if ('alucardPalette' in argv && typeof(argv.alucardPalette) !== 'undefined') {
-  let termsAllowed = 'd,r,b,g,w,l,p,s'
+  let termsAllowed = 'd,r,b,m,g,w,l,p,s'
   if (!(termsAllowed.includes(argv.alucardPalette))) {
     yargs.showHelp()
-    console.error('\nMust contain a letter \'d\'(Default), \'r\'(Bloody Tears), \'b\'(Blue Danube), \'g\'(Swamp Thing), \'w\'(White Knight), \'l\'(Royal Purple), \'p\'(Pink Passion), \'s\'(Shadow Prince)')
+    console.error('\nMust contain a letter \'d\'(Default), \'r\'(Bloody Tears), \'b\'(Blue Danube), \'m\'(Mint Alucard)\'g\'(Swamp Thing), \'w\'(White Knight), \'l\'(Royal Purple), \'p\'(Pink Passion), \'s\'(Shadow Prince)')
     process.exit(1)
   } else {
     options.alucardPaletteSet = argv.alucardPalette.toString()
@@ -1507,7 +1533,11 @@ if ('debug' in argv) {console.log('randomize | Start randomization')}
             seed,
             0,
           ))
-          check.apply(util.applyenemyStatRandoPatches(rng))
+          let chaosFlag = false
+          if (options.elemChaosMode || applied.elemChaosMode) {
+            chaosFlag = true
+          }
+          check.apply(util.applyenemyStatRandoPatches(rng,chaosFlag))
         }
         if ('debug' in argv) {console.log('randomize | function: randomize | Enemy Stat Randomizer Mode | ' + optFlag)}
         optFlag = false
@@ -1575,6 +1605,25 @@ if ('debug' in argv) {console.log('randomize | Start randomization')}
           check.apply(util.applyLibraryShortcutPatches())
         }
         if ('debug' in argv) {console.log('randomize | function: randomize | Library Shortcut | ' + optFlag)}
+        optFlag = false
+        if (options.elemChaosMode || applied.elemChaosMode) { // elemental chaos - eldrich
+          optFlag = true
+          rng = new require('seedrandom')(util.saltSeed(
+            version,
+            options,
+            seed,
+            0,
+          ))
+          check.apply(util.applyElemChaosPatches(rng))
+        }
+        if ('debug' in argv) {console.log('randomize | function: randomize | Elemental Chaos | ' + optFlag)}
+        optFlag = false
+        if (options.simpleInputMode || applied.simpleInputMode) { // Simplifies spell inputs - eldrich
+          // Apply simple input patches. - eldri7ch
+          optFlag = true
+          check.apply(util.applySimpleInputPatches())
+        }
+        if ('debug' in argv) {console.log('randomize | function: randomize | Simplified Input Mode | ' + optFlag)}
         optFlag = false
         if (options.devStashMode || applied.devStashMode) { // dev's stash - eldrich
           optFlag = true

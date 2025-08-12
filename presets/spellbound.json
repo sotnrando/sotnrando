@@ -21,7 +21,6 @@
   },
 
   "inherits": "casual",
-  "colorrandoMode": true,
   "stats": true,
   "turkeyMode": true,
   "music": false,

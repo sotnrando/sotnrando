@@ -1803,7 +1803,7 @@
       stageWrite: 0x000d
     }
   ]
-
+  
   const splashPhrases = [
     "Moving like Dracula, we get it back in blood!",
     "Diagon strats!",
@@ -1883,7 +1883,9 @@
     "eldri7ch checks!",
     "At least it\'s better than Spellbound!",
     "There's no \'world record\' for randomizers!",
-    "Rest in Peace, Scott."
+    "Rest in Peace, Scott.",
+    "Now starting season 28!",
+    "Really good, actually!"
   ]
 
   const prideSplashPhrases = [
@@ -2759,6 +2761,7 @@
     nounsHalloween: nounsHalloween,
     nounsNormal: nounsNormal
   }
+
   if (self) {
     self.sotnRando = Object.assign(self.sotnRando || {}, {
       constants: exports,

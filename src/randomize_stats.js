@@ -144,7 +144,6 @@
   function shuffleEquipmentStats(rng, data, newNames, stats, options) {
     // Randomize names.
     if(options.itemNameRandoMode === true) {
-      console.log("this runs >:D")
       function randomizeNames(items) {
         shuffled(rng, items).forEach(function(item, index) {
           newNames.push({

@@ -1,0 +1,229 @@
+html {
+    height: 100%;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: calc(90% + .2vw);
+    width: 95vw;
+    line-height: 1.5;
+    margin: auto;
+    border: 2px solid white;
+    background-image: linear-gradient(
+        180deg,
+        rgba(2,0,36,1) 0%,
+        rgba(0,0,32,1) 11%,
+        rgba(65,65,150,1) 100%
+    );
+    background-attachment: fixed;
+}
+h1, h2, h3, p, ul {
+	padding: .25em 0;
+}
+h1 {
+    font-size: 250%;
+}
+h3{
+    font-size: 180%;
+}
+header {
+    border-bottom: 2px solid;
+    color: white; 
+    text-indent: 20px; 
+}
+.right{
+       text-align: right;
+
+    } 
+main{
+    display: flex;
+    flex-direction: column;
+}
+section{
+    width: 100%;
+    margin: 1em;
+    h1{
+        color: white;
+    }
+      
+    h3{
+        color:white;
+        text-align: center;
+    }
+    p {
+        padding-right: 2em;
+        font-size: 105%;
+        color:white;
+    };
+    h2 {
+        color: white;
+        font-size: 130%;
+        font-style: oblique;
+        gold{
+            color: goldenrod;
+        }
+    }
+    h3 {
+        margin-right: 1em;
+    }
+    
+    h4{
+        color: white;
+        font-size: 140%;
+        margin-right: 1em;
+    }
+    & ul {
+        padding: 1em;
+        list-style-type: none;
+    }
+    a,a:visited{
+        color: yellow;
+    }
+    a:hover {
+        color: maroon;
+    }
+    .iframe-container{
+        position: relative;
+        margin-top: 1em;
+        width: 95%;
+        padding-bottom: 56.25%; 
+        height: 0;
+    }
+    .iframe-container iframe{
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+.faq{     
+    h3{
+        text-align: left;
+    }
+    p{
+        margin: 1em;
+    }
+    
+}
+.comunity{
+    flex-direction:row ;
+}
+.menu{
+    display: none;
+    position: absolute;
+    left: 20;
+    width: 40%;
+    background-color: rgb(0, 0, 61);
+    border: 2px solid white;
+}
+.menu-btn {
+    display: block;
+    padding: 1em;
+    color: white;
+}
+.menu-btn::after {
+    content: "\2630";
+}
+#checkbox-toggle{
+    display: none;
+}
+#checkbox-toggle:checked ~ .menu{
+    display: block;
+}
+#checkbox-toggle:checked ~ .menu-btn{
+    content: "\2716";
+}
+.navbar {
+    border-bottom: 2px solid white;    
+    & a {
+        display: block;
+        padding: .25em 1em;
+        text-decoration: none;
+        color: white;
+    }
+    & ul {
+        padding: 1em;
+        list-style-type: none;
+    }
+    & a:hover, a:focus {
+        text-decoration: underline;
+    }
+    
+    & a.current{
+        border: 2px solid;
+        border-radius: 10px;  
+        width: fit-content;        
+    }        
+}
+.menu li:has(.submenu) {
+    position: relative;
+    & small::after {content: "\25b6"}
+    & small{
+		margin-left: 1em;
+	}
+    &:hover > .submenu {
+        display: block;
+    }
+}
+.submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: rgb(0, 0, 61);
+    border: 2px solid;
+    border-radius: 10px;
+    color: white;
+    display: none;
+    width: 110%;
+    z-index: 10;
+    & > li a {
+        margin: 2px;
+    }
+}
+
+.menu li:has(.submenu)  small::after{
+		content: "\25b6";
+	}
+.responsive-two-column-grid {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+@media only screen and (min-width: 1692px) {
+    body {
+        width: 70vw;
+    }
+    main {
+        flex-direction: row;
+    }
+    .menu {
+        position: relative;
+        left:0;
+        display:flex;
+        width: 100%;
+        justify-content: space-between;
+        
+    }
+    .navbar{
+        & a.current{
+            width: fit-content;
+        }
+    }
+    .menu-btn{display: none;}
+    #checkbox-toggle:checked ~.menu {display: flex;}
+    .menu li:has(.submenu) small::after {
+        content: "\25bc";
+    }
+    .submenu { 
+        top: auto;
+        left: 0;
+        width: 160%
+    }
+}

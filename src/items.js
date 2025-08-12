@@ -9336,8 +9336,10 @@
       entities: [ 0x3698, 0x4518 ],
     }],
   }]
-
+  
+  
   const exports = items
+
   if (self) {
     self.sotnRando = Object.assign(self.sotnRando || {}, {
       items: exports,

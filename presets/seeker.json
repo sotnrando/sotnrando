@@ -25,7 +25,6 @@
 
   "stats": false,
   "tournamentMode": true,
-  "colorrandoMode": true,
   "fastwarpMode": true,
   "magicmaxMode": true,
   "shopPriceRandoMode": true,

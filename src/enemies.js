@@ -769,7 +769,8 @@
       weakOffset: 0x0b5956,
       resistOffset: 0x0b5958,
       guardOffset: 0x0b595a,
-      absorbOffset: 0x0b595c
+      absorbOffset: 0x0b595c,
+      children: 1
     }, {
       index: 9,
       name: "Sword lord",
@@ -786,7 +787,8 @@
       weakOffset: 0x0b59ce,
       resistOffset: 0x0b59d0,
       guardOffset: 0x0b59d2,
-      absorbOffset: 0x0b59d4
+      absorbOffset: 0x0b59d4,
+      children: 1
     }, {
       index: 11,
       name: "Skelerang",
@@ -803,7 +805,8 @@
       weakOffset: 0x0b5a1e,
       resistOffset: 0x0b5a20,
       guardOffset: 0x0b5a22,
-      absorbOffset: 0x0b5a24
+      absorbOffset: 0x0b5a24,
+      children: 1
     }, {
       index: 13,
       name: "Bloody zombie",
@@ -837,24 +840,8 @@
       weakOffset: 0x0b5a96,
       resistOffset: 0x0b5a98,
       guardOffset: 0x0b5a9a,
-      absorbOffset: 0x0b5a9c
-    }, {
-      index: 15,
-      name: "Flying zombie",
-      nameOffset: 0x0b5ab0,
-      newNameReference: 0x800e0c98,
-      newNameText: 0x0f60f0,
-      hpOffset: 0x0b5ab4,
-      hpValue: 190,
-      atkOffset: 0x0b5ab6,
-      atkValue: 37,
-      atkTypeOffset: 0x0b5ab8,
-      defOffset: 0x0b5aba,
-      defValue: 10,
-      weakOffset: 0x0b5abe,
-      resistOffset: 0x0b5ac0,
-      guardOffset: 0x0b5ac2,
-      absorbOffset: 0x0b5ac4
+      absorbOffset: 0x0b5a9c,
+      children: 1
     }, {
       index: 16,
       name: "Diplocephalus",
@@ -871,7 +858,8 @@
       weakOffset: 0x0b5ae6,
       resistOffset: 0x0b5ae8,
       guardOffset: 0x0b5aea,
-      absorbOffset: 0x0b5aec
+      absorbOffset: 0x0b5aec,
+      children: 3
     }, {
       index: 20,
       name: "Owl knight",
@@ -888,7 +876,8 @@
       weakOffset: 0x0b5b86,
       resistOffset: 0x0b5b88,
       guardOffset: 0x0b5b8a,
-      absorbOffset: 0x0b5b8c
+      absorbOffset: 0x0b5b8c,
+      children: 1
     }, {
       index: 22,
       name: "Owl",
@@ -922,7 +911,8 @@
       weakOffset: 0x0b5bfe,
       resistOffset: 0x0b5c00,
       guardOffset: 0x0b5c02,
-      absorbOffset: 0x0b5c04
+      absorbOffset: 0x0b5c04,
+      children: 3
     }, {
       index: 27,
       name: "Merman",
@@ -939,24 +929,8 @@
       weakOffset: 0x0b5c9e,
       resistOffset: 0x0b5ca0,
       guardOffset: 0x0b5ca2,
-      absorbOffset: 0x0b5ca4
-    }, {
-      index: 29,
-      name: "Merman",
-      nameOffset: 0x0b5ce0,
-      newNameReference: 0x800e0c5c,
-      newNameText: 0x0f60b4,
-      hpOffset: 0x0b5ce4,
-      hpValue: 10,
-      atkOffset: 0x0b5ce6,
-      atkValue: 14,
-      atkTypeOffset: 0x0b5ce8,
-      defOffset: 0x0b5cea,
-      defValue: 1,
-      weakOffset: 0x0b5cee,
-      resistOffset: 0x0b5cf0,
-      guardOffset: 0x0b5cf2,
-      absorbOffset: 0x0b5cf4
+      absorbOffset: 0x0b5ca4,
+      children: 3
     }, {
       index: 31,
       name: "Gorgon",
@@ -973,7 +947,8 @@
       weakOffset: 0x0b5d3e,
       resistOffset: 0x0b5d40,
       guardOffset: 0x0b5d42,
-      absorbOffset: 0x0b5d44
+      absorbOffset: 0x0b5d44,
+      children: 2
     }, {
       index: 34,
       name: "Armor lord",
@@ -990,7 +965,8 @@
       weakOffset: 0x0b5db6,
       resistOffset: 0x0b5db8,
       guardOffset: 0x0b5dba,
-      absorbOffset: 0x0b5dbc
+      absorbOffset: 0x0b5dbc,
+      children: 2
     }, {
       index: 37,
       name: "Black panther",
@@ -1024,7 +1000,8 @@
       weakOffset: 0x0b5e56,
       resistOffset: 0x0b5e58,
       guardOffset: 0x0b5e5a,
-      absorbOffset: 0x0b5e5c
+      absorbOffset: 0x0b5e5c,
+      children: 1
     }, {
       index: 40,
       name: "Flea man",
@@ -1058,7 +1035,8 @@
       weakOffset: 0x0b5ece,
       resistOffset: 0x0b5ed0,
       guardOffset: 0x0b5ed2,
-      absorbOffset: 0x0b5ed4
+      absorbOffset: 0x0b5ed4,
+      children: 1
     }, {
       index: 43,
       name: "White dragon",
@@ -1075,7 +1053,8 @@
       weakOffset: 0x0b5f1e,
       resistOffset: 0x0b5f20,
       guardOffset: 0x0b5f22,
-      absorbOffset: 0x0b5f24
+      absorbOffset: 0x0b5f24,
+      children: 1
     }, {
       index: 45,
       name: "Bone ark",
@@ -1092,24 +1071,8 @@
       weakOffset: 0x0b609e,
       resistOffset: 0x0b60a0,
       guardOffset: 0x0b60a2,
-      absorbOffset: 0x0b60a4
-    }, {
-      index: 46,
-      name: "Bone ark",
-      nameOffset: 0x0b60b8,
-      newNameReference: 0x800e0bfc,
-      newNameText: 0x0f6054,
-      hpOffset: 0x0b60bc,
-      hpValue: 140,
-      atkOffset: 0x0b60be,
-      atkValue: 20,
-      atkTypeOffset: 0x0b60c0,
-      defOffset: 0x0b60c2,
-      defValue: 2,
-      weakOffset: 0x0b60c6,
-      resistOffset: 0x0b60c8,
-      guardOffset: 0x0b60ca,
-      absorbOffset: 0x0b60cc
+      absorbOffset: 0x0b60a4,
+      children: 2
     }, {
       index: 48,
       name: "Flea rider",
@@ -1160,7 +1123,26 @@
       weakOffset: 0x0b6166,
       resistOffset: 0x0b6168,
       guardOffset: 0x0b616a,
-      absorbOffset: 0x0b616c
+      absorbOffset: 0x0b616c,
+      children: 4
+    }, {
+      index: 55,
+      name: "Olrox",
+      nameOffset: 0x0b6220, // 0x0b6158,
+      newNameReference: 0x800e0cfb, // "Good luck"
+      newNameText: "na",
+      hpOffset: 0x0b624c,
+      hpValue: 800,
+      atkOffset: 0x0b6226,
+      atkValue: 15,
+      atkTypeOffset: 0x0b6228,
+      defOffset: 0x0b622a,
+      defValue: 20,
+      weakOffset: 0x0b6256,
+      resistOffset: 0x0b6258,
+      guardOffset: 0x0b625a,
+      absorbOffset: 0x0b625c,
+      children: 5
     }, {
       index: 61,
       name: "Wereskeleton",
@@ -1177,7 +1159,8 @@
       weakOffset: 0x0b631e,
       resistOffset: 0x0b6320,
       guardOffset: 0x0b6322,
-      absorbOffset: 0x0b6324
+      absorbOffset: 0x0b6324,
+      children: 2
     }, {
       index: 64,
       name: "Bat",
@@ -1262,7 +1245,8 @@
       weakOffset: 0x0b6436,
       resistOffset: 0x0b6438,
       guardOffset: 0x0b643a,
-      absorbOffset: 0x0b643c
+      absorbOffset: 0x0b643c,
+      children: 1
     }, {
       index: 70,
       name: "Blood skeleton",
@@ -1296,7 +1280,8 @@
       weakOffset: 0x0b64ae,
       resistOffset: 0x0b64b0,
       guardOffset: 0x0b64b2,
-      absorbOffset: 0x0b64b4
+      absorbOffset: 0x0b64b4,
+      children: 3
     }, {
       index: 75,
       name: "Skeleton",
@@ -1313,7 +1298,8 @@
       weakOffset: 0x0b654e,
       resistOffset: 0x0b6550,
       guardOffset: 0x0b6552,
-      absorbOffset: 0x0b6554
+      absorbOffset: 0x0b6554,
+      children: 1
     }, {
       index: 77,
       name: "Discus lord",
@@ -1330,7 +1316,8 @@
       weakOffset: 0x0b659e,
       resistOffset: 0x0b65a0,
       guardOffset: 0x0b65a2,
-      absorbOffset: 0x0b65a4
+      absorbOffset: 0x0b65a4,
+      children: 1
     }, {
       index: 79,
       name: "Fire demon",
@@ -1347,7 +1334,8 @@
       weakOffset: 0x0b65ee,
       resistOffset: 0x0b65f0,
       guardOffset: 0x0b65f2,
-      absorbOffset: 0x0b65f4
+      absorbOffset: 0x0b65f4,
+      children: 1
     }, {
       index: 81,
       name: "Spittle bone",
@@ -1364,7 +1352,8 @@
       weakOffset: 0x0b663e,
       resistOffset: 0x0b6640,
       guardOffset: 0x0b6642,
-      absorbOffset: 0x0b6644
+      absorbOffset: 0x0b6644,
+      children: 1
     }, {
       index: 83,
       name: "Skeleton ape",
@@ -1381,7 +1370,8 @@
       weakOffset: 0x0b668e,
       resistOffset: 0x0b6690,
       guardOffset: 0x0b6692,
-      absorbOffset: 0x0b6694
+      absorbOffset: 0x0b6694,
+      children: 1
     }, {
       index: 85,
       name: "Stone rose",
@@ -1398,7 +1388,8 @@
       weakOffset: 0x0b66de,
       resistOffset: 0x0b66e0,
       guardOffset: 0x0b66e2,
-      absorbOffset: 0x0b66e4
+      absorbOffset: 0x0b66e4,
+      children: 2
     }, {
       index: 88,
       name: "Ectoplasm",
@@ -1415,7 +1406,8 @@
       weakOffset: 0x0b6756,
       resistOffset: 0x0b6758,
       guardOffset: 0x0b675a,
-      absorbOffset: 0x0b675c
+      absorbOffset: 0x0b675c,
+      children: 1
     }, {
       index: 90,
       name: "Bone pillar",
@@ -1432,7 +1424,8 @@
       weakOffset: 0x0b67a6,
       resistOffset: 0x0b67a8,
       guardOffset: 0x0b67aa,
-      absorbOffset: 0x0b67ac
+      absorbOffset: 0x0b67ac,
+      children: 2
     }, {
       index: 93,
       name: "Spear guard",
@@ -1449,7 +1442,8 @@
       weakOffset: 0x0b681e,
       resistOffset: 0x0b6820,
       guardOffset: 0x0b6822,
-      absorbOffset: 0x0b6824
+      absorbOffset: 0x0b6824,
+      children: 3
     }, {
       index: 97,
       name: "Plate lord",
@@ -1466,7 +1460,8 @@
       weakOffset: 0x0b69ee,
       resistOffset: 0x0b69f0,
       guardOffset: 0x0b69f2,
-      absorbOffset: 0x0b69f4
+      absorbOffset: 0x0b69f4,
+      children: 1
     }, {
       index: 99,
       name: "Frozen shade",
@@ -1483,7 +1478,8 @@
       weakOffset: 0x0b6a3e,
       resistOffset: 0x0b6a40,
       guardOffset: 0x0b6a42,
-      absorbOffset: 0x0b6a44
+      absorbOffset: 0x0b6a44,
+      children: 2
     }, {
       index: 102,
       name: "Bone musket",
@@ -1500,7 +1496,8 @@
       weakOffset: 0x0b6ab6,
       resistOffset: 0x0b6ab8,
       guardOffset: 0x0b6aba,
-      absorbOffset: 0x0b6abc
+      absorbOffset: 0x0b6abc,
+      children: 1
     }, {
       index: 104,
       name: "Dodo bird",
@@ -1585,7 +1582,8 @@
       weakOffset: 0x0b6ba6,
       resistOffset: 0x0b6ba8,
       guardOffset: 0x0b6baa,
-      absorbOffset: 0x0b6bac
+      absorbOffset: 0x0b6bac,
+      children: 1
     }, {
       index: 110,
       name: "Zombie",
@@ -1619,7 +1617,8 @@
       weakOffset: 0x0b6c1e,
       resistOffset: 0x0b6c20,
       guardOffset: 0x0b6c22,
-      absorbOffset: 0x0b6c24
+      absorbOffset: 0x0b6c24,
+      children: 1
     }, {
       index: 113,
       name: "Tombstone",
@@ -1687,7 +1686,8 @@
       weakOffset: 0x0b6ce6,
       resistOffset: 0x0b6ce8,
       guardOffset: 0x0b6cea,
-      absorbOffset: 0x0b6cec
+      absorbOffset: 0x0b6cec,
+      children: 1
     }, {
       index: 118,
       name: "Bone halberd",
@@ -1704,7 +1704,8 @@
       weakOffset: 0x0b6d36,
       resistOffset: 0x0b6d38,
       guardOffset: 0x0b6d3a,
-      absorbOffset: 0x0b6d3c
+      absorbOffset: 0x0b6d3c,
+      children: 1
     }, {
       index: 120,
       name: "Yorick",
@@ -1755,7 +1756,8 @@
       weakOffset: 0x0b6dd6,
       resistOffset: 0x0b6dd8,
       guardOffset: 0x0b6dda,
-      absorbOffset: 0x0b6ddc
+      absorbOffset: 0x0b6ddc,
+      children: 1
     }, {
       index: 124,
       name: "Blade soldier",
@@ -1772,7 +1774,8 @@
       weakOffset: 0x0b6e26,
       resistOffset: 0x0b6e28,
       guardOffset: 0x0b6e2a,
-      absorbOffset: 0x0b6e2c
+      absorbOffset: 0x0b6e2c,
+      children: 1
     }, {
       index: 126,
       name: "Nova skeleton",
@@ -1789,7 +1792,8 @@
       weakOffset: 0x0b6e76,
       resistOffset: 0x0b6e78,
       guardOffset: 0x0b6e7a,
-      absorbOffset: 0x0b6e7c
+      absorbOffset: 0x0b6e7c,
+      children: 1
     }, {
       index: 128,
       name: "Winged guard",
@@ -1857,7 +1861,8 @@
       weakOffset: 0x0b6f3e,
       resistOffset: 0x0b6f40,
       guardOffset: 0x0b6f42,
-      absorbOffset: 0x0b6f44
+      absorbOffset: 0x0b6f44,
+      children: 1
     }, {
       index: 133,
       name: "Valhalla knight",
@@ -1874,7 +1879,8 @@
       weakOffset: 0x0b6f8e,
       resistOffset: 0x0b6f90,
       guardOffset: 0x0b6f92,
-      absorbOffset: 0x0b6f94
+      absorbOffset: 0x0b6f94,
+      children: 2
     }, {
       index: 136,
       name: "Spectral sword",
@@ -1976,7 +1982,8 @@
       weakOffset: 0x0b70ce,
       resistOffset: 0x0b70d0,
       guardOffset: 0x0b70d2,
-      absorbOffset: 0x0b70d4
+      absorbOffset: 0x0b70d4,
+      children: 1
     }, {
       index: 143,
       name: "Oruburos rider",
@@ -2010,7 +2017,8 @@
       weakOffset: 0x0b7146,
       resistOffset: 0x0b7148,
       guardOffset: 0x0b714a,
-      absorbOffset: 0x0b714c
+      absorbOffset: 0x0b714c,
+      children: 1
     }, {
       index: 146,
       name: "Dhuron",
@@ -2044,7 +2052,8 @@
       weakOffset: 0x0b7316,
       resistOffset: 0x0b7318,
       guardOffset: 0x0b731a,
-      absorbOffset: 0x0b731c
+      absorbOffset: 0x0b731c,
+      children: 2
     }, {
       index: 151,
       name: "Warg rider",
@@ -2061,7 +2070,8 @@
       weakOffset: 0x0b738e,
       resistOffset: 0x0b7390,
       guardOffset: 0x0b7392,
-      absorbOffset: 0x0b7394
+      absorbOffset: 0x0b7394,
+      children: 1
     }, {
       index: 153,
       name: "Cave troll",
@@ -2078,7 +2088,8 @@
       weakOffset: 0x0b73de,
       resistOffset: 0x0b73e0,
       guardOffset: 0x0b73e2,
-      absorbOffset: 0x0b73e4
+      absorbOffset: 0x0b73e4,
+      children: 2
     }, {
       index: 156,
       name: "Ghost",
@@ -2129,24 +2140,8 @@
       weakOffset: 0x0b74a6,
       resistOffset: 0x0b74a8,
       guardOffset: 0x0b74aa,
-      absorbOffset: 0x0b74ac
-    }, {
-      index: 159,
-      name: "Corpseweed",
-      nameOffset: 0x0b74c0,
-      newNameReference: 0x800e092c,
-      newNameText: 0x0f5d84,
-      hpOffset: 0x0b74c4,
-      hpValue: 20,
-      atkOffset: 0x0b74c6,
-      atkValue: 20,
-      atkTypeOffset: 0x0b74c8,
-      defOffset: 0x0b74ca,
-      defValue: 1,
-      weakOffset: 0x0b74ce,
-      resistOffset: 0x0b74d0,
-      guardOffset: 0x0b74d2,
-      absorbOffset: 0x0b74d4
+      absorbOffset: 0x0b74ac,
+      children: 2
     }, {
       index: 161,
       name: "Venus weed",
@@ -2163,24 +2158,8 @@
       weakOffset: 0x0b751e,
       resistOffset: 0x0b7520,
       guardOffset: 0x0b7522,
-      absorbOffset: 0x0b7524
-    }, {
-      index: 162,
-      name: "Venus weed",
-      nameOffset: 0x0b7538,
-      newNameReference: 0x800e0920,
-      newNameText: 0x0f5d78,
-      hpOffset: 0x0b753c,
-      hpValue: 500,
-      atkOffset: 0x0b753e,
-      atkValue: 28,
-      atkTypeOffset: 0x0b7540,
-      defOffset: 0x0b7542,
-      defValue: 1,
-      weakOffset: 0x0b7546,
-      resistOffset: 0x0b7548,
-      guardOffset: 0x0b754a,
-      absorbOffset: 0x0b754c
+      absorbOffset: 0x0b7524,
+      children: 3
     }, {
       index: 165,
       name: "Bomb knight",
@@ -2197,7 +2176,8 @@
       weakOffset: 0x0b75be,
       resistOffset: 0x0b75c0,
       guardOffset: 0x0b75c2,
-      absorbOffset: 0x0b75c4
+      absorbOffset: 0x0b75c4,
+      children: 1
     }, {
       index: 167,
       name: "Rock knight",
@@ -2214,7 +2194,8 @@
       weakOffset: 0x0b760e,
       resistOffset: 0x0b7610,
       guardOffset: 0x0b7612,
-      absorbOffset: 0x0b7614
+      absorbOffset: 0x0b7614,
+      children: 7
     }, {
       index: 175,
       name: "Warg",
@@ -2231,7 +2212,8 @@
       weakOffset: 0x0b774e,
       resistOffset: 0x0b7750,
       guardOffset: 0x0b7752,
-      absorbOffset: 0x0b7754
+      absorbOffset: 0x0b7754,
+      children: 2
     }, {
       index: 178,
       name: "Slinger",
@@ -2248,7 +2230,8 @@
       weakOffset: 0x0b77c6,
       resistOffset: 0x0b77c8,
       guardOffset: 0x0b77ca,
-      absorbOffset: 0x0b77cc
+      absorbOffset: 0x0b77cc,
+      children: 1
     }, {
       index: 180,
       name: "Corner guard",
@@ -2265,7 +2248,8 @@
       weakOffset: 0x0b7816,
       resistOffset: 0x0b7818,
       guardOffset: 0x0b781a,
-      absorbOffset: 0x0b781c
+      absorbOffset: 0x0b781c,
+      children: 1
     }, {
       index: 182,
       name: "Bitterfly",
@@ -2299,7 +2283,8 @@
       weakOffset: 0x0b788e,
       resistOffset: 0x0b7890,
       guardOffset: 0x0b7892,
-      absorbOffset: 0x0b7894
+      absorbOffset: 0x0b7894,
+      children: 1
     }, {
       index: 185,
       name: "Spiked ball",
@@ -2333,7 +2318,8 @@
       weakOffset: 0x0b7906,
       resistOffset: 0x0b7908,
       guardOffset: 0x0b790a,
-      absorbOffset: 0x0b790c
+      absorbOffset: 0x0b790c,
+      children: 1
     }, {
       index: 188,
       name: "Gurkha",
@@ -2350,7 +2336,8 @@
       weakOffset: 0x0b7956,
       resistOffset: 0x0b7958,
       guardOffset: 0x0b795a,
-      absorbOffset: 0x0b795c
+      absorbOffset: 0x0b795c,
+      children: 1
     }, {
       index: 190,
       name: "Blade",
@@ -2367,7 +2354,8 @@
       weakOffset: 0x0b79a6,
       resistOffset: 0x0b79a8,
       guardOffset: 0x0b79aa,
-      absorbOffset: 0x0b79ac
+      absorbOffset: 0x0b79ac,
+      children: 2
     }, {
       index: 193,
       name: "Ouija table",
@@ -2384,7 +2372,8 @@
       weakOffset: 0x0b7a1e,
       resistOffset: 0x0b7a20,
       guardOffset: 0x0b7a22,
-      absorbOffset: 0x0b7a24
+      absorbOffset: 0x0b7a24,
+      children: 1
     }, {
       index: 195,
       name: "Sniper of goth",
@@ -2401,7 +2390,8 @@
       weakOffset: 0x0b7a6e,
       resistOffset: 0x0b7a70,
       guardOffset: 0x0b7a72,
-      absorbOffset: 0x0b7a74
+      absorbOffset: 0x0b7a74,
+      children: 7
     }, {
       index: 203,
       name: "Minotaurus",
@@ -2418,7 +2408,8 @@
       weakOffset: 0x0b7cde,
       resistOffset: 0x0b7ce0,
       guardOffset: 0x0b7ce2,
-      absorbOffset: 0x0b7ce4
+      absorbOffset: 0x0b7ce4,
+      children: 2
     }, {
       index: 206,
       name: "Werewolf",
@@ -2435,7 +2426,8 @@
       weakOffset: 0x0b7d56,
       resistOffset: 0x0b7d58,
       guardOffset: 0x0b7d5a,
-      absorbOffset: 0x0b7d5c
+      absorbOffset: 0x0b7d5c,
+      children: 4
     }, {
       index: 211,
       name: "Paranthropus",
@@ -2452,7 +2444,8 @@
       weakOffset: 0x0b7e1e,
       resistOffset: 0x0b7e20,
       guardOffset: 0x0b7e22,
-      absorbOffset: 0x0b7e24
+      absorbOffset: 0x0b7e24,
+      children: 2
     }, {
       index: 214,
       name: "Mudman",
@@ -2469,7 +2462,8 @@
       weakOffset: 0x0b7e96,
       resistOffset: 0x0b7e98,
       guardOffset: 0x0b7e9a,
-      absorbOffset: 0x0b7e9c
+      absorbOffset: 0x0b7e9c,
+      children: 1
     }, {
       index: 216,
       name: "Ghost dancer",
@@ -2503,7 +2497,8 @@
       weakOffset: 0x0b7f0e,
       resistOffset: 0x0b7f10,
       guardOffset: 0x0b7f12,
-      absorbOffset: 0x0b7f14
+      absorbOffset: 0x0b7f14,
+      children: 3
     }, {
       index: 221,
       name: "Salem witch",
@@ -2520,7 +2515,8 @@
       weakOffset: 0x0b7fae,
       resistOffset: 0x0b7fb0,
       guardOffset: 0x0b7fb2,
-      absorbOffset: 0x0b7fb4
+      absorbOffset: 0x0b7fb4,
+      children: 2
     }, {
       index: 224,
       name: "Azaghal",
@@ -2554,7 +2550,8 @@
       weakOffset: 0x0b804e,
       resistOffset: 0x0b8050,
       guardOffset: 0x0b8052,
-      absorbOffset: 0x0b8054
+      absorbOffset: 0x0b8054,
+      children: 1
     }, {
       index: 227,
       name: "Hunting girl",
@@ -2605,7 +2602,8 @@
       weakOffset: 0x0b80ee,
       resistOffset: 0x0b80f0,
       guardOffset: 0x0b80f2,
-      absorbOffset: 0x0b80f4
+      absorbOffset: 0x0b80f4,
+      children: 3
     }, {
       index: 233,
       name: "Ctulhu",
@@ -2622,7 +2620,8 @@
       weakOffset: 0x0b818e,
       resistOffset: 0x0b8190,
       guardOffset: 0x0b8192,
-      absorbOffset: 0x0b8194
+      absorbOffset: 0x0b8194,
+      children: 2
     }, {
       index: 236,
       name: "Malachi",
@@ -2639,7 +2638,8 @@
       weakOffset: 0x0b8206,
       resistOffset: 0x0b8208,
       guardOffset: 0x0b820a,
-      absorbOffset: 0x0b820c
+      absorbOffset: 0x0b820c,
+      children: 2
     }, {
       index: 239,
       name: "Harpy",
@@ -2656,7 +2656,8 @@
       weakOffset: 0x0b827e,
       resistOffset: 0x0b8280,
       guardOffset: 0x0b8282,
-      absorbOffset: 0x0b8284
+      absorbOffset: 0x0b8284,
+      children: 3
     }, {
       index: 243,
       name: "Slogra",
@@ -2673,7 +2674,8 @@
       weakOffset: 0x0b831e,
       resistOffset: 0x0b8320,
       guardOffset: 0x0b8322,
-      absorbOffset: 0x0b8324
+      absorbOffset: 0x0b8324,
+      children: 2
     }, {
       index: 246,
       name: "Axe knight",
@@ -2707,7 +2709,8 @@
       weakOffset: 0x0b83be,
       resistOffset: 0x0b83c0,
       guardOffset: 0x0b83c2,
-      absorbOffset: 0x0b83c4
+      absorbOffset: 0x0b83c4,
+      children: 1
     }, {
       index: 249,
       name: "Magic tome",
@@ -2724,7 +2727,8 @@
       weakOffset: 0x0b840e,
       resistOffset: 0x0b8410,
       guardOffset: 0x0b8412,
-      absorbOffset: 0x0b8414
+      absorbOffset: 0x0b8414,
+      children: 1
     }, {
       index: 251,
       name: "Magic tome",
@@ -2741,7 +2745,8 @@
       weakOffset: 0x0b858e,
       resistOffset: 0x0b8590,
       guardOffset: 0x0b8592,
-      absorbOffset: 0x0b8594
+      absorbOffset: 0x0b8594,
+      children: 1
     }, {
       index: 253,
       name: "Doppleganger10",
@@ -2775,7 +2780,8 @@
       weakOffset: 0x0b8606,
       resistOffset: 0x0b8608,
       guardOffset: 0x0b860a,
-      absorbOffset: 0x0b860c
+      absorbOffset: 0x0b860c,
+      children: 2
     }, {
       index: 261,
       name: "Skull lord",
@@ -2809,7 +2815,8 @@
       weakOffset: 0x0b8746,
       resistOffset: 0x0b8748,
       guardOffset: 0x0b874a,
-      absorbOffset: 0x0b874c
+      absorbOffset: 0x0b874c,
+      children: 1
     }, {
       index: 264,
       name: "Tin man",
@@ -2826,7 +2833,8 @@
       weakOffset: 0x0b8796,
       resistOffset: 0x0b8798,
       guardOffset: 0x0b879a,
-      absorbOffset: 0x0b879c
+      absorbOffset: 0x0b879c,
+      children: 2
     }, {
       index: 267,
       name: "Akmodan ii",
@@ -2843,7 +2851,8 @@
       weakOffset: 0x0b880e,
       resistOffset: 0x0b8810,
       guardOffset: 0x0b8812,
-      absorbOffset: 0x0b8814
+      absorbOffset: 0x0b8814,
+      children: 3
     }, {
       index: 271,
       name: "Cloaked knight",
@@ -2860,7 +2869,8 @@
       weakOffset: 0x0b88ae,
       resistOffset: 0x0b88b0,
       guardOffset: 0x0b88b2,
-      absorbOffset: 0x0b88b4
+      absorbOffset: 0x0b88b4,
+      children: 1
     }, {
       index: 273,
       name: "Darkwing bat",
@@ -2877,7 +2887,8 @@
       weakOffset: 0x0b88fe,
       resistOffset: 0x0b8900,
       guardOffset: 0x0b8902,
-      absorbOffset: 0x0b8904
+      absorbOffset: 0x0b8904,
+      children: 3
     }, {
       index: 277,
       name: "Fishhead",
@@ -2894,7 +2905,8 @@
       weakOffset: 0x0b899e,
       resistOffset: 0x0b89a0,
       guardOffset: 0x0b89a2,
-      absorbOffset: 0x0b89a4
+      absorbOffset: 0x0b89a4,
+      children: 2
     }, {
       index: 280,
       name: "Karasuman",
@@ -2911,7 +2923,8 @@
       weakOffset: 0x0b8a16,
       resistOffset: 0x0b8a18,
       guardOffset: 0x0b8a1a,
-      absorbOffset: 0x0b8a1c
+      absorbOffset: 0x0b8a1c,
+      children: 3
     }, {
       index: 284,
       name: "Imp",
@@ -2945,7 +2958,8 @@
       weakOffset: 0x0b8ade,
       resistOffset: 0x0b8ae0,
       guardOffset: 0x0b8ae2,
-      absorbOffset: 0x0b8ae4
+      absorbOffset: 0x0b8ae4,
+      children: 1
     }, {
       index: 287,
       name: "Scylla",
@@ -2962,7 +2976,8 @@
       weakOffset: 0x0b8b2e,
       resistOffset: 0x0b8b30,
       guardOffset: 0x0b8b32,
-      absorbOffset: 0x0b8b34
+      absorbOffset: 0x0b8b34,
+      children: 6
     }, {
       index: 294,
       name: "Scylla wyrm",
@@ -3013,7 +3028,8 @@
       weakOffset: 0x0b8c96,
       resistOffset: 0x0b8c98,
       guardOffset: 0x0b8c9a,
-      absorbOffset: 0x0b8c9c
+      absorbOffset: 0x0b8c9c,
+      children: 2
     }, {
       index: 300,
       name: "Hippogryph",
@@ -3030,7 +3046,8 @@
       weakOffset: 0x0b8d36,
       resistOffset: 0x0b8d38,
       guardOffset: 0x0b8d3a,
-      absorbOffset: 0x0b8d3c
+      absorbOffset: 0x0b8d3c,
+      children: 2
     }, {
       index: 303,
       name: "Medusa head",
@@ -3081,7 +3098,8 @@
       weakOffset: 0x0b8f2e,
       resistOffset: 0x0b8f30,
       guardOffset: 0x0b8f32,
-      absorbOffset: 0x0b8f34
+      absorbOffset: 0x0b8f34,
+      children: 1
     }, {
       index: 307,
       name: "Richter belmont",
@@ -3098,7 +3116,8 @@
       weakOffset: 0x0b8f7e,
       resistOffset: 0x0b8f80,
       guardOffset: 0x0b8f82,
-      absorbOffset: 0x0b8f84
+      absorbOffset: 0x0b8f84,
+      children: 14
     }, {
       index: 322,
       name: "Scarecrow",
@@ -3149,7 +3168,8 @@
       weakOffset: 0x0b9226,
       resistOffset: 0x0b9228,
       guardOffset: 0x0b922a,
-      absorbOffset: 0x0b922c
+      absorbOffset: 0x0b922c,
+      children: 2
     }, {
       index: 328,
       name: "Fake trevor",
@@ -3166,7 +3186,8 @@
       weakOffset: 0x0b92c6,
       resistOffset: 0x0b92c8,
       guardOffset: 0x0b92ca,
-      absorbOffset: 0x0b92cc
+      absorbOffset: 0x0b92cc,
+      children: 5
     }, {
       index: 334,
       name: "Fake grant",
@@ -3183,7 +3204,8 @@
       weakOffset: 0x0b93b6,
       resistOffset: 0x0b93b8,
       guardOffset: 0x0b93ba,
-      absorbOffset: 0x0b93bc
+      absorbOffset: 0x0b93bc,
+      children: 2
     }, {
       index: 337,
       name: "Fake sypha",
@@ -3200,7 +3222,8 @@
       weakOffset: 0x0b942e,
       resistOffset: 0x0b9430,
       guardOffset: 0x0b9432,
-      absorbOffset: 0x0b9434
+      absorbOffset: 0x0b9434,
+      children: 4
     }, {
       index: 342,
       name: "Succubus",
@@ -3217,7 +3240,8 @@
       weakOffset: 0x0b94f6,
       resistOffset: 0x0b94f8,
       guardOffset: 0x0b94fa,
-      absorbOffset: 0x0b94fc
+      absorbOffset: 0x0b94fc,
+      children: 4
     }, {
       index: 350,
       name: "Killer fish",
@@ -3251,13 +3275,14 @@
       weakOffset: 0x0b965e,
       resistOffset: 0x0b9660,
       guardOffset: 0x0b9662,
-      absorbOffset: 0x0b9664
+      absorbOffset: 0x0b9664,
+      children: 4
     }, {
       index: 356,
       name: "Death",
       nameOffset: 0x0b9848,
       newNameReference: 0x800e0cfb,
-      newNameText: 0x0f596c,
+      newNameText: "na",
       hpOffset: 0x0b984c,
       hpValue: 888,
       atkOffset: 0x0b984e,
@@ -3268,7 +3293,8 @@
       weakOffset: 0x0b9856,
       resistOffset: 0x0b9858,
       guardOffset: 0x0b985a,
-      absorbOffset: 0x0b985c
+      absorbOffset: 0x0b985c,
+      children: 4
     }, {
       index: 361,
       name: "Death",
@@ -3285,7 +3311,8 @@
       weakOffset: 0x0b991e,
       resistOffset: 0x0b9920,
       guardOffset: 0x0b9922,
-      absorbOffset: 0x0b9924
+      absorbOffset: 0x0b9924,
+      children: 1
     }, {
       index: 363,
       name: "Cerberos",
@@ -3302,7 +3329,8 @@
       weakOffset: 0x0b996e,
       resistOffset: 0x0b9970,
       guardOffset: 0x0b9972,
-      absorbOffset: 0x0b9974
+      absorbOffset: 0x0b9974,
+      children: 2
     }, {
       index: 366,
       name: "Medusa",
@@ -3319,7 +3347,8 @@
       weakOffset: 0x0b99e6,
       resistOffset: 0x0b99e8,
       guardOffset: 0x0b99ea,
-      absorbOffset: 0x0b99ec
+      absorbOffset: 0x0b99ec,
+      children: 2
     }, {
       index: 370,
       name: "The creature",
@@ -3336,7 +3365,8 @@
       weakOffset: 0x0b9a86,
       resistOffset: 0x0b9a88,
       guardOffset: 0x0b9a8a,
-      absorbOffset: 0x0b9a8c
+      absorbOffset: 0x0b9a8c,
+      children: 1
     }, {
       index: 372,
       name: "Doppleganger40",
@@ -3353,13 +3383,14 @@
       weakOffset: 0x0b9ad6,
       resistOffset: 0x0b9ad8,
       guardOffset: 0x0b9ada,
-      absorbOffset: 0x0b9adc
+      absorbOffset: 0x0b9adc,
+      children: 6
     }, {
       index: 379,
       name: "Dracula",
       nameOffset: 0x0b9be0,
       newNameReference: 0x800e0ce1,
-      newNameText: 0x0f5930,
+      newNameText: "na",
       hpOffset: 0x0b9be4,
       hpValue: 10000,
       atkOffset: 0x0b9be6, // also B9C0E 0x46; 70
@@ -3387,7 +3418,8 @@
       weakOffset: 0x0b9d06,
       resistOffset: 0x0b9d08,
       guardOffset: 0x0b9d0a,
-      absorbOffset: 0x0b9d0c
+      absorbOffset: 0x0b9d0c,
+      children: 2
     }, {
       index: 389,
       name: "Werewolf",
@@ -3404,12 +3436,13 @@
       weakOffset: 0x0b9d7e,
       resistOffset: 0x0b9d80,
       guardOffset: 0x0b9d82,
-      absorbOffset: 0x0b9d84
+      absorbOffset: 0x0b9d84,
+      children: 2
     }, {
       index: 392,
       name: "Blue venus weed",
       nameOffset: 0x0b9de8,
-      newNameReference: 0x800e0cfb,
+      newNameReference: 0x800e05e4,
       newNameText: 0x0f590c,
       hpOffset: 0x0b9dec,
       hpValue: 100,
@@ -3421,24 +3454,8 @@
       weakOffset: 0x0b9df6,
       resistOffset: 0x0b9df8,
       guardOffset: 0x0b9dfa,
-      absorbOffset: 0x0b9dfc
-    }, {
-      index: 393,
-      name: "Blue venus weed",
-      nameOffset: 0x0b9e10,
-      newNameReference: 0x800e05e4,
-      newNameText: 0x0f590c,
-      hpOffset: 0x0b9e14,
-      hpValue: 550,
-      atkOffset: 0x0b9e16,
-      atkValue: 45,
-      atkTypeOffset: 0x0b9e18,
-      defOffset: 0x0b9e1a,
-      defValue: 1,
-      weakOffset: 0x0b9e1e,
-      resistOffset: 0x0b9e20,
-      guardOffset: 0x0b9e22,
-      absorbOffset: 0x0b9e24
+      absorbOffset: 0x0b9dfc,
+      children: 3
     }, {
       index: 396,
       name: "Guardian",
@@ -3455,7 +3472,8 @@
       weakOffset: 0x0b9e96,
       resistOffset: 0x0b9e98,
       guardOffset: 0x0b9e9a,
-      absorbOffset: 0x0b9e9c
+      absorbOffset: 0x0b9e9c,
+      children: 2
     }
   ]
 

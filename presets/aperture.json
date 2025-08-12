@@ -21,10 +21,14 @@
     "winCondition": "Vlads and Portal Spell"
   },
   
-  "colorrandoMode": true,
   "fastwarpMode": true,
   "mypurseMode": true,
   "unlockedMode": true,
+
+  "relicName": [{
+    "relic": "Faerie Scroll",
+    "newName": "Portal Spell"
+  }],
 
   "complexityGoal": {
     "min": 8,
