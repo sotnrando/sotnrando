@@ -23,6 +23,7 @@
   "inherits": "casual",
   "stats": false,
   "newGoalsSet": "h",
+  "rlbcMode": true,
 
   "complexityGoal": {
     "min": 5,

@@ -24,6 +24,7 @@
   "relicLocationsExtension": "scenic",
   "stats": false,
   "music": false,
+  "rlbcMode": true,
 
   "complexityGoal": {
     "min": 7,
