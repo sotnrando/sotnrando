@@ -7853,6 +7853,8 @@ function applyBountyHunterTargets(rng,bhmode) {
       offset = data.writeWord(offset,0x34040020)  // mov r4,20h
       offset = data.writeWord(offset,0x3C058009)  // mov r5,80090000h
       offset = data.writeWord(offset,0xACA474A0)  // mov [r5+74a0h],r4
+	  offset = data.writeWord(offset,0xA6000026)  // movh [r16+26h],0
+	  offset = data.writeWord(offset,0xAE000028)  // mov [r16+28h],0
       offset = data.writeWord(offset,0x0806E92B)  // jmp 801BA4ACh
       offset = data.writeWord(offset,0x00000000)  // nop
     }
