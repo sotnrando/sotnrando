@@ -452,8 +452,10 @@
             if (!el) {
               console.warn(`Element not found for key '${key}'`);
             } else {
-              el.checked = false;
+              // Preserve checked state if already checked
+              const wasChecked = el.checked;
               el.disabled = true;
+              el.checked = wasChecked;
             }
           });
         }
