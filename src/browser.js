@@ -300,9 +300,9 @@
 
     const DISABLE_RULES = [
       { ids: ["glitch", "glitchmaster", "any-percent"], elems: ["antiFreezeMode"] },
-      { ids: ["dog-life", "magic-mirror", "mobility", "lookingglass", "boss-rush", "beyond", "first-castle"], elems: ["startRoomRando2ndMode"] },
+      { ids: ["dog-life", "magic-mirror", "mobility", "lookingglass", "boss-rush", "beyond", "first-castle", "vanilla"], elems: ["startRoomRando2ndMode"] },
       { ids: ["boss-rush", "first-castle"], elems: ["relicLocations", "relicLocationsSet"] },
-      { ids: ["boss-rush", "beyond"], elems: ["startRoomRandoMode"] },
+      { ids: ["boss-rush", "beyond", "vanilla"], elems: ["startRoomRandoMode"] },
       { ids: ["boss-rush"], elems: ["unlockedMode"] },
       { ids: ["big-toss"], elems: ["enemyStatRandoMode", "elemChaosMode"] },
       { ids: ["boss-rush", "first-castle", "beyond", "seeker", "recycler"], elems: ["rlbcMode"] },
