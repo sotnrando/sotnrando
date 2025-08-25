@@ -10,7 +10,7 @@
   const randomizeMusic = sotnRando.randomizeMusic
   const applyAccessibilityPatches = sotnRando.applyAccessibilityPatches
   const relics = sotnRando.relics
-  const apiUrl = "https://sotnrandoapi.duckdns.org";
+  const apiUrl = "https://api.sotn.io";
   const seasonalEvents = [
     {
       "eventName": "Pride Month",
