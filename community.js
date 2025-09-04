@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const seedColumn = document.getElementById("seedColumn");
     const selectElement = (element) => document.querySelector(element)
 
-    const apiUrl = "https://sotnrandoapi.duckdns.org";
+    const apiUrl = "https://api.sotn.io";
 
     // Fetch Presets
     const fetchPresets = async () => {
