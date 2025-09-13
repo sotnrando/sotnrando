@@ -1404,6 +1404,27 @@
     "type": "word",
     "value": "0xa062797d",
     "comment": "sb v0, 0x797d (v1)"
+  }, 
+  
+  {
+    "comment": "Write to 8003 RAM addresses,",
+    "type": "word",
+    "value": "0x3c038004",
+    "comment": "lui v1, 0x8004"
+  }, {
+    "type": "word",
+    "value": "0x3402001F",
+    "comment": "ori v0, 0x001F"
+  }, {
+    "comment": "Unlock Normal Teleport Rooms",
+    "type": "word",
+    "value": "0xa062BEBC",
+    "comment": "sb v0, 0xBEBC (v1)"
+  }, {
+    "comment": "Unlock Reverse Teleport Rooms",
+    "type": "word",
+    "value": "0xa062BEBD",
+    "comment": "sb v0, 0xBEBD (v1)"
   },
   
   {
