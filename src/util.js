@@ -8873,11 +8873,11 @@ function applyBountyHunterTargets(rng,bhmode) {
     offset = data.writeWord(offset, 0x1800FFD1)
 
     // Holy Cross Fixes
-    offset = 0x0435f102
+    offset = 0x000b1036
     data.writeChar(offset, 0x82)  // heals hp with orbs
-    offset = 0x0435f1a2
+    offset = 0x000b10d6
     data.writeChar(offset, 0x82)  // heals hp with orbs
-    offset = 0x0435f0f6
+    offset = 0x000b102a
     data.writeChar(offset, 0x32)  // costs 50 Hearts
 
     return data
