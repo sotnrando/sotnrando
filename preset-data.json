@@ -1195,5 +1195,25 @@
     "metaExtension": "Scenic",
     "metaComplexity": "14",
     "itemStats": "Normal"
+  },
+  {
+    "name": "Gear Rush",
+    "id": "gear-rush",
+    "description": "You only have 15 minutes to get your gear to fight Dracula!",
+    "author": [
+      "eigh70",
+      "eldri7ch",
+      "MottZilla"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Very Fast",
+    "moddedLevel": "Heavily",
+    "castleType": "Normal",
+    "transformEarly": "No",
+    "transformFocus": "None",
+    "winCondition": "Timed",
+    "metaExtension": "Guarded",
+    "metaComplexity": "1",
+    "itemStats": "Normal"
   }
 ]
