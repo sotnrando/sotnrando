@@ -5253,21 +5253,6 @@
   }, 
   
   {
-    "comment": "Default Warps Open Entrance & Outer Wall OK!",
-    "type": "char",
-    "address": "0x588BC08",
-    "value": "0x05"
-  }, {
-    "comment": "Entrance warp shortcut A",
-    "type": "word",
-    "address": "0x4BAB540",
-    "value": "0x00000000"
-  }, {
-    "comment": "Entrance warp shortcut B",
-    "type": "word",
-    "address": "0x5432848",
-    "value": "0x00000000"
-  }, {
     "comment": "Keep Teleporter Disable",
     "type": "char",
     "address": "0x125BA8",

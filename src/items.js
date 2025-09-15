@@ -9138,7 +9138,7 @@
       entities: [ 0x1d0e, 0x207e ],
     }],
   }, {
-    name: 'Gold Ring',
+    name: 'Gold ring',
     type: TYPE.ACCESSORY,
     id: 241,
     blacklist: [ 0x0b6b3c, 0x0b6b3a ],
@@ -9148,7 +9148,7 @@
       entities: [ 0x4270, 0x52ee ],
     }],
   }, {
-    name: 'Silver Ring',
+    name: 'Silver ring',
     type: TYPE.ACCESSORY,
     id: 242,
     blacklist: [ 0x0b6b3c, 0x0b6b3a ],
