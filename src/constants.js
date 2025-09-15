@@ -1885,7 +1885,8 @@
     "There's no \'world record\' for randomizers!",
     "Rest in Peace, Scott.",
     "Now starting season 28!",
-    "Really good, actually!"
+    "Really good, actually!",
+    "!ahl"
   ]
 
   const prideSplashPhrases = [

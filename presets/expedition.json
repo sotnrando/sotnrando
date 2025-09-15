@@ -22,6 +22,7 @@
 
   "inherits": "nimble",
   "relicLocationsExtension": "equipment",
+  "rlbcMode": true,
 
   "complexityGoal": {
     "min": 8,

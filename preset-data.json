@@ -1173,5 +1173,47 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal"
+  },
+  {
+    "name": "Anguish 2025",
+    "id": "anguish",
+    "description": "Evolved form of Agonize 2020. Fixed locations for various relics to maximize backtracking and fulfill complexity level 14. Uses the Scenic relic extension. Spellbound to make it more insufferable. Side note: It hates you.",
+    "author": [
+      "3snow_p7im",
+      "eldri7ch",
+      "Crazy4blades",
+      "Forat Negre",
+      "Wecoc"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Super Slow",
+    "moddedLevel": "Heavily",
+    "castleType": "Normal",
+    "transformEarly": "No",
+    "transformFocus": "None",
+    "winCondition": "Normal",
+    "metaExtension": "Scenic",
+    "metaComplexity": "14",
+    "itemStats": "Normal"
+  },
+  {
+    "name": "Gear Rush",
+    "id": "gear-rush",
+    "description": "You start with fast movement relics along with Jewel of Open and only have 15 minutes to use get your gear to fight Dracula. Second castle contains high-value gear. Holy glasses are at Spike Breaker location and all shortcuts / warps are open.",
+    "author": [
+      "eigh70",
+      "eldri7ch",
+      "MottZilla"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Very Fast",
+    "moddedLevel": "Heavily",
+    "castleType": "Normal",
+    "transformEarly": "No",
+    "transformFocus": "None",
+    "winCondition": "Timed",
+    "metaExtension": "Guarded",
+    "metaComplexity": "1",
+    "itemStats": "Normal"
   }
 ]

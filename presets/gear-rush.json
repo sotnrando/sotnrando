@@ -1,83 +1,391 @@
 {
   "metadata": {
-    "id": "seeker",
-    "name": "Seeker",
-    "description": "The Portal Spell is always the complexity relic in this first-castle only preset. Richter is missing and the keep teleporter is broken. Obtain five vlads and then find the portal spell to win.",
+    "id": "gear-rush",
+    "name": "Gear Rush",
+    "description": "You start with fast movement relics along with Jewel of Open and only have 15 minutes to use get your gear to fight Dracula. Second castle contains high-value gear. Holy glasses are at Spike Breaker location and all shortcuts / warps are open.",
     "author": [
-      "SacredLucy",
-      "MottZilla",
+      "eigh70",
       "eldri7ch",
-      "DinnerDog",
-      "the_swarm"
+      "MottZilla"
     ],
-    "weight": -2112,
+    "weight": -5001,
     "knowledgeCheck": "None",
     "metaExtension": "Guarded",
-    "metaComplexity": "7",
+    "metaComplexity": "1",
     "itemStats": "Normal",
-    "timeFrame": "Fast",
-    "moddedLevel": "Moderately",
+    "timeFrame": "Very Fast",
+    "moddedLevel": "Heavily",
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Vlads and Portal Spell"
+    "winCondition": "Timed"
   },
 
+  "preventLeaks": false,
   "stats": false,
-  "tournamentMode": true,
+  "colorrandoMode": true,
+  "antiFreezeMode": true,
   "fastwarpMode": true,
   "magicmaxMode": true,
+  "mypurseMode": true,
+  "unlockedMode": true,
+  "noprologueMode": true,
+  "iwsMode": true,
   "shopPriceRandoMode": true,
+  "startRoomRandoMode": true,
+  "dominoMode": true,
+  "immunityPotionMode": true,
+  "godspeedMode": true,
+  
 
   "complexityGoal": {
-    "min": 7,
+    "min": 1,
     "goals": [
-        "Faerie Scroll"
+        "Soul of Bat"
   ]}, 
 
   "placeRelic": [{
     "location": "Trio",
-    "relic": "Cube of Zoe"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
   }, {
     "location": "Force of Echo",
-    "relic": "Holy glasses"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
   }, {
     "location": "Gas Cloud",
-    "relic": "Spirit Orb"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
   }, {
     "location": "Heart of Vlad",
-    "relic": "Holy Symbol"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
   }, {
     "location": "Tooth of Vlad",
-    "relic": "Sword Card"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
   }, {
     "location": "Rib of Vlad",
-    "relic": "Gas Cloud"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
   }, {
     "location": "Ring of Vlad",
-    "relic": "Bat Card"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
   }, {
     "location": "Eye of Vlad",
-    "relic": "Fire of Bat"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
   }, {
     "location": "Dark Blade",
-    "relic": "Ghost Card"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
   }, {
     "location": "Ring of Arcana",
-    "relic": "Force of Echo"
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
+  }, {
+    "location": "Badelaire",
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
+  }, {
+    "location": "Forbidden Library Opal",
+    "relic": [
+      "Cube of Zoe",
+      "Nosedevil Card",
+      "Spirit Orb",
+      "Holy Symbol",
+      "Sword Card",
+      "Gas Cloud",
+      "Bat Card",
+      "Fire of Bat",
+      "Ghost Card",
+      "Force of Echo"
+    ]
+  }, {
+    "location": "Holy glasses",
+    "relic": "Faerie Scroll"
+  }, {
+    "location": "Spike Breaker",
+    "relic": "Holy glasses"
+  }],
+  
+  "replaceRelic": [{
+    "comment": "Replace all C2 relics with boss-ass EQ",
+    "relic": "Cube of Zoe",
+    "item": "Crissaegrim"
+  }, {
+    "relic": "Nosedevil Card",
+    "item": "Alucard shield"
+  }, {
+    "relic": "Spirit Orb",
+    "item": "Masamune"
+  }, {
+    "relic": "Holy Symbol",
+    "item": "Muramasa"
+  }, {
+    "relic": "Sword Card",
+    "item": "Ring of Varda"
+  }, {
+    "relic": "Gas Cloud",
+    "item": "Mablung Sword"
+  }, {
+    "relic": "Bat Card",
+    "item": "Shield rod"
+  }, {
+    "relic": "Fire of Bat",
+    "item": "Vorpal blade"
+  }, {
+    "relic": "Ghost Card",
+    "item": "Yasutsuna"
+  }, {
+    "relic": "Force of Echo",
+    "item": "Duplicator"
+  }, {
+    "relic": "Silver ring",
+    "item": "Opal"
+  }, {
+    "relic": "Gold ring",
+    "item": "Opal"
+  }],
+
+  "blockEquipment": [{
+    "slot": "Right hand",
+    "item": [
+        "Crissaegrim",
+        "Vorpal blade",
+        "Gurthang",
+        "Mablung Sword",
+        "Estoc",
+        "Mourneblade",
+        "Jewel sword",
+        "Short sword",
+        "Tyrfing",
+        "Alucard sword",
+        "Blue knuckles",
+        "Holbein dagger",
+        "Terminus Est",
+        "Runesword"
+      ]
+  }, {
+    "slot": "Left hand",
+    "item": [
+        "Alucard shield",
+        "Medusa shield",
+        "Fire shield",
+        "Iron shield"
+      ]
+  }, {
+    "slot": "Head",
+    "item": [
+        "Beryl circlet",
+        "Dragon helm",
+        "Ruby circlet",
+        "Gold circlet",
+        "Wizard hat"
+      ]
+  }, {
+    "slot": "Body",
+    "item": [
+        "God's Garb",
+        "Mojo mail",
+        "Fury plate",
+        "Alucard mail",
+        "Dark armor",
+        "Cloth tunic",
+        "Hide cuirass",
+        "Dracula tunic",
+        "Diamond plate"
+      ]
+  }, {
+    "slot": "Cloak",
+    "item": [
+        "Twilight cloak",
+        "Royal cloak",
+        "Joseph's cloak"
+      ]
+  }, {
+    "slot": "Other",
+    "item": [
+        "Duplicator",
+        "Ring of Feanor",
+        "Ring of Varda",
+        "Moonstone",
+        "Gauntlet",
+        "King's stone",
+        "Covenant stone",
+        "Ring of Ares",
+        "Nauglamir"
+    ]
+  }],
+
+  "prologueRewards": [{
+    "comment": "If the player does 41-0 heart prologue, they get a free vial stack nuke.", 
+    "item": "Heart Refresh",
+    "replacement": "Monster vial 3"
+  }, {
+    "item": "Neutron bomb",
+    "replacement": "Pentagram"
+  }, {
+    "item": "Potion",
+    "replacement": "Elixir"
   }],
 
   "itemLocations": [{
-    "comment": "Place a Library Card in the Pot Roast wall of Entrance",
-    "zone": "NO3",
-    "item": "Turkey",
-    "replacement": "Library card"
+    "comment": "Place Stopwatch in the Clock Room",
+    "zone": "NO0",
+    "item": "Big heart",
+    "index": 16,
+    "replacement": "Stopwatch"
+  }, {
+    "comment": "Place Stopwatch in the Clock Room",
+    "zone": "NO0",
+    "item": "Big heart",
+    "index": 17,
+    "replacement": "Stopwatch"
   }],
 
-  "enemyDrops": [{
-    "comment": "Make Bone Scimitar drop $700 twice",
-    "enemy": "Bone Scimitar",
-    "items": ["Aquamarine", "Aquamarine"]
+  "blockItems": [{
+    "zone": "*",
+    "item": "*",
+    "replacement": [
+        "Crissaegrim",
+        "Vorpal blade",
+        "Masamune",
+        "Mablung Sword",
+        "Duplicator",
+        "Yasutsuna",
+        "Alucard shield",
+        "Ring of Varda",
+        "Library card",
+        "Muramasa"
+    ]
+  }],
+
+  "blockDrops": [{
+    "enemy": "*",
+    "items": [
+        "Crissaegrim",
+        "Vorpal blade",
+        "Masamune",
+        "Mablung Sword",
+        "Duplicator",
+        "Yasutsuna",
+        "Alucard shield",
+        "Ring of Varda",
+        "Library card",
+        "Muramasa"
+    ]
   }],
 
   "lockLocation": [{
@@ -1063,31 +1371,88 @@
     "value": "0x34020003",
     "comment": "ori v0, 0x0003"
   }, 
+    
+  {
+    "comment": "Write to 8009 RAM addresses,",
+    "type": "word",
+    "value": "0x3c038009",
+    "comment": "lui v1, 0x8009"
+  }, {
+    "comment": "Enable Soul of Bat",
+    "type": "word",
+    "value": "0xa0627964",
+    "comment": "sb v0, 0x7964 (v1)"
+  }, {
+    "comment": "Enable Cube of Zoe",
+    "type": "word",
+    "value": "0xa062796E",
+    "comment": "sb v0, 0x796E (v1)"
+  }, {
+    "comment": "Enable Spirit Orb",
+    "type": "word",
+    "value": "0xa062796F",
+    "comment": "sb v0, 0x796F (v1)"
+  }, {
+    "comment": "Enable Gravity Boots",
+    "type": "word",
+    "value": "0xa0627970",
+    "comment": "sb v0, 0x7970 (v1)"
+  }, {
+    "comment": "Enable Leap Stone",
+    "type": "word",
+    "value": "0xa0627971",
+    "comment": "sb v0, 0x7971 (v1)"
+  }, {
+    "comment": "Enable Jewel of Open",
+    "type": "word",
+    "value": "0xa0627974",
+    "comment": "sb v0, 0x7974 (v1)"
+  }, {
+    "comment": "Enable Eye of Vlad",
+    "type": "word",
+    "value": "0xa0627981",
+    "comment": "sb v0, 0x7981 (v1)"
+  }, {
+    "comment": "Enable Ring of Vlad",
+    "type": "word",
+    "value": "0xa0627980",
+    "comment": "sb v0, 0x7980 (v1)"
+  }, {
+    "comment": "Enable Rib of Vlad",
+    "type": "word",
+    "value": "0xa062797f",
+    "comment": "sb v0, 0x797f (v1)"
+  }, {
+    "comment": "Enable Tooth of Vlad",
+    "type": "word",
+    "value": "0xa062797e",
+    "comment": "sb v0, 0x797e (v1)"
+  }, {
+    "comment": "Enable Heart of Vlad",
+    "type": "word",
+    "value": "0xa062797d",
+    "comment": "sb v0, 0x797d (v1)"
+  }, 
   
   {
     "comment": "Write to 8003 RAM addresses,",
     "type": "word",
     "value": "0x3c038004",
     "comment": "lui v1, 0x8004"
-  }, 
-  
-  {
-    "type": "word",
-    "value": "0x34020063",
-    "comment": "ori v0, 0x0063"
-  }, {
-    "comment": "Saved Richter",
-    "type": "word",
-    "value": "0xa062ca60",
-    "comment": "sb v0, 0xca60 (v1)"
   }, {
     "type": "word",
-    "value": "0x34020001",
-    "comment": "ori v0, 0x0001"
+    "value": "0x3402001F",
+    "comment": "ori v0, 0x001F"
   }, {
+    "comment": "Unlock Normal Teleport Rooms",
     "type": "word",
-    "value": "0xa062BE82",
-    "comment": "sb v0, 0xBE82 (v1)"
+    "value": "0xa062BEBC",
+    "comment": "sb v0, 0xBEBC (v1)"
+  }, {
+    "comment": "Unlock Reverse Teleport Rooms",
+    "type": "word",
+    "value": "0xa062BEBD",
+    "comment": "sb v0, 0xBEBD (v1)"
   }, 
   
   {
@@ -2089,13 +2454,6 @@
   }, 
   
   {
-    "comment": "Keep Softlock Prevention",
-    "address": "0x5642528",
-    "type": "word",
-    "value": "0x00000000"
-  }, 
-  
-  {
     "comment": "Sunstone boosts randomly",
     "address": "0xB4B7C",
     "type": "char",
@@ -2109,5 +2467,935 @@
   }, {
     "type": "char",
     "value": "randomHexChar<0x00-0x0f>"
-  }]
+  }, 
+  
+  {
+    "comment": "Escape Button for Caverns X",
+    "type": "word",
+    "address": "0x48FE92A",
+    "value": "0x009C00D0"
+  }, {
+    "type": "word",
+    "value": "0x2020A02C"
+  }, {
+    "type": "char",
+    "value": "0x8D"
+  }, 
+  
+  {
+    "comment": "Escape Button for Caverns Y",
+    "type": "word",
+    "address": "0x48FD85E",
+    "value": "0x009C00D0"
+  }, {
+    "type": "word",
+    "value": "0x2020A02C"
+  }, {
+    "type": "char",
+    "value": "0x8D"
+  }, 
+  
+  {
+    "comment": "BG Fix for missing candle",
+    "type": "short",
+    "address": "0x4929996",
+    "value": "0x03B9"
+  },
+  
+  {
+    "comment": "Block Drac Exit",
+    "type": "word",
+    "address": "0x56D251C",
+    "value": "0x019E01B2"
+  }, {
+    "type": "word",
+    "value": "0x01B101B2"
+  }, {
+    "type": "word",
+    "value": "0x019E019F"
+  }, {
+    "type": "word",
+    "value": "0x019E01B2"
+  },
+
+  {
+    "comment": "Max attack Muramasa",
+    "type": "word",
+    "address": "0x10D250",
+    "value": "0x3c04000e"
+  }, {
+    "type": "word",
+    "Value": "0x34846000"
+  }, 
+  
+  {
+    "comment": "remove code forcing 0 gold",
+    "type": "word",
+    "address": "0x119B94",
+    "value": "0x00000000"
+  }, 
+
+  {
+    "comment": "Gear Rush Setup Hook",
+    "type": "word",
+    "address": "0x119B6C",
+    "value": "0x34020006"
+  }, {
+    "type": "word",
+    "value": "0x3C018009"
+  }, {
+    "type": "word",
+    "value": "0xAC227BB8"
+  }, {
+    "type": "word",
+    "value": "0xAC227BBC"
+  }, {
+    "type": "word",
+    "value": "0xAC227BC0"
+  }, {
+    "type": "word",
+    "value": "0xAC227BC4"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x080268B1"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, 
+  
+  {
+    "comment": "Count Down Hook",
+    "type": "word",
+    "address": "0x10B17C",
+    "value": "0x0c02682d"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, 
+
+  {
+    "comment": "Gear Rush Execution",
+    "type": "word",
+    "address": "0x37135FC",
+    "value": "0x0C04296F"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x27BDFFE0"
+  }, {
+    "type": "word",
+    "value": "0xAFBF0010"
+  }, {
+    "type": "word",
+    "value": "0x3C098009"
+  }, {
+    "type": "word",
+    "value": "0x352974A0"
+  }, {
+    "type": "word",
+    "value": "0x91260000"
+  }, {
+    "type": "word",
+    "value": "0x34070038"
+  }, {
+    "type": "word",
+    "value": "0x10C70076"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34070028"
+  }, {
+    "type": "word",
+    "value": "0x10C70073"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C04800A"
+  }, {
+    "type": "word",
+    "value": "0x8C84A4D8"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x10800044"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x2484FFFF"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4D8"
+  }, {
+    "type": "word",
+    "value": "0xAD040000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C07800A"
+  }, {
+    "type": "word",
+    "value": "0x8CE7A4E0"
+  }, {
+    "type": "word",
+    "value": "0x3405003C"
+  }, {
+    "type": "word",
+    "value": "0x24E70001"
+  }, {
+    "type": "word",
+    "value": "0x14E50033"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34050259"
+  }, {
+    "type": "word",
+    "value": "0x00852023"
+  }, {
+    "type": "word",
+    "value": "0x04810003"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x0C04D1FE"
+  }, {
+    "type": "word",
+    "value": "0x340406A1"
+  }, {
+    "type": "word",
+    "value": "0x34070000"
+  }, {
+    "type": "word",
+    "value": "0x340F0006"
+  }, {
+    "type": "word",
+    "value": "0x340E000A"
+  }, {
+    "type": "word",
+    "value": "0x3C0A800A"
+  }, {
+    "type": "word",
+    "value": "0x914AA4E4"
+  }, {
+    "type": "word",
+    "value": "0x3C0B800A"
+  }, {
+    "type": "word",
+    "value": "0x916BA4E5"
+  }, {
+    "type": "word",
+    "value": "0x3C0C800A"
+  }, {
+    "type": "word",
+    "value": "0x918CA4E6"
+  }, {
+    "type": "word",
+    "value": "0x3C0D800A"
+  }, {
+    "type": "word",
+    "value": "0x91ADA4E7"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x11A00003"
+  }, {
+    "type": "word",
+    "value": "0x25ADFFFF"
+  }, {
+    "type": "word",
+    "value": "0x08026870"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x340D0009"
+  }, {
+    "type": "word",
+    "value": "0x11800004"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x258CFFFF"
+  }, {
+    "type": "word",
+    "value": "0x08026870"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x340C0005"
+  }, {
+    "type": "word",
+    "value": "0x11600004"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x256BFFFF"
+  }, {
+    "type": "word",
+    "value": "0x08026870"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x340B0009"
+  }, {
+    "type": "word",
+    "value": "0x11400002"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x254AFFFF"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E7"
+  }, {
+    "type": "word",
+    "value": "0x3C098009"
+  }, {
+    "type": "word",
+    "value": "0x3529A4E6"
+  }, {
+    "type": "word",
+    "value": "0xA10D0000"
+  }, {
+    "type": "word",
+    "value": "0xA12C0000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E5"
+  }, {
+    "type": "word",
+    "value": "0x3C098009"
+  }, {
+    "type": "word",
+    "value": "0x3529A4E4"
+  }, {
+    "type": "word",
+    "value": "0xA10B0000"
+  }, {
+    "type": "word",
+    "value": "0xA12A0000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E0"
+  }, {
+    "type": "word",
+    "value": "0xAD070000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x08026890"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C06800A"
+  }, {
+    "type": "word",
+    "value": "0x8CC6A4DC"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34070001"
+  }, {
+    "type": "word",
+    "value": "0x10C70009"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C098009"
+  }, {
+    "type": "word",
+    "value": "0x34040003"
+  }, {
+    "type": "word",
+    "value": "0xA1247973"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4DC"
+  }, {
+    "type": "word",
+    "value": "0x34050001"
+  }, {
+    "type": "word",
+    "value": "0xAD050000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C0A800A"
+  }, {
+    "type": "word",
+    "value": "0x914AA4E4"
+  }, {
+    "type": "word",
+    "value": "0x3C0B800A"
+  }, {
+    "type": "word",
+    "value": "0x916BA4E5"
+  }, {
+    "type": "word",
+    "value": "0x3C06800A"
+  }, {
+    "type": "word",
+    "value": "0x90C6A4E6"
+  }, {
+    "type": "word",
+    "value": "0x3C07800A"
+  }, {
+    "type": "word",
+    "value": "0x90E7A4E7"
+  }, {
+    "type": "word",
+    "value": "0x3402000A"
+  }, {
+    "type": "word",
+    "value": "0x01420019"
+  }, {
+    "type": "word",
+    "value": "0x00002812"
+  }, {
+    "type": "word",
+    "value": "0x00AB2821"
+  }, {
+    "type": "word",
+    "value": "0x3C088002"
+  }, {
+    "type": "word",
+    "value": "0x3508B788"
+  }, {
+    "type": "word",
+    "value": "0xAD000000"
+  }, {
+    "type": "word",
+    "value": "0x3C088002"
+  }, {
+    "type": "word",
+    "value": "0x3508B768"
+  }, {
+    "type": "word",
+    "value": "0x34020070"
+  }, {
+    "type": "word",
+    "value": "0xA5020000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34020017"
+  }, {
+    "type": "word",
+    "value": "0xA5020002"
+  }, {
+    "type": "word",
+    "value": "0x3C048009"
+  }, {
+    "type": "word",
+    "value": "0x3484A4E8"
+  }, {
+    "type": "word",
+    "value": "0x0C004657"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x0C0045BF"
+  }, {
+    "type": "word",
+    "value": "0x2404FFFF"
+  }, {
+    "type": "word",
+    "value": "0x8FBF0010"
+  }, {
+    "type": "word",
+    "value": "0x27BD0020"
+  }, {
+    "type": "word",
+    "value": "0x0803CC4F"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x0F0F0F0F"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x27BDFFE0"
+  }, {
+    "type": "word",
+    "value": "0xAFBF0010"
+  }, {
+    "type": "word",
+    "value": "0x3C098009"
+  }, {
+    "type": "word",
+    "value": "0x352974A0"
+  }, {
+    "type": "word",
+    "value": "0x91260000"
+  }, {
+    "type": "word",
+    "value": "0x3407001F"
+  }, {
+    "type": "word",
+    "value": "0x10C70070"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x35087BF0"
+  }, {
+    "type": "word",
+    "value": "0x3C050000"
+  }, {
+    "type": "word",
+    "value": "0x34A50000"
+  }, {
+    "type": "word",
+    "value": "0xAD050000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x35087B90"
+  }, {
+    "type": "word",
+    "value": "0x8D0A0000"
+  }, {
+    "type": "word",
+    "value": "0x8D0B0004"
+  }, {
+    "type": "word",
+    "value": "0x3C0C736D"
+  }, {
+    "type": "word",
+    "value": "0x358C6169"
+  }, {
+    "type": "word",
+    "value": "0x3C0D6465"
+  }, {
+    "type": "word",
+    "value": "0x35AD6570"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x154C0012"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x156D0010"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4D8"
+  }, {
+    "type": "word",
+    "value": "0x34046270"
+  }, {
+    "type": "word",
+    "value": "0xAD040000"
+  }, {
+    "type": "word",
+    "value": "0x34050007"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E5"
+  }, {
+    "type": "word",
+    "value": "0xA1050000"
+  }, {
+    "type": "word",
+    "value": "0x34050000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E4"
+  }, {
+    "type": "word",
+    "value": "0xA1050000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x08026929"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C0C776F"
+  }, {
+    "type": "word",
+    "value": "0x358C6C73"
+  }, {
+    "type": "word",
+    "value": "0x3C0D656B"
+  }, {
+    "type": "word",
+    "value": "0x35AD6F70"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x154C0017"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x156D0015"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34040049"
+  }, {
+    "type": "word",
+    "value": "0x34050001"
+  }, {
+    "type": "word",
+    "value": "0x0C03F61D"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34040048"
+  }, {
+    "type": "word",
+    "value": "0x34050001"
+  }, {
+    "type": "word",
+    "value": "0x0C03F61D"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4D8"
+  }, {
+    "type": "word",
+    "value": "0x3C040001"
+  }, {
+    "type": "word",
+    "value": "0x34845F90"
+  }, {
+    "type": "word",
+    "value": "0xAD040000"
+  }, {
+    "type": "word",
+    "value": "0x34050002"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E4"
+  }, {
+    "type": "word",
+    "value": "0xA1050000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x08026929"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C0C2D69"
+  }, {
+    "type": "word",
+    "value": "0x358C7467"
+  }, {
+    "type": "word",
+    "value": "0x3C0D6275"
+  }, {
+    "type": "word",
+    "value": "0x35AD6C63"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x154C000B"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x156D0009"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x35087BF0"
+  }, {
+    "type": "word",
+    "value": "0x3C050003"
+  }, {
+    "type": "word",
+    "value": "0x34A5D090"
+  }, {
+    "type": "word",
+    "value": "0xAD050000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x0802691B"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C0C7265"
+  }, {
+    "type": "word",
+    "value": "0x358C7061"
+  }, {
+    "type": "word",
+    "value": "0x3C0D6572"
+  }, {
+    "type": "word",
+    "value": "0x35AD7574"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x154C000B"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x156D0009"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34040049"
+  }, {
+    "type": "word",
+    "value": "0x34050001"
+  }, {
+    "type": "word",
+    "value": "0x0C03F61D"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34040048"
+  }, {
+    "type": "word",
+    "value": "0x34050001"
+  }, {
+    "type": "word",
+    "value": "0x0C03F61D"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4D8"
+  }, {
+    "type": "word",
+    "value": "0x3404D2F0"
+  }, {
+    "type": "word",
+    "value": "0xAD040000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34050005"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E5"
+  }, {
+    "type": "word",
+    "value": "0xA1050000"
+  }, {
+    "type": "word",
+    "value": "0x34050001"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E4"
+  }, {
+    "type": "word",
+    "value": "0xA1050000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x34050000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E7"
+  }, {
+    "type": "word",
+    "value": "0xA1050000"
+  }, {
+    "type": "word",
+    "value": "0x34050000"
+  }, {
+    "type": "word",
+    "value": "0x3C088009"
+  }, {
+    "type": "word",
+    "value": "0x3508A4E6"
+  }, {
+    "type": "word",
+    "value": "0xA1050000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x8FBF0010"
+  }, {
+    "type": "word",
+    "value": "0x27BD0020"
+  }, {
+    "type": "word",
+    "value": "0x0803FF65"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x00000501"
+  }, {
+    "type": "word",
+    "value": "0x454D4954"
+  }, {
+    "type": "word",
+    "value": "0x64322520"
+  }, {
+    "type": "word",
+    "value": "0x2578253A"
+  }, {
+    "type": "word",
+    "value": "0x00000078"
+}]
 }

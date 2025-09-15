@@ -7853,6 +7853,8 @@ function applyBountyHunterTargets(rng,bhmode) {
       offset = data.writeWord(offset,0x34040020)  // mov r4,20h
       offset = data.writeWord(offset,0x3C058009)  // mov r5,80090000h
       offset = data.writeWord(offset,0xACA474A0)  // mov [r5+74a0h],r4
+	  offset = data.writeWord(offset,0xA6000026)  // movh [r16+26h],0
+	  offset = data.writeWord(offset,0xAE000028)  // mov [r16+28h],0
       offset = data.writeWord(offset,0x0806E92B)  // jmp 801BA4ACh
       offset = data.writeWord(offset,0x00000000)  // nop
     }
@@ -8869,6 +8871,14 @@ function applyBountyHunterTargets(rng,bhmode) {
     offset = data.writeWord(offset, 0x8FBF0030)
     offset = data.writeWord(offset, 0x8FB7002C)
     offset = data.writeWord(offset, 0x1800FFD1)
+
+    // Holy Cross Fixes
+    offset = 0x000b1036
+    data.writeChar(offset, 0x82)  // heals hp with orbs
+    offset = 0x000b10d6
+    data.writeChar(offset, 0x82)  // heals hp with orbs
+    offset = 0x000b102a
+    data.writeChar(offset, 0x32)  // costs 50 Hearts
 
     return data
   }

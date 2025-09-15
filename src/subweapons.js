@@ -2,7 +2,7 @@
 
 const subWeapons = [{
 	subWeaName: "None", 
-	isoOffset: 0x0435F0A4, 
+	isoOffset: 0x000B0FD8, 
 	ramOffset: 0x0A4A00, 
 	subWeaAtk: 0, 
 	subWeaHearts: 30000, 
@@ -15,7 +15,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "Dagger", 
-	isoOffset: 0x0435F0B8, 
+	isoOffset: 0x000B0FEC, 
 	ramOffset: 0x0A4A14, 
 	subWeaAtk: 5, 
 	subWeaHearts: 1, 
@@ -28,7 +28,7 @@ const subWeapons = [{
 	subWeaEffect:  0x84}, 
 {
 	subWeaName: "Axe", 
-	isoOffset: 0x0435F0CC, 
+	isoOffset: 0x000B1000, 
 	ramOffset: 0x0A4A28, 
 	subWeaAtk: 10, 
 	subWeaHearts: 4, 
@@ -41,7 +41,7 @@ const subWeapons = [{
 	subWeaEffect:  0x83}, 
 {
 	subWeaName: "Holy Water", 
-	isoOffset: 0x0435F0E0, 
+	isoOffset: 0x000B1014, 
 	ramOffset: 0x0A4A3C, 
 	subWeaAtk: 1, 
 	subWeaHearts: 3, 
@@ -54,7 +54,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "Cross", 
-	isoOffset: 0x0435F0F4, 
+	isoOffset: 0x000B1028, 
 	ramOffset: 0x0A4A50, 
 	subWeaAtk: 5, 
 	subWeaHearts: 100, 
@@ -67,7 +67,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "Bible", 
-	isoOffset: 0x0435F108, 
+	isoOffset: 0x000B103C, 
 	ramOffset: 0x0A4A64, 
 	subWeaAtk: 8, 
 	subWeaHearts: 5, 
@@ -80,7 +80,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "Stopwatch", 
-	isoOffset: 0x0435F11C, 
+	isoOffset: 0x000B1050, 
 	ramOffset: 0x0A4A78, 
 	subWeaAtk: 0, 
 	subWeaHearts: 20, 
@@ -93,7 +93,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "Rebound Stone", 
-	isoOffset: 0x0435F130, 
+	isoOffset: 0x000B1064, 
 	ramOffset: 0x0A4A8C, 
 	subWeaAtk: 8, 
 	subWeaHearts: 2, 
@@ -106,7 +106,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "Vibhuti", 
-	isoOffset: 0x0435F144, 
+	isoOffset: 0x000B1078, 
 	ramOffset: 0x0A4AA0, 
 	subWeaAtk: 8, 
 	subWeaHearts: 3, 
@@ -119,7 +119,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "Agunea", 
-	isoOffset: 0x0435F158, 
+	isoOffset: 0x000B108C, 
 	ramOffset: 0x0A4AB4, 
 	subWeaAtk: 10, 
 	subWeaHearts: 5, 
@@ -132,7 +132,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "Un-Named 1", 
-	isoOffset: 0x0435F16C, 
+	isoOffset: 0x000B10A0, 
 	ramOffset: 0x0A4AC8, 
 	subWeaAtk: 15, 
 	subWeaHearts: 10, 
@@ -145,7 +145,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "(Holy Water Fire)", 
-	isoOffset: 0x0435F180, 
+	isoOffset: 0x000B10B4, 
 	ramOffset: 0x0A4ADC, 
 	subWeaAtk: 8, 
 	subWeaHearts: 1, 
@@ -158,7 +158,7 @@ const subWeapons = [{
 	subWeaEffect:  0x01}, 
 {
 	subWeaName: "(Cross Crosses)", 
-	isoOffset: 0x0435F194, 
+	isoOffset: 0x000B10C8, 
 	ramOffset: 0x0A4AF0, 
 	subWeaAtk: 40, 
 	subWeaHearts: 5, 

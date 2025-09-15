@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map Tool</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="icon" href="images/favicon.ico">
+
+</head>
+
+<body>
+    <header>
+        <h1>Castlevania: Symphony of the Night</h1>
+        <h3>Map Tools</h3>
+    </header>
+    <nav class="navbar">
+        <input type="checkbox" id="checkbox-toggle">
+        <label for="checkbox-toggle" class="menu-btn"></label>
+        <ul class="menu">
+            <li><a href="index.html">Randomizer</i></a></li>
+            <li><a href="faq/index.html">FAQ</a></li>
+            <li><a href="https://ppf.sotn.io">PPF Patcher</a></li>
+            <li><a href="community.html">Leaderboards</a></li>
+            <li><a href="wheel.html">Wheel of Fun</a></li>
+            <li><a href="tips&tricks/index.html">Tips and Tricks<small></small></a>
+                <ul class="submenu">
+                    <li><a href="tips&tricks/generalRando.html">General Randomizer</a></li>
+                    <li><a href="tips&tricks/presetSpecific.html">Preset Specific</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Community & News<small></small></a>
+                <ul class="submenu">
+                    <li><a href="https://discord.com/invite/dzbKhQDjrs">Long Library Discord</a></li>
+                    <li><a href="https://www.symphonyrando.fun">Knowledge Database (sr.f)</a></li>
+                </ul>
+            </li>
+            <li><a>Tools<small></small></a>
+                <ul class="submenu">
+                    <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a>
+                    </li>
+                    <li><a href="https://taliczealot.github.io/#/apps/sotnrandotools">Rando Tools</a></li>
+                    <li><a href="mapcompare.html">Map Tool</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="mapCompare">
+        <h2>200.6% Map Tool</h2>
+
+        <div class="controls">
+            <label>
+                Map Selector
+                <select id="img1Selector">
+                    <option value="" selected>— Choose —</option>
+                    <option value="images/Castle_One.png">Castle 1</option>
+                    <option value="images/Castle_Two.png">Castle 2</option>
+                </select>
+            </label>
+            <label>
+                Your Map
+                <input type="file" id="img2Input" accept="image/*" />
+            </label>
+            <label>
+                Overlay Opacity
+                <input type="range" id="opacitySlider" min="0" max="1" step="0.01" value="0.5" />
+            </label>
+            <button id="cropToggle">Crop Mode</button>
+        </div>
+        <ul id="keyboardControls" style="color: white; list-style: none;">
+            <li>Shift + ↑ — Contract image horizontally</li>
+            <li>Shift + ↓ — Stretch image horizontally</li>
+            <li>Shift + ← — Contract image vertically</li>
+            <li>Shift + → — Stretch image vertically</li>
+            <li>↑ ↓ → ← — Moves image</li>
+        </ul>
+        <canvas id="mainCanvas" width="800" height="600"></canvas>
+    </div>
+
+    <script src="./src/map_comparison.js"></script>
+</body>
+
+</html>

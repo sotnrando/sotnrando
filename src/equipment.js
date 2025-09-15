@@ -6089,7 +6089,7 @@
     equipTypeHex: 0x0003
   }, {
     index: 69, 
-    itemName: "Gold Ring", 
+    itemName: "Gold ring", 
     ramAddr: 0x0A7F98, 
     isoAddr: 0x0B4E40, 
     giveItemR4: 0x48, 
@@ -6114,7 +6114,7 @@
     equipTypeHex: 0x0003
   }, {
     index: 70, 
-    itemName: "Silver Ring", 
+    itemName: "Silver ring", 
     ramAddr: 0x0A7FB8, 
     isoAddr: 0x0B4E60, 
     giveItemR4: 0x49, 
