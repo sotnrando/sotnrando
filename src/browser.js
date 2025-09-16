@@ -21,8 +21,7 @@
     if (!seasonalEvent.toolSplashPhrases) return;
     const splashPhrases = seasonalEvent.toolSplashPhrases;
     const randomSplashIndex = Math.floor(Math.random() * splashPhrases.length);
-    const randomText = splashPhrases[randomSplashIndex];
-    document.getElementById("splashTextDisplay").textContent = randomText;
+    document.getElementById("splashTextDisplay").textContent = splashPhrases[randomSplashIndex];
   }
 
   function cloneItems(items) {                                                              //Saves previous selections
@@ -50,14 +49,15 @@
   function createWorkers(count) {
     const workers = Array(count)
     const url = new URL(window.location.href)
+    let randomizeWorkerString;
     if (url.protocol === 'file:') {
       randomizeWorkerString = randomizeWorker.toString()
       const source = '(' + randomizeWorkerString + ')()'
       for (let i = 0; i < count; i++) {
         workers[i] = new Worker(
-          URL.createObjectURL(new Blob([source], {
-            type: 'text/javascript',
-          }))
+            URL.createObjectURL(new Blob([source], {
+              type: 'text/javascript',
+            }))
         )
       }
     } else {
@@ -117,11 +117,7 @@
   }
 
   function resetCopy() {
-    if (elems.seed.value.length || (currSeed && currSeed.length)) {
-      elems.copy.disabled = false
-    } else {
-      elems.copy.disabled = true
-    }
+    elems.copy.disabled = !(elems.seed.value.length || (currSeed && currSeed.length));
   }
 
   function outputChange(event) {
@@ -160,11 +156,11 @@
     // Fix liner Y position
     linerDisplay.style.backgroundPositionY = "64px";
     // Calculate current position based on the selected options
-    var paletteIndex = paletteSelect.selectedIndex;
-    var linerIndex = linerSelect.selectedIndex;
+    let paletteIndex = paletteSelect.selectedIndex;
+    let linerIndex = linerSelect.selectedIndex;
     paletteDisplay.style.backgroundPositionX = (864 - (paletteIndex * 96)) + "px";
     linerDisplay.style.backgroundPositionX = (768 - (linerIndex * 96)) + "px";
-  };
+  }
 
   updateAlucardPreview();
 
@@ -181,9 +177,9 @@
 
   function updateMapColorPreview() {
     // Calculate current position based on the selected options
-    var mapColorIndex = mapColorSelect.selectedIndex;
+    let mapColorIndex = mapColorSelect.selectedIndex;
     mapColorDisplay.style.backgroundPositionX = (432 - (mapColorIndex * 48)) + "px";
-  };
+  }
 
   mapColorSelect.onclick = function () {
     updateMapColorPreview();
@@ -309,7 +305,7 @@
       return /^[0-9]+(-[0-9]+)?/.test(key) ? key.split("-").shift() : acc;
     }, 1);
 
-    relicLocationsExtensionCache = options.relicLocations && options.relicLocations.extension;
+    let relicLocationsExtensionCache = options.relicLocations && options.relicLocations.extension;
     adjustMaxComplexity();
 
     // Unified logic with disable options merged -crazy4blades
@@ -677,14 +673,12 @@
       for (let i = 0; i < event.dataTransfer.items.length; i++) {
         const item = event.dataTransfer.items[i]
         if (item.kind === 'file') {
-          const file = item.getAsFile()
-          selectedFile = file
+          selectedFile = item.getAsFile()
         }
       }
     } else {
       for (let i = 0; i < event.dataTransfer.files.length; i++) {
-        const file = event.dataTransfer.files[i]
-        selectedFile = file
+        selectedFile = event.dataTransfer.files[i]
       }
     }
     resetTarget(true)
@@ -747,7 +741,7 @@
           goals = relicLocations[key]
           delete relicLocations[key]
         } else {
-          const location = sotnRando.extension.filter(function (location) {
+          sotnRando.extension.filter(function (location) {
             if (location.name === key) {
               if (extensions.indexOf(location.extension) === -1) {
                 delete relicLocations[key]
@@ -841,7 +835,7 @@
     if (elems.bossMusicSeparation.checked) {
       options.bossMusicSeparation = true
     }
-    if (elems.mapColor != 'normal') {
+    if (elems.mapColor !== 'normal') {
       switch (elems.mapColor.value) {
         case 'normal':
           break
@@ -876,7 +870,7 @@
           break
       }
     }
-    if (elems.newGoals.value != 'default') {
+    if (elems.newGoals.value !== 'default') {
       switch (elems.newGoals.value) {
         case 'allBoss':
           newGoalsSet = 'b'
@@ -906,7 +900,8 @@
           break
       }
     }
-    if (elems.alucardPalette != 'default') {
+
+    if (elems.alucardPalette !== 'default') {
       switch (elems.alucardPalette.value) {
         case 'default':
           break
@@ -938,7 +933,7 @@
       }
 
     }
-    if (elems.alucardLiner != 'default') {
+    if (elems.alucardLiner !== 'default') {
       switch (elems.alucardLiner.value) {
         case 'gold':
           alucardLinerSet = 'z'
@@ -962,8 +957,8 @@
   }
 
   function generateSeedName() {
-    let adjectives = [];
-    let nouns = [];
+    let adjectives;
+    let nouns;
 
     let month = new Date().getMonth() + 1;
 
@@ -992,9 +987,7 @@
 
     let suffix = '';
 
-    let seedName = adjective + noun + number + suffix;
-
-    return seedName;
+    return adjective + noun + number + suffix;
   }
 
   function deleteOriginalComplexity(options, newComplexity) {
@@ -1011,7 +1004,7 @@
 
   function submitListener(event) {
     // Get seed.
-    let selectedPreset = null
+    let selectedPreset
     if (isAprilFools) {
       elems.presetId.value = "april-fools";
       presetIdChange();
@@ -1309,7 +1302,7 @@
         if (options.bossMusicSeparation || applied.bossMusicSeparation) {
         }
         // Apply map color patches.
-        if (mapColorLock != 'normal') {
+        if (mapColorLock !== 'normal') {
           switch (mapColorLock) {
             case 'normal':
               break
@@ -1354,7 +1347,7 @@
           }
         }
         // Apply new goals patches.
-        if (newGoalsLock != 'default') {
+        if (newGoalsLock !== 'default') {
           switch (newGoalsLock) {
             case 'default':
               break
@@ -1393,7 +1386,7 @@
           }
         }
         // Apply Alucard's palette.
-        if (alucardPaletteLock != 'default') {
+        if (alucardPaletteLock !== 'default') {
           switch (alucardPaletteLock) {
             case 'default':
               break
@@ -1433,7 +1426,7 @@
         }
 
         //Apply Alucard's Liner
-        if (alucardLinerLock != 'default') {
+        if (alucardLinerLock !== 'default') {
           switch (alucardLinerLock) {
             case 'gold':
               alColL = 'z'
@@ -1651,10 +1644,6 @@
     elems.older.classList.remove('hidden')
   }
 
-  function hideSpoilers() {
-    elems.spoilersContainer.classList.add('hide')
-  }
-
   function showExcludeMenu() {
     elems.excludeSongsMenu.hidden = !elems.excludeSongsOption.checked;
     localStorage.setItem('excludeSongsOption', elems.excludeSongsOption.checked)
@@ -1679,7 +1668,6 @@
     const storedExcludedSongs = localStorage.getItem('excludedSongsList');
     if (storedExcludedSongs) {
       const includeList = document.getElementById("includeList");
-      const excludeList = document.getElementById('excludeList');
       for (const option of includeList.options) {
         option.selected = storedExcludedSongs.includes(option.text);
       }
@@ -1720,7 +1708,6 @@
   function loadEventLogo(seasonalEvent) {
     if (seasonalEvent.eventLogo) {
       elems.logo.src = seasonalEvent.eventLogo;
-      return;
     }
   }
 
@@ -1882,12 +1869,8 @@
       elems.presetId.selectedIndex = 0
     }
     presetChange()
-    if (options.tournamentMode) {
-      elems.tournamentMode.checked = true
-    } else {
-      elems.tournamentMode.checked = false
-    }
-    tournamentModeChange()
+    elems.tournamentMode.checked = options.tournamentMode;
+    ChangeHandlers.tournamentModeChange()
     elems.tournamentMode.disabled = true
     let locations
     if (typeof (applied.relicLocations) === 'object') {
@@ -2051,10 +2034,6 @@
     }
     presetIdChange()
     loadOption('preset', presetChange, true)
-  }
-  let path = url.pathname
-  if (path.match(/index\.html$/)) {
-    path = path.slice(0, path.length - 10)
   }
   if (isDev) {
     document.body.classList.add('dev')

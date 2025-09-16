@@ -15,7 +15,7 @@ BrowserUtils.doApiRequest = async function doApiRequest(reqPath, method, body) {
             body: JSON.stringify(body)
         });
         if (!response.ok) {
-            console.log(`Error reaching path ${path}.`)
+            console.log(`Error reaching path ${reqPath}.`)
         }
         data = await response.json();
     } catch (error) {
@@ -89,6 +89,10 @@ BrowserUtils.showSpoilers = function showSpoilers() {
     }
 }
 
+BrowserUtils.hideSpoilers = function hideSpoilers() {
+    elems.spoilersContainer.classList.add('hide')
+}
+
 //#region Change Handlers
 BrowserUtils.ChangeHandlers = {
     tournamentModeChange: function tournamentModeChange() {
@@ -134,7 +138,6 @@ BrowserUtils.ChangeHandlers = {
             elems.showRelics.disabled = true
             elems.showSolutions.checked = false
             elems.showSolutions.disabled = true
-
         }
     },
     showRelicsChange: function showRelicsChange() {
