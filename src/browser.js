@@ -1490,7 +1490,7 @@
         const duration = new Date().getTime() - start
         // console.log('Seed generation took ' + (duration / 1000) + 's')
         if (selectedPreset !== null) {
-          doApiRequest(apiUrl, "/data/presets", "POST", {
+          doApiRequest("/data/presets", "POST", {
             "preset": selectedPreset,
             "generation_time": duration,
             "app": isDev ? "dev-web" : "web",
