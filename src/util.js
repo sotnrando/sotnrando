@@ -6840,6 +6840,7 @@ function hexValueToDamageString(hexValue) {
     offset = data.writeWord(offset,0x0803ff6c)
     offset = data.writeWord(offset,0x00000000)
 
+	data.writeChar(0xAE663, 0x02)
 	data.writeChar(0xAE664, 0x00)	// Change Room
 
     return data
