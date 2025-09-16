@@ -27,7 +27,7 @@
               <span class="tooltip-indicator">?</span>
               <span class="tooltip hidden">
                 <span>
-                  <input id="dev-stash" type="checkbox">
+                  <input id="dev-stash" type="checkbox" data-store-checkbox="false">
                   <label for="dev-stash">Dev's Stash</label>
                 </span>
               </span>
@@ -198,7 +198,7 @@
                   </div>
                   <fieldset id="relic-locations-set">
                     <legend>
-                      <input id="relic-locations" type="checkbox">
+                      <input id="relic-locations" type="checkbox" data-store-checkbox="true" data-custom-change="relicLocationsChange">
                       <label for="relic-locations">Relic locations</label>
                     </legend>
                     <div class="relic-location">
@@ -363,7 +363,7 @@
                     </span>
                   </div>
                   <div>
-                    <input id="append-seed" type="checkbox">
+                    <input id="append-seed" type="checkbox" data-store-checkbox="true">
                     <label for="append-seed">Append seed to filename
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -378,7 +378,7 @@
                     </label>
                   </div> 
                   <div>
-                    <input id="tournament-mode" type="checkbox">
+                    <input id="tournament-mode" type="checkbox" data-store-checkbox="true" data-custom-change="tournamentModeChange">
                     <label for="tournament-mode">Tournament Mode
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -394,7 +394,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="accessibility-patches" type="checkbox">
+                    <input id="accessibility-patches" type="checkbox" data-store-checkbox="true">
                     <label for="accessibility-patches">Accessibility Patches
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -408,7 +408,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="simple-input" type="checkbox">
+                    <input id="simple-input" type="checkbox" data-store-checkbox="false">
                     <label for="simple-input">Simplified Inputs
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -421,27 +421,27 @@
                     </label>
                   </div>
                   <div >
-                    <input id="show-spoilers" type="checkbox">
+                    <input id="show-spoilers" type="checkbox" data-store-checkbox="true" data-custom-change="spoilersChange">
                     <label for="show-spoilers">Show Spoilers</label>
                   </div>
                   <div >
-                    <input id="show-relics" type="checkbox">
+                    <input id="show-relics" type="checkbox" data-store-checkbox="false" data-custom-change="showRelicsChange">
                     <label for="show-relics">Show Relic Locations</label>
                   </div>
                   <div>
-                    <input id="show-solutions" type="checkbox">
+                    <input id="show-solutions" type="checkbox" data-store-checkbox="false" data-custom-change="showSolutionsChange">
                     <label for="show-solutions">Show solutions</label>
                   </div>
                   <div >
-                    <input id="enemy-drops" type="checkbox">
+                    <input id="enemy-drops" type="checkbox" data-store-checkbox="true">
                     <label for="enemy-drops">Enemy Drops</label>
                   </div>
                   <div >
-                    <input id="stats" type="checkbox">
+                    <input id="stats" type="checkbox" data-store-checkbox="true" data-custom-change="statsChange">
                     <label for="stats">Item Stats</label>
                   </div>
                   <div>
-                    <input id="itemnamerando-mode" type="checkbox">
+                    <input id="itemnamerando-mode" type="checkbox" data-store-checkbox="false" data-custom-change="itemNameRandoModeChange">
                     <label for="itemnamerando-mode">Item Names
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -454,7 +454,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="turkey-mode" type="checkbox">
+                    <input id="turkey-mode" type="checkbox" data-store-checkbox="true">
                     <label for="turkey-mode">Turkey Mode
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -468,19 +468,19 @@
                     </label>
                   </div>
                   <div>
-                    <input id="item-locations" type="checkbox">
+                    <input id="item-locations" type="checkbox" data-store-checkbox="true">
                     <label for="item-locations">Item locations</label>
                   </div>
                   <div>
-                    <input id="starting-equipment" type="checkbox" disabled>
+                    <input id="starting-equipment" type="checkbox" disabled data-store-checkbox="true">
                     <label for="starting-equipment">Starting Equipment</label>
                   </div>
                   <div>
-                    <input id="prologue-rewards" type="checkbox">
+                    <input id="prologue-rewards" type="checkbox" data-store-checkbox="true">
                     <label for="prologue-rewards">Prologue Rewards</label>
                   </div>
                   <div>
-                    <input id="seasonal-phrases" type="checkbox">
+                    <input id="seasonal-phrases" type="checkbox" data-store-checkbox="true">
                     <label for="seasonal-phrases">Seasonal Splash Phrases
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -508,7 +508,7 @@
                     </select>                  
                   </div>
                   <div>
-                    <input id="colorrando-mode" type="checkbox">
+                    <input id="colorrando-mode" type="checkbox" data-store-checkbox="false">
                     <label for="colorrando-mode">Color Randomizer
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -522,7 +522,7 @@
                     </label>
                   </div>               
                   <div>
-                    <input id="magicmax-mode" type="checkbox">
+                    <input id="magicmax-mode" type="checkbox" data-store-checkbox="false">
                     <label for="magicmax-mode">Magic Vessels
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -535,7 +535,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="antifreeze-mode" type="checkbox">
+                    <input id="antifreeze-mode" type="checkbox" data-store-checkbox="false">
                     <label for="antifreeze-mode">Anti-Freeze
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -549,7 +549,7 @@
                     </label>
                   </div>
                   <div >
-                    <input id="mypurse-mode" type="checkbox">
+                    <input id="mypurse-mode" type="checkbox" data-store-checkbox="false">
                     <label for="mypurse-mode">That's my purse!
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -562,7 +562,7 @@
                     </label>
                   </div>
                   <div >
-                    <input id="iws-mode" type="checkbox">
+                    <input id="iws-mode" type="checkbox" data-store-checkbox="false">
                     <label for="iws-mode">Infinite Wing Smash
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -575,7 +575,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="fastwarp-mode" type="checkbox">
+                    <input id="fastwarp-mode" type="checkbox" data-store-checkbox="false">
                     <label for="fastwarp-mode">Fast Warps
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -588,7 +588,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="noprologue-mode" type="checkbox">
+                    <input id="noprologue-mode" type="checkbox" data-store-checkbox="false">
                     <label for="noprologue-mode">Remove Prologue
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -602,7 +602,7 @@
                     </label>
                   </div>
                   <div >
-                    <input id="unlocked-mode" type="checkbox">
+                    <input id="unlocked-mode" type="checkbox" data-store-checkbox="false">
                     <label for="unlocked-mode">Unlocked Mode
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -617,7 +617,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="surprise-mode" type="checkbox">
+                    <input id="surprise-mode" type="checkbox" data-store-checkbox="false">
                     <label for="surprise-mode">Relic Surprise!
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -632,7 +632,7 @@
                     </label>
                   </div>
                   <div >
-                    <input id="enemyStatRando-mode" type="checkbox">
+                    <input id="enemyStatRando-mode" type="checkbox" data-store-checkbox="false" data-custom-change="enemyStatRandoModeChange">
                     <label for="enemyStatRando-mode">Enemy Stats
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -647,7 +647,7 @@
                     </label>
                   </div>                
                   <div>     
-                    <input id="elem-chaos" type="checkbox">
+                    <input id="elem-chaos" type="checkbox" data-custom-change="elemChaosModeChange">
                     <label for="elem-chaos">Elemental Chaos
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -660,7 +660,7 @@
                     </label>
                   </div>                
                   <div>
-                    <input id="shopPriceRando-mode" type="checkbox">
+                    <input id="shopPriceRando-mode" type="checkbox" data-store-checkbox="false">
                     <label for="shopPriceRando-mode">Shop Prices
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -675,7 +675,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="startRoomRando-mode" type="checkbox">
+                    <input id="startRoomRando-mode" type="checkbox" data-store-checkbox="false">
                     <label for="startRoomRando-mode">Starting Zone 1st Castle
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -690,7 +690,7 @@
                     </label>
                   </div>
                 <div>
-                    <input id="startRoomRando2nd-mode" type="checkbox">
+                    <input id="startRoomRando2nd-mode" type="checkbox" data-store-checkbox="false">
                     <label for="startRoomRando2nd-mode">Starting Zone 2nd Castle
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -706,7 +706,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="domino-mode" type="checkbox">
+                    <input id="domino-mode" type="checkbox" data-store-checkbox="false">
                     <label for="domino-mode">Guaranteed Drops
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -721,7 +721,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="rlbc-mode" type="checkbox">
+                    <input id="rlbc-mode" type="checkbox" data-store-checkbox="false">
                     <label for="rlbc-mode">Reverse Library Card
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -736,7 +736,7 @@
                     </label>
                   </div>
                   <div>     
-                    <input id="immunity-potion-mode" type="checkbox">
+                    <input id="immunity-potion-mode" type="checkbox" data-store-checkbox="false">
                     <label for="immunity-potion-mode">Immunity Potions
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -751,7 +751,7 @@
                     </label>
                   </div>
                   <div>     
-                    <input id="godspeed-mode" type="checkbox">
+                    <input id="godspeed-mode" type="checkbox" data-store-checkbox="false">
                     <label for="godspeed-mode">Godspeed Shoes
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -764,7 +764,7 @@
                     </label>
                   </div>
                   <div>
-                    <input id="library-shortcut" type="checkbox">
+                    <input id="library-shortcut" type="checkbox" data-store-checkbox="false">
                     <label for="library-shortcut">Library Shortcut
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
@@ -827,11 +827,11 @@
                   <div id="alucardPaletteDisplay" style="width:96px; height:64px; background: url(https://i81.servimg.com/u/f81/20/40/06/51/alucar11.png);"></div>
                 </div>
                 <div>
-                  <input id="music" type="checkbox">
+                  <input id="music" type="checkbox" data-store-checkbox="true">
                   <label for="music">Music Randomizer</label>
                 </div>
                 <div>     
-                  <input id="boss-music-separation" type="checkbox">
+                  <input id="boss-music-separation" type="checkbox" data-store-checkbox="true">
                   <label for="boss-music-separation">Separate Boss Music
                     <span class="tooltip-wrapper">
                       <span class="tooltip-indicator">?</span>
@@ -1738,6 +1738,8 @@
     <script src="build/presets/gear-rush.js"></script>
     <script src="build/presets/index.js"></script>
     <script src="src/worker.js"></script>
+    <script src="src/browser_utils.js"></script>
+    <script src="src/browser_constants.js"></script>
     <script src="src/browser.js"></script>
   </body>
 </html>
