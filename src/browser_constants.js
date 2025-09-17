@@ -1,5 +1,5 @@
 
-window.BrowserConstants = window.BrowserUtils || {};
+window.BrowserConstants = window.BrowserConstants || {};
 
 BrowserConstants.paletteSelect = elemByQuery('alucardPalette');
 BrowserConstants.linerSelect = elemByQuery('alucardLiner');

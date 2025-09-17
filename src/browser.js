@@ -1,13 +1,14 @@
 
 (function (window) {
   //#region Constants & General Variables
-
+  const url = new URL(window.location.href)
   let currSeed
   let checksum
   let expectChecksum
   let haveChecksum
   let downloadReady
   let selectedFile
+  window.selectedFile = selectedFile
   let version
   let mapColorLock
   let newGoalsLock
@@ -36,47 +37,6 @@
   }
 
   const items = cloneItems(sotnRando.items)
-
-  function workerCount() {
-    const cores = navigator.hardwareConcurrency
-    const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    if (isFirefox) {
-      return Math.max(Math.floor(cores / 2), 1)
-    }
-    return sotnRando.util.workerCountFromCores(cores)
-  }
-
-  function createWorkers(count) {
-    const workers = Array(count)
-    const url = new URL(window.location.href)
-    let randomizeWorkerString;
-    if (url.protocol === 'file:') {
-      randomizeWorkerString = randomizeWorker.toString()
-      const source = '(' + randomizeWorkerString + ')()'
-      for (let i = 0; i < count; i++) {
-        workers[i] = new Worker(
-            URL.createObjectURL(new Blob([source], {
-              type: 'text/javascript',
-            }))
-        )
-      }
-    } else {
-      for (let i = 0; i < count; i++) {
-        workers[i] = new Worker('src/worker.js')
-      }
-    }
-    return workers
-  }
-
-  function getUrl() {
-    const url = new URL(window.location.href)
-    if (url.protocol === 'file:') {
-      return 'file://'
-        + window.location.pathname.split('/').slice(0, -1).join('/') + '/'
-    } else {
-      return window.location.protocol + '//' + window.location.host + '/'
-    }
-  }
 
   function disableDownload() {
     downloadReady = false
@@ -685,16 +645,6 @@
     elems.file.style.display = 'none'
   }
 
-  function randomizedFilename(filename, seed) {
-    const lastPeriodIdx = filename.lastIndexOf('.')
-    const insertIdx = lastPeriodIdx === -1 ? filename.length : lastPeriodIdx
-    return [
-      filename.slice(0, insertIdx),
-      ' (' + seed + ')',
-      filename.slice(insertIdx),
-    ].join('')
-  }
-
   function getFormRelicLocations() {
     if (!elems.relicLocations.checked) {
       return false
@@ -1059,488 +1009,50 @@
     function restoreItems() {
       sotnRando.items = cloneItems(items)
     }
-    function randomize() {                                                                        // This is the main function of the randomizer website
-      const check = new sotnRando.util.checked(this.result)
-      // Save handle to file data.
-      const file = this.result
-      const threads = workerCount()
-      const start = new Date().getTime()
-      // Randomize stats.
-      const rng = new Math.seedrandom(sotnRando.util.saltSeed(
-        version,
+    CoreRandomizer.randomize(
         options,
         seed,
-        0,
-      ))
-      applied.stats = elems.stats.checked
-
-      if (applied.startingEquipment == null || typeof (applied.startingEquipment) != 'object') {
-        applied.startingEquipment = elems.startingEquipment.checked
-      }
-      if (applied.prologueRewards == null || typeof (applied.prologueRewards) != 'object') {
-        applied.prologueRewards = elems.prologueRewards.checked
-      }
-      if (applied.itemLocations == null || typeof (applied.itemLocations) != 'object') {
-        applied.itemLocations = elems.itemLocations.checked
-      }
-      if (applied.enemyDrops == null || typeof (applied.enemyDrops) != 'object') {
-        applied.enemyDrops = elems.enemyDrops.checked
-      }
-      applied.music = elems.music.checked
-      applied.turkeyMode = elems.turkeyMode.checked
-      const result = sotnRando.randomizeStats(rng, applied)
-      const newNames = result.newNames
-      check.apply(result.data)
-      // Randomize relics.
-      let selectedPreset = null
-      selectedPreset = elems.presetId.childNodes[elems.presetId.selectedIndex].value
-      sotnRando.util.selectedPreset = selectedPreset
-
-      return sotnRando.util.randomizeRelics(
-        version,
-        applied,
-        options,
-        seed,
-        newNames,
-        createWorkers(threads),
-        4,
-        getUrl(),
-      ).then(function (result) {
-        sotnRando.util.mergeInfo(info, result.info)
-        const rng = new Math.seedrandom(sotnRando.util.saltSeed(
-          version,
-          options,
-          seed,
-          1,
-        ))
-        result = sotnRando.randomizeRelics.writeRelics(
-          rng,
-          applied,
-          result,
-          newNames,
-        )
-        check.apply(result.data)
-        return sotnRando.util.randomizeItems(
-          version,
-          applied,
-          options,
-          seed,
-          createWorkers(1)[0],
-          2,
-          result.items,
-          newNames,
-          getUrl(),
-        )
-      }).then(function (result) {
-        check.apply(result.data)
-        sotnRando.util.mergeInfo(info, result.info)
-        const rng = new Math.seedrandom(sotnRando.util.saltSeed(
-          version,
-          options,
-          seed,
-          3,
-        ))
-        if (elems.excludeSongsOption.checked) {
-          applied.excludesongs = Array.from(elems.excludeList.options).map(option => option.value);
+        elems.newGoals.value,
+        elems.godspeedMode.checked,
+        elems.mapColor.value,
+        elems.alucardPalette.value,
+        elems.alucardLiner.value,
+        elems.accessibilityPatches.checked,
+        haveChecksum,
+        expectChecksum,
+        false,
+        showSpoilers,
+        null,
+        null,
+        fileOutputHandler,
+        null,
+        this.result
+    ).then(function(){
+      const duration = new Date().getTime() - start
+      doApiRequest("/data/presets", "POST", {
+        "preset": selectedPreset,
+        "generation_time": duration,
+        "app": CoreRandomizer.isDev(url) ? "dev-web" : "web",
+        "settings": {
+          "tournament": elems.tournamentMode.checked,
+          "color_rando": elems.colorrandoMode.checked,
+          "magic_max": elems.magicmaxMode.checked,
+          "anti_freeze": elems.antiFreezeMode.checked,
+          "purse_mode": elems.mypurseMode.checked,
+          "infinite_wing_smash": elems.iwsMode.checked,
+          "fast_warp": elems.fastwarpMode.checked,
+          "no_prologue": elems.noprologueMode.checked,
+          "unlocked": elems.unlockedMode.checked,
+          "surprise": elems.surpriseMode.checked,
+          "enemy_stat": elems.enemyStatRandoMode.checked,
+          "relic_extension": null
         }
-        check.apply(sotnRando.randomizeMusic(rng, applied))
-        // Initiate the write options function master
-        let optWrite = 0x00000000                   // This variable lets the ASM used in the Master Function know if it needs to run certain code or sets flags for the tracker to use
-        let nGoal                                                                           //begin the newGoals flag setting for the function master
-        let elementSet = elems.newGoals.value
-        // console.log('elem set ' + elementSet + '; opt ' + options.newGoals + '; appl ' + applied.newGoals)
-        if (elementSet !== "default" || options.newGoals || applied.newGoals) {   // Sets flag for the tracker to know which goals to use
-          if (elementSet !== "default") {
-            switch (elementSet) {
-              case "allBoss":                         // all bosses flag
-                nGoal = "b"
-                break
-              case "allRelic":                        // all relics flag
-                nGoal = "r"
-                break
-              case "abrsr":                           //  all bosses and relics flag
-                nGoal = "a"
-                break
-              case "vladBoss":                        //  all bosses and vlads flag
-                nGoal = "v"
-                break
-              case "bhNorm":                          //  Bounty Hunter flag
-                nGoal = "h"
-                break
-              case "bhAdvanced":                      //  Target Confirmed flag
-                nGoal = "t"
-                break
-              case "bhHitman":                        //  Hitman flag
-                nGoal = "w"
-                break
-              case "bhBoss":                          //  all bosses and BH flag
-                nGoal = "x"
-                break
-            }
-          } else if (options.newGoals !== undefined) {
-            nGoal = options.newGoals
-          } else if (applied.newGoals !== undefined) {
-            nGoal = applied.newGoals
-          }
-          switch (nGoal) {
-            case "b":                                 // all bosses flag
-              optWrite = optWrite + 0x01
-              break
-            case "r":                                 // all relics flag
-              optWrite = optWrite + 0x02
-              break
-            case "a":                                 //  all bosses and relics flag
-              optWrite = optWrite + 0x03
-              break
-            case "v":                                 //  all bosses and vlad relics flag
-            case "x":                                 //  all bosses and bounties flag
-              optWrite = optWrite + 0x05
-              break
-            default:
-              optWrite = optWrite + 0x00
-          }
-        }
-        // Apply godspeed shoes patches.
-        // console.log('godspeed option: ' + options.godspeedMode + '; godspeed applied: ' + applied.godspeedMode)
-        if (options.godspeedMode || applied.godspeedMode) {
-          // console.log('godspeed enabled')
-          optWrite = optWrite + 0x80000000
-        }
-        check.apply(sotnRando.util.randoFuncMaster(optWrite))
-
-        // console.log('Seasonal mode ' + elems.seasonalPhrasesMode.checked)
-        check.apply(sotnRando.util.applySplashText(rng, elems.seasonalPhrasesMode.checked))
-
-        // Apply tournament mode patches.
-        if (options.tournamentMode) {
-          check.apply(sotnRando.util.applyTournamentModePatches())
-        }
-        // Apply magic max patches.
-        if (options.magicmaxMode || applied.magicmaxMode) {
-          check.apply(sotnRando.util.applyMagicMaxPatches())
-        }
-        // Apply anti-freeze patches.
-        if (options.antiFreezeMode || applied.antiFreezeMode) {
-          check.apply(sotnRando.util.applyAntiFreezePatches())
-        }
-        // Apply my purse patches.
-        if (options.mypurseMode || applied.mypurseMode) {
-          check.apply(sotnRando.util.applyMyPursePatches())
-        }
-        // Apply iws patches.
-        if (options.iwsMode || applied.iwsMode) {
-          check.apply(sotnRando.util.applyiwsPatches())
-        }
-        // Apply fast warp patches.
-        if (options.fastwarpMode || applied.fastwarpMode) {
-          check.apply(sotnRando.util.applyfastwarpPatches())
-        }
-        // Apply no prologue patches.
-        if (options.noprologueMode || applied.noprologueMode) {
-          check.apply(sotnRando.util.applynoprologuePatches())
-        }
-        // Apply unlocked patches.
-        if (options.unlockedMode || applied.unlockedMode) {
-          check.apply(sotnRando.util.applyunlockedPatches())
-        }
-        // Apply surprise patches.
-        if (options.surpriseMode || applied.surpriseMode) {
-          check.apply(sotnRando.util.applysurprisePatches())
-        }
-        // Apply enemy stat rando patches.
-        if (options.enemyStatRandoMode || applied.enemyStatRandoMode) {
-          let chaosFlag = false
-          if (options.elemChaosMode || applied.elemChaosMode) {
-            chaosFlag = true
-          }
-          check.apply(sotnRando.util.applyenemyStatRandoPatches(rng, chaosFlag))
-        }
-        // Apply shop price rando patches.
-        if (options.shopPriceRandoMode || applied.shopPriceRandoMode) {
-          check.apply(sotnRando.util.applyShopPriceRandoPatches(rng))
-        }
-        // Apply starting room rando patches.
-        if (options.startRoomRandoMode || applied.startRoomRandoMode || options.startRoomRando2ndMode || applied.startRoomRando2ndMode) {
-          let castleFlag = 0x00
-          if (options.startRoomRandoMode || applied.startRoomRandoMode) {
-            castleFlag = castleFlag + 0x01
-          }
-          if (options.startRoomRando2ndMode || applied.startRoomRando2ndMode) {
-            castleFlag = castleFlag + 0x10
-          }
-          check.apply(sotnRando.util.applyStartRoomRandoPatches(rng, castleFlag))
-        }
-        // Apply guaranteed drop patches.
-        if (options.dominoMode || applied.dominoMode) {
-          check.apply(sotnRando.util.applyDominoPatches(rng))
-        }
-        // Apply reverse library card patches.
-        if (options.rlbcMode || applied.rlbcMode) {
-          check.apply(sotnRando.util.applyRLBCPatches())
-        }
-        // Apply Resist potion patches. todo: Give own toggle option.
-        if (options.immunityPotionMode || applied.immunityPotionMode) {
-          check.apply(sotnRando.util.applyResistToImmunePotionsPatches())
-        }
-        // Apply library shortcut patches.
-        if (options.libraryShortcut || applied.libraryShortcut) {
-          check.apply(sotnRando.util.applyLibraryShortcutPatches())
-        }
-        // Apply elemental chaos patches.
-        if (options.elemChaosMode || applied.elemChaosMode) {
-          check.apply(sotnRando.util.applyElemChaosPatches(rng))
-        }
-        // Apply simple input patches.
-        if (options.simpleInputMode || applied.simpleInputMode) {
-          check.apply(sotnRando.util.applySimpleInputPatches())
-        }
-        // Apply dev stash patches.
-        if (options.devStashMode || applied.devStashMode) {
-          check.apply(sotnRando.util.applyDevsStashPatches())
-        }
-        // No patches to apply for Boss Music Separator
-        if (options.bossMusicSeparation || applied.bossMusicSeparation) {
-        }
-        // Apply map color patches.
-        if (mapColorLock !== 'normal') {
-          switch (mapColorLock) {
-            case 'normal':
-              break
-            case 'blue':
-              mapcol = 'u'
-              check.apply(sotnRando.util.applyMapColor(mapcol))
-              break
-            case 'green':
-              mapcol = 'g'
-              check.apply(sotnRando.util.applyMapColor(mapcol))
-              break
-            case 'red':
-              mapcol = 'r'
-              check.apply(sotnRando.util.applyMapColor(mapcol))
-              break
-            case 'brown':
-              mapcol = 'n'
-              check.apply(sotnRando.util.applyMapColor(mapcol))
-              break
-            case 'purple':
-              mapcol = 'p'
-              check.apply(sotnRando.util.applyMapColor(mapcol))
-              break
-            case 'grey':
-              mapcol = 'y'
-              check.apply(sotnRando.util.applyMapColor(mapcol))
-              break
-            case 'pink':
-              mapcol = 'k'
-              check.apply(sotnRando.util.applyMapColor(mapcol))
-              break
-            case 'black':
-              mapcol = 'b'
-              check.apply(sotnRando.util.applyMapColor(mapcol))
-              break
-            case 'invis':
-              mapcol = 'i'
-              check.apply(sotnRando.util.applyMapColor(mapcol))
-              break
-            default:
-              break
-          }
-        }
-        // Apply new goals patches.
-        if (newGoalsLock !== 'default') {
-          switch (newGoalsLock) {
-            case 'default':
-              break
-            case 'allBoss':
-              nGoal = 'b'
-              check.apply(sotnRando.util.applyNewGoals(nGoal))
-              break
-            case 'allRelic':
-              nGoal = 'r'
-              check.apply(sotnRando.util.applyNewGoals(nGoal))
-              break
-            case 'abrsr':
-              nGoal = 'a'
-              check.apply(sotnRando.util.applyNewGoals(nGoal))
-              break
-            case 'vladBoss':
-              nGoal = 'v'
-              check.apply(sotnRando.util.applyNewGoals(nGoal))
-              break
-            case 'bhNorm':
-              check.apply(sotnRando.util.applyBountyHunterTargets(rng, 0))                 // 0 = normal Bounty Hunter; 1 = buffed drop rates and guaranteed relics after card obtained
-              break
-            case 'bhAdvanced':
-              check.apply(sotnRando.util.applyBountyHunterTargets(rng, 2))                 // 0 = normal Bounty Hunter; 1 = buffed drop rates and guaranteed relics after card obtained
-              break
-            case "bhHitman":
-              check.apply(sotnRando.util.applyBountyHunterTargets(rng, 1))                 // 0 = normal Bounty Hunter; 1 = buffed drop rates and guaranteed relics after card obtained
-              break
-            case 'bhBoss':
-              nGoal = 'v'
-              check.apply(sotnRando.util.applyNewGoals(nGoal))
-              check.apply(sotnRando.util.applyBountyHunterTargets(rng, 2))                 // 0 = normal Bounty Hunter; 1 = buffed drop rates and guaranteed relics after card obtained
-              break
-            default:
-              break
-          }
-        }
-        // Apply Alucard's palette.
-        if (alucardPaletteLock !== 'default') {
-          switch (alucardPaletteLock) {
-            case 'default':
-              break
-            case 'bloodytears':
-              alColP = 'r'
-              check.apply(sotnRando.util.applyAlucardPalette(alColP))
-              break
-            case 'bluedanube':
-              alColP = 'b'
-              check.apply(sotnRando.util.applyAlucardPalette(alColP))
-              break
-            case 'mint':
-              alColP = 'm'
-              check.apply(sotnRando.util.applyAlucardPalette(alColP))
-              break
-            case 'swampthing':
-              alColP = 'g'
-              check.apply(sotnRando.util.applyAlucardPalette(alColP))
-              break
-            case 'whiteknight':
-              alColP = 'w'
-              check.apply(sotnRando.util.applyAlucardPalette(alColP))
-              break
-            case 'royalpurple':
-              alColP = 'l'
-              check.apply(sotnRando.util.applyAlucardPalette(alColP))
-              break
-            case 'pinkpassion':
-              alColP = 'p'
-              check.apply(sotnRando.util.applyAlucardPalette(alColP))
-              break
-            case 'shadowp':
-              alColP = 's'
-              check.apply(sotnRando.util.applyAlucardPalette(alColP))
-              break
-          }
-        }
-
-        //Apply Alucard's Liner
-        if (alucardLinerLock !== 'default') {
-          switch (alucardLinerLock) {
-            case 'gold':
-              alColL = 'z'
-              check.apply(sotnRando.util.applyAlucardLiner(alColL))
-              break
-            case 'bronze':
-              alColL = 'x'
-              check.apply(sotnRando.util.applyAlucardLiner(alColL))
-              break
-            case 'silver':
-              alColL = 'y'
-              check.apply(sotnRando.util.applyAlucardLiner(alColL))
-              break
-            case 'onyx':
-              alColL = 'w'
-              check.apply(sotnRando.util.applyAlucardLiner(alColL))
-              break
-            case 'coral':
-              alColL = "v"
-              check.apply(sotnRando.util.applyAlucardLiner(alColL))
-              break
-          }
-        }
-        // Apply writes.
-        check.apply(sotnRando.util.applyWrites(rng, applied))
-        sotnRando.util.setSeedText(
-          check,
-          seed,
-          version,
-          options.preset,
-          options.tournamentMode,
-        )
-        return check.sum()
-      }).then(function (result) {
-        checksum = result
-        if (expectChecksum && expectChecksum !== checksum) {
-          throw new sotnRando.errors.VersionError()
-        }
-        // Apply accessibility patches.
-        if (elems.accessibilityPatches.checked) {
-          check.apply(sotnRando.applyAccessibilityPatches())
-        }
-        return sotnRando.util.finalizeData(
-          seed,
-          version,
-          options.preset,
-          options.tournamentMode,
-          file,
-          check,
-          createWorkers(1)[0],
-          getUrl(),
-        )
-      }).then(function (result) {
-        const duration = new Date().getTime() - start
-        // console.log('Seed generation took ' + (duration / 1000) + 's')
-        if (selectedPreset !== null) {
-          doApiRequest("/data/presets", "POST", {
-            "preset": selectedPreset,
-            "generation_time": duration,
-            "app": isDev ? "dev-web" : "web",
-            "settings": {
-              "tournament": elems.tournamentMode.checked,
-              "color_rando": elems.colorrandoMode.checked,
-              "magic_max": elems.magicmaxMode.checked,
-              "anti_freeze": elems.antiFreezeMode.checked,
-              "purse_mode": elems.mypurseMode.checked,
-              "infinite_wing_smash": elems.iwsMode.checked,
-              "fast_warp": elems.fastwarpMode.checked,
-              "no_prologue": elems.noprologueMode.checked,
-              "unlocked": elems.unlockedMode.checked,
-              "surprise": elems.surpriseMode.checked,
-              "enemy_stat": elems.enemyStatRandoMode.checked,
-              "relic_extension": null
-            }
-          })
-        }
-
-        showSpoilers()
-        const url = URL.createObjectURL(new Blob([result.file], {
-          type: 'application/octet-binary',
-        }))
-        let fileName
-        if (elems.output.ppf.checked) {
-          fileName = seed + ".ppf"
-          if (selectedPreset !== null) fileName = selectedPreset + "-" + fileName
-        } else {
-          fileName = selectedFile.name
-        }
-        if (elems.appendSeed.checked) {
-          if (elems.output.ppf.checked) {
-            elems.download.download = fileName
-          } else {
-            elems.download.download = randomizedFilename(fileName, seed)
-          }
-        } else {
-          resultName = "SotN-Randomizer"
-          if (selectedPreset !== null) resultName = resultName + "-" + selectedPreset
-          if (elems.output.ppf.checked) {
-            elems.download.download = resultName + ".ppf"
-          } else {
-            elems.download.download = fileName
-          }
-
-        }
-        elems.download.href = url
-        elems.download.click()
-        URL.revokeObjectURL(url)
-        resetCopy()
-        hideLoader();
       })
-    }
-    if (elems.output.ppf.checked) {
-      randomize().catch(handleError).finally(restoreItems)
-    } else {
+      resetCopy();
+      hideLoader();
+    }).catch(handleError).finally(restoreItems)
+
+    if (!elems.output.ppf.checked) {
       const reader = new FileReader()
       reader.addEventListener('load', function () {
         // Verify vanilla bin.
@@ -1811,28 +1323,8 @@
       elems.presetId.appendChild(option)
     }
   })
-  const url = new URL(window.location.href)
-  const releaseBaseUrl = sotnRando.constants.optionsUrls[sotnRando.constants.defaultOptions]
-  const releaseHostname = new URL(releaseBaseUrl).hostname
-  const isDev = url.hostname !== releaseHostname
-  const fakeVersion = '0.0.0D'
-  if (url.protocol !== 'file:') {
-    fetch('package.json', { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (json) {
-          version = json.version
-          if (isDev && !version.match(/-/)) {
-            version += 'D'
-          }
-          document.getElementById('version').innerText = version
-        })
-      }
-    }).catch(function () {
-      version = fakeVersion
-    })
-  } else {
-    version = fakeVersion
-  }
+
+  document.getElementById('version').innerText = CoreRandomizer.getVersion();
   let options
   let seed
   loadOption('excludeSongsOption', showExcludeMenu, false);
@@ -2035,7 +1527,7 @@
     presetIdChange()
     loadOption('preset', presetChange, true)
   }
-  if (isDev) {
+  if (CoreRandomizer.isDev(url)) {
     document.body.classList.add('dev')
     document.getElementById('dev-border').classList.add('dev')
     document.writeln([

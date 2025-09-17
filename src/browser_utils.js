@@ -72,7 +72,7 @@ BrowserUtils.saveOption = function saveOption(event) {
     localStorage.setItem(kebabToCamel(event.currentTarget.id), elems.tournamentMode.checked)
 }
 
-BrowserUtils.showSpoilers = function showSpoilers() {
+BrowserUtils.showSpoilers = function showSpoilers(startTime) {
     let verbosity
     if (elems.showSolutions.checked) {
         verbosity = 4
@@ -81,12 +81,56 @@ BrowserUtils.showSpoilers = function showSpoilers() {
     } else {
         verbosity = 2
     }
+    const endTime = performance.now()
+    console.log("Seed generated in ", endTime - startTime)
     elems.spoilers.value = sotnRando.util.formatInfo(info, verbosity)
     if (elems.showSpoilers.checked
         && elems.spoilers.value.match(/[^\s]/)) {
         elems.spoilersContainer.style.display = ''
         elems.spoilersContainer.classList.remove('hide')
     }
+}
+
+BrowserUtils.randomizedFilename = function randomizedFilename(filename, seed) {
+    const lastPeriodIdx = filename.lastIndexOf('.')
+    const insertIdx = lastPeriodIdx === -1 ? filename.length : lastPeriodIdx
+    return [
+        filename.slice(0, insertIdx),
+        ' (' + seed + ')',
+        filename.slice(insertIdx),
+    ].join('')
+}
+
+BrowserUtils.fileOutputHandler = function fileOutputHandler(ck, seed, result) {
+    const url = URL.createObjectURL(new Blob([result.file], {
+        type: 'application/octet-binary',
+    }))
+    let fileName
+    if (elems.output.ppf.checked) {
+        fileName = seed + ".ppf"
+        if (selectedPreset !== null) fileName = selectedPreset + "-" + fileName
+    } else {
+        fileName = selectedFile.name
+    }
+    if (elems.appendSeed.checked) {
+        if (elems.output.ppf.checked) {
+            elems.download.download = fileName
+        } else {
+            elems.download.download = BrowserUtils.randomizedFilename(fileName, seed)
+        }
+    } else {
+        let resultName = "SotN-Randomizer"
+        if (selectedPreset !== null) resultName = resultName + "-" + selectedPreset
+        if (elems.output.ppf.checked) {
+            elems.download.download = resultName + ".ppf"
+        } else {
+            elems.download.download = fileName
+        }
+
+    }
+    elems.download.href = url
+    elems.download.click()
+    URL.revokeObjectURL(url)
 }
 
 BrowserUtils.hideSpoilers = function hideSpoilers() {

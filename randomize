@@ -1310,6 +1310,68 @@ if ('inBin' in argv) {
     process.exit(1)
   }
 }
+function showSpoilers(startTime) {
+  if (argv.verbose > 0) {
+    let verbose = argv.verbose
+    if (options.tournamentMode && argv.verbose >= 2) {
+      verbose = 2
+    }
+    if ('debug' in argv && argv.verbose <= 4) {
+      verbose = 4
+    }
+    const text = util.formatInfo(info, verbose)
+
+    //start calculating the time elapsed
+    let endTime = performance.now();
+    var timeDiff = endTime - startTime; //in ms
+    // strip the ms
+    timeDiff /= 1000;
+
+    // get the time
+    var time = Math.round(timeDiff);
+    var minutes = Math.floor(time / 60)
+    var seconds = time - minutes * 60;
+
+    if (text.length) {
+      console.log("Generation time: " + minutes + ":" + seconds)
+      console.log(text)
+    }
+  }
+}
+
+function fileOutputHandler(check, s, r) {
+  if ('out' in argv) {
+    if ('inBin' in argv) {
+      // If is not an in-place randomization, apply writes to the buffer
+      // containing the disc image bytes.
+      const writer = new util.checked(fd)
+      writer.apply(check)
+    } else {
+      // Otherwise, write patch file.
+      const patch = check.toPatch(
+          seed,
+          options.preset,
+          options.tournamentMode,
+      )
+      fs.writeFileSync(argv.out, patch)
+    }
+  }
+  // Write error detection codes.
+  if (fd) {
+    eccEdcCalc(fd, size, true)
+  }
+  // Write randomized bin.
+  if (typeof(fd) === 'object') {
+    fs.writeFileSync(argv.out, fd)
+  }
+}
+
+function closeFile(){
+  if (typeof(fd) === 'number') {
+    fs.closeSync(fd)
+  }
+}
+
 if ('debug' in argv) {console.log('randomize | Start randomization')}
 (async function randomize() {
   try {
@@ -1756,34 +1818,7 @@ if ('debug' in argv) {console.log('randomize | Start randomization')}
       }
     }
     if (!argv.noSeed) {
-      if ('out' in argv) {
-        if ('debug' in argv) {console.log('Continue debug output:')}
-        if ('debug' in argv) {console.log('randomize | function: randomize | Check if BIN input, if not, use PPF')}
-        if ('inBin' in argv) {
-          // If is not an in-place randomization, apply writes to the buffer
-          // containing the disc image bytes.
-          const writer = new util.checked(fd)
-          writer.apply(check)
-        } else {
-          // Otherwise, write patch file.
-          const patch = check.toPatch(
-            seed,
-            options.preset,
-            options.tournamentMode,
-          )
-          fs.writeFileSync(argv.out, patch)
-        }
-      }
-      if ('debug' in argv) {console.log('randomize | function: randomize | Write error detection')}
-      // Write error detection codes.
-      if (fd) {
-        eccEdcCalc(fd, size, true)
-      }
-      if ('debug' in argv) {console.log('randomize | function: randomize | Output BIN')}
-      // Write randomized bin.
-      if (typeof(fd) === 'object') {
-        fs.writeFileSync(argv.out, fd)
-      }
+
     }
   } finally {
     if ('debug' in argv) {console.log('randomize | function: randomize | Wrap-up')}
