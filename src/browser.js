@@ -1009,6 +1009,7 @@
     function restoreItems() {
       sotnRando.items = cloneItems(items)
     }
+    const start = new Date().getTime()
     CoreRandomizer.randomize(
         options,
         seed,

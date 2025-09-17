@@ -72,7 +72,7 @@ BrowserUtils.saveOption = function saveOption(event) {
     localStorage.setItem(kebabToCamel(event.currentTarget.id), elems.tournamentMode.checked)
 }
 
-BrowserUtils.showSpoilers = function showSpoilers(startTime) {
+BrowserUtils.showSpoilers = function showSpoilers(info, startTime) {
     let verbosity
     if (elems.showSolutions.checked) {
         verbosity = 4

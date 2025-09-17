@@ -200,16 +200,12 @@ async function randomize(
                 newNames,
                 workers,
                 4,
+                isBrowser() ? getBrowserUrl() : undefined
             )
             util.mergeInfo(info, result.info)
             debugMessage(debugEnabled, 'Randomize Relics:Write new relic map');
             // Write relics mapping.
-            rng = new require('seedrandom')(util.saltSeed( //new rng generation?
-                version,
-                options,
-                seed,
-                1,
-            ))
+            rng = getRNG(options, seed);
             result = randomizeRelics.writeRelics(
                 rng,
                 applied,
@@ -234,7 +230,7 @@ async function randomize(
             util.mergeInfo(info, result.info)
             debugMessage(debugEnabled, 'Randomize Music');
             // Randomize music.
-            rng = getRNG();
+            rng = getRNG(options, seed);
             check.apply(randomizeMusic(rng, applied))
             debugMessage(debugEnabled, 'Apply options / writes function master');
             // Start the function master
@@ -343,7 +339,7 @@ async function randomize(
             if (options.enemyStatRandoMode || applied.enemyStatRandoMode) { // Randomizes enemy stats - eldrich
                 // Apply Enemy Stat Rando mode patches. - eldri7ch
                 optFlag = true
-                rng = getRNG();
+                rng = getRNG(options, seed);
                 let chaosFlag = false
                 if (options.elemChaosMode || applied.elemChaosMode) {
                     chaosFlag = true
@@ -355,7 +351,7 @@ async function randomize(
             if (options.shopPriceRandoMode || applied.shopPriceRandoMode) { // Randomizes shop prices - eldrich
                 // Apply shop price Rando mode patches. - eldri7ch
                 optFlag = true
-                rng = getRNG();
+                rng = getRNG(options, seed);
                 check.apply(util.applyShopPriceRandoPatches(rng))
             }
             debugMessage(debugEnabled, 'Shop Price Randomizer Mode | ' + optFlag)
@@ -363,7 +359,7 @@ async function randomize(
             if (options.startRoomRandoMode || applied.startRoomRandoMode || options.startRoomRando2ndMode || applied.startRoomRando2ndMode) { // Randomizes starting room - eldrich & MottZilla
                 // Apply starting room Rando mode patches. - eldri7ch
                 optFlag = true
-                rng = getRNG();
+                rng = getRNG(options, seed);
                 let castleFlag = 0x00
                 if (options.startRoomRandoMode || applied.startRoomRandoMode) {
                     castleFlag = castleFlag + 0x01
@@ -409,7 +405,7 @@ async function randomize(
             optFlag = false
             if (options.elemChaosMode || applied.elemChaosMode) { // elemental chaos - eldrich
                 optFlag = true
-                rng = getRNG();
+                rng = getRNG(options, seed);
                 check.apply(util.applyElemChaosPatches(rng))
             }
             debugMessage(debugEnabled, 'Elemental Chaos | ' + optFlag)
@@ -518,7 +514,7 @@ async function randomize(
                 fileToCheck,
                 check,
                 getSingleWorker(),
-                getBrowserUrl,
+                getBrowserUrl(),
             )
         }
 
@@ -527,7 +523,7 @@ async function randomize(
         if(urlHandler) urlHandler();
         debugMessage(debugEnabled, 'Show spoilers')
         // Print spoilers.
-        spoilerHandler(startTime);
+        spoilerHandler(info, startTime);
         debugMessage(debugEnabled, 'Write File Output')
         fileOutputHandler(check, seed, result);
     } finally {
@@ -542,4 +538,5 @@ if(isBrowser()){
     CoreRandomizer.isDev = isBrowserDev;
     CoreRandomizer.getVersion = getVersion;
     CoreRandomizer.randomize = randomize;
+    window.url = new URL(window.location.href)
 }
