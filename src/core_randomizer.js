@@ -23,6 +23,41 @@ function loadRequirements() {
     applyAccessibilityPatches = isBrowser() ? window.sotnRando.applyAccessibilityPatches : require("./accessibility_patches");
     randomizeRelics = isBrowser() ? window.sotnRando.randomizeRelics : require("./randomize_relics");
     NodeWorker = !isBrowser() ? require("worker_threads").Worker : null;
+    constants = isBrowser() ? window.sotnRando.constants : require("./constants");
+}
+
+function generateSeedName() {
+    let adjectives;
+    let nouns;
+
+    let month = new Date().getMonth() + 1;
+
+    switch (month) {
+        case 10:
+            adjectives = constants.adjectivesHalloween;
+            nouns = constants.nounsHalloween;
+            break;
+        case 12:
+            adjectives = constants.adjectivesHolidays;
+            nouns = constants.nounsNormal;
+            break;
+
+        default:
+            adjectives = sotnRando.constants.adjectivesNormal;
+            nouns = sotnRando.constants.nounsNormal;
+            break;
+    }
+
+    let adjective = adjectives[Math.floor(Math.random() * Math.floor(adjectives.length - 1))];
+    let noun = nouns[Math.floor(Math.random() * Math.floor(nouns.length - 1))];
+    let number = Math.floor(Math.random() * 999);
+    if (number % 100 === 69) {
+        number = '69Nice';
+    }
+
+    let suffix = '';
+
+    return adjective + noun + number + suffix;
 }
 
 function getBrowserUrl(){
@@ -44,7 +79,7 @@ function isBrowserDev(url) {
 function getVersion() {
     version = "0.0.0D";
     if(!isBrowser()){
-        version = require('./package').version
+        version = require('../package.json').version
     }else{
         const url = new URL(window.location.href)
         const isDev = isBrowserDev(url);
@@ -111,7 +146,7 @@ function cliWorkers(){
     const cores = os.cpus().length
     const workers = Array(util.workerCountFromCores(cores))
     for (let i = 0; i < workers.length; i++) {
-        workers[i] = new NodeWorker('./worker.js')
+        workers[i] = new NodeWorker('./src/worker.js')
     }
     return workers
 }
@@ -121,7 +156,7 @@ function getWorkers(){
 }
 
 function getSingleWorker(){
-    return isBrowser() ? browserWorkers(1)[0] : new Worker('./worker.js');
+    return isBrowser() ? browserWorkers(1)[0] : new NodeWorker('./src/worker.js');
 }
 
 function debugMessage(debugEnabled, msg) {
@@ -157,6 +192,10 @@ async function randomize(
         startTime = performance.now()
         loadRequirements();
         check = new util.checked(fileToCheck) // typeof(fd) === 'object' ? undefined : fd
+        if(typeof info === "undefined" || !info){
+            info = util.newInfo();
+            info[1]['Seed'] = seed
+        }
         let applied
         try {
             debugMessage(debugEnabled, "Check for overriding preset");
@@ -202,6 +241,7 @@ async function randomize(
                 4,
                 isBrowser() ? getBrowserUrl() : undefined
             )
+
             util.mergeInfo(info, result.info)
             debugMessage(debugEnabled, 'Randomize Relics:Write new relic map');
             // Write relics mapping.
@@ -224,6 +264,7 @@ async function randomize(
                 2,
                 result.items,
                 newNames,
+                isBrowser() ? getBrowserUrl() : undefined
             )
             debugMessage(debugEnabled, 'Randomize Items: Write new item map');
             check.apply(result.data)
@@ -520,7 +561,7 @@ async function randomize(
 
         debugMessage(debugEnabled, 'Show url if provided as arg')
         // Show url if not provided as arg.
-        if(urlHandler) urlHandler();
+        if(urlHandler) urlHandler(checksum);
         debugMessage(debugEnabled, 'Show spoilers')
         // Print spoilers.
         spoilerHandler(info, startTime);
@@ -529,7 +570,6 @@ async function randomize(
     } finally {
         debugMessage(debugEnabled, 'Wrap-up')
         if(fileCloseHandler) fileCloseHandler();
-
     }
 }
 
@@ -538,5 +578,8 @@ if(isBrowser()){
     CoreRandomizer.isDev = isBrowserDev;
     CoreRandomizer.getVersion = getVersion;
     CoreRandomizer.randomize = randomize;
+    CoreRandomizer.generateSeedName = generateSeedName;
     window.url = new URL(window.location.href)
+}else{
+    module.exports = {randomize, generateSeedName}
 }

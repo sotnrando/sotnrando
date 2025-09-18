@@ -11,7 +11,6 @@ function randomizeWorker() {
   function loadBrowser(url, selectedPreset = null) {
     // This allows the presets to be loaded from the browser
     // If you add any inheritance preset, add it to this list.
-    console.log("Loading worker", url, selectedPreset);
     importScripts(
       'https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/seedrandom.min.js',
       url + 'src/constants.js',

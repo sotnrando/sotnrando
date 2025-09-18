@@ -82,7 +82,7 @@ BrowserUtils.showSpoilers = function showSpoilers(info, startTime) {
         verbosity = 2
     }
     const endTime = performance.now()
-    console.log("Seed generated in ", endTime - startTime)
+    console.log("Seed generated in ", endTime - startTime, "ms")
     elems.spoilers.value = sotnRando.util.formatInfo(info, verbosity)
     if (elems.showSpoilers.checked
         && elems.spoilers.value.match(/[^\s]/)) {
@@ -171,7 +171,7 @@ BrowserUtils.ChangeHandlers = {
         }
     },
     spoilersChange: function spoilersChange() {
-        if (elems.showSpoilers.checked) {
+        if (elems.showSpoilers.checked && info) {
             BrowserUtils.showSpoilers()
             if (!elems.tournamentMode.checked) {
                 elems.showRelics.disabled = false
@@ -191,10 +191,10 @@ BrowserUtils.ChangeHandlers = {
             elems.showSolutions.checked = false
             elems.showSolutions.disabled = true
         }
-        BrowserUtils.showSpoilers()
+        if(info) BrowserUtils.showSpoilers();
     },
     showSolutionsChange: function showSolutionsChange() {
-        BrowserUtils.showSpoilers()
+        if(info) BrowserUtils.showSpoilers();
     },
     relicLocationsChange: function relicLocationsChange() {
         if (!elems.relicLocations.checked) {
