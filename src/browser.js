@@ -16,6 +16,20 @@
 
   //#endregion
 
+  document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    const targetId = tab.getAttribute("data-tab");
+
+    // Remove active class from all tabs and contents
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+
+    // Activate selected tab and content
+    tab.classList.add("active");
+    document.getElementById(targetId).classList.add("active");
+  });
+});
+
   function displayRandomSplashText(seasonalEvent) {
     if (!seasonalEvent.toolSplashPhrases) return;
     const splashPhrases = seasonalEvent.toolSplashPhrases;
