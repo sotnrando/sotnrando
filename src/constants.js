@@ -1886,7 +1886,9 @@
     "Rest in Peace, Scott.",
     "Now starting season 28!",
     "Really good, actually!",
-    "!ahl"
+    "!ahl",
+    "For Shakey!",
+    "Barley Teas!"
   ]
 
   const prideSplashPhrases = [
