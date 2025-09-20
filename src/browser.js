@@ -202,14 +202,14 @@
     ];
 
     const BH_GOAL_PRESETS = {
-      bhNorm: new Set(["bounty-hunter", "chaos-lite"]),
-      bhAdvanced: new Set(["target-confirmed"]),
-      bhHitman: new Set(["hitman"]),
-      bhBoss: new Set(["rampage"])
+      h: new Set(["bounty-hunter", "chaos-lite"]),
+      t: new Set(["target-confirmed"]),
+      w: new Set(["hitman"]),
+      x: new Set(["rampage"])
     };
     const GOAL_PRESETS = {
-      allBoss: new Set(["all-bosses", "mirror-breaker"]),
-      vladBoss: new Set(["boss-reflector", "cornivus"])
+      b: new Set(["all-bosses", "mirror-breaker"]),
+      v: new Set(["boss-reflector", "cornivus"])
     };
 
     const enableAll = () => {
@@ -231,9 +231,9 @@
     };
 
     const validateGoal = (presetId, goal) => {
-      const isBossGoal = goal === "allBoss" || goal === "abrsr" || goal === "vladBoss";
-      const isRelicGoal = goal === "allRelic" || goal === "abrsr";
-      const isBhGoal = goal === "bhNorm" || goal === "bhAdvanced" || goal === "bhBoss" || goal === "bhHitman";
+      const isBossGoal = goal === "b" || goal === "a" || goal === "v";
+      const isRelicGoal = goal === "r" || goal === "a";
+      const isBhGoal = goal === "h" || goal === "t" || goal === "w" || goal === "x";
 
       if (isBossGoal && !BOSS_COMPAT.has(presetId)) return "default";
       if (isRelicGoal && !RELIC_COMPAT.has(presetId)) return "default";
