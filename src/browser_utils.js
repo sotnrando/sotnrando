@@ -90,12 +90,13 @@ BrowserUtils.showSpoilers = function showSpoilers(info, startTime) {
         elems.spoilersContainer.classList.remove('hide')
     }
 }
-function toKebabCase(str) {
-    return str.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
+
+BrowserUtils.toKebabCase = function toKebabCase(str) {
+    return str.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase())
 }
 
-function getCurrentOptions() {
-    const allOptions = [
+BrowserUtils.getCurrentOptions = function getCurrentOptions() {
+    const keys = [
         'tournamentMode', 'colorrandoMode', 'magicmaxMode', 'antiFreezeMode',
         'mypurseMode', 'iwsMode', 'fastwarpMode', 'itemNameRandoMode',
         'noprologueMode', 'unlockedMode', 'surpriseMode', 'enemyStatRandoMode',
@@ -105,47 +106,31 @@ function getCurrentOptions() {
         'seasonalPhrasesMode', 'bossMusicSeparation', 'music', 'appendSeed',
         'excludeSongsOption', 'itemLocations', 'stats', 'prologueRewards',
         'startingEquipment', 'accessibilityPatches'
-    ];
+    ]
 
-    const options = {};
-    allOptions.forEach(key => {
-        const input = document.getElementById(toKebabCase(key));
-        options[key] = input?.checked ?? false;
-    });
+    const options = {}
+    keys.forEach(key => {
+        const input = document.getElementById(BrowserUtils.toKebabCase(key))
+        options[key] = input?.checked ?? false
+    })
 
-    // Preset name
-    const presetSelect = document.getElementById('preset-id');
-    options.preset = presetSelect?.options[presetSelect.selectedIndex]?.text || 'Unknown';
+    options.preset = document.getElementById('preset-id')?.selectedOptions?.[0]?.text || 'Unknown'
+    options.complexity = document.getElementById('complexity')?.value || 'Not selected'
+    options.goal = document.getElementById('newGoals')?.selectedOptions?.[0]?.text || 'Unknown'
+    options.extension = [...document.querySelectorAll('input[name="extension"]')]
+        .find(r => r.checked)?.value || 'None'
 
-    // Complexity
-    const complexitySelect = document.getElementById('complexity');
-    options.complexity = complexitySelect?.value || 'Not selected';
-
-    // Relic Extension from radio buttons in .relic-location
-    const extensionRadios = document.querySelectorAll('input[name="extension"]');
-    options.extension = 'None'; // Default fallback
-
-    // Goal selection
-    const goalSelect = document.getElementById('newGoals');
-    options.goal = goalSelect?.options[goalSelect.selectedIndex]?.text || 'Unknown';
-
-    extensionRadios.forEach(radio => {
-        if (radio.checked) {
-            options.extension = radio.value;
-        }
-    });
-
-    return options;
+    return options
 }
 
-function formatSpoilerLog(options) {
-    const enabled = [];
-    const disabled = [];
+BrowserUtils.formatOptionsLog = function formatOptionsLog(options) {
+    const enabled = []
+    const disabled = []
 
-    Object.entries(options).forEach(([key, value]) => {
-        if (['preset', 'complexity', 'extension'].includes(key)) return;
-        (value ? enabled : disabled).push(key);
-    });
+    Object.entries(options).forEach(([key, val]) => {
+        if (['preset', 'complexity', 'extension', 'goal'].includes(key)) return
+        ;(val ? enabled : disabled).push(key)
+    })
 
     return [
         '=== Options Log ===',
@@ -156,25 +141,23 @@ function formatSpoilerLog(options) {
         '',
         `Enabled Options: ${enabled.length ? enabled.join(', ') : 'None'}`,
         `Disabled Options: ${disabled.length ? disabled.join(', ') : 'None'}`
-    ].join('\n');
+    ].join('\n')
 }
 
-function showSpoilerLog() {
-    const currentOptions = getCurrentOptions();
-    localStorage.setItem('lastSeedOptions', JSON.stringify(currentOptions));
-    const log = formatSpoilerLog(currentOptions);
-    document.getElementById('spoilerLogOutput').textContent = log;
+BrowserUtils.showOptionsLog = function showOptionsLog() {
+    const opts = BrowserUtils.getCurrentOptions()
+    localStorage.setItem('lastSeedOptions', JSON.stringify(opts))
+    document.getElementById('optionsLogOutput').textContent = BrowserUtils.formatOptionsLog(opts)
 }
 
-function showPreviousSeed() {
-    const saved = localStorage.getItem('lastSeedOptions');
+BrowserUtils.showPreviousSeed = function showPreviousSeed() {
+    const saved = localStorage.getItem('lastSeedOptions')
     if (!saved) {
-        document.getElementById('spoilerLogOutput').textContent = 'No previous seed data available.';
-        return;
+        document.getElementById('optionsLogOutput').textContent = 'No previous seed data available.'
+        return
     }
-    const options = JSON.parse(saved);
-    const log = formatSpoilerLog(options);
-    document.getElementById('spoilerLogOutput').textContent = log;
+    const opts = JSON.parse(saved)
+    document.getElementById('optionsLogOutput').textContent = BrowserUtils.formatOptionsLog(opts)
 }
 
 BrowserUtils.randomizedFilename = function randomizedFilename(filename, seed) {

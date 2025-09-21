@@ -11,7 +11,7 @@ body {
     margin: auto;
     
 }
-#spoilerLogOutput {
+#optionsLogOutput {
   white-space: pre-wrap;
   word-break: break-word;
   max-width: 100%;
