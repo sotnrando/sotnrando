@@ -118,34 +118,41 @@
     elems.presetSelect.classList.remove('hide')
     elems.presetDetails.classList.remove('hide')
     presetIdChange()
-
+    
     if (event) {
       elems.options.classList.add('animate')
     }
+    
   }
 
   function updateAlucardPreview() {
+    // Ensure required elements exist
+    if (!paletteSelect || !linerSelect || !paletteDisplay || !linerDisplay) return;
+
     // Fix liner Y position
     linerDisplay.style.backgroundPositionY = "64px";
-    // Calculate current position based on the selected options
-    let paletteIndex = paletteSelect.selectedIndex;
-    let linerIndex = linerSelect.selectedIndex;
-    paletteDisplay.style.backgroundPositionX = (864 - (paletteIndex * 96)) + "px";
-    linerDisplay.style.backgroundPositionX = (768 - (linerIndex * 96)) + "px";
+
+    // Calculate background X positions based on selected indices
+    const paletteIndex = paletteSelect.selectedIndex;
+    const linerIndex = linerSelect.selectedIndex;
+
+    paletteDisplay.style.backgroundPositionX = (864 - paletteIndex * 96) + "px";
+    linerDisplay.style.backgroundPositionX = (768 - linerIndex * 96) + "px";
   }
 
+  // Initial render
   updateAlucardPreview();
 
-  paletteSelect.onchange = updateAlucardPreview;
-  linerSelect.onchange = updateAlucardPreview;
+  // Update preview on selection change
+  paletteSelect.addEventListener("change", updateAlucardPreview);
+  linerSelect.addEventListener("change", updateAlucardPreview);
 
-  window.onload = function () {
+  // Re-render on page load if values are present
+  window.addEventListener("load", function () {
     if (paletteSelect.value || linerSelect.value) {
       updateAlucardPreview();
     }
-  };
-
-
+  });
 
   function updateMapColorPreview() {
     // Calculate current position based on the selected options
@@ -264,7 +271,7 @@
     localStorage.setItem("presetId", preset.id);
 
     enableAll();
-
+    
     let goal = computeGoal(preset.id);
     goal = validateGoal(preset.id, goal);
     elems.newGoals.value = goal;
@@ -355,6 +362,7 @@
 
     // Apply the unified logic
     applyOptions(options, preset.id);
+    relicLocationsExtensionChange()  //added to adjust max complexity slider when preset is changed -Crazy4Blades
   }
 
   function complexityChange() {
@@ -376,59 +384,50 @@
   }
 
   function adjustMaxComplexity() {
-    switch (relicLocationsExtensionCache) {
-      case sotnRando.constants.EXTENSION.EQUIPMENT:
-      case sotnRando.constants.EXTENSION.SCENIC:
-        elems.complexity.max = 15
-        generateComplexityDataListItems(15);
-        elems.complexityMaxValue.innerText = 15;
-        break
-      case sotnRando.constants.EXTENSION.GUARDED:
-      case sotnRando.constants.EXTENSION.GUARDEDPLUS:
-      case sotnRando.constants.EXTENSION.EXTENDED:
-      default:
-        elems.complexity.max = 11;
-        generateComplexityDataListItems(11);
-        elems.complexityMaxValue.innerText = 11;
-        break
-    }
-    if (parseInt(elems.complexity.value) > parseInt(elems.complexity.max)) {
-      elems.complexity.value = elems.complexity.max
-    }
-  }
+  const EXT = sotnRando.constants.EXTENSION
+  const highCap = [EXT.EQUIPMENT, EXT.SCENIC].includes(relicLocationsExtensionCache)
+  const max = highCap ? 15 : 11
 
+  elems.complexity.max = max
+  generateComplexityDataListItems(max)
+  elems.complexityMaxValue.innerText = max
+
+  if (+elems.complexity.value > max) {
+    elems.complexity.value = max
+  }
+}
   function relicLocationsExtensionChange() {
-    let value
-    if (elems.relicLocationsExtension.guarded.checked) {
-      value = sotnRando.constants.EXTENSION.GUARDED
-    } else if (elems.relicLocationsExtension.guardedplus.checked) {
-      value = sotnRando.constants.EXTENSION.GUARDEDPLUS
-    } else if (elems.relicLocationsExtension.equipment.checked) {
-      value = sotnRando.constants.EXTENSION.EQUIPMENT
-    } else if (elems.relicLocationsExtension.scenic.checked) {
-      value = sotnRando.constants.EXTENSION.SCENIC
-    } else if (elems.relicLocationsExtension.extended.checked) {
-      value = sotnRando.constants.EXTENSION.EXTENDED
-    } else {
-      value = false
+    const ext = elems.relicLocationsExtension
+    const EXT = sotnRando.constants.EXTENSION
+
+    const map = {
+      guarded: EXT.GUARDED,
+      guardedplus: EXT.GUARDEDPLUS,
+      equipment: EXT.EQUIPMENT,
+      scenic: EXT.SCENIC,
+      extended: EXT.EXTENDED
     }
+
+    let value = false
+    for (const [key, constant] of Object.entries(map)) {
+      if (ext[key]?.checked) {
+        value = constant
+        break
+      }
+    }
+
     relicLocationsExtensionCache = value
     adjustMaxComplexity()
-    complexityChange();
+    complexityChange()
     localStorage.setItem('relicLocationsExtension', value)
   }
 
   function themeChange() {
-    localStorage.setItem('theme', elems.theme.value)
-    {
-      ['menu', 'light', 'dark'].forEach(function (theme) {
-        if (theme === elems.theme.value) {
-          body.classList.add(theme)
-        } else {
-          body.classList.remove(theme)
-        }
-      })
-    }
+    const selected = elems.theme.value
+    localStorage.setItem('theme', selected)
+
+    body.classList.remove('menu', 'light', 'dark')
+    body.classList.add(selected)
   }
 
   function mapColorChange() {
@@ -605,88 +604,30 @@
     return relicLocations
   }
 
-  function getFormOptions() {
-    const options = {
-      preset: sotnRando.presets[elems.presetId.selectedIndex].id
-    }
-    if (elems.tournamentMode.checked) {
-      options.tournamentMode = true
-    }
-    if (elems.colorrandoMode.checked) {
-      options.colorrandoMode = true
-    }
-    if (elems.magicmaxMode.checked) {
-      options.magicmaxMode = true
-    }
-    if (elems.antiFreezeMode.checked) {
-      options.antiFreezeMode = true
-    }
-    if (elems.mypurseMode.checked) {
-      options.mypurseMode = true
-    }
-    if (elems.iwsMode.checked) {
-      options.iwsMode = true
-    }
-    if (elems.fastwarpMode.checked) {
-      options.fastwarpMode = true
-    }
-    if (elems.itemNameRandoMode.checked) {
-      options.itemNameRandoMode = true
-    }
-    if (elems.noprologueMode.checked) {
-      options.noprologueMode = true
-    }
-    if (elems.unlockedMode.checked) {
-      options.unlockedMode = true
-    }
-    if (elems.surpriseMode.checked) {
-      options.surpriseMode = true
-    }
-    if (elems.enemyStatRandoMode.checked) {
-      options.enemyStatRandoMode = true
-    }
-    if (elems.shopPriceRandoMode.checked) {
-      options.shopPriceRandoMode = true
-    }
-    if (elems.startRoomRandoMode.checked) {
-      options.startRoomRandoMode = true
-    }
-    if (elems.startRoomRando2ndMode.checked) {
-      options.startRoomRando2ndMode = true
-    }
-    if (elems.dominoMode.checked) {
-      options.dominoMode = true
-    }
-    if (elems.rlbcMode.checked) {
-      options.rlbcMode = true
-    }
-    if (elems.immunityPotionMode.checked) {
-      options.immunityPotionMode = true
-    }
-    if (elems.godspeedMode.checked) {
-      options.godspeedMode = true
-    }
-    if (elems.libraryShortcut.checked) {
-      options.libraryShortcut = true
-    }
-    if (elems.elemChaosMode.checked) {
-      options.elemChaosMode = true
-    }
-    if (elems.simpleInputMode.checked) {
-      options.simpleInputMode = true
-    }
-    if (elems.devStashMode.checked) {
-      options.devStashMode = true
-    }
-    if (elems.seasonalPhrasesMode.checked) {
-      options.seasonalPhrasesMode = true
-    }
-    if (elems.bossMusicSeparation.checked) {
-      options.bossMusicSeparation = true
-    }
-    options.relicLocations = getFormRelicLocations();
-    return options
+function getFormOptions() {
+  const options = {
+    preset: sotnRando.presets[elems.presetId.selectedIndex].id,
+    relicLocations: getFormRelicLocations()
   }
+
+  const keys = [
+    'tournamentMode', 'colorrandoMode', 'magicmaxMode', 'antiFreezeMode',
+    'mypurseMode', 'iwsMode', 'fastwarpMode', 'itemNameRandoMode',
+    'noprologueMode', 'unlockedMode', 'surpriseMode', 'enemyStatRandoMode',
+    'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
+    'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
+    'libraryShortcut', 'elemChaosMode', 'simpleInputMode', 'devStashMode',
+    'seasonalPhrasesMode', 'bossMusicSeparation'
+  ]
+
+  keys.forEach(key => {
+    if (elems[key]?.checked) {
+      options[key] = true
+    }
+  })
+
+  return options
+}
 
   function deleteOriginalComplexity(options, newComplexity) {
     let relicLocations = options.relicLocations;
@@ -1103,6 +1044,7 @@
         }
       }
       presetIdChange()
+      
     } else {
       elems.presetId.selectedIndex = 0
     }
@@ -1314,5 +1256,6 @@
     })
   })
   presetIdChange()
+  
   //#endregion
 })(typeof (window) !== 'undefined' ? window : null)
