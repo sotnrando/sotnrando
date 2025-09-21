@@ -17,18 +17,18 @@
   //#endregion
 
   document.querySelectorAll(".tab").forEach(tab => {
-  tab.addEventListener("click", () => {
-    const targetId = tab.getAttribute("data-tab");
+    tab.addEventListener("click", () => {
+      const targetId = tab.getAttribute("data-tab");
 
-    // Remove active class from all tabs and contents
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+      // Remove active class from all tabs and contents
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
 
-    // Activate selected tab and content
-    tab.classList.add("active");
-    document.getElementById(targetId).classList.add("active");
+      // Activate selected tab and content
+      tab.classList.add("active");
+      document.getElementById(targetId).classList.add("active");
+    });
   });
-});
 
   function displayRandomSplashText(seasonalEvent) {
     if (!seasonalEvent.toolSplashPhrases) return;
@@ -437,173 +437,60 @@
   }
 
   function newGoalsChange() {
-    let bhCompatible = [
-      "bounty-hunter",
-      "target-confirmed",
-      "hitman",
-      "chaos-lite",
-      "rampage"
-    ]
-    let bossCompatible = [
-      "casual",
-      "safe",
-      "adventure",
-      "og",
-      "guarded-og",
-      "sequence-breaker",
-      "lycanthrope",
-      "warlock",
-      "nimble",
-      "expedition",
-      "bat-master",
-      "glitch",
-      "scavenger",
-      "empty-hand",
-      "third-castle",
-      "magic-mirror",
-      "leg-day",
-      "big-toss",
-      "grand-tour",
-      "crash-course",
-      "any-percent",
-      "lookingglass",
-      "skinwalker",
-      "summoner",
-      "safe-stwo",
-      "open",
-      "brawler",
-      "lucky-sevens",
-      "sight-seer",
-      "cursed-night",
-      "spellbound",
-      "mobility",
-      "glitchmaster",
-      "dog-life",
-      "battle-mage",
-      "timeline",
-      "chimera",
-      "vanilla",
-      "all-bosses",
-      "rampage",
-      "nimble-lite",
-      "oracle",
-      "boss-reflector",
-      "cornivus",
-      "mirror-breaker"
-    ]
-    let relicCompatible = [
-      "casual",
-      "safe",
-      "adventure",
-      "og",
-      "guarded-og",
-      "sequence-breaker",
-      "lycanthrope",
-      "warlock",
-      "nimble",
-      "expedition",
-      "bat-master",
-      "scavenger",
-      "empty-hand",
-      "gem-farmer",
-      "third-castle",
-      "rat-race",
-      "magic-mirror",
-      "bountyhunter",
-      "bountyhuntertc",
-      "hitman",
-      "beyond",
-      "grand-tour",
-      "crash-course",
-      "lookingglass",
-      "skinwalker",
-      "summoner",
-      "agonize-twtw",
-      "safe-stwo",
-      "open",
-      "lucky-sevens",
-      "sight-seer",
-      "cursed-night",
-      "spellbound",
-      "mobility",
-      "timeline",
-      "chimera",
-      "vanilla",
-      "nimble-lite",
-      "all-bosses",
-      "cornivus",
-      "mirror-breaker"
-    ]
-    switch (elems.newGoals.value) {                                             // Adjusting newGoals drop-down based on selections - eldri7ch
-      case "abrsr":                                                             // ABRSR (All Bosses and Relics) can't exist if not compatible with All Boss AND All Relics - eldri7ch
-        if (!bossCompatible.includes(elems.presetId.value) || !relicCompatible.includes(elems.presetId.value)) {
-          elems.newGoals.value = "default"
-        }
-        break
-      case "vladBoss":                                                          // Very few presets remove Vlads as possibilities. No 'break' here because it also needs to check All Bosses - eldri7ch
-        if (["oracle", "glitch", "glitchmaster", "any-percent"].includes(elems.presetId.value)) {
-          elems.newGoals.value = "default"
-        }
-      case "allBoss":                                                           // Check against all bosses compatibility - eldri7ch
-        if (!bossCompatible.includes(elems.presetId.value)) {
-          elems.newGoals.value = "default"
-        }
-        break
-      case "allRelic":                                                          // Check against all relics compatibility - eldri7ch
-        if (!relicCompatible.includes(elems.presetId.value)) {
-          elems.newGoals.value = "default"
-        }
-        break
-      case "bhNorm":
-      case "bhAdvanced":
-      case "bhHitman":
-      case "bhBoss":                                                            // Check against BH compatibility - eldri7ch
-        if (!bhCompatible.includes(elems.presetId.value)) {
-          elems.newGoals.value = "default"
-        }
-        break
-      default:
+    const { presetId, newGoals } = elems;
+    const preset = presetId.value;
+    const goal = newGoals.value;
+
+    const bhCompatible = ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage"];
+    const bossCompatible = [
+      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
+      "expedition", "bat-master", "glitch", "scavenger", "empty-hand", "third-castle", "magic-mirror", "leg-day",
+      "big-toss", "grand-tour", "crash-course", "any-percent", "lookingglass", "skinwalker", "summoner", "safe-stwo",
+      "open", "brawler", "lucky-sevens", "sight-seer", "cursed-night", "spellbound", "mobility", "glitchmaster",
+      "dog-life", "battle-mage", "timeline", "chimera", "vanilla", "all-bosses", "rampage", "nimble-lite", "oracle",
+      "boss-reflector", "cornivus", "mirror-breaker"
+    ];
+    const relicCompatible = [
+      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
+      "expedition", "bat-master", "scavenger", "empty-hand", "gem-farmer", "third-castle", "rat-race", "magic-mirror",
+      "bountyhunter", "bountyhuntertc", "hitman", "beyond", "grand-tour", "crash-course", "lookingglass", "skinwalker",
+      "summoner", "agonize-twtw", "safe-stwo", "open", "lucky-sevens", "sight-seer", "cursed-night", "spellbound",
+      "mobility", "timeline", "chimera", "vanilla", "nimble-lite", "all-bosses", "cornivus", "mirror-breaker"
+    ];
+
+    const isCompatible = {
+      abrsr: bossCompatible.includes(preset) && relicCompatible.includes(preset),
+      vladBoss: !["oracle", "glitch", "glitchmaster", "any-percent"].includes(preset),
+      allBoss: bossCompatible.includes(preset),
+      allRelic: relicCompatible.includes(preset),
+      bhNorm: bhCompatible.includes(preset),
+      bhAdvanced: ["target-confirmed"].includes(preset),
+      bhHitman: ["hitman"].includes(preset),
+      bhBoss: ["rampage"].includes(preset)
+
+    };
+
+    if (goal in isCompatible && !isCompatible[goal]) {
+      newGoals.value = "default";
     }
-    // All BH presets need to match their respective coding. This is to prevent arbitrary additions of BH code to presets where vlads can spawn. - eldri7ch
-    if (elems.newGoals.value !== "bhNorm") {                                    // Check against BH compatibility - eldri7ch
-      if (["chaos-lite", "bounty-hunter"].includes(elems.presetId.value)) {
-        elems.newGoals.value = "bhNorm"
+
+    const autoAssign = [
+      { goal: "bhNorm", presets: ["chaos-lite", "bounty-hunter"] },
+      { goal: "bhAdvanced", presets: ["target-confirmed"] },
+      { goal: "bhHitman", presets: ["hitman"] },
+      { goal: "bhBoss", presets: ["rampage"] },
+      { goal: "allBoss", presets: ["all-bosses", "mirror-breaker"], exclude: ["abrsr", "vladBoss"] },
+      { goal: "vladBoss", presets: ["boss-reflector", "cornivus"] }
+    ];
+
+    for (const { goal, presets, exclude = [] } of autoAssign) {
+      if (newGoals.value !== goal && presets.includes(preset) && !exclude.includes(newGoals.value)) {
+        newGoals.value = goal;
       }
     }
-    if (elems.newGoals.value !== "bhAdvanced") {                                // Check against Target Confirmed compatibility - eldri7ch
-      if (["target-confirmed"].includes(elems.presetId.value)) {
-        elems.newGoals.value = "bhAdvanced"
-      }
-    }
-    if (elems.newGoals.value !== "bhHitman") {                                  // Check against Hitman compatibility - eldri7ch
-      if (["hitman"].includes(elems.presetId.value)) {
-        elems.newGoals.value = "bhHitman"
-      }
-    }
-    if (elems.newGoals.value !== "bhBoss") {                                    // Check against BH + All Bosses compatibility - eldri7ch
-      if (["rampage"].includes(elems.presetId.value)) {
-        elems.newGoals.value = "bhBoss"
-      }
-    }
-    if (elems.newGoals.value !== "allBoss") {                                   // Check against all Bosses compatibility (Right now this only checks All-Bosses Preset) - eldri7ch
-      if (["all-bosses", "mirror-breaker"].includes(elems.presetId.value) && !["abrsr", "vladBoss"].includes(elems.newGoals.value)) {
-        elems.newGoals.value = "allBoss"
-      }
-    }
-    // if (elems.newGoals.value !== "abrsr") {                                  // Check against abrsr compatibility (No presets currently use this) - eldri7ch
-    //   if (["rampage"].includes(elems.presetId.value)) {
-    //     elems.newGoals.value = "abrsr"
-    //   }
-    // }
-    if (elems.newGoals.value !== "vladBoss") {                                  // Check against all Bosses + all vlads compatibility - eldri7ch
-      if (["boss-reflector", "cornivus"].includes(elems.presetId.value)) {
-        elems.newGoals.value = "vladBoss"
-      }
-    }
-    localStorage.setItem('newGoals', elems.newGoals.value)                      // Set local storage and the newGoalsLock - eldri7ch
-    newGoalsLock = elems.newGoals.value
-    // console.log(elems.presetId.value)
-    // console.log('set new goals: ' + newGoalsLock)
+
+    localStorage.setItem('newGoals', newGoals.value);
+    newGoalsLock = newGoals.value;
   }
 
   function alucardPaletteChange() {
@@ -868,27 +755,27 @@
     }
     const start = new Date().getTime()
     CoreRandomizer.randomize(
-        options,
-        seed,
-        elems.newGoals.value,
-        elems.godspeedMode.checked,
-        elems.mapColor.value,
-        elems.alucardPalette.value,
-        elems.alucardLiner.value,
-        elems.accessibilityPatches.checked,
-        haveChecksum,
-        expectChecksum,
-        CoreRandomizer.isDev(url),
-        showSpoilers,
-        null,
-        null,
-        fileOutputHandler,
-        null,
-        this.result
-    ).then(function(){
+      options,
+      seed,
+      elems.newGoals.value,
+      elems.godspeedMode.checked,
+      elems.mapColor.value,
+      elems.alucardPalette.value,
+      elems.alucardLiner.value,
+      elems.accessibilityPatches.checked,
+      haveChecksum,
+      expectChecksum,
+      CoreRandomizer.isDev(url),
+      showSpoilers,
+      null,
+      null,
+      fileOutputHandler,
+      null,
+      this.result
+    ).then(function () {
       resetCopy();
       hideLoader();
-      if(getVersion() === "0.0.0D") return; // Do not log local tests into the API.
+      if (getVersion() === "0.0.0D") return; // Do not log local tests into the API.
       const duration = new Date().getTime() - start
       doApiRequest("/data/presets", "POST", {
         "preset": selectedPreset,
@@ -1410,7 +1297,7 @@
     el.addEventListener('change', saveOption);
     loadCheckboxOption(el);
     let customChangeFunction = el.getAttribute('data-custom-change');
-    if(customChangeFunction) {
+    if (customChangeFunction) {
       el.addEventListener('change', ChangeHandlers[customChangeFunction]);
       ChangeHandlers[customChangeFunction]();
     }
