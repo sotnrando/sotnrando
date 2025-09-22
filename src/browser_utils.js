@@ -206,6 +206,51 @@ BrowserUtils.hideSpoilers = function hideSpoilers() {
     elems.spoilersContainer.classList.add('hide')
 }
 
+BrowserUtils.loadPresets = function loadPresets() {
+    let sortedPresets = sotnRando.presets
+    sortedPresets.sort(function (a, b) {
+        if (!('weight' in a && 'id' in a)) {
+            if (!('weight' in b && 'id' in b)) {
+                return 0
+            }
+            return 1
+        } else if (!('weight' in b && 'id' in b)) {
+            return -1
+        }
+        const weight = a.weight - b.weight
+        if (weight === 0) {
+            if (a.id < b.id) {
+                return -1
+            } else if (a.id > b.id) {
+                return 1
+            }
+        }
+        return weight
+    });
+
+    sortedPresets.forEach(function (preset) {
+        if (!preset.hidden) {
+            if (preset.id === "april-fools" && !isAprilFools) return;
+            const option = document.createElement('option')
+            option.value = preset.id
+            option.innerText = preset.name
+            if (preset.id === "april-fools") option.innerText = "April Fools";
+            elems.presetId.appendChild(option)
+        }
+    })
+}
+
+BrowserUtils.cloneItems = function cloneItems(items) {                     //Saves previous selections
+    return items.map(function (item) {
+        const clone = Object.assign({}, item)
+        delete clone.tiles
+        if (item.tiles) {
+            clone.tiles = item.tiles.slice()
+        }
+        return clone
+    })
+}
+
 //#region Change Handlers
 BrowserUtils.ChangeHandlers = {
     tournamentModeChange: function tournamentModeChange() {

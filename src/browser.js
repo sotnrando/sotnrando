@@ -2,6 +2,9 @@
 (function (window) {
   //#region Constants & General Variables
   const url = new URL(window.location.href)
+  const body = document.getElementsByTagName('body')[0]
+  const items = cloneItems(sotnRando.items)
+  let animationDone = true
   let currSeed
   let expectChecksum
   let haveChecksum
@@ -13,22 +16,14 @@
   let alucardPaletteLock
   let alucardLinerLock
   let isAprilFools
+  let options
+  let seed
+  let applied
+  let override
 
   //#endregion
 
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      const targetId = tab.getAttribute("data-tab");
-
-      // Remove active class from all tabs and contents
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-
-      // Activate selected tab and content
-      tab.classList.add("active");
-      document.getElementById(targetId).classList.add("active");
-    });
-  });
+  //#region Helper Functions & UI Controllers
 
   function displayRandomSplashText(seasonalEvent) {
     if (!seasonalEvent.toolSplashPhrases) return;
@@ -36,19 +31,6 @@
     const randomSplashIndex = Math.floor(Math.random() * splashPhrases.length);
     document.getElementById("splashTextDisplay").textContent = splashPhrases[randomSplashIndex];
   }
-
-  function cloneItems(items) {                                                              //Saves previous selections
-    return items.map(function (item) {
-      const clone = Object.assign({}, item)
-      delete clone.tiles
-      if (item.tiles) {
-        clone.tiles = item.tiles.slice()
-      }
-      return clone
-    })
-  }
-
-  const items = cloneItems(sotnRando.items)
 
   function disableDownload() {
     downloadReady = false
@@ -92,6 +74,353 @@
     elems.copy.disabled = !(elems.seed.value.length || (currSeed && currSeed.length));
   }
 
+  function isTodayBetweenDates(startMonth, startDay, endMonth, endDay) {
+    const today = new Date();
+    const year = today.getFullYear();
+
+    const startDate = new Date(year, startMonth, startDay);
+    const endDate = new Date(year, endMonth, endDay);
+
+    return today >= startDate && today < endDate;
+  }
+
+  function loadEventLogo(seasonalEvent) {
+    if (seasonalEvent.eventLogo) {
+      elems.logo.src = seasonalEvent.eventLogo;
+    }
+  }
+
+  function loadEvent() {
+    for (const seasonalEvent of sotnRando.constants.seasonalEvents) {
+      // Months are - 1 because JS months start from 0.
+      if (isTodayBetweenDates(seasonalEvent.startMonth - 1, seasonalEvent.startDay, seasonalEvent.endMonth - 1, seasonalEvent.endDay)) {
+        loadEventLogo(seasonalEvent);
+        displayRandomSplashText(seasonalEvent);
+        return;
+      }
+    }
+  }
+
+  function addDefaultEventListeners(){
+    mapColorSelect.addEventListener("click", updateMapColorPreview);
+    window.addEventListener("load", function () {
+      if (mapColorSelect.value) {
+        updateMapColorPreview();
+      }
+    });
+    body.addEventListener('dragover', dragOverListener)
+    body.addEventListener('dragleave', dragLeaveListener)
+    body.addEventListener('drop', dropListener)
+    elems.output.ppf.addEventListener('change', outputChange)
+    elems.output.bin.addEventListener('change', outputChange)
+    elems.file.addEventListener('change', fileChange)
+    elems.form.addEventListener('submit', submitListener)
+    elems.seed.addEventListener('change', seedChange)
+    elems.presetId.addEventListener('change', presetIdChange)
+    elems.complexity.addEventListener('change', complexityChange)
+    elems.complexity.addEventListener('input', updateCurrentComplexityValue);
+    elems.relicLocationsExtension.guarded.addEventListener(
+        'change',
+        relicLocationsExtensionChange,
+    )
+    elems.relicLocationsExtension.guardedplus.addEventListener(
+        'change',
+        relicLocationsExtensionChange,
+    )
+    elems.relicLocationsExtension.equipment.addEventListener(
+        'change',
+        relicLocationsExtensionChange,
+    )
+    elems.relicLocationsExtension.scenic.addEventListener(
+        'change',
+        relicLocationsExtensionChange,
+    )
+    elems.relicLocationsExtension.extended.addEventListener(
+        'change',
+        relicLocationsExtensionChange,
+    )
+    elems.relicLocationsExtension.classic.addEventListener(
+        'change',
+        relicLocationsExtensionChange,
+    )
+
+    elems.clear.addEventListener('click', clearHandler)
+    elems.theme.addEventListener('change', themeChange)
+    elems.mapColor.addEventListener('change', mapColorChange)
+    elems.newGoals.addEventListener('change', newGoalsChange)
+    elems.alucardPalette.addEventListener('change', alucardPaletteChange)
+    elems.alucardLiner.addEventListener('change', alucardLinerChange)
+    elems.copy.addEventListener('click', copyHandler)
+    elems.showOlder.addEventListener('click', showOlderHandler)
+    elems.excludeSongsOption.addEventListener('change', showExcludeMenu)
+    elems.esMoveToRight.addEventListener('click', excludeSong)
+    elems.esMoveToLeft.addEventListener('click', includeSong)
+    paletteSelect.addEventListener("change", updateAlucardPreview);
+    linerSelect.addEventListener("change", updateAlucardPreview);
+    window.addEventListener("load", function () {
+      if (paletteSelect.value || linerSelect.value) {
+        updateAlucardPreview();
+      }
+    });
+  }
+
+  function loadOptionsFromUrl() {
+    // This logic allows for the existence of option URLs for seeds.
+    const rs = sotnRando.util.optionsFromUrl(window.location.href)
+    options = rs.options
+    const applied = sotnRando.util.Preset.options(options)
+    seed = rs.seed
+    if (!Number.isNaN(rs.checksum)) {
+      expectChecksum = rs.checksum
+    }
+    if (typeof (seed) === 'string') {
+      elems.seed.value = seed
+      seedChange()
+      haveChecksum = true
+    }
+    if (seed.length) {
+      elems.seed.disabled = true
+    }
+    if (options.preset) {
+      let index = 0
+      for (let i = 0; i < sotnRando.presets.length; i++) {
+        if (sotnRando.presets[i].id === options.preset) {
+          elems.presetId.selectedIndex = index
+          break
+        }
+        if (!sotnRando.presets.hidden) {
+          index++
+        }
+      }
+      presetIdChange()
+
+    } else {
+      elems.presetId.selectedIndex = 0
+    }
+    presetChange()
+    elems.tournamentMode.checked = options.tournamentMode;
+    ChangeHandlers.tournamentModeChange()
+    elems.tournamentMode.disabled = true
+    let locations
+    if (typeof (applied.relicLocations) === 'object') {
+      locations = applied.relicLocations
+    } else {
+      locations = safe.options().relicLocations
+    }
+    Object.getOwnPropertyNames(locations).forEach(
+        function (key) {
+          if (/^[0-9]+(-[0-9]+)?$/.test(key)) {
+            elems.complexity.value = key.split('-').shift()
+          }
+        }
+    )
+    elems.enemyDrops.checked = applied.enemyDrops
+    let enemyDropsArg = ''
+    if (typeof (options.enemyDrops) === 'object') {
+      enemyDropsArg = sotnRando.util.optionsToString({
+        enemyDrops: options.enemyDrops,
+      })
+    }
+    elems.enemyDropsArg.value = enemyDropsArg
+    elems.startingEquipment.checked = applied.startingEquipment
+    let startingEquipmentArg = ''
+    if (typeof (options.startingEquipment) === 'object') {
+      startingEquipmentArg = sotnRando.util.optionsToString({
+        startingEquipment: options.startingEquipment,
+      })
+    }
+    elems.startingEquipmentArg.value = startingEquipmentArg
+    elems.itemLocations.checked = applied.itemLocations
+    let itemLocationsArg = ''
+    if (typeof (options.itemLocations) === 'object') {
+      itemLocationsArg = sotnRando.util.optionsToString({
+        itemLocations: options.itemLocations,
+      })
+    }
+    elems.itemLocationsArg.value = itemLocationsArg
+    elems.prologueRewards.checked = applied.prologueRewards
+    let prologueRewardsArg = ''
+    if (typeof (options.prologueRewards) === 'object') {
+      prologueRewardsArg = sotnRando.util.optionsToString({
+        prologueRewards: options.prologueRewards,
+      })
+    }
+    elems.prologueRewardsArg.value = prologueRewardsArg
+    elems.relicLocations.checked = !!applied.relicLocations
+    let relicLocationsArg = ''
+    if (typeof (options.relicLocations) === 'object') {
+      // This is a hacky way to get all possible relic location locks
+      // serialized, without including the relic locations extension.
+      const relicOptions = sotnRando.util.optionsFromString(sotnRando.util.optionsToString({
+        relicLocations: Object.assign({}, applied.relicLocations, {
+          extension: sotnRando.constants.EXTENSION.SCENIC,
+        }),
+      }).replace(new RegExp(':?' + sotnRando.util.optionsToString({
+        relicLocations: {
+          extension: sotnRando.constants.EXTENSION.SCENIC,
+        },
+      }).slice(2)), ''))
+      // Restore original extension from URL.
+      if ('extension' in options.relicLocations) {
+        relicOptions.relicLocations.extension
+            = options.relicLocations.extension
+      }
+      relicLocationsArg = sotnRando.util.optionsToString(relicOptions)
+    }
+    elems.relicLocationsArg.value = relicLocationsArg
+    elems.relicLocationsExtension.extended.checked =
+        applied.relicLocations
+        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EXTENDED
+    elems.relicLocationsExtension.scenic.checked =
+        applied.relicLocations
+        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.SCENIC
+    elems.relicLocationsExtension.guarded.checked =
+        applied.relicLocations
+        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDED
+    elems.relicLocationsExtension.guardedplus.checked =
+        applied.relicLocations
+        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDEDPLUS
+    elems.relicLocationsExtension.equipment.checked =
+        applied.relicLocations
+        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EQUIPMENT
+    elems.relicLocationsExtension.classic.checked =
+        applied.relicLocations
+        && !applied.relicLocations.extension
+    relicLocationsExtensionChange()
+    let writes = ''
+    if (options.writes) {
+      writes = sotnRando.util.optionsToString({ writes: options.writes })
+    }
+    elems.writes.value = writes
+    elems.stats.checked = applied.stats
+    ChangeHandlers.statsChange();
+    elems.music.checked = applied.music
+    elems.turkeyMode.checked = applied.turkeyMode
+    elems.presetId.disabled = true
+    elems.complexity.disabled = true
+    elems.enemyDrops.disabled = true
+    elems.startingEquipment.disabled = true
+    elems.itemLocations.disabled = true
+    elems.prologueRewards.disabled = true
+    elems.relicLocations.disabled = false
+    elems.relicLocationsSet.disabled = false
+    elems.stats.disabled = true
+    elems.music.disabled = true
+    elems.turkeyMode.disabled = true
+    elems.clear.classList.remove('hidden')
+    const baseUrl = url.origin + url.pathname
+    window.history.replaceState({}, document.title, baseUrl)
+  }
+
+  function loadPastOptions() {
+    loadOption('complexity', complexityChange, 7)
+
+    let relicLocationsExtension =
+        localStorage.getItem('relicLocationsExtension')
+    if (typeof (relicLocationsExtension) === 'string') {
+      switch (relicLocationsExtension) {
+        case sotnRando.constants.EXTENSION.GUARDED:
+          elems.relicLocationsExtension.guarded.checked = true
+          break
+        case sotnRando.constants.EXTENSION.GUARDEDPLUS:
+          elems.relicLocationsExtension.guardedplus.checked = true
+          break
+        case sotnRando.constants.EXTENSION.EQUIPMENT:
+          elems.relicLocationsExtension.equipment.checked = true
+          break
+        case sotnRando.constants.EXTENSION.EXTENDED:
+          elems.relicLocationsExtension.extended.checked = true
+          break
+        case sotnRando.constants.EXTENSION.SCENIC:
+          elems.relicLocationsExtension.scenic.checked = true
+          break
+        default:
+          elems.relicLocationsExtension.classic.checked = true
+          break
+      }
+    } else if (sotnRando.constants.defaultExtension) {
+      elems.relicLocationsExtension[sotnRando.constants.defaultExtension].checked = true
+    } else {
+      elems.relicLocationsExtension.classic.checked = true
+    }
+    relicLocationsExtensionChange()
+    let presetId = localStorage.getItem('presetId')
+    if (typeof (presetId) !== 'string') {
+      presetId = 'casual'
+    }
+    let index = 0
+    for (let i = 0; i < sotnRando.presets.length; i++) {
+      if (sotnRando.presets[i].id === presetId) {
+        elems.presetId.selectedIndex = index
+        break
+      }
+      if (!sotnRando.presets.hidden) {
+        index++
+      }
+    }
+    presetIdChange()
+    loadOption('preset', presetChange, true)
+  }
+
+  function showDevWarning() {
+    document.body.classList.add('dev')
+    document.getElementById('dev-border').classList.add('dev')
+    document.writeln([
+      '<div id="warning">WARNING: This is the development version of the',
+      'randomizer. Do not use this unless you know what you\'re doing.',
+      'Bugs and softlocks are to be expected.<br>',
+      'Go to <a href="https://sotn.io">sotn.io</a> for the stable release.',
+      '</div>',
+    ].join(' '))
+    setTimeout(function () {
+      document.getElementById('content').prepend(
+          document.getElementById('warning'),
+      )
+    })
+  }
+
+  function loadSeedType(){
+    const output = localStorage.getItem('output')
+    if (output === 'ppf') {
+      elems.output.ppf.checked = true
+    } else {
+      elems.output.bin.checked = true
+    }
+  }
+
+  function addCheckboxesHandlers() {
+    const checkboxesToStore = document.querySelectorAll('[data-store-checkbox="true"], [data-store-checkbox="false"]');
+    checkboxesToStore.forEach(el => {
+      el.addEventListener('change', saveOption);
+      loadCheckboxOption(el);
+      let customChangeFunction = el.getAttribute('data-custom-change');
+      if (customChangeFunction) {
+        el.addEventListener('change', ChangeHandlers[customChangeFunction]);
+        ChangeHandlers[customChangeFunction]();
+      }
+    });
+  }
+
+  function loadMenuOptions() {
+    loadOption('theme', themeChange, 'menu')
+    loadOption('mapColor', mapColorChange, 'menu')
+    loadOption('newGoals', newGoalsChange, 'menu')
+    loadOption('alucardPalette', alucardPaletteChange, 'menu')
+    loadOption('alucardLiner', alucardLinerChange, 'menu')
+  }
+
+  function showHiddenTooltips(){
+    setTimeout(function () {
+      const els = document.getElementsByClassName('tooltip')
+      Array.prototype.forEach.call(els, function (el) {
+        el.classList.remove('hidden')
+      })
+    })
+  }
+
+  //#endregion
+
+  //#region Event Handlers & Listeners
   function outputChange(event) {
     if (elems.output.ppf.checked) {
       elems.target.classList.add('hide')
@@ -122,7 +451,6 @@
     if (event) {
       elems.options.classList.add('animate')
     }
-
   }
 
   function updateAlucardPreview() {
@@ -140,34 +468,10 @@
     linerDisplay.style.backgroundPositionX = (768 - linerIndex * 96) + "px";
   }
 
-  // Initial render
-  updateAlucardPreview();
-
-  // Update preview on selection change
-  paletteSelect.addEventListener("change", updateAlucardPreview);
-  linerSelect.addEventListener("change", updateAlucardPreview);
-
-  // Re-render on page load if values are present
-  window.addEventListener("load", function () {
-    if (paletteSelect.value || linerSelect.value) {
-      updateAlucardPreview();
-    }
-  });
-
   function updateMapColorPreview() {
     // Calculate current position based on the selected options
     let mapColorIndex = mapColorSelect.selectedIndex;
     mapColorDisplay.style.backgroundPositionX = (432 - (mapColorIndex * 48)) + "px";
-  }
-
-  mapColorSelect.onclick = function () {
-    updateMapColorPreview();
-  }
-
-  window.onload = function () {
-    if (mapColorSelect.value) {
-      updateMapColorPreview();
-    }
   }
 
   function presetIdChange() {
@@ -415,7 +719,6 @@
         break
       }
     }
-
     relicLocationsExtensionCache = value
     adjustMaxComplexity()
     complexityChange()
@@ -641,118 +944,6 @@
     })
   }
 
-  function submitListener(event) {
-    // Get seed.
-    let selectedPreset
-    if (isAprilFools) {
-      elems.presetId.value = "april-fools";
-      presetIdChange();
-    }
-
-    selectedPreset = elems.presetId.childNodes[elems.presetId.selectedIndex].value
-    self.sotnRando.selectedPreset = selectedPreset
-
-    event.preventDefault()
-    event.stopPropagation()
-    // Disable UI.
-    disableDownload()
-    // Show loading bar.
-    showLoader()
-
-    let seed = generateSeedName()
-    if (elems.seed.value.length) {
-      seed = elems.seed.value
-    }
-    currSeed = seed
-    // Get options.
-    const options = getFormOptions()
-    // Check for overriding preset.
-    let applied
-    let override
-    for (let preset of sotnRando.presets) {
-      if (preset.override) {
-        applied = preset.options()
-        override = true
-        break
-      }
-    }
-    // Get user specified options.
-    if (!override) {
-      applied = sotnRando.util.Preset.options(options)
-    }
-    if (elems.complexity.value) {
-      deleteOriginalComplexity(applied, elems.complexity.value);
-    }
-    function handleError(err) {
-      if (!sotnRando.errors.isError(err)) {
-        console.error(err)
-      }
-      elems.target.classList.remove('active')
-      elems.target.classList.add('error')
-      elems.status.innerText = err.message
-    }
-    function restoreItems() {
-      sotnRando.items = cloneItems(items)
-    }
-    const start = new Date().getTime()
-    CoreRandomizer.randomize(
-      options,
-      seed,
-      elems.newGoals.value,
-      elems.godspeedMode.checked,
-      elems.mapColor.value,
-      elems.alucardPalette.value,
-      elems.alucardLiner.value,
-      elems.accessibilityPatches.checked,
-      haveChecksum,
-      expectChecksum,
-      CoreRandomizer.isDev(url),
-      showSpoilers,
-      null,
-      null,
-      fileOutputHandler,
-      null,
-      this.result
-    ).then(function () {
-      resetCopy();
-      hideLoader();
-      if (getVersion() === "0.0.0D") return; // Do not log local tests into the API.
-      const duration = new Date().getTime() - start
-      doApiRequest("/data/presets", "POST", {
-        "preset": selectedPreset,
-        "generation_time": duration,
-        "app": CoreRandomizer.isDev(url) ? "dev-web" : "web",
-        "settings": {
-          "tournament": elems.tournamentMode.checked,
-          "color_rando": elems.colorrandoMode.checked,
-          "magic_max": elems.magicmaxMode.checked,
-          "anti_freeze": elems.antiFreezeMode.checked,
-          "purse_mode": elems.mypurseMode.checked,
-          "infinite_wing_smash": elems.iwsMode.checked,
-          "fast_warp": elems.fastwarpMode.checked,
-          "no_prologue": elems.noprologueMode.checked,
-          "unlocked": elems.unlockedMode.checked,
-          "surprise": elems.surpriseMode.checked,
-          "enemy_stat": elems.enemyStatRandoMode.checked,
-          "relic_extension": null
-        }
-      })
-    }).catch(handleError).finally(restoreItems)
-
-    if (!elems.output.ppf.checked) {
-      const reader = new FileReader()
-      reader.addEventListener('load', function () {
-        // Verify vanilla bin.
-        sotnRando.util.sha256(this.result).then(function (digest) {
-          if (digest !== sotnRando.constants.digest) {
-            throw new Error('Disc image is not a valid or vanilla backup')
-          }
-        }).then(randomize.bind(this)).catch(handleError).finally(restoreItems)
-      })
-      reader.readAsArrayBuffer(selectedFile)
-    }
-  }
-
   function clearHandler(event) {
     event.preventDefault()
     event.stopPropagation()
@@ -785,8 +976,6 @@
 
     presetChange()
   }
-
-  let animationDone = true
 
   function copyHandler(event) {
     event.preventDefault()
@@ -863,368 +1052,164 @@
     loadStoredSongs();
   }
 
-  function isTodayBetweenDates(startMonth, startDay, endMonth, endDay) {
-    const today = new Date();
-    const year = today.getFullYear();
+  //#endregion
 
-    const startDate = new Date(year, startMonth, startDay);
-    const endDate = new Date(year, endMonth, endDay);
+  //#region Randomization Step Process
 
-    return today >= startDate && today < endDate;
+  function handleError(err) {
+    if (!sotnRando.errors.isError(err)) {
+      console.error(err)
+    }
+    elems.target.classList.remove('active')
+    elems.target.classList.add('error')
+    elems.status.innerText = err.message
+  }
+  function restoreItems() {
+    sotnRando.items = cloneItems(items)
   }
 
-  function loadEventLogo(seasonalEvent) {
-    if (seasonalEvent.eventLogo) {
-      elems.logo.src = seasonalEvent.eventLogo;
-    }
-  }
-
-  function loadEvent() {
-    for (const seasonalEvent of sotnRando.constants.seasonalEvents) {
-      // Months are - 1 because JS months start from 0.
-      if (isTodayBetweenDates(seasonalEvent.startMonth - 1, seasonalEvent.startDay, seasonalEvent.endMonth - 1, seasonalEvent.endDay)) {
-        loadEventLogo(seasonalEvent);
-        displayRandomSplashText(seasonalEvent);
-        return;
-      }
-    }
-  }
-
-  //#region Initialize Browser
-
-  const body = document.getElementsByTagName('body')[0]
-  body.addEventListener('dragover', dragOverListener)
-  body.addEventListener('dragleave', dragLeaveListener)
-  body.addEventListener('drop', dropListener)
-
-  loadEvent();
-  resetState();
-  elems.output.ppf.addEventListener('change', outputChange)
-  elems.output.bin.addEventListener('change', outputChange)
-  elems.file.addEventListener('change', fileChange)
-  elems.form.addEventListener('submit', submitListener)
-  elems.seed.addEventListener('change', seedChange)
-  elems.presetId.addEventListener('change', presetIdChange)
-  elems.complexity.addEventListener('change', complexityChange)
-  elems.complexity.addEventListener('input', updateCurrentComplexityValue);
-  elems.relicLocationsExtension.guarded.addEventListener(
-    'change',
-    relicLocationsExtensionChange,
-  )
-  elems.relicLocationsExtension.guardedplus.addEventListener(
-    'change',
-    relicLocationsExtensionChange,
-  )
-  elems.relicLocationsExtension.equipment.addEventListener(
-    'change',
-    relicLocationsExtensionChange,
-  )
-  elems.relicLocationsExtension.scenic.addEventListener(
-    'change',
-    relicLocationsExtensionChange,
-  )
-  elems.relicLocationsExtension.extended.addEventListener(
-    'change',
-    relicLocationsExtensionChange,
-  )
-  elems.relicLocationsExtension.classic.addEventListener(
-    'change',
-    relicLocationsExtensionChange,
-  )
-
-  elems.clear.addEventListener('click', clearHandler)
-  elems.theme.addEventListener('change', themeChange)
-  elems.mapColor.addEventListener('change', mapColorChange)
-  elems.newGoals.addEventListener('change', newGoalsChange)
-  elems.alucardPalette.addEventListener('change', alucardPaletteChange)
-  elems.alucardLiner.addEventListener('change', alucardLinerChange)
-  elems.copy.addEventListener('click', copyHandler)
-  elems.showOlder.addEventListener('click', showOlderHandler)
-  elems.excludeSongsOption.addEventListener('change', showExcludeMenu)
-  elems.esMoveToRight.addEventListener('click', excludeSong)
-  elems.esMoveToLeft.addEventListener('click', includeSong)
-  // Set April Fools flag
-  const month = new Date().getMonth() + 1;
-  const day = new Date().getDate();
-  isAprilFools = month === 4 && day === 1;
-  // Load presets
-  sortedPresets = sotnRando.presets
-  sortedPresets.sort(function (a, b) {
-    if (!('weight' in a && 'id' in a)) {
-      if (!('weight' in b && 'id' in b)) {
-        return 0
-      }
-      return 1
-    } else if (!('weight' in b && 'id' in b)) {
-      return -1
-    }
-    const weight = a.weight - b.weight
-    if (weight === 0) {
-      if (a.id < b.id) {
-        return -1
-      } else if (a.id > b.id) {
-        return 1
-      }
-    }
-    return weight
-  });
-
-  sortedPresets.forEach(function (preset) {
-    if (!preset.hidden) {
-      if (preset.id === "april-fools" && !isAprilFools) return;
-      const option = document.createElement('option')
-      option.value = preset.id
-      option.innerText = preset.name
-      if (preset.id === "april-fools") option.innerText = "April Fools";
-      elems.presetId.appendChild(option)
-    }
-  })
-
-  document.getElementById('version').innerText = CoreRandomizer.getVersion();
-  let options
-  let seed
-  loadOption('excludeSongsOption', showExcludeMenu, false);
-  loadSongs();
-  if (url.search.length) {
-    const rs = sotnRando.util.optionsFromUrl(window.location.href)
-    options = rs.options
-    const applied = sotnRando.util.Preset.options(options)
-    seed = rs.seed
-    if (!Number.isNaN(rs.checksum)) {
-      expectChecksum = rs.checksum
-    }
-    if (typeof (seed) === 'string') {
-      elems.seed.value = seed
-      seedChange()
-      haveChecksum = true
-    }
-    if (seed.length) {
-      elems.seed.disabled = true
-    }
-    if (options.preset) {
-      let index = 0
-      for (let i = 0; i < sotnRando.presets.length; i++) {
-        if (sotnRando.presets[i].id === options.preset) {
-          elems.presetId.selectedIndex = index
-          break
-        }
-        if (!sotnRando.presets.hidden) {
-          index++
-        }
-      }
-      presetIdChange()
-
-    } else {
-      elems.presetId.selectedIndex = 0
-    }
-    presetChange()
-    elems.tournamentMode.checked = options.tournamentMode;
-    ChangeHandlers.tournamentModeChange()
-    elems.tournamentMode.disabled = true
-    let locations
-    if (typeof (applied.relicLocations) === 'object') {
-      locations = applied.relicLocations
-    } else {
-      locations = safe.options().relicLocations
-    }
-    Object.getOwnPropertyNames(locations).forEach(
-      function (key) {
-        if (/^[0-9]+(-[0-9]+)?$/.test(key)) {
-          elems.complexity.value = key.split('-').shift()
-        }
-      }
-    )
-    elems.enemyDrops.checked = applied.enemyDrops
-    let enemyDropsArg = ''
-    if (typeof (options.enemyDrops) === 'object') {
-      enemyDropsArg = sotnRando.util.optionsToString({
-        enemyDrops: options.enemyDrops,
-      })
-    }
-    elems.enemyDropsArg.value = enemyDropsArg
-    elems.startingEquipment.checked = applied.startingEquipment
-    let startingEquipmentArg = ''
-    if (typeof (options.startingEquipment) === 'object') {
-      startingEquipmentArg = sotnRando.util.optionsToString({
-        startingEquipment: options.startingEquipment,
-      })
-    }
-    elems.startingEquipmentArg.value = startingEquipmentArg
-    elems.itemLocations.checked = applied.itemLocations
-    let itemLocationsArg = ''
-    if (typeof (options.itemLocations) === 'object') {
-      itemLocationsArg = sotnRando.util.optionsToString({
-        itemLocations: options.itemLocations,
-      })
-    }
-    elems.itemLocationsArg.value = itemLocationsArg
-    elems.prologueRewards.checked = applied.prologueRewards
-    let prologueRewardsArg = ''
-    if (typeof (options.prologueRewards) === 'object') {
-      prologueRewardsArg = sotnRando.util.optionsToString({
-        prologueRewards: options.prologueRewards,
-      })
-    }
-    elems.prologueRewardsArg.value = prologueRewardsArg
-    elems.relicLocations.checked = !!applied.relicLocations
-    let relicLocationsArg = ''
-    if (typeof (options.relicLocations) === 'object') {
-      // This is a hacky way to get all possible relic location locks
-      // serialized, without including the relic locations extension.
-      const relicOptions = sotnRando.util.optionsFromString(sotnRando.util.optionsToString({
-        relicLocations: Object.assign({}, applied.relicLocations, {
-          extension: sotnRando.constants.EXTENSION.SCENIC,
-        }),
-      }).replace(new RegExp(':?' + sotnRando.util.optionsToString({
-        relicLocations: {
-          extension: sotnRando.constants.EXTENSION.SCENIC,
-        },
-      }).slice(2)), ''))
-      // Restore original extension from URL.
-      if ('extension' in options.relicLocations) {
-        relicOptions.relicLocations.extension
-          = options.relicLocations.extension
-      }
-      relicLocationsArg = sotnRando.util.optionsToString(relicOptions)
-    }
-    elems.relicLocationsArg.value = relicLocationsArg
-    elems.relicLocationsExtension.extended.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EXTENDED
-    elems.relicLocationsExtension.scenic.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.SCENIC
-    elems.relicLocationsExtension.guarded.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDED
-    elems.relicLocationsExtension.guardedplus.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDEDPLUS
-    elems.relicLocationsExtension.equipment.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EQUIPMENT
-    elems.relicLocationsExtension.classic.checked =
-      applied.relicLocations
-      && !applied.relicLocations.extension
-    relicLocationsExtensionChange()
-    let writes = ''
-    if (options.writes) {
-      writes = sotnRando.util.optionsToString({ writes: options.writes })
-    }
-    elems.writes.value = writes
-    elems.stats.checked = applied.stats
-    ChangeHandlers.statsChange();
-    elems.music.checked = applied.music
-    elems.turkeyMode.checked = applied.turkeyMode
-    elems.presetId.disabled = true
-    elems.complexity.disabled = true
-    elems.enemyDrops.disabled = true
-    elems.startingEquipment.disabled = true
-    elems.itemLocations.disabled = true
-    elems.prologueRewards.disabled = true
-    elems.relicLocations.disabled = false
-    elems.relicLocationsSet.disabled = false
-    elems.stats.disabled = true
-    elems.music.disabled = true
-    elems.turkeyMode.disabled = true
-    elems.clear.classList.remove('hidden')
-    const baseUrl = url.origin + url.pathname
-    window.history.replaceState({}, document.title, baseUrl)
-  } else {
-    loadOption('complexity', complexityChange, 7)
-
-    let relicLocationsExtension =
-      localStorage.getItem('relicLocationsExtension')
-    if (typeof (relicLocationsExtension) === 'string') {
-      switch (relicLocationsExtension) {
-        case sotnRando.constants.EXTENSION.GUARDED:
-          elems.relicLocationsExtension.guarded.checked = true
-          break
-        case sotnRando.constants.EXTENSION.GUARDEDPLUS:
-          elems.relicLocationsExtension.guardedplus.checked = true
-          break
-        case sotnRando.constants.EXTENSION.EQUIPMENT:
-          elems.relicLocationsExtension.equipment.checked = true
-          break
-        case sotnRando.constants.EXTENSION.EXTENDED:
-          elems.relicLocationsExtension.extended.checked = true
-          break
-        case sotnRando.constants.EXTENSION.SCENIC:
-          elems.relicLocationsExtension.scenic.checked = true
-          break
-        default:
-          elems.relicLocationsExtension.classic.checked = true
-          break
-      }
-    } else if (sotnRando.constants.defaultExtension) {
-      elems.relicLocationsExtension[sotnRando.constants.defaultExtension].checked = true
-    } else {
-      elems.relicLocationsExtension.classic.checked = true
-    }
-    relicLocationsExtensionChange()
-    let presetId = localStorage.getItem('presetId')
-    if (typeof (presetId) !== 'string') {
-      presetId = 'casual'
-    }
-    let index = 0
-    for (let i = 0; i < sotnRando.presets.length; i++) {
-      if (sotnRando.presets[i].id === presetId) {
-        elems.presetId.selectedIndex = index
+  function loadPresetOptions() {
+    for (let preset of sotnRando.presets) {
+      if (preset.override) {
+        applied = preset.options()
+        override = true
         break
       }
-      if (!sotnRando.presets.hidden) {
-        index++
-      }
     }
-    presetIdChange()
-    loadOption('preset', presetChange, true)
-  }
-  if (CoreRandomizer.isDev(url)) {
-    document.body.classList.add('dev')
-    document.getElementById('dev-border').classList.add('dev')
-    document.writeln([
-      '<div id="warning">WARNING: This is the development version of the',
-      'randomizer. Do not use this unless you know what you\'re doing.',
-      'Bugs and softlocks are to be expected.<br>',
-      'Go to <a href="https://sotn.io">sotn.io</a> for the stable release.',
-      '</div>',
-    ].join(' '))
-    setTimeout(function () {
-      document.getElementById('content').prepend(
-        document.getElementById('warning'),
-      )
-    })
-  }
-  const output = localStorage.getItem('output')
-  if (output === 'ppf') {
-    elems.output.ppf.checked = true
-  } else {
-    elems.output.bin.checked = true
-  }
-  outputChange()
-  // Load checkboxes values and their custom change handlers.
-  const checkboxesToStore = document.querySelectorAll('[data-store-checkbox="true"], [data-store-checkbox="false"]');
-  checkboxesToStore.forEach(el => {
-    el.addEventListener('change', saveOption);
-    loadCheckboxOption(el);
-    let customChangeFunction = el.getAttribute('data-custom-change');
-    if (customChangeFunction) {
-      el.addEventListener('change', ChangeHandlers[customChangeFunction]);
-      ChangeHandlers[customChangeFunction]();
+    // Get user specified options.
+    if (!override) {
+      applied = sotnRando.util.Preset.options(options)
     }
-  });
-  loadOption('theme', themeChange, 'menu')
-  loadOption('mapColor', mapColorChange, 'menu')
-  loadOption('newGoals', newGoalsChange, 'menu')
-  loadOption('alucardPalette', alucardPaletteChange, 'menu')
-  loadOption('alucardLiner', alucardLinerChange, 'menu')
-  setTimeout(function () {
-    const els = document.getElementsByClassName('tooltip')
-    Array.prototype.forEach.call(els, function (el) {
-      el.classList.remove('hidden')
-    })
-  })
-  presetIdChange()
+    if (elems.complexity.value) {
+      deleteOriginalComplexity(applied, elems.complexity.value);
+    }
+  }
 
+  function submitListener(event) {
+    // This is the logic that is executed when you press the Randomize button.
+    // Get seed.
+    event.preventDefault()
+    event.stopPropagation()
+    // Disable UI.
+    disableDownload()
+    // Show loading bar.
+    showLoader()
+
+    // If today is april fools, force the april fools preset.
+    let selectedPreset
+    if (isAprilFools) {
+      elems.presetId.value = "april-fools";
+      presetIdChange();
+    }
+
+    selectedPreset = elems.presetId.childNodes[elems.presetId.selectedIndex].value
+    self.sotnRando.selectedPreset = selectedPreset
+
+    currSeed = generateSeedName()
+    if (elems.seed.value.length) {
+      currSeed = elems.seed.value
+    }
+    // Get options.
+    const options = getFormOptions()
+    loadPresetOptions();
+
+    const start = new Date().getTime()
+    CoreRandomizer.randomize(
+      options,
+      currSeed,
+      elems.newGoals.value,
+      elems.godspeedMode.checked,
+      elems.mapColor.value,
+      elems.alucardPalette.value,
+      elems.alucardLiner.value,
+      elems.accessibilityPatches.checked,
+      haveChecksum,
+      expectChecksum,
+      CoreRandomizer.isDev(url),
+      showSpoilers,
+      null,
+      null,
+      fileOutputHandler,
+      null,
+      this.result
+    ).then(function () {
+      resetCopy();
+      hideLoader();
+      if (getVersion() === "0.0.0D") return; // Do not log local tests into the API.
+      const duration = new Date().getTime() - start
+      doApiRequest("/data/presets", "POST", {
+        "preset": selectedPreset,
+        "generation_time": duration,
+        "app": CoreRandomizer.isDev(url) ? "dev-web" : "web",
+        "settings": {
+          "tournament": elems.tournamentMode.checked,
+          "color_rando": elems.colorrandoMode.checked,
+          "magic_max": elems.magicmaxMode.checked,
+          "anti_freeze": elems.antiFreezeMode.checked,
+          "purse_mode": elems.mypurseMode.checked,
+          "infinite_wing_smash": elems.iwsMode.checked,
+          "fast_warp": elems.fastwarpMode.checked,
+          "no_prologue": elems.noprologueMode.checked,
+          "unlocked": elems.unlockedMode.checked,
+          "surprise": elems.surpriseMode.checked,
+          "enemy_stat": elems.enemyStatRandoMode.checked,
+          "relic_extension": null
+        }
+      })
+    }).catch(handleError).finally(restoreItems)
+
+    if (!elems.output.ppf.checked) {
+      const reader = new FileReader()
+      reader.addEventListener('load', function () {
+        // Verify vanilla bin.
+        sotnRando.util.sha256(this.result).then(function (digest) {
+          if (digest !== sotnRando.constants.digest) {
+            throw new Error('Disc image is not a valid or vanilla backup')
+          }
+        }).then(randomize.bind(this)).catch(handleError).finally(restoreItems)
+      })
+      reader.readAsArrayBuffer(selectedFile)
+    }
+  }
+
+  //#endregion
+
+  //#region Initialize Process (Load Browser)
+
+  function initializeBrowser() {
+    // Initial render
+    updateAlucardPreview();
+    loadEvent();
+    resetState();
+    addDefaultEventListeners();
+    // Set April Fools flag
+    const month = new Date().getMonth() + 1;
+    const day = new Date().getDate();
+    isAprilFools = month === 4 && day === 1;
+    // Load presets
+    loadPresets();
+
+    document.getElementById('version').innerText = CoreRandomizer.getVersion();
+
+    loadOption('excludeSongsOption', showExcludeMenu, false);
+    loadSongs();
+    if (url.search.length) { // If the URL includes query params, it means that it is a URL preloaded with options.
+      loadOptionsFromUrl();
+    } else {
+      loadPastOptions();
+    }
+    if (CoreRandomizer.isDev(url)) {
+      showDevWarning();
+    }
+    loadSeedType(); // Tells whether to use PPF or BIN
+    outputChange();
+    // Load checkboxes values and their custom change handlers.
+    addCheckboxesHandlers();
+    loadMenuOptions();
+    showHiddenTooltips();
+    presetIdChange();
+  }
+
+  initializeBrowser();
   //#endregion
 })(typeof (window) !== 'undefined' ? window : null)
