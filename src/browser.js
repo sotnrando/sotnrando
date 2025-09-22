@@ -118,11 +118,11 @@
     elems.presetSelect.classList.remove('hide')
     elems.presetDetails.classList.remove('hide')
     presetIdChange()
-    
+
     if (event) {
       elems.options.classList.add('animate')
     }
-    
+
   }
 
   function updateAlucardPreview() {
@@ -271,7 +271,7 @@
     localStorage.setItem("presetId", preset.id);
 
     enableAll();
-    
+
     let goal = computeGoal(preset.id);
     goal = validateGoal(preset.id, goal);
     elems.newGoals.value = goal;
@@ -384,18 +384,18 @@
   }
 
   function adjustMaxComplexity() {
-  const EXT = sotnRando.constants.EXTENSION
-  const highCap = [EXT.EQUIPMENT, EXT.SCENIC].includes(relicLocationsExtensionCache)
-  const max = highCap ? 15 : 11
+    const EXT = sotnRando.constants.EXTENSION
+    const highCap = [EXT.EQUIPMENT, EXT.SCENIC].includes(relicLocationsExtensionCache)
+    const max = highCap ? 15 : 11
 
-  elems.complexity.max = max
-  generateComplexityDataListItems(max)
-  elems.complexityMaxValue.innerText = max
+    elems.complexity.max = max
+    generateComplexityDataListItems(max)
+    elems.complexityMaxValue.innerText = max
 
-  if (+elems.complexity.value > max) {
-    elems.complexity.value = max
+    if (+elems.complexity.value > max) {
+      elems.complexity.value = max
+    }
   }
-}
   function relicLocationsExtensionChange() {
     const ext = elems.relicLocationsExtension
     const EXT = sotnRando.constants.EXTENSION
@@ -604,30 +604,30 @@
     return relicLocations
   }
 
-function getFormOptions() {
-  const options = {
-    preset: sotnRando.presets[elems.presetId.selectedIndex].id,
-    relicLocations: getFormRelicLocations()
-  }
-
-  const keys = [
-    'tournamentMode', 'colorrandoMode', 'magicmaxMode', 'antiFreezeMode',
-    'mypurseMode', 'iwsMode', 'fastwarpMode', 'itemNameRandoMode',
-    'noprologueMode', 'unlockedMode', 'surpriseMode', 'enemyStatRandoMode',
-    'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
-    'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
-    'libraryShortcut', 'elemChaosMode', 'simpleInputMode', 'devStashMode',
-    'seasonalPhrasesMode', 'bossMusicSeparation'
-  ]
-
-  keys.forEach(key => {
-    if (elems[key]?.checked) {
-      options[key] = true
+  function getFormOptions() {
+    const options = {
+      preset: sotnRando.presets[elems.presetId.selectedIndex].id,
+      relicLocations: getFormRelicLocations()
     }
-  })
 
-  return options
-}
+    const formOptions = [
+      'tournamentMode', 'colorrandoMode', 'magicmaxMode', 'antiFreezeMode',
+      'mypurseMode', 'iwsMode', 'fastwarpMode', 'itemNameRandoMode',
+      'noprologueMode', 'unlockedMode', 'surpriseMode', 'enemyStatRandoMode',
+      'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
+      'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
+      'libraryShortcut', 'elemChaosMode', 'simpleInputMode', 'devStashMode',
+      'seasonalPhrasesMode', 'bossMusicSeparation'
+    ]
+
+    formOptions.forEach(key => {
+      if (elems[key]?.checked) {
+        options[key] = true
+      }
+    })
+
+    return options
+  }
 
   function deleteOriginalComplexity(options, newComplexity) {
     let relicLocations = options.relicLocations;
@@ -754,52 +754,35 @@ function getFormOptions() {
   }
 
   function clearHandler(event) {
-    expectChecksum = undefined
     event.preventDefault()
     event.stopPropagation()
-    elems.seed.value = ''
-    elems.seed.disabled = false
-    elems.presetId.disabled = false
-    elems.enemyDrops.disabled = false
-    elems.enemyDropsArg.value = ''
-    elems.startingEquipment.disabled = false
-    elems.startingEquipmentArg.value = ''
-    elems.itemLocations.disabled = false
-    elems.itemLocationsArg.value = ''
-    elems.prologueRewards.disabled = false
-    elems.prologueRewardsArg.value = ''
-    elems.relicLocations.disabled = false
-    elems.relicLocationsSet.disabled = false
-    elems.relicLocationsArg.value = ''
-    elems.writes.value = ''
-    elems.turkeyMode.disabled = false
-    elems.magicmaxMode.disabled = false
-    elems.colorrandoMode.disabled = false
-    elems.antiFreezeMode.disabled = false
-    elems.mypurseMode.disabled = false
-    elems.iwsMode.disabled = false
-    elems.fastwarpMode.disabled = false
-    elems.noprologueMode.disabled = false
-    elems.unlockedMode.disabled = false
-    elems.surpriseMode.disabled = false
-    elems.enemyStatRandoMode.disabled = false
-    elems.shopPriceRandoMode.disabled = false
-    elems.startRoomRandoMode.disabled = false
-    elems.startRoomRando2ndMode.disabled = false
-    elems.dominoMode.disabled = false
-    elems.rlbcMode.disabled = false
-    elems.newGoals.value = ''
-    elems.immunityPotionMode.disabled = false
-    elems.godspeedMode.disabled = false
-    elems.libraryShortcut.disabled = false
-    elems.elemChaosMode.disabled = false
-    elems.simpleInputMode.disabled = false
-    elems.devStashMode.disabled = false
-    elems.seasonalPhrasesMode.disabled = false
+    expectChecksum = undefined
+
+    // Reset values
+    const resetFields = [
+      'seed', 'enemyDropsArg', 'startingEquipmentArg', 'itemLocationsArg',
+      'prologueRewardsArg', 'relicLocationsArg', 'writes', 'newGoals'
+    ]
+    resetFields.forEach(key => elems[key].value = '')
+
+    // Enable toggles
+    const clearFields = [
+      'seed', 'presetId', 'enemyDrops', 'startingEquipment', 'itemLocations',
+      'prologueRewards', 'relicLocations', 'relicLocationsSet', 'turkeyMode',
+      'magicmaxMode', 'colorrandoMode', 'antiFreezeMode', 'mypurseMode',
+      'iwsMode', 'fastwarpMode', 'noprologueMode', 'unlockedMode',
+      'surpriseMode', 'enemyStatRandoMode', 'shopPriceRandoMode',
+      'startRoomRandoMode', 'startRoomRando2ndMode', 'dominoMode', 'rlbcMode',
+      'immunityPotionMode', 'godspeedMode', 'libraryShortcut', 'elemChaosMode',
+      'simpleInputMode', 'devStashMode', 'seasonalPhrasesMode',
+      'bossMusicSeparation', 'tournamentMode'
+    ]
+    clearFields.forEach(key => elems[key].disabled = false)
+
+    // Special case
     elems.seasonalPhrasesMode.value = true
-    elems.bossMusicSeparation.disabled = false
-    elems.tournamentMode.disabled = false
     elems.clear.classList.add('hidden')
+
     presetChange()
   }
 
@@ -808,34 +791,20 @@ function getFormOptions() {
   function copyHandler(event) {
     event.preventDefault()
     event.stopPropagation()
-    //elems.seed.value = elems.seed.value || currSeed || ''
-    // const url = util.optionsToUrl(                                     Removed to change the copy seed button to a Copy Spoilers button
-    //   version,
-    //   getFormOptions(),
-    //   checksum,
-    //   elems.seed.value,
-    //   window.location.href,
-    // )
-    // const input = document.createElement('input')
-    // document.body.appendChild(input)
-    // input.type = 'text'
-    // input.value = url.toString()
-    // input.select()
-    // document.execCommand('copy')
-    // document.body.removeChild(input)
-    navigator.clipboard.writeText(spoilers.value);
-    if (animationDone) {
-      animationDone = false
-      elems.notification.classList.add('success')
-      elems.notification.classList.remove('hide')
-      setTimeout(function () {
-        elems.notification.classList.add('hide')
-      }, 2000)
-      setTimeout(function () {
-        elems.notification.classList.remove('success')
-        animationDone = true
-      }, 4000)
-    }
+
+    navigator.clipboard.writeText(spoilers.value)
+
+    if (!animationDone) return
+
+    animationDone = false
+    elems.notification.classList.add('success')
+    elems.notification.classList.remove('hide')
+
+    setTimeout(() => elems.notification.classList.add('hide'), 2000)
+    setTimeout(() => {
+      elems.notification.classList.remove('success')
+      animationDone = true
+    }, 4000)
   }
 
   function showOlderHandler(event) {
@@ -1044,7 +1013,7 @@ function getFormOptions() {
         }
       }
       presetIdChange()
-      
+
     } else {
       elems.presetId.selectedIndex = 0
     }
@@ -1256,6 +1225,6 @@ function getFormOptions() {
     })
   })
   presetIdChange()
-  
+
   //#endregion
 })(typeof (window) !== 'undefined' ? window : null)
