@@ -1068,7 +1068,7 @@
     sotnRando.items = cloneItems(items)
   }
 
-  function loadPresetOptions() {
+  function loadPresetOptions(formOptions) {
     for (let preset of sotnRando.presets) {
       if (preset.override) {
         applied = preset.options()
@@ -1078,7 +1078,7 @@
     }
     // Get user specified options.
     if (!override) {
-      applied = sotnRando.util.Preset.options(options)
+      applied = sotnRando.util.Preset.options(formOptions)
     }
     if (elems.complexity.value) {
       deleteOriginalComplexity(applied, elems.complexity.value);
@@ -1111,7 +1111,7 @@
     }
     // Get options.
     const options = getFormOptions()
-    loadPresetOptions();
+    loadPresetOptions(options);
 
     const start = new Date().getTime()
     CoreRandomizer.randomize(
