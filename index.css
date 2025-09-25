@@ -11,12 +11,25 @@ body {
     margin: auto;
     
 }
+#optionsLogOutput {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+  font-family: monospace;
+  background: #111;
+  color: #eee;
+  padding: 12px;
+  border-radius: 6px;
+}
 
 h4{
     margin-left: 1em;
 }
 .customizations{
     width: 100%;
+    div{
+        margin: 3px 0;
+    }
 }
 
 .map-color{
@@ -123,9 +136,15 @@ h1 {
 }
 .left-column-options{
     flex-basis: 50%;
+    div{
+        margin: 2px 0;
+    }
 }
 .right-column-options{
     flex-basis: 50%;
+    div{
+        margin: 2px 0;
+    }
 }
 
 
@@ -296,10 +315,61 @@ h3 time {
 
 .checkboxes{
     display:flex;
+    
 }
 
 
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 18px;
+}
 
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #a5a5a5;
+  transition: 0.3s;
+  border-radius: 18px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 0px;
+  bottom: 0px;
+  background-color: rgb(204, 204, 204);
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .slider {
+  background-color: #4CAF50;
+}
+
+.toggle-switch input:checked + .slider::before {
+  transform: translateX(18px); 
+}
+
+.toggle-switch input:disabled + .slider {
+  background-color: #424242;
+  cursor: not-allowed;
+}
+
+.toggle-switch input:disabled + .slider::before {
+  background-color: #a0a0a0;
+}
 
 
 input[type="number"] {
