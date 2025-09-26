@@ -6843,6 +6843,12 @@ function hexValueToDamageString(hexValue) {
 	data.writeChar(0xAE663, 0x02)
 	data.writeChar(0xAE664, 0x00)	// Change Room
 
+	offset = 0x119C98				// Always get HR & NB Prologue Rewards
+	offset = data.writeWord(offset,0x18000002)
+	offset = data.writeWord(offset,0x00000000)
+	offset = 0x119CFC
+	offset = data.writeWord(offset,0x00000000)
+
     return data
   }
 
