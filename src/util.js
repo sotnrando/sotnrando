@@ -6819,7 +6819,7 @@ function hexValueToDamageString(hexValue) {
     offset = data.writeWord(offset,0x0803fef0)      // place hook in relic reset
     offset = data.writeWord(offset,0x00000000)
 
-    offset = 0x001199b8                             // start code in richter (no use in no-prologue)
+    offset = 0x001199b8                             // start code in richter (no use in no-prologue) 
     offset = data.writeWord(offset,0xa0600000)      // reset the time attack to allow bosses to spawn
     offset = data.writeWord(offset,0x2610ffff)
     offset = data.writeWord(offset,0x0601fffd)
@@ -6832,8 +6832,16 @@ function hexValueToDamageString(hexValue) {
     offset = data.writeWord(offset,0x2610ffff)
     offset = data.writeWord(offset,0x0601fffd)
     offset = data.writeWord(offset,0x24630004)
+	offset = data.writeWord(offset,0x3C028009)
+	offset = data.writeWord(offset,0x34427C34)
+	offset = data.writeWord(offset,0xAC400000)
+	offset = data.writeWord(offset,0xAC400004)
+	offset = data.writeWord(offset,0xAC400008)
     offset = data.writeWord(offset,0x0803ff6c)
     offset = data.writeWord(offset,0x00000000)
+
+	data.writeChar(0xAE663, 0x02)
+	data.writeChar(0xAE664, 0x00)	// Change Room
 
     return data
   }
