@@ -6669,13 +6669,12 @@
     "type": "word",
     "value": "0x00000000"
   }, {
-    "comment": "SF",
-    "address": "0x140A2C",
-    "type": "char",
-    "value": "0x00"
-  }, {
     "comment": "Obsidian has 1 ATK",
     "address": "0xB2A30",
+    "type": "char",
+    "value": "0x01"
+  }, {
+    "address": "0xB3C68",
     "type": "char",
     "value": "0x01"
   }, {
