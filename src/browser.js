@@ -101,7 +101,7 @@
     }
   }
 
-  function addDefaultEventListeners(){
+  function addDefaultEventListeners() {
     mapColorSelect.addEventListener("click", updateMapColorPreview);
     window.addEventListener("load", function () {
       if (mapColorSelect.value) {
@@ -120,28 +120,28 @@
     elems.complexity.addEventListener('change', complexityChange)
     elems.complexity.addEventListener('input', updateCurrentComplexityValue);
     elems.relicLocationsExtension.guarded.addEventListener(
-        'change',
-        relicLocationsExtensionChange,
+      'change',
+      relicLocationsExtensionChange,
     )
     elems.relicLocationsExtension.guardedplus.addEventListener(
-        'change',
-        relicLocationsExtensionChange,
+      'change',
+      relicLocationsExtensionChange,
     )
     elems.relicLocationsExtension.equipment.addEventListener(
-        'change',
-        relicLocationsExtensionChange,
+      'change',
+      relicLocationsExtensionChange,
     )
     elems.relicLocationsExtension.scenic.addEventListener(
-        'change',
-        relicLocationsExtensionChange,
+      'change',
+      relicLocationsExtensionChange,
     )
     elems.relicLocationsExtension.extended.addEventListener(
-        'change',
-        relicLocationsExtensionChange,
+      'change',
+      relicLocationsExtensionChange,
     )
     elems.relicLocationsExtension.classic.addEventListener(
-        'change',
-        relicLocationsExtensionChange,
+      'change',
+      relicLocationsExtensionChange,
     )
 
     elems.clear.addEventListener('click', clearHandler)
@@ -208,11 +208,11 @@
       locations = safe.options().relicLocations
     }
     Object.getOwnPropertyNames(locations).forEach(
-        function (key) {
-          if (/^[0-9]+(-[0-9]+)?$/.test(key)) {
-            elems.complexity.value = key.split('-').shift()
-          }
+      function (key) {
+        if (/^[0-9]+(-[0-9]+)?$/.test(key)) {
+          elems.complexity.value = key.split('-').shift()
         }
+      }
     )
     elems.enemyDrops.checked = applied.enemyDrops
     let enemyDropsArg = ''
@@ -263,29 +263,29 @@
       // Restore original extension from URL.
       if ('extension' in options.relicLocations) {
         relicOptions.relicLocations.extension
-            = options.relicLocations.extension
+          = options.relicLocations.extension
       }
       relicLocationsArg = sotnRando.util.optionsToString(relicOptions)
     }
     elems.relicLocationsArg.value = relicLocationsArg
     elems.relicLocationsExtension.extended.checked =
-        applied.relicLocations
-        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EXTENDED
+      applied.relicLocations
+      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EXTENDED
     elems.relicLocationsExtension.scenic.checked =
-        applied.relicLocations
-        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.SCENIC
+      applied.relicLocations
+      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.SCENIC
     elems.relicLocationsExtension.guarded.checked =
-        applied.relicLocations
-        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDED
+      applied.relicLocations
+      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDED
     elems.relicLocationsExtension.guardedplus.checked =
-        applied.relicLocations
-        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDEDPLUS
+      applied.relicLocations
+      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDEDPLUS
     elems.relicLocationsExtension.equipment.checked =
-        applied.relicLocations
-        && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EQUIPMENT
+      applied.relicLocations
+      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EQUIPMENT
     elems.relicLocationsExtension.classic.checked =
-        applied.relicLocations
-        && !applied.relicLocations.extension
+      applied.relicLocations
+      && !applied.relicLocations.extension
     relicLocationsExtensionChange()
     let writes = ''
     if (options.writes) {
@@ -316,7 +316,7 @@
     loadOption('complexity', complexityChange, 7)
 
     let relicLocationsExtension =
-        localStorage.getItem('relicLocationsExtension')
+      localStorage.getItem('relicLocationsExtension')
     if (typeof (relicLocationsExtension) === 'string') {
       switch (relicLocationsExtension) {
         case sotnRando.constants.EXTENSION.GUARDED:
@@ -374,12 +374,12 @@
     ].join(' '))
     setTimeout(function () {
       document.getElementById('content').prepend(
-          document.getElementById('warning'),
+        document.getElementById('warning'),
       )
     })
   }
 
-  function loadSeedType(){
+  function loadSeedType() {
     const output = localStorage.getItem('output')
     if (output === 'ppf') {
       elems.output.ppf.checked = true
@@ -409,7 +409,7 @@
     loadOption('alucardLiner', alucardLinerChange, 'menu')
   }
 
-  function showHiddenTooltips(){
+  function showHiddenTooltips() {
     setTimeout(function () {
       const els = document.getElementsByClassName('tooltip')
       Array.prototype.forEach.call(els, function (el) {
@@ -520,7 +520,7 @@
     };
     const GOAL_PRESETS = {
       b: new Set(["all-bosses", "mirror-breaker"]),
-      v: new Set(["boss-reflector", "cornivus"])
+      v: new Set(["boss-reflector", "cornivus", "nimble-lite-te"])
     };
 
     const enableAll = () => {
@@ -541,6 +541,7 @@
       return "default";
     };
 
+
     const validateGoal = (presetId, goal) => {
       const isBossGoal = goal === "b" || goal === "a" || goal === "v";
       const isRelicGoal = goal === "r" || goal === "a";
@@ -551,6 +552,25 @@
       if (isBhGoal && !BH_COMPAT.has(presetId)) return "default";
       return goal;
     };
+    const enforceGoalCompatibility = (presetId) => {
+      const goalOptions = elems.newGoals.options;
+      for (let i = 0; i < goalOptions.length; i++) {
+        const opt = goalOptions[i];
+        const val = opt.value;
+
+        const isBossGoal = val === "b" || val === "a" || val === "v";
+        const isRelicGoal = val === "r" || val === "a";
+        const isBhGoal = val === "h" || val === "t" || val === "w" || val === "x";
+
+        const incompatible =
+          (isBossGoal && !BOSS_COMPAT.has(presetId)) ||
+          (isRelicGoal && !RELIC_COMPAT.has(presetId)) ||
+          (isBhGoal && !BH_COMPAT.has(presetId));
+
+        opt.disabled = incompatible;
+      }
+    };
+
 
     let idx = elems.presetId.selectedIndex;
     if (idx < 0) idx = 0;
@@ -665,6 +685,7 @@
     };
 
     // Apply the unified logic
+    enforceGoalCompatibility(preset.id);
     applyOptions(options, preset.id);
     relicLocationsExtensionChange()  //added to adjust max complexity slider when preset is changed -Crazy4Blades
   }
