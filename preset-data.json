@@ -959,7 +959,7 @@
   {
     "name": "Vanilla",
     "id": "vanilla",
-    "description": "The vanilla game.",
+    "description": "The vanilla game without any randomization. Intended for playing the base game with just the basic enhancements provided by the ranodmizer.",
     "author": [
       "eldri7ch"
     ],
