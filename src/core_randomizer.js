@@ -34,12 +34,12 @@ function generateSeedName() {
 
     switch (month) {
         case 10:
-            adjectives = constants.adjectivesHalloween;
-            nouns = constants.nounsHalloween;
+            adjectives = sotnRando.constants.adjectivesHalloween;
+            nouns = sotnRando.constants.nounsHalloween;
             break;
         case 12:
-            adjectives = constants.adjectivesHolidays;
-            nouns = constants.nounsNormal;
+            adjectives = sotnRando.constants.adjectivesHolidays;
+            nouns = sotnRando.constants.nounsNormal;
             break;
 
         default:
