@@ -3336,7 +3336,7 @@ function hexValueToDamageString(hexValue) {
     }
     const presetRange = {
       start: 0x04389c8c,
-      length: 30,
+      length: 50,
     }
     data.writeShort(0x043930c4, 0x78b4)
     data.writeShort(0x043930d4, 0x78d4)
