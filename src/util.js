@@ -1495,6 +1495,37 @@ function hexValueToDamageString(hexValue) {
     return address + val.length
   }
 
+  checked.prototype.writeColor = function writeColor(address, rgba32Value) {
+    checkAddressRange(address)
+    const highColor15Value = rgba32ToHighColor15(rgba32Value)
+    const bytes = [
+      highColor15Value & 0xff,
+      (highColor15Value >>> 8) & 0xff,
+    ]
+    if (this.file) {
+      if (typeof(this.file) === 'object') {
+        for (let i = 0; i < 2; i++) {
+          this.file[address + i] = bytes[i]
+        }
+      } else {
+        const buf = Buffer.from(bytes)
+        fs.writeSync(this.file, buf, 0, 2, address)
+      }
+    }
+    for (let i = address; i < address + 2; i++) {
+      delete this.writes[i]
+    }
+    this.writes[address] = {
+      len: 2,
+      val: highColor15Value & 0xffff,
+    }
+    address = address + 2					// Step adddress. 
+    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
+      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    }
+    return address
+  }
+
   checked.prototype.apply = function apply(checked) {
     const self = this
     Object.getOwnPropertyNames(checked.writes).forEach(function(address) {
@@ -6592,6 +6623,35 @@ function hexValueToDamageString(hexValue) {
     return data
   }
 
+  function rgba32ToHighColor15(rgba32) {
+    // SOTN uses the Playstation's 15-bit high-color palette, with 5 bits for red, green, and blue and 1 bit for alpha
+    // NOTE(sestren): 0x00 through 0x07 will map to 0, 0x08 through 0x0f will map to 1, and so on, with 0xf8 through 0xff mapping to 31
+    const red = Math.floor(Number("0x" + rgba32.substring(1, 3)) / 8)
+    const green = Math.floor(Number("0x" + rgba32.substring(3, 5)) / 8)
+    const blue = Math.floor(Number("0x" + rgba32.substring(5, 7)) / 8)
+    const alpha = Math.floor(Number("0x" + rgba32.substring(7, 9)) / 128)
+    const highColor15 = (alpha << 15) + (blue << 10) + (green << 5) + red
+    return highColor15
+  }
+
+  function highColor15ToRgba32(highColor15) {
+    let value = highColor15
+    const red = value % 32
+    value = Math.floor(value / 32)
+    const green = value % 32
+    value = Math.floor(value / 32)
+    const blue = value % 32
+    value = Math.floor(value / 32)
+    const alpha = value % 32
+    // NOTE(sestren): 0 will map to 0x00, 1 will map to 0x08, and so on, with 31 mapping to 0xf8
+    const rr = (8 * red).toString(16).padStart(2, '0')
+    const gg = (8 * green).toString(16).padStart(2, '0')
+    const bb = (8 * blue).toString(16).padStart(2, '0')
+    const aa = (alpha > 0) ? 'ff' : '7f'
+    const rgba32 = '#' + rr + gg + bb + aa
+    return rgba32
+  }
+
   function applyMapColor(mapcol) {	// Researched by MottZilla & eldri7ch. Function by eldri7ch
     const data = new checked()
     const addressAl = 0x03874848 //define address for alucard maps
@@ -6603,55 +6663,55 @@ function hexValueToDamageString(hexValue) {
     // Patch map colors - eldri7ch
     switch (mapcol) {
     case 'u': // Dark Blue
-      colorWrite = 0xb0000000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      colorWrite = '#000060ff'
+      data.writeColor(addressAl, colorWrite)
+      data.writeColor(addressRi, colorWrite)
       break
     case 'r': // Crimson
-      colorWrite = 0x80500000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      colorWrite = '#801000ff'
+      data.writeColor(addressAl, colorWrite)
+      data.writeColor(addressRi, colorWrite)
       break
     case 'n': // Brown
-      colorWrite = 0x80ca0000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      colorWrite = '#503000ff'
+      data.writeColor(addressAl, colorWrite)
+      data.writeColor(addressRi, colorWrite)
       break
     case 'g': // Dark Green
-      colorWrite = 0x09000000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      colorWrite = '#0040107f' // Is this transparent on purpose?
+      data.writeColor(addressAl, colorWrite)
+      data.writeColor(addressRi, colorWrite)
       break
     case 'y': // Gray
-      colorWrite = 0xc20d0000
-      bordWrite = 0xffff
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
-      data.writeShort(addressAlBord,bordWrite)
-      data.writeShort(addressRiBord,bordWrite)
+      colorWrite = '#688080ff'
+      bordWrite = '#ffffffff'
+      data.writeColor(addressAl, colorWrite)
+      data.writeColor(addressRi, colorWrite)
+      data.writeColor(addressAlBord, bordWrite)
+      data.writeColor(addressRiBord, bordWrite)
       break
     case 'p': // Purple
-      colorWrite = 0xB0080000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      colorWrite = '#400060ff'
+      data.writeColor(addressAl, colorWrite)
+      data.writeColor(addressRi, colorWrite)
       break
     case 'k': // Pink
-      colorWrite = 0xf4b40000
-      bordWrite = 0xfe9e
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
-      data.writeShort(addressAlBord,bordWrite)
-      data.writeShort(addressRiBord,bordWrite)
+      colorWrite = '#a028e8ff'
+      bordWrite = '#f0a0f8ff'
+      data.writeColor(addressAl, colorWrite)
+      data.writeColor(addressRi, colorWrite)
+      data.writeColor(addressAlBord, bordWrite)
+      data.writeColor(addressRiBord, bordWrite)
       break
     case 'b': // Black
-      colorWrite = 0x10000000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      colorWrite = '#0000207f' // Is this transparent on purpose?
+      data.writeColor(addressAl, colorWrite)
+      data.writeColor(addressRi, colorWrite)
       break
     case 'i': // invisible
-      colorWrite = 0x00000000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      colorWrite = '#0000007f'
+      data.writeColor(addressAl, colorWrite)
+      data.writeColor(addressRi, colorWrite)
       break
     }
     return data
@@ -9470,6 +9530,8 @@ function applyBountyHunterTargets(rng,bhmode) {
     hasNonCircularPath: hasNonCircularPath,
     renderSolutions: renderSolutions,
     workerCountFromCores: workerCountFromCores,
+    rgba32ToHighColor15: rgba32ToHighColor15,
+    highColor15ToRgba32: highColor15ToRgba32,
   }
   if (self) {
     self.sotnRando = Object.assign(self.sotnRando || {}, {
