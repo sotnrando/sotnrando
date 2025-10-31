@@ -1546,25 +1546,54 @@
   }
 
   function randomizeDraculaCape(data, rng){
-    const draculaCapePaletteCount = 8
-    let colorDC = Math.floor(rng() * draculaCapePaletteCount)
-    offset = 0
     const palettesDraculaCape = [
-      [0x9c21, 0xbc42, 0xd0a1],  //Blue
-      [0x8d03, 0x8a23, 0x82e7],  //Green
-      [0x8008, 0x8011, 0x801C],  //Default Red
-      [0x9448, 0xd492, 0xd93b],  //Pink
-      [0x8d2d, 0x9a36, 0x9bbd],  //Yellow
-      [0xa129, 0xb231, 0xdb39],  //Gray
-      [0x9422, 0xa826, 0xb867],  //Purple
-      [0x8000, 0x8821, 0x8c63],  //Black
+      [ // Blue
+        '#080838ff',
+        '#101078ff',
+        '#0828a0ff',
+      ],
+      [ // Green
+        '#184018ff',
+        '#188810ff',
+        '#38b800ff',
+      ],
+      [ // Red (Default)
+        '#400000ff',
+        '#880000ff',
+        '#e00000ff',
+      ],
+      [ // Pink
+        '#401028ff',
+        '#9020a8ff',
+        '#d848b0ff',
+      ],
+      [ // Yellow
+        '#684818ff',
+        '#b08830ff',
+        '#e8e830ff',
+      ],
+      [ // Gray
+        '#484840ff',
+        '#888860ff',
+        '#c8c8b0ff',
+      ],
+      [ // Purple
+        '#100828ff',
+        '#300850ff',
+        '#381870ff',
+      ],
+      [ // Black
+        '#000000ff',
+        '#080810ff',
+        '#181818ff',
+      ],
     ]
+    const draculaCapePaletteCount = palettesDraculaCape.length
+    let colorDC = Math.floor(rng() * draculaCapePaletteCount)
+    colorDC = (colorDC >= draculaCapePaletteCount) ? 0 : colorDC
     offset = 0x535D4EA
-    if(colorDC >= draculaCapePaletteCount){
-      colorDC = 0;
-    }
     for (let i = 0; i < 3; i++) {
-      offset = data.writeShort(offset,palettesDraculaCape[colorDC][i])
+      offset = data.writeColor(offset, palettesDraculaCape[colorDC][i])
     }
   }
 
@@ -1629,122 +1658,115 @@
   }
 
   function randomizeRichterColor(data, rng){
-    const RichterPaletteCount = 6
-    let colorR = Math.floor(rng() * RichterPaletteCount)
-    let offset = 0
-    const RichterOffset = [         //Offsets for the pause UI during Prologue.
-      0x38BE9EA,0x38BEA0A,0x38BEA2A,0x38BEA4A,0x38BEA6A,0x38BEAAA,0x38BEACA,0x38BEAEA,0x38BEB0A,0x38BEB2A,0x38BEB4A,0x38BEB6A
-    ]
     const palettesRichter = [
-      [0x0000,0x8000,0xb185,0xc210,0xd294,0xf39c,0xfd80,0xb000,0x80ac,0x9556,0xb21c,0xc29c,0xd33c,0x8194,0xfc00,0x801f], //Blue
-      [0x0000,0x8000,0xb185,0xc210,0xd294,0xf39c,0xaa80,0x8080,0x80ac,0x9556,0xb21c,0xc29c,0xd33c,0x8194,0x8180,0xfc1f], //Green
-      [0x0000,0x8000,0xa906,0xbd8d,0xdab6,0xffff,0x801e,0x8009,0x80cd,0x9956,0xbe7f,0xcedf,0xdb7f,0x81f2,0x8013,0x83e0], //Red
-      [0x0000,0x8000,0xa906,0xbd8d,0xdab6,0xffff,0xa4e9,0x9402,0x80cd,0x9956,0xbe7f,0xcedf,0xdb7f,0x81f2,0x94a2,0xff80], //Black
-      [0x0000,0x8000,0xB185,0xC210,0xD294,0xF39C,0xFD97,0xB007,0xB04C,0x9556,0xB21C,0xC29C,0xD33C,0x8194,0xFC10,0x801F], //Purple (MottZilla)
-      [0x0000,0x8000,0xb185,0xc210,0xd294,0xf39c,0xc104,0x9821,0x8067,0x8ced,0x9d72,0xa9b1,0xa5f6,0x910d,0xc084,0x819f]  //the_swarm
+      ['#0000007f', '#000000ff', '#286060ff', '#808080ff', '#a0a0a0ff', '#e0e0e0ff', '#0060f8ff', '#000060ff', '#602800ff', '#b05028ff', '#e08060ff', '#e0a080ff', '#e0c8a0ff', '#a06000ff', '#0000f8ff', '#f80000ff', ], // Blue
+      ['#0000007f', '#000000ff', '#286060ff', '#808080ff', '#a0a0a0ff', '#e0e0e0ff', '#00a050ff', '#002000ff', '#602800ff', '#b05028ff', '#e08060ff', '#e0a080ff', '#e0c8a0ff', '#a06000ff', '#006000ff', '#f800f8ff', ], // Green
+      ['#0000007f', '#000000ff', '#304050ff', '#686078ff', '#b0a8b0ff', '#f8f8f8ff', '#f00000ff', '#480000ff', '#683000ff', '#b05030ff', '#f89878ff', '#f8b098ff', '#f8d8b0ff', '#907800ff', '#980000ff', '#00f800ff', ], // Red
+      ['#0000007f', '#000000ff', '#304050ff', '#686078ff', '#b0a8b0ff', '#f8f8f8ff', '#483848ff', '#100028ff', '#683000ff', '#b05030ff', '#f89878ff', '#f8b098ff', '#f8d8b0ff', '#907800ff', '#102828ff', '#00e0f8ff', ], // Black
+      ['#0000007f', '#000000ff', '#286060ff', '#808080ff', '#a0a0a0ff', '#e0e0e0ff', '#b860f8ff', '#380060ff', '#601060ff', '#b05028ff', '#e08060ff', '#e0a080ff', '#e0c8a0ff', '#a06000ff', '#8000f8ff', '#f80000ff', ], // Purple (MottZilla)
+      ['#0000007f', '#000000ff', '#286060ff', '#808080ff', '#a0a0a0ff', '#e0e0e0ff', '#204080ff', '#080830ff', '#381800ff', '#683818ff', '#905838ff', '#886850ff', '#b07848ff', '#684020ff', '#202080ff', '#f86000ff', ], // the_swarm
     ];
-    if(colorR >= RichterPaletteCount){
-      colorR = 0;
-    }
-    offset = 0x38BED78                                                                                                   //Richter's main palette.
+    const RichterPaletteCount = palettesRichter.length
+    let colorR = Math.floor(rng() * RichterPaletteCount)
+    colorR = (colorR >= RichterPaletteCount) ? 0 : colorR
+    let offset = 0x38BED78                                                                                                   //Richter's main palette.
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     offset = 0x38BEED8                                                                                                   //Richter's alternate palettes when using item crash.
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     offset = 0x436BA9C                                                                                                   //Richter's palette for ending cutscene.
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     offset = 0x562266C                                                                                                   //Richter's palette for saving Richter cutscene.
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     offset = 0x63CD658                                                                                                   //Richter's palette for his Boss Fight.
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     offset = 0x63CD7B8                                                                                                   //Richter's alternate paletts when using item crashes during Boss Fight. 
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesRichter[colorR][i])
+      offset = data.writeColor(offset, palettesRichter[colorR][i])
     }
     offset = 0x6113772                                                                                                   //Richter's Colosseum cutscene. 
-    offset = data.writeShort(offset,palettesRichter[colorR][14])
-    offset = data.writeShort(offset,palettesRichter[colorR][7])
-    offset = data.writeShort(offset,palettesRichter[colorR][6])
+    offset = data.writeColor(offset, palettesRichter[colorR][14])
+    offset = data.writeColor(offset, palettesRichter[colorR][7])
+    offset = data.writeColor(offset, palettesRichter[colorR][6])
+    const RichterOffset = [ // Offsets for the pause UI during Prologue.
+      0x38BE9EA, 0x38BEA0A, 0x38BEA2A, 0x38BEA4A, 0x38BEA6A, 0x38BEAAA, 0x38BEACA, 0x38BEAEA, 0x38BEB0A, 0x38BEB2A, 0x38BEB4A, 0x38BEB6A
+    ]
     offset = 0x38BE9EA                                                                                                   //Richter's pause UI. 
     for (let i = 0; i < 12; i++) {
-      offset = data.writeShort(RichterOffset[i],palettesRichter[colorR][14])
+      offset = data.writeColor(RichterOffset[i], palettesRichter[colorR][14])
     }
     offset = 0x38BEA1A                                                                                                   //Richter's Health Bar. 
-    offset = data.writeShort(offset,palettesRichter[colorR][6])
-    offset = data.writeShort(offset,palettesRichter[colorR][14])
-    offset = data.writeShort(offset,palettesRichter[colorR][7])
-    
+    offset = data.writeColor(offset, palettesRichter[colorR][6])
+    offset = data.writeColor(offset, palettesRichter[colorR][14])
+    offset = data.writeColor(offset, palettesRichter[colorR][7])
   }
 
   function randomizeMariaColor(data, rng){
-    const MariaPaletteCount = 6
-    let colorM = Math.floor(rng() * MariaPaletteCount)
-    let offset = 0
     const palettesMaria = [
-      [0x0000,0x84c9,0x8d53,0xa1f9,0xb6fc,0x8180,0x8280,0xab2a,0x9218,0x931f,0x9463,0x9ce7,0xb148,0xca2e,0xe2f6,0xef7b], // Default
-      [0x0000,0x84c9,0x8d53,0xa1f9,0xb6fc,0xb0a0,0xd120,0xe62a,0x9218,0x931f,0x9463,0x9ce7,0xb148,0xca2e,0xe2f6,0xef7b], // Blue
-      [0x0000,0xb04c,0x8d53,0xb1f9,0xcafd,0xb4f3,0xbd9a,0xd1de,0x9218,0x931f,0xa488,0x9ce7,0xb1a7,0xca2e,0xe2f6,0xef7b], // Pink
-      [0x0000,0xb50a,0x8d53,0xa1f9,0xb6fc,0xde04,0xd6e3,0xeb49,0x9218,0x931f,0xb486,0xb50a,0xbd69,0xd26d,0xe2f6,0xef7b], // Light blue
-      [0x0000,0x84c9,0x950f,0xa1f9,0xb6fc,0x9c64,0x98c8,0xa906,0x9218,0x931f,0x9463,0x9ce7,0xa906,0xb9ac,0xd6b2,0xef7b], // Black
-      [0x0000,0xb04c,0x8d53,0xa9b8,0xc29c,0xbc49,0xd06f,0xf8b1,0x9218,0x931f,0x9463,0x9ce7,0xb1a7,0xca2e,0xe2f6,0xef7b], // Purple
+      ['#0000007f', '#483008ff', '#985018ff', '#c87840ff', '#e0b868ff', '#006000ff', '#00a000ff', '#50c850ff', '#c08020ff', '#f8c020ff', '#181828ff', '#383838ff', '#405060ff', '#708890ff', '#b0b8c0ff', '#d8d8d8ff', ], // Default
+      ['#0000007f', '#483008ff', '#985018ff', '#c87840ff', '#e0b868ff', '#002860ff', '#0048a0ff', '#5088c8ff', '#c08020ff', '#f8c020ff', '#181828ff', '#383838ff', '#405060ff', '#708890ff', '#b0b8c0ff', '#d8d8d8ff', ], // Blue
+      ['#0000007f', '#601060ff', '#985018ff', '#c87860ff', '#e8b890ff', '#983868ff', '#d06078ff', '#f070a0ff', '#c08020ff', '#f8c020ff', '#402048ff', '#383838ff', '#386860ff', '#708890ff', '#b0b8c0ff', '#d8d8d8ff', ], // Pink
+      ['#0000007f', '#504068ff', '#985018ff', '#c87840ff', '#e0b868ff', '#2080b8ff', '#18b8a8ff', '#48d0d0ff', '#c08020ff', '#f8c020ff', '#302068ff', '#504068ff', '#485878ff', '#6898a0ff', '#b0b8c0ff', '#d8d8d8ff', ], // Light blue
+      ['#0000007f', '#483008ff', '#784028ff', '#c87840ff', '#e0b868ff', '#201838ff', '#403030ff', '#304050ff', '#c08020ff', '#f8c020ff', '#181828ff', '#383838ff', '#304050ff', '#606870ff', '#90a8a8ff', '#d8d8d8ff', ], // Black
+      ['#0000007f', '#601060ff', '#985018ff', '#c06850ff', '#e0a080ff', '#481078ff', '#7818a0ff', '#8828f0ff', '#c08020ff', '#f8c020ff', '#181828ff', '#383838ff', '#386860ff', '#708890ff', '#b0b8c0ff', '#d8d8d8ff', ], // Purple
     ];
-    if(colorM >= MariaPaletteCount){
-      colorM = 0;
-    }
-    offset = 0x436BA7C                                                                                                   //Ending Cutscene
+    const MariaPaletteCount = palettesMaria.length
+    let colorM = Math.floor(rng() * MariaPaletteCount)
+    colorM = (colorM >= MariaPaletteCount) ? 0 : colorM
+    let offset = 0x436BA7C                                                                                                   //Ending Cutscene
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesMaria[colorM][i])
+      offset = data.writeColor(offset, palettesMaria[colorM][i])
     }
     offset = 0x45638F4                                                                                                   //Holy Glasses Cutscene
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesMaria[colorM][i])
+      offset = data.writeColor(offset, palettesMaria[colorM][i])
     }
     offset = 0x4690EE4                                                                                                   //Silver Ring Cutscene
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesMaria[colorM][i])
+      offset = data.writeColor(offset, palettesMaria[colorM][i])
     }
     offset = 0x54CA704                                                                                                   //Alchemy Labs Cutscene
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesMaria[colorM][i])
+      offset = data.writeColor(offset, palettesMaria[colorM][i])
     }
     offset = 0x562220C                                                                                                   //Save Richter Cutscene
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesMaria[colorM][i])
+      offset = data.writeColor(offset, palettesMaria[colorM][i])
     }
     offset = 0x631620C                                                                                                   //Hippogriff Cutscene
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesMaria[colorM][i])
+      offset = data.writeColor(offset, palettesMaria[colorM][i])
     }
     offset = 0x650E768                                                                                                   //Clock Room Cutscene
     for (let i = 0; i < 16; i++) {
-      offset = data.writeShort(offset,palettesMaria[colorM][i])
+      offset = data.writeColor(offset, palettesMaria[colorM][i])
     }
   }
 
@@ -1804,7 +1826,7 @@
         break
     }
     
-    // this copde literally replaces the ASM that the game normally uses to set the menu color
+    // this code literally replaces the ASM that the game normally uses to set the menu color
     // This code was compiled with a repeated function that wasn't needed so we can use the space
     offset = data.writeWord(offset, 0x3C108003)                                 
     offset = data.writeWord(offset, 0x3610CAC0)                                 // populate r16 with the address 0x8003cac0 (used again later in and out of our code)                       
