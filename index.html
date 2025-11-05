@@ -1007,7 +1007,37 @@
           <h3>November 10, 2025</h3>
             <h4>Preset Changes</h4>
               <ul>
+                <li>Temporarily* added the following tournament presets:</li>
+                  <ul>
+                    <li>Rampage 2025 Tournament Edition* (This preset may end up staying permanently depending on performance)</li>
+                    <li>Cornivus 2025 Tournament Edition</li>
+                    <li>Nimble Lite 2025 Tournament Edition</li>
+                    <li>Recycler 2025 Tournament Edition</li>
+                    <li>Chimera 2025 Tournament Edition</li>
+                  </ul>
+                <li>Removed nerf to <i>all</i> thrust swords and only nerfed the thrust damage of Obsidian Sword in Boss Rush.</li>
+                <li>Fixed an issue where Gravity Boots didn't turn off second Leap Stone additional jumps in Recycler.</li>
+                <li>Removed menu lock when attempting to save in Gear Rush.</li>
+                <li>Removed Succubus fight in Gear Rush since player could not enter Nightmare. Relic now spawns by default.</li>
                 <li>eldri7ch fell into a Glitch.</li>
+                <li></li>
+                <h5>The following presets are now deprecated. Deprecation means they will be maintained and distributed with the randomizer but are no longer on the website.</h5>
+                  <ul>
+                    <li>Summoner</li>
+                    <li>Rat Race</li>
+                    <li>Brawler</li>
+                    <li>Empty Hand</li>
+                  </ul>
+              </ul>
+            <h4>Options Changes</h4>
+              <ul>
+                <li>No Prologue Mode removes the "grand" entrance of Alucard to allow the SOTN Rando Tools to start / stop LiveSplit.</li>
+              </ul>
+            <h4>Program Updates</h4>
+              <ul>
+                <li>Increased character limit for preset data on main menu screen from 30 characters to 50.</li>
+                <li>Updated color coding to RGBA32 for ease of programming.</li>
+                <li>Moved all randomization into a single core randomization module to maintain parity in generation and to streamline future coding.</li>
               </ul>
         <a id="show-older" href="#older">Show older changes</a>
         <div id="older" class="hidden">
@@ -1858,10 +1888,8 @@
   <script src="build/presets/expedition.js"></script>
   <script src="build/presets/glitch.js"></script>
   <script src="build/presets/scavenger.js"></script>
-  <script src="build/presets/empty-hand.js"></script>
   <script src="build/presets/gem-farmer.js"></script>
   <script src="build/presets/third-castle.js"></script>
-  <script src="build/presets/rat-race.js"></script>
   <script src="build/presets/magic-mirror.js"></script>
   <script src="build/presets/leg-day.js"></script>
   <script src="build/presets/boss-rush.js"></script>
@@ -1870,15 +1898,13 @@
   <script src="build/presets/bounty-hunter.js"></script>
   <script src="build/presets/target-confirmed.js"></script>
   <script src="build/presets/hitman.js"></script>
+  <script src="build/presets/grand-tour.js"></script>
   <script src="build/presets/chaos-lite.js"></script>
   <script src="build/presets/beyond.js"></script>
   <script src="build/presets/breach.js"></script>
-  <script src="build/presets/grand-tour.js"></script>
   <script src="build/presets/any-percent.js"></script>
-  <script src="build/presets/summoner.js"></script>
   <script src="build/presets/agonize-twtw.js"></script>
   <script src="build/presets/safe-stwo.js"></script>
-  <script src="build/presets/brawler.js"></script>
   <script src="build/presets/open.js"></script>
   <script src="build/presets/first-castle.js"></script>
   <script src="build/presets/lucky-sevens.js"></script>
@@ -1903,6 +1929,11 @@
   <script src="build/presets/recycler.js"></script>
   <script src="build/presets/anguish.js"></script>
   <script src="build/presets/gear-rush.js"></script>
+  <script src="build/presets/rampage-25te.js"></script>
+  <script src="build/presets/nimble-lite-te.js"></script>
+  <script src="build/presets/cornivus-te.js"></script>
+  <script src="build/presets/recycler-te.js"></script>
+  <script src="build/presets/chimera-te.js"></script>
   <script src="build/presets/index.js"></script>
   <script src="src/worker.js"></script>
   <script src="src/core_randomizer.js"></script>

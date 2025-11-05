@@ -1,140 +1,48 @@
 {
   "metadata": {
-    "id": "vanilla",
-    "name": "Vanilla",
-    "description": "The vanilla game without any randomization. Intended for playing the base game with just the basic enhancements provided by the ranodmizer.",
-    "author": [ 
-      "eldri7ch"
+    "id": "cornivus-te",
+    "name": "Cornivus 2025 Tournament Edition",
+    "description": "Start in second castle with all wolf relics and stat-boosting potions. MP consumption is greatly reduced when in wolf form. All Bosses and All Vlads required to win.",
+    "author": [
+      "3snow_p7im",
+      "eldri7ch",
+      "Dr4gonBlitz"
     ],
-    "weight": -1950,
+    "weight": -4003,
     "knowledgeCheck": "None",
-    "metaExtension": "Classic",
-    "metaComplexity": "9",
+    "metaExtension": "Guarded",
+    "metaComplexity": "8",
     "itemStats": "Normal",
-    "timeFrame": "Normal",
-    "moddedLevel": "None",
+    "timeFrame": "Fast",
+    "moddedLevel": "Moderately",
     "castleType": "Normal",
-    "transformEarly": "No",
-    "transformFocus": "None",
-    "winCondition": "Normal"
+    "transformEarly": "Yes",
+    "transformFocus": "Wolf",
+    "winCondition": "All Bosses & Vlad Relics"
   },
 
-  "relicLocations": false,
-  "relicLocationsExtension": false,
-  "preventLeaks": false,
   "stats": false,
   "music": false,
-  "turkeyMode": false,
-  "colorrandoMode": false,
-  
+  "tournamentMode": true,
+  "antiFreezeMode": true,
+  "fastwarpMode": true,
+  "magicmaxMode": true,
+  "mypurseMode": true,
+  "startRoomRando1stMode": false,
+  "startRoomRando2ndMode": true,
+  "rlbcMode": true,
+  "newGoalsSet": "v",
+
   "complexityGoal": {
-    "min": 1,
+    "min": 8,
     "goals": [
-      "Holy glasses + Heart of Vlad + Tooth of Vlad + Rib of Vlad + Ring of Vlad + Eye of Vlad"
+      "Holy glasses + Heart of Vlad + Tooth of Vlad + Rib of Vlad + Ring of Vlad + Eye of Vlad + Jewel of Open"
   ]},
 
-  "placeRelic": [{
-    "location": "Soul of Bat",
-    "relic": "Soul of Bat"
-  }, {
-    "location": "Echo of Bat",
-    "relic": "Echo of Bat"
-  }, {
-    "location": "Force of Echo",
-    "relic": "Force of Echo"
-  }, {
-    "location": "Fire of Bat",
-    "relic": "Fire of Bat"
-  }, {
-    "location": "Soul of Wolf",
-    "relic": "Soul of Wolf"
-  }, {
-    "location": "Power of Wolf",
-    "relic": "Power of Wolf"
-  }, {
-    "location": "Skill of Wolf",
-    "relic": "Skill of Wolf"
-  }, {
-    "location": "Form of Mist",
-    "relic": "Form of Mist"
-  }, {
-    "location": "Power of Mist",
-    "relic": "Power of Mist"
-  }, {
-    "location": "Gas Cloud",
-    "relic": "Gas Cloud"
-  }, {
-    "location": "Cube of Zoe",
-    "relic": "Cube of Zoe"
-  }, {
-    "location": "Spirit Orb",
-    "relic": "Spirit Orb"
-  }, {
-    "location": "Faerie Scroll",
-    "relic": "Faerie Scroll"
-  }, {
-    "location": "Holy Symbol",
-    "relic": "Holy Symbol"
-  }, {
-    "location": "Gravity Boots",
-    "relic": "Gravity Boots"
-  }, {
-    "location": "Leap Stone",
-    "relic": "Leap Stone"
-  }, {
-    "location": "Jewel of Open",
-    "relic": "Jewel of Open"
-  }, {
-    "location": "Merman Statue",
-    "relic": "Merman Statue"
-  }, {
-    "location": "Ghost Card",
-    "relic": "Ghost Card"
-  }, {
-    "location": "Bat Card",
-    "relic": "Bat Card"
-  }, {
-    "location": "Faerie Card",
-    "relic": "Faerie Card"
-  }, {
-    "location": "Demon Card",
-    "relic": "Demon Card"
-  }, {
-    "location": "Sword Card",
-    "relic": "Sword Card"
-  }, {
-    "location": "Silver ring",
-    "relic": "Silver ring"
-  }, {
-    "location": "Gold ring",
-    "relic": "Gold ring"
-  }, {
-    "location": "Holy glasses",
-    "relic": "Holy glasses"
-  }, {
-    "location": "Spike Breaker",
-    "relic": "Spike Breaker"
-  },{
-    "location": "Tooth of Vlad",
-    "relic": "Tooth of Vlad"
-  }, {
-    "location": "Eye of Vlad",
-    "relic": "Eye of Vlad"
-  }, {
-    "location": "Ring of Vlad",
-    "relic": "Ring of Vlad"
-  }, {
-    "location": "Heart of Vlad",
-    "relic": "Heart of Vlad"
-  }, {
-    "location": "Rib of Vlad",
-    "relic": "Rib of Vlad"
+  "startingEquipment": [{
+    "slot": "Other",
+    "item": "Mystic pendant"
   }],
-  
-  "startingEquipment": false,
-  "prologueRewards": false,
-  "itemLocations": false,
-  "enemyDrops": false,
 
   "lockLocation": [{
     "location": "Soul of Bat",
@@ -158,8 +66,7 @@
     "comment": "Requires flight + a transformation",
     "locks": [
       "Soul of Bat",
-      "Gravity Boots + Leap Stone + Form of Mist",
-      "Gravity Boots + Leap Stone + Soul of Wolf",
+      "Gravity Boots + Leap Stone",
       "Form of Mist + Power of Mist"
     ]
   }, {
@@ -169,11 +76,6 @@
       "Holy glasses + Soul of Bat",
       "Holy glasses + Gravity Boots + Leap Stone",
       "Holy glasses + Form of Mist + Power of Mist"
-    ]
-  }, {
-    "location": "Soul of Wolf",
-    "comment": "No Requirements",
-    "locks": [
     ]
   }, {
     "location": "Power of Wolf",
@@ -217,16 +119,6 @@
       "Holy glasses + Form of Mist + Power of Mist"
     ]
   }, {
-    "location": "Cube of Zoe",
-    "comment": "No Requirements",
-    "locks": [
-    ]
-  }, {
-    "location": "Spirit Orb",
-    "comment": "No Requirements",
-    "locks": [
-    ]
-  }, {
     "location": "Gravity Boots",
     "comment": "Requires flight",
     "locks": [
@@ -248,16 +140,6 @@
     "location": "Holy Symbol",
     "locks": [
       "Jewel of Open + Merman Statue"
-    ]
-  }, {
-    "location": "Faerie Scroll",
-    "comment": "No Requirements",
-    "locks": [
-    ]
-  }, {
-    "location": "Jewel of Open",
-    "comment": "No Requirements",
-    "locks": [
     ]
   }, {
     "location": "Merman Statue",
@@ -293,10 +175,7 @@
     "location": "Demon Card",
     "comment": "Requires Jewel of Open + at least Leap Stone",
     "locks": [
-      "Jewel of Open + Leap Stone",
-      "Jewel of Open + Soul of Bat",
-      "Jewel of Open + Form of Mist + Power of Mist",
-      "Jewel of Open + Soul of Wolf + Power of Wolf"
+      "Jewel of Open"
     ],
     "comment": "Access must also give at least Leap Stone",
     "escapeRequires": [
@@ -334,8 +213,7 @@
     "comment": "In second castle",
     "locks": [
       "Holy glasses + Soul of Bat",
-      "Holy glasses + Gravity Boots + Leap Stone + Form of Mist",
-      "Holy glasses + Gravity Boots + Leap Stone + Soul of Wolf",
+      "Holy glasses + Gravity Boots + Leap Stone",
       "Holy glasses + Form of Mist + Power of Mist"
     ]
   }, {
@@ -392,10 +270,7 @@
     "location": "Mormegil",
     "comment": "Requires Jewel of Open + at least Leap Stone",
     "locks": [
-      "Jewel of Open + Leap Stone",
-      "Jewel of Open + Soul of Bat",
-      "Jewel of Open + Form of Mist + Power of Mist",
-      "Jewel of Open + Soul of Wolf + Power of Wolf"
+      "Jewel of Open"
     ],
     "comment": "Access must also give at least Leap Stone",
     "escapeRequires": [
@@ -440,22 +315,7 @@
     "location": "Jewel sword",
     "comment": "Requires Wolf + Bat",
     "locks": [
-      "Soul of Wolf + Soul of Bat"
-    ]
-  }, {
-    "location": "Basilard",
-    "comment": "No Requirements",
-    "locks": [
-    ]
-  }, {
-    "location": "Sunglasses",
-    "comment": "No Requirements",
-    "locks": [
-    ]
-  }, {
-    "location": "Cloth cape",
-    "comment": "No Requirements",
-    "locks": [
+      "Soul of Bat"
     ]
   }, {
     "location": "Mystic pendant",
@@ -549,16 +409,6 @@
       "Form of Mist + Power of Mist"
     ]
   }, {
-    "location": "Gladius",
-    "comment": "No Requirements",
-    "locks": [
-    ]
-  }, {
-    "location": "Jewel knuckles",
-    "comment": "No Requirements",
-    "locks": [
-    ]
-  }, {
     "location": "Holy rod",
     "comment": "Requires at least Leap Stone",
     "locks": [
@@ -575,11 +425,6 @@
       "Leap Stone",
       "Gravity Boots",
       "Form of Mist + Power of Mist"
-    ]
-  }, {
-    "location": "Bronze cuirass",
-    "comment": "No Requirements",
-    "locks": [
     ]
   }, {
     "location": "Alucart sword",
@@ -689,10 +534,7 @@
     "location": "Combat knife",
     "comment": "Requires Jewel of Open + at least Leap Stone",
     "locks": [
-      "Jewel of Open + Soul of Bat",
-      "Jewel of Open + Leap Stone",
-      "Jewel of Open + Form of Mist + Power of Mist",
-      "Jewel of Open + Soul of Wolf + Power of Wolf"
+      "Jewel of Open"
     ],
     "comments": "Access must also give at least Leap Stone",
     "escapeRequires": [
@@ -705,14 +547,8 @@
     "location": "Ring of Ares",
     "comment": "Requires Jewel of Open + Demon Card + at least Leap Stone",
     "locks": [
-      "Jewel of Open + Demon Card + Soul of Bat",
-      "Jewel of Open + Demon Card + Leap Stone",
-      "Jewel of Open + Demon Card + Form of Mist + Power of Mist",
-      "Jewel of Open + Demon Card + Soul of Wolf + Power of Wolf",
-      "Jewel of Open + Nosedevil Card + Soul of Bat",
-      "Jewel of Open + Nosedevil Card + Leap Stone",
-      "Jewel of Open + Nosedevil Card + Form of Mist + Power of Mist",
-      "Jewel of Open + Nosedevil Card + Soul of Wolf + Power of Wolf"
+      "Jewel of Open + Demon Card",
+      "Jewel of Open + Nosedevil Card"
     ],
     "comment": "Access must also give at least Leap Stone",
     "escapeRequires": [
@@ -725,10 +561,7 @@
     "location": "Bloodstone",
     "comment": "Requires Jewel of Open + at least Leap Stone",
     "locks": [
-      "Jewel of Open + Soul of Bat",
-      "Jewel of Open + Leap Stone",
-      "Jewel of Open + Form of Mist + Power of Mist",
-      "Jewel of Open + Soul of Wolf + Power of Wolf"
+      "Jewel of Open"
     ],
     "comment": "Access must also give at least Leap Stone",
     "escapeRequires": [
@@ -756,10 +589,7 @@
     "location": "Walk armor",
     "comment": "Requires Jewel of Open + at least Leap Stone",
     "locks": [
-      "Jewel of Open + Soul of Bat",
-      "Jewel of Open + Leap Stone",
-      "Jewel of Open + Form of Mist + Power of Mist",
-      "Jewel of Open + Soul of Wolf + Power of Wolf"
+      "Jewel of Open"
     ],
     "comment": "Access must also give at least Leap Stone",
     "escapeRequires": [
@@ -772,7 +602,7 @@
     "location": "Beryl circlet",
     "comment": "Requires Holy glasses + Bat + Wolf",
     "locks": [
-      "Holy glasses + Soul of Bat + Soul of Wolf"
+      "Holy glasses + Soul of Bat"
     ]
   }, {
     "location": "Talisman",
@@ -1009,11 +839,6 @@
     "location": "Confessional",
     "comment": "Requires Jewel of Open or at least Leap Stone",
     "locks": [
-      "Jewel of Open",
-      "Leap Stone",
-      "Gravity Boots",
-      "Soul of Bat",
-      "Form of Mist + Power of Mist"
     ]
   }, {
     "location": "Colosseum Green tea",
@@ -1028,10 +853,6 @@
     "location": "Clock Tower Cloaked knight",
     "comment": "Requires at least Leap Stone",
     "locks": [
-      "Leap Stone",
-      "Gravity Boots",
-      "Soul of Bat",
-      "Form of Mist + Power of Mist"
     ]
   }, {
     "location": "Waterfall Cave",
@@ -1106,5 +927,106 @@
       "Holy glasses + Gravity Boots + Leap Stone",
       "Holy glasses + Form of Mist + Power of Mist"
     ]
+  }],
+
+  "writes": [{
+    "comment": "Jump to injected code",
+    "address": "0x000fa97c",
+    "type": "word",
+    "value": "0x0c04db00"
+  }, {
+    "address": "0x00158c98",
+    "comment": "Save Return Address for rA (func call)",
+    "type": "word",
+    "value": "0x37F70000"
+  },
+
+  {
+    "comment": "give STR. Potion, Lck Potion, ATK potion, Smart Potion, Shield Potion; assign 94h to r9",
+    "type": "word",
+    "value": "0x34090094"
+  },{
+    "comment": "assign 99h to r8",
+    "type": "word",
+    "value": "0x34080099"
+  },{
+    "comment": "assign 0 to r5",
+    "type": "word",
+    "value": "0x34050000"
+  },{
+    "comment": "assign r9 to r4",
+    "type": "word",
+    "value": "0x35240000"
+  },{
+    "comment": "call give item",
+    "type": "word",
+    "value": "0x0C03F61D"
+  },{
+    "comment": "add 1 to r9",
+    "type": "word",
+    "value": "0x25290001"
+  },{
+    "comment": "if r8 <> r9 then jump back to ",
+    "type": "word",
+    "value": "0x1509fffb"
+  },{
+    "type": "word",
+    "value": "0x00000000"
+  },
+  
+  {
+    "comment": "Recall Return Address for rA (func call)",
+    "type": "word",
+    "value": "0x36FF0000"
+  }, {
+    "type": "word",
+    "value": "0x00000000",
+    "comment": "nop"
+  },
+  
+  { 
+    "type": "word",
+    "value": "0x34020003",
+    "comment": "ori v0, 0x0003"
+  }, {
+    "type": "word",
+    "value": "0x3c038009",
+    "comment": "lui v1, 0x8009"
+  }, {
+    "comment": "Enable Soul of Wolf",
+    "type": "word",
+    "value": "0xa0627968",
+    "comment": "sb v0, 0x7968 (v1)"
+  }, {
+    "comment": "Enable Power of Wolf",
+    "type": "word",
+    "value": "0xa0627969",
+    "comment": "sb v0, 0x7969 (v1)"
+  }, {
+    "comment": "Enable Skill of Wolf",
+    "type": "word",
+    "value": "0xa062796a",
+    "comment": "sb v0, 0x796a (v1)"
+  }, 
+  
+  {
+    "comment": "Return from injected code",
+    "type": "word",
+    "value": "0x0803924f",
+    "comment": "j 0x800e493c"
+  }, {
+    "type": "word",
+    "value": "0x00000000",
+    "comment": "nop"
+  }, {
+    "comment": "Don't consume mana in wolf form",
+    "type": "short",
+    "address": "0x00118cc8",
+    "value": "0x0000"
+  }, {
+    "comment": "Reduce mana consumption during wolf dash",
+    "type": "char",
+    "address": "0x000b53b0",
+    "value": "0x01"
   }]
 }
