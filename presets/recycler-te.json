@@ -1,13 +1,13 @@
 {
   "metadata": {
-    "id": "recycler",
-    "name": "Recycler",
+    "id": "recycler-te",
+    "name": "Recycler 2025 Tournament Edition",
     "description": "A high-complexity preset where duplicate relics appear for the main progression relics and there are eight Vlad relics. Start in second castle with stat-boosting potions. Six vlads open the doors to Dracula. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
     "author": [
       "eldri7ch",
       "MottZilla"
     ],
-    "weight": -2187,
+    "weight": -4000,
     "knowledgeCheck": "None",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
@@ -21,10 +21,13 @@
   },
 
   "stats": false,
+  "music": false,
+  "tournamentMode": true,
   "antiFreezeMode": true,
   "fastwarpMode": true,
+  "magicmaxMode": true,
+  "mypurseMode": true,
   "startRoomRando2ndMode": true,
-  "immunityPotionMode": true,
 
   "alias": [{
     "comment": "Alias Bat Card as Bat2 (Soul of Bat 2)",

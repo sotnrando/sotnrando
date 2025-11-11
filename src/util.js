@@ -1495,6 +1495,37 @@ function hexValueToDamageString(hexValue) {
     return address + val.length
   }
 
+  checked.prototype.writeColor = function writeColor(address, rgba32Value) {
+    checkAddressRange(address)
+    const highColor15Value = rgba32ToHighColor15(rgba32Value)
+    const bytes = [
+      highColor15Value & 0xff,
+      (highColor15Value >>> 8) & 0xff,
+    ]
+    if (this.file) {
+      if (typeof(this.file) === 'object') {
+        for (let i = 0; i < 2; i++) {
+          this.file[address + i] = bytes[i]
+        }
+      } else {
+        const buf = Buffer.from(bytes)
+        fs.writeSync(this.file, buf, 0, 2, address)
+      }
+    }
+    for (let i = address; i < address + 2; i++) {
+      delete this.writes[i]
+    }
+    this.writes[address] = {
+      len: 2,
+      val: highColor15Value & 0xffff,
+    }
+    address = address + 2					// Step adddress. 
+    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
+      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    }
+    return address
+  }
+
   checked.prototype.apply = function apply(checked) {
     const self = this
     Object.getOwnPropertyNames(checked.writes).forEach(function(address) {
@@ -3305,7 +3336,7 @@ function hexValueToDamageString(hexValue) {
     }
     const presetRange = {
       start: 0x04389c8c,
-      length: 30,
+      length: 50,
     }
     data.writeShort(0x043930c4, 0x78b4)
     data.writeShort(0x043930d4, 0x78d4)
@@ -6592,68 +6623,99 @@ function hexValueToDamageString(hexValue) {
     return data
   }
 
-  function applyMapColor(mapcol) {	// Researched by MottZilla & eldri7ch. Function by eldri7ch
+  function rgba32ToHighColor15(rgba32) {
+    // SOTN uses the Playstation's 15-bit high-color palette, with 5 bits for red, green, and blue and 1 bit for alpha
+    // NOTE(sestren): 0x00 through 0x07 will map to 0, 0x08 through 0x0f will map to 1, and so on, with 0xf8 through 0xff mapping to 31
+    const red = Math.floor(Number("0x" + rgba32.substring(1, 3)) / 8)
+    const green = Math.floor(Number("0x" + rgba32.substring(3, 5)) / 8)
+    const blue = Math.floor(Number("0x" + rgba32.substring(5, 7)) / 8)
+    const alpha = Math.floor(Number("0x" + rgba32.substring(7, 9)) / 128)
+    const highColor15 = (alpha << 15) + (blue << 10) + (green << 5) + red
+    return highColor15
+  }
+
+  function highColor15ToRgba32(highColor15) {
+    let value = highColor15
+    const red = value % 32
+    value = Math.floor(value / 32)
+    const green = value % 32
+    value = Math.floor(value / 32)
+    const blue = value % 32
+    value = Math.floor(value / 32)
+    const alpha = value % 32
+    // NOTE(sestren): 0 will map to 0x00, 1 will map to 0x08, and so on, with 31 mapping to 0xf8
+    const rr = (8 * red).toString(16).padStart(2, '0')
+    const gg = (8 * green).toString(16).padStart(2, '0')
+    const bb = (8 * blue).toString(16).padStart(2, '0')
+    const aa = (alpha > 0) ? 'ff' : '7f'
+    const rgba32 = '#' + rr + gg + bb + aa
+    return rgba32
+  }
+
+  function applyMapColor(mapColor) {	// Researched by MottZilla & eldri7ch. Function by eldri7ch
+    // NOTE(sestren): Most of the castle map's palette are not used in the vanilla game or are prevented from being used
+    // Default colors are given below for illustration purposes
     const data = new checked()
-    const addressAl = 0x03874848 //define address for alucard maps
-    const addressRi = 0x038C0508 //define address for richter maps
-    const addressAlBord = 0x03874864 //define address for alucard maps borders
-    const addressRiBord = 0x038C0524 //define address for richter maps borders
-    let colorWrite
-    let bordWrite
-    // Patch map colors - eldri7ch
-    switch (mapcol) {
+    let paletteIndexes = {
+      // Used for unrevealed portions of the map (i.e., transparency)
+      unrevealed: { index: 0x0, defaultColor: "#0000007f" },
+      // Used when exploring the map
+      exploredFills:   { index: 0x1, defaultColor: "#5070f8ff" },
+      exploredBorders: { index: 0xE, defaultColor: "#c0c0c0ff" },
+      saveRoomFills:   { index: 0x4, defaultColor: "#f80000ff" },
+      warpRoomFills:   { index: 0x5, defaultColor: "#f88000ff" },
+      // Used when purchasing the Castle Map from the Shop
+      revealedFills:   { index: 0x3, defaultColor: "#383860ff" },
+      revealedBorders: { index: 0xD, defaultColor: "#909090ff" },
+    }
+    switch (mapColor) {
     case 'u': // Dark Blue
-      colorWrite = 0xb0000000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#000060ff'
       break
     case 'r': // Crimson
-      colorWrite = 0x80500000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#801000ff'
       break
     case 'n': // Brown
-      colorWrite = 0x80ca0000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#503000ff'
       break
     case 'g': // Dark Green
-      colorWrite = 0x09000000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#004010ff'
       break
     case 'y': // Gray
-      colorWrite = 0xc20d0000
-      bordWrite = 0xffff
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
-      data.writeShort(addressAlBord,bordWrite)
-      data.writeShort(addressRiBord,bordWrite)
+      paletteIndexes.exploredFills.color   = '#688080ff'
+      paletteIndexes.exploredBorders.color = '#ffffffff'
       break
     case 'p': // Purple
-      colorWrite = 0xB0080000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#400060ff'
       break
     case 'k': // Pink
-      colorWrite = 0xf4b40000
-      bordWrite = 0xfe9e
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
-      data.writeShort(addressAlBord,bordWrite)
-      data.writeShort(addressRiBord,bordWrite)
+      paletteIndexes.exploredFills.color   = '#a028e8ff'
+      paletteIndexes.exploredBorders.color = '#f0a0f8ff'
       break
     case 'b': // Black
-      colorWrite = 0x10000000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#000020ff'
       break
-    case 'i': // invisible
-      colorWrite = 0x00000000
-      data.writeWord(addressAl, colorWrite)
-      data.writeWord(addressRi, colorWrite)
+    case 'i': // Invisible
+      paletteIndexes.exploredFills.color = '#0000007f'
       break
     }
+    const paletteAddresses = {
+      "Castle Map Color Palette (DRA)": 0x03874848,
+      "Castle Map Color Palette (RIC)": 0x038C0508,
+    }
+    // In the switch-case above, various 'color' properties were added
+    // The presence of this property is used as a signal to update a color using the given RGBA32-formatted string value
+    Object.values(paletteIndexes)
+    .filter((paletteIndex) => {
+      return 'color' in paletteIndex
+    })
+    .forEach((paletteIndex) => {
+      Object.values(paletteAddresses)
+      .forEach((paletteAddress) => {
+        const bytesPerColor = 0x02
+        data.writeColor(paletteAddress + bytesPerColor * paletteIndex.index, paletteIndex.color)
+      })
+    })
     return data
   }
 
@@ -6819,7 +6881,7 @@ function hexValueToDamageString(hexValue) {
     offset = data.writeWord(offset,0x0803fef0)      // place hook in relic reset
     offset = data.writeWord(offset,0x00000000)
 
-    offset = 0x001199b8                             // start code in richter (no use in no-prologue)
+    offset = 0x001199b8                             // start code in richter (no use in no-prologue) 
     offset = data.writeWord(offset,0xa0600000)      // reset the time attack to allow bosses to spawn
     offset = data.writeWord(offset,0x2610ffff)
     offset = data.writeWord(offset,0x0601fffd)
@@ -6832,8 +6894,22 @@ function hexValueToDamageString(hexValue) {
     offset = data.writeWord(offset,0x2610ffff)
     offset = data.writeWord(offset,0x0601fffd)
     offset = data.writeWord(offset,0x24630004)
+	offset = data.writeWord(offset,0x3C028009)
+	offset = data.writeWord(offset,0x34427C34)
+	offset = data.writeWord(offset,0xAC400000)
+	offset = data.writeWord(offset,0xAC400004)
+	offset = data.writeWord(offset,0xAC400008)
     offset = data.writeWord(offset,0x0803ff6c)
     offset = data.writeWord(offset,0x00000000)
+
+	data.writeChar(0xAE663, 0x02)
+	data.writeChar(0xAE664, 0x00)	// Change Room
+
+	offset = 0x119C98				// Always get HR & NB Prologue Rewards
+	offset = data.writeWord(offset,0x18000002)
+	offset = data.writeWord(offset,0x00000000)
+	offset = 0x119CFC
+	offset = data.writeWord(offset,0x00000000)
 
     return data
   }
@@ -9456,6 +9532,8 @@ function applyBountyHunterTargets(rng,bhmode) {
     hasNonCircularPath: hasNonCircularPath,
     renderSolutions: renderSolutions,
     workerCountFromCores: workerCountFromCores,
+    rgba32ToHighColor15: rgba32ToHighColor15,
+    highColor15ToRgba32: highColor15ToRgba32,
   }
   if (self) {
     self.sotnRando = Object.assign(self.sotnRando || {}, {

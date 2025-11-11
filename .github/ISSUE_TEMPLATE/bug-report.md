@@ -1,7 +1,7 @@
 ---
 name: Other bug report
 about: For bugs not related to softlocks resulting from relic placement.
-assignees: 3snowp7im
+assignees: eldri7ch2
 ---
 
 New issues must complete all sections of this template or they will be
