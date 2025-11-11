@@ -6654,6 +6654,8 @@ function hexValueToDamageString(hexValue) {
 
   function applyMapColor(mapColor) {	// Researched by MottZilla & eldri7ch. Function by eldri7ch
     // NOTE(sestren): Most of the castle map's palette are not used in the vanilla game or are prevented from being used
+    // Default colors are given below for illustration purposes
+    const data = new checked()
     let paletteIndexes = {
       // Used for unrevealed portions of the map (i.e., transparency)
       unrevealed: { index: 0x0, defaultColor: "#0000007f" },
@@ -6666,7 +6668,6 @@ function hexValueToDamageString(hexValue) {
       revealedFills:   { index: 0x3, defaultColor: "#383860ff" },
       revealedBorders: { index: 0xD, defaultColor: "#909090ff" },
     }
-    const data = new checked()
     switch (mapColor) {
     case 'u': // Dark Blue
       paletteIndexes.exploredFills.color = '#000060ff'
@@ -6702,9 +6703,11 @@ function hexValueToDamageString(hexValue) {
       "Castle Map Color Palette (DRA)": 0x03874848,
       "Castle Map Color Palette (RIC)": 0x038C0508,
     }
+    // In the switch-case above, various 'color' properties were added
+    // The presence of this property is used as a signal to update a color using the given RGBA32-formatted string value
     Object.values(paletteIndexes)
     .filter((paletteIndex) => {
-      return paletteIndex.hasOwnProperty('color')
+      return 'color' in paletteIndex
     })
     .forEach((paletteIndex) => {
       Object.values(paletteAddresses)
