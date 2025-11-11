@@ -6652,68 +6652,70 @@ function hexValueToDamageString(hexValue) {
     return rgba32
   }
 
-  function applyMapColor(mapcol) {	// Researched by MottZilla & eldri7ch. Function by eldri7ch
+  function applyMapColor(mapColor) {	// Researched by MottZilla & eldri7ch. Function by eldri7ch
+    // NOTE(sestren): Most of the castle map's palette are not used in the vanilla game or are prevented from being used
+    // Default colors are given below for illustration purposes
     const data = new checked()
-    const addressAl = 0x03874848 //define address for alucard maps
-    const addressRi = 0x038C0508 //define address for richter maps
-    const addressAlBord = 0x03874864 //define address for alucard maps borders
-    const addressRiBord = 0x038C0524 //define address for richter maps borders
-    let colorWrite
-    let bordWrite
-    // Patch map colors - eldri7ch
-    switch (mapcol) {
+    let paletteIndexes = {
+      // Used for unrevealed portions of the map (i.e., transparency)
+      unrevealed: { index: 0x0, defaultColor: "#0000007f" },
+      // Used when exploring the map
+      exploredFills:   { index: 0x1, defaultColor: "#5070f8ff" },
+      exploredBorders: { index: 0xE, defaultColor: "#c0c0c0ff" },
+      saveRoomFills:   { index: 0x4, defaultColor: "#f80000ff" },
+      warpRoomFills:   { index: 0x5, defaultColor: "#f88000ff" },
+      // Used when purchasing the Castle Map from the Shop
+      revealedFills:   { index: 0x3, defaultColor: "#383860ff" },
+      revealedBorders: { index: 0xD, defaultColor: "#909090ff" },
+    }
+    switch (mapColor) {
     case 'u': // Dark Blue
-      colorWrite = '#000060ff'
-      data.writeColor(addressAl, colorWrite)
-      data.writeColor(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#000060ff'
       break
     case 'r': // Crimson
-      colorWrite = '#801000ff'
-      data.writeColor(addressAl, colorWrite)
-      data.writeColor(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#801000ff'
       break
     case 'n': // Brown
-      colorWrite = '#503000ff'
-      data.writeColor(addressAl, colorWrite)
-      data.writeColor(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#503000ff'
       break
     case 'g': // Dark Green
-      colorWrite = '#0040107f' // Is this transparent on purpose?
-      data.writeColor(addressAl, colorWrite)
-      data.writeColor(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#004010ff'
       break
     case 'y': // Gray
-      colorWrite = '#688080ff'
-      bordWrite = '#ffffffff'
-      data.writeColor(addressAl, colorWrite)
-      data.writeColor(addressRi, colorWrite)
-      data.writeColor(addressAlBord, bordWrite)
-      data.writeColor(addressRiBord, bordWrite)
+      paletteIndexes.exploredFills.color   = '#688080ff'
+      paletteIndexes.exploredBorders.color = '#ffffffff'
       break
     case 'p': // Purple
-      colorWrite = '#400060ff'
-      data.writeColor(addressAl, colorWrite)
-      data.writeColor(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#400060ff'
       break
     case 'k': // Pink
-      colorWrite = '#a028e8ff'
-      bordWrite = '#f0a0f8ff'
-      data.writeColor(addressAl, colorWrite)
-      data.writeColor(addressRi, colorWrite)
-      data.writeColor(addressAlBord, bordWrite)
-      data.writeColor(addressRiBord, bordWrite)
+      paletteIndexes.exploredFills.color   = '#a028e8ff'
+      paletteIndexes.exploredBorders.color = '#f0a0f8ff'
       break
     case 'b': // Black
-      colorWrite = '#0000207f' // Is this transparent on purpose?
-      data.writeColor(addressAl, colorWrite)
-      data.writeColor(addressRi, colorWrite)
+      paletteIndexes.exploredFills.color = '#000020ff'
       break
-    case 'i': // invisible
-      colorWrite = '#0000007f'
-      data.writeColor(addressAl, colorWrite)
-      data.writeColor(addressRi, colorWrite)
+    case 'i': // Invisible
+      paletteIndexes.exploredFills.color = '#0000007f'
       break
     }
+    const paletteAddresses = {
+      "Castle Map Color Palette (DRA)": 0x03874848,
+      "Castle Map Color Palette (RIC)": 0x038C0508,
+    }
+    // In the switch-case above, various 'color' properties were added
+    // The presence of this property is used as a signal to update a color using the given RGBA32-formatted string value
+    Object.values(paletteIndexes)
+    .filter((paletteIndex) => {
+      return 'color' in paletteIndex
+    })
+    .forEach((paletteIndex) => {
+      Object.values(paletteAddresses)
+      .forEach((paletteAddress) => {
+        const bytesPerColor = 0x02
+        data.writeColor(paletteAddress + bytesPerColor * paletteIndex.index, paletteIndex.color)
+      })
+    })
     return data
   }
 
