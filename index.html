@@ -1,120 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <title>Castlevania: Symphony of the Night Randomizer</title>
-  <link rel="icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
-  <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="static/css/randomizations.css">
-</head>
-
-<body>
-  <main>
-    <header>
-      <p id="splashTextDisplay" class="splash-text"></p>
-      <img src="images/logo.png" alt="RandomizerLogo" class="center" id="pageLogo">
-      <div class="center-text">
-        by Wild Mouse,
-        <a class="contact" href="https://twitter.com/3snow_p7im">
-          <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitter.svg"
-            alt="Twitter">
-        </a>
-        <a class="contact" href="https://twitch.tv/3snow_p7im">
-          <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg"
-            alt="TwitchIcon"></a>
-        , eldri7ch
-        <span class="tooltip-wrapper">
-          <span class="tooltip-indicator">?</span>
-          <span class="tooltip hidden">
-            <span>
-              <input id="dev-stash" type="checkbox" data-store-checkbox="false">
-              <label for="dev-stash">Dev's Stash</label>
+  <head>
+    <title>Castlevania: Symphony of the Night Randomizer</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet"
+          href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="static/css/randomizations.css">
+  </head>
+  <body>
+    <main>     
+      <header>
+        <p id="splashTextDisplay" class="splash-text"></p>       
+          <img src = "images/logo.png" alt= "RandomizerLogo" class = "center" id="pageLogo">
+          <div class = "center-text">
+            by Wild Mouse,
+            <a class="contact" href="https://twitter.com/3snow_p7im">
+              <img height="16" width="16"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitter.svg" alt = "Twitter">
+            </a>
+            <a class="contact" href="https://twitch.tv/3snow_p7im">
+              <img height="16" width="16"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg" alt = "TwitchIcon"></a>
+            , eldri7ch
+            <span class="tooltip-wrapper">
+              <span class="tooltip-indicator">?</span>
+              <span class="tooltip hidden">
+                <span>
+                  <input id="dev-stash" type="checkbox">
+                  <label for="dev-stash">Dev's Stash</label>
+                </span>
+              </span>
             </span>
-          </span>
-        </span>
-        <a class="contact" href="https://bsky.app/profile/eldri7ch.bsky.social">
-          <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/bluesky.svg"
-            alt="BlueSkyIcon">
-        </a>
-        <a class="contact" href="https://twitch.tv/eldri7ch">
-          <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg"
-            alt="TwitchIcon"></a>
-        , MottZilla
-        <a class="contact" href="https://twitch.tv/MottZilla0">
-          <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg"
-            alt="TwitchIcon"></a>
-        , SacredLucy
-        <a class="contact" href="https://twitch.tv/sacredlucyy">
-          <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg"
-            alt="TwitchIcon"></a>
-        , and CRAZY4BLADES
-        <a class="contact" href="https://twitch.tv/crazy4bladestv">
-          <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg"
-            alt="TwitchIcon"></a>
-      </div>
-      <div id="version"></div>
-    </header>
+            <a class="contact" href="https://bsky.app/profile/eldri7ch.bsky.social">
+              <img height="16" width="16"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/bluesky.svg" alt = "BlueSkyIcon">
+            </a>
+            <a class="contact" href="https://twitch.tv/eldri7ch">
+              <img height="16" width="16"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg" alt = "TwitchIcon"></a>
+            , MottZilla
+            <a class="contact" href="https://twitch.tv/MottZilla0">
+              <img height="16" width="16"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg" alt = "TwitchIcon"></a>
+            , SacredLucy
+            <a class="contact" href="https://twitch.tv/sacredlucyy">
+              <img height="16" width="16"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg" alt = "TwitchIcon"></a>
+            , and CRAZY4BLADES
+            <a class="contact" href="https://twitch.tv/crazy4bladestv">
+              <img height="16" width="16"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg" alt = "TwitchIcon"></a>
+          </div><div id="version"></div>
+      </header>
     <nav class="navbar">
-      <input type="checkbox" id="checkbox-toggle">
-      <label for="checkbox-toggle" class="menu-btn"></label>
-      <ul class="menu-list">
-        <li><a class="current">Randomizer</a></li>
-        <li><a href="faq/index.html">FAQ</a></li>
-        <li><a href="https://ppf.sotn.io">PPF Patcher</a></li>
-        <li><a href="community.html">Leaderboards</a></li>
-        <li><a href="wheel.html">Wheel of Fun</a></li>
-        <li><a href="tips&tricks/index.html">Tips and Tricks<small></small></a>
-          <ul class="submenu">
-            <li><a href="tips&tricks/generalRando.html">General Randomizer</a></li>
-            <li><a href="tips&tricks/presetSpecific.html">Preset Specific</a></li>
-          </ul>
-        </li>
-        <li><a>Community & News<small></small></a>
-          <ul class="submenu">
-            <li><a href="https://discord.com/invite/dzbKhQDjrs">Long Library Discord</a></li>
-            <li><a href="https://www.symphonyrando.fun">Knowledge Database (sr.f)</a></li>
-            <li><a href="https://www.speedrun.com/sotn">Speedrun Leaderboards</a></li>
-          </ul>
-        </li>
-        <li><a>Tools<small></small></a>
-          <ul class="submenu">
-            <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
-            <li><a href="https://taliczealot.github.io/#/apps/sotnrandotools">Rando Tools</a></li>
-            <li><a href="mapcompare.html">Map Tool</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <section>
-      <fieldset class="body-pos">
+        <input type="checkbox" id="checkbox-toggle">
+        <label for="checkbox-toggle" class="menu-btn"></label>
+        <ul class="menu-list">
+            <li><a class="current">Randomizer</a></li>
+            <li><a href="faq/index.html">FAQ</a></li>
+            <li><a href="https://ppf.sotn.io">PPF Patcher</a></li>
+            <li><a href="community.html">Leaderboards</a></li>
+            <li><a href="wheel.html">Wheel of Fun</a></li>
+            <li><a href="tips&tricks/index.html">Tips and Tricks<small></small></a>
+                <ul class="submenu">
+                    <li><a href="tips&tricks/generalRando.html">General Randomizer</a></li>
+                    <li><a href="tips&tricks/presetSpecific.html">Preset Specific</a></li>
+                </ul>
+            </li>
+            <li><a>Community & News<small></small></a>
+                <ul class="submenu">
+                    <li><a href="https://discord.com/invite/dzbKhQDjrs">Long Library Discord</a></li>
+                    <li><a href="https://www.symphonyrando.fun">Knowledge Database (sr.f)</a></li>
+                    <li><a href="https://www.speedrun.com/sotn">Speedrun Leaderboards</a></li>
+                </ul>
+            </li>
+            <li><a>Tools<small></small></a>
+                <ul class="submenu">
+                    <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
+                    <li><a href="https://taliczealot.github.io/#/apps/sotnrandotools">Rando Tools</a></li>
+                    <li><a href="mapcompare.html">Map Tool</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>      
+      <section>
+        <fieldset class = "body-pos">
         <form id="form">
           <fieldset>
-            <legend>Output</legend>
-            <div class="right-theme">
-              <label for="theme">&#127912;Theme </label>
-              <select id="theme">
-                <option value="menu">Menu</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-              </select>
-            </div>
-            <div id="bin-ppf">
-              <div id="bin">
-                <input id="output-bin" name="output" type="radio" value="bin">
-                <label for="output-bin">.bin</label>
+        <legend>Output</legend>
+          <div class="right-theme">
+            <label for="theme">&#127912;Theme </label>  
+            <select id="theme">
+              <option value="menu">Menu</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>              
+              <div id="bin-ppf">
+                <div id="bin">
+                  <input id="output-bin"
+                      name="output"
+                      type="radio"
+                      value="bin">
+                  <label for="output-bin">.bin</label>
+                </div>
+                <div id="ppf">
+                  <input id="output-ppf"
+                    name="output"
+                    type="radio"
+                    value="ppf">
+                  <label for="output-ppf">.ppf</label>
+                </div>
               </div>
-              <div id="ppf">
-                <input id="output-ppf" name="output" type="radio" value="ppf">
-                <label for="output-ppf">.ppf</label>
+              <div id="target" class="hidden">
+                <label id="status" for="file"></label>
+                <input id="file" type="file" accept=".bin,.iso">
               </div>
-            </div>
-            <div id="target" class="hidden">
-              <label id="status" for="file"></label>
-              <input id="file" type="file" accept=".bin,.iso">
-            </div>
-          </fieldset>
-          <div id="content"></div>
+            </fieldset>
+          <div id = "content"></div>      
           <div id="randomization-options" class="responsive-three-column-grid">
             <fieldset class="input-box">
               <legend>Randomizations</legend>
@@ -128,7 +132,7 @@
                   <div id="preset-select">
                     <select id="preset-id"></select>
                   </div>
-                </div>
+                </div>                
                 <section id="preset-details">
                   <h4>Preset description:</h4>
                   <p id="preset-description"></p>
@@ -177,12 +181,12 @@
                       <p id="preset-winCondition"></p>
                     </div>
                   </fieldset>
-                </section>
+                </section>  
                 <fieldset id="options">
                   <small>&#10071; Lower complexities generate faster but may also be faster to beat.</small>
                   <div id="complexity-slider">
                     <label for="complexity">Complexity</label>
-                    <div id="complexity-slider-details">
+                    <div id="complexity-slider-details"> 
                       <span id="complexityMinValue">1</span>
                       <input id="complexity" type="range" min="1" list="complexityValues">
                       <span id="complexityMaxValue"></span>
@@ -194,12 +198,14 @@
                   </div>
                   <fieldset id="relic-locations-set">
                     <legend>
-                      <input id="relic-locations" type="checkbox" data-store-checkbox="true"
-                        data-custom-change="relicLocationsChange">
+                      <input id="relic-locations" type="checkbox">
                       <label for="relic-locations">Relic locations</label>
                     </legend>
                     <div class="relic-location">
-                      <input id="extension-guarded" name="extension" type="radio" value="guarded">
+                      <input id="extension-guarded"
+                             name="extension"
+                             type="radio"
+                             value="guarded">
                       <label for="extension-guarded">
                         Guarded
                         <span class="tooltip-wrapper">
@@ -214,7 +220,10 @@
                       </label>
                     </div>
                     <div class="relic-location">
-                      <input id="extension-guardedplus" name="extension" type="radio" value="guardedplus">
+                      <input id="extension-guardedplus"
+                             name="extension"
+                             type="radio"
+                             value="guardedplus">
                       <label for="extension-guardedplus">
                         Guarded<i>Plus</i>
                         <span class="tooltip-wrapper">
@@ -229,7 +238,10 @@
                       </label>
                     </div>
                     <div class="relic-location">
-                      <input id="extension-equipment" name="extension" type="radio" value="equipment">
+                      <input id="extension-equipment"
+                             name="extension"
+                             type="radio"
+                             value="equipment">
                       <label for="extension-equipment">
                         Equipment
                         <span class="tooltip-wrapper">
@@ -244,7 +256,10 @@
                       </label>
                     </div>
                     <div class="relic-location">
-                      <input id="extension-scenic" name="extension" type="radio" value="scenic">
+                      <input id="extension-scenic"
+                              name="extension"
+                              type="radio"
+                              value="scenic">
                       <label for="extension-scenic">
                         Scenic
                         <span class="tooltip-wrapper">
@@ -252,7 +267,7 @@
                           <span class="tooltip hidden">
                             <span>
                               Relics and progression items may appear in
-                              place of equipment tiles or in unique
+                              place of equipment tiles or in unique 
                               locations in either castle. 118 Check locations.
                             </span>
                           </span>
@@ -260,7 +275,10 @@
                       </label>
                     </div>
                     <div class="relic-location">
-                      <input id="extension-extended" name="extension" type="radio" value="wanderer">
+                      <input id="extension-extended"
+                              name="extension"
+                              type="radio"
+                              value="wanderer">
                       <label for="extension-extended">
                         Extended
                         <span class="tooltip-wrapper">
@@ -268,8 +286,8 @@
                           <span class="tooltip hidden">
                             <span>
                               Relics and progression items may appear in
-                              place of <i>limited</i> equipment tiles or
-                              in unique locations in either castle. 70
+                              place of <i>limited</i> equipment tiles or 
+                              in unique locations in either castle. 70 
                               Check locations.
                             </span>
                           </span>
@@ -277,7 +295,10 @@
                       </label>
                     </div>
                     <div class="relic-location">
-                      <input id="extension-classic" name="extension" type="radio" value="classic">
+                      <input id="extension-classic"
+                             name="extension"
+                             type="radio"
+                             value="classic">
                       <label for="extension-classic">
                         Classic
                         <span class="tooltip-wrapper">
@@ -293,20 +314,41 @@
                       </label>
                     </div>
                   </fieldset>
-                  <input id="enemy-drops-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="starting-equipment-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="item-locations-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="prologue-rewards-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="relic-locations-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="writes" type="text" disabled="disabled" style="display: none">
+                  <input id="enemy-drops-arg"
+                         type="text"
+                         disabled="disabled"
+                         style="display: none">
+                  <input id="starting-equipment-arg"
+                         type="text"
+                         disabled="disabled"
+                         style="display: none">
+                  <input id="item-locations-arg"
+                         type="text"
+                         disabled="disabled"
+                         style="display: none">
+                  <input id="prologue-rewards-arg"
+                         type="text"
+                         disabled="disabled"
+                         style="display: none">
+                  <input id="relic-locations-arg"
+                         type="text"
+                         disabled="disabled"
+                         style="display: none">
+                  <input id="writes"
+                         type="text"
+                         disabled="disabled"
+                         style="display: none">
                 </fieldset>
-                <div class="pure-u-1"> <input id="clear" type="submit" class="pure-button hidden" value="Clear">
+                <div class="pure-u-1">                <input id="clear"
+                         type="submit"
+                         class="pure-button hidden"
+                         value="Clear">
                 </div>
               </div>
             </fieldset>
             <fieldset class="input-box">
               <legend>Options</legend>
-              <div class="checkboxes">
+              <div class = "checkboxes">
                 <div class="left-column-options">
                   <div>
                     <label for="newGoals">Change Goals</label><span class="tooltip-wrapper">
@@ -320,196 +362,132 @@
                       </span>
                     </span>
                   </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="append-seed" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="append-seed" class="toggle-label">
-                      Append Seed to Filename
+                  <div>
+                    <input id="append-seed" type="checkbox">
+                    <label for="append-seed">Append seed to filename
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Appends the seed to the filename of the randomized bin.<br>
-                            You will need to modify your cue file track listing to reference the new filename.
+                            Appends the seed to the filename of the randomized bin.
+                            You will need to modify your cue file track listing to
+                            reference the new filename.
                           </span>
                         </span>
                       </span>
                     </label>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="tournament-mode" type="checkbox" data-store-checkbox="true"
-                        data-custom-change="tournamentModeChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="tournament-mode" class="toggle-label">
-                      Tournament Mode
+                  </div> 
+                  <div>
+                    <input id="tournament-mode" type="checkbox">
+                    <label for="tournament-mode">Tournament Mode
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Prevents displaying the relic locations and solutions.<br>
-                            Sets the library shop relic cost to 0.<br>
-                            Permanently opens the clock room statue.<br>
+                            Prevents displaying the relic locations and solutions.
+                            Sets the library shop relic cost to 0.
+                            Permanently opens the clock room statue.
                             For use when racing.
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="accessibility-patches" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="accessibility-patches" class="toggle-label">
-                      Accessibility Patches
+                  <div>
+                    <input id="accessibility-patches" type="checkbox">
+                    <label for="accessibility-patches">Accessibility Patches
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Reduces screen flashing from use items, adjusts some relics for better visibility, and
-                            patches some softlocks.
+                            Reduces screen flashing from use items, adjusts some 
+                            relics for better visibility and patches some softlocks.
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="simple-input" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="simple-input" class="toggle-label">
-                      Simplified Inputs
+                  <div>
+                    <input id="simple-input" type="checkbox">
+                    <label for="simple-input">Simplified Inputs
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Simplifies inputs so spells no longer need complex sequences to execute. L2 for Gravity
-                            Boots. R3 and any of the following: Left / Right for Hellfire, Up for Soul Steal, and 2x
-                            Down for Tetra Spirit.
+                            Simplifies inputs so spells no longer need complex sequences to execute. L2 for Gravity Boots. R3 and any of the following: Left / Right for Hellfire, Up for Soul Steal, and 2x Down for Tetra Spirit
+                          </span>
+                        </span>
+                      </span> <new></new><!--New tag -->
+                    </label>
+                  </div>
+                  <div >
+                    <input id="show-spoilers" type="checkbox">
+                    <label for="show-spoilers">Show Spoilers</label>
+                  </div>
+                  <div >
+                    <input id="show-relics" type="checkbox">
+                    <label for="show-relics">Show Relic Locations</label>
+                  </div>
+                  <div>
+                    <input id="show-solutions" type="checkbox">
+                    <label for="show-solutions">Show solutions</label>
+                  </div>
+                  <div >
+                    <input id="enemy-drops" type="checkbox">
+                    <label for="enemy-drops">Enemy Drops</label>
+                  </div>
+                  <div >
+                    <input id="stats" type="checkbox">
+                    <label for="stats">Item Stats</label>
+                  </div>
+                  <div>
+                    <input id="itemnamerando-mode" type="checkbox">
+                    <label for="itemnamerando-mode">Item Names
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Randomize item names when using Item Stat Rando.
                           </span>
                         </span>
                       </span>
-                      <new></new>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="show-spoilers" type="checkbox" data-store-checkbox="true"
-                        data-custom-change="spoilersChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="show-spoilers" class="toggle-label">Show Spoilers</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="show-relics" type="checkbox" data-store-checkbox="false"
-                        data-custom-change="showRelicsChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="show-relics" class="toggle-label">Show Relic Locations</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="show-solutions" type="checkbox" data-store-checkbox="false"
-                        data-custom-change="showSolutionsChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="show-solutions" class="toggle-label">Show Solutions</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="enemy-drops" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="enemy-drops" class="toggle-label">Enemy Drops</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="stats" type="checkbox" data-store-checkbox="true" data-custom-change="statsChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="stats" class="toggle-label">Item Stats</label>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="itemnamerando-mode" type="checkbox" data-store-checkbox="false"
-                        data-custom-change="itemNameRandoModeChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="itemnamerando-mode" class="toggle-label">
-                      Item Names
+                  <div>
+                    <input id="turkey-mode" type="checkbox">
+                    <label for="turkey-mode">Turkey Mode
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
-                          <span>Randomize item names when using Item Stat Rando.</span>
+                          <span>
+                            Replaces the subweapons in the glass vats at Alchemy Lab 
+                            and Black Marble Gallery with useless turkeys.
+                          </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="turkey-mode" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="turkey-mode" class="toggle-label">
-                      Turkey Mode
+                  <div>
+                    <input id="item-locations" type="checkbox">
+                    <label for="item-locations">Item locations</label>
+                  </div>
+                  <div>
+                    <input id="starting-equipment" type="checkbox" disabled>
+                    <label for="starting-equipment">Starting Equipment</label>
+                  </div>
+                  <div>
+                    <input id="prologue-rewards" type="checkbox">
+                    <label for="prologue-rewards">Prologue Rewards</label>
+                  </div>
+                  <div>
+                    <input id="seasonal-phrases" type="checkbox">
+                    <label for="seasonal-phrases">Seasonal Splash Phrases
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
-                          <span>Replaces the subweapons in the glass vats at Alchemy Lab and Black Marble Gallery with
-                            useless turkeys.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="item-locations" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="item-locations" class="toggle-label">Item Locations</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="starting-equipment" type="checkbox" disabled data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="starting-equipment" class="toggle-label disabled">Starting Equipment</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="prologue-rewards" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="prologue-rewards" class="toggle-label">Prologue Rewards</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="seasonal-phrases" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="seasonal-phrases" class="toggle-label">
-                      Seasonal Splash Phrases
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Allow seasonal and holiday-based splash phrases on the "Press Start" screen.</span>
+                          <span>
+                            Allow seasonal and holiday-based splash phrases on the "Press Start" screen.
+                          </span>
                         </span>
                       </span>
                     </label>
@@ -519,328 +497,262 @@
                   <div>
                     <select id="newGoals">
                       <option value="default">Default</option>
-                      <option value="b">All Bosses</option>
-                      <option value="r">All Relics</option>
-                      <option value="a">All Bosses & Relics</option>
-                      <option value="v">All Bosses & Vlad Relics</option>
-                      <option value="h">Bounty Hunter</option>
-                      <option value="t">Target Confirmed</option>
-                      <option value="w">Hitman</option>
-                      <option value="x">All Bosses & Bounties</option>
-                    </select>
+                      <option value="allBoss">All Bosses</option>
+                      <option value="allRelic">All Relics</option>
+                      <option value="abrsr">All Bosses & Relics</option>
+                      <option value="vladBoss">All Bosses & Vlad Relics</option>
+                      <option value="bhNorm">Bounty Hunter</option>
+                      <option value="bhAdvanced">Target Confirmed</option>
+                      <option value="bhHitman">Hitman</option>
+                      <option value="bhBoss">All Bosses & Bounties</option>
+                    </select>                  
                   </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="colorrando-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="colorrando-mode" class="toggle-label">
-                      Color Randomizer
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Randomize various color palettes. Ex: Cape colors, gravity boots trails,
-                            hydrostorm.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="magicmax-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="magicmax-mode" class="toggle-label">
-                      Magic Vessels
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Replace Heart Max Up with Magic Max Up.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="antifreeze-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="antifreeze-mode" class="toggle-label">
-                      Anti-Freeze
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Remove screen freezes on level-up, relic and vessel acquisition.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="mypurse-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="mypurse-mode" class="toggle-label">
-                      That's my purse!
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Prevents Death from stealing your gear.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="iws-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="iws-mode" class="toggle-label">
-                      Infinite Wing Smash
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Enables infinite Wing Smash for one input.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="fastwarp-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="fastwarp-mode" class="toggle-label">
-                      Fast Warps
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Quickens warp animation when using teleporters.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="noprologue-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="noprologue-mode" class="toggle-label">
-                      Remove Prologue
+                  <div>
+                    <input id="colorrando-mode" type="checkbox">
+                    <label for="colorrando-mode">Color Randomizer
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Removes the Prologue from being required to play.
+                            Randomize various color palettes. Ex: Cape colors, 
+                            gravity boots trails, hydrostorm.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>               
+                  <div>
+                    <input id="magicmax-mode" type="checkbox">
+                    <label for="magicmax-mode">Magic Vessels
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Replace Heart Max Up with Magic Max Up.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="antifreeze-mode" type="checkbox">
+                    <label for="antifreeze-mode">Anti-Freeze
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Remove screen freezes on level-up, relic and vessel 
+                            acquisition.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div >
+                    <input id="mypurse-mode" type="checkbox">
+                    <label for="mypurse-mode">That's my purse!
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Prevents Death from stealing your gear.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div >
+                    <input id="iws-mode" type="checkbox">
+                    <label for="iws-mode">Infinite Wing Smash
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Enables infinite Wing Smash for one input.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="fastwarp-mode" type="checkbox">
+                    <label for="fastwarp-mode">Fast Warps
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Quickens warp animation when using teleporters.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div>
+                    <input id="noprologue-mode" type="checkbox">
+                    <label for="noprologue-mode">Remove Prologue
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Removes the Prologue from being required to play. 
                             <span style="color: red;">(Will remove potential prologue rewards.)</span>
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="unlocked-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="unlocked-mode" class="toggle-label">
-                      Unlocked Mode
+                  <div >
+                    <input id="unlocked-mode" type="checkbox">
+                    <label for="unlocked-mode">Unlocked Mode
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Opens all five shortcuts in first castle and one in second castle.
-                            <span style="color: red;">(Will break logic for most presets.)</span>
+                            Opens all five shortcuts in first castle and one in 
+                            second castle. <span style="color: red;">(Will break logic for most 
+                            presets.)</span>
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="surprise-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="surprise-mode" class="toggle-label">
-                      Relic Surprise!
+                  <div>
+                    <input id="surprise-mode" type="checkbox">
+                    <label for="surprise-mode">Relic Surprise!
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            All relics are hidden behind the same sprite and palette.
-                            The player cannot tell what the relic is until they collect it.
+                            All relics are hidden behind the same sprite and palette. 
+                            The player cannot tell what the relic is until they 
+                            collect it.
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="enemyStatRando-mode" type="checkbox" data-store-checkbox="false"
-                        data-custom-change="enemyStatRandoModeChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="enemyStatRando-mode" class="toggle-label">
-                      Enemy Stats
+                  <div >
+                    <input id="enemyStatRando-mode" type="checkbox">
+                    <label for="enemyStatRando-mode">Enemy Stats
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Enemy stats are randomized ranging from 25% to 200% of their original value and their attack
-                            and defense types are randomized to include random elements.
+                            Enemy stats are randomized ranging from 25% to 200% of 
+                            their original value and their attack and defense types 
+                            are randomized to include random elements.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>                
+                  <div>     
+                    <input id="elem-chaos" type="checkbox">
+                    <label for="elem-chaos">Elemental Chaos
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Randomizes almost every single element in the game.
+                          </span>
+                        </span>
+                      </span> <new></new><!--New tag -->
+                    </label>
+                  </div>                
+                  <div>
+                    <input id="shopPriceRando-mode" type="checkbox">
+                    <label for="shopPriceRando-mode">Shop Prices
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Shop prices are randomized ranging from 50% to 150% of 
+                            their original value and they are shuffled between each 
+                            other.
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="elem-chaos" type="checkbox" data-custom-change="elemChaosModeChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="elem-chaos" class="toggle-label">
-                      Elemental Chaos
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Randomizes almost every single element in the game.</span>
-                        </span>
-                      </span>
-                      <new></new>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="shopPriceRando-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="shopPriceRando-mode" class="toggle-label">
-                      Shop Prices
+                  <div>
+                    <input id="startRoomRando-mode" type="checkbox">
+                    <label for="startRoomRando-mode">Starting Zone 1st Castle
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Shop prices are randomized ranging from 50% to 150% of their original value and they are
-                            shuffled between each other.
+                            Start in the entrance as usual but after the first Warg, 
+                            you are teleported to a random zone to start the rest of 
+                            your run. (Select both to have full-range starting rando)
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="startRoomRando-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="startRoomRando-mode" class="toggle-label">
-                      Starting Zone 1st Castle
+                <div>
+                    <input id="startRoomRando2nd-mode" type="checkbox">
+                    <label for="startRoomRando2nd-mode">Starting Zone 2nd Castle
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Start in the entrance as usual but after the first Warg, you are teleported to a random zone
-                            to start the rest of your run. (Select both to have full-range starting rando)
+                            Start in the entrance as usual but after the first Warg, 
+                            you are teleported to a random zone in second castle to 
+                            start the rest of your run. (Select both to have full-
+                            range starting rando)
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="startRoomRando2nd-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="startRoomRando2nd-mode" class="toggle-label">
-                      Starting Zone 2nd Castle
+                  <div>
+                    <input id="domino-mode" type="checkbox">
+                    <label for="domino-mode">Guaranteed Drops
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Start in the entrance as usual but after the first Warg, you are teleported to a random zone
-                            in second castle to start the rest of your run. (Select both to have full-range starting
-                            rando)
+                            Guarantees drops from every enemy that has one. Ring of
+                            Arcana makes them drop their rare item instead of the 
+                            uncommon.
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="domino-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="domino-mode" class="toggle-label">
-                      Guaranteed Drops
+                  <div>
+                    <input id="rlbc-mode" type="checkbox">
+                    <label for="rlbc-mode">Reverse Library Card
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Guarantees drops from every enemy that has one. Ring of Arcana makes them drop their rare
-                            item instead of the uncommon.
+                            Adds a new function to Library Cards. Hold Down while 
+                            using them to take Alucard to the second castle Library 
+                            after Richter is saved.
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="rlbc-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="rlbc-mode" class="toggle-label">
-                      Reverse Library Card
+                  <div>     
+                    <input id="immunity-potion-mode" type="checkbox">
+                    <label for="immunity-potion-mode">Immunity Potions
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Adds a new function to Library Cards. Hold Down while using them to take Alucard to the
-                            second castle Library after Richter is saved.
+                            Converts Resist Fire, Resist Ice, etc. potions to grant 
+                            Immunity to the element in question and allows them to grant 
+                            invincibility frames.
                           </span>
                         </span>
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="immunity-potion-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="immunity-potion-mode" class="toggle-label">
-                      Immunity Potions
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Converts Resist Fire, Resist Ice, etc. potions to grant Immunity to the element in question
-                            and allows them to grant invincibility frames.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="godspeed-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="godspeed-mode" class="toggle-label">
-                      Godspeed Shoes
+                  <div>     
+                    <input id="godspeed-mode" type="checkbox">
+                    <label for="godspeed-mode">Godspeed Shoes
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
@@ -851,14 +763,9 @@
                       </span>
                     </label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="library-shortcut" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="library-shortcut" class="toggle-label">
-                      Library Shortcut
+                  <div>
+                    <input id="library-shortcut" type="checkbox">
+                    <label for="library-shortcut">Library Shortcut
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
@@ -870,1076 +777,967 @@
                     </label>
                   </div>
                 </div>
-              </div>
+              </div>                
             </fieldset>
-            <fieldset class="input-box">
+          <fieldset class="input-box">
               <legend>Customizations</legend>
               <div class="customizations">
                 <div>
                   <div class="mapColor-dropdown">
                     <label>Map Color:</label>
                     <select id="mapColor">
-                      <option value="default">Normal</option>
-                      <option value="u">Dark Blue</option>
-                      <option value="r">Crimson</option>
-                      <option value="n">Brown</option>
-                      <option value="g">Hunter Green</option>
-                      <option value="y">Grey</option>
-                      <option value="p">Purple</option>
-                      <option value="k">Pink</option>
-                      <option value="b">Black</option>
+                      <option value="normal">Normal</option>
+                      <option value="blue">Dark Blue</option>
+                      <option value="red">Crimson</option>
+                      <option value="brown">Brown</option>
+                      <option value="green">Hunter Green</option>
+                      <option value="grey">Grey</option>
+                      <option value="purple">Purple</option>
+                      <option value="pink">Pink</option>
+                      <option value="black">Black</option>
                     </select>
                   </div>
-                  <div id="mapColorDisplay" class="map-color"
-                    style="background: url(https://i.servimg.com/u/f81/20/40/06/51/map_pa10.png);"></div>
-                  <div id="alucard-palette-container">
-                    <label>Alucard Palette:</label>
-                    <select id="alucardPalette">
-                      <option value="default">Default</option>
-                      <option value="r">Bloody Tears</option>
-                      <option value="b">Blue Danube</option>
-                      <option value="m">Refreshing Mint</option>
-                      <option value="g">Swamp Thing</option>
-                      <option value="w">White Knight</option>
-                      <option value="l">Royal Purple</option>
-                      <option value="p">Pink Passion</option>
-                      <option value="s">Shadow Prince</option>
-                    </select>
-                  </div>
-                  <div id="alucard-liner-container">
-                    <label>Alucard Liner:</label>
-                    <select id="alucardLiner">
-                      <option value="z">Gold Liner (default)</option>
-                      <option value="x">Bronze Liner</option>
-                      <option value="y">Silver Liner</option>
-                      <option value="w">Onyx Liner</option>
-                      <option value="v">Coral Liner</option>
-                    </select>
-                  </div>
-                  <div class="alucard-display">
-                    <div id="alucardLinerDisplay"
-                      style="margin: 0; position: absolute; width:96px; height:64px; background: url(https://i.servimg.com/u/f81/20/40/06/51/alucar10.png);">
-                    </div>
-                    <div id="alucardPaletteDisplay"
-                      style=" width:96px; height:64px; background: url(https://i81.servimg.com/u/f81/20/40/06/51/alucar11.png);">
-                    </div>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="music" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="music" class="toggle-label">Music Randomizer</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="boss-music-separation" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="boss-music-separation" class="toggle-label">
-                      Separate Boss Music
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Separates Boss music and Normal stage music randomization.<br>
-                            Prevents hearing Enchanted Banquet for 10 minutes.
-                          </span>
+                <div id="mapColorDisplay" class= "map-color" style="background: url(https://i.servimg.com/u/f81/20/40/06/51/map_pa10.png);"></div>              
+                <div id = "alucard-palette-container">
+                  <label>Alucard Palette:</label>
+                  <select id="alucardPalette">
+                    <option value="default">Default</option>
+                    <option value="bloodytears">Bloody Tears</option>
+                    <option value="bluedanube">Blue Danube</option>
+                    <option value="mint">Refreshing Mint</option>
+                    <option value="swampthing">Swamp Thing</option>
+                    <option value="whiteknight">White Knight</option>
+                    <option value="royalpurple">Royal Purple</option>
+                    <option value="pinkpassion">Pink Passion</option>
+                    <option value="shadowp">Shadow Prince</option>
+                  </select>
+                </div>                    
+                <div id = "alucard-liner-container">
+                  <label>Alucard Liner:</label>
+                  <select id="alucardLiner">
+                    <option value="gold">Gold Liner (default)</option>
+                    <option value="bronze">Bronze Liner</option>
+                    <option value="silver">Silver Liner</option>
+                    <option value="onyx">Onyx Liner</option>
+                    <option value="coral">Coral Liner</option>
+                  </select>
+                </div>
+                <div class = "alucard-display">
+                  <div id="alucardLinerDisplay" style="position: absolute; width:96px; height:64px; background: url(https://i.servimg.com/u/f81/20/40/06/51/alucar10.png);"></div>
+                  <div id="alucardPaletteDisplay" style="width:96px; height:64px; background: url(https://i81.servimg.com/u/f81/20/40/06/51/alucar11.png);"></div>
+                </div>
+                <div>
+                  <input id="music" type="checkbox">
+                  <label for="music">Music Randomizer</label>
+                </div>
+                <div>     
+                  <input id="boss-music-separation" type="checkbox">
+                  <label for="boss-music-separation">Separate Boss Music
+                    <span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>
+                          Separates Boss music and Normal stage music randomization. 
+                          Prevents hearing Enchanted Banquet for 10 minutes.
                         </span>
                       </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="excludeSongsOption" type="checkbox">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="excludeSongsOption" class="toggle-label">
-                      Exclude Songs
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            If Music Randomizer is enabled, you can choose which songs to exclude from
-                            randomizations.<br>
-                            These songs will not appear during your playthrough.
-                          </span>
+                    </span>
+                  </label>
+                </div>
+                <div>
+                  <label>                    
+                    <input id="excludeSongsOption" type="checkbox">
+                    <span>Exclude Songs </span>
+                    <span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>
+                          If Music Randomizer is enabled, you can choose which songs to exclude from Randomizations.
+                          These songs will not appear during your playthrough.
                         </span>
                       </span>
-                    </label>
-                  </div>
-
+                    </span>
+                  </label>
                   <div id="excludeSongsMenu" class="listbox-container" hidden>
-                    <select id="includeList" class="listbox" multiple></select>
+                    <select id="includeList" class="listbox" multiple>
+                    </select>
                     <div class="listbox-button-container">
                       <button id="esMoveToRight" class="listbox-button" type="button">→</button>
                       <button id="esMoveToLeft" class="listbox-button" type="button">←</button>
                     </div>
-                    <select id="excludeList" class="listbox" multiple></select>
+                    <select id="excludeList" class="listbox" multiple>
+                    </select>
                   </div>
                 </div>
-              </div>
+              </div>  </div>
             </fieldset>
-
-          </div>
+           
+        </div>               
           <div>
             <div id="spoilers-container" class="hide" style="display: none">
               <textarea id="spoilers" rows="8" cols="32"></textarea>
             </div>
           </div>
           <p id="buttons">
-            <input id="randomize" type="submit" class="primary" disabled="disabled" value="Randomize">
-            <input id="copy" type="submit" disabled="disabled" value="Copy Spoilers">
+            <input id="randomize"
+                   type="submit"
+                   class="primary"
+                   disabled="disabled"
+                   value="Randomize">
+            <input id="copy"
+                   type="submit"
+                   disabled="disabled"
+                   value="Copy Spoilers">
           </p>
+          <a id="download" style="display:none"></a>
+          <div id="loader"></div>
         </form>
-        <div>
-          <button style="color:black;" onclick="showOptionsLog()">Generate Options Log</button>
-          <button style="color:black;" onclick="showPreviousSeed()">Previous Seed Options Log</button>
-        </div>
-        <a id="download" style="display:none"></a>
-        <div id="loader"></div>
-        <pre id="optionsLogOutput"></pre>
         <div id="notification">Copied to clipboard</div>
         <hr>
         <h2><a id="changelog">Changelog</a></h2>
-          <h3>November 10, 2025</h3>
+        <h3>September 15, 2025</h3>
+          <h4>Preset Changes</h4>
+            <ul>
+              <li>Added the new Anguish preset.</li>
+              <li>Added the new Gear Rush preset.</li>
+                <ul>
+                  <li>• Name Code: APERTURE gives the player Gold and Silver ring to access Dracula early by visiting Maria at the Holy glasses location.</li>
+                  <li>• Name Code: SLOWPOKE Increases the amount of time given to the player to 25 minutes and also gives the rings to access Dracula early.</li>
+                  <li>• Name Code: IAMSPEED Decreases the amount of time the player has to 7 minutes. (No rings given)</li>
+                  <li>• Name Code: GTI-CLUB gives the player $250,000 in game, just like the sega Saturn version.</li>
+                </ul>
+              <li>Made the new Vlad relic effects take effect based on whether the relic is on or off in Recycler.</li>
+              <li>Added additional jumps to having two Leap Stone turned on in Recycler.</li>
+              <li>The Glitch logic issues aren't real; they can't hurt you.</li>
+            </ul>
+          <h4>Options Changes</h4>
+            <ul>
+              <li>Fixed a bug where the relic at Power of Wolf wouldn't appear when Starting Room Rando was enabled.</li>
+              <li>Added a new mystery feature to Dev's Stash.</li>
+              <li>Fixed an issue where Reverse Library Cards wouldn't function on presets that had the map "pre-purchased" by the preset. (Hotfix)</li>
+              <li>Fixed an issue where Second Castle Random Start movement wouldn't function on presets that had the map "pre-purchased" by the preset. (Hotfix)</li>
+            </ul>
+          <h4>Website Changes</h4>
+            <ul>
+              <li>Added the Map Tool to compare maps for 200.6% runs.</li>
+            </ul>
+        <a id="show-older" href="#older">Show older changes</a>
+        <div id="older" class="hidden">
+          <h3>August 11, 2025</h3>
             <h4>Preset Changes</h4>
               <ul>
-                <li>Temporarily* added the following tournament presets:</li>
-                  <ul>
-                    <li>Rampage 2025 Tournament Edition* (This preset may end up staying permanently depending on performance)</li>
-                    <li>Cornivus 2025 Tournament Edition</li>
-                    <li>Nimble Lite 2025 Tournament Edition</li>
-                    <li>Recycler 2025 Tournament Edition</li>
-                    <li>Chimera 2025 Tournament Edition</li>
-                  </ul>
-                <li>Removed nerf to <i>all</i> thrust swords and only nerfed the thrust damage of Obsidian Sword in Boss Rush.</li>
-                <li>Fixed an issue where Gravity Boots didn't turn off second Leap Stone additional jumps in Recycler.</li>
-                <li>Removed menu lock when attempting to save in Gear Rush.</li>
-                <li>Removed Succubus fight in Gear Rush since player could not enter Nightmare. Relic now spawns by default.</li>
-                <li>eldri7ch fell into a Glitch.</li>
-                <li></li>
-                <h5>The following presets are now deprecated. Deprecation means they will be maintained and distributed with the randomizer but are no longer on the website.</h5>
-                  <ul>
-                    <li>Summoner</li>
-                    <li>Rat Race</li>
-                    <li>Brawler</li>
-                    <li>Empty Hand</li>
-                  </ul>
+                <li>Added Elemental Chaos to Max Rando.</li>
+                <li>Fixed an issue with Bounty Hunter, Battle Mage, Hitman, Target Confirmed, and Rampage needing Demon Card in alternate extensions.</li>
+                <li>The time of the eldri7ch is over, the age of the Glitch has come.</li>
+                <li>Color Randomizer removed from all presets as a default option.</li>
+                <li>Removed outer wall teleporter for Mirror Breaker.</li>
               </ul>
-            <h4>Options Changes</h4>
+            <h4>Option Changes</h4>
               <ul>
-                <li>No Prologue Mode removes the "grand" entrance of Alucard to allow the SOTN Rando Tools to start / stop LiveSplit.</li>
+                <li>Added Elemental Chaos Mode.</li>
+                <li>Added new Simplified Input option.</li>
+                <li>Re-worked many enemies in Enemy Stat Randomizer.</li>
+                <li>Added enemy projectiles to Enemy Stat Randomizer.</li>
+                <li>Randomized certain bosses' attack elements in Enemy Stat Randomizer.</li>
+                <li>Corrected a lot of name card issues in Enemy Stat Randomizer.</li>
+                <li>Removed ability for enemy weakness to also be their resist, immunity, or absorb.</li>
+                <li>Patched a bug where new immunities would not remove absorbs and vice versa.</li>
+              </ul>
+            <h4>Website Changes</h4>
+              <ul>
+                <li>Options enabled by the presets will no longer be able to be turned off (temporary solution).</li>
+              </ul>
+          <h3>July 14, 2025</h3>
+            <h4>Preset Changes</h4>
+              <ul>
+                <li>Removed $700 and $5000 drops from Rat Race.</li>
+                <li>Guaranteed drops for Hitman, Target Confirmed, and Rampage.</li>
+                <li>Has anyone really been far even as decided to use even go fix to do Glitch more like?</li>
+              </ul>
+            <h4>Option Changes</h4>
+              <ul>
+                <li>Removed game freeze in Colosseum room with Valhalla Knights.</li>
+              </ul>
+          <h3>June 9, 2025</h3>
+            <h4>Some Notes On This Month's Changes</h4>
+              <ul>          
+                <li>
+                  This month marks the beginning of a new initiative with the SOTN Randomizer to start auditing and operating some 
+                  quality control on the presets being included in the Randomizer or on the website. Certain presets will be "deprecated" 
+                  and removed from the ranbdomizer website while still being included in the Randomizer's files for offline generation. 
+                  This is all in an effort to maintain a simpler list for the players to interact with while we build-out our new 
+                  filtration systems which will actively edit the list based on selections made by users. We will be calling out which 
+                  presets are being removed from where and indicatin how they can be accessed in the change log to help users find them 
+                  in the future. On top of this, we will be auditing preset files, themselves, and ordering the JSON data so that everything 
+                  becomes easier to understand for would-be developers. We appreciate your patience with our housekeeping initiatives.
+                </li>
+              </ul>
+            <h4>Preset Changes</h4>
+              <ul>
+                <li>Added Seeker preset.</li>
+                <li>Added Oracle preset.</li>
+                <li>Added Mirror Breaker preset.</li>
+                <li>Added All Bosses preset.</li>
+                <li>Added Nimble-Lite preset.</li>
+                <li>Added Rampage preset.</li>
+                <li>Added Cornivus preset.</li>
+                <li>Added Max Rando preset.</li>
+                <li>Added Recycler preset.</li>
+                <li>Bounty Hunter, Hitman, Target Confirmed, Chaos Lite, and Rampage no longer require the Bounty Hunter Tool.</li>
+                <li>Added Item Stat and Item Name Randomizer to Chaos-Lite.</li>
+                <li>Lookingglass is now Deprecated. This can still be generated through Command Line Interface (CLI) and will still build en masse.</li>
+                <li>Crash Coarse is now Deprecated. This can still be generated through Command Line Interface (CLI) and will still build en masse.</li>
+                <li>Skinwalker is now Deprecated. This can still be generated through Command Line Interface (CLI) and will still build en masse.</li>
+                <li>Re-added Glitch Legacy as Deprecated. This can now be generated through Command Line Interface (CLI) and will be built en masse.</li>
+                <li>Re-named Bounty Hunter: TC to Target Confirmed.</li>
+                <li>Fixed a bug created at the end of Boss Rush because of the splash phrases.</li>
+                <li>Fixed a bug that caused a game crash if the player left the CD room at the start of a second-castle start seed to the left.</li>
+                <li>The preset audit was successful. Almost every preset has been re-weighted and had the keys sorted to create a uniform order to them.</li>
+                <li>How do I fixed Glitch?</li>
               </ul>
             <h4>Program Updates</h4>
               <ul>
-                <li>Increased character limit for preset data on main menu screen from 30 characters to 50.</li>
-                <li>Updated color coding to RGBA32 for ease of programming.</li>
-                <li>Moved all randomization into a single core randomization module to maintain parity in generation and to streamline future coding.</li>
+                <li>Incorporated Bounty Hunter tool function into the Randomizer.</li>
+                <li>Removed bug that wouldn't allow Vanilla or Agonize 2020 to generate.</li>
               </ul>
-        <a id="show-older" href="#older">Show older changes</a>
-        <div id="older" class="hidden">
-          <h3>September 15, 2025</h3>
-          <h4>Preset Changes</h4>
-          <ul>
-            <li>Added the new Anguish preset.</li>
-            <li>Added the new Gear Rush preset.</li>
-            <ul>
-              <li>• Name Code: APERTURE gives the player Gold and Silver ring to access Dracula early by visiting Maria at
-                the Holy glasses location.</li>
-              <li>• Name Code: SLOWPOKE Increases the amount of time given to the player to 25 minutes and also gives the
-                rings to access Dracula early.</li>
-              <li>• Name Code: IAMSPEED Decreases the amount of time the player has to 7 minutes. (No rings given)</li>
-              <li>• Name Code: GTI-CLUB gives the player $250,000 in game, just like the sega Saturn version.</li>
-            </ul>
-            <li>Made the new Vlad relic effects take effect based on whether the relic is on or off in Recycler.</li>
-            <li>Added additional jumps to having two Leap Stone turned on in Recycler.</li>
-            <li>The Glitch logic issues aren't real; they can't hurt you.</li>
-          </ul>
-          <h4>Options Changes</h4>
-          <ul>
-            <li>Fixed a bug where the relic at Power of Wolf wouldn't appear when Starting Room Rando was enabled.</li>
-            <li>Added a new mystery feature to Dev's Stash.</li>
-            <li>Fixed an issue where Reverse Library Cards wouldn't function on presets that had the map "pre-purchased"
-              by the preset. (Hotfix)</li>
-            <li>Fixed an issue where Second Castle Random Start movement wouldn't function on presets that had the map
-              "pre-purchased" by the preset. (Hotfix)</li>
-          </ul>
-          <h4>Website Changes</h4>
-          <ul>
-            <li>Added the Map Tool to compare maps for 200.6% runs.</li>
-          </ul>
-          <h3>August 11, 2025</h3>
-          <h4>Preset Changes</h4>
-          <ul>
-            <li>Added Elemental Chaos to Max Rando.</li>
-            <li>Fixed an issue with Bounty Hunter, Battle Mage, Hitman, Target Confirmed, and Rampage needing Demon Card
-              in alternate extensions.</li>
-            <li>The time of the eldri7ch is over, the age of the Glitch has come.</li>
-            <li>Color Randomizer removed from all presets as a default option.</li>
-            <li>Removed outer wall teleporter for Mirror Breaker.</li>
-          </ul>
-          <h4>Option Changes</h4>
-          <ul>
-            <li>Added Elemental Chaos Mode.</li>
-            <li>Added new Simplified Input option.</li>
-            <li>Re-worked many enemies in Enemy Stat Randomizer.</li>
-            <li>Added enemy projectiles to Enemy Stat Randomizer.</li>
-            <li>Randomized certain bosses' attack elements in Enemy Stat Randomizer.</li>
-            <li>Corrected a lot of name card issues in Enemy Stat Randomizer.</li>
-            <li>Removed ability for enemy weakness to also be their resist, immunity, or absorb.</li>
-            <li>Patched a bug where new immunities would not remove absorbs and vice versa.</li>
-          </ul>
-          <h4>Website Changes</h4>
-          <ul>
-            <li>Options enabled by the presets will no longer be able to be turned off (temporary solution).</li>
-          </ul>
-          <h3>July 14, 2025</h3>
-          <h4>Preset Changes</h4>
-          <ul>
-            <li>Removed $700 and $5000 drops from Rat Race.</li>
-            <li>Guaranteed drops for Hitman, Target Confirmed, and Rampage.</li>
-            <li>Has anyone really been far even as decided to use even go fix to do Glitch more like?</li>
-          </ul>
-          <h4>Option Changes</h4>
-          <ul>
-            <li>Removed game freeze in Colosseum room with Valhalla Knights.</li>
-          </ul>
-          <h3>June 9, 2025</h3>
-          <h4>Some Notes On This Month's Changes</h4>
-          <ul>
-            <li>
-              This month marks the beginning of a new initiative with the SOTN Randomizer to start auditing and
-              operating some
-              quality control on the presets being included in the Randomizer or on the website. Certain presets will be
-              "deprecated"
-              and removed from the ranbdomizer website while still being included in the Randomizer's files for offline
-              generation.
-              This is all in an effort to maintain a simpler list for the players to interact with while we build-out
-              our new
-              filtration systems which will actively edit the list based on selections made by users. We will be calling
-              out which
-              presets are being removed from where and indicatin how they can be accessed in the change log to help
-              users find them
-              in the future. On top of this, we will be auditing preset files, themselves, and ordering the JSON data so
-              that everything
-              becomes easier to understand for would-be developers. We appreciate your patience with our housekeeping
-              initiatives.
-            </li>
-          </ul>
-          <h4>Preset Changes</h4>
-          <ul>
-            <li>Added Seeker preset.</li>
-            <li>Added Oracle preset.</li>
-            <li>Added Mirror Breaker preset.</li>
-            <li>Added All Bosses preset.</li>
-            <li>Added Nimble-Lite preset.</li>
-            <li>Added Rampage preset.</li>
-            <li>Added Cornivus preset.</li>
-            <li>Added Max Rando preset.</li>
-            <li>Added Recycler preset.</li>
-            <li>Bounty Hunter, Hitman, Target Confirmed, Chaos Lite, and Rampage no longer require the Bounty Hunter
-              Tool.</li>
-            <li>Added Item Stat and Item Name Randomizer to Chaos-Lite.</li>
-            <li>Lookingglass is now Deprecated. This can still be generated through Command Line Interface (CLI) and
-              will still build en masse.</li>
-            <li>Crash Coarse is now Deprecated. This can still be generated through Command Line Interface (CLI) and
-              will still build en masse.</li>
-            <li>Skinwalker is now Deprecated. This can still be generated through Command Line Interface (CLI) and will
-              still build en masse.</li>
-            <li>Re-added Glitch Legacy as Deprecated. This can now be generated through Command Line Interface (CLI) and
-              will be built en masse.</li>
-            <li>Re-named Bounty Hunter: TC to Target Confirmed.</li>
-            <li>Fixed a bug created at the end of Boss Rush because of the splash phrases.</li>
-            <li>Fixed a bug that caused a game crash if the player left the CD room at the start of a second-castle
-              start seed to the left.</li>
-            <li>The preset audit was successful. Almost every preset has been re-weighted and had the keys sorted to
-              create a uniform order to them.</li>
-            <li>How do I fixed Glitch?</li>
-          </ul>
-          <h4>Program Updates</h4>
-          <ul>
-            <li>Incorporated Bounty Hunter tool function into the Randomizer.</li>
-            <li>Removed bug that wouldn't allow Vanilla or Agonize 2020 to generate.</li>
-          </ul>
-          <h4>Options Changes</h4>
-          <ul>
-            <li>Added new Separate Boss Music Randomizer mode for music randomization.</li>
-            <li>Added Song Exclusion to the website.</li>
-            <li>Removed Nocturne from the songs to be randomized.</li>
-            <li>Added Immunity Potions option.</li>
-            <li>Added Godspeed Shoes option.</li>
-            <li>Added Library Shortcut option.</li>
-            <li>Added an option to enable seasonal splash phrases on the start screen.</li>
-          </ul>
+            <h4>Options Changes</h4>
+              <ul>
+                <li>Added new Separate Boss Music Randomizer mode for music randomization.</li>
+                <li>Added Song Exclusion to the website.</li>
+                <li>Removed Nocturne from the songs to be randomized.</li>
+                <li>Added Immunity Potions option.</li>
+                <li>Added Godspeed Shoes option.</li>
+                <li>Added Library Shortcut option.</li>
+                <li>Added an option to enable seasonal splash phrases on the start screen.</li>
+              </ul>
           <h3>May 12, 2025</h3>
-          <h4>Preset Changes</h4>
-          <ul>
-            <li>Added Second Castle Starting Room Randomizer to Chaos-Lite.</li>
-            <li>Familiar cards are no longer given to the player "active" in Timeline.</li>
-            <li>Timeline's timer no longer pauses in the menu.*</li>
-            <li>Added code to give the player a Toadstool at the beginning of Big Toss.</li>
-            <li>Come to me, Glitch, son of romscout! Kneel before Eld!</li>
-          </ul>
-          <h4>Options Changes</h4>
-          <ul>
-            <li>Removed preset tickbox because all features locked behind it are now available.</li>
-            <li>Removed extensions options for presets which can't use them.</li>
-            <li>Added palettes for Wolf form to match Alucard palettes.</li>
-            <li>Corrected an error where a variable was not set when generating through the website for Random Starting
-              Room.</li>
-            <li>Added an additional goal to update the game to: All Bosses and all Vlads.</li>
-            <li>Removed potential softlock from starting in Castle Keep attic in Starting Room Randomizer.</li>
-            <li>Updated Color Randomizer to use hue-shifting for capes proposed by Wecoc.</li>
-            <li>Added Menu Color to Color Randomizer.</li>
-            <li>Corrected an error in Starting Equipment spoilers when Item Name Randomizer Mode was not being used.
-            </li>
-            <li>Corrected an error with New Goals that allowed players to open the Dracula door in second castle without
-              Eye of Vlad.</li>
-          </ul>
-          <h4>Program Updates</h4>
-          <ul>
-            <li>Added randomized splash phrases to the game title screen.</li>
-            <li>Added a feature where updated goals can be added to preset files using letter codes. "b: All Bosses; r:
-              All Relics; a: ABRSR, v: All Bosses & All Vlads"</li>
-          </ul>
-          <h4>Website Updates</h4>
-          <ul>
-            <li>Allowed players to generate custom relic extensions and complexity levels with all presets.</li>
-            <li>Fixed a bug where the complexity inner text didn't update, causing misunderstandings about the
-              complexity of the selected preset.</li>
-            <li>Added the SOTNRando icon to the navigation bar.</li>
-            <li>Added the SOTNRando header image courtesy of DarkFalzJoker to the top of the site.</li>
-            <li>Added a new section to help players preview which customizations they might wish to use for their
-              Alucard and Map sprites.</li>
-            <li>All links in the links section have been removed and moved to a navigation bar.</li>
-            <li>Added visual effects to the navigation bar for a more satisfying experience.</li>
-          </ul>
-          <h4>Tools Updates</h4>
-          <ul>
-            <li>Upgraded Map View to give more detailed information about the entities and to properly name more of
-              them.</li>
-          </ul>
+            <h4>Preset Changes</h4>
+              <ul>            
+                <li>Added Second Castle Starting Room Randomizer to Chaos-Lite.</li>
+                <li>Familiar cards are no longer given to the player "active" in Timeline.</li>
+                <li>Timeline's timer no longer pauses in the menu.*</li>
+                <li>Added code to give the player a Toadstool at the beginning of Big Toss.</li>
+                <li>Come to me, Glitch, son of romscout! Kneel before Eld!</li>
+              </ul>
+            <h4>Options Changes</h4>
+              <ul>
+                <li>Removed preset tickbox because all features locked behind it are now available.</li>
+                <li>Removed extensions options for presets which can't use them.</li>
+                <li>Added palettes for Wolf form to match Alucard palettes.</li>
+                <li>Corrected an error where a variable was not set when generating through the website for Random Starting Room.</li>
+                <li>Added an additional goal to update the game to: All Bosses and all Vlads.</li>
+                <li>Removed potential softlock from starting in Castle Keep attic in Starting Room Randomizer.</li>
+                <li>Updated Color Randomizer to use hue-shifting for capes proposed by Wecoc.</li>
+                <li>Added Menu Color to Color Randomizer.</li>
+                <li>Corrected an error in Starting Equipment spoilers when Item Name Randomizer Mode was not being used.</li>
+                <li>Corrected an error with New Goals that allowed players to open the Dracula door in second castle without Eye of Vlad.</li>
+              </ul>
+            <h4>Program Updates</h4>
+              <ul>
+                <li>Added randomized splash phrases to the game title screen.</li>
+                <li>Added a feature where updated goals can be added to preset files using letter codes. "b: All Bosses; r: All Relics; a: ABRSR, v: All Bosses & All Vlads"</li>
+              </ul>
+            <h4>Website Updates</h4>
+              <ul>
+                <li>Allowed players to generate custom relic extensions and complexity levels with all presets.</li>
+                <li>Fixed a bug where the complexity inner text didn't update, causing misunderstandings about the complexity of the selected preset.</li>
+                <li>Added the SOTNRando icon to the navigation bar.</li>
+                <li>Added the SOTNRando header image courtesy of DarkFalzJoker to the top of the site.</li>
+                <li>Added a new section to help players preview which customizations they might wish to use for their Alucard and Map sprites.</li>
+                <li>All links in the links section have been removed and moved to a navigation bar.</li>
+                <li>Added visual effects to the navigation bar for a more satisfying experience.</li>
+              </ul>
+            <h4>Tools Updates</h4>
+              <ul>
+                <li>Upgraded Map View to give more detailed information about the entities and to properly name more of them.</li>
+              </ul>
           <h3>April 14, 2025</h3>
-          <h4>Options Changes</h4>
-          <ul>
-            <li>Added Alucard Palette Selector.</li>
-            <li>Almost every single randomized / selected palette for Richter, Maria, Dracula, and Alucard was reworked.
-            </li>
-            <li>Removed Guaranteed Drops mode for Bounty Hunter variants (The BH tool breaks drops if enabled).</li>
-            <li>Removed Reverse Library Card for Beyond preset.</li>
-          </ul>
-          <h4>Website Updates</h4>
-          <ul>
-            <li>Added "Known Bugs" section for transparency.</li>
-          </ul>
+            <h4>Options Changes</h4>
+              <ul>
+                <li>Added Alucard Palette Selector.</li>
+                <li>Almost every single randomized / selected palette for Richter, Maria, Dracula, and Alucard was reworked.</li>
+                <li>Removed Guaranteed Drops mode for Bounty Hunter variants (The BH tool breaks drops if enabled).</li>
+                <li>Removed Reverse Library Card for Beyond preset.</li>
+              </ul>
+            <h4>Website Updates</h4>
+              <ul>
+                <li>Added "Known Bugs" section for transparency.</li>
+              </ul>
           <h3>April 3, 2025</h3>
-          <h4>Hotfix</h4>
-          <ul>
-            <li>Fixed Starting Room Randomizer execution from Preset Files.</li>
-          </ul>
+            <h4>Hotfix</h4>
+              <ul>
+                <li>Fixed Starting Room Randomizer execution from Preset Files.</li>
+              </ul>
           <h3>April 2, 2025</h3>
-          <h4>Preset Changes</h4>
-          <ul>
-            <li>Added Vanilla preset.</li>
-            <li>Datedupay Litchgay Ogiclay.</li>
-          </ul>
-          <h4>Options Changes</h4>
-          <ul>
-            <li>Added new option to change seed goals.</li>
-            <li>♦ All Bosses changes the goal to defeat all bosses listed on the time attack table in the vanilla game.
-            </li>
-            <li>♦ All Relics changes the goal to collect all relics in the North American version of the vanilla game.
-            </li>
-            <li>♦ All Bosses and Relics changes the goal to defeat all bosses and collect all relics as above.</li>
-            <li>Added Guaranteed Drops Option (3/14/2025).</li>
-            <li>Added Reverse Library Cards Option.</li>
-            <li>Added Alucard Palette Randomizer Option.</li>
-            <li>Added Richter Palette Randomizer to Color Randomizer.</li>
-          </ul>
-          <h4>Program Updates</h4>
-          <ul>
-            <li>Fix an issue that prevented SOTN.io from generating seeds after a previous seed was downloaded.</li>
-            <li>Added a way for the randomizer to start setting aside ISO memory and RAM to execute complex functions in
-              ASM.</li>
-            <li>Now the randomizer loads 14 sectors fropm the ISO automatically. Three are reserved for options, eleven
-              sectors are for presets.</li>
-          </ul>
+            <h4>Preset Changes</h4>
+              <ul>
+                <li>Added Vanilla preset.</li>
+                <li>Datedupay Litchgay Ogiclay.</li>
+              </ul>
+            <h4>Options Changes</h4>
+              <ul>
+                <li>Added new option to change seed goals.</li>
+                <li>♦ All Bosses changes the goal to defeat all bosses listed on the time attack table in the vanilla game.</li>
+                <li>♦ All Relics changes the goal to collect all relics in the North American version of the vanilla game.</li>
+                <li>♦ All Bosses and Relics changes the goal to defeat all bosses and collect all relics as above.</li>
+                <li>Added Guaranteed Drops Option (3/14/2025).</li>
+                <li>Added Reverse Library Cards Option.</li>
+                <li>Added Alucard Palette Randomizer Option.</li>
+                <li>Added Richter Palette Randomizer to Color Randomizer.</li>
+              </ul>
+            <h4>Program Updates</h4>
+              <ul>
+                <li>Fix an issue that prevented SOTN.io from generating seeds after a previous seed was downloaded.</li>
+                <li>Added a way for the randomizer to start setting aside ISO memory and RAM to execute complex functions in ASM.</li>
+                <li>Now the randomizer loads 14 sectors fropm the ISO automatically. Three are reserved for options, eleven sectors are for presets.</li>
+              </ul>
           <h3>March 10, 2025</h3>
-          <h4>Preset Changes</h4>
-          <ul>
-            <li>Added Chimera preset.</li>
-            <li>Added Battle Mage preset.</li>
-            <li>Added Timeline preset.</li>
-            <li>Added logic for Equipment and Scenic locations for Dog Life.</li>
-            <li>Removed several soft-locks in Dog Life.</li>
-            <li>Fixed some movement bugs and added Out of Logic checks for the tracker for Dog Life.</li>
-            <li>Updated Big Toss preset to remove consumable status from Toadstool and High Potion.</li>
-            <li>Removed Duplicator and added God's Garb as starting equipment in Big Toss.</li>
-            <li>Added an additional Antivenom as replacement for Force of Echo in Big Toss.</li>
-            <li>Glitch festers like a splinter in the side of bugfixing.</li>
-          </ul>
-          <h4>Options Changes</h4>
-          <ul>
-            <li>Blocked Castle 2 Start for First Castle preset.</li>
-          </ul>
-          <h4>Program Updates</h4>
-          <ul>
-            <li>Added new randomizer capability to generate a random hex byte between two values. (Shuffled pool)</li>
-            <li>Updated "randomRelic" writes option to use pool shuffling instead of pure RNG.</li>
-          </ul>
+            <h4>Preset Changes</h4>
+              <ul>
+                <li>Added Chimera preset.</li>
+                <li>Added Battle Mage preset.</li>
+                <li>Added Timeline preset.</li>
+                <li>Added logic for Equipment and Scenic locations for Dog Life.</li>
+                <li>Removed several soft-locks in Dog Life.</li>
+                <li>Fixed some movement bugs and added Out of Logic checks for the tracker for Dog Life.</li>
+                <li>Updated Big Toss preset to remove consumable status from Toadstool and High Potion.</li>
+                <li>Removed Duplicator and added God's Garb as starting equipment in Big Toss.</li>
+                <li>Added an additional Antivenom as replacement for Force of Echo in Big Toss.</li>
+                <li>Glitch festers like a splinter in the side of bugfixing.</li>
+              </ul>
+            <h4>Options Changes</h4>
+              <ul>
+                <li>Blocked Castle 2 Start for First Castle preset.</li>
+              </ul>
+            <h4>Program Updates</h4>
+              <ul>
+                <li>Added new randomizer capability to generate a random hex byte between two values. (Shuffled pool)</li>
+                <li>Updated "randomRelic" writes option to use pool shuffling instead of pure RNG.</li>
+              </ul>
           <h3>February 10, 2025</h3>
-          <h4>Preset Changes</h4>
-          <ul>
-            <li>eldri7ch used Bugfix against Glitch! It's not very effective...</li>
-          </ul>
-          <h4>Options Changes</h4>
-          <ul>
-            <li>Added Castle 2 Starting Area Randomizer.</li>
-            <li>Separated out Item Name Randomization from Item Stat Randomizer.</li>
-            <li>Disabled certain options for various preset to avoid those options being turned on and breaking the
-              preset.</li>
-            <li>Corrected issues with wing smash trail color randomizer to use either a sanctioned palette or simply a
-              new outline color.</li>
-          </ul>
-          <h4>Accessibility / Quality of Life Changes</h4>
-          <ul>
-            <li>Removed game freeze if luck is negative and the game tries to calculate critical damage.</li>
-            <li>Removed game freeze caused by using too many wing smashes through Rock Knights in Reverce Caverns.</li>
-            <li>Added Map Color selector to website.</li>
-          </ul>
+            <h4>Preset Changes</h4>
+              <ul>
+                <li>eldri7ch used Bugfix against Glitch! It's not very effective...</li>
+              </ul>
+            <h4>Options Changes</h4>
+              <ul>
+                <li>Added Castle 2 Starting Area Randomizer.</li>
+                <li>Separated out Item Name Randomization from Item Stat Randomizer.</li>
+                <li>Disabled certain options for various preset to avoid those options being turned on and breaking the preset.</li>
+                <li>Corrected issues with wing smash trail color randomizer to use either a sanctioned palette or simply a new outline color.</li>
+              </ul>
+            <h4>Accessibility / Quality of Life Changes</h4>
+              <ul>
+                <li>Removed game freeze if luck is negative and the game tries to calculate critical damage.</li>
+                <li>Removed game freeze caused by using too many wing smashes through Rock Knights in Reverce Caverns.</li>
+                <li>Added Map Color selector to website.</li>
+              </ul>
           <h3>January 13, 2025</h3>
-          <h4>Preset Changes</h4>
-          <ul>
-            <li>Updated preset descriptions.</li>
-            <li>Removed boss room limitations for Cursed Night preset.</li>
-            <li>Added ability to use Heart Refresh for Cursed Night.</li>
-            <li>Added new starting equipment for Cursed Night.</li>
-            <li>Removed Coral Circlet from the Shop in Cursed Night.</li>
-            <li>Added Starting Room Randomization to Chaos-Lite preset.</li>
-            <li>Added Starting Room Randomization to Open preset.</li>
-            <li>Added 7 random relics to starting pool for Lucky Sevens preset.</li>
-            <li>Removed prologue for Lucky Sevens.</li>
-            <li>Removed remaining Bat relics from Leg Day preset.</li>
-            <li>Removed Karma Coin from the $400 candle in Rat Race and replaced with Heart.</li>
-            <li>Removed Unlocked Mode from Lucky Sevens.</li>
-            <li>Renamed Speedrun preset to Sequence Breaker.</li>
-            <li>Renamed Forge preset to Any Percent.</li>
-            <li>Corrected errors which prevented Rat Race and Sequence Breaker presets from appearing on the website.
-            </li>
-            <li>Flight of wolf re-worked in Dog Life preset.</li>
-            <li>Removed squeak from big toss in Dog Life.</li>
-            <li>Removed multiple soft-locks in logic for Dog Life.</li>
-            <li>Tile / terrain updates for Dog Life for ease of movement.</li>
-            <li>Removed Enemy Stat Randomizer from Mobility preset.</li>
-            <li>Updated Glitchmaster preset scrawl.</li>
-            <li>Updated Glitch preset scrawl.</li>
-            <li>Reticulated Glitch logic splines.</li>
-          </ul>
-          <h4>Extension Changes</h4>
-          <ul>
-            <li>Renamed Wanderer locations extension to Extended.</li>
-            <li>Renamed Spread locations extension to Guarded<i>Plus</i>.</li>
-            <li>Renamed Tourist locations extension to Scenic.</li>
-          </ul>
-          <h4>Options Changes</h4>
-          <ul>
-            <li>Added new Starting Zone randomizer allowing Alucard to start in different zones.</li>
-            <li>Corrected an error when trying to apply Shop Price Rando.</li>
-            <li>Corrected an error when assigning randomization display for Death.</li>
-            <li>Corrected an error when assigning randomization of attributes to Dracula.</li>
-            <li>Corrected an error when improperly clearing time attack in No Prologue Mode.</li>
-          </ul>
-          <h4>Website Changes</h4>
-          <ul>
-            <li>Set ground work for and started started website re-design.</li>
-            <li>Updated many option names on the website to be more aesthetic or descriptive.</li>
-            <li>Updated website to have the Meta Data information used for categorization and filtration (not
-              implemented yet).</li>
-          </ul>
+            <h4>Preset Changes</h4>
+              <ul>
+                <li>Updated preset descriptions.</li>
+                <li>Removed boss room limitations for Cursed Night preset.</li>
+                <li>Added ability to use Heart Refresh for Cursed Night.</li>
+                <li>Added new starting equipment for Cursed Night.</li>
+                <li>Removed Coral Circlet from the Shop in Cursed Night.</li>
+                <li>Added Starting Room Randomization to Chaos-Lite preset.</li>
+                <li>Added Starting Room Randomization to Open preset.</li>
+                <li>Added 7 random relics to starting pool for Lucky Sevens preset.</li>
+                <li>Removed prologue for Lucky Sevens.</li>
+                <li>Removed remaining Bat relics from Leg Day preset.</li>
+                <li>Removed Karma Coin from the $400 candle in Rat Race and replaced with Heart.</li>
+                <li>Removed Unlocked Mode from Lucky Sevens.</li>
+                <li>Renamed Speedrun preset to Sequence Breaker.</li>
+                <li>Renamed Forge preset to Any Percent.</li>
+                <li>Corrected errors which prevented Rat Race and Sequence Breaker presets from appearing on the website.</li>
+                <li>Flight of wolf re-worked in Dog Life preset.</li>
+                <li>Removed squeak from big toss in Dog Life.</li>
+                <li>Removed multiple soft-locks in logic for Dog Life.</li>
+                <li>Tile / terrain updates for Dog Life for ease of movement.</li>
+                <li>Removed Enemy Stat Randomizer from Mobility preset.</li>
+                <li>Updated Glitchmaster preset scrawl.</li>
+                <li>Updated Glitch preset scrawl.</li>
+                <li>Reticulated Glitch logic splines.</li>
+              </ul>
+            <h4>Extension Changes</h4>
+              <ul>
+                <li>Renamed Wanderer locations extension to Extended.</li>
+                <li>Renamed Spread locations extension to Guarded<i>Plus</i>.</li>
+                <li>Renamed Tourist locations extension to Scenic.</li>
+              </ul>
+            <h4>Options Changes</h4>
+              <ul>
+                <li>Added new Starting Zone randomizer allowing Alucard to start in different zones.</li>
+                <li>Corrected an error when trying to apply Shop Price Rando.</li>
+                <li>Corrected an error when assigning randomization display for Death.</li>
+                <li>Corrected an error when assigning randomization of attributes to Dracula.</li>
+                <li>Corrected an error when improperly clearing time attack in No Prologue Mode.</li>
+              </ul>
+            <h4>Website Changes</h4>
+              <ul>
+                <li>Set ground work for and started started website re-design.</li>
+                <li>Updated many option names on the website to be more aesthetic or descriptive.</li>
+                <li>Updated website to have the Meta Data information used for categorization and filtration (not implemented yet).</li>
+              </ul>
           <h3>December 9, 2024</h3>
-          <ul>
-            <li>Added Dog Life Preset.</li>
-            <li>Added Cursed Night Preset.</li>
-            <li>Added Glitchmaster Preset.</li>
-            <li>Added Sight-Seer Preset.</li>
-            <li>Added new Shop Price Randomizer option.</li>
-            <li>Added four $700 bags and one $5000 chest to candle randomization.</li>
-            <li>Incorporated Enemy Stat Randomizer into Chaos Lite.</li>
-            <li>Incorporated Shop Price Randomizer into Chaos Lite.</li>
-            <li>Removed guaranteed $400 drop from Rat Race.</li>
-            <li>Fixed an error in relic placement in Forge.</li>
-            <li>Fixed an error in logic in Speedrun.</li>
-            <li>Fixed an error in logic in Adventure.</li>
-            <li>Re-re-re-re fixed Glitch logic.</li>
-          </ul>
+              <ul>
+                <li>Added Dog Life Preset.</li>
+                <li>Added Cursed Night Preset.</li>
+                <li>Added Glitchmaster Preset.</li>
+                <li>Added Sight-Seer Preset.</li>
+                <li>Added new Shop Price Randomizer option.</li>
+                <li>Added four $700 bags and one $5000 chest to candle randomization.</li>
+                <li>Incorporated Enemy Stat Randomizer into Chaos Lite.</li>
+                <li>Incorporated Shop Price Randomizer into Chaos Lite.</li>
+                <li>Removed guaranteed $400 drop from Rat Race.</li>
+                <li>Fixed an error in relic placement in Forge.</li>
+                <li>Fixed an error in logic in Speedrun.</li>
+                <li>Fixed an error in logic in Adventure.</li>
+                <li>Re-re-re-re fixed Glitch logic.</li>
+              </ul>
           <h3>October 14, 2024</h3>
-          <ul>
-            <li>Updated First Castle Preset with a new instant teleport to Dracula.</li>
-            <li>Moved the former "Black Marble Vats" check in Wanderer and Tourist to "Reverse Alucart Sword". This
-              removes a potential corruption when items spawn at the location and adds a Cube of Zoe check to second
-              castle.</li>
-            <li>Updated Open preset to actually be open by opening the Colosseum and Olrox's Quarters shortcuts
-              connecting them to Royal Chapel.</li>
-            <li>Updated Skinwalker preset file to actually use the Wanderer extension.</li>
-            <li>Removed large version number from website.</li>
-            <li>Glitch will be fixed one day.</li>
-          </ul>
+              <ul>
+                <li>Updated First Castle Preset with a new instant teleport to Dracula.</li>
+                <li>Moved the former "Black Marble Vats" check in Wanderer and Tourist to "Reverse Alucart Sword". This removes a potential corruption when items spawn at the location and adds a Cube of Zoe check to second castle.</li>
+                <li>Updated Open preset to actually be open by opening the Colosseum and Olrox's Quarters shortcuts connecting them to Royal Chapel.</li>
+                <li>Updated Skinwalker preset file to actually use the Wanderer extension.</li>
+                <li>Removed large version number from website.</li>
+                <li>Glitch will be fixed one day.</li>
+              </ul>
           <h3>September 10, 2024</h3>
-          <ul>
-            <li>Added First Castle Preset.</li>
-            <li>Added Lucky Sevens Preset.</li>
-            <li>Added Surprise mode to hide relic's true identity until collected.</li>
-            <li>Added Enemy Stat Randomizer mode to randomize enemy stats like attack, defense, and HP.</li>
-            <li>Updated preset descriptions to do their job better.</li>
-            <li>Updated website animations in and out of Menu Mode.</li>
-            <li>Moved Starting Equipment, Enemy Drops, Item Location, Turkey Mode, Item Stats and Prologue Rewards to
-              the Options section.</li>
-            <li>Choosing presets on site will now check boxes of options used in preset files.</li>
-            <li>Certain presets on site will disable incompatible options.</li>
-            <li>Formatting updates.</li>
-            <li>Fixed Glitch logic yet again.</li>
-          </ul>
+              <ul>
+                <li>Added First Castle Preset.</li>
+                <li>Added Lucky Sevens Preset.</li>
+                <li>Added Surprise mode to hide relic's true identity until collected.</li>
+                <li>Added Enemy Stat Randomizer mode to randomize enemy stats like attack, defense, and HP.</li>
+                <li>Updated preset descriptions to do their job better.</li>
+                <li>Updated website animations in and out of Menu Mode.</li>
+                <li>Moved Starting Equipment, Enemy Drops, Item Location, Turkey Mode, Item Stats and Prologue Rewards to the Options section.</li>
+                <li>Choosing presets on site will now check boxes of options used in preset files.</li>
+                <li>Certain presets on site will disable incompatible options.</li>
+                <li>Formatting updates.</li>
+                <li>Fixed Glitch logic yet again.</li>
+              </ul>
           <h3>August 12, 2024</h3>
-          <ul>
-            <li>Updated logic to be more intuitive in equipment and tourist extensions.</li>
-            <li>Added new option: Unlocked Mode to open shortcuts.</li>
-            <li>Restored dev mode for webpage when not on SOTN.io.</li>
-            <li>Removed map color preset compatibility to fix preset options offset. (CLI / Launcher only)</li>
-            <li>Restored pink map color to be able to be selected. (CLI / Launcher only)</li>
-            <li>Added two new "colors" for the map: Black and Invisible. (CLI / Launcher only)</li>
-            <li>Added track exclusion from the music rando. (CLI / Launcher only)</li>
-            <li>Removed error where Aperture map reveal allowed early reverse Library card.</li>
-            <li>Corrected Skinwalker logic to force early transformations.</li>
-            <li>Added Wing Smash trail color randomization provided by Bismurphy.</li>
-            <li>Removed zero-relic Faerie Card logic and replaced with more accessible options in Glitch.</li>
-            <li>Removed softlock with Maria Silver Ring cutscene in Glitch.</li>
-            <li>Fixed Glitch logic again.</li>
-          </ul>
+              <ul>
+                <li>Updated logic to be more intuitive in equipment and tourist extensions.</li>
+                <li>Added new option: Unlocked Mode to open shortcuts.</li>
+                <li>Restored dev mode for webpage when not on SOTN.io.</li>
+                <li>Removed map color preset compatibility to fix preset options offset. (CLI / Launcher only)</li>
+                <li>Restored pink map color to be able to be selected. (CLI / Launcher only)</li>
+                <li>Added two new "colors" for the map: Black and Invisible. (CLI / Launcher only)</li>
+                <li>Added track exclusion from the music rando. (CLI / Launcher only)</li>
+                <li>Removed error where Aperture map reveal allowed early reverse Library card.</li>
+                <li>Corrected Skinwalker logic to force early transformations.</li>
+                <li>Added Wing Smash trail color randomization provided by Bismurphy.</li>
+                <li>Removed zero-relic Faerie Card logic and replaced with more accessible options in Glitch.</li>
+                <li>Removed softlock with Maria Silver Ring cutscene in Glitch.</li>
+                <li>Fixed Glitch logic again.</li>
+              </ul>
           <h3>July 19, 2024</h3>
-          <ul>
-            <li>Added new seed naming scheme.</li>
-            <li>Performance enhancement: Presets now load on demand instead of being loaded every randomization
-              iteration.</li>
-            <li>Performance enhancement: Added debug mode foundation to Command Line.</li>
-          </ul>
+              <ul>
+                <li>Added new seed naming scheme.</li>
+                <li>Performance enhancement: Presets now load on demand instead of being loaded every randomization iteration.</li>
+                <li>Performance enhancement: Added debug mode foundation to Command Line.</li>
+              </ul>
           <h3>July 16, 2024</h3>
-          <ul>
-            <li>Added Brawler preset.</li>
-            <li>Added Infinite Wing Smash mode, Fast Warps mode, and No Prologue mode.</li>
-            <li>Adjusted options layout to ease confusion.</li>
-            <li>Added Wanderer and Tourist extensions as options to website.</li>
-            <li>Added check counts to extension descriptions.</li>
-            <li>Added generation time as an output when using spoilers in Command Line.</li>
-            <li>Added $5000 chest to items list. (May or may not appear)</li>
-            <li>Changed how Maria First Meeting room spawns removing the need to change how time attack reads for it.
-            </li>
-          </ul>
+              <ul>
+                <li>Added Brawler preset.</li>
+                <li>Added Infinite Wing Smash mode, Fast Warps mode, and No Prologue mode.</li>
+                <li>Adjusted options layout to ease confusion.</li>
+                <li>Added Wanderer and Tourist extensions as options to website.</li>
+                <li>Added check counts to extension descriptions.</li>
+                <li>Added generation time as an output when using spoilers in Command Line.</li>
+                <li>Added $5000 chest to items list. (May or may not appear)</li>
+                <li>Changed how Maria First Meeting room spawns removing the need to change how time attack reads for it.</li>
+              </ul>
           <h3>July 10, 2024</h3>
-          <ul>
-            <li>Updated Glitch to remove guaranteed Duplicator, made preset-associated items infinite, made Heart
-              Refresh animation faster.</li>
-          </ul>
+              <ul>
+                <li>Updated Glitch to remove guaranteed Duplicator, made preset-associated items infinite, made Heart Refresh animation faster.</li>
+              </ul>
           <h3>June 11, 2024</h3>
-          <ul>
-            <li>Added Bounty Hunter, Hitman, Chaos Lite, and Bounty Hunter - Target Confirmed. All of these need to be
-              applied to the BIN and then use <a
-                href="https://github.com/MottZilla/BountyHunterTool/releases/">MottZilla's Bounty Hunter Tool</a> to
-              patch the enemy drops.</li>
-          </ul>
+              <ul>
+                <li>Added Bounty Hunter, Hitman, Chaos Lite, and Bounty Hunter - Target Confirmed. All of these need to be applied to the BIN and then use <a href="https://github.com/MottZilla/BountyHunterTool/releases/">MottZilla's Bounty Hunter Tool</a> to patch the enemy drops.</li>
+              </ul>
           <h3>June 10, 2024</h3>
-          <ul>
-            <li>Added Agonize 2020 preset. Simulates the Agonize preset just prior to 3/27/2020.</li>
-            <li>Added Season 2 Safe preset. Simulates the Safe logic from Season 2.</li>
-            <li>Added Open preset. Simulates the the resulting preset if Safe with open shortcuts and teleporters was
-              finalized with a few conveniences.</li>
-            <li>Replaced Glitch preset with optimized Glitch Remastered. Reduces load times for the preset and adds
-              logic for more glitches/exploits. Glitch Legacy is still a JSON in files.</li>
-          </ul>
+              <ul>
+                <li>Added Agonize 2020 preset. Simulates the Agonize preset just prior to 3/27/2020.</li>
+                <li>Added Season 2 Safe preset. Simulates the Safe logic from Season 2.</li>
+                <li>Added Open preset. Simulates the the resulting preset if Safe with open shortcuts and teleporters was finalized with a few conveniences.</li>
+                <li>Replaced Glitch preset with optimized Glitch Remastered. Reduces load times for the preset and adds logic for more glitches/exploits. Glitch Legacy is still a JSON in files.</li>
+              </ul>
           <h3>June 8, 2024</h3>
-          <ul>
-            <li>Added map color feature for CLI.</li>
-            <li>Added "That's my purse!" to stop Death from stealing items.</li>
-          </ul>
+              <ul>
+                <li>Added map color feature for CLI.</li>
+                <li>Added "That's my purse!" to stop Death from stealing items.</li>
+              </ul>
           <h3>June 5, 2024</h3>
-          <ul>
-            <li>Added Doppleganger's capes, Gravity Boots trails, and Hydrostorm color rando.</li>
-            <li>Separated color rando from Turkey mode.</li>
-            <li>Patch for Clear Game status without having a Clear File on memory card.</li>
-            <li>New patch to add back Japan-only Sprite and Nosedevil Cards to menu.</li>
-            <li>Added Magic Max Up option to replace Heart Max Up.</li>
-            <li>Added Anti-Freeze option to remove freeze on pickup of relic or max up and on level up.</li>
-            <li>Added Tourist and Wanderer location extensions.</li>
-            <li>Added presets including Magic Mirror, Leg Day, Boss Rush, Big Toss, Aperture and more.</li>
-            <li>Patch Clock Room softlock.</li>
-            <li>Removed Estoc from pool of Thrust Swords in logic.</li>
-            <li>Backend ~ Improved data write system for non-userdata auto skip.</li>
-            <li>Backend ~ Added Random options (random1, random3, random10, random99, and randomrelic) for preset
-              writes.</li>
-            <li>Backend ~ Removed space after Spectral Sword in enemies.js which was causing errors.</li>
-            <li>Backend ~ Added new item replacement list parameter & Fixed item aliasing issues.</li>
-            <li>And more!</li>
-            <li>The listed above were added between the last log and the date above.</li>
-          </ul>
+              <ul>
+                <li>Added Doppleganger's capes, Gravity Boots trails, and Hydrostorm color rando.</li>
+                <li>Separated color rando from Turkey mode.</li>
+                <li>Patch for Clear Game status without having a Clear File on memory card.</li>
+                <li>New patch to add back Japan-only Sprite and Nosedevil Cards to menu.</li>
+                <li>Added Magic Max Up option to replace Heart Max Up.</li>
+                <li>Added Anti-Freeze option to remove freeze on pickup of relic or max up and on level up.</li>
+                <li>Added Tourist and Wanderer location extensions.</li>
+                <li>Added presets including Magic Mirror, Leg Day, Boss Rush, Big Toss, Aperture and more.</li>
+                <li>Patch Clock Room softlock.</li>
+                <li>Removed Estoc from pool of Thrust Swords in logic.</li>
+                <li>Backend ~ Improved data write system for non-userdata auto skip.</li>
+                <li>Backend ~ Added Random options (random1, random3, random10, random99, and randomrelic) for preset writes.</li>
+                <li>Backend ~ Removed space after Spectral Sword in enemies.js which was causing errors.</li>
+                <li>Backend ~ Added new item replacement list parameter & Fixed item aliasing issues.</li>
+                <li>And more!</li>
+                <li>The listed above were added between the last log and the date above.</li>
+              </ul>
           <h3>April 2, 2023</h3>
-          <ul>
-            <li>Add Rat Race preset.</li>
-          </ul>
+              <ul>
+                <li>Add Rat Race preset.</li>
+              </ul>
           <h3>March 15, 2023</h3>
-          <ul>
-            <li>Update tournament mode to include free shop relic and open clock
-              room statue.</li>
-            <li>Update accessibility mode to patch soft locks at Olrox, Scylla, and
-              Minotaur & Werewolf.</li>
-          </ul>
+              <ul>
+                <li>Update tournament mode to include free shop relic and open clock
+                  room statue.</li>
+                <li>Update accessibility mode to patch soft locks at Olrox, Scylla, and
+                  Minotaur & Werewolf.</li>
+              </ul>
           <h3>October 5, 2022</h3>
-          <ul>
-            <li>Prevent Clock Tower puzzle softlock in Equipment extension.</li>
-          </ul>
+              <ul>
+                <li>Prevent Clock Tower puzzle softlock in Equipment extension.</li>
+              </ul>
           <h3>July 20, 2022</h3>
-          <ul>
-            <li>Add Warlock preset.</li>
-          </ul>
+              <ul>
+                <li>Add Warlock preset.</li>
+              </ul>
           <h3>July 9, 2022</h3>
-          <ul>
-            <li>Add Expedition preset.</li>
-            <li>Add Lycanthrope preset.</li>
-          </ul>
+              <ul>
+                <li>Add Expedition preset.</li>
+                <li>Add Lycanthrope preset.</li>
+              </ul>
           <h3>April 20, 2022</h3>
-          <ul>
-            <li>Add Nimble preset.</li>
-          </ul>
+              <ul>
+                <li>Add Nimble preset.</li>
+              </ul>
           <h3>April 2, 2022</h3>
-          <ul>
-            <li>Add Third Castle preset.</li>
-          </ul>
+              <ul>
+                <li>Add Third Castle preset.</li>
+              </ul>
           <h3>February 24, 2022</h3>
-          <ul>
-            <li>Fix stat randomization for club weapons.</li>
-          </ul>
+              <ul>
+                <li>Fix stat randomization for club weapons.</li>
+              </ul>
           <h3>January 11, 2022</h3>
-          <ul>
-            <li>Add Guarded O.G. preset.</li>
-          </ul>
+              <ul>
+                <li>Add Guarded O.G. preset.</li>
+              </ul>
           <h3>December 26, 2021</h3>
-          <ul>
-            <li>Add Spread relic locations extension.</li>
-            <li>Add Bat Master preset.</li>
-          </ul>
+              <ul>
+                <li>Add Spread relic locations extension.</li>
+                <li>Add Bat Master preset.</li>
+              </ul>
           <h3>May 17, 2021</h3>
-          <ul>
-            <li>Use Guarded relic locations for Casual preset.</li>
-          </ul>
+              <ul>
+                <li>Use Guarded relic locations for Casual preset.</li>
+              </ul>
           <h3>April 27, 2021</h3>
-          <ul>
-            <li>Reject disc images that are not valid, vanilla backups.</li>
-          </ul>
+              <ul>
+                <li>Reject disc images that are not valid, vanilla backups.</li>
+              </ul>
           <h3>April 2, 2021</h3>
-          <ul>
-            <li>Add Gem Farmer preset.</li>
-          </ul>
+              <ul>
+                <li>Add Gem Farmer preset.</li>
+              </ul>
           <h3>March 12, 2021</h3>
-          <ul>
-            <li>Add O.G. preset.</li>
-          </ul>
+              <ul>
+                <li>Add O.G. preset.</li>
+              </ul>
           <h3>February 27, 2021</h3>
-          <ul>
-            <li>Add item stats randomization.</li>
-          </ul>
+              <ul>
+                <li>Add item stats randomization.</li>
+              </ul>
           <h3>February 15, 2021</h3>
-          <ul>
-            <li>Add PPF output option.</li>
-          </ul>
+              <ul>
+                <li>Add PPF output option.</li>
+              </ul>
           <h3>February 7, 2021</h3>
-          <ul>
-            <li>Add Trio as a possible relic location in Guarded and Equipment
-              extensions.</li>
-          </ul>
+              <ul>
+                <li>Add Trio as a possible relic location in Guarded and Equipment
+                  extensions.</li>
+              </ul>
           <h3>January 18, 2021</h3>
-          <ul>
-            <li>Add Thrust Sword logic to Speedrun preset.</li>
-            <li>Increase minimum complexities for Safe and enture
-              presets.</li>
-          </ul>
+              <ul>
+                <li>Add Thrust Sword logic to Speedrun preset.</li>
+                <li>Increase minimum complexities for Safe and enture
+                  presets.</li>
+              </ul>
           <h3>September 19, 2020</h3>
-          <ul>
-            <li>Add Tournament Mode.</li>
-          </ul>
+              <ul>
+                <li>Add Tournament Mode.</li>
+              </ul>
           <h3>August 11, 2020</h3>
-          <ul>
-            <li>Add Scavenger preset.</li>
-          </ul>
+              <ul>
+                <li>Add Scavenger preset.</li>
+              </ul>
           <h3>August 7, 2020</h3>
-          <ul>
-            <li>Make Leap Stone a 0-relic check in Speedrun preset.</li>
-          </ul>
+              <ul>
+                <li>Make Leap Stone a 0-relic check in Speedrun preset.</li>
+              </ul>
           <h3>July 27, 2020</h3>
-          <ul>
-            <li>Add music randomizer.</li>
-          </ul>
+              <ul>
+                <li>Add music randomizer.</li>
+              </ul>
           <h3>July 10, 2020</h3>
-          <ul>
-            <li>Fix escape requirements not being honored when a location is
-              empty.</li>
-          </ul>
+              <ul>
+                <li>Fix escape requirements not being honored when a location is
+                  empty.</li>
+              </ul>
           <h3>June 22, 2020</h3>
-          <ul>
-            <li>Add Jewel of Open + Soul of Wolf + Leap Stone as Gold Ring
-              location lock for Speedrun preset.</li>
-          </ul>
+              <ul>
+                <li>Add Jewel of Open + Soul of Wolf + Leap Stone as Gold Ring
+                  location lock for Speedrun preset.</li>
+              </ul>
           <h3>June 3, 2020</h3>
-          <ul>
-            <li>Fix duped progression item in Cave.</li>
-          </ul>
+              <ul>
+                <li>Fix duped progression item in Cave.</li>
+              </ul>
           <h3>Map 26, 2020</h3>
-          <ul>
-            <li>Add Forbidden Library Opal location to enture preset.</li>
-          </ul>
+              <ul>
+                <li>Add Forbidden Library Opal location to enture preset.</li>
+              </ul>
           <h3>April 30, 2020</h3>
-          <ul>
-            <li>Add Pixie singing "Nocturne" when sitting in a chair.</li>
-          </ul>
+              <ul>
+                <li>Add Pixie singing "Nocturne" when sitting in a chair.</li>
+              </ul>
           <h3>April 25, 2020</h3>
-          <ul>
-            <li>Increase worker performance.</li>
-            <li>Add <a href="/faq">FAQ</a>.</li>
-          </ul>
+              <ul>
+                <li>Increase worker performance.</li>
+                <li>Add <a href="/faq">FAQ</a>.</li>
+              </ul>
           <h3>April 21, 2020</h3>
-          <ul>
-            <li>Add Jewel of Open + Soul of Wolf + Skill of Wolf to Gold Ring
-              location locks in Speedrun preset.</li>
-            <li>Fix missing cape color layer.</li>
-          </ul>
+              <ul>
+                <li>Add Jewel of Open + Soul of Wolf + Skill of Wolf to Gold Ring
+                  location locks in Speedrun preset.</li>
+                <li>Fix missing cape color layer.</li>
+              </ul>
           <h3>April 17, 2020</h3>
-          <ul>
-            <li>Add solutions to spoiler log.</li>
-            <li>Increase minimum complexities.</li>
-          </ul>
+              <ul>
+                <li>Add solutions to spoiler log.</li>
+                <li>Increase minimum complexities.</li>
+              </ul>
           <h3>April 12, 2020</h3>
-          <ul>
-            <li>Prevent generation of seeds that softlock at Holy Glasses.</li>
-            <li>Show preset ID at file select menu.</li>
-            <li>Increase minimum complexities.</li>
-          </ul>
+              <ul>
+                <li>Prevent generation of seeds that softlock at Holy Glasses.</li>
+                <li>Show preset ID at file select menu.</li>
+                <li>Increase minimum complexities.</li>
+              </ul>
           <h3>April 10, 2020</h3>
-          <ul>
-            <li>Add "Menu" theme.</li>
-          </ul>
+              <ul>
+                <li>Add "Menu" theme.</li>
+              </ul>
           <h3>April 8, 2020</h3>
-          <ul>
-            <li>Add multithreaded seed generation strategy.</li>
-          </ul>
+              <ul>
+                <li>Add multithreaded seed generation strategy.</li>
+              </ul>
           <h3>April 5, 2020</h3>
-          <ul>
-            <li>Add Sprite and Nosedevil familiars in Guarded and Equipment
-              extensions.</li>
-          </ul>
+              <ul>
+                <li>Add Sprite and Nosedevil familiars in Guarded and Equipment
+                  extensions.</li>
+              </ul>
           <h3>April 3, 2020</h3>
-          <ul>
-            <li>Add Speedrun preset.</li>
-            <li>Randomize all cape colors.</li>
-            <li>Fix erasing Ring of Vlad location.</li>
-          </ul>
+              <ul>
+                <li>Add Speedrun preset.</li>
+                <li>Randomize all cape colors.</li>
+                <li>Fix erasing Ring of Vlad location.</li>
+              </ul>
           <h3>April 2, 2020</h3>
-          <ul>
-            <li>Add enture preset.</li>
-            <li>Add Empty hand preset.</li>
-            <li>Add night mode.</li>
-          </ul>
+              <ul>
+                <li>Add enture preset.</li>
+                <li>Add Empty hand preset.</li>
+                <li>Add night mode.</li>
+              </ul>
           <h3>March 31, 2020</h3>
-          <ul>
-            <li>Fix exception when replacing Holy Glasses with relic.</li>
-          </ul>
+              <ul>
+                <li>Fix exception when replacing Holy Glasses with relic.</li>
+              </ul>
           <h3>March 30, 2020</h3>
-          <ul>
-            <li>Fix gold ring duping.</li>
-          </ul>
+              <ul>
+                <li>Fix gold ring duping.</li>
+              </ul>
           <h3>March 29, 2020</h3>
-          <ul>
-            <li>Fix progression item duping at relic bosses.</li>
-            <li>Fix missing progression item at Scylla.</li>
-          </ul>
+              <ul>
+                <li>Fix progression item duping at relic bosses.</li>
+                <li>Fix missing progression item at Scylla.</li>
+              </ul>
           <h3>March 28, 2020</h3>
-          <ul>
-            <li>Fix information leak of progression item randomization.</li>
-            <li>Fix progression item randomization in Outer Wall.</li>
-          </ul>
+              <ul>
+                <li>Fix information leak of progression item randomization.</li>
+                <li>Fix progression item randomization in Outer Wall.</li>
+              </ul>
           <h3>March 27, 2020</h3>
-          <ul>
-            <li>Add progression item randomization.</li>
-            <li>Fix icons of equipment stolen by Death.</li>
-          </ul>
+              <ul>
+                <li>Add progression item randomization.</li>
+                <li>Fix icons of equipment stolen by Death.</li>
+              </ul>
           <h3>March 17, 2020</h3>
-          <ul>
-            <li>Fix disappearing items.</li>
-          </ul>
+              <ul>
+                <li>Fix disappearing items.</li>
+              </ul>
           <h3>March 15, 2020</h3>
-          <ul>
-            <li>Fix duping item that replaces Cube of Zoe.</li>
-          </ul>
+              <ul>
+                <li>Fix duping item that replaces Cube of Zoe.</li>
+              </ul>
           <h3>March 13, 2020</h3>
-          <ul>
-            <li>Fix relic placement in miscellaneous presets.</li>
-            <li>Fix missing replacement item at Soul of Bat.</li>
-            <li>Add extra agony to agonize preset.</li>
-          </ul>
+              <ul>
+                <li>Fix relic placement in miscellaneous presets.</li>
+                <li>Fix missing replacement item at Soul of Bat.</li>
+                <li>Add extra agony to agonize preset.</li>
+              </ul>
           <h3>March 12, 2020</h3>
-          <ul>
-            <li>Add relic locations extension with new Guarded option.</li>
-            <li>Fix softlock in Lesser Demon fight.</li>
-          </ul>
+              <ul>
+                <li>Add relic locations extension with new Guarded option.</li>
+                <li>Fix softlock in Lesser Demon fight.</li>
+              </ul>
           <h3>March 4, 2020</h3>
-          <ul>
-            <li>Add Joseph's Cloak color randomization to Turkey Mode.</li>
-          </ul>
+              <ul>
+                <li>Add Joseph's Cloak color randomization to Turkey Mode.</li>
+              </ul>
           <h3>February 27, 2020</h3>
-          <ul>
-            <li>Fix relic duping when performing glitches.</li>
-          </ul>
+              <ul>
+                <li>Fix relic duping when performing glitches.</li>
+              </ul>
           <h3>February 5, 2020</h3>
-          <ul>
-            <li>Update links section.</li>
-          </ul>
+              <ul>
+                <li>Update links section.</li>
+              </ul>
           <h3>October 26, 2019</h3>
-          <ul>
-            <li>"The Manly Update": Add Jewel + Power + Wolf to locks on Demon
-              Card location.</li>
-            <li>Add extra agony to agonize preset.</li>
-          </ul>
+              <ul>
+                <li>"The Manly Update": Add Jewel + Power + Wolf to locks on Demon
+                  Card location.</li>
+                <li>Add extra agony to agonize preset.</li>
+              </ul>
           <h3>October 1, 2019</h3>
-          <ul>
-            <li>Fix some candles not being randomized.</li>
-            <li>Add extra agony to agonize preset.</li>
-          </ul>
+              <ul>
+                <li>Fix some candles not being randomized.</li>
+                <li>Add extra agony to agonize preset.</li>
+              </ul>
           <h3>August 15, 2019</h3>
-          <ul>
-            <li>Fix crash related to transfering data to web worker.</li>
-          </ul>
+              <ul>
+                <li>Fix crash related to transfering data to web worker.</li>
+              </ul>
           <h3>August 11, 2019</h3>
-          <ul>
-            <li>Fix uncurse being placed in random candles.</li>
-            <li>Add support for custom enemy drops from enemies that have no
-              vanilla drops.</li>
-          </ul>
+              <ul>
+                <li>Fix uncurse being placed in random candles.</li>
+                <li>Add support for custom enemy drops from enemies that have no
+                  vanilla drops.</li>
+              </ul>
           <h3>May 23, 2019</h3>
-          <ul>
-            <li>Add support for custom enemy drops, starting equipment, item
-              locations, and prologue rewards.</li>
-            <li>Deprecate relic logic selector in favor of
-              <a href="https://github.com/3snow_p7im/SotN-Randomizer#presets">presets</a>.
-            </li>
-          </ul>
+              <ul>
+                <li>Add support for custom enemy drops, starting equipment, item
+                  locations, and prologue rewards.</li>
+                <li>Deprecate relic logic selector in favor of
+                  <a href="https://github.com/3snow_p7im/SotN-Randomizer#presets">presets</a>.</li>
+              </ul>
           <h3>May 11, 2019</h3>
-          <ul>
-            <li>Add selector for built-in relic logic schemes.</li>
-          </ul>
+              <ul>
+                <li>Add selector for built-in relic logic schemes.</li>
+              </ul>
           <h3>May 8, 2019</h3>
-          <ul>
-            <li>Add support for custom relic logic.</li>
-          </ul>
+              <ul>
+                <li>Add support for custom relic logic.</li>
+              </ul>
           <h3>May 3, 2019</h3>
-          <ul>
-            <li>Add file input as alternative to drag API.</li>
-          </ul>
+              <ul>
+                <li>Add file input as alternative to drag API.</li>
+              </ul>
           <h3>April 30, 2019</h3>
-          <ul>
-            <li>Use web worker.</li>
-          </ul>
+              <ul>
+                <li>Use web worker.</li>
+              </ul>
           <h3>April 28, 2019</h3>
-          <ul>
-            <li>Add drop randomization.</li>
-          </ul>
+              <ul>
+                <li>Add drop randomization.</li>
+              </ul>
           <h3>April 23, 2019</h3>
-          <ul>
-            <li>Add checksum verification.</li>
-          </ul>
+              <ul>
+                <li>Add checksum verification.</li>
+              </ul>
           <h3>April 22, 2019</h3>
-          <ul>
-            <li>Add turkey mode.</li>
-          </ul>
+              <ul>
+                <li>Add turkey mode.</li>
+              </ul>
           <h3>April 20, 2019</h3>
-          <ul>
-            <li>Add candle randomization.</li>
-            <li>Add prologue reward item randomization.</li>
-            <li>Add Axe Lord and Luck Mode starting equipment
-              randomization.</li>
-            <li>Add copy seed button.</li>
-          </ul>
+              <ul>
+                <li>Add candle randomization.</li>
+                <li>Add prologue reward item randomization.</li>
+                <li>Add Axe Lord and Luck Mode starting equipment
+                  randomization.</li>
+                <li>Add copy seed button.</li>
+              </ul>
           <h3>April 15, 2019</h3>
-          <ul>
-            <li>Display seed at file select menu.</li>
-            <li>Distribute jewel types with same frequency as vanilla.</li>
-          </ul>
+              <ul>
+                <li>Display seed at file select menu.</li>
+                <li>Distribute jewel types with same frequency as vanilla.</li>
+              </ul>
           <h3>April 14, 2019</h3>
-          <ul>
-            <li>Add option to show relic locations in spoilers.</li>
-          </ul>
+              <ul>
+                <li>Add option to show relic locations in spoilers.</li>
+              </ul>
           <h3>April 13, 2019</h3>
-          <ul>
-            <li>Fix Maria cutscene skip in Richter mode.</li>
-          </ul>
+              <ul>
+                <li>Fix Maria cutscene skip in Richter mode.</li>
+              </ul>
           <h3>April 11, 2019</h3>
-          <ul>
-            <li>Remove Maria cutscene in Marble Gallery to avoid confusion.</li>
-            <li>Add spoilers option.</li>
-          </ul>
+              <ul>
+                <li>Remove Maria cutscene in Marble Gallery to avoid confusion.</li>
+                <li>Add spoilers option.</li>
+              </ul>
           <h3>April 8, 2019</h3>
-          <ul>
-            <li>Fix bug that allowed salable gems to be sold in shop menu.</li>
-            <li>Items are now placed by type with same frequency as
-              vanilla.</li>
-          </ul>
+              <ul>
+                <li>Fix bug that allowed salable gems to be sold in shop menu.</li>
+                <li>Items are now placed by type with same frequency as
+                  vanilla.</li>
+              </ul>
           <h3>April 7, 2019</h3>
-          <ul>
-            <li>Add item location randomization.</li>
-          </ul>
+              <ul>
+                <li>Add item location randomization.</li>
+              </ul>
           <h3>April 5, 2019</h3>
-          <ul>
-            <li>Add <a href="relics">relic distribution</a>
-              (thx Soba)</li>
-            <li>Fix relic duping in Medusa room.</li>
-            <li>Fix shop relic name not being updated in shop menu.</li>
-            <li>Produce more uniform relic distribution (thx Soba).</li>
-          </ul>
+              <ul>
+                <li>Add <a href="relics">relic distribution</a>
+                  (thx Soba)</li>
+                <li>Fix relic duping in Medusa room.</li>
+                <li>Fix shop relic name not being updated in shop menu.</li>
+                <li>Produce more uniform relic distribution (thx Soba).</li>
+              </ul>
           <h3>April 4, 2019</h3>
-          <ul>
-            <li>Remove Maria cutscene in Alchemy Lab to avoid softlock.</li>
-            <li>Fix 2nd castle relic locations (thx Soba).</li>
-            <li>Fix randomized equipment by same type.</li>
-          </ul>
+              <ul>
+                <li>Remove Maria cutscene in Alchemy Lab to avoid softlock.</li>
+                <li>Fix 2nd castle relic locations (thx Soba).</li>
+                <li>Fix randomized equipment by same type.</li>
+              </ul>
           <h3>April 3, 2019</h3>
-          <ul>
-            <li>Fix random seed not being reproducible.</li>
-            <li>Fix crash after Scylla fight.</li>
-            <li>Fix faerie scroll duping.</li>
-            <li>Fix same seed causes different randomizations.</li>
-          </ul>
+              <ul>
+                <li>Fix random seed not being reproducible.</li>
+                <li>Fix crash after Scylla fight.</li>
+                <li>Fix faerie scroll duping.</li>
+                <li>Fix same seed causes different randomizations.</li>
+              </ul>
           <h3>April 2, 2019</h3>
-          <ul>
-            <li>Fix equipment randomization.</li>
-            <li>
-              Fix bug that allowed bat relic to be placed in 2nd castle without
-              ability to get spike breaker armor.
-            </li>
-            <li>Download file name contains seed value.</li>
-          </ul>
+              <ul>
+                <li>Fix equipment randomization.</li>
+                <li>
+                  Fix bug that allowed bat relic to be placed in 2nd castle without
+                  ability to get spike breaker armor.
+                </li>
+                <li>Download file name contains seed value.</li>
+              </ul>
           <h3>April 1, 2019</h3>
-          <ul>
-            <li>Fix shop relic glitch.</li>
-            <li>Fix relic duping in clock tower and outer wall.</li>
-          </ul>
+              <ul>
+                <li>Fix shop relic glitch.</li>
+                <li>Fix relic duping in clock tower and outer wall.</li>
+              </ul>
           <h3>March 31, 2019</h3>
-          <ul>
-            <li>Add equipment location randomization.</li>
-          </ul>
+              <ul>
+                <li>Add equipment location randomization.</li>
+              </ul>
           <h3>March 28, 2019</h3>
-          <ul>
-            <li>Add starting equipment randomization.</li>
-          </ul>
+              <ul>
+                <li>Add starting equipment randomization.</li>
+              </ul>
           <h3>March 27, 2019</h3>
-          <ul>
-            <li>Ported setz's
-              <a href="https://github.com/josephstevenspgh/SotN-Relic-Randomizer">relic randomizer</a>
-              to javascript.
-            </li>
-          </ul>
-        </div>
-        <h2>Known Bugs</h2>
-        <ul>
-          <li>Removing Tournament Mode can make seeds take longer to generate.</li>
-          <li>Incorrect default icons when starting with "null" equipment.</li>
-        </ul>
-      </fieldset>
-    </section>
-  </main>
-  <div id="dev-border"></div>
-  <a id="fork" href="https://github.com/sotnrando/sotnrando"><img width="149" height="149"
-      src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149"
-      class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/seedrandom.min.js"></script>
-  <script src="src/constants.js"></script>
-  <script src="src/enemies.js"></script>
-  <script src="src/errors.js"></script>
-  <script src="src/extension.js"></script>
-  <script src="src/items.js"></script>
-  <script src="src/equipment.js"></script>
-  <script src="src/spells.js"></script>
-  <script src="src/subweapons.js"></script>
-  <script src="src/relics.js"></script>
-  <script src="src/stats.js"></script>
-  <script src="src/util.js"></script>
-  <script src="src/accessibility_patches.js"></script>
-  <script src="src/randomize_stats.js"></script>
-  <script src="src/randomize_relics.js"></script>
-  <script src="src/randomize_items.js"></script>
-  <script src="src/randomize_music.js"></script>
-  <script src="build/presets/casual.js"></script>
-  <script src="build/presets/safe.js"></script>
-  <script src="build/presets/adventure.js"></script>
-  <script src="build/presets/og.js"></script>
-  <script src="build/presets/guarded-og.js"></script>
-  <script src="build/presets/sequence-breaker.js"></script>
-  <script src="build/presets/lycanthrope.js"></script>
-  <script src="build/presets/warlock.js"></script>
-  <script src="build/presets/nimble.js"></script>
-  <script src="build/presets/bat-master.js"></script>
-  <script src="build/presets/expedition.js"></script>
-  <script src="build/presets/glitch.js"></script>
-  <script src="build/presets/scavenger.js"></script>
-  <script src="build/presets/gem-farmer.js"></script>
-  <script src="build/presets/third-castle.js"></script>
-  <script src="build/presets/magic-mirror.js"></script>
-  <script src="build/presets/leg-day.js"></script>
-  <script src="build/presets/boss-rush.js"></script>
-  <script src="build/presets/aperture.js"></script>
-  <script src="build/presets/big-toss.js"></script>
-  <script src="build/presets/bounty-hunter.js"></script>
-  <script src="build/presets/target-confirmed.js"></script>
-  <script src="build/presets/hitman.js"></script>
-  <script src="build/presets/grand-tour.js"></script>
-  <script src="build/presets/chaos-lite.js"></script>
-  <script src="build/presets/beyond.js"></script>
-  <script src="build/presets/breach.js"></script>
-  <script src="build/presets/any-percent.js"></script>
-  <script src="build/presets/agonize-twtw.js"></script>
-  <script src="build/presets/safe-stwo.js"></script>
-  <script src="build/presets/open.js"></script>
-  <script src="build/presets/first-castle.js"></script>
-  <script src="build/presets/lucky-sevens.js"></script>
-  <script src="build/presets/sight-seer.js"></script>
-  <script src="build/presets/cursed-night.js"></script>
-  <script src="build/presets/glitchmaster.js"></script>
-  <script src="build/presets/mobility.js"></script>
-  <script src="build/presets/spellbound.js"></script>
-  <script src="build/presets/dog-life.js"></script>
-  <script src="build/presets/battle-mage.js"></script>
-  <script src="build/presets/chimera.js"></script>
-  <script src="build/presets/timeline.js"></script>
-  <script src="build/presets/vanilla.js"></script>
-  <script src="build/presets/oracle.js"></script>
-  <script src="build/presets/seeker.js"></script>
-  <script src="build/presets/all-bosses.js"></script>
-  <script src="build/presets/nimble-lite.js"></script>
-  <script src="build/presets/rampage.js"></script>
-  <script src="build/presets/cornivus.js"></script>
-  <script src="build/presets/max-rando.js"></script>
-  <script src="build/presets/mirror-breaker.js"></script>
-  <script src="build/presets/recycler.js"></script>
-  <script src="build/presets/anguish.js"></script>
-  <script src="build/presets/gear-rush.js"></script>
-  <script src="build/presets/rampage-25te.js"></script>
-  <script src="build/presets/nimble-lite-te.js"></script>
-  <script src="build/presets/cornivus-te.js"></script>
-  <script src="build/presets/recycler-te.js"></script>
-  <script src="build/presets/chimera-te.js"></script>
-  <script src="build/presets/index.js"></script>
-  <script src="src/worker.js"></script>
-  <script src="src/core_randomizer.js"></script>
-  <script src="src/browser_utils.js"></script>
-  <script src="src/browser_constants.js"></script>
-  <script src="src/browser.js"></script>
-</body>
-
+              <ul>
+                <li>Ported setz's
+                  <a href="https://github.com/josephstevenspgh/SotN-Relic-Randomizer">relic randomizer</a>
+                  to javascript.</li>
+              </ul>
+            </div>
+            <h2>Known Bugs</h2>
+            <ul>
+              <li>Removing Tournament Mode can make seeds take longer to generate.</li>
+              <li>Incorrect default icons when starting with "null" equipment.</li>
+            </ul> 
+         </fieldset>
+        </section>
+    </main>
+    <div id="dev-border"></div>
+    <a id="fork" href="https://github.com/sotnrando/sotnrando"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/seedrandom.min.js"></script>
+    <script src="src/constants.js"></script>
+    <script src="src/enemies.js"></script>
+    <script src="src/errors.js"></script>
+    <script src="src/extension.js"></script>
+    <script src="src/items.js"></script>
+    <script src="src/equipment.js"></script>
+    <script src="src/spells.js"></script>
+    <script src="src/subweapons.js"></script>
+    <script src="src/relics.js"></script>
+    <script src="src/stats.js"></script>
+    <script src="src/util.js"></script>
+    <script src="src/accessibility_patches.js"></script>
+    <script src="src/randomize_stats.js"></script>
+    <script src="src/randomize_relics.js"></script>
+    <script src="src/randomize_items.js"></script>
+    <script src="src/randomize_music.js"></script>
+    <script src="build/presets/casual.js"></script>
+    <script src="build/presets/safe.js"></script>
+    <script src="build/presets/adventure.js"></script>
+    <script src="build/presets/og.js"></script>
+    <script src="build/presets/guarded-og.js"></script>
+    <script src="build/presets/sequence-breaker.js"></script>
+    <script src="build/presets/lycanthrope.js"></script>
+    <script src="build/presets/warlock.js"></script>
+    <script src="build/presets/nimble.js"></script>
+    <script src="build/presets/bat-master.js"></script>
+    <script src="build/presets/expedition.js"></script>
+    <script src="build/presets/glitch.js"></script>
+    <script src="build/presets/scavenger.js"></script>
+    <script src="build/presets/empty-hand.js"></script>
+    <script src="build/presets/gem-farmer.js"></script>
+    <script src="build/presets/third-castle.js"></script>
+    <script src="build/presets/rat-race.js"></script>
+    <script src="build/presets/magic-mirror.js"></script>
+    <script src="build/presets/leg-day.js"></script>
+    <script src="build/presets/boss-rush.js"></script>
+    <script src="build/presets/aperture.js"></script>
+    <script src="build/presets/big-toss.js"></script>
+    <script src="build/presets/bounty-hunter.js"></script>
+    <script src="build/presets/target-confirmed.js"></script>
+    <script src="build/presets/hitman.js"></script>
+    <script src="build/presets/chaos-lite.js"></script>
+    <script src="build/presets/beyond.js"></script>
+    <script src="build/presets/breach.js"></script>
+    <script src="build/presets/grand-tour.js"></script>
+    <script src="build/presets/any-percent.js"></script>
+    <script src="build/presets/summoner.js"></script>
+    <script src="build/presets/agonize-twtw.js"></script>
+    <script src="build/presets/safe-stwo.js"></script>
+    <script src="build/presets/brawler.js"></script>
+    <script src="build/presets/open.js"></script>
+    <script src="build/presets/first-castle.js"></script>
+    <script src="build/presets/lucky-sevens.js"></script>
+    <script src="build/presets/sight-seer.js"></script>
+    <script src="build/presets/cursed-night.js"></script>
+    <script src="build/presets/glitchmaster.js"></script>
+    <script src="build/presets/mobility.js"></script>
+    <script src="build/presets/spellbound.js"></script>
+    <script src="build/presets/dog-life.js"></script>
+    <script src="build/presets/battle-mage.js"></script>
+    <script src="build/presets/chimera.js"></script>
+    <script src="build/presets/timeline.js"></script>
+    <script src="build/presets/vanilla.js"></script>
+    <script src="build/presets/oracle.js"></script>
+    <script src="build/presets/seeker.js"></script>
+    <script src="build/presets/all-bosses.js"></script>
+    <script src="build/presets/nimble-lite.js"></script>
+    <script src="build/presets/rampage.js"></script>
+    <script src="build/presets/cornivus.js"></script>
+    <script src="build/presets/max-rando.js"></script>
+    <script src="build/presets/mirror-breaker.js"></script>
+    <script src="build/presets/recycler.js"></script>
+    <script src="build/presets/anguish.js"></script>
+    <script src="build/presets/gear-rush.js"></script>
+    <script src="build/presets/index.js"></script>
+    <script src="src/worker.js"></script>
+    <script src="src/browser.js"></script>
+  </body>
 </html>

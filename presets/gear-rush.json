@@ -1453,17 +1453,6 @@
     "type": "word",
     "value": "0xa062BEBD",
     "comment": "sb v0, 0xBEBD (v1)"
-  },
-  
-  {
-    "type": "word",
-    "value": "0x34020001",
-    "comment": "ori v0, 0x0001"
-  }, {
-    "comment": "succubus defeated",
-    "type": "word",
-    "value": "0xa062CA4C",
-    "comment": "sb v0, 0xCA4C (v1)"
   }, 
   
   {
@@ -2524,11 +2513,6 @@
     "comment": "Prevent saving",
     "type": "word",
     "address": "0x120260",
-    "value": "0x00000000"
-  }, {
-    "comment": "Prevent saving",
-    "type": "word",
-    "address": "0x120204",
     "value": "0x00000000"
   },
 
