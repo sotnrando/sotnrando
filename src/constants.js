@@ -1886,9 +1886,7 @@
     "Rest in Peace, Scott.",
     "Now starting season 28!",
     "Really good, actually!",
-    "!ahl",
-    "For Shakey!",
-    "Barley Teas!"
+    "!ahl"
   ]
 
   const prideSplashPhrases = [
@@ -2707,44 +2705,6 @@
     "Jingly"
   ];
 
-  const seasonalEvents = [
-    {
-      "eventName": "Pride Month",
-      "startMonth": 6,
-      "startDay": 1,
-      "endMonth": 7,
-      "endDay": 1,
-      "eventLogo": "images/logopride.png",
-      "toolSplashPhrases": prideSplashPhrases
-    }
-  ]
-
-  let songsList = [
-    "Lost Painting",
-    "Curse Zone",
-    "Requiem For The Gods",
-    "Rainbow Cemetary",
-    "Wood Carving Partita",
-    "Crystal Teardrops",
-    "Marble Gallery",
-    "Draculas Castle",
-    "The Tragic Prince",
-    "Tower of Mist",
-    "Door of Holy Spirits",
-    "Dance of Pales",
-    "Abandoned Pit",
-    "Heavenly Doorway",
-    "Festival of Servants",
-    "Wandering Ghosts",
-    "The Door to the Abyss",
-    "Dance of Gold",
-    "Enchanted Banquet",
-    "Death Ballad",
-    "Final Toccata",
-    "Dance of Illusions",
-    "Blood Relations"
-  ]
-
   const digest =
         'ce01203a9df93e001b88ef4c350889c19f11ffba89d20f214bdd8dec0b2d8d7c'
 
@@ -2800,9 +2760,7 @@
     adjectivesHalloween: adjectivesHalloween,
     adjectivesHolidays: adjectivesHolidays,
     nounsHalloween: nounsHalloween,
-    nounsNormal: nounsNormal,
-    seasonalEvents: seasonalEvents,
-    songsList: songsList
+    nounsNormal: nounsNormal
   }
 
   if (self) {
