@@ -31,6 +31,7 @@
   "startRoomRando1stMode": false,
   "startRoomRando2ndMode": true,
   "rlbcMode": true,
+  "dominoMode": true,
   "newGoalsSet": "v",
 
   "complexityGoal": {

@@ -28,6 +28,7 @@
   "magicmaxMode": true,
   "mypurseMode": true,
   "startRoomRando2ndMode": true,
+  "dominoMode": true,
 
   "alias": [{
     "comment": "Alias Bat Card as Bat2 (Soul of Bat 2)",

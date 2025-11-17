@@ -29,6 +29,7 @@
   "mypurseMode": true,
   "godspeedMode": true,
   "startRoomRando2ndMode": true,
+  "dominoMode": true,
 
   "complexityGoal": {
     "min": 8,
