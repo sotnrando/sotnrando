@@ -721,6 +721,23 @@
       elems.complexity.value = max
     }
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('complexity');
+    const currentValueElement = document.getElementById('complexityCurrentValue');
+
+    if (slider && currentValueElement) {
+      slider.addEventListener('input', () => {
+        const value = parseInt(slider.value, 10);
+        currentValueElement.textContent = value;
+        if (value >= 10) {
+          alert(`Warning: You are currently attempting to set minimum complexity to ${value}, which exceeds the recommended minimum. Increasing complexity does not make the seed more difficult, but rather enforces a more linear logic path. Additionally, higher minimum complexity can significantly increase seed generation time. While such settings are technically supported, they are generally discouraged.`);
+        }
+      });
+    }
+  });
+
+
   function relicLocationsExtensionChange() {
     const ext = elems.relicLocationsExtension
     const EXT = sotnRando.constants.EXTENSION
