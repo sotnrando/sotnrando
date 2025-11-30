@@ -1889,6 +1889,7 @@
     "!ahl",
     "For Shakey!",
     "Barley Teas!"
+    "But DerDrach has finished second castle!"
   ]
 
   const prideSplashPhrases = [
