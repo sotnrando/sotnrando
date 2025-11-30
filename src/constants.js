@@ -1888,7 +1888,7 @@
     "Really good, actually!",
     "!ahl",
     "For Shakey!",
-    "Barley Teas!"
+    "Barley Teas!",
     "But DerDrach has finished second castle!"
   ]
 

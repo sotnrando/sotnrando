@@ -10,7 +10,6 @@
   let haveChecksum
   let downloadReady
   let selectedFile
-  window.selectedFile = selectedFile
   let mapColorLock
   let newGoalsLock
   let alucardPaletteLock
@@ -49,6 +48,7 @@
   function resetState() {
     sotnRando.items = cloneItems(items)
     selectedFile = undefined
+    window.selectedFile = selectedFile
     resetTarget()
     elems.randomize.disabled = true
     disableDownload()
@@ -848,6 +848,7 @@
     if (elems.file.files[0]) {
       resetState()
       selectedFile = elems.file.files[0]
+      window.selectedFile = selectedFile
       resetTarget()
       elems.target.classList.add('active')
     }
@@ -873,11 +874,13 @@
         const item = event.dataTransfer.items[i]
         if (item.kind === 'file') {
           selectedFile = item.getAsFile()
+          window.selectedFile = selectedFile
         }
       }
     } else {
       for (let i = 0; i < event.dataTransfer.files.length; i++) {
         selectedFile = event.dataTransfer.files[i]
+        window.selectedFile = selectedFile
       }
     }
     resetTarget(true)
@@ -1152,51 +1155,51 @@
     loadPresetOptions(options);
 
     const start = new Date().getTime()
-    CoreRandomizer.randomize(
-      options,
-      currSeed,
-      elems.newGoals.value,
-      elems.godspeedMode.checked,
-      elems.mapColor.value,
-      elems.alucardPalette.value,
-      elems.alucardLiner.value,
-      elems.accessibilityPatches.checked,
-      haveChecksum,
-      expectChecksum,
-      CoreRandomizer.isDev(url),
-      showSpoilers,
-      null,
-      null,
-      fileOutputHandler,
-      null,
-      this.result
-    ).then(function () {
-      resetCopy();
-      hideLoader();
-      if (getVersion() === "0.0.0D") return; // Do not log local tests into the API.
-      const duration = new Date().getTime() - start
-      doApiRequest("/data/presets", "POST", {
-        "preset": selectedPreset,
-        "generation_time": duration,
-        "app": CoreRandomizer.isDev(url) ? "dev-web" : "web",
-        "settings": {
-          "tournament": elems.tournamentMode.checked,
-          "color_rando": elems.colorrandoMode.checked,
-          "magic_max": elems.magicmaxMode.checked,
-          "anti_freeze": elems.antiFreezeMode.checked,
-          "purse_mode": elems.mypurseMode.checked,
-          "infinite_wing_smash": elems.iwsMode.checked,
-          "fast_warp": elems.fastwarpMode.checked,
-          "no_prologue": elems.noprologueMode.checked,
-          "unlocked": elems.unlockedMode.checked,
-          "surprise": elems.surpriseMode.checked,
-          "enemy_stat": elems.enemyStatRandoMode.checked,
-          "relic_extension": null
-        }
-      })
-    }).catch(handleError).finally(restoreItems)
-
-    if (!elems.output.ppf.checked) {
+    if(elems.output.ppf.checked){
+      CoreRandomizer.randomize(
+          options,
+          currSeed,
+          elems.newGoals.value,
+          elems.godspeedMode.checked,
+          elems.mapColor.value,
+          elems.alucardPalette.value,
+          elems.alucardLiner.value,
+          elems.accessibilityPatches.checked,
+          haveChecksum,
+          expectChecksum,
+          CoreRandomizer.isDev(url),
+          showSpoilers,
+          null,
+          null,
+          fileOutputHandler,
+          null,
+          this.result
+      ).then(function () {
+        resetCopy();
+        hideLoader();
+        if (getVersion() === "0.0.0D") return; // Do not log local tests into the API.
+        const duration = new Date().getTime() - start
+        doApiRequest("/data/presets", "POST", {
+          "preset": selectedPreset,
+          "generation_time": duration,
+          "app": CoreRandomizer.isDev(url) ? "dev-web" : "web",
+          "settings": {
+            "tournament": elems.tournamentMode.checked,
+            "color_rando": elems.colorrandoMode.checked,
+            "magic_max": elems.magicmaxMode.checked,
+            "anti_freeze": elems.antiFreezeMode.checked,
+            "purse_mode": elems.mypurseMode.checked,
+            "infinite_wing_smash": elems.iwsMode.checked,
+            "fast_warp": elems.fastwarpMode.checked,
+            "no_prologue": elems.noprologueMode.checked,
+            "unlocked": elems.unlockedMode.checked,
+            "surprise": elems.surpriseMode.checked,
+            "enemy_stat": elems.enemyStatRandoMode.checked,
+            "relic_extension": null
+          }
+        })
+      }).catch(handleError).finally(restoreItems)
+    }else{
       const reader = new FileReader()
       reader.addEventListener('load', function () {
         // Verify vanilla bin.
@@ -1204,7 +1207,24 @@
           if (digest !== sotnRando.constants.digest) {
             throw new Error('Disc image is not a valid or vanilla backup')
           }
-        }).then(randomize.bind(this)).catch(handleError).finally(restoreItems)
+        }).then(randomize(options,
+            currSeed,
+            elems.newGoals.value,
+            elems.godspeedMode.checked,
+            elems.mapColor.value,
+            elems.alucardPalette.value,
+            elems.alucardLiner.value,
+            elems.accessibilityPatches.checked,
+            haveChecksum,
+            expectChecksum,
+            CoreRandomizer.isDev(url),
+            showSpoilers,
+            null,
+            null,
+            fileOutputHandler,
+            null,
+            this.result
+        )).catch(handleError).finally(restoreItems)
       })
       reader.readAsArrayBuffer(selectedFile)
     }
