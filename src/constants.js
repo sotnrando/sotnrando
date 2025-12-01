@@ -1889,7 +1889,16 @@
     "!ahl",
     "For Shakey!",
     "Barley Teas!",
-    "But DerDrach has finished second castle!"
+    "But DerDrach has full-cleared second castle!",
+    "Spring Tournament 2022 Champion JupiterClimb",
+    "Spring Tournament 2023 Champion Dr4gonBlitz!",
+    "Spring Tournament 2024 Champion the__swarm!",
+    "Spring Tournament 2025 Champion DerDrach!",
+    "Fall Tournament 2021 Champion asdheyb!",
+    "Fall Tournament 2022 Champion JupiterClimb!",
+    "Fall Tournament 2023 Champion the__swarm!",
+    "Fall Tournament 2024 Champion DerDrach!",
+    "Fall Tournament 2025 Champion Renantrl1!"
   ]
 
   const prideSplashPhrases = [

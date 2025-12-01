@@ -837,6 +837,26 @@
     name: 'Thrust sword',
     ability: RELIC.THRUST_SWORD,
     consumesItem: false,
+  }, {
+    name: 'Duplicator',
+    ability: RELIC.DUPLICATOR,
+    consumesItem: false,
+  }, {
+    name: 'Library card',
+    ability: RELIC.LIBRARY_CARD,
+    consumesItem: true,
+  }, {
+    name: 'Fire boomerang',
+    ability: RELIC.FIRE_BOOMERANG,
+    consumesItem: false,
+  }, {
+    name: 'Heart Refresh',
+    ability: RELIC.HEART_REFRESH,
+    consumesItem: false,
+  }, {
+    name: 'Inert',
+    ability: RELIC.INERT,
+    consumesItem: false,
   }]
 
   const exports = relics
