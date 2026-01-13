@@ -271,8 +271,10 @@ async function randomize(
             util.mergeInfo(info, result.info)
             debugMessage(debugEnabled, 'Randomize Music');
             // Randomize music.
-            rng = getRNG(options, seed);
-            check.apply(randomizeMusic(rng, applied))
+            if (applied.randomizeMusic == true && applied.randomizeMusic !== undefined) {
+                rng = getRNG(options, seed);
+                check.apply(randomizeMusic(rng, applied))
+            }
             debugMessage(debugEnabled, 'Apply options / writes function master');
             // Start the function master
             let optWrite = 0x00000000                   // This variable lets the ASM used in the Master Function know if it needs to run certain code or sets flags for the tracker to use
