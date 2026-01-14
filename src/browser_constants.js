@@ -97,7 +97,7 @@ BrowserConstants.elems = {
     godspeedMode: document.getElementById('godspeed-mode'),
     libraryShortcut: document.getElementById('library-shortcut'),
     elemChaosMode: document.getElementById('elem-chaos'),
-    simpleInputMode: document.getElementById('simple-input'),
+    easyMode: document.getElementById('easy-mode'),
     devStashMode: document.getElementById('dev-stash'),
     seasonalPhrasesMode: document.getElementById('seasonal-phrases'),
     bossMusicSeparation: document.getElementById('boss-music-separation'),

@@ -453,12 +453,12 @@ async function randomize(
             }
             debugMessage(debugEnabled, 'Elemental Chaos | ' + optFlag)
             optFlag = false
-            if (options.simpleInputMode || applied.simpleInputMode) { // Simplifies spell inputs - eldrich
-                // Apply simple input patches. - eldri7ch
+            if (options.easyMode || applied.easyMode) { // Simplifies spell inputs and extends i-frames - eldrich
+                // Apply easy mode patches. - eldri7ch
                 optFlag = true
-                check.apply(util.applySimpleInputPatches())
+                check.apply(util.applyEasyModePatches())
             }
-            debugMessage(debugEnabled, 'Simplified Input Mode | ' + optFlag)
+            debugMessage(debugEnabled, 'Easy Mode | ' + optFlag)
             optFlag = false
             if (options.devStashMode || applied.devStashMode) { // dev's stash - eldrich
                 optFlag = true

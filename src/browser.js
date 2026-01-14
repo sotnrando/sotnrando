@@ -648,7 +648,7 @@
       "itemNameRandoMode", "noprologueMode", "unlockedMode", "surpriseMode",
       "enemyStatRandoMode", "shopPriceRandoMode", "startRoomRandoMode",
       "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
-      "godspeedMode", "libraryShortcut", "elemChaosMode", "simpleInputMode",
+      "godspeedMode", "libraryShortcut", "elemChaosMode", "easyMode",
       "devStashMode", "bossMusicSeparation"
     ];
 
@@ -951,7 +951,7 @@
       'noprologueMode', 'unlockedMode', 'surpriseMode', 'enemyStatRandoMode',
       'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
       'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
-      'libraryShortcut', 'elemChaosMode', 'simpleInputMode', 'devStashMode',
+      'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
       'seasonalPhrasesMode', 'bossMusicSeparation'
     ]
 
@@ -1000,7 +1000,7 @@
       'surpriseMode', 'enemyStatRandoMode', 'shopPriceRandoMode',
       'startRoomRandoMode', 'startRoomRando2ndMode', 'dominoMode', 'rlbcMode',
       'immunityPotionMode', 'godspeedMode', 'libraryShortcut', 'elemChaosMode',
-      'simpleInputMode', 'devStashMode', 'seasonalPhrasesMode',
+      'easyMode', 'devStashMode', 'seasonalPhrasesMode',
       'bossMusicSeparation', 'tournamentMode'
     ]
     clearFields.forEach(key => elems[key].disabled = false)
