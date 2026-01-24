@@ -9012,7 +9012,7 @@ function applyBountyHunterTargets(rng,bhmode) {
     offset = 0x059E92D8
     offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
     offset = data.writeWord(offset, 0xa4230f6c)                                 // assign the value to RAM
-    offset = data.writeWord(offset, 0x0c06d1fe)                                 // Call sfx player
+    offset = data.writeWord(offset, 0x0c04d1fe)                                 // Call sfx player
     offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
     offset = data.writeWord(offset, 0x0806a0d9)                                 // Jump to 0x801A8364
     data.writeWord(offset, 0x00000000)
