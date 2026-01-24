@@ -513,6 +513,13 @@ async function randomize(
                 check.apply(util.applyAlucardLiner(alucardLiner))
             }
             debugMessage(debugEnabled, 'Alucard Liner')
+            optFlag = false
+            if (options.singleHitGearMode || applied.singleHitGearMode) { // Single-Hit Gears - eldrich
+                optFlag = true
+                check.apply(util.applySingleHitGearPatches())
+            }
+            debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
+            optFlag = false
             debugMessage(debugEnabled, 'Apply Writes')
             // Apply writes.
             check.apply(util.applyWrites(rng, applied))

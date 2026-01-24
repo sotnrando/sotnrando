@@ -2735,6 +2735,11 @@ function hexValueToDamageString(hexValue) {
       } else if ('excludesongs' in options) { // Exclude songs - eldri7ch
         randomize.push('eds:' + options.excludesongs)
         delete options.excludesongs
+      } else if ('singleHitGearMode' in options) { // Single-Hit Gears - eldri7ch
+        if (options.singleHitGearMode) {
+          randomize.push('gp')
+        }
+        delete options.singleHitGearMode
       } else if ('preset' in options) {
         randomize.push('p:' + options.preset)
         delete options.preset
@@ -3982,6 +3987,7 @@ function hexValueToDamageString(hexValue) {
     elemChaosMode,
     easyMode,
     devStashMode,
+    singleHitGearMode,
     seasonalPhrasesMode,
     bossMusicSeparation,
     newGoalsSet,
@@ -4035,6 +4041,7 @@ function hexValueToDamageString(hexValue) {
     this.elemChaosMode = elemChaosMode
     this.easyMode = easyMode
     this.devStashMode = devStashMode
+    this.singleHitGearMode = singleHitGearMode
     this.seasonalPhrasesMode = seasonalPhrasesMode
     this.bossMusicSeparation = bossMusicSeparation
     this.newGoalsSet = newGoalsSet
@@ -4218,6 +4225,8 @@ function hexValueToDamageString(hexValue) {
     this.seasonalPhrases = false
     // boss music separation
     this.bossMusic = true
+    // Single-Hit Gears
+    this.singleHitGear = true
     // new goals for completion.
     this.newGoals = undefined
     // Debug mode.
@@ -4575,6 +4584,9 @@ function hexValueToDamageString(hexValue) {
     }
     if ('newGoalsSet' in json) {
       builder.newGoalsSet(json.newGoalsSet)
+    }
+    if ('singleHitGearMode' in json) {
+      builder.singleHitGearMode(json.singleHitGearMode)
     }
     if ('writes' in json) {
       let lastAddress = 0
@@ -4937,6 +4949,9 @@ function hexValueToDamageString(hexValue) {
     }
     if ('newGoalsSet' in preset) {
       this.newGoals = preset.newGoalsSet
+    }
+    if ('singleHitGearMode' in preset) {
+      this.singleHitGear = preset.singleHitGearMode
     }
     if ('writes' in preset) {
       this.writes = this.writes || []
@@ -5726,6 +5741,11 @@ function hexValueToDamageString(hexValue) {
     this.newGoals = nGoals
   }
 
+  // Enable Single-Hit Gears - eldri7ch
+  PresetBuilder.prototype.singleHitGearMode = function singleHitGearMode(enabled) {
+    this.singleHitGear = enabled
+  }
+
   // Write a character.
   PresetBuilder.prototype.writeChar = function writeChar(address, value) {
     let valueCheck
@@ -6052,6 +6072,7 @@ function hexValueToDamageString(hexValue) {
     const bossMusic = self.bossMusic
     const newGoals = self.newGoals
     const debug = self.debug
+    const singleHitGear = self.singleHitGear
     const writes = self.writes
     return new Preset(
       self.metadata.id,
@@ -6105,6 +6126,7 @@ function hexValueToDamageString(hexValue) {
       bossMusic,
       newGoals,
       debug,
+      singleHitGear,
       writes,
     )
   }
@@ -8971,6 +8993,33 @@ function applyBountyHunterTargets(rng,bhmode) {
     return data
   }
 
+  function applySingleHitGearPatches() {
+    // console.log('Single-Hit Gears')
+
+    const data = new checked()
+    let offset
+
+    // First Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
+    offset = 0x055A0F04
+    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
+    offset = data.writeWord(offset, 0xa4230fd0)                                 // assign the value to RAM
+    offset = data.writeWord(offset, 0x0c06d6f8)                                 // Call sfx player
+    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
+    offset = data.writeWord(offset, 0x0806a29c)                                 // Jump to 0x801A8A70
+    data.writeWord(offset, 0x00000000)
+
+    // Second Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
+    offset = 0x059E92D8
+    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
+    offset = data.writeWord(offset, 0xa4230f6c)                                 // assign the value to RAM
+    offset = data.writeWord(offset, 0x0c06d1fe)                                 // Call sfx player
+    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
+    offset = data.writeWord(offset, 0x0806a0d9)                                 // Jump to 0x801A8364
+    data.writeWord(offset, 0x00000000)
+
+    return data
+  }
+
   function randomizeRelics(
     version,
     applied,
@@ -9533,6 +9582,7 @@ function applyBountyHunterTargets(rng,bhmode) {
     applyAlucardPalette: applyAlucardPalette,
     applySplashText: applySplashText,
     applyAlucardLiner: applyAlucardLiner,
+    applySingleHitGearPatches: applySingleHitGearPatches,
     randomizeRelics: randomizeRelics,
     randomizeItems: randomizeItems,
     applyWrites: applyWrites,

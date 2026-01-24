@@ -649,7 +649,7 @@
       "enemyStatRandoMode", "shopPriceRandoMode", "startRoomRandoMode",
       "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
       "godspeedMode", "libraryShortcut", "elemChaosMode", "easyMode",
-      "devStashMode", "bossMusicSeparation"
+      "devStashMode", "bossMusicSeparation", "singleHitGearMode"
     ];
 
     const keysToRemove = ["music", "bossMusicSeparation"];
@@ -952,7 +952,7 @@
       'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
       'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
       'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
-      'seasonalPhrasesMode', 'bossMusicSeparation'
+      'seasonalPhrasesMode', 'bossMusicSeparation', 'singleHitGearMode'
     ]
 
     formOptions.forEach(key => {
@@ -1001,7 +1001,7 @@
       'startRoomRandoMode', 'startRoomRando2ndMode', 'dominoMode', 'rlbcMode',
       'immunityPotionMode', 'godspeedMode', 'libraryShortcut', 'elemChaosMode',
       'easyMode', 'devStashMode', 'seasonalPhrasesMode',
-      'bossMusicSeparation', 'tournamentMode'
+      'bossMusicSeparation', 'singleHitGearMode', 'tournamentMode'
     ]
     clearFields.forEach(key => elems[key].disabled = false)
 

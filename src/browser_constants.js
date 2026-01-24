@@ -101,6 +101,7 @@ BrowserConstants.elems = {
     devStashMode: document.getElementById('dev-stash'),
     seasonalPhrasesMode: document.getElementById('seasonal-phrases'),
     bossMusicSeparation: document.getElementById('boss-music-separation'),
+    singleHitGearMode: document.getElementById('single-hit-gear'),
     accessibilityPatches: document.getElementById('accessibility-patches'),
     showSpoilers: document.getElementById('show-spoilers'),
     showRelics: document.getElementById('show-relics'),
