@@ -103,7 +103,7 @@ BrowserUtils.getCurrentOptions = function getCurrentOptions() {
         'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
         'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
         'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
-        'seasonalPhrasesMode', 'bossMusicSeparation', 'singleHitGearMode', 
+        'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode', 
         'music', 'appendSeed', 'excludeSongsOption', 'itemLocations', 'stats', 
         'prologueRewards', 'startingEquipment', 'accessibilityPatches'
     ]

@@ -271,7 +271,8 @@ async function randomize(
             util.mergeInfo(info, result.info)
             debugMessage(debugEnabled, 'Randomize Music');
             // Randomize music.
-            if (applied.randomizeMusic == true && applied.randomizeMusic !== undefined) {
+            // console.log("Music Randomizer: " + applied.music)
+            if (applied.music == true && applied.music !== undefined) {
                 rng = getRNG(options, seed);
                 check.apply(randomizeMusic(rng, applied))
             }

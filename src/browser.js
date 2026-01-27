@@ -952,7 +952,7 @@
       'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
       'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
       'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
-      'seasonalPhrasesMode', 'bossMusicSeparation', 'singleHitGearMode'
+      'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode'
     ]
 
     formOptions.forEach(key => {
