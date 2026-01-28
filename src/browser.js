@@ -477,7 +477,7 @@
   function presetIdChange() {
   // Refactored for ease of alteration and maintainability -crazy4blades
   const BH_COMPAT = new Set([
-    "bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage"
+    "bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "rampage-25te"
   ]);
   const BOSS_COMPAT = new Set([
     "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
@@ -516,7 +516,7 @@
     h: new Set(["bounty-hunter", "chaos-lite"]),
     t: new Set(["target-confirmed"]),
     w: new Set(["hitman"]),
-    x: new Set(["rampage"])
+    x: new Set(["rampage","rampage-25te"])
   };
   const GOAL_PRESETS = {
     b: new Set(["all-bosses", "mirror-breaker"]),
