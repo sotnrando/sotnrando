@@ -509,7 +509,7 @@
     { ids: ["big-toss"], elems: ["enemyStatRandoMode", "elemChaosMode"] },
     { ids: ["boss-rush", "first-castle", "beyond", "seeker", "recycler"], elems: ["rlbcMode"] },
     { ids: ["battle-mage"], elems: ["godspeedMode"] },
-    { ids: ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "oracle"], elems: ["dominoMode"] }
+    { ids: ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "rampage-25te", "oracle"], elems: ["dominoMode"] }
   ];
 
   const BH_GOAL_PRESETS = {
