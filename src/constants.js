@@ -464,14 +464,7 @@
     SILVER_RING: 'S',
     SPIKE_BREAKER: 'K',
     HOLY_GLASSES: 'H',
-    THRUST_SWORD: 'D',
-    LIBRARY_CARD: 'C',
-    HEART_REFRESH: 'Y',
-    FIRE_BOOMERANG: 'O',
-    SHIELD_ROD: 'X',
-    TOADSTOOL: 'm',
-    DUPLICATOR: 'u',
-    GOAL_ITEM: 'Z',
+    THRUST_SWORD: 'D'
   }
 
   const tileIdOffset = 0x80
