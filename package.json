@@ -89,7 +89,10 @@
     "nimble-lite-te",
     "cornivus-te",
     "recycler-te",
-    "chimera-te"
+    "chimera-te",
+    "lycanthrope-transform-2026",
+    "nimble-lite-transform-2026",
+    "warlock-transform-2026"
   ],
   "engines": {
     "node": ">=15"

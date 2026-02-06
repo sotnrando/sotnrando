@@ -1314,5 +1314,61 @@
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Normal"
+  },
+  {
+    "name": "Lycanthrope - Transform Tournament 2026",
+    "id": "lycanthrope-transform-2026",
+    "description": "Start with all wolf relics. MP consumption is greatly reduced when in wolf form. Death skip is intended with a long wolf run.",
+    "author": [
+      "3snow_p7im"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Fast",
+    "moddedLevel": "Slightly",
+    "castleType": "Normal",
+    "transformEarly": "Yes",
+    "transformFocus": "Wolf",
+    "winCondition": "Normal",
+    "metaExtension": "Guarded",
+    "metaComplexity": "8",
+    "itemStats": "Normal"
+  },
+  {
+    "name": "Nimble Lite - Transform Tournament 2026",
+    "id": "nimble-lite-transform-2026",
+    "description": "A fast, complexity-focused preset. Start with Soul of Bat, Leap Stone, Gravity Boots. Reduced movement MP costs.",
+    "author": [
+      "MottZilla",
+      "the_swarm",
+      "3snow_p7im"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Fast",
+    "moddedLevel": "None",
+    "castleType": "Normal",
+    "transformEarly": "Yes",
+    "transformFocus": "Bat",
+    "winCondition": "Normal",
+    "metaExtension": "Guarded",
+    "metaComplexity": "6",
+    "itemStats": "Normal"
+  },
+  {
+    "name": "Warlock - Transform Tournament 2026",
+    "id": "warlock-transform-2026",
+    "description": "Start with high intelligence and Form of Mist. Drastically reduced MP cost for spells. Mist is free.",
+    "author": [
+      "3snow_p7im"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Normal",
+    "moddedLevel": "Slightly",
+    "castleType": "Normal",
+    "transformEarly": "Yes",
+    "transformFocus": "Mist",
+    "winCondition": "Normal",
+    "metaExtension": "Guarded",
+    "metaComplexity": "6",
+    "itemStats": "Normal"
   }
 ]
