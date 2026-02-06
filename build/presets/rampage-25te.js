@@ -1,5 +1,5 @@
 // This is a generated file. Do not edit it directly.
-// Make your changes to presets/rampage-25te.json then rebuild
+// Make your changes to presets/rampage-fall25.json then rebuild
 // this file with `npm run build-presets -- rampage-25te`.
 (function(self) {
 
