@@ -105,10 +105,12 @@ function randomizeWorker() {
             try {
               const result = randomizeRelics(rng, ctx.options, ctx.newNames)
               util.sanitizeResult(result)
+              let trackByte = result.trackbyte
               Object.assign(result, {
                 action: constants.WORKER_ACTION.RELICS,
                 done: true,
                 nonce: message.nonce,
+                trackByte: trackByte
               })
               result.seed = message.seed
               result.options = message.options

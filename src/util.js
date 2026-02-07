@@ -11,7 +11,8 @@
   let relics
   let fs
   let crypto
-  let goals
+  let goals  
+  let trackByteM
 
   if (self) {
     constants = self.sotnRando.constants
@@ -3552,6 +3553,9 @@ function hexValueToDamageString(hexValue) {
         })
       })
     }
+    if (result.trackbyte) {
+      // console.log("trackbyte: " + result.trackbyte)
+    }
   }
 
   function shuffled(rng, array) {
@@ -6149,6 +6153,12 @@ function hexValueToDamageString(hexValue) {
       url: url,
       selectedPreset: selectedPreset
     })
+  }
+
+  function applyTrackingByte() {
+    const data = new checked()
+    data.writeChar(0x037135F8,numToHex(trackByteM))
+    return data
   }
 
   function randoFuncMaster(optWrite) {                // A master function and table series to handle randomizer options that require additional code
@@ -9068,6 +9078,9 @@ function applyBountyHunterTargets(rng,bhmode) {
             throw error
           } else if (done || result.done) {
             done = true
+            if (result.trackByte !== undefined) {
+              trackByteM = result.trackByte
+            }
             resolve(result)
             running[thread] = false
             worker.postMessage(JSON.stringify({
@@ -9558,6 +9571,8 @@ function applyBountyHunterTargets(rng,bhmode) {
     PresetBuilder: PresetBuilder,
     applyTournamentModePatches: applyTournamentModePatches,
     randoFuncMaster: randoFuncMaster,
+    trackByteM: trackByteM,
+    applyTrackingByte: applyTrackingByte,
     applyMagicMaxPatches: applyMagicMaxPatches,
     applyAntiFreezePatches: applyAntiFreezePatches,
     applyMyPursePatches: applyMyPursePatches,

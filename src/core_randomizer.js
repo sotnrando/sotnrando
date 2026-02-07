@@ -542,6 +542,8 @@ async function randomize(
             options.preset,
             options.tournamentMode,
         )
+        debugMessage(debugEnabled, 'Apply tracking byte for tracker data')
+        check.apply(util.applyTrackingByte(util.trackByteM))
         checksum = await check.sum()
         debugMessage(debugEnabled, 'Checksum verification')
         // Verify expected checksum matches actual checksum.
