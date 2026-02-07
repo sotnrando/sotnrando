@@ -280,13 +280,17 @@ async function randomize(
             // Start the function master
             let optWrite = 0x00000000                   // This variable lets the ASM used in the Master Function know if it needs to run certain code or sets flags for the tracker to use
             let nGoal = newGoals !== "default" ? newGoals : undefined;
-            // console.log(options.newGoalsSet + '|' + applied.newGoalsSet)
-            if (nGoal || options.newGoalsSet || applied.newGoalsSet) {                   // Sets flag for the tracker to know which goals to use
-                if (!nGoal && applied.newGoalsSet !== undefined) {
+            if (nGoal === undefined || nGoal === false) {
+                if (options.newGoalsSet === undefined && applied.newGoalsSet === undefined) {
+                    nGoal = false
+                } else if (options.newGoalsSet === undefined) {
                     nGoal = applied.newGoalsSet
-                } else if (!nGoal && options.newGoalsSet !== undefined) {
+                } else {
                     nGoal = options.newGoalsSet
                 }
+            }
+            debugMessage(debugEnabled, 'newGoalsCheck | ' + nGoal + ':' + options.newGoalsSet + ':' + applied.newGoalsSet)
+            if (nGoal) {                                      // Sets flag for the tracker to know which goals to use
                 switch(nGoal) {
                     case "b":                                 // all bosses flag
                         optWrite = optWrite + 0x01
