@@ -6070,12 +6070,12 @@ function hexValueToDamageString(hexValue) {
     const godspeed = self.godspeed
     const libShort = self.libShort
     const elemChaos = self.elemChaos
-    const easy = self.easy
-    const devStash = self.devStash
-    const seasonalPhrases = self.seasonalPhrases
-    const bossMusic = self.bossMusic
+    const easy = false
+    const devStash = false
+    const seasonalPhrases = true
+    const bossMusic = false
     const newGoals = self.newGoals
-    const debug = self.debug
+    const debug = false
     const singleHitGear = self.singleHitGear
     const writes = self.writes
     return new Preset(
@@ -6126,11 +6126,11 @@ function hexValueToDamageString(hexValue) {
       elemChaos,
       easy,
       devStash,
+      singleHitGear,
       seasonalPhrases,
       bossMusic,
       newGoals,
       debug,
-      singleHitGear,
       writes,
     )
   }
