@@ -85,11 +85,10 @@
     "recycler",
     "anguish",
     "gear-rush",
-    "rampage-25te",
-    "nimble-lite-te",
-    "cornivus-te",
-    "recycler-te",
-    "chimera-te"
+    "rampage-fall25",
+    "lycanthrope-transform-2026",
+    "nimble-lite-transform-2026",
+    "warlock-transform-2026"
   ],
   "engines": {
     "node": ">=15"
