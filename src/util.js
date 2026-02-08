@@ -7895,21 +7895,23 @@ function applyBountyHunterTargets(rng,bhmode) {
     // console.log("Last Room in Data is: id = " + startRoomData[Math.floor(0.999 * (startRoomData.length))].id + " : " + startRoomData[Math.floor(0.999 * (startRoomData.length))].comment)
     // End of Debug Messages
 
-    if(castleFlag === 0x01)        // 1st Castle Only
-    {
-      while(startRoomData[randRoomId].stage >= 0x20)
-      {
-        randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 2nd Castle but we did not choose to include it.
-      }
-    }
+    // if(castleFlag === 0x01)        // 1st Castle Only
+    // {
+    //   while(startRoomData[randRoomId].stage >= 0x20)
+    //   {
+    //     randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 2nd Castle but we did not choose to include it.
+    //   }
+    // }
 
-    if(castleFlag === 0x10)        // 2nd Castle Only
-    {
-      while(startRoomData[randRoomId].stage < 0x20)
-      {
-        randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 1st Castle but we did not choose to include it.
-      }
-    }
+    // if(castleFlag === 0x10)        // 2nd Castle Only
+    // {
+    //   while(startRoomData[randRoomId].stage < 0x20)
+    //   {
+    //     randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 1st Castle but we did not choose to include it.
+    //   }
+    // }
+
+    randRoomId = 35
     
     // Old debug code
     /*while(startRoomData[randRoomId].id === undefined | startRoomData[randRoomId].xyWrite === undefined
@@ -7989,7 +7991,7 @@ function applyBountyHunterTargets(rng,bhmode) {
     offset = data.writeChar(offset,0x41)
     data.writeChar(offset,0x64)
 
-    // console.log("randRoomId = " + randRoomId + ", Room id = " + startRoomData[randRoomId].id + " Desc:" + startRoomData[randRoomId].comment)
+    console.log("randRoomId = " + randRoomId + ", Room id = " + startRoomData[randRoomId].id + " Desc:" + startRoomData[randRoomId].comment)
 
     offset = 0xae95c                                                            // change the destination
     newWrite = startRoomData[randRoomId].xyWrite                                // Write X,Y Position
@@ -8061,6 +8063,11 @@ function applyBountyHunterTargets(rng,bhmode) {
       offset = 0x0563E4C0
       offset = data.writeWord(offset,0x34020001)
       data.writeChar(offset,0x00000000)
+
+      data.writeWord(0x0563E7A8,0x34020001)
+      data.writeWord(0x0563EBCC,0x34020001)
+      data.writeWord(0x0563EA20,0x34020001)
+      data.writeWord(0x0563EC40,0x34020001)
     }
 
     return data
