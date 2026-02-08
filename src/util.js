@@ -7895,23 +7895,21 @@ function applyBountyHunterTargets(rng,bhmode) {
     // console.log("Last Room in Data is: id = " + startRoomData[Math.floor(0.999 * (startRoomData.length))].id + " : " + startRoomData[Math.floor(0.999 * (startRoomData.length))].comment)
     // End of Debug Messages
 
-    // if(castleFlag === 0x01)        // 1st Castle Only
-    // {
-    //   while(startRoomData[randRoomId].stage >= 0x20)
-    //   {
-    //     randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 2nd Castle but we did not choose to include it.
-    //   }
-    // }
+    if(castleFlag === 0x01)        // 1st Castle Only
+    {
+      while(startRoomData[randRoomId].stage >= 0x20)
+      {
+        randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 2nd Castle but we did not choose to include it.
+      }
+    }
 
-    // if(castleFlag === 0x10)        // 2nd Castle Only
-    // {
-    //   while(startRoomData[randRoomId].stage < 0x20)
-    //   {
-    //     randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 1st Castle but we did not choose to include it.
-    //   }
-    // }
-
-    randRoomId = 35
+    if(castleFlag === 0x10)        // 2nd Castle Only
+    {
+      while(startRoomData[randRoomId].stage < 0x20)
+      {
+        randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 1st Castle but we did not choose to include it.
+      }
+    }
     
     // Old debug code
     /*while(startRoomData[randRoomId].id === undefined | startRoomData[randRoomId].xyWrite === undefined
