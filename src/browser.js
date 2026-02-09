@@ -689,28 +689,75 @@
     enforceGoalCompatibility(preset.id);
     applyOptions(options, preset.id);
     relicLocationsExtensionChange();
-    // FINAL: Disable all options if tournament preset is present
-    const isTeLocked = /-spr[0-9]{2}te$/.test(preset.id) || /-win[0-9]{2}te$/.test(preset.id) || /-aut[0-9]{2}te$/.test(preset.id) || /-sum[0-9]{2}te$/.test(preset.id);
+    const TOURNAMENT_LOCKED = [
+      "accessibilityPatches",
+      "antiFreezeMode",
+      "bossMusicSeparation",
+      "colorrandoMode",
+      "devStashMode",
+      "dominoMode",
+      "easyMode",
+      "elemChaosMode",
+      "enemyDrops",
+      "enemyStatRandoMode",
+      "fastwarpMode",
+      "godspeedMode",
+      "immunityPotionMode",
+      "iwsMode",
+      "itemLocations",
+      "itemNameRandoMode",
+      "itemNames",
+      "itemStats",
+      "libraryShortcut",
+      "magicmaxMode",
+      "music",
+      "mypurseMode",
+      "newGoals",
+      "noprologueMode",
+      "prologueRewards",
+      "relicLocations",
+      "relicLocationsSet",
+      "rlbcMode",
+      "shopPriceRandoMode",
+      "showRelicLocations",
+      "showSolutions",
+      "showSpoilers",
+      "show-relics",
+      "show-solutions",
+      "startingEquipment",
+      "singleHitGearMode",
+      "startRoomRando2ndMode",
+      "startRoomRandoMode",
+      "stats",
+      "surpriseMode",
+      "tournamentMode",
+      "turkeyMode"
+    ];
+
+    const isTeLocked =
+      /-spr[0-9]{2}te$/.test(preset.id) ||
+      /-win[0-9]{2}te$/.test(preset.id) ||
+      /-aut[0-9]{2}te$/.test(preset.id) ||
+      /-sum[0-9]{2}te$/.test(preset.id);
 
     if (isTeLocked) {
-      ALL_TOGGLES.forEach(key => {
+      // TE: disable all locked keys
+      TOURNAMENT_LOCKED.forEach(key => {
         const el = elems[key];
         if (el) el.disabled = true;
       });
 
-      // Disable all other option checkboxes
-      const allCheckboxes = document.querySelectorAll("input[type='checkbox']");
-      allCheckboxes.forEach(cb => cb.disabled = true);
+      const allRadios = document.querySelectorAll("input[type='radio']");
+      allRadios.forEach(r => r.disabled = true);
+    } else {
+      // Non‑TE: re‑enable everything this system controls
+      TOURNAMENT_LOCKED.forEach(key => {
+        const el = elems[key];
+        if (el) el.disabled = false;
+      });
 
-      // Disable goal selector
-      if (elems.newGoals) elems.newGoals.disabled = true;
-
-      // Disable relic extension set
-      if (elems.relicLocationsExtension) {
-        Object.values(elems.relicLocationsExtension).forEach(ext => {
-          if (ext) ext.disabled = true;
-        });
-      }
+      const allRadios = document.querySelectorAll("input[type='radio']");
+      allRadios.forEach(r => r.disabled = false);
     }
   }
 
