@@ -167,7 +167,12 @@
     "comment": "Patch shop relic price",
     "type":    "word",
     "address": "0x047a3098",
-    "value":    "0x00000096"
+    "value":    "0x000f423f"
+  }, {
+    "comment": "Patch shop sell price",
+    "type":    "word",
+    "address": "0x047a3224",
+    "value":    "0x000f423f"
   }, {
     "comment": "Blank shop menu",
     "address": "0x047a309c",
