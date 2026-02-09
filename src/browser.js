@@ -731,7 +731,8 @@
       "stats",
       "surpriseMode",
       "tournamentMode",
-      "turkeyMode"
+      "turkeyMode",
+      "unlockedMode"
     ];
 
     const isTeLocked =
