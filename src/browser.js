@@ -679,6 +679,29 @@
   enforceGoalCompatibility(preset.id);
   applyOptions(options, preset.id);
   relicLocationsExtensionChange();
+  // FINAL: Disable all options if tournament preset is present
+  const isTeLocked = /-spr[0-9]{2}te$/.test(preset.id) || /-win[0-9]{2}te$/.test(preset.id) || /-aut[0-9]{2}te$/.test(preset.id) || /-sum[0-9]{2}te$/.test(preset.id);
+
+  if (isTeLocked) {
+    ALL_TOGGLES.forEach(key => {
+      const el = elems[key];
+      if (el) el.disabled = true;
+    });
+
+    // Disable all other option checkboxes
+    const allCheckboxes = document.querySelectorAll("input[type='checkbox']");
+    allCheckboxes.forEach(cb => cb.disabled = true);
+
+    // Disable goal selector
+    if (elems.newGoals) elems.newGoals.disabled = true;
+
+    // Disable relic extension set
+    if (elems.relicLocationsExtension) {
+      Object.values(elems.relicLocationsExtension).forEach(ext => {
+        if (ext) ext.disabled = true;
+      });
+    }
+  }
 }
 
   function complexityChange() {
