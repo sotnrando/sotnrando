@@ -1,14 +1,14 @@
 {
   "metadata": {
-    "id": "nimble-lite-te",
-    "name": "Nimble Lite 2025 Tournament Edition",
+    "id": "nimble-lite-transform-2026",
+    "name": "Nimble Lite - Spring 2026 Tournament Edition",
     "description": "A fast, complexity-focused preset. Start with Soul of Bat, Leap Stone, Gravity Boots. Reduced movement MP costs.",
     "author": [
       "MottZilla",
       "the_swarm",
       "3snow_p7im"
     ],
-    "weight": -4002,
+    "weight": -4001,
     "knowledgeCheck": "None",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
@@ -22,15 +22,11 @@
   },
   
   "stats": false,
-  "music": false,
-  "tournamentMode": true,
-  "antiFreezeMode": true,
   "fastwarpMode": true,
   "magicmaxMode": true,
-  "mypurseMode": true,
-  "startRoomRando2ndMode": true,
-  "dominoMode": true,
-  "newGoalsSet": "v",
+  "shopPriceRandoMode": true,
+  "rlbcMode": true,
+  "startRoomRandoMode": true,
 
   "complexityGoal": {
     "min": 6,

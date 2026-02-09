@@ -1217,8 +1217,8 @@
     "itemStats": "Normal"
   },
   {
-    "name": "Rampage Fall 2025",
-    "id": "rampage-fall25",
+    "name": "Rampage - Fall 2025 Tournament Edition",
+    "id": "rampage-aut25te",
     "description": "Target Confirmed Variant where you start in a random location in Castle 2 and opens all shortcuts and all teleporters. Acquire Familiar Cards to know which enemies to hunt. All bosses and Vlads required.",
     "author": [
       "TalicZealot",
@@ -1239,8 +1239,8 @@
     "itemStats": "Normal"
   },
   {
-    "name": "Lycanthrope - Transform Tournament 2026",
-    "id": "lycanthrope-transform-2026",
+    "name": "Lycanthrope - Spring 2026 Tournament Edition",
+    "id": "lycanthrope-spr26te",
     "description": "Start with all wolf relics. MP consumption is greatly reduced when in wolf form. Death skip is intended with a long wolf run.",
     "author": [
       "3snow_p7im"
@@ -1257,7 +1257,7 @@
     "itemStats": "Normal"
   },
   {
-    "name": "Nimble Lite - Transform Tournament 2026",
+    "name": "Nimble Lite - Spring 2026 Tournament Edition",
     "id": "nimble-lite-transform-2026",
     "description": "A fast, complexity-focused preset. Start with Soul of Bat, Leap Stone, Gravity Boots. Reduced movement MP costs.",
     "author": [
@@ -1277,8 +1277,8 @@
     "itemStats": "Normal"
   },
   {
-    "name": "Warlock - Transform Tournament 2026",
-    "id": "warlock-transform-2026",
+    "name": "Warlock - Spring 2026 Tournament Edition",
+    "id": "warlock-spr26te",
     "description": "Start with high intelligence and Form of Mist. Drastically reduced MP cost for spells. Mist is free.",
     "author": [
       "3snow_p7im"
