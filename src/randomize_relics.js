@@ -1226,9 +1226,9 @@
         )
       }
     }
+    // Get the goal and complexity target.
     const locksMap = locksFromLocations(relicLocations)
     const escapesMap = escapesFromLocations(relicLocations)
-    // Get the goal and complexity target.
     let target
     let goal
     Object.getOwnPropertyNames(locksMap).forEach(function(name) {
@@ -1381,6 +1381,30 @@
         info[4]['Complexity'] = result.depth
       }
     }
+    let trackbyte
+
+    trackbyte = target.min
+
+    switch (relicLocations.extension){
+      case 'guarded':
+        trackbyte = trackbyte + 0x10
+        break
+      case 'guardedplus':
+        trackbyte = trackbyte + 0x20
+        break
+      case 'extended':
+        trackbyte = trackbyte + 0x30
+        break
+      case 'equipment':
+        trackbyte = trackbyte + 0x40
+        break
+      case 'scenic':
+        trackbyte = trackbyte + 0x50
+        break
+      default:
+    }
+
+    // console.log("Tracking Byte: " + trackbyte)
     return {
       mapping: result.mapping,
       solutions: result.solutions,
@@ -1388,6 +1412,7 @@
       relics: enabledRelics,
       thrustSword: thrustSword,
       info: info,
+      trackbyte: trackbyte,
     }
   }
 

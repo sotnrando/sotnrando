@@ -464,7 +464,7 @@
     SILVER_RING: 'S',
     SPIKE_BREAKER: 'K',
     HOLY_GLASSES: 'H',
-    THRUST_SWORD: 'D',
+    THRUST_SWORD: 'D'
   }
 
   const tileIdOffset = 0x80

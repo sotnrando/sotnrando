@@ -380,18 +380,19 @@
 
                   <div class="toggle-container">
                     <label class="toggle-switch">
-                      <input id="simple-input" type="checkbox" data-store-checkbox="false">
+                      <input id="easy-mode" type="checkbox" data-store-checkbox="false">
                       <span class="slider"></span>
                     </label>
-                    <label for="simple-input" class="toggle-label">
-                      Simplified Inputs
+                    <label for="easy-mode" class="toggle-label">
+                      Easy Mode
                       <span class="tooltip-wrapper">
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
                             Simplifies inputs so spells no longer need complex sequences to execute. L2 for Gravity
                             Boots. R3 and any of the following: Left / Right for Hellfire, Up for Soul Steal, and 2x
-                            Down for Tetra Spirit.
+                            Down for Tetra Spirit. An additional 4 frames of invincibility is added to all damage 
+                            states, spell resolutions, and potions.
                           </span>
                         </span>
                       </span>
@@ -715,7 +716,6 @@
                           <span>Randomizes almost every single element in the game.</span>
                         </span>
                       </span>
-                      <new></new>
                     </label>
                   </div>
 
@@ -788,8 +788,7 @@
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Guarantees drops from every enemy that has one. Ring of Arcana makes them drop their rare
-                            item instead of the uncommon.
+                            Guarantees drops from every enemy that has one. Which is dropped depends on kill count odd / even.
                           </span>
                         </span>
                       </span>
@@ -867,6 +866,25 @@
                           </span>
                         </span>
                       </span>
+                    </label>
+                  </div>
+
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="single-hit-gear" type="checkbox" data-store-checkbox="false">
+                      <span class="slider"></span>
+                    </label>
+                    <label for="single-hit-gear" class="toggle-label">
+                      Single-Hit Gears
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Makes all gear puzzles only require a single hit on one gear to open the respective door.
+                          </span>
+                        </span>
+                      </span>
+                      <new></new>
                     </label>
                   </div>
                 </div>
@@ -1004,6 +1022,34 @@
         <div id="notification">Copied to clipboard</div>
         <hr>
         <h2><a id="changelog">Changelog</a></h2>
+          <h3>February 9, 2026</h3>
+            <h4>Preset Updates</h4>
+              <ul>
+                <li>Added Lycanthrope Spring 2026 Tournament Edition preset.</li>
+                <li>Added Nimble Lite Spring 2026 Tournament Edition preset.</li>
+                <li>Added Warlock Spring 2026 Tournament Edition preset.</li>
+                <li>Fixed an error where Bounty Hunter variants could not generate their Cards / place Vlad relics.</li>
+                <li>Adjusted Rate Race shop price and sell price to trivialize random cash bags found in the preset.</li>
+                <li>Glitch is life, Glitch is eternal. Glitch will forever remain [TBD].</li>
+              </ul>
+            <h4>Option Updates</h4>
+              <ul>
+                <li>Incorporated a new Easy Mode where we combined an invincibility frame extension with simplified inputs.</li>
+                <li>Added Single-Hit Gears to make Clock Tower and Reverse Clock Tower less frustrating.</li>
+                <li>Removed potential softlock when starting above Richter in Castle Keep using Starting Room Randomizer.</li>
+              </ul>
+            <h4>Website Updates</h4>
+              <ul>
+                <li>Fixed an error that caused music not to randomize from the website.</li>
+                <li>Fixed an error which caused certain presets not to trigger the Goals changes.</li>
+              </ul>
+            <h4>Program Updates</h4>
+              <ul>
+                <li>Added new function and supporting code to convey to the Rando Tools the actual Complexity and Relic Location Extension used.</li>
+                <li>Patched an issue where killing Ctulhu in the Marble Gallery would prevent a scroll lock entity from spawning.</li>
+              </ul>
+        <a id="show-older" href="#older">Show older changes</a>
+        <div id="older" class="hidden">
           <h3>January 12, 2026</h3>
             <h4>Preset Updates</h4>
               <ul>
@@ -1024,8 +1070,6 @@
                 <li>Added complexity and Relic Extension disclosures to the tracker.</li>
                 <li>Corrected a lot of errors regarding how relics and relic locations are tracked and displayed.</li>
               </ul>
-        <a id="show-older" href="#older">Show older changes</a>
-        <div id="older" class="hidden">
           <h3>December 18, 2025</h3>
             <h4>Program Updates</h4>
               <ul>
@@ -1955,11 +1999,10 @@
   <script src="build/presets/recycler.js"></script>
   <script src="build/presets/anguish.js"></script>
   <script src="build/presets/gear-rush.js"></script>
-  <script src="build/presets/rampage-25te.js"></script>
-  <script src="build/presets/nimble-lite-te.js"></script>
-  <script src="build/presets/cornivus-te.js"></script>
-  <script src="build/presets/recycler-te.js"></script>
-  <script src="build/presets/chimera-te.js"></script>
+  <script src="build/presets/rampage-aut25te.js"></script>
+  <script src="build/presets/lycanthrope-spr26te.js"></script>
+  <script src="build/presets/nimble-lite-spr26te.js"></script>
+  <script src="build/presets/warlock-spr26te.js"></script>
   <script src="build/presets/index.js"></script>
   <script src="src/worker.js"></script>
   <script src="src/core_randomizer.js"></script>

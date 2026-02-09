@@ -1217,8 +1217,8 @@
     "itemStats": "Normal"
   },
   {
-    "name": "Rampage 2025 Tournament Edition",
-    "id": "rampage-25te",
+    "name": "Rampage - Fall 2025 Tournament Edition",
+    "id": "rampage-aut25te",
     "description": "Target Confirmed Variant where you start in a random location in Castle 2 and opens all shortcuts and all teleporters. Acquire Familiar Cards to know which enemies to hunt. All bosses and Vlads required.",
     "author": [
       "TalicZealot",
@@ -1239,8 +1239,26 @@
     "itemStats": "Normal"
   },
   {
-    "name": "Nimble Lite 2025 Tournament Edition",
-    "id": "nimble-lite-te",
+    "name": "Lycanthrope - Spring 2026 Tournament Edition",
+    "id": "lycanthrope-spr26te",
+    "description": "Start with all wolf relics. MP consumption is greatly reduced when in wolf form. Death skip is intended with a long wolf run.",
+    "author": [
+      "3snow_p7im"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Fast",
+    "moddedLevel": "Slightly",
+    "castleType": "Normal",
+    "transformEarly": "Yes",
+    "transformFocus": "Wolf",
+    "winCondition": "Normal",
+    "metaExtension": "Guarded",
+    "metaComplexity": "8",
+    "itemStats": "Normal"
+  },
+  {
+    "name": "Nimble Lite - Spring 2026 Tournament Edition",
+    "id": "nimble-lite-transform-2026",
     "description": "A fast, complexity-focused preset. Start with Soul of Bat, Leap Stone, Gravity Boots. Reduced movement MP costs.",
     "author": [
       "MottZilla",
@@ -1259,60 +1277,21 @@
     "itemStats": "Normal"
   },
   {
-    "name": "Cornivus 2025 Tournament Edition",
-    "id": "cornivus-te",
-    "description": "Start in second castle with all wolf relics and stat-boosting potions. MP consumption is greatly reduced when in wolf form. All Bosses and All Vlads required to win.",
+    "name": "Warlock - Spring 2026 Tournament Edition",
+    "id": "warlock-spr26te",
+    "description": "Start with high intelligence and Form of Mist. Drastically reduced MP cost for spells. Mist is free.",
     "author": [
-      "3snow_p7im",
-      "eldri7ch",
-      "Dr4gonBlitz"
-    ],
-    "knowledgeCheck": "None",
-    "timeFrame": "Fast",
-    "moddedLevel": "Moderately",
-    "castleType": "Normal",
-    "transformEarly": "Yes",
-    "transformFocus": "Wolf",
-    "winCondition": "All Bosses & Vlad Relics",
-    "metaExtension": "Guarded",
-    "metaComplexity": "8",
-    "itemStats": "Normal"
-  },
-  {
-    "name": "Recycler 2025 Tournament Edition",
-    "id": "recycler-te",
-    "description": "A high-complexity preset where duplicate relics appear for the main progression relics and there are eight Vlad relics. Start in second castle with stat-boosting potions. Six vlads open the doors to Dracula. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
-    "author": [
-      "eldri7ch",
-      "MottZilla"
-    ],
-    "knowledgeCheck": "None",
-    "timeFrame": "Normal",
-    "moddedLevel": "None",
-    "castleType": "Normal",
-    "transformEarly": "No",
-    "transformFocus": "None",
-    "winCondition": "Six out of Eight Vlads",
-    "metaExtension": "Guarded",
-    "metaComplexity": "6",
-    "itemStats": "Normal"
-  },
-  {
-    "name": "Chimera 2025 Tournament Edition",
-    "id": "chimera-te",
-    "description": "Safe logic, Wolf enhanced, Mist MP cost zeroed, Gas Cloud grants Warlock Magic. Thrust Sword at start for OoL Flight with Grav. Double Tap Dash (God Speed Shoes)",
-    "author": [
-      "MottZilla"
+      "3snow_p7im"
     ],
     "knowledgeCheck": "None",
     "timeFrame": "Normal",
     "moddedLevel": "Slightly",
     "castleType": "Normal",
-    "transformEarly": "No",
-    "transformFocus": "No",
+    "transformEarly": "Yes",
+    "transformFocus": "Mist",
     "winCondition": "Normal",
     "metaExtension": "Guarded",
-    "metaComplexity": "8",
+    "metaComplexity": "6",
     "itemStats": "Normal"
   }
 ]

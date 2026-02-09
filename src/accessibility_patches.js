@@ -128,6 +128,11 @@
     offset = data.writeWord(offset,0xAE22B98C)
   }
 
+  // Force the scroll lock entity in forbidden route to spawn
+  function patchForbiddenRouteScrollLock(data) {
+    data.writeChar(0x435FB77,0xA0)
+  }
+
   function applyAccessibilityPatches() {
     const data = new util.checked()
     patchPowerOfSireFlashing(data)
@@ -144,6 +149,7 @@
     patchRockKnightRoom(data)
     patchLuckCriticalCrash(data)
     patchDeathSkipSoftlock(data)
+    patchForbiddenRouteScrollLock(data)
     return data
   }
 

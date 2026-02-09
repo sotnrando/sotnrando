@@ -11,7 +11,8 @@
   let relics
   let fs
   let crypto
-  let goals
+  let goals  
+  let trackByteM
 
   if (self) {
     constants = self.sotnRando.constants
@@ -2700,11 +2701,11 @@ function hexValueToDamageString(hexValue) {
           randomize.push('ec')
         }
         delete options.elemChaosMode
-      } else if ('simpleInputMode' in options) { // simple input - eldri7ch
-        if (options.simpleInputMode) {
-          randomize.push('si')
+      } else if ('easyMode' in options) { // simple input - eldri7ch
+        if (options.easyMode) {
+          randomize.push('ez')
         }
-        delete options.simpleInputMode
+        delete options.easyMode
       } else if ('devStashMode' in options) { // dev's stash - eldri7ch
         if (options.devStashMode) {
           randomize.push('dev')
@@ -2735,6 +2736,11 @@ function hexValueToDamageString(hexValue) {
       } else if ('excludesongs' in options) { // Exclude songs - eldri7ch
         randomize.push('eds:' + options.excludesongs)
         delete options.excludesongs
+      } else if ('singleHitGearMode' in options) { // Single-Hit Gears - eldri7ch
+        if (options.singleHitGearMode) {
+          randomize.push('gp')
+        }
+        delete options.singleHitGearMode
       } else if ('preset' in options) {
         randomize.push('p:' + options.preset)
         delete options.preset
@@ -3547,6 +3553,9 @@ function hexValueToDamageString(hexValue) {
         })
       })
     }
+    if (result.trackbyte) {
+      // console.log("trackbyte: " + result.trackbyte)
+    }
   }
 
   function shuffled(rng, array) {
@@ -3980,8 +3989,9 @@ function hexValueToDamageString(hexValue) {
     godspeedMode,
     libraryShortcut,
     elemChaosMode,
-    simpleInputMode,
+    easyMode,
     devStashMode,
+    singleHitGearMode,
     seasonalPhrasesMode,
     bossMusicSeparation,
     newGoalsSet,
@@ -4033,8 +4043,9 @@ function hexValueToDamageString(hexValue) {
     this.godspeedMode = godspeedMode
     this.libraryShortcut = libraryShortcut
     this.elemChaosMode = elemChaosMode
-    this.simpleInputMode = simpleInputMode
+    this.easyMode = easyMode
     this.devStashMode = devStashMode
+    this.singleHitGearMode = singleHitGearMode
     this.seasonalPhrasesMode = seasonalPhrasesMode
     this.bossMusicSeparation = bossMusicSeparation
     this.newGoalsSet = newGoalsSet
@@ -4211,13 +4222,15 @@ function hexValueToDamageString(hexValue) {
     // elemental chaos.
     this.elemChaos = false
     // simple input.
-    this.simpleInput = false
+    this.easy = false
     // dev's stash mode.
     this.devStash = false
     // seasonal phrases mode.
     this.seasonalPhrases = false
     // boss music separation
     this.bossMusic = true
+    // Single-Hit Gears
+    this.singleHitGear = true
     // new goals for completion.
     this.newGoals = undefined
     // Debug mode.
@@ -4561,8 +4574,8 @@ function hexValueToDamageString(hexValue) {
     if ('elemChaosMode' in json) {
       builder.elemChaosMode(json.elemChaosMode)
     }
-    if ('simpleInputMode' in json) {
-      builder.simpleInputMode(json.simpleInputMode)
+    if ('easyMode' in json) {
+      builder.easyMode(json.easyMode)
     }
     if ('devStashMode' in json) {
       builder.devStashMode(json.devStashMode)
@@ -4575,6 +4588,9 @@ function hexValueToDamageString(hexValue) {
     }
     if ('newGoalsSet' in json) {
       builder.newGoalsSet(json.newGoalsSet)
+    }
+    if ('singleHitGearMode' in json) {
+      builder.singleHitGearMode(json.singleHitGearMode)
     }
     if ('writes' in json) {
       let lastAddress = 0
@@ -4923,8 +4939,8 @@ function hexValueToDamageString(hexValue) {
     if ('elemChaosMode' in preset) {
       this.elemChaos = preset.elemChaosMode
     }
-    if ('simpleInputMode' in preset) {
-      this.simpleInput = preset.simpleInputMode
+    if ('easyMode' in preset) {
+      this.easy = preset.easyMode
     }
     if ('devStashMode' in preset) {
       this.devStash = preset.devStashMode
@@ -4937,6 +4953,9 @@ function hexValueToDamageString(hexValue) {
     }
     if ('newGoalsSet' in preset) {
       this.newGoals = preset.newGoalsSet
+    }
+    if ('singleHitGearMode' in preset) {
+      this.singleHitGear = preset.singleHitGearMode
     }
     if ('writes' in preset) {
       this.writes = this.writes || []
@@ -5701,8 +5720,8 @@ function hexValueToDamageString(hexValue) {
   }
 
   // Enable Simplified Inputs - eldri7ch
-  PresetBuilder.prototype.simpleInputMode = function simpleInputMode(enabled) {
-    this.simpleInput = enabled
+  PresetBuilder.prototype.easyMode = function easyMode(enabled) {
+    this.easy = enabled
   }
 
   // Enable Dev's Stash - eldri7ch
@@ -5724,6 +5743,11 @@ function hexValueToDamageString(hexValue) {
   PresetBuilder.prototype.newGoalsSet = function newGoalsSet(nGoals) {
     assert.oneOf(typeof(nGoals), ['boolean', 'string'])
     this.newGoals = nGoals
+  }
+
+  // Enable Single-Hit Gears - eldri7ch
+  PresetBuilder.prototype.singleHitGearMode = function singleHitGearMode(enabled) {
+    this.singleHitGear = enabled
   }
 
   // Write a character.
@@ -6046,12 +6070,13 @@ function hexValueToDamageString(hexValue) {
     const godspeed = self.godspeed
     const libShort = self.libShort
     const elemChaos = self.elemChaos
-    const simpleInput = self.simpleInput
-    const devStash = self.devStash
-    const seasonalPhrases = self.seasonalPhrases
-    const bossMusic = self.bossMusic
+    const easy = false
+    const devStash = false
+    const seasonalPhrases = true
+    const bossMusic = false
     const newGoals = self.newGoals
-    const debug = self.debug
+    const debug = false
+    const singleHitGear = self.singleHitGear
     const writes = self.writes
     return new Preset(
       self.metadata.id,
@@ -6099,8 +6124,9 @@ function hexValueToDamageString(hexValue) {
       godspeed,
       libShort,
       elemChaos,
-      simpleInput,
+      easy,
       devStash,
+      singleHitGear,
       seasonalPhrases,
       bossMusic,
       newGoals,
@@ -6127,6 +6153,12 @@ function hexValueToDamageString(hexValue) {
       url: url,
       selectedPreset: selectedPreset
     })
+  }
+
+  function applyTrackingByte() {
+    const data = new checked()
+    data.writeChar(0x037135F8,numToHex(trackByteM))
+    return data
   }
 
   function randoFuncMaster(optWrite) {                // A master function and table series to handle randomizer options that require additional code
@@ -7903,13 +7935,13 @@ function applyBountyHunterTargets(rng,bhmode) {
       offset = data.writeWord(offset,0x3C028007)
       offset = data.writeWord(offset,0x9042BBFB)
       offset = data.writeWord(offset,0x00000000)
-	  offset = data.writeWord(offset,0x30420001)
+	    offset = data.writeWord(offset,0x30420001)
       offset = data.writeWord(offset,0x1440000A)
       offset = data.writeWord(offset,0x00000000)
       offset = data.writeWord(offset,0x3C028007)
       offset = data.writeWord(offset,0x9042BCC0)
       offset = data.writeWord(offset,0x00000000)
-	  offset = data.writeWord(offset,0x30420004)
+	    offset = data.writeWord(offset,0x30420004)
       offset = data.writeWord(offset,0x14400004)
       offset = data.writeWord(offset,0x00000000)
       offset = data.writeWord(offset,0x34020001)
@@ -7933,13 +7965,13 @@ function applyBountyHunterTargets(rng,bhmode) {
       offset = data.writeWord(offset,0x34040020)  // mov r4,20h
       offset = data.writeWord(offset,0x3C058009)  // mov r5,80090000h
       offset = data.writeWord(offset,0xACA474A0)  // mov [r5+74a0h],r4
-	  offset = data.writeWord(offset,0xA6000026)  // movh [r16+26h],0
-	  offset = data.writeWord(offset,0xAE000028)  // mov [r16+28h],0
-	  offset = data.writeWord(offset,0x0C03C848)  // call 800F2120h
-	  offset = data.writeWord(offset,0x00000000)  // nop
-	  offset = data.writeWord(offset,0x3C058013)  // mov r5,80130000h
-	  offset = data.writeWord(offset,0x34A5AED0)  // or r5,0AED0h
-	  offset = data.writeWord(offset,0xACA00000)  // mov [r5],0
+	    offset = data.writeWord(offset,0xA6000026)  // movh [r16+26h],0
+	    offset = data.writeWord(offset,0xAE000028)  // mov [r16+28h],0
+	    offset = data.writeWord(offset,0x0C03C848)  // call 800F2120h
+	    offset = data.writeWord(offset,0x00000000)  // nop
+	    offset = data.writeWord(offset,0x3C058013)  // mov r5,80130000h
+	    offset = data.writeWord(offset,0x34A5AED0)  // or r5,0AED0h
+	    offset = data.writeWord(offset,0xACA00000)  // mov [r5],0
       offset = data.writeWord(offset,0x0806E92B)  // jmp 801BA4ACh
       offset = data.writeWord(offset,0x00000000)  // nop
     }
@@ -7957,7 +7989,7 @@ function applyBountyHunterTargets(rng,bhmode) {
     offset = data.writeChar(offset,0x41)
     data.writeChar(offset,0x64)
 
-    // console.log("randRoomId = " + randRoomId + ", Room id = " + startRoomData[randRoomId].id + " Desc:" + startRoomData[randRoomId].comment)
+    console.log("randRoomId = " + randRoomId + ", Room id = " + startRoomData[randRoomId].id + " Desc:" + startRoomData[randRoomId].comment)
 
     offset = 0xae95c                                                            // change the destination
     newWrite = startRoomData[randRoomId].xyWrite                                // Write X,Y Position
@@ -8029,6 +8061,11 @@ function applyBountyHunterTargets(rng,bhmode) {
       offset = 0x0563E4C0
       offset = data.writeWord(offset,0x34020001)
       data.writeChar(offset,0x00000000)
+
+      data.writeWord(0x0563E7A8,0x34020001)
+      data.writeWord(0x0563EBCC,0x34020001)
+      data.writeWord(0x0563EA20,0x34020001)
+      data.writeWord(0x0563EC40,0x34020001)
     }
 
     return data
@@ -8070,17 +8107,18 @@ function applyBountyHunterTargets(rng,bhmode) {
     offset = 0x12B534                                 // Hook to our new LBC function
     data.writeWord(offset, 0x0C02622F)                // No "nop" instr needed as it's already a call
     // Update description
-	offset = 0xF1DE8
-	offset = data.writeWord(offset,0x65766552)
-	offset = data.writeWord(offset,0x62697372)
-	offset = data.writeWord(offset,0x6C20656C)
-	offset = data.writeWord(offset,0x61726269)
-	offset = data.writeWord(offset,0x63207972)
-	offset = data.writeWord(offset,0x20647261)
-	offset = data.writeWord(offset,0x73756D81)
-	offset = data.writeWord(offset,0x006E8165)
-	// Update Name
-	data.writeShort(0xF1E14,0xFFE6)    
+    offset = 0xF1DE8
+    offset = data.writeWord(offset,0x65766552)
+    offset = data.writeWord(offset,0x62697372)
+    offset = data.writeWord(offset,0x6C20656C)
+    offset = data.writeWord(offset,0x61726269)
+    offset = data.writeWord(offset,0x63207972)
+    offset = data.writeWord(offset,0x20647261)
+    offset = data.writeWord(offset,0x73756D81)
+    offset = data.writeWord(offset,0x006E8165)
+    // Update Name
+    data.writeShort(0xF1E14,0xFFE6)
+
     return data
   }
 
@@ -8470,7 +8508,7 @@ function applyBountyHunterTargets(rng,bhmode) {
     return data
   }
 
-  function applySimpleInputPatches() {
+  function applyEasyModePatches() {
     const data = new checked()
     let offset
     
@@ -8490,6 +8528,8 @@ function applyBountyHunterTargets(rng,bhmode) {
     offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
     data.writeWord(offset,0x34040003)
 
+    data.writeWord(0x0012A234,0x26310004)                                       // 'add r17,4h' adds 4 frames of invincibility to everything which
+                                                                                // adds i-frames, including getting hit.
     return data
   }
 
@@ -8968,6 +9008,33 @@ function applyBountyHunterTargets(rng,bhmode) {
     return data
   }
 
+  function applySingleHitGearPatches() {
+    // console.log('Single-Hit Gears')
+
+    const data = new checked()
+    let offset
+
+    // First Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
+    offset = 0x055A0F04
+    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
+    offset = data.writeWord(offset, 0xa4230fd0)                                 // assign the value to RAM
+    offset = data.writeWord(offset, 0x0c06d6f8)                                 // Call sfx player
+    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
+    offset = data.writeWord(offset, 0x0806a29c)                                 // Jump to 0x801A8A70
+    data.writeWord(offset, 0x00000000)
+
+    // Second Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
+    offset = 0x059E92D8
+    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
+    offset = data.writeWord(offset, 0xa4230f6c)                                 // assign the value to RAM
+    offset = data.writeWord(offset, 0x0c04d1fe)                                 // Call sfx player
+    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
+    offset = data.writeWord(offset, 0x0806a0d9)                                 // Jump to 0x801A8364
+    data.writeWord(offset, 0x00000000)
+
+    return data
+  }
+
   function randomizeRelics(
     version,
     applied,
@@ -9016,6 +9083,9 @@ function applyBountyHunterTargets(rng,bhmode) {
             throw error
           } else if (done || result.done) {
             done = true
+            if (result.trackByte !== undefined) {
+              trackByteM = result.trackByte
+            }
             resolve(result)
             running[thread] = false
             worker.postMessage(JSON.stringify({
@@ -9506,6 +9576,8 @@ function applyBountyHunterTargets(rng,bhmode) {
     PresetBuilder: PresetBuilder,
     applyTournamentModePatches: applyTournamentModePatches,
     randoFuncMaster: randoFuncMaster,
+    trackByteM: trackByteM,
+    applyTrackingByte: applyTrackingByte,
     applyMagicMaxPatches: applyMagicMaxPatches,
     applyAntiFreezePatches: applyAntiFreezePatches,
     applyMyPursePatches: applyMyPursePatches,
@@ -9523,13 +9595,14 @@ function applyBountyHunterTargets(rng,bhmode) {
 	  applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
     applyElemChaosPatches: applyElemChaosPatches,
-    applySimpleInputPatches: applySimpleInputPatches,
+    applyEasyModePatches: applyEasyModePatches,
     applyDevsStashPatches: applyDevsStashPatches,
     applyMapColor: applyMapColor,
     applyNewGoals: applyNewGoals,
     applyAlucardPalette: applyAlucardPalette,
     applySplashText: applySplashText,
     applyAlucardLiner: applyAlucardLiner,
+    applySingleHitGearPatches: applySingleHitGearPatches,
     randomizeRelics: randomizeRelics,
     randomizeItems: randomizeItems,
     applyWrites: applyWrites,

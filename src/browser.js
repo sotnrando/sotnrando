@@ -475,211 +475,292 @@
   }
 
   function presetIdChange() {
-  // Refactored for ease of alteration and maintainability -crazy4blades
-  const BH_COMPAT = new Set([
-    "bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage"
-  ]);
-  const BOSS_COMPAT = new Set([
-    "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-    "expedition", "bat-master", "glitch", "scavenger", "empty-hand", "third-castle", "magic-mirror", "leg-day",
-    "big-toss", "grand-tour", "crash-course", "any-percent", "lookingglass", "skinwalker", "summoner", "safe-stwo",
-    "open", "brawler", "lucky-sevens", "sight-seer", "cursed-night", "spellbound", "mobility", "glitchmaster",
-    "dog-life", "battle-mage", "timeline", "chimera", "vanilla", "all-bosses", "rampage", "nimble-lite", "oracle",
-    "boss-reflector", "cornivus", "mirror-breaker"
-  ]);
-  const RELIC_COMPAT = new Set([
-    "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-    "expedition", "bat-master", "scavenger", "empty-hand", "gem-farmer", "third-castle", "rat-race", "magic-mirror",
-    "bounty-hunter", "target-confirmed", "hitman", "beyond", "grand-tour", "crash-course", "lookingglass", "skinwalker",
-    "summoner", "agonize-twtw", "safe-stwo", "open", "lucky-sevens", "sight-seer", "cursed-night", "spellbound",
-    "mobility", "timeline", "chimera", "vanilla", "nimble-lite", "all-bosses", "cornivus", "mirror-breaker"
-  ]);
+    // Refactored for ease of alteration and maintainability -crazy4blades
+    const BH_COMPAT = new Set([
+      "bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "rampage-25te"
+    ]);
+    const BOSS_COMPAT = new Set([
+      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
+      "expedition", "bat-master", "glitch", "scavenger", "empty-hand", "third-castle", "magic-mirror", "leg-day",
+      "big-toss", "grand-tour", "crash-course", "any-percent", "lookingglass", "skinwalker", "summoner", "safe-stwo",
+      "open", "brawler", "lucky-sevens", "sight-seer", "cursed-night", "spellbound", "mobility", "glitchmaster",
+      "dog-life", "battle-mage", "timeline", "chimera", "vanilla", "all-bosses", "rampage", "nimble-lite", "oracle",
+      "boss-reflector", "cornivus", "mirror-breaker"
+    ]);
+    const RELIC_COMPAT = new Set([
+      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
+      "expedition", "bat-master", "scavenger", "empty-hand", "gem-farmer", "third-castle", "rat-race", "magic-mirror",
+      "bounty-hunter", "target-confirmed", "hitman", "beyond", "grand-tour", "crash-course", "lookingglass", "skinwalker",
+      "summoner", "agonize-twtw", "safe-stwo", "open", "lucky-sevens", "sight-seer", "cursed-night", "spellbound",
+      "mobility", "timeline", "chimera", "vanilla", "nimble-lite", "all-bosses", "cornivus", "mirror-breaker"
+    ]);
 
-  const ALL_TOGGLES = [
-    "antiFreezeMode", "startRoomRando2ndMode", "relicLocations", "relicLocationsSet", "startRoomRandoMode",
-    "unlockedMode", "enemyStatRandoMode", "elemChaosMode", "rlbcMode", "godspeedMode", "dominoMode"
-  ];
-
-  const DISABLE_RULES = [
-    { ids: ["glitch", "glitchmaster", "any-percent"], elems: ["antiFreezeMode"] },
-    { ids: ["dog-life", "magic-mirror", "mobility", "lookingglass", "boss-rush", "beyond", "first-castle", "vanilla"], elems: ["startRoomRando2ndMode"] },
-    { ids: ["boss-rush", "first-castle", "seeker"], elems: ["relicLocations", "relicLocationsSet"] },
-    { ids: ["boss-rush", "beyond", "vanilla"], elems: ["startRoomRandoMode"] },
-    { ids: ["boss-rush"], elems: ["unlockedMode"] },
-    { ids: ["big-toss"], elems: ["enemyStatRandoMode", "elemChaosMode"] },
-    { ids: ["boss-rush", "first-castle", "beyond", "seeker", "recycler"], elems: ["rlbcMode"] },
-    { ids: ["battle-mage"], elems: ["godspeedMode"] },
-    { ids: ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "oracle"], elems: ["dominoMode"] }
-  ];
-
-  const BH_GOAL_PRESETS = {
-    h: new Set(["bounty-hunter", "chaos-lite"]),
-    t: new Set(["target-confirmed"]),
-    w: new Set(["hitman"]),
-    x: new Set(["rampage"])
-  };
-  const GOAL_PRESETS = {
-    b: new Set(["all-bosses", "mirror-breaker"]),
-    v: new Set(["boss-reflector", "cornivus", "nimble-lite-te"])
-  };
-
-  const enableAll = () => {
-    for (const key of ALL_TOGGLES) {
-      const el = elems[key];
-      if (!el) continue;
-      el.disabled = false;
-    }
-  };
-
-  const computeGoal = (presetId) => {
-    for (const [goal, set] of Object.entries(BH_GOAL_PRESETS)) {
-      if (set.has(presetId)) return goal;
-    }
-    for (const [goal, set] of Object.entries(GOAL_PRESETS)) {
-      if (set.has(presetId)) return goal;
-    }
-    return "default";
-  };
-
-  const validateGoal = (presetId, goal) => {
-    const isBossGoal = goal === "b" || goal === "a" || goal === "v";
-    const isRelicGoal = goal === "r" || goal === "a";
-    const isBhGoal = goal === "h" || goal === "t" || goal === "w" || goal === "x";
-
-    if (isBossGoal && !BOSS_COMPAT.has(presetId)) return "default";
-    if (isRelicGoal && !RELIC_COMPAT.has(presetId)) return "default";
-    if (isBhGoal && !BH_COMPAT.has(presetId)) return "default";
-    return goal;
-  };
-
-  const enforceGoalCompatibility = (presetId) => {
-    const goalOptions = elems.newGoals.options;
-    for (let i = 0; i < goalOptions.length; i++) {
-      const opt = goalOptions[i];
-      const val = opt.value;
-
-      const isBossGoal = val === "b" || val === "a" || val === "v";
-      const isRelicGoal = val === "r" || val === "a";
-      const isBhGoal = val === "h" || val === "t" || val === "w" || val === "x";
-
-      const incompatible =
-        (isBossGoal && !BOSS_COMPAT.has(presetId)) ||
-        (isRelicGoal && !RELIC_COMPAT.has(presetId)) ||
-        (isBhGoal && !BH_COMPAT.has(presetId));
-
-      opt.disabled = incompatible;
-    }
-  };
-
-  let idx = elems.presetId.selectedIndex;
-  if (idx < 0) idx = 0;
-
-  const id = elems.presetId.options
-    ? elems.presetId.options[idx].value
-    : elems.presetId.childNodes[idx].value;
-
-  const preset = sotnRando.presets.find(p => p.id === id) || sotnRando.presets[0];
-
-  // Metadata
-  elems.presetDescription.innerText = preset.description;
-  elems.presetAuthor.innerText = preset.author;
-  elems.presetKnowledgeCheck.innerText = preset.knowledgeCheck;
-  elems.presetExtension.innerText = preset.metaExtension;
-  elems.presetComplexity.innerText = preset.metaComplexity;
-  elems.presetItemStats.innerText = preset.itemStats;
-  elems.presetTimeFrame.innerText = preset.timeFrame;
-  elems.presetModdedLevel.innerText = preset.moddedLevel;
-  elems.presetCastleType.innerText = preset.castleType;
-  elems.presetTransformEarly.innerText = preset.transformEarly;
-  elems.presetTransformFocus.innerText = preset.transformFocus;
-  elems.presetWinCondition.innerText = preset.winCondition;
-
-  localStorage.setItem("presetId", preset.id);
-
-  enableAll();
-
-  let goal = computeGoal(preset.id);
-  goal = validateGoal(preset.id, goal);
-  elems.newGoals.value = goal;
-
-  localStorage.setItem("newGoals", elems.newGoals.value);
-  newGoalsLock = elems.newGoals.value;
-
-  const options = preset.options();
-  let complexity = Object.keys(options.relicLocations || {}).reduce((acc, key) => {
-    return /^[0-9]+(-[0-9]+)?/.test(key) ? key.split("-").shift() : acc;
-  }, 1);
-
-  adjustMaxComplexity();
-
-  // Unified logic with corrected disabling behavior
-  const applyOptions = (options = {}, presetId) => {
-    elems.complexity.value = complexity;
-    elems.complexityCurrentValue.innerText = `(${complexity})`;
-
-    const setCheckDisable = (key, condition) => {
-      const el = elems[key];
-      if (!el) return;
-      el.checked = !!condition;
-      el.disabled = false; // preset never disables
-    };
-
-    setCheckDisable("enemyDrops", options.enemyDrops);
-    setCheckDisable("startingEquipment", options.startingEquipment);
-    setCheckDisable("itemLocations", options.itemLocations);
-    setCheckDisable("prologueRewards", options.prologueRewards);
-
-    elems.relicLocations.checked = !!options.relicLocations;
-
-    const ext = options.relicLocations?.extension;
-    const extSet = elems.relicLocationsExtension;
-    if (extSet) {
-      extSet.guarded.checked = ext === sotnRando.constants.EXTENSION.GUARDED;
-      extSet.guardedplus.checked = ext === sotnRando.constants.EXTENSION.GUARDEDPLUS;
-      extSet.equipment.checked = ext === sotnRando.constants.EXTENSION.EQUIPMENT;
-      extSet.scenic.checked = ext === sotnRando.constants.EXTENSION.SCENIC;
-      extSet.extended.checked = ext === sotnRando.constants.EXTENSION.EXTENDED;
-      extSet.classic.checked = !ext;
-    }
-
-    const allKeys = [
-      "stats", "music", "turkeyMode", "magicmaxMode", "colorrandoMode",
-      "antiFreezeMode", "mypurseMode", "iwsMode", "fastwarpMode",
-      "itemNameRandoMode", "noprologueMode", "unlockedMode", "surpriseMode",
-      "enemyStatRandoMode", "shopPriceRandoMode", "startRoomRandoMode",
-      "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
-      "godspeedMode", "libraryShortcut", "elemChaosMode", "simpleInputMode",
-      "devStashMode", "bossMusicSeparation"
+    const ALL_TOGGLES = [
+      "antiFreezeMode", "startRoomRando2ndMode", "relicLocations", "relicLocationsSet", "startRoomRandoMode",
+      "unlockedMode", "enemyStatRandoMode", "elemChaosMode", "rlbcMode", "godspeedMode", "dominoMode"
     ];
 
-    const keysToRemove = ["music", "bossMusicSeparation"];
-    const filteredKeys = allKeys.filter(key => !keysToRemove.includes(key));
+    const DISABLE_RULES = [
+      { ids: ["glitch", "glitchmaster", "any-percent"], elems: ["antiFreezeMode"] },
+      { ids: ["dog-life", "magic-mirror", "mobility", "lookingglass", "boss-rush", "beyond", "first-castle", "vanilla"], elems: ["startRoomRando2ndMode"] },
+      { ids: ["boss-rush", "first-castle", "seeker"], elems: ["relicLocations", "relicLocationsSet"] },
+      { ids: ["boss-rush", "beyond", "vanilla"], elems: ["startRoomRandoMode"] },
+      { ids: ["boss-rush"], elems: ["unlockedMode"] },
+      { ids: ["big-toss"], elems: ["enemyStatRandoMode", "elemChaosMode"] },
+      { ids: ["boss-rush", "first-castle", "beyond", "seeker", "recycler"], elems: ["rlbcMode"] },
+      { ids: ["battle-mage"], elems: ["godspeedMode"] },
+      { ids: ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "rampage-25te", "oracle"], elems: ["dominoMode"] }
+    ];
 
-    filteredKeys.forEach(key => {
-      const el = elems[key];
-      if (!el) return;
-      el.checked = !!options[key];
-      el.disabled = false; // preset never disables
-    });
+    const BH_GOAL_PRESETS = {
+      h: new Set(["bounty-hunter", "chaos-lite"]),
+      t: new Set(["target-confirmed"]),
+      w: new Set(["hitman"]),
+      x: new Set(["rampage", "rampage-25te"])
+    };
+    const GOAL_PRESETS = {
+      b: new Set(["all-bosses", "mirror-breaker"]),
+      v: new Set(["boss-reflector", "cornivus", "nimble-lite-te"])
+    };
 
-    // Compatibility disables still apply
-    DISABLE_RULES.forEach(rule => {
-      if (rule.ids.includes(presetId)) {
-        rule.elems.forEach(key => {
-          const el = elems[key];
-          if (!el) return;
-          const wasChecked = el.checked;
-          el.disabled = true;
-          el.checked = wasChecked;
-        });
+    const enableAll = () => {
+      for (const key of ALL_TOGGLES) {
+        const el = elems[key];
+        if (!el) continue;
+        el.disabled = false;
       }
-    });
-  };
+    };
 
-  enforceGoalCompatibility(preset.id);
-  applyOptions(options, preset.id);
-  relicLocationsExtensionChange();
-}
+    const computeGoal = (presetId) => {
+      for (const [goal, set] of Object.entries(BH_GOAL_PRESETS)) {
+        if (set.has(presetId)) return goal;
+      }
+      for (const [goal, set] of Object.entries(GOAL_PRESETS)) {
+        if (set.has(presetId)) return goal;
+      }
+      return "default";
+    };
+
+    const validateGoal = (presetId, goal) => {
+      const isBossGoal = goal === "b" || goal === "a" || goal === "v";
+      const isRelicGoal = goal === "r" || goal === "a";
+      const isBhGoal = goal === "h" || goal === "t" || goal === "w" || goal === "x";
+
+      if (isBossGoal && !BOSS_COMPAT.has(presetId)) return "default";
+      if (isRelicGoal && !RELIC_COMPAT.has(presetId)) return "default";
+      if (isBhGoal && !BH_COMPAT.has(presetId)) return "default";
+      return goal;
+    };
+
+    const enforceGoalCompatibility = (presetId) => {
+      const goalOptions = elems.newGoals.options;
+      for (let i = 0; i < goalOptions.length; i++) {
+        const opt = goalOptions[i];
+        const val = opt.value;
+
+        const isBossGoal = val === "b" || val === "a" || val === "v";
+        const isRelicGoal = val === "r" || val === "a";
+        const isBhGoal = val === "h" || val === "t" || val === "w" || val === "x";
+
+        const incompatible =
+          (isBossGoal && !BOSS_COMPAT.has(presetId)) ||
+          (isRelicGoal && !RELIC_COMPAT.has(presetId)) ||
+          (isBhGoal && !BH_COMPAT.has(presetId));
+
+        opt.disabled = incompatible;
+      }
+    };
+
+    let idx = elems.presetId.selectedIndex;
+    if (idx < 0) idx = 0;
+
+    const id = elems.presetId.options
+      ? elems.presetId.options[idx].value
+      : elems.presetId.childNodes[idx].value;
+
+    const preset = sotnRando.presets.find(p => p.id === id) || sotnRando.presets[0];
+
+    // Metadata
+    elems.presetDescription.innerText = preset.description;
+    elems.presetAuthor.innerText = preset.author;
+    elems.presetKnowledgeCheck.innerText = preset.knowledgeCheck;
+    elems.presetExtension.innerText = preset.metaExtension;
+    elems.presetComplexity.innerText = preset.metaComplexity;
+    elems.presetItemStats.innerText = preset.itemStats;
+    elems.presetTimeFrame.innerText = preset.timeFrame;
+    elems.presetModdedLevel.innerText = preset.moddedLevel;
+    elems.presetCastleType.innerText = preset.castleType;
+    elems.presetTransformEarly.innerText = preset.transformEarly;
+    elems.presetTransformFocus.innerText = preset.transformFocus;
+    elems.presetWinCondition.innerText = preset.winCondition;
+
+    localStorage.setItem("presetId", preset.id);
+
+    enableAll();
+
+    let goal = computeGoal(preset.id);
+    goal = validateGoal(preset.id, goal);
+    elems.newGoals.value = goal;
+
+    localStorage.setItem("newGoals", elems.newGoals.value);
+    newGoalsLock = elems.newGoals.value;
+
+    const options = preset.options();
+    let complexity = Object.keys(options.relicLocations || {}).reduce((acc, key) => {
+      return /^[0-9]+(-[0-9]+)?/.test(key) ? key.split("-").shift() : acc;
+    }, 1);
+
+    adjustMaxComplexity();
+
+    // Unified logic with corrected disabling behavior
+    const applyOptions = (options = {}, presetId) => {
+      elems.complexity.value = complexity;
+      elems.complexityCurrentValue.innerText = `(${complexity})`;
+
+      const setCheckDisable = (key, condition) => {
+        const el = elems[key];
+        if (!el) return;
+        el.checked = !!condition;
+        el.disabled = false; // preset never disables
+      };
+
+      setCheckDisable("enemyDrops", options.enemyDrops);
+      setCheckDisable("startingEquipment", options.startingEquipment);
+      setCheckDisable("itemLocations", options.itemLocations);
+      setCheckDisable("prologueRewards", options.prologueRewards);
+
+      elems.relicLocations.checked = !!options.relicLocations;
+
+      const ext = options.relicLocations?.extension;
+      const extSet = elems.relicLocationsExtension;
+      if (extSet) {
+        extSet.guarded.checked = ext === sotnRando.constants.EXTENSION.GUARDED;
+        extSet.guardedplus.checked = ext === sotnRando.constants.EXTENSION.GUARDEDPLUS;
+        extSet.equipment.checked = ext === sotnRando.constants.EXTENSION.EQUIPMENT;
+        extSet.scenic.checked = ext === sotnRando.constants.EXTENSION.SCENIC;
+        extSet.extended.checked = ext === sotnRando.constants.EXTENSION.EXTENDED;
+        extSet.classic.checked = !ext;
+      }
+
+      const allKeys = [
+        "stats", "music", "turkeyMode", "magicmaxMode", "colorrandoMode",
+        "antiFreezeMode", "mypurseMode", "iwsMode", "fastwarpMode",
+        "itemNameRandoMode", "noprologueMode", "unlockedMode", "surpriseMode",
+        "enemyStatRandoMode", "shopPriceRandoMode", "startRoomRandoMode",
+        "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
+        "godspeedMode", "libraryShortcut", "elemChaosMode", "easyMode",
+        "devStashMode", "bossMusicSeparation", "singleHitGearMode"
+      ];
+
+      const keysToRemove = ["music", "bossMusicSeparation"];
+      const filteredKeys = allKeys.filter(key => !keysToRemove.includes(key));
+
+      filteredKeys.forEach(key => {
+        const el = elems[key];
+        if (!el) return;
+
+        if (key in options) {
+          el.checked = !!options[key];
+        } else {
+          el.checked = false; // force default false when undefined
+        }
+
+        el.disabled = false; // preset never disables
+      });
+
+      // HARD OVERRIDE: presets cannot enable singleHitGearMode
+      // It is always false unless the user manually checks it
+      elems.singleHitGearMode.checked = false;
+
+      // Compatibility disables still apply
+      DISABLE_RULES.forEach(rule => {
+        if (rule.ids.includes(presetId)) {
+          rule.elems.forEach(key => {
+            const el = elems[key];
+            if (!el) return;
+            const wasChecked = el.checked;
+            el.disabled = true;
+            el.checked = wasChecked;
+          });
+        }
+      });
+    };
+
+    enforceGoalCompatibility(preset.id);
+    applyOptions(options, preset.id);
+    relicLocationsExtensionChange();
+    const TOURNAMENT_LOCKED = [
+      "accessibilityPatches",
+      "antiFreezeMode",
+      "bossMusicSeparation",
+      "colorrandoMode",
+      "devStashMode",
+      "dominoMode",
+      "easyMode",
+      "elemChaosMode",
+      "enemyDrops",
+      "enemyStatRandoMode",
+      "fastwarpMode",
+      "godspeedMode",
+      "immunityPotionMode",
+      "iwsMode",
+      "itemLocations",
+      "itemNameRandoMode",
+      "itemNames",
+      "itemStats",
+      "libraryShortcut",
+      "magicmaxMode",
+      "music",
+      "mypurseMode",
+      "newGoals",
+      "noprologueMode",
+      "prologueRewards",
+      "relicLocations",
+      "relicLocationsSet",
+      "rlbcMode",
+      "shopPriceRandoMode",
+      "showRelicLocations",
+      "showSolutions",
+      "showSpoilers",
+      "show-relics",
+      "show-solutions",
+      "startingEquipment",
+      "singleHitGearMode",
+      "startRoomRando2ndMode",
+      "startRoomRandoMode",
+      "stats",
+      "surpriseMode",
+      "tournamentMode",
+      "turkeyMode",
+      "unlockedMode"
+    ];
+
+    const isTeLocked =
+      /-spr[0-9]{2}te$/.test(preset.id) ||
+      /-win[0-9]{2}te$/.test(preset.id) ||
+      /-aut[0-9]{2}te$/.test(preset.id) ||
+      /-sum[0-9]{2}te$/.test(preset.id);
+
+    if (isTeLocked) {
+      // TE: disable all locked keys
+      TOURNAMENT_LOCKED.forEach(key => {
+        const el = elems[key];
+        if (el) el.disabled = true;
+      });
+
+      const allRadios = document.querySelectorAll("input[type='radio']");
+      allRadios.forEach(r => r.disabled = true);
+    } else {
+      // Non‑TE: re‑enable everything this system controls
+      TOURNAMENT_LOCKED.forEach(key => {
+        const el = elems[key];
+        if (el) el.disabled = false;
+      });
+
+      const allRadios = document.querySelectorAll("input[type='radio']");
+      allRadios.forEach(r => r.disabled = false);
+    }
+  }
 
   function complexityChange() {
     localStorage.setItem('complexity', elems.complexity.value);
@@ -951,8 +1032,8 @@
       'noprologueMode', 'unlockedMode', 'surpriseMode', 'enemyStatRandoMode',
       'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
       'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
-      'libraryShortcut', 'elemChaosMode', 'simpleInputMode', 'devStashMode',
-      'seasonalPhrasesMode', 'bossMusicSeparation'
+      'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
+      'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode'
     ]
 
     formOptions.forEach(key => {
@@ -1000,8 +1081,8 @@
       'surpriseMode', 'enemyStatRandoMode', 'shopPriceRandoMode',
       'startRoomRandoMode', 'startRoomRando2ndMode', 'dominoMode', 'rlbcMode',
       'immunityPotionMode', 'godspeedMode', 'libraryShortcut', 'elemChaosMode',
-      'simpleInputMode', 'devStashMode', 'seasonalPhrasesMode',
-      'bossMusicSeparation', 'tournamentMode'
+      'easyMode', 'devStashMode', 'seasonalPhrasesMode',
+      'bossMusicSeparation', 'singleHitGearMode', 'tournamentMode'
     ]
     clearFields.forEach(key => elems[key].disabled = false)
 
@@ -1147,25 +1228,25 @@
     // Get options.
     let options = getFormOptions()
     const start = new Date().getTime()
-    if(elems.output.ppf.checked){
+    if (elems.output.ppf.checked) {
       CoreRandomizer.randomize(
-          options,
-          currSeed,
-          elems.newGoals.value,
-          elems.godspeedMode.checked,
-          elems.mapColor.value,
-          elems.alucardPalette.value,
-          elems.alucardLiner.value,
-          elems.accessibilityPatches.checked,
-          haveChecksum,
-          expectChecksum,
-          CoreRandomizer.isDev(url),
-          showSpoilers,
-          null,
-          null,
-          fileOutputHandler,
-          null,
-          this.result
+        options,
+        currSeed,
+        elems.newGoals.value,
+        elems.godspeedMode.checked,
+        elems.mapColor.value,
+        elems.alucardPalette.value,
+        elems.alucardLiner.value,
+        elems.accessibilityPatches.checked,
+        haveChecksum,
+        expectChecksum,
+        CoreRandomizer.isDev(url),
+        showSpoilers,
+        null,
+        null,
+        fileOutputHandler,
+        null,
+        this.result
       ).then(function () {
         resetCopy();
         hideLoader();
@@ -1191,7 +1272,7 @@
           }
         })
       }).catch(handleError).finally(restoreItems)
-    }else{
+    } else {
       const reader = new FileReader()
       reader.addEventListener('load', function () {
         // Verify vanilla bin.
@@ -1200,22 +1281,22 @@
             throw new Error('Disc image is not a valid or vanilla backup')
           }
         }).then(randomize(options,
-            currSeed,
-            elems.newGoals.value,
-            elems.godspeedMode.checked,
-            elems.mapColor.value,
-            elems.alucardPalette.value,
-            elems.alucardLiner.value,
-            elems.accessibilityPatches.checked,
-            haveChecksum,
-            expectChecksum,
-            CoreRandomizer.isDev(url),
-            showSpoilers,
-            null,
-            null,
-            fileOutputHandler,
-            null,
-            this.result
+          currSeed,
+          elems.newGoals.value,
+          elems.godspeedMode.checked,
+          elems.mapColor.value,
+          elems.alucardPalette.value,
+          elems.alucardLiner.value,
+          elems.accessibilityPatches.checked,
+          haveChecksum,
+          expectChecksum,
+          CoreRandomizer.isDev(url),
+          showSpoilers,
+          null,
+          null,
+          fileOutputHandler,
+          null,
+          this.result
         )).catch(handleError).finally(restoreItems)
       })
       reader.readAsArrayBuffer(selectedFile)

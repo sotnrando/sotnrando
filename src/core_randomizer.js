@@ -271,7 +271,8 @@ async function randomize(
             util.mergeInfo(info, result.info)
             debugMessage(debugEnabled, 'Randomize Music');
             // Randomize music.
-            if (applied.randomizeMusic == true && applied.randomizeMusic !== undefined) {
+            // console.log("Music Randomizer: " + applied.music)
+            if (applied.music == true && applied.music !== undefined) {
                 rng = getRNG(options, seed);
                 check.apply(randomizeMusic(rng, applied))
             }
@@ -279,13 +280,17 @@ async function randomize(
             // Start the function master
             let optWrite = 0x00000000                   // This variable lets the ASM used in the Master Function know if it needs to run certain code or sets flags for the tracker to use
             let nGoal = newGoals !== "default" ? newGoals : undefined;
-            // console.log(options.newGoalsSet + '|' + applied.newGoalsSet)
-            if (nGoal || options.newGoalsSet || applied.newGoalsSet) {                   // Sets flag for the tracker to know which goals to use
-                if (!nGoal && applied.newGoalsSet !== undefined) {
+            if (nGoal === undefined || nGoal === false) {
+                if (options.newGoalsSet === undefined && applied.newGoalsSet === undefined) {
+                    nGoal = false
+                } else if (options.newGoalsSet === undefined) {
                     nGoal = applied.newGoalsSet
-                } else if (!nGoal && options.newGoalsSet !== undefined) {
+                } else {
                     nGoal = options.newGoalsSet
                 }
+            }
+            debugMessage(debugEnabled, 'newGoalsCheck | ' + nGoal + ':' + options.newGoalsSet + ':' + applied.newGoalsSet)
+            if (nGoal) {                                      // Sets flag for the tracker to know which goals to use
                 switch(nGoal) {
                     case "b":                                 // all bosses flag
                         optWrite = optWrite + 0x01
@@ -453,12 +458,12 @@ async function randomize(
             }
             debugMessage(debugEnabled, 'Elemental Chaos | ' + optFlag)
             optFlag = false
-            if (options.simpleInputMode || applied.simpleInputMode) { // Simplifies spell inputs - eldrich
-                // Apply simple input patches. - eldri7ch
+            if (options.easyMode || applied.easyMode) { // Simplifies spell inputs and extends i-frames - eldrich
+                // Apply easy mode patches. - eldri7ch
                 optFlag = true
-                check.apply(util.applySimpleInputPatches())
+                check.apply(util.applyEasyModePatches())
             }
-            debugMessage(debugEnabled, 'Simplified Input Mode | ' + optFlag)
+            debugMessage(debugEnabled, 'Easy Mode | ' + optFlag)
             optFlag = false
             if (options.devStashMode || applied.devStashMode) { // dev's stash - eldrich
                 optFlag = true
@@ -513,6 +518,13 @@ async function randomize(
                 check.apply(util.applyAlucardLiner(alucardLiner))
             }
             debugMessage(debugEnabled, 'Alucard Liner')
+            optFlag = false
+            if (options.singleHitGearMode || applied.singleHitGearMode) { // Single-Hit Gears - eldrich
+                optFlag = true
+                check.apply(util.applySingleHitGearPatches())
+            }
+            debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
+            optFlag = false
             debugMessage(debugEnabled, 'Apply Writes')
             // Apply writes.
             check.apply(util.applyWrites(rng, applied))
@@ -534,6 +546,8 @@ async function randomize(
             options.preset,
             options.tournamentMode,
         )
+        debugMessage(debugEnabled, 'Apply tracking byte for tracker data')
+        check.apply(util.applyTrackingByte())
         checksum = await check.sum()
         debugMessage(debugEnabled, 'Checksum verification')
         // Verify expected checksum matches actual checksum.

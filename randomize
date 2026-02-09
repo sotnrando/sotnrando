@@ -665,9 +665,9 @@ const yargs = require('yargs')
     describe: 'Randomizes almost every element in the game.',
     type: 'boolean',
   })
-  .option('simpleInput', {
-    alias: 'si',
-    describe: 'Simplifies inputs so spells no longer need complex sequences to execute.',
+  .option('easy', {
+    alias: 'ez',
+    describe: 'Simplifies inputs so spells no longer need complex sequences to execute and extends invincibility when hit.',
     type: 'boolean',
   })
   .option('devStash', {
@@ -719,6 +719,11 @@ const yargs = require('yargs')
     describe: 'Excludes the songs given by parameters. Example: --eds LOST_PAINTING,CURSE_ZONE',
     type: 'string',
     requiresArg: true,
+  })
+  .option('singleHitGear', {
+    alias: 'gp',
+    describe: 'Makes all gear puzzles only require a single hit on one gear to open the respective door.',
+    type: 'boolean',
   })
   .option('disable-accessibility-patches', {
     alias: 'a',
@@ -776,9 +781,9 @@ if ('debug' in argv) {
     console.log('Begin Debug output:')
   }
 }
-if ('simpleInput' in argv) {
+if ('easy' in argv) {
   if ('tournament' in argv) {
-    console.error('\nYou cannot run simplified inputs at the same time as tournament mode.')
+    console.error('\nYou cannot run easy mode at the same time as tournament mode.')
     process.exit(1)
   }
 }
@@ -1194,10 +1199,10 @@ if ('debug' in argv) {console.log('randomize | Set elemChaos')}
 if (argv.elemChaos) {
   options.elemChaosMode = true
 }
-if ('debug' in argv) {console.log('randomize | Set simpleInput')}
-// Enable elemental chaos if specified. - eldri7ch
-if (argv.simpleInput) {
-  options.simpleInputMode = true
+if ('debug' in argv) {console.log('randomize | Set easy')}
+// Enable easy mode if specified. - eldri7ch
+if (argv.easy) {
+  options.easyMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set devStash')}
 // Enable Dev's Stash if specified. - eldri7ch
@@ -1269,6 +1274,11 @@ if ('debug' in argv) {console.log('randomize | Set debug')}
 // Enable debug mode if specified. - eldri7ch
 if (argv.debug) { // Enables debug - eldrich
   options.debugMode = true
+}
+if ('debug' in argv) {console.log('randomize | Set singleHitGear')}
+// Enable Single-Hit Gears if specified. - eldri7ch
+if (argv.singleHitGear) {
+  options.singleHitGearMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set verbosity')}
 // Set misc options.

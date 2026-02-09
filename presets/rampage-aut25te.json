@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "id": "rampage-25te",
-    "name": "Rampage 2025 Tournament Edition",
+    "id": "rampage-aut25te",
+    "name": "Rampage - Fall 2025 Tournament Edition",
     "description": "Target Confirmed Variant where you start in a random location in Castle 2 and opens all shortcuts and all teleporters. Acquire Familiar Cards to know which enemies to hunt. All bosses and Vlads required.",
     "author": [
       "TalicZealot",
@@ -10,7 +10,7 @@
       "Wecoc",
       "Dr4gonBlitz"
     ],
-    "weight": -4999,
+    "weight": -2200,
     "knowledgeCheck": "None",
     "metaExtension": "Guarded",
     "metaComplexity": "6",

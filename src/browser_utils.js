@@ -102,10 +102,10 @@ BrowserUtils.getCurrentOptions = function getCurrentOptions() {
         'noprologueMode', 'unlockedMode', 'surpriseMode', 'enemyStatRandoMode',
         'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
         'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
-        'libraryShortcut', 'elemChaosMode', 'simpleInputMode', 'devStashMode',
-        'seasonalPhrasesMode', 'bossMusicSeparation', 'music', 'appendSeed',
-        'excludeSongsOption', 'itemLocations', 'stats', 'prologueRewards',
-        'startingEquipment', 'accessibilityPatches'
+        'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
+        'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode', 
+        'music', 'appendSeed', 'excludeSongsOption', 'itemLocations', 'stats', 
+        'prologueRewards', 'startingEquipment', 'accessibilityPatches'
     ]
 
     const options = {}
@@ -259,11 +259,11 @@ BrowserUtils.ChangeHandlers = {
             elems.showRelics.disabled = true
             elems.showSolutions.checked = false
             elems.showSolutions.disabled = true
-            elems.simpleInputMode.checked = false
-            elems.simpleInputMode.disabled = true
+            elems.easyMode.checked = false
+            elems.easyMode.disabled = true
         } else {
             elems.showRelics.disabled = false
-            elems.simpleInputMode.disabled = false
+            elems.easyMode.disabled = false
         }
     },
     itemNameRandoModeChange: function itemNameRandoModeChange() {

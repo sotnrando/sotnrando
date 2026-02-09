@@ -355,9 +355,6 @@
       "Gravity Boots + Clay"
     ]
   }, {
-    "location": "Faerie Card",
-    "locks": []
-  }, {
     "location": "Demon Card",
     "locks": [
       "Jewel of Open",
@@ -796,6 +793,7 @@
       "Form of Mist + Power of Mist",
       "Soul of Bat",
       "Gravity Boots + Clay",
+      "Gravity Boots + Leap Stone",
       "Gravity Boots + Soul of Wolf",
       "Gravity Boots + Form of Mist",
       "Soul of Wolf + Hrefresh1 + Frang + Form of Mist",
@@ -818,6 +816,7 @@
       "Gravity Boots + Hrefresh1",
       "Gravity Boots + Hrefresh2",
       "Gravity Boots + Clay",
+      "Gravity Boots + Leap Stone",
       "Gravity Boots + Soul of Wolf",
       "Gravity Boots + Form of Mist",
       "Soul of Wolf + Power of Wolf + Srod",
