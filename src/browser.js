@@ -742,6 +742,7 @@
       /-sum[0-9]{2}te$/.test(preset.id);
 
     if (isTeLocked) {
+      elems.tournamentMode.checked = true;
       // TE: disable all locked keys
       TOURNAMENT_LOCKED.forEach(key => {
         const el = elems[key];
