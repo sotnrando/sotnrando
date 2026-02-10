@@ -19,6 +19,7 @@
     "winCondition": "Normal"
   },
 
+  "tournamentMode": true,
   "stats": false,
   "fastwarpMode": true,
   "magicmaxMode": true,
