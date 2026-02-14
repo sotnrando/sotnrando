@@ -1168,6 +1168,7 @@
         'placed',
         'replaced',
         'blocked',
+        'goalItems',
       ].indexOf(location) === -1
     }).forEach(function(location) {
       map[location] = locations[location].filter(function(lock) {
@@ -1187,6 +1188,7 @@
         'placed',
         'replaced',
         'blocked',
+        'goalItems',
       ].indexOf(location) === -1
     }).forEach(function(location) {
       map[location] = locations[location].filter(function(lock) {
@@ -1323,6 +1325,34 @@
         }
       )
     }
+    // Create fake relics for goal items so they are placed at relic
+    // locations using the same placement algorithm.
+    const combinedReplaced = Object.assign(
+      {},
+      relicLocations.replaced || {},
+    )
+    const goalItems = relicLocations.goalItems || []
+    goalItems.forEach(function(gi) {
+      const item = util.itemFromName(gi.item)
+      if (!item) {
+        throw new Error('Unknown goal item: ' + gi.item)
+      }
+      const ability = 'gi_' + (gi.alias || gi.item)
+      enabledRelics.push({
+        ability: ability,
+        name: item.name,
+        itemId: item.id,
+      })
+      combinedReplaced[ability] = gi.item
+    })
+    // Verify there are enough locations for all relics and goal items.
+    if (enabledRelics.length > locations.length) {
+      throw new Error(
+        'Not enough relic locations for goal items. Need '
+        + enabledRelics.length + ' locations but only '
+        + locations.length + ' available.'
+      )
+    }
     // Initialize location locks.
     locations.forEach(function(location) {
       const id = location.id
@@ -1410,6 +1440,7 @@
       solutions: result.solutions,
       locations: locations,
       relics: enabledRelics,
+      replaced: combinedReplaced,
       thrustSword: thrustSword,
       info: info,
       trackbyte: trackbyte,
@@ -1426,7 +1457,9 @@
       let replaced
       let leakPrevention = true
       if (typeof(options.relicLocations) === 'object') {
-        replaced = options.relicLocations.replaced
+        // Use combined replaced map from result (includes goal items)
+        // falling back to the original options replaced map.
+        replaced = result.replaced || options.relicLocations.replaced
         leakPrevention = !('leakPrevention' in options.relicLocations)
           || options.relicLocations.leakPrevention
       }

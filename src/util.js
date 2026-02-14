@@ -4493,6 +4493,11 @@ function hexValueToDamageString(hexValue) {
         )
       })
     }
+    if ('goalItem' in json) {
+      json.goalItem.forEach(function(goalItem) {
+        builder.goalItem(goalItem.item, goalItem.alias)
+      })
+    }
     if ('complexityGoal' in json) {
       if (json.complexityGoal) {
         const args = [json.complexityGoal.min]
@@ -4829,6 +4834,9 @@ function hexValueToDamageString(hexValue) {
         if ('blocked' in preset.relicLocations) {
           self.locations.blocked = clone(preset.relicLocations.blocked)
         }
+        if ('goalItems' in preset.relicLocations) {
+          self.locations.goalItems = clone(preset.relicLocations.goalItems)
+        }
         const locations = Object.getOwnPropertyNames(preset.relicLocations)
         locations.filter(function(location) {
           return [
@@ -4838,6 +4846,7 @@ function hexValueToDamageString(hexValue) {
             'placed',
             'replaced',
             'blocked',
+            'goalItems',
           ].indexOf(location) === -1
         }).forEach(function(location) {
           if ((/^[0-9]+(-[0-9]+)?$/).test(location)) {
@@ -5541,6 +5550,19 @@ function hexValueToDamageString(hexValue) {
     this.locations.replaced[relic] = getItemAlias.call(this, item)
   }
 
+  // Place an item at a relic location as a goal item.
+  PresetBuilder.prototype.goalItem = function goalItem(itemName, alias) {
+    assert.equal(typeof(itemName), 'string')
+    if (typeof(this.locations) !== 'object') {
+      this.locations = {}
+    }
+    this.locations.goalItems = this.locations.goalItems || []
+    this.locations.goalItems.push({
+      item: getItemAlias.call(this, itemName),
+      alias: alias,
+    })
+  }
+
   // Enable/disable relic location randomization.
   PresetBuilder.prototype.relicLocations = function relicLocations(enabled) {
     assert.equal(typeof(enabled), 'boolean')
@@ -6027,6 +6049,9 @@ function hexValueToDamageString(hexValue) {
       }
       if (self.locations.blocked) {
         relicLocations.blocked = self.locations.blocked
+      }
+      if (self.locations.goalItems) {
+        relicLocations.goalItems = self.locations.goalItems
       }
       if (self.goal) {
         let target = self.target.min.toString()

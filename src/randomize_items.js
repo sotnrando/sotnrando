@@ -1901,6 +1901,20 @@
           delete item.tiles
           return item
         })
+        // Exclude goal items from the regular item pool so they only
+        // spawn at relic locations.
+        if (options.relicLocations
+            && typeof(options.relicLocations) === 'object'
+            && options.relicLocations.goalItems) {
+          const goalItemNames = options.relicLocations.goalItems.map(
+            function(gi) {
+              return gi.item
+            }
+          )
+          pool = pool.filter(function(item) {
+            return goalItemNames.indexOf(item.name) === -1
+          })
+        }
         // Randomizations.
         if (options.itemLocations) {
           // Randomize candles.
