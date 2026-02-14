@@ -458,6 +458,12 @@ async function randomize(
             }
             debugMessage(debugEnabled, 'Elemental Chaos | ' + optFlag)
             optFlag = false
+            if (options.singleHitGearMode || applied.singleHitGearMode) { // Single-Hit Gears - eldrich
+                optFlag = true
+                check.apply(util.applySingleHitGearPatches())
+            }
+            debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
+            optFlag = false
             if (options.easyMode || applied.easyMode) { // Simplifies spell inputs and extends i-frames - eldrich
                 // Apply easy mode patches. - eldri7ch
                 optFlag = true
@@ -518,12 +524,6 @@ async function randomize(
                 check.apply(util.applyAlucardLiner(alucardLiner))
             }
             debugMessage(debugEnabled, 'Alucard Liner')
-            optFlag = false
-            if (options.singleHitGearMode || applied.singleHitGearMode) { // Single-Hit Gears - eldrich
-                optFlag = true
-                check.apply(util.applySingleHitGearPatches())
-            }
-            debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
             optFlag = false
             debugMessage(debugEnabled, 'Apply Writes')
             // Apply writes.

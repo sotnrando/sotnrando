@@ -2701,6 +2701,11 @@ function hexValueToDamageString(hexValue) {
           randomize.push('ec')
         }
         delete options.elemChaosMode
+      } else if ('singleHitGearMode' in options) { // Single-Hit Gears - eldri7ch
+        if (options.singleHitGearMode) {
+          randomize.push('gp')
+        }
+        delete options.singleHitGearMode
       } else if ('easyMode' in options) { // simple input - eldri7ch
         if (options.easyMode) {
           randomize.push('ez')
@@ -2736,11 +2741,6 @@ function hexValueToDamageString(hexValue) {
       } else if ('excludesongs' in options) { // Exclude songs - eldri7ch
         randomize.push('eds:' + options.excludesongs)
         delete options.excludesongs
-      } else if ('singleHitGearMode' in options) { // Single-Hit Gears - eldri7ch
-        if (options.singleHitGearMode) {
-          randomize.push('gp')
-        }
-        delete options.singleHitGearMode
       } else if ('preset' in options) {
         randomize.push('p:' + options.preset)
         delete options.preset
@@ -3989,9 +3989,9 @@ function hexValueToDamageString(hexValue) {
     godspeedMode,
     libraryShortcut,
     elemChaosMode,
+    singleHitGearMode,
     easyMode,
     devStashMode,
-    singleHitGearMode,
     seasonalPhrasesMode,
     bossMusicSeparation,
     newGoalsSet,
@@ -4043,9 +4043,9 @@ function hexValueToDamageString(hexValue) {
     this.godspeedMode = godspeedMode
     this.libraryShortcut = libraryShortcut
     this.elemChaosMode = elemChaosMode
+    this.singleHitGearMode = singleHitGearMode
     this.easyMode = easyMode
     this.devStashMode = devStashMode
-    this.singleHitGearMode = singleHitGearMode
     this.seasonalPhrasesMode = seasonalPhrasesMode
     this.bossMusicSeparation = bossMusicSeparation
     this.newGoalsSet = newGoalsSet
@@ -4221,6 +4221,8 @@ function hexValueToDamageString(hexValue) {
     this.libShort = false
     // elemental chaos.
     this.elemChaos = false
+    // Single-Hit Gears
+    this.singleHitGear = false
     // simple input.
     this.easy = false
     // dev's stash mode.
@@ -4229,8 +4231,6 @@ function hexValueToDamageString(hexValue) {
     this.seasonalPhrases = false
     // boss music separation
     this.bossMusic = true
-    // Single-Hit Gears
-    this.singleHitGear = true
     // new goals for completion.
     this.newGoals = undefined
     // Debug mode.
@@ -4579,6 +4579,9 @@ function hexValueToDamageString(hexValue) {
     if ('elemChaosMode' in json) {
       builder.elemChaosMode(json.elemChaosMode)
     }
+    if ('singleHitGearMode' in json) {
+      builder.singleHitGearMode(json.singleHitGearMode)
+    }
     if ('easyMode' in json) {
       builder.easyMode(json.easyMode)
     }
@@ -4593,9 +4596,6 @@ function hexValueToDamageString(hexValue) {
     }
     if ('newGoalsSet' in json) {
       builder.newGoalsSet(json.newGoalsSet)
-    }
-    if ('singleHitGearMode' in json) {
-      builder.singleHitGearMode(json.singleHitGearMode)
     }
     if ('writes' in json) {
       let lastAddress = 0
@@ -4948,6 +4948,9 @@ function hexValueToDamageString(hexValue) {
     if ('elemChaosMode' in preset) {
       this.elemChaos = preset.elemChaosMode
     }
+    if ('singleHitGearMode' in preset) {
+      this.singleHitGear = preset.singleHitGearMode
+    }
     if ('easyMode' in preset) {
       this.easy = preset.easyMode
     }
@@ -4962,9 +4965,6 @@ function hexValueToDamageString(hexValue) {
     }
     if ('newGoalsSet' in preset) {
       this.newGoals = preset.newGoalsSet
-    }
-    if ('singleHitGearMode' in preset) {
-      this.singleHitGear = preset.singleHitGearMode
     }
     if ('writes' in preset) {
       this.writes = this.writes || []
@@ -5741,6 +5741,11 @@ function hexValueToDamageString(hexValue) {
     this.elemChaos = enabled
   }
 
+  // Enable Single-Hit Gears - eldri7ch
+  PresetBuilder.prototype.singleHitGearMode = function singleHitGearMode(enabled) {
+    this.singleHitGear = enabled
+  }
+
   // Enable Simplified Inputs - eldri7ch
   PresetBuilder.prototype.easyMode = function easyMode(enabled) {
     this.easy = enabled
@@ -5765,11 +5770,6 @@ function hexValueToDamageString(hexValue) {
   PresetBuilder.prototype.newGoalsSet = function newGoalsSet(nGoals) {
     assert.oneOf(typeof(nGoals), ['boolean', 'string'])
     this.newGoals = nGoals
-  }
-
-  // Enable Single-Hit Gears - eldri7ch
-  PresetBuilder.prototype.singleHitGearMode = function singleHitGearMode(enabled) {
-    this.singleHitGear = enabled
   }
 
   // Write a character.
@@ -6095,13 +6095,13 @@ function hexValueToDamageString(hexValue) {
     const godspeed = self.godspeed
     const libShort = self.libShort
     const elemChaos = self.elemChaos
+    const singleHitGear = self.singleHitGear
     const easy = false
     const devStash = false
     const seasonalPhrases = true
     const bossMusic = false
     const newGoals = self.newGoals
     const debug = false
-    const singleHitGear = self.singleHitGear
     const writes = self.writes
     return new Preset(
       self.metadata.id,
@@ -6149,9 +6149,9 @@ function hexValueToDamageString(hexValue) {
       godspeed,
       libShort,
       elemChaos,
+      singleHitGear,
       easy,
       devStash,
-      singleHitGear,
       seasonalPhrases,
       bossMusic,
       newGoals,
@@ -9620,6 +9620,7 @@ function applyBountyHunterTargets(rng,bhmode) {
 	  applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
     applyElemChaosPatches: applyElemChaosPatches,
+    applySingleHitGearPatches: applySingleHitGearPatches,
     applyEasyModePatches: applyEasyModePatches,
     applyDevsStashPatches: applyDevsStashPatches,
     applyMapColor: applyMapColor,
@@ -9627,7 +9628,6 @@ function applyBountyHunterTargets(rng,bhmode) {
     applyAlucardPalette: applyAlucardPalette,
     applySplashText: applySplashText,
     applyAlucardLiner: applyAlucardLiner,
-    applySingleHitGearPatches: applySingleHitGearPatches,
     randomizeRelics: randomizeRelics,
     randomizeItems: randomizeItems,
     applyWrites: applyWrites,
