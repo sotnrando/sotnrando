@@ -946,11 +946,13 @@ if ('presetFile' in argv) {
 }
 // If a preset and an options string are specified, determine if the options
 // are just duplicate options of the preset.
+let presetName
 if (options && 'preset' in options
     && Object.getOwnPropertyNames(options).length > 1) {
   try {
     const applied = util.Preset.options(options)
     const preset = util.presetFromName(options.preset)
+    console.log("Options Preset: " + options.preset)
     if (util.optionsToString(preset.options())
         === util.optionsToString(applied)) {
       // Options string has duplicative values, so just make the options
@@ -958,6 +960,7 @@ if (options && 'preset' in options
       options = {preset: preset.id}
     } else {
       // Options string overrides the preset, so use the applied options.
+      presetName = options.preset
       options = applied
     }
   } catch (err) {
@@ -1425,7 +1428,8 @@ core_randomizer.randomize(
     showUrl,
     fileOutputHandler,
     closeFile,
-    this.result
+    this.result,
+    presetName
 ).then(function(){
 
 })

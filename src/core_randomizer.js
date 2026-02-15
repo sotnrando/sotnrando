@@ -181,7 +181,8 @@ async function randomize(
     urlHandler,
     fileOutputHandler,
     fileCloseHandler,
-    fileToCheck
+    fileToCheck,
+    presetName = options.preset
 ){
     try {
         let check
@@ -218,7 +219,7 @@ async function randomize(
             console.error('\n' + err.message)
             if(!isBrowser()) process.exit(1);
         }
-        console.log(applied)
+        // console.log(applied)
         try {
             let rng
             let result
@@ -561,7 +562,7 @@ async function randomize(
             check,
             seed,
             version,
-            options.preset,
+            presetName,
             options.tournamentMode,
         )
         debugMessage(debugEnabled, 'Apply tracking byte for tracker data')
