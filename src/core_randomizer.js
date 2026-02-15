@@ -218,6 +218,7 @@ async function randomize(
             console.error('\n' + err.message)
             if(!isBrowser()) process.exit(1);
         }
+        console.log(applied)
         try {
             let rng
             let result
@@ -468,8 +469,16 @@ async function randomize(
             if (options.startStatRandoMode || applied.startStatRandoMode) { // Starting Stat Randomizer - eldrich
                 optFlag = true
                 rng = getRNG(options, seed);
-                ssMax = Math.max(options.startStatRandoMode,applied.startStatRandoMode)
-                check.apply(util.applyStartStatRandoPatches(rng,ssMax))
+                if (options.startStatRandoMode !== undefined) {
+                    ssOpt = Number(options.startStatRandoMode)
+                } else {
+                    if (applied.startStatRandoMode !== undefined) {
+                        ssOpt = Number(applied.startStatRandoMode)
+                    } else {
+                        ssOpt = 0
+                    }
+                }
+                check.apply(util.applyStartStatRandoPatches(rng,ssOpt))
             }
             debugMessage(debugEnabled, '| Starting Stat Randomizer | ' + optFlag + " | " + ssMax)
             optFlag = false

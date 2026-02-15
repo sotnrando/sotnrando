@@ -45,7 +45,8 @@
   "newGoalsSet": "a",
   "immunityPotionMode": true,
   "godspeedMode": true,
-
+  "libraryShortcut": true,
+  "singleHitGearMode": true,
 
   "alias": [{
     "comment": "Alias NO3 as Entrance",
