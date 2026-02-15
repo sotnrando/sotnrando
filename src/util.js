@@ -2706,6 +2706,9 @@ function hexValueToDamageString(hexValue) {
           randomize.push('gp')
         }
         delete options.singleHitGearMode
+      } else if ('startStatRandoMode' in options) { // Starting Stat Randomizer - eldri7ch
+        randomize.push('ss:' + options.startStatRandoMode)
+        delete options.startStatRandoMode
       } else if ('easyMode' in options) { // simple input - eldri7ch
         if (options.easyMode) {
           randomize.push('ez')
@@ -3990,6 +3993,7 @@ function hexValueToDamageString(hexValue) {
     libraryShortcut,
     elemChaosMode,
     singleHitGearMode,
+    startStatRandoMode,
     easyMode,
     devStashMode,
     seasonalPhrasesMode,
@@ -4044,6 +4048,7 @@ function hexValueToDamageString(hexValue) {
     this.libraryShortcut = libraryShortcut
     this.elemChaosMode = elemChaosMode
     this.singleHitGearMode = singleHitGearMode
+    this.startStatRandoMode = startStatRandoMode
     this.easyMode = easyMode
     this.devStashMode = devStashMode
     this.seasonalPhrasesMode = seasonalPhrasesMode
@@ -4223,6 +4228,8 @@ function hexValueToDamageString(hexValue) {
     this.elemChaos = false
     // Single-Hit Gears
     this.singleHitGear = false
+    // Starting Stat Randomizer
+    this.startStatRando = undefined
     // simple input.
     this.easy = false
     // dev's stash mode.
@@ -4581,6 +4588,9 @@ function hexValueToDamageString(hexValue) {
     }
     if ('singleHitGearMode' in json) {
       builder.singleHitGearMode(json.singleHitGearMode)
+    }
+    if ('startStatRandoMode' in json) {
+      builder.startStatRandoMode(json.startStatRandoMode)
     }
     if ('easyMode' in json) {
       builder.easyMode(json.easyMode)
@@ -4950,6 +4960,9 @@ function hexValueToDamageString(hexValue) {
     }
     if ('singleHitGearMode' in preset) {
       this.singleHitGear = preset.singleHitGearMode
+    }
+    if ('startStatRandoMode' in preset) {
+      this.startStatRando = preset.startStatRandoMode
     }
     if ('easyMode' in preset) {
       this.easy = preset.easyMode
@@ -5746,6 +5759,12 @@ function hexValueToDamageString(hexValue) {
     this.singleHitGear = enabled
   }
 
+  // Enable Starting Stat Randomizer - eldri7ch
+  PresetBuilder.prototype.startStatRandoMode = function startStatRandoMode(ssMax) {
+    assert.oneOf(typeof(ssMax), ['boolean','number'])
+    this.startStatRando = ssMax
+  }
+
   // Enable Simplified Inputs - eldri7ch
   PresetBuilder.prototype.easyMode = function easyMode(enabled) {
     this.easy = enabled
@@ -6096,6 +6115,7 @@ function hexValueToDamageString(hexValue) {
     const libShort = self.libShort
     const elemChaos = self.elemChaos
     const singleHitGear = self.singleHitGear
+    const startStatRando = self.startStatRando
     const easy = false
     const devStash = false
     const seasonalPhrases = true
@@ -6150,6 +6170,7 @@ function hexValueToDamageString(hexValue) {
       libShort,
       elemChaos,
       singleHitGear,
+      startStatRando,
       easy,
       devStash,
       seasonalPhrases,
@@ -8558,6 +8579,61 @@ function applyBountyHunterTargets(rng,bhmode) {
     return data
   }
 
+  function alucardStatRando(rng,max) {
+    let newAmt                                                                  // set aside for return
+    newAmt = Math.floor(rng() * max) + 1                                        // random between 0 and the maximum. Max will never be more than 98
+    
+    return newAmt
+  }
+
+  function applyStartStatRandoPatches(rng,max) {
+    const data = new checked()
+    let offset
+    let newStr
+    let newCon
+    let newInt
+    let newLck
+    const r2Assign = 0x34020000
+
+    newStr = alucardStatRando(rng,max)
+    newCon = alucardStatRando(rng,max)
+    newInt = alucardStatRando(rng,max)
+    newLck = alucardStatRando(rng,max)
+
+    console.log(newStr)
+    console.log(newCon)
+    console.log(newInt)
+    console.log(newLck)
+
+    // console.log(numToHex(r2Assign + newStr))
+
+    newStr = numToHex(r2Assign + newStr)
+    newCon = numToHex(r2Assign + newCon)
+    newInt = numToHex(r2Assign + newInt)
+    newLck = numToHex(r2Assign + newLck)
+
+    offset = 0x00119B6C
+    offset = data.writeWord(offset,0x3C018009)
+    offset = data.writeWord(offset,newStr)
+    offset += 0x4
+
+    // console.log(numToHex(offset))
+
+    offset = data.writeWord(offset,newCon)
+    offset += 0x4
+
+    // console.log(numToHex(offset))
+
+    offset = data.writeWord(offset,newInt)
+    offset += 0x4
+
+    // console.log(numToHex(offset))
+
+    offset = data.writeWord(offset,newLck)
+
+    return data
+  }
+
   function applyDevsStashPatches() {
     // console.log('dev's stash')
 
@@ -9621,6 +9697,7 @@ function applyBountyHunterTargets(rng,bhmode) {
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
     applyElemChaosPatches: applyElemChaosPatches,
     applySingleHitGearPatches: applySingleHitGearPatches,
+    applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,
     applyDevsStashPatches: applyDevsStashPatches,
     applyMapColor: applyMapColor,

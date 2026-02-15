@@ -464,6 +464,15 @@ async function randomize(
             }
             debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
             optFlag = false
+            let ssMax = 0
+            if (options.startStatRandoMode || applied.startStatRandoMode) { // Starting Stat Randomizer - eldrich
+                optFlag = true
+                rng = getRNG(options, seed);
+                ssMax = Math.max(options.startStatRandoMode,applied.startStatRandoMode)
+                check.apply(util.applyStartStatRandoPatches(rng,ssMax))
+            }
+            debugMessage(debugEnabled, '| Starting Stat Randomizer | ' + optFlag + " | " + ssMax)
+            optFlag = false
             if (options.easyMode || applied.easyMode) { // Simplifies spell inputs and extends i-frames - eldrich
                 // Apply easy mode patches. - eldri7ch
                 optFlag = true
