@@ -722,8 +722,8 @@
       "showRelicLocations",
       "showSolutions",
       "showSpoilers",
-      "show-relics",
-      "show-solutions",
+      "showRelics",
+      "showSolutions",
       "startingEquipment",
       "singleHitGearMode",
       "startRoomRando2ndMode",
@@ -761,6 +761,7 @@
       const allRadios = document.querySelectorAll("input[type='radio']");
       allRadios.forEach(r => r.disabled = false);
     }
+    ChangeHandlers.tournamentModeChange();
   }
 
   function complexityChange() {

@@ -21,10 +21,10 @@
             <li><a href="https://ppf.sotn.io">PPF Patcher</a></li>
             <li><a href="../community.html">Leaderboards</a></li>
             <li><a href="../wheel.html">Wheel of Fun</a></li>
-            <li><a href="../tips&tricks/index.html" class="current">Tips and Tricks<small></small></a>
+            <li><a href="" class="current">Tips and Tricks<small></small></a>
                 <ul class="submenu">
-                    <li><a href="../tips&tricks/generalRando.html">General Randomizer</a></li>
-                    <li><a href="../tips&tricks/presetSpecific.html">Preset Specific</a></li>
+                    <li><a href="generalRando.html">General Randomizer</a></li>
+                    <li><a href="presetSpecific.html">Preset Specific</a></li>
                 </ul>
             </li>
             <li><a href="#">Community & News<small></small></a>
@@ -37,7 +37,7 @@
             <li><a>Tools<small></small></a>
                 <ul class="submenu">
                     <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
-                    <li><a href="https://taliczealot.github.io/#/apps/sotnrandotools">Rando Tools</a></li>
+                    <li><a href="https://github.com/sotnrando/SotnRandoTools/releases">Rando Tools</a></li>
                     <li><a href="../mapcompare.html">Map Tool</a></li>
                 </ul>
             </li>
@@ -46,14 +46,27 @@
     </nav>
     <main>
         <section>
-            <h3>Preset Specific</h3>
-                <ul>
-                    <li><a href="presetSpecific/lycanDeathSkip.html">Lycanthrope Death Skip</a></li>
-                    <li><a href="presetSpecific/lycanDopp10Skip.html">Lycanthrope Dopp10 Skip</a></li>
-                    <li><a href="presetSpecific/legDaySuperJump.html">Leg Day Super Jump</a></li>
-                    <li><a href=""></a></li>
-                </ul>
+
+            <!-- Trick Selector -->
+            <h3>Select a Trick</h3>
+            <select id="trickSelector"></select>
+
+            <!-- Trick Content -->
+            <h3 id="trickTitle"></h3>
+            <h2 id="difficulty"></h2>
+            <h2 id="utility"></h2>
+            <div id="trickContent"></div>
+
+            <!-- Video Container -->
+            <div id="videoContainer"></div>
+
         </section>
     </main>
+    <script>
+        fetch("presetTricks.json")
+            .then(r => r.json())
+            .then(data => initializeTrickPage(data));
+    </script>
+    <script src="tricks.js"></script>
 </body>
 </html>
