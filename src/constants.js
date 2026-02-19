@@ -1898,7 +1898,13 @@
     "Fall Tournament 2022 Champion JupiterClimb!",
     "Fall Tournament 2023 Champion the__swarm!",
     "Fall Tournament 2024 Champion DerDrach!",
-    "Fall Tournament 2025 Champion Renantrl1!"
+    "Fall Tournament 2025 Champion Renantrl1!",
+    "Inverse Holo Ultra Chrome Foil!",
+    "More faithful to the original than D2R!",
+    "Made of 28% Spaghetti!",
+    "Stages, and overlays, and entities, oh my!",
+    "Happy 40th, Castlevania!",
+    "BUFFER DO NOT DELETE!"
   ]
 
   const prideSplashPhrases = [

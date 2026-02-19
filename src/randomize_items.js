@@ -1838,6 +1838,69 @@
     offset = data.writeWord(offset, 0xAE020008)                                 // blue to 0x8003cac8
     data.writeWord(offset, 0x34020001)                                          // r2 needed to be set to 1 after this.
   }
+
+  function foilFamiliarCards(data, rng, options){
+    // Foil Familiar Cards; Code by eldri7ch, idea by eldri7ch
+    // Adds "foil" familiar cards and "inverse foil" familiar cards by changing palette ID in the relic definition tables.
+    // all arrays sorted from top-to-bottom or left to right: 
+    // Bat Card, Ghost Card, Faerie Card, Demon Card, Sword Card, Sprite Card, Nosedevil Card
+    let cardAddrArray = [0x000B57A2,0x000B57B2,0x000B57C2,0x000B57D2,0x000B57E2,0x000B57F2,0x000B5802]
+    let offset
+    let roll
+    let foilArray = [0x0A, 0x0C, 0x12, 0x0D, 0x15, 0x16, 0x14]
+    let inverseFoilArray = [0x00, 0x03, 0x07, 0x08, 0x05, 0x06, 0x09]
+    let detection = 0
+
+    if (options.tournamentMode) {                                               // Force the card array to be shuffled if Tournament mode is enabled
+      cardAddrArray = shuffled(rng, cardAddrArray)                              // This way no one can say "I saw shiny Demon Card" in a race
+    }
+
+    for (let i = 0; i < 7; i++) {                                               // Cycle through the cards
+      roll = Math.floor(rng() * 69)                                             // Foils are a 1 in 69 chance
+
+      offset = cardAddrArray.pop()                                              // Remove an address from the array regardless if it rolled foil
+      colorFromArray = foilArray.pop()                                          // Remove the colors from the array regardless to maintain card / color synch
+
+      // console.log(offset)
+      // console.log("Roll: " + roll + " | colorID: " + colorFromArray)
+
+      if (roll === 1) {                                                           // Only apply the new color if the roll was 0
+        detection++                                                             // Detection to alert players if there may be foils
+        data.writeChar(offset, colorFromArray)                                  // Apply the color
+      }
+    }
+
+    if (detection > 0){                                                         // If a foil was detected, let the player know
+      console.log("Foil Detected!")
+    }
+
+    detection = 0                                                               // detection reset
+
+    cardAddrArray = [0x000B57A2,0x000B57B2,0x000B57C2,0x000B57D2,0x000B57E2,0x000B57F2,0x000B5802]
+
+    if (options.tournamentMode) {                                               // Force the card array to be shuffled if Tournament mode is enabled
+      cardAddrArray = shuffled(rng, cardAddrArray)                              // This way no one can say "I saw shiny Demon Card" in a race
+    }
+
+    for (let i = 0; i < 7; i++) {                                               // Cycle through the cards
+      roll = Math.floor(rng() * 420)                                            // Inverse Foils are a 1 in 420 chance
+
+      offset = cardAddrArray.pop()                                              // Remove an address from the array regardless if it rolled inverse foil
+      colorFromArray = inverseFoilArray.pop()                                   // Remove the colors from the array regardless to maintain card / color synch
+      
+      // console.log(offset)
+      // console.log("Roll: " + roll + " | colorID: " + colorFromArray)
+
+      if (roll === 1) {                                                           // Only apply the new color if the roll was 0
+        detection++                                                             // Detection to alert players if there may be foils
+        data.writeChar(offset, colorFromArray)                                  // Apply the color
+      }
+    }
+    
+    if (detection > 0){                                                         // If an inverse foil was detected, let the player know
+      console.log("Inverse Foil Detected!")
+    }
+  }
   
   function randomizeItems(rng, items, newNames, options) {
     const data = new util.checked()
@@ -1985,6 +2048,7 @@
           randomizeDraculaCape(data,rng)
           randomizeMariaColor(data,rng)
           randomizeMenuBgColor(data, rng)
+          foilFamiliarCards(data, rng, options)
         }
         // Write items to ROM.
         if (options.itemLocations
