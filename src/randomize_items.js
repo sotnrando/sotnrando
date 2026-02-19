@@ -1864,7 +1864,7 @@
       // console.log(offset)
       // console.log("Roll: " + roll + " | colorID: " + colorFromArray)
 
-      if (roll === 1) {                                                           // Only apply the new color if the roll was 0
+      if (roll === 1) {                                                         // Only apply the new color if the roll was 0
         detection++                                                             // Detection to alert players if there may be foils
         data.writeChar(offset, colorFromArray)                                  // Apply the color
       }
@@ -1891,7 +1891,7 @@
       // console.log(offset)
       // console.log("Roll: " + roll + " | colorID: " + colorFromArray)
 
-      if (roll === 1) {                                                           // Only apply the new color if the roll was 0
+      if (roll === 1) {                                                         // Only apply the new color if the roll was 0
         detection++                                                             // Detection to alert players if there may be foils
         data.writeChar(offset, colorFromArray)                                  // Apply the color
       }
