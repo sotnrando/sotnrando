@@ -8300,14 +8300,24 @@ function applyBountyHunterTargets(rng,bhmode) {
     return data
   }
 
-  function applySplashText(rng,seasonAllowed) {                                               // Splash text; ASM by MottZilla, JS by 3snow_p7im, eldri7ch, and DotChris
+  function applySplashText(rng,seasonAllowed) {                                 // Splash text; ASM by MottZilla, JS by 3snow_p7im, eldri7ch, and DotChris
     const month = new Date().getMonth() + 1                                     // Acquire the month the code is run
+    const day = new Date().getDay() + 1
     let splashPhrases = []
 
-    if (seasonAllowed) {                                                    // check if seasonal phrases are allowed
+    console.log("Day: " + day)
+    if (seasonAllowed) {                                                        // check if seasonal phrases are allowed
       switch (month) {                                                          // Establish different sets of phrases from constants.js based on the month
+      case 4:                                                                   // April Fools
+        if(day === 1){
+          splashPhrases = constants.aprilFoolsSplashPhrases
+        }  
+        break
       case 6:                                                                   // Pride month
         splashPhrases = constants.prideSplashPhrases
+        break
+      case 12:                                                                  // Winter month
+        splashPhrases = constants.winterSplashPhrases
         break
       default:                                                                  // Any other month
         splashPhrases = constants.splashPhrases

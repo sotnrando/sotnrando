@@ -1927,6 +1927,44 @@
     "You get to decide your own identity!"
   ]
 
+  const winterSplashPhrases = [
+    "Happy Hanukkah!",
+    "Merry Christmas!",
+    "Merr crismus.",
+    "Joyous Kwanzaa!",
+    "Happy Yule!",
+    "Io, Saturnalia!",
+    "Happy Festivus for the rest of us!",
+    "Glad Lucia!",
+    "Dong Zhi kuai le!",
+    "Toji omedetou gozaimasu!",
+    "Yule steal men's souls!",
+    "Feliz Navidad!",
+    "Feliz Natal!",
+    "Merry Xmas!",
+    "Trouble the solstice of my mother no more!",
+    "THIS CANNOT BE! SNOOOOOOOOOOOOW!",
+    "Gifts ain't nothin to me, man!",
+    "Schmoos carrying Crissae-toe!",
+    "Don't drink the Egg Nauglamir!"
+  ]
+
+  const aprilFoolsSplashPhrases = [
+    "April Fools!",
+    "How's tricks!?",
+    "Behind you!",
+    "Made you look!",
+    "Psyche!",
+    "Up high! Down low! Too slow!",
+    "Gullible isn't in the dictionary!",
+    "They said you sound like and owl!",
+    "Just another totally normal day!",
+    "Just kidding!",
+    "Prank responisibly!",
+    "Leg pulling leads to amputees!",
+    "A moose once bit my sister!"
+  ]
+
   const adjectivesNormal = [
     "Invincible",
     "Burning",
@@ -2811,6 +2849,8 @@
     startRoomData: startRoomData,
     splashPhrases: splashPhrases,
     prideSplashPhrases: prideSplashPhrases,
+    winterSplashPhrases: winterSplashPhrases,
+    aprilFoolsSplashPhrases: aprilFoolsSplashPhrases,
     digest: digest,
     adjectivesNormal: adjectivesNormal,
     adjectivesHalloween: adjectivesHalloween,
