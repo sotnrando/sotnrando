@@ -552,24 +552,6 @@
     oldStr.substring(0,index) + newStr + oldStr.substring(index + newStr.length)
   }
 
-  function enemyNumStatRand(randomFloat,statAmt) {                              // a function to return a new value for a stat based on the stat's original value
-    let tempAmt                                                                 // temp holding space for the number to be converted
-    let newAmt                                                                  // this will ultimately be our output
-    tempAmt = Math.round(randomFloat * statAmt)                                 // set the temp to the new value for the stat
-    newAmt = numToHex(tempAmt,4)                                                // convert the new stat amount to hex width 4 to avoid giving large HP enemies 15k+ HP
-    return newAmt                                                               // return the resulting hex for implementation
-  }
-
-  function itemPriceStatRand(rng,priceAmt) {                                    // a function to return a new value for a stat based on the stat's original value
-    let randomFloat                                                             // set aside for floating decimal
-    let tempAmt                                                                 // temp holding space for the number to be converted
-    let newAmt                                                                  // this will ultimately be our output
-    randomFloat = ((Math.floor(rng() * 100) +50)/ 100)                          // select a random % between 50% and 150%
-    tempAmt = Math.round(randomFloat * priceAmt)                                // set the temp to the new value for the price
-    newAmt = numToHex(tempAmt,8)                                                // convert the new stat amount to hex width 8 to match the current format
-    return newAmt                                                               // return the resulting hex for implementation
-  }
-
   function shuffle(rng,array) {
     for (let i = array.length - 1; i > 0; i--) {
       // Generate a random index from 0 to i
@@ -579,780 +561,6 @@
       [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
     }
     return array;
-  }
-
-  function halfChanceElementRando(rng) {
-    let newType
-    // We want nothing 50% of the time, and a random type all other times
-    if(rng() >= 0.5) return 0x0000;
-    
-    let typeList = [
-      0x0020, // hit
-      0x0040, // cut
-      0x0080, // poison
-      0x8000, // Fire
-      0x2000, // Ice
-      0x1000, // Holy
-      0x4000, // Lightning
-      0x0100, // Curse
-      0x0200, // Stone
-      0x0800  // Dark
-    ]
-    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
-    return newType
-  }
-
-  function thirdChanceElementRando(rng) {
-    let newType
-    // We want nothing 33% of the time, and a random type all other times
-    if(rng() >= 0.33) return 0x0000;
-    
-    let typeList = [
-      0x0020, // hit
-      0x0040, // cut
-      0x0080, // poison
-      0x8000, // Fire
-      0x2000, // Ice
-      0x1000, // Holy
-      0x4000, // Lightning
-      0x0100, // Curse
-      0x0200, // Stone
-      0x0800  // Dark
-    ]
-    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
-    return newType
-  }
-
-  function quarterChanceElementRando(rng) {
-    let newType
-    // We want nothing 50% of the time, and a random type all other times
-    if(rng() >= 0.25) return 0x0000;
-    
-    let typeList = [
-      0x0020, // hit
-      0x0040, // cut
-      0x0080, // poison
-      0x8000, // Fire
-      0x2000, // Ice
-      0x1000, // Holy
-      0x4000, // Lightning
-      0x0100, // Curse
-      0x0200, // Stone
-      0x0800  // Dark
-    ]
-    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
-    return newType
-  }
-
-  function weaponElemRando(rng) {
-    let newType
-    let typeList = [
-      0x0020, // hit
-      0x0040, // cut
-      0x0080, // poison
-      0x8000, // Fire
-      0x2000, // Ice
-      0x1000, // Holy
-      0x4000, // Lightning
-      0x0100, // Curse
-      0x0200, // Stone
-      0x0800  // Dark
-    ]
-    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
-    return newType
-  }
-
-  function enemyWeakTypeStatRand(rng) {
-    let newType
-    let typeList = [
-      0x0020, // hit
-      0x0040, // cut
-      0x0080, // poison
-      0x8000, // Fire
-      0x2000, // Ice
-      0x1000, // Holy
-      0x4000, // Lightning
-      0x0100, // Curse
-      0x0200, // Stone
-      0x0800  // Dark
-    ]
-    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
-    return newType
-  }
-
-  function enemyAtkTypeStatRand(rng) {
-    let newType
-    let typeList = [
-      // 0x0000, // No hitbox - Do not combine
-      // 0x1000, // Hit 1/6 - Do not combine within the 0xn000 tier. These do not combine with each other. Do not combine with the 0x0n00 tier.
-      // 0x2000, // hit - Do not combine within the 0xn000 tier. These do not combine with each other.
-      // 0x4000, // cut - Do not combine within the 0xn000 tier. These do not combine with each other.
-      // 0x5000, // cut 1/6 - Do not combine within the 0xn000 tier. These do not combine with each other. Do not combine with the 0x0n00 tier.
-      // 0x6000, // weak cut - Do not combine
-      // 0x8000, // Poison - Do not combine within the 0xn000 tier. These do not combine with each other.
-      // 0x0001, // Curse
-      // 0x0002, // Stone
-      // 0x0004, // Water
-      // 0x0008, // Dark
-      // 0x0010, // Holy
-      // 0x0020, // Ice
-      // 0x0040, // Lightning
-      // 0x0080, // Fire
-      // 0x0200, // Weak Hit - do not combine within the 0x0n00 tier. These do not combine with each other.
-      // 0x0400, // Big Toss - do not combine within the 0x0n00 tier. These do not combine with each other.
-      // 0x0600, // guard - do not combine.
-      // 0x0700, // Cat - do not combine within the 0x0n00 tier. These do not combine with each other.
-      0x0000, // No hitbox
-      0x0000, // No hitbox
-      0x0000, // No hitbox
-      0x0006, // guard
-      0x0006, // guard
-      0x0006, // guard
-      0x0021, // Normal Hit
-      0x0021, // Normal Hit
-      0x0021, // Normal Hit
-      0x0121, // Hit Curse
-      0x0221, // Hit Stone
-      0x0321, // Hit Stone Curse
-      0x0421, // Hit Water
-      0x0421, // Hit Water
-      0x0421, // Hit Water
-      0x0521, // Hit Water Curse
-      0x0621, // Hit Water Stone
-      0x0821, // Hit Dark
-      0x0821, // Hit Dark
-      0x0821, // Hit Dark
-      0x0921, // Hit Dark Curse
-      0x0a21, // Hit Dark Stone
-      0x0c21, // Hit Dark Water
-      0x0c21, // Hit Dark Water
-      0x0c21, // Hit Dark Water
-      0x1021, // Hit Holy
-      0x1021, // Hit Holy
-      0x1021, // Hit Holy
-      0x1021, // Hit Holy
-      0x1021, // Hit Holy
-      0x1121, // Hit Holy Curse
-      0x1221, // Hit Holy Stone
-      0x1421, // Hit Holy Water
-      0x1421, // Hit Holy Water
-      0x1421, // Hit Holy Water
-      0x1821, // Hit Holy Dark
-      0x1821, // Hit Holy Dark
-      0x1821, // Hit Holy Dark
-      0x2021, // Hit Ice
-      0x2021, // Hit Ice
-      0x2021, // Hit Ice
-      0x2121, // Hit Ice Curse
-      0x2221, // Hit Ice Stone
-      0x2421, // Hit Ice Water
-      0x2821, // Hit Ice Dark
-      0x2821, // Hit Ice Dark
-      0x2821, // Hit Ice Dark
-      0x3021, // Hit Holy Ice
-      0x3021, // Hit Holy Ice
-      0x3021, // Hit Holy Ice
-      0x4021, // Hit Lightning
-      0x4021, // Hit Lightning
-      0x4021, // Hit Lightning
-      0x4121, // Hit Lightning Curse
-      0x4221, // Hit Lightning Stone
-      0x4421, // Hit Lightning Water
-      0x4421, // Hit Lightning Water
-      0x4421, // Hit Lightning Water
-      0x4821, // Hit Lightning Dark
-      0x4821, // Hit Lightning Dark
-      0x4821, // Hit Lightning Dark
-      0x5021, // Hit Holy Lightning
-      0x5021, // Hit Holy Lightning
-      0x5021, // Hit Holy Lightning
-      0x6021, // Hit Ice Lightning
-      0x6021, // Hit Ice Lightning
-      0x6021, // Hit Ice Lightning
-      0x8021, // Hit Fire
-      0x8021, // Hit Fire
-      0x8021, // Hit Fire
-      0x8121, // Hit Fire Curse
-      0x8221, // Hit Fire Stone
-      0x8421, // Hit Fire Water
-      0x8421, // Hit Fire Water
-      0x8421, // Hit Fire Water
-      0x8821, // Hit Fire Dark
-      0x8821, // Hit Fire Dark
-      0x8821, // Hit Fire Dark
-      0x9021, // Hit Holy Fire
-      0x9021, // Hit Holy Fire
-      0x9021, // Hit Holy Fire
-      0xA021, // Hit Ice Fire
-      0xA021, // Hit Ice Fire
-      0xA021, // Hit Ice Fire
-      0xC021, // Hit Lightning Fire
-      0xC021, // Hit Lightning Fire
-      0xC021, // Hit Lightning Fire
-      0x0124, // Hit Curse
-      0x0224, // Hit Stone
-      0x0324, // Hit Stone Curse
-      0x0424, // Hit Water
-      0x0424, // Hit Water
-      0x0424, // Hit Water
-      0x0524, // Hit Water Curse
-      0x0624, // Hit Water Stone
-      0x0824, // Hit Dark
-      0x0824, // Hit Dark
-      0x0824, // Hit Dark
-      0x0924, // Hit Dark Curse
-      0x0a24, // Hit Dark Stone
-      0x0c24, // Hit Dark Water
-      0x0c24, // Hit Dark Water
-      0x0c24, // Hit Dark Water
-      0x1024, // Hit Holy
-      0x1024, // Hit Holy
-      0x1024, // Hit Holy
-      0x1024, // Hit Holy
-      0x1024, // Hit Holy
-      0x1124, // Hit Holy Curse
-      0x1224, // Hit Holy Stone
-      0x1424, // Hit Holy Water
-      0x1424, // Hit Holy Water
-      0x1424, // Hit Holy Water
-      0x1824, // Hit Holy Dark
-      0x1824, // Hit Holy Dark
-      0x1824, // Hit Holy Dark
-      0x2024, // Hit Ice
-      0x2024, // Hit Ice
-      0x2024, // Hit Ice
-      0x2124, // Hit Ice Curse
-      0x2224, // Hit Ice Stone
-      0x2424, // Hit Ice Water
-      0x2824, // Hit Ice Dark
-      0x2824, // Hit Ice Dark
-      0x2824, // Hit Ice Dark
-      0x3024, // Hit Holy Ice
-      0x3024, // Hit Holy Ice
-      0x3024, // Hit Holy Ice
-      0x4024, // Hit Lightning
-      0x4024, // Hit Lightning
-      0x4024, // Hit Lightning
-      0x4124, // Hit Lightning Curse
-      0x4224, // Hit Lightning Stone
-      0x4424, // Hit Lightning Water
-      0x4424, // Hit Lightning Water
-      0x4424, // Hit Lightning Water
-      0x4824, // Hit Lightning Dark
-      0x4824, // Hit Lightning Dark
-      0x4824, // Hit Lightning Dark
-      0x5024, // Hit Holy Lightning
-      0x5024, // Hit Holy Lightning
-      0x5024, // Hit Holy Lightning
-      0x6024, // Hit Ice Lightning
-      0x6024, // Hit Ice Lightning
-      0x6024, // Hit Ice Lightning
-      0x8024, // Hit Fire
-      0x8024, // Hit Fire
-      0x8024, // Hit Fire
-      0x8124, // Hit Fire Curse
-      0x8224, // Hit Fire Stone
-      0x8424, // Hit Fire Water
-      0x8424, // Hit Fire Water
-      0x8424, // Hit Fire Water
-      0x8824, // Hit Fire Dark
-      0x8824, // Hit Fire Dark
-      0x8824, // Hit Fire Dark
-      0x9024, // Hit Holy Fire
-      0x9024, // Hit Holy Fire
-      0x9024, // Hit Holy Fire
-      0xA024, // Hit Ice Fire
-      0xA024, // Hit Ice Fire
-      0xA024, // Hit Ice Fire
-      0xC024, // Hit Lightning Fire
-      0xC024, // Hit Lightning Fire
-      0xC024, // Hit Lightning Fire
-      0x0041, // Normal Cut
-      0x0041, // Normal Cut
-      0x0041, // Normal Cut
-      0x0141, // Cut Curse
-      0x0241, // Cut Stone
-      0x0341, // Cut Stone Curse
-      0x0441, // Cut Water
-      0x0441, // Cut Water
-      0x0441, // Cut Water
-      0x0541, // Cut Water Curse
-      0x0641, // Cut Water Stone
-      0x0841, // Cut Dark
-      0x0841, // Cut Dark
-      0x0841, // Cut Dark
-      0x0941, // Cut Dark Curse
-      0x0a41, // Cut Dark Stone
-      0x0c41, // Cut Dark Water
-      0x0c41, // Cut Dark Water
-      0x0c41, // Cut Dark Water
-      0x1041, // Cut Holy
-      0x1041, // Cut Holy
-      0x1041, // Cut Holy
-      0x1141, // Cut Holy Curse
-      0x1241, // Cut Holy Stone
-      0x1441, // Cut Holy Water
-      0x1441, // Cut Holy Water
-      0x1441, // Cut Holy Water
-      0x1841, // Cut Holy Dark
-      0x1841, // Cut Holy Dark
-      0x1841, // Cut Holy Dark
-      0x2041, // Cut Ice
-      0x2041, // Cut Ice
-      0x2041, // Cut Ice
-      0x2141, // Cut Ice Curse
-      0x2241, // Cut Ice Stone
-      0x2441, // Cut Ice Water
-      0x2441, // Cut Ice Water
-      0x2441, // Cut Ice Water
-      0x2841, // Cut Ice Dark
-      0x2841, // Cut Ice Dark
-      0x2841, // Cut Ice Dark
-      0x3041, // Cut Holy Ice
-      0x3041, // Cut Holy Ice
-      0x3041, // Cut Holy Ice
-      0x4041, // Cut Lightning
-      0x4041, // Cut Lightning
-      0x4041, // Cut Lightning
-      0x4141, // Cut Lightning Curse
-      0x4241, // Cut Lightning Stone
-      0x4441, // Cut Lightning Water
-      0x4441, // Cut Lightning Water
-      0x4441, // Cut Lightning Water
-      0x4841, // Cut Lightning Dark
-      0x4841, // Cut Lightning Dark
-      0x4841, // Cut Lightning Dark
-      0x5041, // Cut Holy Lightning
-      0x5041, // Cut Holy Lightning
-      0x5041, // Cut Holy Lightning
-      0x6041, // Cut Ice Lightning
-      0x6041, // Cut Ice Lightning
-      0x6041, // Cut Ice Lightning
-      0x8041, // Cut Fire
-      0x8041, // Cut Fire
-      0x8041, // Cut Fire
-      0x8141, // Cut Fire Curse
-      0x8241, // Cut Fire Stone
-      0x8441, // Cut Fire Water
-      0x8441, // Cut Fire Water
-      0x8441, // Cut Fire Water
-      0x8841, // Cut Fire Dark
-      0x8841, // Cut Fire Dark
-      0x8841, // Cut Fire Dark
-      0x9041, // Cut Holy Fire
-      0x9041, // Cut Holy Fire
-      0x9041, // Cut Holy Fire
-      0xA041, // Cut Ice Fire
-      0xA041, // Cut Ice Fire
-      0xA041, // Cut Ice Fire
-      0xC041, // Cut Lightning Fire
-      0xC041, // Cut Lightning Fire
-      0xC041, // Cut Lightning Fire
-      0x0044, // Normal Cut
-      0x0044, // Normal Cut
-      0x0044, // Normal Cut
-      0x0144, // Cut Curse
-      0x0244, // Cut Stone
-      0x0344, // Cut Stone Curse
-      0x0444, // Cut Water
-      0x0444, // Cut Water
-      0x0444, // Cut Water
-      0x0544, // Cut Water Curse
-      0x0644, // Cut Water Stone
-      0x0844, // Cut Dark
-      0x0844, // Cut Dark
-      0x0844, // Cut Dark
-      0x0944, // Cut Dark Curse
-      0x0a44, // Cut Dark Stone
-      0x0c44, // Cut Dark Water
-      0x0c44, // Cut Dark Water
-      0x0c44, // Cut Dark Water
-      0x1044, // Cut Holy
-      0x1044, // Cut Holy
-      0x1044, // Cut Holy
-      0x1144, // Cut Holy Curse
-      0x1244, // Cut Holy Stone
-      0x1444, // Cut Holy Water
-      0x1444, // Cut Holy Water
-      0x1444, // Cut Holy Water
-      0x1844, // Cut Holy Dark
-      0x1844, // Cut Holy Dark
-      0x1844, // Cut Holy Dark
-      0x2044, // Cut Ice
-      0x2044, // Cut Ice
-      0x2044, // Cut Ice
-      0x2144, // Cut Ice Curse
-      0x2244, // Cut Ice Stone
-      0x2444, // Cut Ice Water
-      0x2444, // Cut Ice Water
-      0x2444, // Cut Ice Water
-      0x2844, // Cut Ice Dark
-      0x2844, // Cut Ice Dark
-      0x2844, // Cut Ice Dark
-      0x3044, // Cut Holy Ice
-      0x3044, // Cut Holy Ice
-      0x3044, // Cut Holy Ice
-      0x4044, // Cut Lightning
-      0x4044, // Cut Lightning
-      0x4044, // Cut Lightning
-      0x4144, // Cut Lightning Curse
-      0x4244, // Cut Lightning Stone
-      0x4444, // Cut Lightning Water
-      0x4444, // Cut Lightning Water
-      0x4444, // Cut Lightning Water
-      0x4844, // Cut Lightning Dark
-      0x4844, // Cut Lightning Dark
-      0x4844, // Cut Lightning Dark
-      0x5044, // Cut Holy Lightning
-      0x5044, // Cut Holy Lightning
-      0x5044, // Cut Holy Lightning
-      0x6044, // Cut Ice Lightning
-      0x6044, // Cut Ice Lightning
-      0x6044, // Cut Ice Lightning
-      0x8044, // Cut Fire
-      0x8044, // Cut Fire
-      0x8044, // Cut Fire
-      0x8144, // Cut Fire Curse
-      0x8244, // Cut Fire Stone
-      0x8444, // Cut Fire Water
-      0x8444, // Cut Fire Water
-      0x8444, // Cut Fire Water
-      0x8844, // Cut Fire Dark
-      0x8844, // Cut Fire Dark
-      0x8844, // Cut Fire Dark
-      0x9044, // Cut Holy Fire
-      0x9044, // Cut Holy Fire
-      0x9044, // Cut Holy Fire
-      0xA044, // Cut Ice Fire
-      0xA044, // Cut Ice Fire
-      0xA044, // Cut Ice Fire
-      0xC044, // Cut Lightning Fire
-      0xC044, // Cut Lightning Fire
-      0xC044, // Cut Lightning Fire
-      0x0080, // Normal Poison
-      0x0080, // Normal Poison
-      0x0080, // Normal Poison
-      0x0180, // Poison Curse
-      0x0280, // Poison Stone
-      0x0480, // Poison Water
-      0x0480, // Poison Water
-      0x0480, // Poison Water
-      0x0880, // Poison Dark
-      0x0880, // Poison Dark
-      0x0880, // Poison Dark
-      0x1080, // Poison Holy
-      0x1080, // Poison Holy
-      0x1080, // Poison Holy
-      0x2080, // Poison Ice
-      0x2080, // Poison Ice
-      0x2080, // Poison Ice
-      0x4080, // Poison Lightning
-      0x4080, // Poison Lightning
-      0x4080, // Poison Lightning
-      0x8080, // Poison Fire
-      0x8080, // Poison Fire
-      0x8080, // Poison Fire
-      0x0084, // Poison Big Toss
-      0x0084, // Poison Big Toss
-      0x0084, // Poison Big Toss
-      0x0184, // Poison Big Toss Curse
-      0x0284, // Poison Big Toss Stone
-      0x0484, // Poison Big Toss Water
-      0x0484, // Poison Big Toss Water
-      0x0484, // Poison Big Toss Water
-      0x0884, // Poison Big Toss Dark
-      0x0884, // Poison Big Toss Dark
-      0x0884, // Poison Big Toss Dark
-      0x1084, // Poison Big Toss Holy
-      0x1084, // Poison Big Toss Holy
-      0x1084, // Poison Big Toss Holy
-      0x2084, // Poison Big Toss Ice
-      0x2084, // Poison Big Toss Ice
-      0x2084, // Poison Big Toss Ice
-      0x4084, // Poison Big Toss Lightning
-      0x4084, // Poison Big Toss Lightning
-      0x4084, // Poison Big Toss Lightning
-      0x8084, // Poison Big Toss Fire
-      0x8084, // Poison Big Toss Fire
-      0x8084, // Poison Big Toss Fire
-      0x0007, // Cat
-      0x0007, // Cat
-      0x0007, // Cat
-      0x0107, // Cat Curse
-      0x0207, // Cat Stone
-      0x0407, // Cat Water
-      0x0407, // Cat Water
-      0x0407, // Cat Water
-      0x0807, // Cat Dark
-      0x0807, // Cat Dark
-      0x0807, // Cat Dark
-      0x1007, // Cat Holy
-      0x1007, // Cat Holy
-      0x1007, // Cat Holy
-      0x2007, // Cat Ice
-      0x2007, // Cat Ice
-      0x2007, // Cat Ice
-      0x4007, // Cat Lightning
-      0x4007, // Cat Lightning
-      0x4007, // Cat Lightning
-      0x8007, // Cat Fire
-      0x8007, // Cat Fire
-      0x8007, // Cat Fire
-      0x0011, // Normal Hit 1/6
-      0x0011, // Normal Hit 1/6
-      0x0011, // Normal Hit 1/6
-      0x0411, // Hit 1/6 Water
-      0x0411, // Hit 1/6 Water
-      0x0411, // Hit 1/6 Water
-      0x0811, // Hit 1/6 Dark
-      0x0811, // Hit 1/6 Dark
-      0x0811, // Hit 1/6 Dark
-      0x0c11, // Hit 1/6 Dark Water
-      0x0c11, // Hit 1/6 Dark Water
-      0x0c11, // Hit 1/6 Dark Water
-      0x1011, // Hit 1/6 Holy
-      0x1011, // Hit 1/6 Holy
-      0x1011, // Hit 1/6 Holy
-      0x1411, // Hit 1/6 Holy Water
-      0x1411, // Hit 1/6 Holy Water
-      0x1411, // Hit 1/6 Holy Water
-      0x1811, // Hit 1/6 Holy Dark
-      0x1811, // Hit 1/6 Holy Dark
-      0x1811, // Hit 1/6 Holy Dark
-      0x2011, // Hit 1/6 Ice
-      0x2011, // Hit 1/6 Ice
-      0x2011, // Hit 1/6 Ice
-      0x2411, // Hit 1/6 Ice Water
-      0x2411, // Hit 1/6 Ice Water
-      0x2411, // Hit 1/6 Ice Water
-      0x2811, // Hit 1/6 Ice Dark
-      0x2811, // Hit 1/6 Ice Dark
-      0x2811, // Hit 1/6 Ice Dark
-      0x3011, // Hit 1/6 Holy Ice
-      0x3011, // Hit 1/6 Holy Ice
-      0x3011, // Hit 1/6 Holy Ice
-      0x4011, // Hit 1/6 Lightning
-      0x4011, // Hit 1/6 Lightning
-      0x4011, // Hit 1/6 Lightning
-      0x4411, // Hit 1/6 Lightning Water
-      0x4411, // Hit 1/6 Lightning Water
-      0x4411, // Hit 1/6 Lightning Water
-      0x4811, // Hit 1/6 Lightning Dark
-      0x4811, // Hit 1/6 Lightning Dark
-      0x4811, // Hit 1/6 Lightning Dark
-      0x5011, // Hit 1/6 Holy Lightning
-      0x5011, // Hit 1/6 Holy Lightning
-      0x5011, // Hit 1/6 Holy Lightning
-      0x6011, // Hit 1/6 Ice Lightning
-      0x6011, // Hit 1/6 Ice Lightning
-      0x6011, // Hit 1/6 Ice Lightning
-      0x8011, // Hit 1/6 Fire
-      0x8011, // Hit 1/6 Fire
-      0x8011, // Hit 1/6 Fire
-      0x8411, // Hit 1/6 Fire Water
-      0x8411, // Hit 1/6 Fire Water
-      0x8411, // Hit 1/6 Fire Water
-      0x8811, // Hit 1/6 Fire Dark
-      0x8811, // Hit 1/6 Fire Dark
-      0x8811, // Hit 1/6 Fire Dark
-      0x9011, // Hit 1/6 Holy Fire
-      0x9011, // Hit 1/6 Holy Fire
-      0x9011, // Hit 1/6 Holy Fire
-      0xA011, // Hit 1/6 Ice Fire
-      0xA011, // Hit 1/6 Ice Fire
-      0xA011, // Hit 1/6 Ice Fire
-      0xC011, // Hit 1/6 Lightning Fire
-      0xC011, // Hit 1/6 Lightning Fire
-      0xC011, // Hit 1/6 Lightning Fire
-      0x0051, // Normal Cut 1/6
-      0x0051, // Normal Cut 1/6
-      0x0051, // Normal Cut 1/6
-      0x0451, // Cut 1/6 Water
-      0x0451, // Cut 1/6 Water
-      0x0451, // Cut 1/6 Water
-      0x0851, // Cut 1/6 Dark
-      0x0851, // Cut 1/6 Dark
-      0x0851, // Cut 1/6 Dark
-      0x0c51, // Cut 1/6 Dark Water
-      0x0c51, // Cut 1/6 Dark Water
-      0x0c51, // Cut 1/6 Dark Water
-      0x1051, // Cut 1/6 Holy
-      0x1051, // Cut 1/6 Holy
-      0x1051, // Cut 1/6 Holy
-      0x1451, // Cut 1/6 Holy Water
-      0x1451, // Cut 1/6 Holy Water
-      0x1451, // Cut 1/6 Holy Water
-      0x1851, // Cut 1/6 Holy Dark
-      0x1851, // Cut 1/6 Holy Dark
-      0x1851, // Cut 1/6 Holy Dark
-      0x2051, // Cut 1/6 Ice
-      0x2051, // Cut 1/6 Ice
-      0x2051, // Cut 1/6 Ice
-      0x2451, // Cut 1/6 Ice Water
-      0x2451, // Cut 1/6 Ice Water
-      0x2451, // Cut 1/6 Ice Water
-      0x2851, // Cut 1/6 Ice Dark
-      0x2851, // Cut 1/6 Ice Dark
-      0x2851, // Cut 1/6 Ice Dark
-      0x3051, // Cut 1/6 Holy Ice
-      0x3051, // Cut 1/6 Holy Ice
-      0x3051, // Cut 1/6 Holy Ice
-      0x4051, // Cut 1/6 Lightning
-      0x4051, // Cut 1/6 Lightning
-      0x4051, // Cut 1/6 Lightning
-      0x4451, // Cut 1/6 Lightning Water
-      0x4451, // Cut 1/6 Lightning Water
-      0x4451, // Cut 1/6 Lightning Water
-      0x4851, // Cut 1/6 Lightning Dark
-      0x4851, // Cut 1/6 Lightning Dark
-      0x4851, // Cut 1/6 Lightning Dark
-      0x5051, // Cut 1/6 Holy Lightning
-      0x5051, // Cut 1/6 Holy Lightning
-      0x5051, // Cut 1/6 Holy Lightning
-      0x6051, // Cut 1/6 Ice Lightning
-      0x6051, // Cut 1/6 Ice Lightning
-      0x6051, // Cut 1/6 Ice Lightning
-      0x8051, // Cut 1/6 Fire
-      0x8051, // Cut 1/6 Fire
-      0x8051, // Cut 1/6 Fire
-      0x8451, // Cut 1/6 Fire Water
-      0x8451, // Cut 1/6 Fire Water
-      0x8451, // Cut 1/6 Fire Water
-      0x8851, // Cut 1/6 Fire Dark
-      0x8851, // Cut 1/6 Fire Dark
-      0x8851, // Cut 1/6 Fire Dark
-      0x9051, // Cut 1/6 Holy Fire
-      0x9051, // Cut 1/6 Holy Fire
-      0x9051, // Cut 1/6 Holy Fire
-      0xA051, // Cut 1/6 Ice Fire
-      0xA051, // Cut 1/6 Ice Fire
-      0xA051, // Cut 1/6 Ice Fire
-      0xC051, // Cut 1/6 Lightning Fire
-      0xC051, // Cut 1/6 Lightning Fire
-      0xC051, // Cut 1/6 Lightning Fire
-    ]
-    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
-    return newType
-  }
-
-  function getStatType(typeObj, value){
-    let valuesForDamage = findRequiredNumbers(value, Object.keys(typeObj))
-    valuesForDamage.sort((a, b) => a - b);  // Sort them ascending
-    let valueType = ""
-    for(value of valuesForDamage){
-        valueType += typeObj[value]
-    }
-    return valueType
-}
-
-function hexValueToDamageString(hexValue) {
-    // Hit types can't be combined
-    let hitTypes = {
-        0: "",     // No Hit Box
-        1: "",     // Hit 16%
-        2: "",     // Hit
-        4: "",     // Cut
-        5: "",     // Cut 16%
-        6: "",     // Cut Weak
-        8: "30"      // Poison
-    }
-
-    // Hit effects can't be combined
-    let hitEffects = {
-        0: "",         // No Hit Box
-        1: "",         // Ignore normal attack styles
-        2: "",       // Hit Weak
-        4: "",       // Big Toss
-        6: "",       // Guard
-        7: "23"        // Cat
-    }
-
-    // Damage Types CAN be combined
-    let damageTypes = {
-        0: "",         // None
-        1: "28",        // Holy
-        2: "29",        // Ice
-        4: "2c",        // Lightning
-        8: "26"         // Fire
-    }
-
-    // Special Types CAN be combined
-    let specialTypes = {
-        0: "",          // None
-        1: "35",         // Curse
-        2: "33",         // Stone
-        4: "37",         // Water
-        8: "24"          // Dark
-    }
-
-    let hitTypeValue = (hexValue >> 4) & 0xF;
-    let hitType = hitTypes[hitTypeValue]
-
-    let hitEffectValue = hexValue & 0xF
-    let hitEffect = hitEffects[hitEffectValue]
-
-    let damageTypeValue = (hexValue >> 12) & 0xF;
-    let damageType = getStatType(damageTypes, damageTypeValue);
-
-    let specialTypeValue = (hexValue >> 8) & 0xF;
-    let specialType = getStatType(specialTypes, specialTypeValue)
-
-    return `${hitType}${hitEffect}${damageType}${specialType}`
-  }
-
-  function hexValueToDefenceString(hexValue) {
-    // Hit types can't be combined
-    let hitTypes = {
-        0: "3f",     // No Resistance
-        1: "",     // Hit 16%
-        2: "03",     // Hit
-        4: "0f",     // Cut
-        5: "",     // Cut 16%
-        6: "",     // Cut Weak
-        8: "30"      // Poison
-    }
-
-    // Hit effects can't be combined
-    let hitEffects = {
-        0: "",         // No Hit Box
-        1: "",         // Ignore normal attack styles
-        2: "",       // Hit Weak
-        4: "",       // Big Toss
-        6: "",       // Guard
-        7: "23"        // Cat
-    }
-
-    // Damage Types CAN be combined
-    let damageTypes = {
-        0: "",         // None
-        1: "28",        // Holy
-        2: "29",        // Ice
-        4: "2c",        // Lightning
-        8: "26"         // Fire
-    }
-
-    // Special Types CAN be combined
-    let specialTypes = {
-        0: "",          // None
-        1: "35",         // Curse
-        2: "33",         // Stone
-        4: "37",         // Water
-        8: "24"          // Dark
-    }
-
-    let hitTypeValue = (hexValue >> 4) & 0xF;
-    let hitType = hitTypes[hitTypeValue]
-
-    let hitEffectValue = hexValue & 0xF
-    let hitEffect = hitEffects[hitEffectValue]
-
-    let damageTypeValue = (hexValue >> 12) & 0xF;
-    let damageType = getStatType(damageTypes, damageTypeValue);
-
-    let specialTypeValue = (hexValue >> 8) & 0xF;
-    let specialType = getStatType(specialTypes, specialTypeValue)
-
-    return `${hitType}${hitEffect}${damageType}${specialType}`
   }
 
   checked.prototype.writeChar = function writeChar(address, val) {
@@ -2601,7 +1809,7 @@ function hexValueToDamageString(hexValue) {
           randomize.push('t')
         }
         delete options.tournamentMode
-      } else if ('colorrandoMode' in options) { // randomizes cape, grav boots, and hydro storm colors - eldri7ch
+      } else  if ('colorrandoMode' in options) { // randomizes cape, grav boots, and hydro storm colors - eldri7ch
         if (options.colorrandoMode) {
           randomize.push('l')
         }
@@ -2631,11 +1839,6 @@ function hexValueToDamageString(hexValue) {
           randomize.push('9')
         }
         delete options.fastwarpMode
-      } else if ('itemNameRandoMode' in options) { // randomize item names with item stat rando - MottZilla
-        if (options.itemNameRandoMode) {
-          randomize.push('in')
-        }
-        delete options.itemNameRandoMode
       } else if ('noprologueMode' in options) { // Removes prologue - eldri7ch
         if (options.noprologueMode) {
           randomize.push('R')
@@ -2656,6 +1859,11 @@ function hexValueToDamageString(hexValue) {
           randomize.push('E')
         }
         delete options.enemyStatRandoMode
+      } else if ('elemChaosMode' in options) { // elemental chaos - eldri7ch
+        if (options.elemChaosMode) {
+          randomize.push('ec')
+        }
+        delete options.elemChaosMode
       } else if ('shopPriceRandoMode' in options) { // randomize shop prices - eldri7ch
         if (options.shopPriceRandoMode) {
           randomize.push('sh')
@@ -2696,16 +1904,14 @@ function hexValueToDamageString(hexValue) {
           randomize.push('ls')
         }
         delete options.libraryShortcut
-      } else if ('elemChaosMode' in options) { // elemental chaos - eldri7ch
-        if (options.elemChaosMode) {
-          randomize.push('ec')
-        }
-        delete options.elemChaosMode
       } else if ('singleHitGearMode' in options) { // Single-Hit Gears - eldri7ch
         if (options.singleHitGearMode) {
           randomize.push('gp')
         }
         delete options.singleHitGearMode
+      } else if ('newGoalsSet' in options) { // Change the goals
+        randomize.push('g:' + options.newGoalsSet)
+        delete options.newGoalsSet
       } else if ('startStatRandoMode' in options) { // Starting Stat Randomizer - eldri7ch
         randomize.push('ss:' + options.startStatRandoMode)
         delete options.startStatRandoMode
@@ -2727,9 +1933,6 @@ function hexValueToDamageString(hexValue) {
       } else if ('mapcolorTheme' in options) { // switch map color
         randomize.push('m:' + options.mapcolorTheme)
         delete options.mapcolorTheme
-      } else if ('newGoalsSet' in options) { // Change the goals
-        randomize.push('g:' + options.newGoalsSet)
-        delete options.newGoalsSet
       } else if ('bossMusicSeparation' in options) { // boss Music Separation- eldri7ch
         if (options.bossMusicSeparation) {
           randomize.push('bm')
@@ -3146,6 +2349,11 @@ function hexValueToDamageString(hexValue) {
           randomize.push('s')
         }
         delete options.stats
+      } else if ('itemNameRandoMode' in options) { // randomize item names with item stat rando - MottZilla
+        if (options.itemNameRandoMode) {
+          randomize.push('in')
+        }
+        delete options.itemNameRandoMode
       } else if ('music' in options) {
         if (options.music) {
           randomize.push('m')
@@ -3970,6 +3178,7 @@ function hexValueToDamageString(hexValue) {
     prologueRewards,
     relicLocations,
     stats,
+    itemNameRandoMode,
     music,
     turkeyMode,
     colorrandoMode,
@@ -3978,11 +3187,11 @@ function hexValueToDamageString(hexValue) {
     mypurseMode,
     iwsMode,
     fastwarpMode,
-    itemNameRandoMode,
     noprologueMode,
     unlockedMode,
     surpriseMode,
     enemyStatRandoMode,
+    elemChaosMode,
     shopPriceRandoMode,
     startRoomRandoMode,
     startRoomRando2ndMode,
@@ -3991,15 +3200,14 @@ function hexValueToDamageString(hexValue) {
     immunityPotionMode,
     godspeedMode,
     libraryShortcut,
-    elemChaosMode,
     singleHitGearMode,
-    startStatRandoMode,
-    easyMode,
-    devStashMode,
-    seasonalPhrasesMode,
-    bossMusicSeparation,
     newGoalsSet,
-    debugMode,
+    startStatRandoMode,
+    // easyMode,
+    // devStashMode,
+    // seasonalPhrasesMode,
+    // bossMusicSeparation,
+    // debugMode,
     writes,
   ) {
     this.id = id
@@ -4025,6 +3233,7 @@ function hexValueToDamageString(hexValue) {
     this.prologueRewards = prologueRewards
     this.relicLocations = relicLocations
     this.stats = stats
+    this.itemNameRandoMode = itemNameRandoMode
     this.music = music
     this.turkeyMode = turkeyMode
     this.colorrandoMode = colorrandoMode
@@ -4033,11 +3242,11 @@ function hexValueToDamageString(hexValue) {
     this.mypurseMode = mypurseMode
     this.iwsMode = iwsMode
     this.fastwarpMode = fastwarpMode
-    this.itemNameRandoMode = itemNameRandoMode
     this.noprologueMode = noprologueMode
     this.unlockedMode = unlockedMode
     this.surpriseMode = surpriseMode
     this.enemyStatRandoMode = enemyStatRandoMode
+    this.elemChaosMode = elemChaosMode
     this.shopPriceRandoMode = shopPriceRandoMode
     this.startRoomRandoMode = startRoomRandoMode
     this.startRoomRando2ndMode = startRoomRando2ndMode
@@ -4046,15 +3255,14 @@ function hexValueToDamageString(hexValue) {
     this.immunityPotionMode = immunityPotionMode
     this.godspeedMode = godspeedMode
     this.libraryShortcut = libraryShortcut
-    this.elemChaosMode = elemChaosMode
     this.singleHitGearMode = singleHitGearMode
-    this.startStatRandoMode = startStatRandoMode
-    this.easyMode = easyMode
-    this.devStashMode = devStashMode
-    this.seasonalPhrasesMode = seasonalPhrasesMode
-    this.bossMusicSeparation = bossMusicSeparation
     this.newGoalsSet = newGoalsSet
-    this.debugMode = debugMode
+    this.startStatRandoMode = startStatRandoMode
+    // this.easyMode = easyMode
+    // this.devStashMode = devStashMode
+    // this.seasonalPhrasesMode = seasonalPhrasesMode
+    // this.bossMusicSeparation = bossMusicSeparation
+    // this.debugMode = debugMode
     if (writes) {
       this.writes = writes
     }
@@ -4208,6 +3416,8 @@ function hexValueToDamageString(hexValue) {
     this.surprise = false
     // enemyStatRando mode.
     this.enemyStatRando = false
+    // elemental chaos.
+    this.elemChaos = false
     // shopPriceRando mode.
     this.shopPriceRando = false
     // startRoomRando mode.
@@ -4224,24 +3434,22 @@ function hexValueToDamageString(hexValue) {
     this.godspeed = false
     // library shortcut.
     this.libShort = false
-    // elemental chaos.
-    this.elemChaos = false
     // Single-Hit Gears
     this.singleHitGear = false
-    // Starting Stat Randomizer
-    this.startStatRando = undefined
-    // simple input.
-    this.easy = false
-    // dev's stash mode.
-    this.devStash = false
-    // seasonal phrases mode.
-    this.seasonalPhrases = false
-    // boss music separation
-    this.bossMusic = true
     // new goals for completion.
     this.newGoals = undefined
-    // Debug mode.
-    this.debug = false
+    // Starting Stat Randomizer
+    this.startStatRando = undefined
+    // // simple input.
+    // this.easy = false
+    // // dev's stash mode.
+    // this.devStash = false
+    // // seasonal phrases mode.
+    // this.seasonalPhrases = false
+    // // boss music separation
+    // this.bossMusic = true
+    // // Debug mode.
+    // this.debug = false
     // Arbitrary writes.
     this.writes = undefined
   }
@@ -4520,12 +3728,21 @@ function hexValueToDamageString(hexValue) {
     if ('stats' in json) {
       builder.randomizeStats(json.stats)
     }
+    if ('itemNameRandoMode' in json) {
+      builder.itemNameRandoMode(json.itemNameRandoMode)
+    }
     if ('music' in json) {
       builder.randomizeMusic(json.music)
+    }
+    if ('bossMusicSeparation' in json) {
+      builder.bossMusicSeparation(json.bossMusicSeparation)
     }
     if ('turkeyMode' in json) {
       builder.turkeyMode(json.turkeyMode)
     }
+    // ############################## Modern Options #########################
+    // ############################### For Sorting ###########################
+    // ============================= Preset: Boolean =========================
     if ('colorrandoMode' in json) {
       builder.colorrandoMode(json.colorrandoMode)
     }
@@ -4544,9 +3761,6 @@ function hexValueToDamageString(hexValue) {
     if ('fastwarpMode' in json) {
       builder.fastwarpMode(json.fastwarpMode)
     }
-    if ('itemNameRandoMode' in json) {
-      builder.itemNameRandoMode(json.itemNameRandoMode)
-    }
     if ('noprologueMode' in json) {
       builder.noprologueMode(json.noprologueMode)
     }
@@ -4558,6 +3772,9 @@ function hexValueToDamageString(hexValue) {
     }
     if ('enemyStatRandoMode' in json) {
       builder.enemyStatRandoMode(json.enemyStatRandoMode)
+    }
+    if ('elemChaosMode' in json) {
+      builder.elemChaosMode(json.elemChaosMode)
     }
     if ('shopPriceRandoMode' in json) {
       builder.shopPriceRandoMode(json.shopPriceRandoMode)
@@ -4583,15 +3800,17 @@ function hexValueToDamageString(hexValue) {
     if ('libraryShortcut' in json) {
       builder.libraryShortcut(json.libraryShortcut)
     }
-    if ('elemChaosMode' in json) {
-      builder.elemChaosMode(json.elemChaosMode)
-    }
     if ('singleHitGearMode' in json) {
       builder.singleHitGearMode(json.singleHitGearMode)
+    }
+    // ============================== Preset: Argument ==========================
+    if ('newGoalsSet' in json) {
+      builder.newGoalsSet(json.newGoalsSet)
     }
     if ('startStatRandoMode' in json) {
       builder.startStatRandoMode(json.startStatRandoMode)
     }
+    // ============================ Website Only: Boolean =======================
     if ('easyMode' in json) {
       builder.easyMode(json.easyMode)
     }
@@ -4601,12 +3820,8 @@ function hexValueToDamageString(hexValue) {
     if ('seasonalPhrasesMode' in json) {
       builder.seasonalPhrasesMode(json.seasonalPhrasesMode)
     }
-    if ('bossMusicSeparation' in json) {
-      builder.bossMusicSeparation(json.bossMusicSeparation)
-    }
-    if ('newGoalsSet' in json) {
-      builder.newGoalsSet(json.newGoalsSet)
-    }
+    // #########################################################################
+    // ################################ End Sorting ############################
     if ('writes' in json) {
       let lastAddress = 0
       json.writes.forEach(function(write) {
@@ -4892,12 +4107,21 @@ function hexValueToDamageString(hexValue) {
     if ('stats' in preset) {
       this.stats = preset.stats
     }
+    if ('itemNameRandoMode' in preset) {
+      this.itemnamerando = preset.itemNameRandoMode
+    }
     if ('music' in preset) {
       this.music = preset.music
+    }
+    if ('bossMusicSeparation' in preset) {
+      this.bossMusic = preset.bossMusicSeparation
     }
     if ('turkeyMode' in preset) {
       this.turkey = preset.turkeyMode
     }
+    // ############################### Modern Options ##########################
+    // ################################ For Sorting ############################
+    // ============================== Preset: Boolean ==========================
     if ('colorrandoMode' in preset) {
       this.colorrando = preset.colorrandoMode
     }
@@ -4916,9 +4140,6 @@ function hexValueToDamageString(hexValue) {
     if ('fastwarpMode' in preset) {
       this.fastwarp = preset.fastwarpMode
     }
-    if ('itemNameRandoMode' in preset) {
-      this.itemnamerando = preset.itemNameRandoMode
-    }
     if ('noprologueMode' in preset) {
       this.noprologue = preset.noprologueMode
     }
@@ -4930,6 +4151,9 @@ function hexValueToDamageString(hexValue) {
     }
     if ('enemyStatRandoMode' in preset) {
       this.enemyStatRando = preset.enemyStatRandoMode
+    }
+    if ('elemChaosMode' in preset) {
+      this.elemChaos = preset.elemChaosMode
     }
     if ('shopPriceRandoMode' in preset) {
       this.shopPriceRando = preset.shopPriceRandoMode
@@ -4955,15 +4179,17 @@ function hexValueToDamageString(hexValue) {
     if ('libraryShortcut' in preset) {
       this.libShort = preset.libraryShortcut
     }
-    if ('elemChaosMode' in preset) {
-      this.elemChaos = preset.elemChaosMode
-    }
     if ('singleHitGearMode' in preset) {
       this.singleHitGear = preset.singleHitGearMode
+    }
+    // ============================== Preset: Argument ==========================
+    if ('newGoalsSet' in preset) {
+      this.newGoals = preset.newGoalsSet
     }
     if ('startStatRandoMode' in preset) {
       this.startStatRando = preset.startStatRandoMode
     }
+    // ============================ Website Only: Boolean =======================
     if ('easyMode' in preset) {
       this.easy = preset.easyMode
     }
@@ -4973,12 +4199,8 @@ function hexValueToDamageString(hexValue) {
     if ('seasonalPhrasesMode' in preset) {
       this.seasonalPhrases = preset.seasonalPhrasesMode
     }
-    if ('bossMusicSeparation' in preset) {
-      this.bossMusic = preset.bossMusicSeparation
-    }
-    if ('newGoalsSet' in preset) {
-      this.newGoals = preset.newGoalsSet
-    }
+    // #########################################################################
+    // ################################ End Sorting ############################
     if ('writes' in preset) {
       this.writes = this.writes || []
       this.writes.push.apply(this.writes, preset.writes)
@@ -5644,6 +4866,11 @@ function hexValueToDamageString(hexValue) {
     this.stats = enabled
   }
 
+  // Enable Item Name Rando - MottZilla
+  PresetBuilder.prototype.itemNameRandoMode = function itemNameRandoMode(enabled) {
+    this.itemnamerando = enabled
+  }
+
   // Enable music randomization.
   PresetBuilder.prototype.randomizeMusic = function randomizeMusic(enabled) {
     this.music = enabled
@@ -5654,6 +4881,10 @@ function hexValueToDamageString(hexValue) {
     this.turkey = enabled
   }
 
+  // ############################### Modern Options ##########################
+  // ################################ For Sorting ############################
+  // ============================== Preset: Boolean ==========================
+  
   // Enable Color Palette Randomization
   PresetBuilder.prototype.colorrandoMode = function colorrandoMode(enabled) {
     this.colorrando = enabled
@@ -5684,11 +4915,6 @@ function hexValueToDamageString(hexValue) {
     this.fastwarp = enabled
   }
 
-  // Enable Item Name Rando - MottZilla
-  PresetBuilder.prototype.itemNameRandoMode = function itemNameRandoMode(enabled) {
-    this.itemnamerando = enabled
-  }
-
   // Enable Prologue Skip - eldri7ch
   PresetBuilder.prototype.noprologueMode = function noprologueMode(enabled) {
     this.noprologue = enabled
@@ -5707,6 +4933,11 @@ function hexValueToDamageString(hexValue) {
   // Enable Enemy Stat Rando - eldri7ch
   PresetBuilder.prototype.enemyStatRandoMode = function enemyStatRandoMode(enabled) {
     this.enemyStatRando = enabled
+  }
+  
+  // Enable Elemental Chaos - eldri7ch
+  PresetBuilder.prototype.elemChaosMode = function elemChaosMode(enabled) {
+    this.elemChaos = enabled
   }
 
   // Enable Shop Price Rando - eldri7ch
@@ -5748,48 +4979,45 @@ function hexValueToDamageString(hexValue) {
   PresetBuilder.prototype.libraryShortcut = function libraryShortcut(enabled) {
     this.libShort = enabled
   }
-  
-  // Enable Elemental Chaos - eldri7ch
-  PresetBuilder.prototype.elemChaosMode = function elemChaosMode(enabled) {
-    this.elemChaos = enabled
-  }
 
   // Enable Single-Hit Gears - eldri7ch
   PresetBuilder.prototype.singleHitGearMode = function singleHitGearMode(enabled) {
     this.singleHitGear = enabled
   }
-
-  // Enable Starting Stat Randomizer - eldri7ch
-  PresetBuilder.prototype.startStatRandoMode = function startStatRandoMode(ssMax) {
-    assert.oneOf(typeof(ssMax), ['boolean','number'])
-    this.startStatRando = ssMax
-  }
-
-  // Enable Simplified Inputs - eldri7ch
-  PresetBuilder.prototype.easyMode = function easyMode(enabled) {
-    this.easy = enabled
-  }
-
-  // Enable Dev's Stash - eldri7ch
-  PresetBuilder.prototype.devStashMode = function devStashMode(enabled) {
-    this.devStash = enabled
-  }
-
-  // Enable Seasonal Phrases - eldri7ch
-  PresetBuilder.prototype.seasonalPhrasesMode = function seasonalPhrasesMode(enabled) {
-    this.seasonalPhrases = enabled
-  }
-
-  // Enable boss music separation - eldri7ch
-  PresetBuilder.prototype.bossMusicSeparation = function bossMusicSeparation(enabled) {
-    this.bossMusic = enabled
-  }
-
+  
+  // ============================== Preset: Argument ==========================
+  
   // Assign New Goals - eldri7ch
   PresetBuilder.prototype.newGoalsSet = function newGoalsSet(nGoals) {
     assert.oneOf(typeof(nGoals), ['boolean', 'string'])
     this.newGoals = nGoals
   }
+
+  // Enable Starting Stat Randomizer - eldri7ch
+  PresetBuilder.prototype.startStatRandoMode = function startStatRandoMode(ssMax) {
+    assert.oneOf(typeof(ssMax), ['boolean', 'number'])
+    this.startStatRando = ssMax
+  }
+
+  // Enable Simplified Inputs - eldri7ch
+  // PresetBuilder.prototype.easyMode = function easyMode(enabled) {
+  //   this.easy = enabled
+  // }
+
+  // // Enable Dev's Stash - eldri7ch
+  // PresetBuilder.prototype.devStashMode = function devStashMode(enabled) {
+  //   this.devStash = enabled
+  // }
+
+  // // Enable Seasonal Phrases - eldri7ch
+  // PresetBuilder.prototype.seasonalPhrasesMode = function seasonalPhrasesMode(enabled) {
+  //   this.seasonalPhrases = enabled
+  // }
+
+  // // Enable boss music separation - eldri7ch
+  // PresetBuilder.prototype.bossMusicSeparation = function bossMusicSeparation(enabled) {
+  //   this.bossMusic = enabled
+  // }
 
   // Write a character.
   PresetBuilder.prototype.writeChar = function writeChar(address, value) {
@@ -6092,6 +5320,7 @@ function hexValueToDamageString(hexValue) {
       }
     }
     const stats = self.stats
+    const itemnamerando = self.itemnamerando
     const music = self.music
     const turkey = self.turkey
     const colorrando = self.colorrando
@@ -6100,11 +5329,11 @@ function hexValueToDamageString(hexValue) {
     const mypurse = self.mypurse
     const iws = self.iws
     const fastwarp = self.fastwarp
-    const itemnamerando = self.itemnamerando
     const noprologue = self.noprologue
     const unlocked = self.unlocked
     const surprise = self.surprise
     const enemyStatRando = self.enemyStatRando
+    const elemChaos = self.elemChaos
     const shopPriceRando = self.shopPriceRando
     const startRoomRando = self.startRoomRando
     const startRoomRando2nd = self.startRoomRando2nd
@@ -6113,15 +5342,14 @@ function hexValueToDamageString(hexValue) {
     const immunityPotion = self.immunityPotion
     const godspeed = self.godspeed
     const libShort = self.libShort
-    const elemChaos = self.elemChaos
     const singleHitGear = self.singleHitGear
-    const startStatRando = self.startStatRando
-    const easy = false
-    const devStash = false
-    const seasonalPhrases = true
-    const bossMusic = false
     const newGoals = self.newGoals
-    const debug = false
+    const startStatRando = self.startStatRando
+    // const easy = false
+    // const devStash = false
+    // const seasonalPhrases = true
+    // const bossMusic = false
+    // const debug = false
     const writes = self.writes
     return new Preset(
       self.metadata.id,
@@ -6147,6 +5375,7 @@ function hexValueToDamageString(hexValue) {
       rewards,
       relicLocations,
       stats,
+      itemnamerando,
       music,
       turkey,
       colorrando,
@@ -6155,11 +5384,11 @@ function hexValueToDamageString(hexValue) {
       mypurse,
       iws,
       fastwarp,
-      itemnamerando,
       noprologue,
       unlocked,
       surprise,
       enemyStatRando,
+      elemChaos,
       shopPriceRando,
       startRoomRando,
       startRoomRando2nd,
@@ -6168,15 +5397,14 @@ function hexValueToDamageString(hexValue) {
       immunityPotion,
       godspeed,
       libShort,
-      elemChaos,
       singleHitGear,
-      startStatRando,
-      easy,
-      devStash,
-      seasonalPhrases,
-      bossMusic,
       newGoals,
-      debug,
+      startStatRando,
+      // easy,
+      // devStash,
+      // seasonalPhrases,
+      // bossMusic,
+      // debug,
       writes,
     )
   }
@@ -6200,6 +5428,10 @@ function hexValueToDamageString(hexValue) {
       selectedPreset: selectedPreset
     })
   }
+  
+  // ######################### Options Applications ##########################
+  // ########################### Sorted 2026.02.15 ###########################
+  // ============================= Main Program ==============================
 
   function applyTrackingByte() {
     const data = new checked()
@@ -6508,11 +5740,13 @@ function hexValueToDamageString(hexValue) {
     offset = data.writeWord(offset,0x00000000)
     offset = data.writeWord(offset,0xffffffff)
     
-	// Hook Master function into gameplay loop.
-	data.writeWord(0xFAA38,0x0C02622D)
+    // Hook Master function into gameplay loop.
+    data.writeWord(0xFAA38,0x0C02622D)
 
     return data
   }
+
+  // =========================== Preset: Boolean =============================
 
   function applyTournamentModePatches() {
     const data = new checked()
@@ -6701,238 +5935,6 @@ function hexValueToDamageString(hexValue) {
     return data
   }
 
-  function rgba32ToHighColor15(rgba32) {
-    // SOTN uses the Playstation's 15-bit high-color palette, with 5 bits for red, green, and blue and 1 bit for alpha
-    // NOTE(sestren): 0x00 through 0x07 will map to 0, 0x08 through 0x0f will map to 1, and so on, with 0xf8 through 0xff mapping to 31
-    const red = Math.floor(Number("0x" + rgba32.substring(1, 3)) / 8)
-    const green = Math.floor(Number("0x" + rgba32.substring(3, 5)) / 8)
-    const blue = Math.floor(Number("0x" + rgba32.substring(5, 7)) / 8)
-    const alpha = Math.floor(Number("0x" + rgba32.substring(7, 9)) / 128)
-    const highColor15 = (alpha << 15) + (blue << 10) + (green << 5) + red
-    return highColor15
-  }
-
-  function highColor15ToRgba32(highColor15) {
-    let value = highColor15
-    const red = value % 32
-    value = Math.floor(value / 32)
-    const green = value % 32
-    value = Math.floor(value / 32)
-    const blue = value % 32
-    value = Math.floor(value / 32)
-    const alpha = value % 32
-    // NOTE(sestren): 0 will map to 0x00, 1 will map to 0x08, and so on, with 31 mapping to 0xf8
-    const rr = (8 * red).toString(16).padStart(2, '0')
-    const gg = (8 * green).toString(16).padStart(2, '0')
-    const bb = (8 * blue).toString(16).padStart(2, '0')
-    const aa = (alpha > 0) ? 'ff' : '7f'
-    const rgba32 = '#' + rr + gg + bb + aa
-    return rgba32
-  }
-
-  function applyMapColor(mapColor) {	// Researched by MottZilla & eldri7ch. Function by eldri7ch
-    // NOTE(sestren): Most of the castle map's palette are not used in the vanilla game or are prevented from being used
-    // Default colors are given below for illustration purposes
-    const data = new checked()
-    let paletteIndexes = {
-      // Used for unrevealed portions of the map (i.e., transparency)
-      unrevealed: { index: 0x0, defaultColor: "#0000007f" },
-      // Used when exploring the map
-      exploredFills:   { index: 0x1, defaultColor: "#5070f8ff" },
-      exploredBorders: { index: 0xE, defaultColor: "#c0c0c0ff" },
-      saveRoomFills:   { index: 0x4, defaultColor: "#f80000ff" },
-      warpRoomFills:   { index: 0x5, defaultColor: "#f88000ff" },
-      // Used when purchasing the Castle Map from the Shop
-      revealedFills:   { index: 0x3, defaultColor: "#383860ff" },
-      revealedBorders: { index: 0xD, defaultColor: "#909090ff" },
-    }
-    switch (mapColor) {
-    case 'u': // Dark Blue
-      paletteIndexes.exploredFills.color = '#000060ff'
-      break
-    case 'r': // Crimson
-      paletteIndexes.exploredFills.color = '#801000ff'
-      break
-    case 'n': // Brown
-      paletteIndexes.exploredFills.color = '#503000ff'
-      break
-    case 'g': // Dark Green
-      paletteIndexes.exploredFills.color = '#004010ff'
-      break
-    case 'y': // Gray
-      paletteIndexes.exploredFills.color   = '#688080ff'
-      paletteIndexes.exploredBorders.color = '#ffffffff'
-      break
-    case 'p': // Purple
-      paletteIndexes.exploredFills.color = '#400060ff'
-      break
-    case 'k': // Pink
-      paletteIndexes.exploredFills.color   = '#a028e8ff'
-      paletteIndexes.exploredBorders.color = '#f0a0f8ff'
-      break
-    case 'b': // Black
-      paletteIndexes.exploredFills.color = '#000020ff'
-      break
-    case 'i': // Invisible
-      paletteIndexes.exploredFills.color = '#0000007f'
-      break
-    }
-    const paletteAddresses = {
-      "Castle Map Color Palette (DRA)": 0x03874848,
-      "Castle Map Color Palette (RIC)": 0x038C0508,
-    }
-    // In the switch-case above, various 'color' properties were added
-    // The presence of this property is used as a signal to update a color using the given RGBA32-formatted string value
-    Object.values(paletteIndexes)
-    .filter((paletteIndex) => {
-      return 'color' in paletteIndex
-    })
-    .forEach((paletteIndex) => {
-      Object.values(paletteAddresses)
-      .forEach((paletteAddress) => {
-        const bytesPerColor = 0x02
-        data.writeColor(paletteAddress + bytesPerColor * paletteIndex.index, paletteIndex.color)
-      })
-    })
-    return data
-  }
-
-  function applyNewGoals(nGoal) {	// Research and function by MottZilla & eldri7ch.
-    const data = new checked()
-    const jmpAddr = 0x04fcf814                                                  // define address to hook
-    const funcAddress = 0x04fe4f68                                              // define address for functions (inside Black Marble Gallery Overlay)
-    let offset
-                                                                                // Patch new goals - eldri7ch
-    switch (nGoal) {
-    case 'b':                                                                   // All Bosses
-      offset = jmpAddr
-      data.writeWord(offset, 0x08074fbc)
-
-      offset = funcAddress
-      offset = data.writeWord(offset, 0x3C108003)
-      offset = data.writeWord(offset, 0x3610CA2C)
-      offset = data.writeWord(offset, 0x3C118003)
-      offset = data.writeWord(offset, 0x3631CA80)
-      offset = data.writeWord(offset, 0x8E120000)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x12400005)
-      offset = data.writeWord(offset, 0x26100004)
-      offset = data.writeWord(offset, 0x1611FFFB)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080704E4)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080705E4)
-      offset = data.writeWord(offset, 0x00000000)
-
-      offset = 0x04fcf7f3                                                       // Remove need for Vlads
-      data.writeChar(offset, 0x34)
-      break
-    case 'r':                                                                   // All Relics
-      offset = jmpAddr
-      data.writeWord(offset, 0x08074fbc)
-
-      offset = funcAddress
-      offset = data.writeWord(offset, 0x3C108009)
-      offset = data.writeWord(offset, 0x36107964)
-      offset = data.writeWord(offset, 0x3C118009)
-      offset = data.writeWord(offset, 0x3631797B)
-      offset = data.writeWord(offset, 0x92120000)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x1240000F)
-      offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x3C108009)
-      offset = data.writeWord(offset, 0x3610797D)
-      offset = data.writeWord(offset, 0x3C118009)
-      offset = data.writeWord(offset, 0x36317982)
-      offset = data.writeWord(offset, 0x92120000)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x12400005)
-      offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080704E4)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080705E4)
-      offset = data.writeWord(offset, 0x00000000)
-      break
-    case 'a':                                                                   // All Bosses & Relics (ABRSR)
-      offset = jmpAddr
-      data.writeWord(offset, 0x08074fbc)
-
-      offset = funcAddress
-      offset = data.writeWord(offset, 0x3C108003)
-      offset = data.writeWord(offset, 0x3610CA2C)
-      offset = data.writeWord(offset, 0x3C118003)
-      offset = data.writeWord(offset, 0x3631CA80)
-      offset = data.writeWord(offset, 0x8E120000)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x12400019)
-      offset = data.writeWord(offset, 0x26100004)
-      offset = data.writeWord(offset, 0x1611FFFB)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x3C108009)
-      offset = data.writeWord(offset, 0x36107964)
-      offset = data.writeWord(offset, 0x3C118009)
-      offset = data.writeWord(offset, 0x3631797B)
-      offset = data.writeWord(offset, 0x92120000)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x1240000F)
-      offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x3C108009)
-      offset = data.writeWord(offset, 0x3610797D)
-      offset = data.writeWord(offset, 0x3C118009)
-      offset = data.writeWord(offset, 0x36317982)
-      offset = data.writeWord(offset, 0x92120000)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x12400005)
-      offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080704E4)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080705E4)
-      offset = data.writeWord(offset, 0x00000000)
-      break
-    case 'v':                                                                   // All Bosses All Vlads
-      offset = jmpAddr
-      data.writeWord(offset, 0x08074fbc)
-
-      offset = funcAddress
-      offset = data.writeWord(offset, 0x3C108003)
-      offset = data.writeWord(offset, 0x3610CA2C)
-      offset = data.writeWord(offset, 0x3C118003)
-      offset = data.writeWord(offset, 0x3631CA80)
-      offset = data.writeWord(offset, 0x8E120000)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x1240000F)
-      offset = data.writeWord(offset, 0x26100004)
-      offset = data.writeWord(offset, 0x1611FFFB)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x3C108009)
-      offset = data.writeWord(offset, 0x3610797D)
-      offset = data.writeWord(offset, 0x3C118009)
-      offset = data.writeWord(offset, 0x36317982)
-      offset = data.writeWord(offset, 0x92120000)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x12400005)
-      offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080704E4)
-      offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080705E4)
-      offset = data.writeWord(offset, 0x00000000)
-      break
-    }
-
-    // insert code to help the tracker here.
-    return data
-  }
-
   function applyiwsPatches() {
     const data = new checked()
     // Patch wing smash duration - eldri7ch
@@ -6972,22 +5974,22 @@ function hexValueToDamageString(hexValue) {
     offset = data.writeWord(offset,0x2610ffff)
     offset = data.writeWord(offset,0x0601fffd)
     offset = data.writeWord(offset,0x24630004)
-	offset = data.writeWord(offset,0x3C028009)
-	offset = data.writeWord(offset,0x34427C34)
-	offset = data.writeWord(offset,0xAC400000)
-	offset = data.writeWord(offset,0xAC400004)
-	offset = data.writeWord(offset,0xAC400008)
+    offset = data.writeWord(offset,0x3C028009)
+    offset = data.writeWord(offset,0x34427C34)
+    offset = data.writeWord(offset,0xAC400000)
+    offset = data.writeWord(offset,0xAC400004)
+    offset = data.writeWord(offset,0xAC400008)
     offset = data.writeWord(offset,0x0803ff6c)
     offset = data.writeWord(offset,0x00000000)
 
-	data.writeChar(0xAE663, 0x02)
-	data.writeChar(0xAE664, 0x00)	// Change Room
+    data.writeChar(0xAE663, 0x02)
+    data.writeChar(0xAE664, 0x00)	// Change Room
 
-	offset = 0x119C98				// Always get HR & NB Prologue Rewards
-	offset = data.writeWord(offset,0x18000002)
-	offset = data.writeWord(offset,0x00000000)
-	offset = 0x119CFC
-	offset = data.writeWord(offset,0x00000000)
+    offset = 0x119C98				// Always get HR & NB Prologue Rewards
+    offset = data.writeWord(offset,0x18000002)
+    offset = data.writeWord(offset,0x00000000)
+    offset = 0x119CFC
+    offset = data.writeWord(offset,0x00000000)
 
     return data
   }
@@ -7159,6 +6161,798 @@ function hexValueToDamageString(hexValue) {
     data.writeWord(offset,spritePal)
     offset += 0x10
     return data
+  }
+
+  function enemyNumStatRand(randomFloat,statAmt) {                              // a function to return a new value for a stat based on the stat's original value
+    let tempAmt                                                                 // temp holding space for the number to be converted
+    let newAmt                                                                  // this will ultimately be our output
+    tempAmt = Math.round(randomFloat * statAmt)                                 // set the temp to the new value for the stat
+    newAmt = numToHex(tempAmt,4)                                                // convert the new stat amount to hex width 4 to avoid giving large HP enemies 15k+ HP
+    return newAmt                                                               // return the resulting hex for implementation
+  }
+
+  function itemPriceStatRand(rng,priceAmt) {                                    // a function to return a new value for a stat based on the stat's original value
+    let randomFloat                                                             // set aside for floating decimal
+    let tempAmt                                                                 // temp holding space for the number to be converted
+    let newAmt                                                                  // this will ultimately be our output
+    randomFloat = ((Math.floor(rng() * 100) +50)/ 100)                          // select a random % between 50% and 150%
+    tempAmt = Math.round(randomFloat * priceAmt)                                // set the temp to the new value for the price
+    newAmt = numToHex(tempAmt,8)                                                // convert the new stat amount to hex width 8 to match the current format
+    return newAmt                                                               // return the resulting hex for implementation
+  }
+
+  function halfChanceElementRando(rng) {
+    let newType
+    // We want nothing 50% of the time, and a random type all other times
+    if(rng() >= 0.5) return 0x0000;
+    
+    let typeList = [
+      0x0020, // hit
+      0x0040, // cut
+      0x0080, // poison
+      0x8000, // Fire
+      0x2000, // Ice
+      0x1000, // Holy
+      0x4000, // Lightning
+      0x0100, // Curse
+      0x0200, // Stone
+      0x0800  // Dark
+    ]
+    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
+    return newType
+  }
+
+  function thirdChanceElementRando(rng) {
+    let newType
+    // We want nothing 33% of the time, and a random type all other times
+    if(rng() >= 0.33) return 0x0000;
+    
+    let typeList = [
+      0x0020, // hit
+      0x0040, // cut
+      0x0080, // poison
+      0x8000, // Fire
+      0x2000, // Ice
+      0x1000, // Holy
+      0x4000, // Lightning
+      0x0100, // Curse
+      0x0200, // Stone
+      0x0800  // Dark
+    ]
+    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
+    return newType
+  }
+
+  function quarterChanceElementRando(rng) {
+    let newType
+    // We want nothing 50% of the time, and a random type all other times
+    if(rng() >= 0.25) return 0x0000;
+    
+    let typeList = [
+      0x0020, // hit
+      0x0040, // cut
+      0x0080, // poison
+      0x8000, // Fire
+      0x2000, // Ice
+      0x1000, // Holy
+      0x4000, // Lightning
+      0x0100, // Curse
+      0x0200, // Stone
+      0x0800  // Dark
+    ]
+    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
+    return newType
+  }
+
+  function weaponElemRando(rng) {
+    let newType
+    let typeList = [
+      0x0020, // hit
+      0x0040, // cut
+      0x0080, // poison
+      0x8000, // Fire
+      0x2000, // Ice
+      0x1000, // Holy
+      0x4000, // Lightning
+      0x0100, // Curse
+      0x0200, // Stone
+      0x0800  // Dark
+    ]
+    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
+    return newType
+  }
+
+  function enemyWeakTypeStatRand(rng) {
+    let newType
+    let typeList = [
+      0x0020, // hit
+      0x0040, // cut
+      0x0080, // poison
+      0x8000, // Fire
+      0x2000, // Ice
+      0x1000, // Holy
+      0x4000, // Lightning
+      0x0100, // Curse
+      0x0200, // Stone
+      0x0800  // Dark
+    ]
+    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
+    return newType
+  }
+
+  function enemyAtkTypeStatRand(rng) {
+    let newType
+    let typeList = [
+      // 0x0000, // No hitbox - Do not combine
+      // 0x1000, // Hit 1/6 - Do not combine within the 0xn000 tier. These do not combine with each other. Do not combine with the 0x0n00 tier.
+      // 0x2000, // hit - Do not combine within the 0xn000 tier. These do not combine with each other.
+      // 0x4000, // cut - Do not combine within the 0xn000 tier. These do not combine with each other.
+      // 0x5000, // cut 1/6 - Do not combine within the 0xn000 tier. These do not combine with each other. Do not combine with the 0x0n00 tier.
+      // 0x6000, // weak cut - Do not combine
+      // 0x8000, // Poison - Do not combine within the 0xn000 tier. These do not combine with each other.
+      // 0x0001, // Curse
+      // 0x0002, // Stone
+      // 0x0004, // Water
+      // 0x0008, // Dark
+      // 0x0010, // Holy
+      // 0x0020, // Ice
+      // 0x0040, // Lightning
+      // 0x0080, // Fire
+      // 0x0200, // Weak Hit - do not combine within the 0x0n00 tier. These do not combine with each other.
+      // 0x0400, // Big Toss - do not combine within the 0x0n00 tier. These do not combine with each other.
+      // 0x0600, // guard - do not combine.
+      // 0x0700, // Cat - do not combine within the 0x0n00 tier. These do not combine with each other.
+      0x0000, // No hitbox
+      0x0000, // No hitbox
+      0x0000, // No hitbox
+      0x0006, // guard
+      0x0006, // guard
+      0x0006, // guard
+      0x0021, // Normal Hit
+      0x0021, // Normal Hit
+      0x0021, // Normal Hit
+      0x0121, // Hit Curse
+      0x0221, // Hit Stone
+      0x0321, // Hit Stone Curse
+      0x0421, // Hit Water
+      0x0421, // Hit Water
+      0x0421, // Hit Water
+      0x0521, // Hit Water Curse
+      0x0621, // Hit Water Stone
+      0x0821, // Hit Dark
+      0x0821, // Hit Dark
+      0x0821, // Hit Dark
+      0x0921, // Hit Dark Curse
+      0x0a21, // Hit Dark Stone
+      0x0c21, // Hit Dark Water
+      0x0c21, // Hit Dark Water
+      0x0c21, // Hit Dark Water
+      0x1021, // Hit Holy
+      0x1021, // Hit Holy
+      0x1021, // Hit Holy
+      0x1021, // Hit Holy
+      0x1021, // Hit Holy
+      0x1121, // Hit Holy Curse
+      0x1221, // Hit Holy Stone
+      0x1421, // Hit Holy Water
+      0x1421, // Hit Holy Water
+      0x1421, // Hit Holy Water
+      0x1821, // Hit Holy Dark
+      0x1821, // Hit Holy Dark
+      0x1821, // Hit Holy Dark
+      0x2021, // Hit Ice
+      0x2021, // Hit Ice
+      0x2021, // Hit Ice
+      0x2121, // Hit Ice Curse
+      0x2221, // Hit Ice Stone
+      0x2421, // Hit Ice Water
+      0x2821, // Hit Ice Dark
+      0x2821, // Hit Ice Dark
+      0x2821, // Hit Ice Dark
+      0x3021, // Hit Holy Ice
+      0x3021, // Hit Holy Ice
+      0x3021, // Hit Holy Ice
+      0x4021, // Hit Lightning
+      0x4021, // Hit Lightning
+      0x4021, // Hit Lightning
+      0x4121, // Hit Lightning Curse
+      0x4221, // Hit Lightning Stone
+      0x4421, // Hit Lightning Water
+      0x4421, // Hit Lightning Water
+      0x4421, // Hit Lightning Water
+      0x4821, // Hit Lightning Dark
+      0x4821, // Hit Lightning Dark
+      0x4821, // Hit Lightning Dark
+      0x5021, // Hit Holy Lightning
+      0x5021, // Hit Holy Lightning
+      0x5021, // Hit Holy Lightning
+      0x6021, // Hit Ice Lightning
+      0x6021, // Hit Ice Lightning
+      0x6021, // Hit Ice Lightning
+      0x8021, // Hit Fire
+      0x8021, // Hit Fire
+      0x8021, // Hit Fire
+      0x8121, // Hit Fire Curse
+      0x8221, // Hit Fire Stone
+      0x8421, // Hit Fire Water
+      0x8421, // Hit Fire Water
+      0x8421, // Hit Fire Water
+      0x8821, // Hit Fire Dark
+      0x8821, // Hit Fire Dark
+      0x8821, // Hit Fire Dark
+      0x9021, // Hit Holy Fire
+      0x9021, // Hit Holy Fire
+      0x9021, // Hit Holy Fire
+      0xA021, // Hit Ice Fire
+      0xA021, // Hit Ice Fire
+      0xA021, // Hit Ice Fire
+      0xC021, // Hit Lightning Fire
+      0xC021, // Hit Lightning Fire
+      0xC021, // Hit Lightning Fire
+      0x0124, // Hit Curse
+      0x0224, // Hit Stone
+      0x0324, // Hit Stone Curse
+      0x0424, // Hit Water
+      0x0424, // Hit Water
+      0x0424, // Hit Water
+      0x0524, // Hit Water Curse
+      0x0624, // Hit Water Stone
+      0x0824, // Hit Dark
+      0x0824, // Hit Dark
+      0x0824, // Hit Dark
+      0x0924, // Hit Dark Curse
+      0x0a24, // Hit Dark Stone
+      0x0c24, // Hit Dark Water
+      0x0c24, // Hit Dark Water
+      0x0c24, // Hit Dark Water
+      0x1024, // Hit Holy
+      0x1024, // Hit Holy
+      0x1024, // Hit Holy
+      0x1024, // Hit Holy
+      0x1024, // Hit Holy
+      0x1124, // Hit Holy Curse
+      0x1224, // Hit Holy Stone
+      0x1424, // Hit Holy Water
+      0x1424, // Hit Holy Water
+      0x1424, // Hit Holy Water
+      0x1824, // Hit Holy Dark
+      0x1824, // Hit Holy Dark
+      0x1824, // Hit Holy Dark
+      0x2024, // Hit Ice
+      0x2024, // Hit Ice
+      0x2024, // Hit Ice
+      0x2124, // Hit Ice Curse
+      0x2224, // Hit Ice Stone
+      0x2424, // Hit Ice Water
+      0x2824, // Hit Ice Dark
+      0x2824, // Hit Ice Dark
+      0x2824, // Hit Ice Dark
+      0x3024, // Hit Holy Ice
+      0x3024, // Hit Holy Ice
+      0x3024, // Hit Holy Ice
+      0x4024, // Hit Lightning
+      0x4024, // Hit Lightning
+      0x4024, // Hit Lightning
+      0x4124, // Hit Lightning Curse
+      0x4224, // Hit Lightning Stone
+      0x4424, // Hit Lightning Water
+      0x4424, // Hit Lightning Water
+      0x4424, // Hit Lightning Water
+      0x4824, // Hit Lightning Dark
+      0x4824, // Hit Lightning Dark
+      0x4824, // Hit Lightning Dark
+      0x5024, // Hit Holy Lightning
+      0x5024, // Hit Holy Lightning
+      0x5024, // Hit Holy Lightning
+      0x6024, // Hit Ice Lightning
+      0x6024, // Hit Ice Lightning
+      0x6024, // Hit Ice Lightning
+      0x8024, // Hit Fire
+      0x8024, // Hit Fire
+      0x8024, // Hit Fire
+      0x8124, // Hit Fire Curse
+      0x8224, // Hit Fire Stone
+      0x8424, // Hit Fire Water
+      0x8424, // Hit Fire Water
+      0x8424, // Hit Fire Water
+      0x8824, // Hit Fire Dark
+      0x8824, // Hit Fire Dark
+      0x8824, // Hit Fire Dark
+      0x9024, // Hit Holy Fire
+      0x9024, // Hit Holy Fire
+      0x9024, // Hit Holy Fire
+      0xA024, // Hit Ice Fire
+      0xA024, // Hit Ice Fire
+      0xA024, // Hit Ice Fire
+      0xC024, // Hit Lightning Fire
+      0xC024, // Hit Lightning Fire
+      0xC024, // Hit Lightning Fire
+      0x0041, // Normal Cut
+      0x0041, // Normal Cut
+      0x0041, // Normal Cut
+      0x0141, // Cut Curse
+      0x0241, // Cut Stone
+      0x0341, // Cut Stone Curse
+      0x0441, // Cut Water
+      0x0441, // Cut Water
+      0x0441, // Cut Water
+      0x0541, // Cut Water Curse
+      0x0641, // Cut Water Stone
+      0x0841, // Cut Dark
+      0x0841, // Cut Dark
+      0x0841, // Cut Dark
+      0x0941, // Cut Dark Curse
+      0x0a41, // Cut Dark Stone
+      0x0c41, // Cut Dark Water
+      0x0c41, // Cut Dark Water
+      0x0c41, // Cut Dark Water
+      0x1041, // Cut Holy
+      0x1041, // Cut Holy
+      0x1041, // Cut Holy
+      0x1141, // Cut Holy Curse
+      0x1241, // Cut Holy Stone
+      0x1441, // Cut Holy Water
+      0x1441, // Cut Holy Water
+      0x1441, // Cut Holy Water
+      0x1841, // Cut Holy Dark
+      0x1841, // Cut Holy Dark
+      0x1841, // Cut Holy Dark
+      0x2041, // Cut Ice
+      0x2041, // Cut Ice
+      0x2041, // Cut Ice
+      0x2141, // Cut Ice Curse
+      0x2241, // Cut Ice Stone
+      0x2441, // Cut Ice Water
+      0x2441, // Cut Ice Water
+      0x2441, // Cut Ice Water
+      0x2841, // Cut Ice Dark
+      0x2841, // Cut Ice Dark
+      0x2841, // Cut Ice Dark
+      0x3041, // Cut Holy Ice
+      0x3041, // Cut Holy Ice
+      0x3041, // Cut Holy Ice
+      0x4041, // Cut Lightning
+      0x4041, // Cut Lightning
+      0x4041, // Cut Lightning
+      0x4141, // Cut Lightning Curse
+      0x4241, // Cut Lightning Stone
+      0x4441, // Cut Lightning Water
+      0x4441, // Cut Lightning Water
+      0x4441, // Cut Lightning Water
+      0x4841, // Cut Lightning Dark
+      0x4841, // Cut Lightning Dark
+      0x4841, // Cut Lightning Dark
+      0x5041, // Cut Holy Lightning
+      0x5041, // Cut Holy Lightning
+      0x5041, // Cut Holy Lightning
+      0x6041, // Cut Ice Lightning
+      0x6041, // Cut Ice Lightning
+      0x6041, // Cut Ice Lightning
+      0x8041, // Cut Fire
+      0x8041, // Cut Fire
+      0x8041, // Cut Fire
+      0x8141, // Cut Fire Curse
+      0x8241, // Cut Fire Stone
+      0x8441, // Cut Fire Water
+      0x8441, // Cut Fire Water
+      0x8441, // Cut Fire Water
+      0x8841, // Cut Fire Dark
+      0x8841, // Cut Fire Dark
+      0x8841, // Cut Fire Dark
+      0x9041, // Cut Holy Fire
+      0x9041, // Cut Holy Fire
+      0x9041, // Cut Holy Fire
+      0xA041, // Cut Ice Fire
+      0xA041, // Cut Ice Fire
+      0xA041, // Cut Ice Fire
+      0xC041, // Cut Lightning Fire
+      0xC041, // Cut Lightning Fire
+      0xC041, // Cut Lightning Fire
+      0x0044, // Normal Cut
+      0x0044, // Normal Cut
+      0x0044, // Normal Cut
+      0x0144, // Cut Curse
+      0x0244, // Cut Stone
+      0x0344, // Cut Stone Curse
+      0x0444, // Cut Water
+      0x0444, // Cut Water
+      0x0444, // Cut Water
+      0x0544, // Cut Water Curse
+      0x0644, // Cut Water Stone
+      0x0844, // Cut Dark
+      0x0844, // Cut Dark
+      0x0844, // Cut Dark
+      0x0944, // Cut Dark Curse
+      0x0a44, // Cut Dark Stone
+      0x0c44, // Cut Dark Water
+      0x0c44, // Cut Dark Water
+      0x0c44, // Cut Dark Water
+      0x1044, // Cut Holy
+      0x1044, // Cut Holy
+      0x1044, // Cut Holy
+      0x1144, // Cut Holy Curse
+      0x1244, // Cut Holy Stone
+      0x1444, // Cut Holy Water
+      0x1444, // Cut Holy Water
+      0x1444, // Cut Holy Water
+      0x1844, // Cut Holy Dark
+      0x1844, // Cut Holy Dark
+      0x1844, // Cut Holy Dark
+      0x2044, // Cut Ice
+      0x2044, // Cut Ice
+      0x2044, // Cut Ice
+      0x2144, // Cut Ice Curse
+      0x2244, // Cut Ice Stone
+      0x2444, // Cut Ice Water
+      0x2444, // Cut Ice Water
+      0x2444, // Cut Ice Water
+      0x2844, // Cut Ice Dark
+      0x2844, // Cut Ice Dark
+      0x2844, // Cut Ice Dark
+      0x3044, // Cut Holy Ice
+      0x3044, // Cut Holy Ice
+      0x3044, // Cut Holy Ice
+      0x4044, // Cut Lightning
+      0x4044, // Cut Lightning
+      0x4044, // Cut Lightning
+      0x4144, // Cut Lightning Curse
+      0x4244, // Cut Lightning Stone
+      0x4444, // Cut Lightning Water
+      0x4444, // Cut Lightning Water
+      0x4444, // Cut Lightning Water
+      0x4844, // Cut Lightning Dark
+      0x4844, // Cut Lightning Dark
+      0x4844, // Cut Lightning Dark
+      0x5044, // Cut Holy Lightning
+      0x5044, // Cut Holy Lightning
+      0x5044, // Cut Holy Lightning
+      0x6044, // Cut Ice Lightning
+      0x6044, // Cut Ice Lightning
+      0x6044, // Cut Ice Lightning
+      0x8044, // Cut Fire
+      0x8044, // Cut Fire
+      0x8044, // Cut Fire
+      0x8144, // Cut Fire Curse
+      0x8244, // Cut Fire Stone
+      0x8444, // Cut Fire Water
+      0x8444, // Cut Fire Water
+      0x8444, // Cut Fire Water
+      0x8844, // Cut Fire Dark
+      0x8844, // Cut Fire Dark
+      0x8844, // Cut Fire Dark
+      0x9044, // Cut Holy Fire
+      0x9044, // Cut Holy Fire
+      0x9044, // Cut Holy Fire
+      0xA044, // Cut Ice Fire
+      0xA044, // Cut Ice Fire
+      0xA044, // Cut Ice Fire
+      0xC044, // Cut Lightning Fire
+      0xC044, // Cut Lightning Fire
+      0xC044, // Cut Lightning Fire
+      0x0080, // Normal Poison
+      0x0080, // Normal Poison
+      0x0080, // Normal Poison
+      0x0180, // Poison Curse
+      0x0280, // Poison Stone
+      0x0480, // Poison Water
+      0x0480, // Poison Water
+      0x0480, // Poison Water
+      0x0880, // Poison Dark
+      0x0880, // Poison Dark
+      0x0880, // Poison Dark
+      0x1080, // Poison Holy
+      0x1080, // Poison Holy
+      0x1080, // Poison Holy
+      0x2080, // Poison Ice
+      0x2080, // Poison Ice
+      0x2080, // Poison Ice
+      0x4080, // Poison Lightning
+      0x4080, // Poison Lightning
+      0x4080, // Poison Lightning
+      0x8080, // Poison Fire
+      0x8080, // Poison Fire
+      0x8080, // Poison Fire
+      0x0084, // Poison Big Toss
+      0x0084, // Poison Big Toss
+      0x0084, // Poison Big Toss
+      0x0184, // Poison Big Toss Curse
+      0x0284, // Poison Big Toss Stone
+      0x0484, // Poison Big Toss Water
+      0x0484, // Poison Big Toss Water
+      0x0484, // Poison Big Toss Water
+      0x0884, // Poison Big Toss Dark
+      0x0884, // Poison Big Toss Dark
+      0x0884, // Poison Big Toss Dark
+      0x1084, // Poison Big Toss Holy
+      0x1084, // Poison Big Toss Holy
+      0x1084, // Poison Big Toss Holy
+      0x2084, // Poison Big Toss Ice
+      0x2084, // Poison Big Toss Ice
+      0x2084, // Poison Big Toss Ice
+      0x4084, // Poison Big Toss Lightning
+      0x4084, // Poison Big Toss Lightning
+      0x4084, // Poison Big Toss Lightning
+      0x8084, // Poison Big Toss Fire
+      0x8084, // Poison Big Toss Fire
+      0x8084, // Poison Big Toss Fire
+      0x0007, // Cat
+      0x0007, // Cat
+      0x0007, // Cat
+      0x0107, // Cat Curse
+      0x0207, // Cat Stone
+      0x0407, // Cat Water
+      0x0407, // Cat Water
+      0x0407, // Cat Water
+      0x0807, // Cat Dark
+      0x0807, // Cat Dark
+      0x0807, // Cat Dark
+      0x1007, // Cat Holy
+      0x1007, // Cat Holy
+      0x1007, // Cat Holy
+      0x2007, // Cat Ice
+      0x2007, // Cat Ice
+      0x2007, // Cat Ice
+      0x4007, // Cat Lightning
+      0x4007, // Cat Lightning
+      0x4007, // Cat Lightning
+      0x8007, // Cat Fire
+      0x8007, // Cat Fire
+      0x8007, // Cat Fire
+      0x0011, // Normal Hit 1/6
+      0x0011, // Normal Hit 1/6
+      0x0011, // Normal Hit 1/6
+      0x0411, // Hit 1/6 Water
+      0x0411, // Hit 1/6 Water
+      0x0411, // Hit 1/6 Water
+      0x0811, // Hit 1/6 Dark
+      0x0811, // Hit 1/6 Dark
+      0x0811, // Hit 1/6 Dark
+      0x0c11, // Hit 1/6 Dark Water
+      0x0c11, // Hit 1/6 Dark Water
+      0x0c11, // Hit 1/6 Dark Water
+      0x1011, // Hit 1/6 Holy
+      0x1011, // Hit 1/6 Holy
+      0x1011, // Hit 1/6 Holy
+      0x1411, // Hit 1/6 Holy Water
+      0x1411, // Hit 1/6 Holy Water
+      0x1411, // Hit 1/6 Holy Water
+      0x1811, // Hit 1/6 Holy Dark
+      0x1811, // Hit 1/6 Holy Dark
+      0x1811, // Hit 1/6 Holy Dark
+      0x2011, // Hit 1/6 Ice
+      0x2011, // Hit 1/6 Ice
+      0x2011, // Hit 1/6 Ice
+      0x2411, // Hit 1/6 Ice Water
+      0x2411, // Hit 1/6 Ice Water
+      0x2411, // Hit 1/6 Ice Water
+      0x2811, // Hit 1/6 Ice Dark
+      0x2811, // Hit 1/6 Ice Dark
+      0x2811, // Hit 1/6 Ice Dark
+      0x3011, // Hit 1/6 Holy Ice
+      0x3011, // Hit 1/6 Holy Ice
+      0x3011, // Hit 1/6 Holy Ice
+      0x4011, // Hit 1/6 Lightning
+      0x4011, // Hit 1/6 Lightning
+      0x4011, // Hit 1/6 Lightning
+      0x4411, // Hit 1/6 Lightning Water
+      0x4411, // Hit 1/6 Lightning Water
+      0x4411, // Hit 1/6 Lightning Water
+      0x4811, // Hit 1/6 Lightning Dark
+      0x4811, // Hit 1/6 Lightning Dark
+      0x4811, // Hit 1/6 Lightning Dark
+      0x5011, // Hit 1/6 Holy Lightning
+      0x5011, // Hit 1/6 Holy Lightning
+      0x5011, // Hit 1/6 Holy Lightning
+      0x6011, // Hit 1/6 Ice Lightning
+      0x6011, // Hit 1/6 Ice Lightning
+      0x6011, // Hit 1/6 Ice Lightning
+      0x8011, // Hit 1/6 Fire
+      0x8011, // Hit 1/6 Fire
+      0x8011, // Hit 1/6 Fire
+      0x8411, // Hit 1/6 Fire Water
+      0x8411, // Hit 1/6 Fire Water
+      0x8411, // Hit 1/6 Fire Water
+      0x8811, // Hit 1/6 Fire Dark
+      0x8811, // Hit 1/6 Fire Dark
+      0x8811, // Hit 1/6 Fire Dark
+      0x9011, // Hit 1/6 Holy Fire
+      0x9011, // Hit 1/6 Holy Fire
+      0x9011, // Hit 1/6 Holy Fire
+      0xA011, // Hit 1/6 Ice Fire
+      0xA011, // Hit 1/6 Ice Fire
+      0xA011, // Hit 1/6 Ice Fire
+      0xC011, // Hit 1/6 Lightning Fire
+      0xC011, // Hit 1/6 Lightning Fire
+      0xC011, // Hit 1/6 Lightning Fire
+      0x0051, // Normal Cut 1/6
+      0x0051, // Normal Cut 1/6
+      0x0051, // Normal Cut 1/6
+      0x0451, // Cut 1/6 Water
+      0x0451, // Cut 1/6 Water
+      0x0451, // Cut 1/6 Water
+      0x0851, // Cut 1/6 Dark
+      0x0851, // Cut 1/6 Dark
+      0x0851, // Cut 1/6 Dark
+      0x0c51, // Cut 1/6 Dark Water
+      0x0c51, // Cut 1/6 Dark Water
+      0x0c51, // Cut 1/6 Dark Water
+      0x1051, // Cut 1/6 Holy
+      0x1051, // Cut 1/6 Holy
+      0x1051, // Cut 1/6 Holy
+      0x1451, // Cut 1/6 Holy Water
+      0x1451, // Cut 1/6 Holy Water
+      0x1451, // Cut 1/6 Holy Water
+      0x1851, // Cut 1/6 Holy Dark
+      0x1851, // Cut 1/6 Holy Dark
+      0x1851, // Cut 1/6 Holy Dark
+      0x2051, // Cut 1/6 Ice
+      0x2051, // Cut 1/6 Ice
+      0x2051, // Cut 1/6 Ice
+      0x2451, // Cut 1/6 Ice Water
+      0x2451, // Cut 1/6 Ice Water
+      0x2451, // Cut 1/6 Ice Water
+      0x2851, // Cut 1/6 Ice Dark
+      0x2851, // Cut 1/6 Ice Dark
+      0x2851, // Cut 1/6 Ice Dark
+      0x3051, // Cut 1/6 Holy Ice
+      0x3051, // Cut 1/6 Holy Ice
+      0x3051, // Cut 1/6 Holy Ice
+      0x4051, // Cut 1/6 Lightning
+      0x4051, // Cut 1/6 Lightning
+      0x4051, // Cut 1/6 Lightning
+      0x4451, // Cut 1/6 Lightning Water
+      0x4451, // Cut 1/6 Lightning Water
+      0x4451, // Cut 1/6 Lightning Water
+      0x4851, // Cut 1/6 Lightning Dark
+      0x4851, // Cut 1/6 Lightning Dark
+      0x4851, // Cut 1/6 Lightning Dark
+      0x5051, // Cut 1/6 Holy Lightning
+      0x5051, // Cut 1/6 Holy Lightning
+      0x5051, // Cut 1/6 Holy Lightning
+      0x6051, // Cut 1/6 Ice Lightning
+      0x6051, // Cut 1/6 Ice Lightning
+      0x6051, // Cut 1/6 Ice Lightning
+      0x8051, // Cut 1/6 Fire
+      0x8051, // Cut 1/6 Fire
+      0x8051, // Cut 1/6 Fire
+      0x8451, // Cut 1/6 Fire Water
+      0x8451, // Cut 1/6 Fire Water
+      0x8451, // Cut 1/6 Fire Water
+      0x8851, // Cut 1/6 Fire Dark
+      0x8851, // Cut 1/6 Fire Dark
+      0x8851, // Cut 1/6 Fire Dark
+      0x9051, // Cut 1/6 Holy Fire
+      0x9051, // Cut 1/6 Holy Fire
+      0x9051, // Cut 1/6 Holy Fire
+      0xA051, // Cut 1/6 Ice Fire
+      0xA051, // Cut 1/6 Ice Fire
+      0xA051, // Cut 1/6 Ice Fire
+      0xC051, // Cut 1/6 Lightning Fire
+      0xC051, // Cut 1/6 Lightning Fire
+      0xC051, // Cut 1/6 Lightning Fire
+    ]
+    newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
+    return newType
+  }
+
+  function hexValueToDamageString(hexValue) {
+    // Hit types can't be combined
+    let hitTypes = {
+        0: "",     // No Hit Box
+        1: "",     // Hit 16%
+        2: "",     // Hit
+        4: "",     // Cut
+        5: "",     // Cut 16%
+        6: "",     // Cut Weak
+        8: "30"      // Poison
+    }
+
+    // Hit effects can't be combined
+    let hitEffects = {
+        0: "",         // No Hit Box
+        1: "",         // Ignore normal attack styles
+        2: "",       // Hit Weak
+        4: "",       // Big Toss
+        6: "",       // Guard
+        7: "23"        // Cat
+    }
+
+    // Damage Types CAN be combined
+    let damageTypes = {
+        0: "",         // None
+        1: "28",        // Holy
+        2: "29",        // Ice
+        4: "2c",        // Lightning
+        8: "26"         // Fire
+    }
+
+    // Special Types CAN be combined
+    let specialTypes = {
+        0: "",          // None
+        1: "35",         // Curse
+        2: "33",         // Stone
+        4: "37",         // Water
+        8: "24"          // Dark
+    }
+
+    let hitTypeValue = (hexValue >> 4) & 0xF;
+    let hitType = hitTypes[hitTypeValue]
+
+    let hitEffectValue = hexValue & 0xF
+    let hitEffect = hitEffects[hitEffectValue]
+
+    let damageTypeValue = (hexValue >> 12) & 0xF;
+    let damageType = getStatType(damageTypes, damageTypeValue);
+
+    let specialTypeValue = (hexValue >> 8) & 0xF;
+    let specialType = getStatType(specialTypes, specialTypeValue)
+
+    return `${hitType}${hitEffect}${damageType}${specialType}`
+  }
+
+  function hexValueToDefenceString(hexValue) {
+    // Hit types can't be combined
+    let hitTypes = {
+        0: "3f",     // No Resistance
+        1: "",     // Hit 16%
+        2: "03",     // Hit
+        4: "0f",     // Cut
+        5: "",     // Cut 16%
+        6: "",     // Cut Weak
+        8: "30"      // Poison
+    }
+
+    // Hit effects can't be combined
+    let hitEffects = {
+        0: "",         // No Hit Box
+        1: "",         // Ignore normal attack styles
+        2: "",       // Hit Weak
+        4: "",       // Big Toss
+        6: "",       // Guard
+        7: "23"        // Cat
+    }
+
+    // Damage Types CAN be combined
+    let damageTypes = {
+        0: "",         // None
+        1: "28",        // Holy
+        2: "29",        // Ice
+        4: "2c",        // Lightning
+        8: "26"         // Fire
+    }
+
+    // Special Types CAN be combined
+    let specialTypes = {
+        0: "",          // None
+        1: "35",         // Curse
+        2: "33",         // Stone
+        4: "37",         // Water
+        8: "24"          // Dark
+    }
+
+    let hitTypeValue = (hexValue >> 4) & 0xF;
+    let hitType = hitTypes[hitTypeValue]
+
+    let hitEffectValue = hexValue & 0xF
+    let hitEffect = hitEffects[hitEffectValue]
+
+    let damageTypeValue = (hexValue >> 12) & 0xF;
+    let damageType = getStatType(damageTypes, damageTypeValue);
+
+    let specialTypeValue = (hexValue >> 8) & 0xF;
+    let specialType = getStatType(specialTypes, specialTypeValue)
+
+    return `${hitType}${hitEffect}${damageType}${specialType}`
+  }
+
+  function getStatType(typeObj, value){
+    let valuesForDamage = findRequiredNumbers(value, Object.keys(typeObj))
+    valuesForDamage.sort((a, b) => a - b);  // Sort them ascending
+    let valueType = ""
+    for(value of valuesForDamage){
+        valueType += typeObj[value]
+    }
+    return valueType
   }
 
   function applyenemyStatRandoPatches(rng,chaos) {
@@ -7633,7 +7427,7 @@ function hexValueToDamageString(hexValue) {
     })
 
     spellsArr.forEach(function(spell) {                                         // cycle through spells (and familiar and xform damages)
-      console.log(spell.spellName)
+      // console.log(spell.spellName)
       newElem = weaponElemRando(rng)                                            // identify new element
       offset = spell.spellElementOffset                                         // assign offset to update
       data.writeShort(offset,newElem)                                           // Commit writes
@@ -7678,245 +7472,6 @@ function hexValueToDamageString(hexValue) {
     })
 
     return data
-  }
-
-// Written By: MottZilla
-// Selects 5 Enemies as Bounty Hunter Targets, sets their drops and applies hints to the Cards.
-function applyBountyHunterTargets(rng,bhmode) {
-	const bountyHunterTargets = enemies.bountyHunterTargets
-	const data = new checked()
-	
-  // console.log('Apply BH components')
-	let TargetHeartId,TargetToothId,TargetRibId,TargetRingId,TargetEyeId
-	let TargetHeartEnemyId,TargetToothEnemyId,TargetRibEnemyId,TargetRingEnemyId,TargetEyeEnemyId	
-	let VladDropRate = 16
-	let offset
-	let EBase = 0xB5858
-	let dindex = 6
-	
-	// Support Functions
-	function getEnemyOffset(id)
-	{
-		let offset_e,offset_s
-		offset_e = id * 0x28
-		offset_s = Math.floor((offset_e+0x100) / 0x800) * 0x130
-		return EBase + offset_e + offset_s
-	}
-	
-	function writeTargetText(TargetOfs)
-	{
-		TargetOfs = data.writeWord(TargetOfs,0x47524154)	// TARG
-		TargetOfs = data.writeShort(TargetOfs,0x5445)		// ET
-		TargetOfs = data.writeChar(TargetOfs,0x20)			// ' '		
-		return TargetOfs
-	}
-	
-	function writeEnemyText(TargetId)
-	{
-		for(let i = 0; i < bountyHunterTargets[TargetId].name.length; i++)
-		{	offset = data.writeChar(offset,bountyHunterTargets[TargetId].name.charCodeAt(i) )	}
-		data.writeChar(offset,0)	// String Termination
-	}
-	
-	function writeTargetData(Id,EnemyId,HintOffset,VladNumber)
-	{
-		offset = getEnemyOffset(EnemyId)
-		data.writeShort(offset + 0x1A,0xB5 + VladNumber)
-		data.writeShort(offset + 0x1E,VladDropRate)
-		if(bhmode == 2) { data.writeChar(offset + 0x25,0) }
-		if(HintOffset > 0)
-		{
-			offset = writeTargetText(HintOffset)				// Writing Hint String
-			writeEnemyText(Id)									// Write Enemy Name on Card
-		}
-	}
-	
-	function changeCardNames()
-	{
-		offset = 0xF5581							// Set Relic Name (Heart Card)
-		offset = data.writeWord(offset,0x72616548)
-		offset = data.writeChar(offset,0x74)
-		offset = 0xF55AC							// Set Relic Name (Tooth Card)
-		offset = data.writeWord(offset,0x746F6F54)
-		offset = data.writeChar(offset,0x68)
-		offset = 0xF55D9							// Set Relic Name (Rib Card)
-		offset = data.writeWord(offset,0x20626952)
-		offset = data.writeWord(offset,0x64726143)
-		offset = data.writeChar(offset,0)
-		offset = 0xF5608							// Set Relic Name (Ring Card)
-		offset = data.writeWord(offset,0x676E6952)
-		offset = data.writeWord(offset,0x72614320)
-		offset = data.writeShort(offset,0x0064)
-		offset = 0xF5635							// Set Relic Name (Eye Card)
-		offset = data.writeWord(offset,0x20657945)
-		offset = data.writeWord(offset,0x64726143)
-		offset = data.writeChar(offset,0)
-	}
-	
-	function enemyHasVlad(enemyId)
-	{
-		let VladReturn = 0
-		// Handle Duplicates
-		if(enemyId == 246) { enemyId = 6 }	// Axe Knight
-		if(enemyId == 15) { enemyId = 14 }	// Flying Zombie
-		if(enemyId == 29) { enemyId = 27 }	// Merman
-		if(enemyId == 136 || enemyId == 138) { enemyId = 129 }	// Spectral sword
-		if(enemyId == 159) { enemyId = 158 }	// CORPSEWEED
-		if(enemyId == 162) { enemyId = 161 }	// VENUS WEED
-		if(enemyId == 304) { enemyId = 303 }	// Medusa head
-		if(enemyId == 393) { enemyId = 392 }	// Blue Venus WEED
-		if(enemyId == 46) { enemyId = 45 }		// Bone ARK
-		if(enemyId == 142 || enemyId == 143) { enemyId = 141 }	// OROBOUROUS
-		
-		if(TargetHeartEnemyId == enemyId) { VladReturn = 1 }
-		if(TargetToothEnemyId == enemyId) { VladReturn = 2 }
-		if(TargetRibEnemyId == enemyId) { VladReturn = 3 }
-		if(TargetRingEnemyId == enemyId) { VladReturn = 4 }
-		if(TargetEyeEnemyId == enemyId) { VladReturn = 5 }
-		return VladReturn
-	}
-	
-	function selectTargets()
-	{
-		TargetHeartId = TargetToothId = TargetRibId = TargetRingId = TargetEyeId = 0
-		while(TargetHeartId == 0)
-		{	TargetHeartId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}
-		TargetHeartEnemyId = bountyHunterTargets[TargetHeartId].enemyid						// Heart of Vlad - Pick Enemy Id
-		while(TargetToothId == TargetHeartId || TargetToothId == 0)	
-		{	TargetToothId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Tooth of Vlad - Pick Enemy Id (Can't match Heart)
-		TargetToothEnemyId = bountyHunterTargets[TargetToothId].enemyid
-		while(TargetRibId == TargetHeartId || TargetRibId == TargetToothId || TargetRibId == 0)	
-		{	TargetRibId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Rib of Vlad - Pick Enemy Id (Can't Match Heart, Tooth)
-		TargetRibEnemyId = bountyHunterTargets[TargetRibId].enemyid		
-		while(TargetRingId == TargetHeartId || TargetRingId == TargetToothId || TargetRingId == TargetRibId || TargetRingId == 0)
-		{	TargetRingId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Ring of Vlad - Pick Enemy Id (Can't Match Heart, Tooth, Rib)
-		TargetRingEnemyId = bountyHunterTargets[TargetRingId].enemyid
-		while(TargetEyeId == TargetHeartId || TargetEyeId == TargetToothId || TargetEyeId == TargetRibId || TargetEyeId == TargetRingId || TargetEyeId == 0)	
-		{	TargetEyeId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Eye of Vlad - Pick Enemy Id (Can't Match Heart, Tooth, Rib, Ring)
-		TargetEyeEnemyId = bountyHunterTargets[TargetEyeId].enemyid		
-	}
-	
-	function handleDuplicateDefs()
-	{
-		if(enemyHasVlad(6) > 0)	// AXE KNIGHT
-		{	writeTargetData(0,246,0,enemyHasVlad(6))	}		
-		if(enemyHasVlad(14) > 0)	// FLYING ZOMBIE
-		{	writeTargetData(0,15,0,enemyHasVlad(14))	}	
-		if(enemyHasVlad(27) > 0)	// MERMAN
-		{	writeTargetData(0,29,0,enemyHasVlad(27))	}
-		if(enemyHasVlad(129) > 0)	// SPECTRAL SWORD
-		{
-			writeTargetData(0,136,0,enemyHasVlad(129))
-			writeTargetData(0,138,0,enemyHasVlad(129))
-		}
-		if(enemyHasVlad(158) > 0)	// CORPSEWEED
-		{	writeTargetData(0,159,0,enemyHasVlad(158))	}
-		if(enemyHasVlad(161) > 0)	// VENUS WEED
-		{	writeTargetData(0,162,0,enemyHasVlad(161))	}
-		if(enemyHasVlad(303) > 0)	// MEDUSA HEAD
-		{	writeTargetData(0,304,0,enemyHasVlad(303))	}
-		if(enemyHasVlad(392) > 0)	// BLUE VENUS WEED
-		{	writeTargetData(0,393,0,enemyHasVlad(392))	}
-		if(enemyHasVlad(45) > 0)	// BONE ARK
-		{	writeTargetData(0,46,0,enemyHasVlad(45))	}
-		if(enemyHasVlad(141) > 0)	// OROBOUROUS
-		{
-			writeTargetData(0,142,0,enemyHasVlad(141))
-			writeTargetData(0,143,0,enemyHasVlad(141))
-			if(bhmode < 2) { data.writeChar(0xB6ED5,0x24) }
-		}		
-	}
-	
-	function checkForDropRateBoost()
-	{
-		if(bhmode > 0)	// bhmode ~ 0:Normal, 1:Hitman, 2:TargetConfirmed
-		{
-			while(dindex < 397)				// Buff item Drops for Hitman & Target Confirmed
-			{
-				if(enemyHasVlad(dindex) == 0)		// Only change Item Drop Rates on Enemies without Vlads.
-				{
-					offset = getEnemyOffset(dindex)
-					data.writeShort(offset + 0x1E,16)
-					data.writeShort(offset + 0x20,32)		
-				}	
-				dindex = dindex + 1
-			}
-		}		
-	}
-	
-	// Execution
-	if(bhmode > 0)
-	{
-		VladDropRate = 256	// Vlad Drop Rate increased for Hitman & Target Confirmed
-	}
-	selectTargets()
-	writeTargetData(TargetHeartId,TargetHeartEnemyId,0xF5560,1)
-	writeTargetData(TargetToothId,TargetToothEnemyId,0xF558C,2)
-	writeTargetData(TargetRibId,TargetRibEnemyId,0xF55B8,3)
-	writeTargetData(TargetRingId,TargetRingEnemyId,0xF55E8,4)
-	writeTargetData(TargetEyeId,TargetEyeEnemyId,0xF5614,5)
-	changeCardNames()
-	handleDuplicateDefs()
-	checkForDropRateBoost()
-	
-	return data
-}
-
-// Written By: MottZilla
-// Changes Resist Potions to grant immunity and gives i-frames like Potion, High Potion, etc.
-  function applyResistToImmunePotionsPatches() {
-    // console.log('potions ran')
-	  const data = new checked()
-	  let offset = 0x13F7D8
-	  offset = data.writeWord(offset,0x0C04D1FE)	// Assembly patch
-	  offset = data.writeWord(offset,0x34040668)
-	  offset = data.writeWord(offset,0x8E240018)
-	  offset = data.writeWord(offset,0x00000000)
-	  offset = data.writeWord(offset,0x2C8F0005)
-	  offset = data.writeWord(offset,0x2C8E0080)
-	  offset = data.writeWord(offset,0x15E00003)
-	  offset = data.writeWord(offset,0x34040001)
-	  offset = data.writeWord(offset,0x0C04385A)
-	  offset = data.writeWord(offset,0x34050040)
-	  offset = data.writeWord(offset,0x11C00003)
-	  offset = data.writeWord(offset,0x8E240018)
-	  offset = data.writeWord(offset,0x0C03FC3D)
-	  offset = data.writeWord(offset,0x00000000)
-	  offset = data.writeWord(offset,0x08048367)
-	  offset = data.writeWord(offset,0x00000000)
-	  // Assembly adjustmetns
-	  data.writeChar(0x10D6DC,0x2C)
-	  data.writeChar(0x10D6EC,0x2C)
-	  data.writeChar(0x10D708,0x2C)
-	  data.writeChar(0x10D718,0x2C)
-	  data.writeChar(0x10D734,0x2C)
-	  data.writeChar(0x10D744,0x2C)
-	  data.writeChar(0x10D760,0x2C)
-	  data.writeChar(0x10D770,0x2C)
-	  data.writeChar(0x10D78C,0x2C)
-	  data.writeChar(0x10D79C,0x2C)
-	  data.writeChar(0x10D7E4,0x2C)
-	  data.writeChar(0x10D7F4,0x2C)
-	  // Name Change
-	  offset = 0xF204C
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF2018
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF1FE8
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF1FB8
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF1F8C
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF1F60
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  return data
   }
 
   function applyStartRoomRandoPatches(rng,castleFlag) {
@@ -8035,7 +7590,7 @@ function applyBountyHunterTargets(rng,bhmode) {
     offset = data.writeChar(offset,0x41)
     data.writeChar(offset,0x64)
 
-    console.log("randRoomId = " + randRoomId + ", Room id = " + startRoomData[randRoomId].id + " Desc:" + startRoomData[randRoomId].comment)
+    // console.log("randRoomId = " + randRoomId + ", Room id = " + startRoomData[randRoomId].id + " Desc:" + startRoomData[randRoomId].comment)
 
     offset = 0xae95c                                                            // change the destination
     newWrite = startRoomData[randRoomId].xyWrite                                // Write X,Y Position
@@ -8168,231 +7723,61 @@ function applyBountyHunterTargets(rng,bhmode) {
     return data
   }
 
-  function applyAlucardPalette(alColP){                  //Alucard Palette Randomizer - CRAZY4BLADES, palettes by eldri7ch
-    const data = new checked()
-    let colorAlucardBright = 1//Math.floor(rng() * 2)
-    let colorAlucardSet= 0
-    const palettesAlucard = [
-      [0x8404, 0x8c28, 0x8c4c, 0xa552, 0xb9f3, 0xcad8, 0xf39c], // Bloody Tears
-      [0x9021, 0xa043, 0xb8a6, 0xc529, 0xcded, 0xcef5, 0xf39c], // Blue Danube
-      [0x8042, 0x8082, 0x80c6, 0x8d2f, 0xa9d1, 0xc6d5, 0xe39b], // Swamp Thing
-      [0x9063, 0x94a5, 0xa12a, 0xb9f0, 0xd674, 0xeb5b, 0xf39c], // White Knight
-      [0x8c02, 0x9c04, 0xac88, 0xbd0a, 0xcdad, 0xc655, 0xcf18], // Royal Purple
-      [0x9024, 0x9867, 0xa8ac, 0xbd31, 0xcdf5, 0xeabb, 0xfb1d], // Pink Passion
-      [0x8841, 0x9482, 0x9502, 0x9964, 0x9e07, 0xcef5, 0xf7bd], // Mint
-      [0x8000, 0x8c42, 0x98a5, 0xa0e9, 0xa96d, 0xb9f1, 0xc655]  // Shadow Prince
-    ]
-    const palettesWolfCloth = [
-      [0x8005,0x802a,0x8cad,0xa4f6,0x810d,0xbdf8,0x81f9,0xa31f,0x82df,0x8003,0x8023,0x8447,0x94ab,0xa112],
-      [0xa465,0xb884,0xc8e6,0xd58b,0x8d21,0xe690,0x9a42,0xb6e8,0xa360,0x9802,0x9423,0xa863,0xb908,0xc147],
-      [0x8063,0x80c7,0x8509,0x954e,0xa42a,0xadd4,0xc454,0xd55a,0xe85a,0x8021,0x8042,0x8064,0x8886,0xa4eb],
-      [0x8c64,0xa0e8,0xad6b,0xde52,0xb4e0,0xfb9a,0xe5e0,0xfe27,0xfea0,0x8422,0x8c64,0x9484,0xb129,0xd1ef],
-      [0xa465,0xb447,0xb88b,0xd94f,0x98c7,0xd9d8,0xad8e,0xca75,0xbe36,0x9802,0x9423,0xa445,0xa067,0xb0cd],
-      [0x9826,0xa46c,0xb8f2,0xe1d8,0x8422,0xfaba,0x8844,0x9086,0x90cb,0x8c03,0x8c24,0x9c69,0xb50d,0xcd2f],
-      [0x8c61,0x9502,0xa183,0xae4a,0xa427,0xbed6,0xc80a,0xcc8c,0xec16,0x8841,0x8841,0x90a2,0x98e4,0x9d65],
-      [0x8822,0x8c43,0x98a5,0xa0e9,0x808d,0xa96d,0x80f9,0x8d9e,0x813f,0x8421,0x8822,0x8822,0x9063,0x9484]
-    ]
-    switch (alColP){
-      case 'r':
-        colorAlucardSet = 0
-        break
-      case 'b':
-        colorAlucardSet = 1
-        break
-      case 'g':
-        colorAlucardSet = 2
-        break
-      case 'w':
-        colorAlucardSet = 3
-        break
-      case 'l':
-        colorAlucardSet = 4
-        break
-      case 'p':
-        colorAlucardSet = 5
-        break
-      case 'm':
-        colorAlucardSet = 6
-        break
-      case 's':
-        colorAlucardSet = 7
-        break
-    }
-        
-    // Cloth
-    offset = 0xEF952
-    for (let i = 0; i < 5; i++) {
-      index = i + colorAlucardBright + 1
-      offset = data.writeShort(offset, palettesAlucard[colorAlucardSet][index])
-    }
-    // Darkest color
-    offset = 0xEF93E
-    index = colorAlucardBright
-    offset = data.writeShort(offset,palettesAlucard[colorAlucardSet][index])
-
-    offset = 0xEF9C0
-    for (let i = 0; i < 4; i++) { //0-3
-      offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][i])
-    }
-    offset += 0x0a
-    for (let i = 4; i < 9; i++) {//4-8
-      offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][i])
-    }
-    offset += 0x04
-    for (let i = 9; i < 13; i++) {//10-13
-      offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][i])
-    }
-    offset += 0x0c
-    offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][13])
-    return data
-  }
-
-  function applyAlucardLiner(alColL){
-    const data = new checked()
-    let colorAlucardLiner = 0
-    const palettesAlucardLiner = [
-      [0x84ab, 0x8d2f, 0x91d6, 0x929b], // Gold Trim (Default)
-      [0x8465, 0x88a8, 0x88ec, 0x9151], // Bronze Trim
-      [0x94a6, 0xa54a, 0xb9ef, 0xc693], // Silver Trim
-      [0x8c43, 0x98a5, 0x9cc8, 0xa54c], // Onyx Trim
-      [0xa8ac, 0xad0f, 0xadb3, 0xbe16]  // Coral Trim
-    ]
-    const palettesWolfSkin = [
-      [0x9db5,0xbebd,0xff9a,0x8888,0x98f0,0x90ec,0xa990,0xa9f6,0x8023,0x8049],
-      [0x94eb,0xa56e,0xba14,0x8445,0x9089,0x8c66,0x94a8,0xa0eb,0x8023,0x8445],
-      [0xc1cf,0xded6,0xff9a,0x98a5,0xb14b,0xa509,0xb9ce,0xc611,0x8421,0x98a5],
-      [0xa52c,0xa98a,0x9cc7,0x8c44,0x98a8,0x9486,0x9ce7,0xa509,0x8001,0x8c44],
-      [0xbdf9,0xce7d,0xdf7c,0x948a,0xb553,0xa10f,0xbdd3,0xbdf8,0x8403,0x904b]
-    ]
-    
-    switch(alColL){
-      case 'z':
-        colorAlucardLiner = [0]
-        break
-      case "x":
-        colorAlucardLiner = [1]
-        break
-      case 'y':
-        colorAlucardLiner = [2]
-        break
-      case 'w':
-        colorAlucardLiner = [3]
-        break
-      case 'v':
-        colorAlucardLiner = [4]
-        break
-    }
-    if (colorAlucardLiner > 4) {
-      colorAlucardLiner = 0;
-    }
-    offset = 0xEF940
-    for (let i = 0; i < 4; i++) {
-      offset = data.writeShort(offset,palettesAlucardLiner[colorAlucardLiner][i])
-    }
-    offset = 0xEF9C8
-    for (let i = 0; i< 5; i++) {
-      offset = data.writeShort(offset,palettesWolfSkin[colorAlucardLiner][i])
-    }
-    offset += 0x16
-    for (let i = 5; i< 10; i++) {
-      offset = data.writeShort(offset,palettesWolfSkin[colorAlucardLiner][i])
-    }
-    return data
-  }
-
-  function applySplashText(rng,seasonAllowed) {                                 // Splash text; ASM by MottZilla, JS by 3snow_p7im, eldri7ch, and DotChris
-    const month = new Date().getMonth() + 1                                     // Acquire the month the code is run
-    const day = new Date().getDay() + 1
-    let splashPhrases = []
-
-    console.log("Day: " + day)
-    if (seasonAllowed) {                                                        // check if seasonal phrases are allowed
-      switch (month) {                                                          // Establish different sets of phrases from constants.js based on the month
-      case 4:                                                                   // April Fools
-        if(day === 1){
-          splashPhrases = constants.aprilFoolsSplashPhrases
-        }  
-        break
-      case 6:                                                                   // Pride month
-        splashPhrases = constants.prideSplashPhrases
-        break
-      case 12:                                                                  // Winter month
-        splashPhrases = constants.winterSplashPhrases
-        break
-      default:                                                                  // Any other month
-        splashPhrases = constants.splashPhrases
-        break
-      }
-    } else {
-      splashPhrases = constants.splashPhrases
-    }
-
-    const data = new checked()
-    let strId
-    let strText
-    let strLength
-    let newXPos
-    let offset
-    // Identify Variables
-    strId= Math.floor(rng() * Math.floor(splashPhrases.length))
-    strText = splashPhrases[strId]
-    strLength = strText.length
-    newXPos = numToHex(0x3404004b + (180-((strLength * 8) / 2)))
-    // Start writing the code - code by MottZilla
-    // Title Screen Display Text through Debug
-    offset = 0x4398AD0
-    offset = data.writeWord(offset, 0x3C04801B)
-    offset = data.writeWord(offset, 0x34844880)
-    offset = data.writeWord(offset, 0x0C004657)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x2404FFFF)
-    offset = data.writeWord(offset, 0x0C0045BF)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x34040020)
-    offset = data.writeWord(offset, 0x3C058003)
-    offset = data.writeWord(offset, 0xA0A4B768)
-    offset = data.writeWord(offset, 0x340400C1)                                 // y posoition for text
-    offset = data.writeWord(offset, 0xA0A4B76A)
-    offset = data.writeWord(offset, 0x3C028009)
-    offset = data.writeWord(offset, 0x94427494)
-    offset = data.writeWord(offset, 0x0806D200)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x00007845)
-    // Write Text Hook
-    offset = 0x439895C
-    offset = data.writeWord(offset, 0x0806d20e)
-    offset = data.writeWord(offset, 0x00000000)
-    // Write the new X pos for the text
-    offset = 0x4398AF0
-    data.writeWord(offset, newXPos)
-    // Write the text
-    let i = 0
-    let strHex = []
-    console.log(strText)
-    // Convert each character of the text to hex code.
-    // Loops through each character in the string and assigns
-    // a hex code for that character to be written.
-    while (i < (strLength)) {                                                   // code runs as long as the string still has characters in it
-      if (i < strLength) {                                                      // run if the character is not the end of the string
-        if (strText[i] == "\\") {                                               // Check for apostrophes
-          strhex[i] = 0x27
-        } else {                                                                // if it's not an apostrophe, write the hex code for the text
-          strHex[i] = strText.charCodeAt(i)
-        }
-      } else {                                                                  // if it IS the end of the string, add a termination 0x00
-        strHex[i] = 0x00
-      }
-      i++                                                                       // advance the integer in 'i'
-    }
-    // perform the write
-    offset = 0x4398B18
-    strHex[strLength + 1] = 0x00                                                // add an additional termination 0x00 in case the past one failed
-    offset = data.writeString(offset, strHex)                                   // actually write the text we need
-    offset = data.writeChar(offset, 0x00)                                       // I know, it seems redundant, but add an additional termination 0x00
-    
-    return data
+  function applyResistToImmunePotionsPatches() {
+    // Written By: MottZilla
+    // Changes Resist Potions to grant immunity and gives i-frames like Potion, High Potion, etc.
+    // console.log('potions ran')
+	  const data = new checked()
+	  let offset = 0x13F7D8
+	  offset = data.writeWord(offset,0x0C04D1FE)	// Assembly patch
+	  offset = data.writeWord(offset,0x34040668)
+	  offset = data.writeWord(offset,0x8E240018)
+	  offset = data.writeWord(offset,0x00000000)
+	  offset = data.writeWord(offset,0x2C8F0005)
+	  offset = data.writeWord(offset,0x2C8E0080)
+	  offset = data.writeWord(offset,0x15E00003)
+	  offset = data.writeWord(offset,0x34040001)
+	  offset = data.writeWord(offset,0x0C04385A)
+	  offset = data.writeWord(offset,0x34050040)
+	  offset = data.writeWord(offset,0x11C00003)
+	  offset = data.writeWord(offset,0x8E240018)
+	  offset = data.writeWord(offset,0x0C03FC3D)
+	  offset = data.writeWord(offset,0x00000000)
+	  offset = data.writeWord(offset,0x08048367)
+	  offset = data.writeWord(offset,0x00000000)
+	  // Assembly adjustmetns
+	  data.writeChar(0x10D6DC,0x2C)
+	  data.writeChar(0x10D6EC,0x2C)
+	  data.writeChar(0x10D708,0x2C)
+	  data.writeChar(0x10D718,0x2C)
+	  data.writeChar(0x10D734,0x2C)
+	  data.writeChar(0x10D744,0x2C)
+	  data.writeChar(0x10D760,0x2C)
+	  data.writeChar(0x10D770,0x2C)
+	  data.writeChar(0x10D78C,0x2C)
+	  data.writeChar(0x10D79C,0x2C)
+	  data.writeChar(0x10D7E4,0x2C)
+	  data.writeChar(0x10D7F4,0x2C)
+	  // Name Change
+	  offset = 0xF204C
+	  offset = data.writeWord(offset,0x554D4D29)
+	  offset = data.writeShort(offset,0x454E)
+	  offset = 0xF2018
+	  offset = data.writeWord(offset,0x554D4D29)
+	  offset = data.writeShort(offset,0x454E)
+	  offset = 0xF1FE8
+	  offset = data.writeWord(offset,0x554D4D29)
+	  offset = data.writeShort(offset,0x454E)
+	  offset = 0xF1FB8
+	  offset = data.writeWord(offset,0x554D4D29)
+	  offset = data.writeShort(offset,0x454E)
+	  offset = 0xF1F8C
+	  offset = data.writeWord(offset,0x554D4D29)
+	  offset = data.writeShort(offset,0x454E)
+	  offset = 0xF1F60
+	  offset = data.writeWord(offset,0x554D4D29)
+	  offset = data.writeShort(offset,0x454E)
+	  return data
   }
 
   function applyLibraryShortcutPatches() {
@@ -8564,28 +7949,350 @@ function applyBountyHunterTargets(rng,bhmode) {
     return data
   }
 
-  function applyEasyModePatches() {
+  function applySingleHitGearPatches() {
+    // console.log('Single-Hit Gears')
+
     const data = new checked()
     let offset
+
+    // First Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
+    offset = 0x055A0F04
+    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
+    offset = data.writeWord(offset, 0xa4230fd0)                                 // assign the value to RAM
+    offset = data.writeWord(offset, 0x0c06d6f8)                                 // Call sfx player
+    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
+    offset = data.writeWord(offset, 0x0806a29c)                                 // Jump to 0x801A8A70
+    data.writeWord(offset, 0x00000000)
+
+    // Second Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
+    offset = 0x059E92D8
+    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
+    offset = data.writeWord(offset, 0xa4230f6c)                                 // assign the value to RAM
+    offset = data.writeWord(offset, 0x0c04d1fe)                                 // Call sfx player
+    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
+    offset = data.writeWord(offset, 0x0806a0d9)                                 // Jump to 0x801A8364
+    data.writeWord(offset, 0x00000000)
+
+    return data
+  }
+
+  // =========================== Preset: Argument ============================
+
+  function applyNewGoals(nGoal) {	// Research and function by MottZilla & eldri7ch.
+    const data = new checked()
+    const jmpAddr = 0x04fcf814                                                  // define address to hook
+    const funcAddress = 0x04fe4f68                                              // define address for functions (inside Black Marble Gallery Overlay)
+    let offset
+                                                                                // Patch new goals - eldri7ch
+    switch (nGoal) {
+    case 'b':                                                                   // All Bosses
+      offset = jmpAddr
+      data.writeWord(offset, 0x08074fbc)
+
+      offset = funcAddress
+      offset = data.writeWord(offset, 0x3C108003)
+      offset = data.writeWord(offset, 0x3610CA2C)
+      offset = data.writeWord(offset, 0x3C118003)
+      offset = data.writeWord(offset, 0x3631CA80)
+      offset = data.writeWord(offset, 0x8E120000)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x12400005)
+      offset = data.writeWord(offset, 0x26100004)
+      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x080704E4)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x080705E4)
+      offset = data.writeWord(offset, 0x00000000)
+
+      offset = 0x04fcf7f3                                                       // Remove need for Vlads
+      data.writeChar(offset, 0x34)
+      break
+    case 'r':                                                                   // All Relics
+      offset = jmpAddr
+      data.writeWord(offset, 0x08074fbc)
+
+      offset = funcAddress
+      offset = data.writeWord(offset, 0x3C108009)
+      offset = data.writeWord(offset, 0x36107964)
+      offset = data.writeWord(offset, 0x3C118009)
+      offset = data.writeWord(offset, 0x3631797B)
+      offset = data.writeWord(offset, 0x92120000)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x1240000F)
+      offset = data.writeWord(offset, 0x26100001)
+      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x3C108009)
+      offset = data.writeWord(offset, 0x3610797D)
+      offset = data.writeWord(offset, 0x3C118009)
+      offset = data.writeWord(offset, 0x36317982)
+      offset = data.writeWord(offset, 0x92120000)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x12400005)
+      offset = data.writeWord(offset, 0x26100001)
+      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x080704E4)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x080705E4)
+      offset = data.writeWord(offset, 0x00000000)
+      break
+    case 'a':                                                                   // All Bosses & Relics (ABRSR)
+      offset = jmpAddr
+      data.writeWord(offset, 0x08074fbc)
+
+      offset = funcAddress
+      offset = data.writeWord(offset, 0x3C108003)
+      offset = data.writeWord(offset, 0x3610CA2C)
+      offset = data.writeWord(offset, 0x3C118003)
+      offset = data.writeWord(offset, 0x3631CA80)
+      offset = data.writeWord(offset, 0x8E120000)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x12400019)
+      offset = data.writeWord(offset, 0x26100004)
+      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x3C108009)
+      offset = data.writeWord(offset, 0x36107964)
+      offset = data.writeWord(offset, 0x3C118009)
+      offset = data.writeWord(offset, 0x3631797B)
+      offset = data.writeWord(offset, 0x92120000)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x1240000F)
+      offset = data.writeWord(offset, 0x26100001)
+      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x3C108009)
+      offset = data.writeWord(offset, 0x3610797D)
+      offset = data.writeWord(offset, 0x3C118009)
+      offset = data.writeWord(offset, 0x36317982)
+      offset = data.writeWord(offset, 0x92120000)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x12400005)
+      offset = data.writeWord(offset, 0x26100001)
+      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x080704E4)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x080705E4)
+      offset = data.writeWord(offset, 0x00000000)
+      break
+    case 'v':                                                                   // All Bosses All Vlads
+      offset = jmpAddr
+      data.writeWord(offset, 0x08074fbc)
+
+      offset = funcAddress
+      offset = data.writeWord(offset, 0x3C108003)
+      offset = data.writeWord(offset, 0x3610CA2C)
+      offset = data.writeWord(offset, 0x3C118003)
+      offset = data.writeWord(offset, 0x3631CA80)
+      offset = data.writeWord(offset, 0x8E120000)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x1240000F)
+      offset = data.writeWord(offset, 0x26100004)
+      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x3C108009)
+      offset = data.writeWord(offset, 0x3610797D)
+      offset = data.writeWord(offset, 0x3C118009)
+      offset = data.writeWord(offset, 0x36317982)
+      offset = data.writeWord(offset, 0x92120000)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x12400005)
+      offset = data.writeWord(offset, 0x26100001)
+      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x080704E4)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x080705E4)
+      offset = data.writeWord(offset, 0x00000000)
+      break
+    }
+
+    // insert code to help the tracker here.
+    return data
+  }
+
+  function applyBountyHunterTargets(rng,bhmode) {
+    // Written By: MottZilla
+    // Selects 5 Enemies as Bounty Hunter Targets, sets their drops and applies hints to the Cards.
+    const bountyHunterTargets = enemies.bountyHunterTargets
+    const data = new checked()
     
-    offset = 0x0012ca48                                                         // Address for adding new inputs to gravity boots
-    offset = data.writeWord(offset,0x08026232)                                  // instructs the game to jump to the new command detection code
-    data.writeWord(offset,0x00000000)
-
-    offset = 0x0012da34                                                         // Address for adding new inputs to soul steal
-    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
-    data.writeWord(offset,0x34040001)
-
-    offset = 0x0012d7a4                                                         // Address for adding new inputs to tetra spirit
-    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
-    data.writeWord(offset,0x34040002)
-
-    offset = 0x0012d454                                                         // Address for adding new inputs to hellfire
-    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
-    data.writeWord(offset,0x34040003)
-
-    data.writeWord(0x0012A234,0x26310004)                                       // 'add r17,4h' adds 4 frames of invincibility to everything which
-                                                                                // adds i-frames, including getting hit.
+    // console.log('Apply BH components')
+    let TargetHeartId,TargetToothId,TargetRibId,TargetRingId,TargetEyeId
+    let TargetHeartEnemyId,TargetToothEnemyId,TargetRibEnemyId,TargetRingEnemyId,TargetEyeEnemyId	
+    let VladDropRate = 16
+    let offset
+    let EBase = 0xB5858
+    let dindex = 6
+    
+    // Support Functions
+    function getEnemyOffset(id)
+    {
+      let offset_e,offset_s
+      offset_e = id * 0x28
+      offset_s = Math.floor((offset_e+0x100) / 0x800) * 0x130
+      return EBase + offset_e + offset_s
+    }
+    
+    function writeTargetText(TargetOfs)
+    {
+      TargetOfs = data.writeWord(TargetOfs,0x47524154)	// TARG
+      TargetOfs = data.writeShort(TargetOfs,0x5445)		// ET
+      TargetOfs = data.writeChar(TargetOfs,0x20)			// ' '		
+      return TargetOfs
+    }
+    
+    function writeEnemyText(TargetId)
+    {
+      for(let i = 0; i < bountyHunterTargets[TargetId].name.length; i++)
+      {	offset = data.writeChar(offset,bountyHunterTargets[TargetId].name.charCodeAt(i) )	}
+      data.writeChar(offset,0)	// String Termination
+    }
+    
+    function writeTargetData(Id,EnemyId,HintOffset,VladNumber)
+    {
+      offset = getEnemyOffset(EnemyId)
+      data.writeShort(offset + 0x1A,0xB5 + VladNumber)
+      data.writeShort(offset + 0x1E,VladDropRate)
+      if(bhmode == 2) { data.writeChar(offset + 0x25,0) }
+      if(HintOffset > 0)
+      {
+        offset = writeTargetText(HintOffset)				// Writing Hint String
+        writeEnemyText(Id)									// Write Enemy Name on Card
+      }
+    }
+    
+    function changeCardNames()
+    {
+      offset = 0xF5581							// Set Relic Name (Heart Card)
+      offset = data.writeWord(offset,0x72616548)
+      offset = data.writeChar(offset,0x74)
+      offset = 0xF55AC							// Set Relic Name (Tooth Card)
+      offset = data.writeWord(offset,0x746F6F54)
+      offset = data.writeChar(offset,0x68)
+      offset = 0xF55D9							// Set Relic Name (Rib Card)
+      offset = data.writeWord(offset,0x20626952)
+      offset = data.writeWord(offset,0x64726143)
+      offset = data.writeChar(offset,0)
+      offset = 0xF5608							// Set Relic Name (Ring Card)
+      offset = data.writeWord(offset,0x676E6952)
+      offset = data.writeWord(offset,0x72614320)
+      offset = data.writeShort(offset,0x0064)
+      offset = 0xF5635							// Set Relic Name (Eye Card)
+      offset = data.writeWord(offset,0x20657945)
+      offset = data.writeWord(offset,0x64726143)
+      offset = data.writeChar(offset,0)
+    }
+    
+    function enemyHasVlad(enemyId)
+    {
+      let VladReturn = 0
+      // Handle Duplicates
+      if(enemyId == 246) { enemyId = 6 }	// Axe Knight
+      if(enemyId == 15) { enemyId = 14 }	// Flying Zombie
+      if(enemyId == 29) { enemyId = 27 }	// Merman
+      if(enemyId == 136 || enemyId == 138) { enemyId = 129 }	// Spectral sword
+      if(enemyId == 159) { enemyId = 158 }	// CORPSEWEED
+      if(enemyId == 162) { enemyId = 161 }	// VENUS WEED
+      if(enemyId == 304) { enemyId = 303 }	// Medusa head
+      if(enemyId == 393) { enemyId = 392 }	// Blue Venus WEED
+      if(enemyId == 46) { enemyId = 45 }		// Bone ARK
+      if(enemyId == 142 || enemyId == 143) { enemyId = 141 }	// OROBOUROUS
+      
+      if(TargetHeartEnemyId == enemyId) { VladReturn = 1 }
+      if(TargetToothEnemyId == enemyId) { VladReturn = 2 }
+      if(TargetRibEnemyId == enemyId) { VladReturn = 3 }
+      if(TargetRingEnemyId == enemyId) { VladReturn = 4 }
+      if(TargetEyeEnemyId == enemyId) { VladReturn = 5 }
+      return VladReturn
+    }
+    
+    function selectTargets()
+    {
+      TargetHeartId = TargetToothId = TargetRibId = TargetRingId = TargetEyeId = 0
+      while(TargetHeartId == 0)
+      {	TargetHeartId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}
+      TargetHeartEnemyId = bountyHunterTargets[TargetHeartId].enemyid						// Heart of Vlad - Pick Enemy Id
+      while(TargetToothId == TargetHeartId || TargetToothId == 0)	
+      {	TargetToothId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Tooth of Vlad - Pick Enemy Id (Can't match Heart)
+      TargetToothEnemyId = bountyHunterTargets[TargetToothId].enemyid
+      while(TargetRibId == TargetHeartId || TargetRibId == TargetToothId || TargetRibId == 0)	
+      {	TargetRibId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Rib of Vlad - Pick Enemy Id (Can't Match Heart, Tooth)
+      TargetRibEnemyId = bountyHunterTargets[TargetRibId].enemyid		
+      while(TargetRingId == TargetHeartId || TargetRingId == TargetToothId || TargetRingId == TargetRibId || TargetRingId == 0)
+      {	TargetRingId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Ring of Vlad - Pick Enemy Id (Can't Match Heart, Tooth, Rib)
+      TargetRingEnemyId = bountyHunterTargets[TargetRingId].enemyid
+      while(TargetEyeId == TargetHeartId || TargetEyeId == TargetToothId || TargetEyeId == TargetRibId || TargetEyeId == TargetRingId || TargetEyeId == 0)	
+      {	TargetEyeId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Eye of Vlad - Pick Enemy Id (Can't Match Heart, Tooth, Rib, Ring)
+      TargetEyeEnemyId = bountyHunterTargets[TargetEyeId].enemyid		
+    }
+    
+    function handleDuplicateDefs()
+    {
+      if(enemyHasVlad(6) > 0)	// AXE KNIGHT
+      {	writeTargetData(0,246,0,enemyHasVlad(6))	}		
+      if(enemyHasVlad(14) > 0)	// FLYING ZOMBIE
+      {	writeTargetData(0,15,0,enemyHasVlad(14))	}	
+      if(enemyHasVlad(27) > 0)	// MERMAN
+      {	writeTargetData(0,29,0,enemyHasVlad(27))	}
+      if(enemyHasVlad(129) > 0)	// SPECTRAL SWORD
+      {
+        writeTargetData(0,136,0,enemyHasVlad(129))
+        writeTargetData(0,138,0,enemyHasVlad(129))
+      }
+      if(enemyHasVlad(158) > 0)	// CORPSEWEED
+      {	writeTargetData(0,159,0,enemyHasVlad(158))	}
+      if(enemyHasVlad(161) > 0)	// VENUS WEED
+      {	writeTargetData(0,162,0,enemyHasVlad(161))	}
+      if(enemyHasVlad(303) > 0)	// MEDUSA HEAD
+      {	writeTargetData(0,304,0,enemyHasVlad(303))	}
+      if(enemyHasVlad(392) > 0)	// BLUE VENUS WEED
+      {	writeTargetData(0,393,0,enemyHasVlad(392))	}
+      if(enemyHasVlad(45) > 0)	// BONE ARK
+      {	writeTargetData(0,46,0,enemyHasVlad(45))	}
+      if(enemyHasVlad(141) > 0)	// OROBOUROUS
+      {
+        writeTargetData(0,142,0,enemyHasVlad(141))
+        writeTargetData(0,143,0,enemyHasVlad(141))
+        if(bhmode < 2) { data.writeChar(0xB6ED5,0x24) }
+      }		
+    }
+    
+    function checkForDropRateBoost()
+    {
+      if(bhmode > 0)	// bhmode ~ 0:Normal, 1:Hitman, 2:TargetConfirmed
+      {
+        while(dindex < 397)				// Buff item Drops for Hitman & Target Confirmed
+        {
+          if(enemyHasVlad(dindex) == 0)		// Only change Item Drop Rates on Enemies without Vlads.
+          {
+            offset = getEnemyOffset(dindex)
+            data.writeShort(offset + 0x1E,16)
+            data.writeShort(offset + 0x20,32)		
+          }	
+          dindex = dindex + 1
+        }
+      }		
+    }
+    
+    // Execution
+    if(bhmode > 0)
+    {
+      VladDropRate = 256	// Vlad Drop Rate increased for Hitman & Target Confirmed
+    }
+    selectTargets()
+    writeTargetData(TargetHeartId,TargetHeartEnemyId,0xF5560,1)
+    writeTargetData(TargetToothId,TargetToothEnemyId,0xF558C,2)
+    writeTargetData(TargetRibId,TargetRibEnemyId,0xF55B8,3)
+    writeTargetData(TargetRingId,TargetRingEnemyId,0xF55E8,4)
+    writeTargetData(TargetEyeId,TargetEyeEnemyId,0xF5614,5)
+    changeCardNames()
+    handleDuplicateDefs()
+    checkForDropRateBoost()
+    
     return data
   }
 
@@ -8605,15 +8312,17 @@ function applyBountyHunterTargets(rng,bhmode) {
     let newLck
     const r2Assign = 0x34020000
 
+    // console.log("STATS MAX: " + parseInt(max))
+
     newStr = alucardStatRando(rng,max)
     newCon = alucardStatRando(rng,max)
     newInt = alucardStatRando(rng,max)
     newLck = alucardStatRando(rng,max)
 
-    console.log(newStr)
-    console.log(newCon)
-    console.log(newInt)
-    console.log(newLck)
+    // console.log(newStr)
+    // console.log(newCon)
+    // console.log(newInt)
+    // console.log(newLck)
 
     // console.log(numToHex(r2Assign + newStr))
 
@@ -8641,6 +8350,33 @@ function applyBountyHunterTargets(rng,bhmode) {
 
     offset = data.writeWord(offset,newLck)
 
+    return data
+  }
+
+  // =========================== Website: Boolean ============================
+
+  function applyEasyModePatches() {
+    const data = new checked()
+    let offset
+    
+    offset = 0x0012ca48                                                         // Address for adding new inputs to gravity boots
+    offset = data.writeWord(offset,0x08026232)                                  // instructs the game to jump to the new command detection code
+    data.writeWord(offset,0x00000000)
+
+    offset = 0x0012da34                                                         // Address for adding new inputs to soul steal
+    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
+    data.writeWord(offset,0x34040001)
+
+    offset = 0x0012d7a4                                                         // Address for adding new inputs to tetra spirit
+    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
+    data.writeWord(offset,0x34040002)
+
+    offset = 0x0012d454                                                         // Address for adding new inputs to hellfire
+    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
+    data.writeWord(offset,0x34040003)
+
+    data.writeWord(0x0012A234,0x26310004)                                       // 'add r17,4h' adds 4 frames of invincibility to everything which
+                                                                                // adds i-frames, including getting hit.
     return data
   }
 
@@ -9119,32 +8855,323 @@ function applyBountyHunterTargets(rng,bhmode) {
     return data
   }
 
-  function applySingleHitGearPatches() {
-    // console.log('Single-Hit Gears')
+  function applySplashText(rng,seasonAllowed) {                                               // Splash text; ASM by MottZilla, JS by 3snow_p7im, eldri7ch, and DotChris
+    const month = new Date().getMonth() + 1                                     // Acquire the month the code is run
+    let splashPhrases = []
+
+    if (seasonAllowed) {                                                    // check if seasonal phrases are allowed
+      switch (month) {                                                          // Establish different sets of phrases from constants.js based on the month
+      case 6:                                                                   // Pride month
+        splashPhrases = constants.prideSplashPhrases
+        break
+      default:                                                                  // Any other month
+        splashPhrases = constants.splashPhrases
+        break
+      }
+    } else {
+      splashPhrases = constants.splashPhrases
+    }
 
     const data = new checked()
+    let strId
+    let strText
+    let strLength
+    let newXPos
     let offset
-
-    // First Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
-    offset = 0x055A0F04
-    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
-    offset = data.writeWord(offset, 0xa4230fd0)                                 // assign the value to RAM
-    offset = data.writeWord(offset, 0x0c06d6f8)                                 // Call sfx player
-    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
-    offset = data.writeWord(offset, 0x0806a29c)                                 // Jump to 0x801A8A70
-    data.writeWord(offset, 0x00000000)
-
-    // Second Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
-    offset = 0x059E92D8
-    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
-    offset = data.writeWord(offset, 0xa4230f6c)                                 // assign the value to RAM
-    offset = data.writeWord(offset, 0x0c04d1fe)                                 // Call sfx player
-    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
-    offset = data.writeWord(offset, 0x0806a0d9)                                 // Jump to 0x801A8364
-    data.writeWord(offset, 0x00000000)
-
+    // Identify Variables
+    strId= Math.floor(rng() * Math.floor(splashPhrases.length))
+    strText = splashPhrases[strId]
+    strLength = strText.length
+    newXPos = numToHex(0x3404004b + (180-((strLength * 8) / 2)))
+    // Start writing the code - code by MottZilla
+    // Title Screen Display Text through Debug
+    offset = 0x4398AD0
+    offset = data.writeWord(offset, 0x3C04801B)
+    offset = data.writeWord(offset, 0x34844880)
+    offset = data.writeWord(offset, 0x0C004657)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x2404FFFF)
+    offset = data.writeWord(offset, 0x0C0045BF)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34040020)
+    offset = data.writeWord(offset, 0x3C058003)
+    offset = data.writeWord(offset, 0xA0A4B768)
+    offset = data.writeWord(offset, 0x340400C1)                                 // y posoition for text
+    offset = data.writeWord(offset, 0xA0A4B76A)
+    offset = data.writeWord(offset, 0x3C028009)
+    offset = data.writeWord(offset, 0x94427494)
+    offset = data.writeWord(offset, 0x0806D200)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00007845)
+    // Write Text Hook
+    offset = 0x439895C
+    offset = data.writeWord(offset, 0x0806d20e)
+    offset = data.writeWord(offset, 0x00000000)
+    // Write the new X pos for the text
+    offset = 0x4398AF0
+    data.writeWord(offset, newXPos)
+    // Write the text
+    let i = 0
+    let strHex = []
+    console.log(strText)
+    // Convert each character of the text to hex code.
+    // Loops through each character in the string and assigns
+    // a hex code for that character to be written.
+    while (i < (strLength)) {                                                   // code runs as long as the string still has characters in it
+      if (i < strLength) {                                                      // run if the character is not the end of the string
+        if (strText[i] == "\\") {                                               // Check for apostrophes
+          strhex[i] = 0x27
+        } else {                                                                // if it's not an apostrophe, write the hex code for the text
+          strHex[i] = strText.charCodeAt(i)
+        }
+      } else {                                                                  // if it IS the end of the string, add a termination 0x00
+        strHex[i] = 0x00
+      }
+      i++                                                                       // advance the integer in 'i'
+    }
+    // perform the write
+    offset = 0x4398B18
+    strHex[strLength + 1] = 0x00                                                // add an additional termination 0x00 in case the past one failed
+    offset = data.writeString(offset, strHex)                                   // actually write the text we need
+    offset = data.writeChar(offset, 0x00)                                       // I know, it seems redundant, but add an additional termination 0x00
+    
     return data
   }
+
+  // ========================== Website: Argument ============================
+  
+  function rgba32ToHighColor15(rgba32) {
+    // SOTN uses the Playstation's 15-bit high-color palette, with 5 bits for red, green, and blue and 1 bit for alpha
+    // NOTE(sestren): 0x00 through 0x07 will map to 0, 0x08 through 0x0f will map to 1, and so on, with 0xf8 through 0xff mapping to 31
+    const red = Math.floor(Number("0x" + rgba32.substring(1, 3)) / 8)
+    const green = Math.floor(Number("0x" + rgba32.substring(3, 5)) / 8)
+    const blue = Math.floor(Number("0x" + rgba32.substring(5, 7)) / 8)
+    const alpha = Math.floor(Number("0x" + rgba32.substring(7, 9)) / 128)
+    const highColor15 = (alpha << 15) + (blue << 10) + (green << 5) + red
+    return highColor15
+  }
+
+  function highColor15ToRgba32(highColor15) {
+    let value = highColor15
+    const red = value % 32
+    value = Math.floor(value / 32)
+    const green = value % 32
+    value = Math.floor(value / 32)
+    const blue = value % 32
+    value = Math.floor(value / 32)
+    const alpha = value % 32
+    // NOTE(sestren): 0 will map to 0x00, 1 will map to 0x08, and so on, with 31 mapping to 0xf8
+    const rr = (8 * red).toString(16).padStart(2, '0')
+    const gg = (8 * green).toString(16).padStart(2, '0')
+    const bb = (8 * blue).toString(16).padStart(2, '0')
+    const aa = (alpha > 0) ? 'ff' : '7f'
+    const rgba32 = '#' + rr + gg + bb + aa
+    return rgba32
+  }
+
+  function applyMapColor(mapColor) {	// Researched by MottZilla & eldri7ch. Function by eldri7ch
+    // NOTE(sestren): Most of the castle map's palette are not used in the vanilla game or are prevented from being used
+    // Default colors are given below for illustration purposes
+    const data = new checked()
+    let paletteIndexes = {
+      // Used for unrevealed portions of the map (i.e., transparency)
+      unrevealed: { index: 0x0, defaultColor: "#0000007f" },
+      // Used when exploring the map
+      exploredFills:   { index: 0x1, defaultColor: "#5070f8ff" },
+      exploredBorders: { index: 0xE, defaultColor: "#c0c0c0ff" },
+      saveRoomFills:   { index: 0x4, defaultColor: "#f80000ff" },
+      warpRoomFills:   { index: 0x5, defaultColor: "#f88000ff" },
+      // Used when purchasing the Castle Map from the Shop
+      revealedFills:   { index: 0x3, defaultColor: "#383860ff" },
+      revealedBorders: { index: 0xD, defaultColor: "#909090ff" },
+    }
+    switch (mapColor) {
+    case 'u': // Dark Blue
+      paletteIndexes.exploredFills.color = '#000060ff'
+      break
+    case 'r': // Crimson
+      paletteIndexes.exploredFills.color = '#801000ff'
+      break
+    case 'n': // Brown
+      paletteIndexes.exploredFills.color = '#503000ff'
+      break
+    case 'g': // Dark Green
+      paletteIndexes.exploredFills.color = '#004010ff'
+      break
+    case 'y': // Gray
+      paletteIndexes.exploredFills.color   = '#688080ff'
+      paletteIndexes.exploredBorders.color = '#ffffffff'
+      break
+    case 'p': // Purple
+      paletteIndexes.exploredFills.color = '#400060ff'
+      break
+    case 'k': // Pink
+      paletteIndexes.exploredFills.color   = '#a028e8ff'
+      paletteIndexes.exploredBorders.color = '#f0a0f8ff'
+      break
+    case 'b': // Black
+      paletteIndexes.exploredFills.color = '#000020ff'
+      break
+    case 'i': // Invisible
+      paletteIndexes.exploredFills.color = '#0000007f'
+      break
+    }
+    const paletteAddresses = {
+      "Castle Map Color Palette (DRA)": 0x03874848,
+      "Castle Map Color Palette (RIC)": 0x038C0508,
+    }
+    // In the switch-case above, various 'color' properties were added
+    // The presence of this property is used as a signal to update a color using the given RGBA32-formatted string value
+    Object.values(paletteIndexes)
+    .filter((paletteIndex) => {
+      return 'color' in paletteIndex
+    })
+    .forEach((paletteIndex) => {
+      Object.values(paletteAddresses)
+      .forEach((paletteAddress) => {
+        const bytesPerColor = 0x02
+        data.writeColor(paletteAddress + bytesPerColor * paletteIndex.index, paletteIndex.color)
+      })
+    })
+    return data
+  }
+
+  function applyAlucardPalette(alColP){                  //Alucard Palette Randomizer - CRAZY4BLADES, palettes by eldri7ch
+    const data = new checked()
+    let colorAlucardBright = 1//Math.floor(rng() * 2)
+    let colorAlucardSet= 0
+    const palettesAlucard = [
+      [0x8404, 0x8c28, 0x8c4c, 0xa552, 0xb9f3, 0xcad8, 0xf39c], // Bloody Tears
+      [0x9021, 0xa043, 0xb8a6, 0xc529, 0xcded, 0xcef5, 0xf39c], // Blue Danube
+      [0x8042, 0x8082, 0x80c6, 0x8d2f, 0xa9d1, 0xc6d5, 0xe39b], // Swamp Thing
+      [0x9063, 0x94a5, 0xa12a, 0xb9f0, 0xd674, 0xeb5b, 0xf39c], // White Knight
+      [0x8c02, 0x9c04, 0xac88, 0xbd0a, 0xcdad, 0xc655, 0xcf18], // Royal Purple
+      [0x9024, 0x9867, 0xa8ac, 0xbd31, 0xcdf5, 0xeabb, 0xfb1d], // Pink Passion
+      [0x8841, 0x9482, 0x9502, 0x9964, 0x9e07, 0xcef5, 0xf7bd], // Mint
+      [0x8000, 0x8c42, 0x98a5, 0xa0e9, 0xa96d, 0xb9f1, 0xc655]  // Shadow Prince
+    ]
+    const palettesWolfCloth = [
+      [0x8005,0x802a,0x8cad,0xa4f6,0x810d,0xbdf8,0x81f9,0xa31f,0x82df,0x8003,0x8023,0x8447,0x94ab,0xa112],
+      [0xa465,0xb884,0xc8e6,0xd58b,0x8d21,0xe690,0x9a42,0xb6e8,0xa360,0x9802,0x9423,0xa863,0xb908,0xc147],
+      [0x8063,0x80c7,0x8509,0x954e,0xa42a,0xadd4,0xc454,0xd55a,0xe85a,0x8021,0x8042,0x8064,0x8886,0xa4eb],
+      [0x8c64,0xa0e8,0xad6b,0xde52,0xb4e0,0xfb9a,0xe5e0,0xfe27,0xfea0,0x8422,0x8c64,0x9484,0xb129,0xd1ef],
+      [0xa465,0xb447,0xb88b,0xd94f,0x98c7,0xd9d8,0xad8e,0xca75,0xbe36,0x9802,0x9423,0xa445,0xa067,0xb0cd],
+      [0x9826,0xa46c,0xb8f2,0xe1d8,0x8422,0xfaba,0x8844,0x9086,0x90cb,0x8c03,0x8c24,0x9c69,0xb50d,0xcd2f],
+      [0x8c61,0x9502,0xa183,0xae4a,0xa427,0xbed6,0xc80a,0xcc8c,0xec16,0x8841,0x8841,0x90a2,0x98e4,0x9d65],
+      [0x8822,0x8c43,0x98a5,0xa0e9,0x808d,0xa96d,0x80f9,0x8d9e,0x813f,0x8421,0x8822,0x8822,0x9063,0x9484]
+    ]
+    switch (alColP){
+      case 'r':
+        colorAlucardSet = 0
+        break
+      case 'b':
+        colorAlucardSet = 1
+        break
+      case 'g':
+        colorAlucardSet = 2
+        break
+      case 'w':
+        colorAlucardSet = 3
+        break
+      case 'l':
+        colorAlucardSet = 4
+        break
+      case 'p':
+        colorAlucardSet = 5
+        break
+      case 'm':
+        colorAlucardSet = 6
+        break
+      case 's':
+        colorAlucardSet = 7
+        break
+    }
+        
+    // Cloth
+    offset = 0xEF952
+    for (let i = 0; i < 5; i++) {
+      index = i + colorAlucardBright + 1
+      offset = data.writeShort(offset, palettesAlucard[colorAlucardSet][index])
+    }
+    // Darkest color
+    offset = 0xEF93E
+    index = colorAlucardBright
+    offset = data.writeShort(offset,palettesAlucard[colorAlucardSet][index])
+
+    offset = 0xEF9C0
+    for (let i = 0; i < 4; i++) { //0-3
+      offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][i])
+    }
+    offset += 0x0a
+    for (let i = 4; i < 9; i++) {//4-8
+      offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][i])
+    }
+    offset += 0x04
+    for (let i = 9; i < 13; i++) {//10-13
+      offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][i])
+    }
+    offset += 0x0c
+    offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][13])
+    return data
+  }
+
+  function applyAlucardLiner(alColL){
+    const data = new checked()
+    let colorAlucardLiner = 0
+    const palettesAlucardLiner = [
+      [0x84ab, 0x8d2f, 0x91d6, 0x929b], // Gold Trim (Default)
+      [0x8465, 0x88a8, 0x88ec, 0x9151], // Bronze Trim
+      [0x94a6, 0xa54a, 0xb9ef, 0xc693], // Silver Trim
+      [0x8c43, 0x98a5, 0x9cc8, 0xa54c], // Onyx Trim
+      [0xa8ac, 0xad0f, 0xadb3, 0xbe16]  // Coral Trim
+    ]
+    const palettesWolfSkin = [
+      [0x9db5,0xbebd,0xff9a,0x8888,0x98f0,0x90ec,0xa990,0xa9f6,0x8023,0x8049],
+      [0x94eb,0xa56e,0xba14,0x8445,0x9089,0x8c66,0x94a8,0xa0eb,0x8023,0x8445],
+      [0xc1cf,0xded6,0xff9a,0x98a5,0xb14b,0xa509,0xb9ce,0xc611,0x8421,0x98a5],
+      [0xa52c,0xa98a,0x9cc7,0x8c44,0x98a8,0x9486,0x9ce7,0xa509,0x8001,0x8c44],
+      [0xbdf9,0xce7d,0xdf7c,0x948a,0xb553,0xa10f,0xbdd3,0xbdf8,0x8403,0x904b]
+    ]
+    
+    switch(alColL){
+      case 'z':
+        colorAlucardLiner = [0]
+        break
+      case "x":
+        colorAlucardLiner = [1]
+        break
+      case 'y':
+        colorAlucardLiner = [2]
+        break
+      case 'w':
+        colorAlucardLiner = [3]
+        break
+      case 'v':
+        colorAlucardLiner = [4]
+        break
+    }
+    if (colorAlucardLiner > 4) {
+      colorAlucardLiner = 0;
+    }
+    offset = 0xEF940
+    for (let i = 0; i < 4; i++) {
+      offset = data.writeShort(offset,palettesAlucardLiner[colorAlucardLiner][i])
+    }
+    offset = 0xEF9C8
+    for (let i = 0; i< 5; i++) {
+      offset = data.writeShort(offset,palettesWolfSkin[colorAlucardLiner][i])
+    }
+    offset += 0x16
+    for (let i = 5; i< 10; i++) {
+      offset = data.writeShort(offset,palettesWolfSkin[colorAlucardLiner][i])
+    }
+    return data
+  }
+
+  // #########################################################################
+  // ################################ End Options ############################
 
   function randomizeRelics(
     version,
@@ -9686,8 +9713,8 @@ function applyBountyHunterTargets(rng,bhmode) {
     Preset: Preset,
     PresetBuilder: PresetBuilder,
     applyTournamentModePatches: applyTournamentModePatches,
-    randoFuncMaster: randoFuncMaster,
     trackByteM: trackByteM,
+    randoFuncMaster: randoFuncMaster,
     applyTrackingByte: applyTrackingByte,
     applyMagicMaxPatches: applyMagicMaxPatches,
     applyAntiFreezePatches: applyAntiFreezePatches,
@@ -9698,6 +9725,7 @@ function applyBountyHunterTargets(rng,bhmode) {
     applyunlockedPatches: applyunlockedPatches,
     applysurprisePatches: applysurprisePatches,
     applyenemyStatRandoPatches: applyenemyStatRandoPatches,
+    applyElemChaosPatches: applyElemChaosPatches,
     applyShopPriceRandoPatches: applyShopPriceRandoPatches,
     applyStartRoomRandoPatches: applyStartRoomRandoPatches,
 	  applyBountyHunterTargets: applyBountyHunterTargets,
@@ -9705,7 +9733,6 @@ function applyBountyHunterTargets(rng,bhmode) {
     applyRLBCPatches: applyRLBCPatches,
 	  applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
-    applyElemChaosPatches: applyElemChaosPatches,
     applySingleHitGearPatches: applySingleHitGearPatches,
     applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,
