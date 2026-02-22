@@ -8050,6 +8050,16 @@
     return data
   }
 
+  function applyJewelSwordBuffPatches() {
+    const data = new checked()
+
+    // console.log('Jewel Sword')
+    // Jewel Sword Patch Hook - code and idea by eldri7ch
+    data.writeWord(0x0010D2A0, 0x08026236)
+
+    return data
+  }
+
   // =========================== Preset: Argument ============================
 
   function applyNewGoals(nGoal) {	// Research and function by MottZilla & eldri7ch.
@@ -9808,6 +9818,7 @@
 	  applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
     applySingleHitGearPatches: applySingleHitGearPatches,
+    applyJewelSwordBuffPatches: applyJewelSwordBuffPatches,
     applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,
     applyDevsStashPatches: applyDevsStashPatches,

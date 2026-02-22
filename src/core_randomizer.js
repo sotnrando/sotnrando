@@ -481,7 +481,7 @@ async function randomize(
                 }
                 check.apply(util.applyStartStatRandoPatches(rng,ssOpt))
             }
-            debugMessage(debugEnabled, '| Starting Stat Randomizer | ' + optFlag + " | " + ssMax)
+            debugMessage(debugEnabled, '| Starting Stat Randomizer | ' + optFlag + " | " + ssOpt)
             optFlag = false
             if (options.easyMode || applied.easyMode) { // Simplifies spell inputs and extends i-frames - eldrich
                 // Apply easy mode patches. - eldri7ch
