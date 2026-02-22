@@ -391,7 +391,7 @@
                           <span>
                             Simplifies inputs so spells no longer need complex sequences to execute. L2 for Gravity
                             Boots. R3 and any of the following: Left / Right for Hellfire, Up for Soul Steal, and 2x
-                            Down for Tetra Spirit. An additional 4 frames of invincibility is added to all damage 
+                            Down for Tetra Spirit. An additional 4 frames of invincibility is added to all damage
                             states, spell resolutions, and potions.
                           </span>
                         </span>
@@ -514,6 +514,21 @@
                         </span>
                       </span>
                     </label>
+                  </div>
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="startingStats" type="checkbox" data-store-checkbox="true">
+                      <span class="slider"></span>
+                    </label>
+                    <label for="startingStats" class="toggle-label">
+                      Randomize Starting Stats
+                    </label>
+                  </div>
+                  <div class="option-row" id="statMaxRow">
+                    <label for="statMax">MAX:</label>
+                    <input type="range" id="statMax" min="5" max="100" value="30" step="5">
+                    <span id="statMaxCurrentValue"></span>
+                    <datalist id="statMaxList"></datalist>
                   </div>
                 </div>
                 <div class="right-column-options">
@@ -788,7 +803,8 @@
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Guarantees drops from every enemy that has one. Which is dropped depends on kill count odd / even.
+                            Guarantees drops from every enemy that has one. Which is dropped depends on kill count odd /
+                            even.
                           </span>
                         </span>
                       </span>
@@ -908,6 +924,8 @@
                       <option value="b">Black</option>
                     </select>
                   </div>
+
+
                   <div id="mapColorDisplay" class="map-color"
                     style="background: url(https://i.servimg.com/u/f81/20/40/06/51/map_pa10.png);"></div>
                   <div id="alucard-palette-container">
@@ -1022,122 +1040,139 @@
         <div id="notification">Copied to clipboard</div>
         <hr>
         <h2><a id="changelog">Changelog</a></h2>
-          <h3>March 9, 2026</h3>
-            <h4>Preset Updates</h4>
-              <ul>
-                <li>Removed logic issue where Bat was required for the Jewel sword and Beryl Circlet checks in Big Toss.</li>
-                <li>Glitch is life, Glitch is eternal. Glitch will forever remain [TBD].</li>
-              </ul>
-            <h4>Options Updates</h4>
-              <ul>
-                <li>Added starting Stat Randomizer. (Command Line Only)</li>
-                <li>Familiar cards now have a chance to be Foil if Color Randomizer is turned on.</li>
-              </ul>
-            <h4>Program Updates</h4>
-              <ul>
-                <li>Added a capability for the randomizer for force one or more items to spawn in a preset (in relic locations) 
-                    by using the "goalItem" flag.</li>
-                <li>Removed a bug where, using command line, removing music randomization prevented the preset name from being 
-                    passed to the game menu screen.</li>
-              </ul>
+        <h3>March 9, 2026</h3>
+        <h4>Preset Updates</h4>
+        <ul>
+          <li>Removed logic issue where Bat was required for the Jewel sword and Beryl Circlet checks in Big Toss.</li>
+          <li>Glitch is life, Glitch is eternal. Glitch will forever remain [TBD].</li>
+        </ul>
+        <h4>Options Updates</h4>
+        <ul>
+          <li>Added starting Stat Randomizer. (Command Line Only)</li>
+          <li>Familiar cards now have a chance to be Foil if Color Randomizer is turned on.</li>
+        </ul>
+        <h4>Program Updates</h4>
+        <ul>
+          <li>Added a capability for the randomizer for force one or more items to spawn in a preset (in relic
+            locations)
+            by using the "goalItem" flag.</li>
+          <li>Removed a bug where, using command line, removing music randomization prevented the preset name from being
+            passed to the game menu screen.</li>
+        </ul>
         <a id="show-older" href="#older">Show older changes</a>
         <div id="older" class="hidden">
           <h3>February 9, 2026</h3>
-            <h4>Preset Updates</h4>
-              <ul>
-                <li>Added Lycanthrope Spring 2026 Tournament Edition preset.</li>
-                <li>Added Nimble Lite Spring 2026 Tournament Edition preset.</li>
-                <li>Added Warlock Spring 2026 Tournament Edition preset.</li>
-                <li>Fixed an error where Bounty Hunter variants could not generate their Cards / place Vlad relics.</li>
-                <li>Adjusted Rat Race shop price and sell price to trivialize random cash bags found in the preset.</li>
-                <li>Glitch is life, Glitch is eternal. Glitch will forever remain [TBD].</li>
-              </ul>
-            <h4>Option Updates</h4>
-              <ul>
-                <li>Incorporated a new Easy Mode where we combined an invincibility frame extension with simplified inputs.</li>
-                <li>Added Single-Hit Gears to make Clock Tower and Reverse Clock Tower less frustrating.</li>
-                <li>Removed potential softlock when starting above Richter in Castle Keep using Starting Room Randomizer.</li>
-              </ul>
-            <h4>Website Updates</h4>
-              <ul>
-                <li>Fixed an error that caused music not to randomize from the website.</li>
-                <li>Fixed an error which caused certain presets not to trigger the Goals changes.</li>
-              </ul>
-            <h4>Program Updates</h4>
-              <ul>
-                <li>Added new function and supporting code to convey to the Rando Tools the actual Complexity and Relic Location Extension used.</li>
-                <li>Patched an issue where killing Ctulhu in the Marble Gallery would prevent a scroll lock entity from spawning.</li>
-              </ul>
+          <h4>Preset Updates</h4>
+          <ul>
+            <li>Added Lycanthrope Spring 2026 Tournament Edition preset.</li>
+            <li>Added Nimble Lite Spring 2026 Tournament Edition preset.</li>
+            <li>Added Warlock Spring 2026 Tournament Edition preset.</li>
+            <li>Fixed an error where Bounty Hunter variants could not generate their Cards / place Vlad relics.</li>
+            <li>Adjusted Rat Race shop price and sell price to trivialize random cash bags found in the preset.</li>
+            <li>Glitch is life, Glitch is eternal. Glitch will forever remain [TBD].</li>
+          </ul>
+          <h4>Option Updates</h4>
+          <ul>
+            <li>Incorporated a new Easy Mode where we combined an invincibility frame extension with simplified inputs.
+            </li>
+            <li>Added Single-Hit Gears to make Clock Tower and Reverse Clock Tower less frustrating.</li>
+            <li>Removed potential softlock when starting above Richter in Castle Keep using Starting Room Randomizer.
+            </li>
+          </ul>
+          <h4>Website Updates</h4>
+          <ul>
+            <li>Fixed an error that caused music not to randomize from the website.</li>
+            <li>Fixed an error which caused certain presets not to trigger the Goals changes.</li>
+          </ul>
+          <h4>Program Updates</h4>
+          <ul>
+            <li>Added new function and supporting code to convey to the Rando Tools the actual Complexity and Relic
+              Location Extension used.</li>
+            <li>Patched an issue where killing Ctulhu in the Marble Gallery would prevent a scroll lock entity from
+              spawning.</li>
+          </ul>
           <h3>January 12, 2026</h3>
-            <h4>Preset Updates</h4>
-              <ul>
-                <li>"All glory to the hypno-Glitch." - eldri7ch</li>
-              </ul>
-            <h4>Website Updates</h4>
-              <ul>
-                <li>Removed a major bug that would cause presets to generate with / without randomizations counter to what was indicated by website selections.</li>
-              </ul>
-            <h4>Project Updates</h4>
-              <ul>
-                <li>Incorporated the SOTN Rando Tools into the main repo library and Crazy4Blades took over leading production on those. We are greateful to TalicZealot for his continued support moving through 2023 and most of 2024 but this was an inevitable move.</li>
-                <li>Keep an eye on the new repo <a href="https://github.com/sotnrando/SotnRandoTools/releases">here</a> to make sure you have the most updated tools in case those aren't automatically upgraded for you.</li>
-              </ul>
-            <h4>Rando Tools Updates</h4>
-              <ul>
-                <li>Added Library Card tracking option.</li>
-                <li>Added complexity and Relic Extension disclosures to the tracker.</li>
-                <li>Corrected a lot of errors regarding how relics and relic locations are tracked and displayed.</li>
-              </ul>
+          <h4>Preset Updates</h4>
+          <ul>
+            <li>"All glory to the hypno-Glitch." - eldri7ch</li>
+          </ul>
+          <h4>Website Updates</h4>
+          <ul>
+            <li>Removed a major bug that would cause presets to generate with / without randomizations counter to what
+              was indicated by website selections.</li>
+          </ul>
+          <h4>Project Updates</h4>
+          <ul>
+            <li>Incorporated the SOTN Rando Tools into the main repo library and Crazy4Blades took over leading
+              production on those. We are greateful to TalicZealot for his continued support moving through 2023 and
+              most of 2024 but this was an inevitable move.</li>
+            <li>Keep an eye on the new repo <a href="https://github.com/sotnrando/SotnRandoTools/releases">here</a> to
+              make sure you have the most updated tools in case those aren't automatically upgraded for you.</li>
+          </ul>
+          <h4>Rando Tools Updates</h4>
+          <ul>
+            <li>Added Library Card tracking option.</li>
+            <li>Added complexity and Relic Extension disclosures to the tracker.</li>
+            <li>Corrected a lot of errors regarding how relics and relic locations are tracked and displayed.</li>
+          </ul>
           <h3>December 18, 2025</h3>
-            <h4>Program Updates</h4>
-              <ul>
-                <li>Removed a bug that would cause map reveal in reverse outer wall.</li>
-                <li>Corrected an error that caused the tracker to show both castle's checks in one castle.</li>
-              </ul>
+          <h4>Program Updates</h4>
+          <ul>
+            <li>Removed a bug that would cause map reveal in reverse outer wall.</li>
+            <li>Corrected an error that caused the tracker to show both castle's checks in one castle.</li>
+          </ul>
           <h3>November 10, 2025</h3>
-            <h4>Preset Changes</h4>
-              <ul>
-                <li>Temporarily* added the following tournament presets:</li>
-                  <ul>
-                    <li>Rampage 2025 Tournament Edition* (This preset may end up staying permanently depending on performance)</li>
-                    <li>Cornivus 2025 Tournament Edition</li>
-                    <li>Nimble Lite 2025 Tournament Edition</li>
-                    <li>Recycler 2025 Tournament Edition</li>
-                    <li>Chimera 2025 Tournament Edition</li>
-                  </ul>
-                <li>Removed nerf to <i>all</i> thrust swords and only nerfed the thrust damage of Obsidian Sword in Boss Rush.</li>
-                <li>Fixed an issue where Gravity Boots didn't turn off second Leap Stone additional jumps in Recycler.</li>
-                <li>Removed menu lock when attempting to save in Gear Rush.</li>
-                <li>Removed Succubus fight in Gear Rush since player could not enter Nightmare. Relic now spawns by default.</li>
-                <li>eldri7ch fell into a Glitch.</li>
-                <li></li>
-                <h5>The following presets are now deprecated. Deprecation means they will be maintained and distributed with the randomizer but are no longer on the website.</h5>
-                  <ul>
-                    <li>Summoner</li>
-                    <li>Rat Race</li>
-                    <li>Brawler</li>
-                    <li>Empty Hand</li>
-                  </ul>
-              </ul>
-            <h4>Options Changes</h4>
-              <ul>
-                <li>No Prologue Mode removes the "grand" entrance of Alucard to allow the SOTN Rando Tools to start / stop LiveSplit.</li>
-              </ul>
-            <h4>Program Updates</h4>
-              <ul>
-                <li>Increased character limit for preset data on main menu screen from 30 characters to 50.</li>
-                <li>Updated color coding to RGBA32 for ease of programming.</li>
-                <li>Moved all randomization into a single core randomization module to maintain parity in generation and to streamline future coding.</li>
-              </ul>
+          <h4>Preset Changes</h4>
+          <ul>
+            <li>Temporarily* added the following tournament presets:</li>
+            <ul>
+              <li>Rampage 2025 Tournament Edition* (This preset may end up staying permanently depending on performance)
+              </li>
+              <li>Cornivus 2025 Tournament Edition</li>
+              <li>Nimble Lite 2025 Tournament Edition</li>
+              <li>Recycler 2025 Tournament Edition</li>
+              <li>Chimera 2025 Tournament Edition</li>
+            </ul>
+            <li>Removed nerf to <i>all</i> thrust swords and only nerfed the thrust damage of Obsidian Sword in Boss
+              Rush.</li>
+            <li>Fixed an issue where Gravity Boots didn't turn off second Leap Stone additional jumps in Recycler.</li>
+            <li>Removed menu lock when attempting to save in Gear Rush.</li>
+            <li>Removed Succubus fight in Gear Rush since player could not enter Nightmare. Relic now spawns by default.
+            </li>
+            <li>eldri7ch fell into a Glitch.</li>
+            <li></li>
+            <h5>The following presets are now deprecated. Deprecation means they will be maintained and distributed with
+              the randomizer but are no longer on the website.</h5>
+            <ul>
+              <li>Summoner</li>
+              <li>Rat Race</li>
+              <li>Brawler</li>
+              <li>Empty Hand</li>
+            </ul>
+          </ul>
+          <h4>Options Changes</h4>
+          <ul>
+            <li>No Prologue Mode removes the "grand" entrance of Alucard to allow the SOTN Rando Tools to start / stop
+              LiveSplit.</li>
+          </ul>
+          <h4>Program Updates</h4>
+          <ul>
+            <li>Increased character limit for preset data on main menu screen from 30 characters to 50.</li>
+            <li>Updated color coding to RGBA32 for ease of programming.</li>
+            <li>Moved all randomization into a single core randomization module to maintain parity in generation and to
+              streamline future coding.</li>
+          </ul>
           <h3>September 15, 2025</h3>
           <h4>Preset Changes</h4>
           <ul>
             <li>Added the new Anguish preset.</li>
             <li>Added the new Gear Rush preset.</li>
             <ul>
-              <li>• Name Code: APERTURE gives the player Gold and Silver ring to access Dracula early by visiting Maria at
+              <li>• Name Code: APERTURE gives the player Gold and Silver ring to access Dracula early by visiting Maria
+                at
                 the Holy glasses location.</li>
-              <li>• Name Code: SLOWPOKE Increases the amount of time given to the player to 25 minutes and also gives the
+              <li>• Name Code: SLOWPOKE Increases the amount of time given to the player to 25 minutes and also gives
+                the
                 rings to access Dracula early.</li>
               <li>• Name Code: IAMSPEED Decreases the amount of time the player has to 7 minutes. (No rings given)</li>
               <li>• Name Code: GTI-CLUB gives the player $250,000 in game, just like the sega Saturn version.</li>

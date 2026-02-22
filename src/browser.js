@@ -796,6 +796,19 @@
     }
   }
 
+  function statMaxChange() {
+    elems.statMaxCurrentValue.innerText = `(${elems.statMax.value})`;
+  }
+
+  function statMaxSlider() {
+    const saved = localStorage.getItem('statMax') || "25";
+    elems.statMax.value = saved;
+    elems.statMaxCurrentValue.innerText = `(${saved})`;
+
+    elems.statMax.addEventListener('input', statMaxChange);
+  }
+
+
   document.addEventListener('DOMContentLoaded', () => {
     const slider = document.getElementById('complexity');
     const currentValueElement = document.getElementById('complexityCurrentValue');
@@ -1341,6 +1354,7 @@
     loadMenuOptions();
     showHiddenTooltips();
     presetIdChange();
+    statMaxSlider();
   }
 
   initializeBrowser();
