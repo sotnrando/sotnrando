@@ -319,6 +319,8 @@ async function randomize(
             }
             check.apply(util.randoFuncMaster(optWrite))
 
+            check.apply(util.applySwordBuffPatches())
+
             let seasonAllowed = options.seasonalPhrasesMode || applied.seasonalPhrasesMode
             check.apply(util.applySplashText(rng,seasonAllowed))
 

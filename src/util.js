@@ -8026,12 +8026,55 @@
     return data
   }
 
-  function applyJewelSwordBuffPatches() {
+  function applySwordBuffPatches() {
     const data = new checked()
+    let offset
 
     // console.log('Jewel Sword')
     // Jewel Sword Patch Hook - code and idea by eldri7ch
     data.writeWord(0x0010D2A0, 0x08026236)
+
+    // Badelaire Patch - code by eldri7ch and idea by MottZilla
+    data.writeChar(0x10D238,0x34)
+
+    // Yasutsuna Hitbox Fix by MottZilla
+    // RIGHT HAND
+    // offset = 0x3BFB314
+    // offset = data.writeWord(offset, 0x18000024)
+    // offset = data.writeWord(offset, 0x00000000)
+
+    // offset = 0x3BFB3A8
+    // offset = data.writeWord(offset, 0x3C178007)
+    // offset = data.writeWord(offset, 0x36F733D8)
+    // offset = data.writeWord(offset, 0x00000000)
+    // offset = data.writeWord(offset, 0x8EF60000)
+    // offset = data.writeWord(offset, 0x8EF50004)
+    // offset = data.writeWord(offset, 0x96F40014)
+    // offset = data.writeWord(offset, 0xAE360000)
+    // offset = data.writeWord(offset, 0xAE350004)
+    // offset = data.writeWord(offset, 0xA6340014)
+    // offset = data.writeWord(offset, 0x8FBF0030)
+    // offset = data.writeWord(offset, 0x8FB7002C)
+    // offset = data.writeWord(offset, 0x1800FFD1)
+
+    //LEFT HAND
+    // offset = 0x3DD57F4
+    // offset = data.writeWord(offset, 0x18000024)
+    // offset = data.writeWord(offset, 0x00000000)
+
+    // offset = 0x3DD5888
+    // offset = data.writeWord(offset, 0x3C178007)
+    // offset = data.writeWord(offset, 0x36F733D8)
+    // offset = data.writeWord(offset, 0x00000000)
+    // offset = data.writeWord(offset, 0x8EF60000)
+    // offset = data.writeWord(offset, 0x8EF50004)
+    // offset = data.writeWord(offset, 0x96F40014)
+    // offset = data.writeWord(offset, 0xAE360000)
+    // offset = data.writeWord(offset, 0xAE350004)
+    // offset = data.writeWord(offset, 0xA6340014)
+    // offset = data.writeWord(offset, 0x8FBF0030)
+    // offset = data.writeWord(offset, 0x8FB7002C)
+    // offset = data.writeWord(offset, 0x1800FFD1)
 
     return data
   }
@@ -9794,7 +9837,7 @@
 	  applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
     applySingleHitGearPatches: applySingleHitGearPatches,
-    applyJewelSwordBuffPatches: applyJewelSwordBuffPatches,
+    applySwordBuffPatches: applySwordBuffPatches,
     applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,
     applyDevsStashPatches: applyDevsStashPatches,
