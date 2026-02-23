@@ -1847,8 +1847,8 @@
     let cardAddrArray = [0x000B57A2,0x000B57B2,0x000B57C2,0x000B57D2,0x000B57E2,0x000B57F2,0x000B5802]
     let offset
     let roll
-    let foilArray = [0x0A, 0x0C, 0x12, 0x0D, 0x15, 0x16, 0x14]
-    let inverseFoilArray = [0x00, 0x03, 0x07, 0x08, 0x05, 0x06, 0x09]
+    let foilArray = [0x00C2, 0x00BC, 0x00C4, 0x00CD, 0x00C3, 0x00BF, 0x0072]
+    let inverseFoilArray = [0x0100, 0x0103, 0x0107, 0x0108, 0x0105, 0x0106, 0x0109]
     let detection = 0
 
     if (options.tournamentMode) {                                               // Force the card array to be shuffled if Tournament mode is enabled
@@ -1866,7 +1866,7 @@
 
       if (roll === 1) {                                                         // Only apply the new color if the roll was 0
         detection++                                                             // Detection to alert players if there may be foils
-        data.writeChar(offset, colorFromArray)                                  // Apply the color
+        data.writeShort(offset, colorFromArray)                                  // Apply the color
       }
     }
 
@@ -1893,7 +1893,7 @@
 
       if (roll === 1) {                                                         // Only apply the new color if the roll was 0
         detection++                                                             // Detection to alert players if there may be foils
-        data.writeChar(offset, colorFromArray)                                  // Apply the color
+        data.writeShort(offset, colorFromArray)                                  // Apply the color
       }
     }
     
