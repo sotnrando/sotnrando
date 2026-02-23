@@ -649,7 +649,7 @@
         "enemyStatRandoMode", "shopPriceRandoMode", "startRoomRandoMode",
         "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
         "godspeedMode", "libraryShortcut", "elemChaosMode", "easyMode",
-        "devStashMode", "bossMusicSeparation", "singleHitGearMode"
+        "devStashMode", "bossMusicSeparation", "singleHitGearMode","startStatRandoMode"
       ];
 
       const keysToRemove = ["music", "bossMusicSeparation"];
@@ -670,7 +670,7 @@
 
       // HARD OVERRIDE: presets cannot enable singleHitGearMode
       // It is always false unless the user manually checks it
-      elems.singleHitGearMode.checked = false;
+      // elems.singleHitGearMode.checked = false;
 
       // Compatibility disables still apply
       DISABLE_RULES.forEach(rule => {
@@ -726,6 +726,7 @@
       "showSolutions",
       "startingEquipment",
       "singleHitGearMode",
+      "startStatRandoMode",
       "startRoomRando2ndMode",
       "startRoomRandoMode",
       "stats",
@@ -1048,7 +1049,8 @@
       'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
       'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
       'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
-      'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode'
+      'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode',
+      'startStatRandoMode'
     ]
 
     formOptions.forEach(key => {
@@ -1097,7 +1099,7 @@
       'startRoomRandoMode', 'startRoomRando2ndMode', 'dominoMode', 'rlbcMode',
       'immunityPotionMode', 'godspeedMode', 'libraryShortcut', 'elemChaosMode',
       'easyMode', 'devStashMode', 'seasonalPhrasesMode',
-      'bossMusicSeparation', 'singleHitGearMode', 'tournamentMode'
+      'bossMusicSeparation', 'singleHitGearMode', 'startStatRandoMode', 'tournamentMode'
     ]
     clearFields.forEach(key => elems[key].disabled = false)
 
@@ -1248,6 +1250,7 @@
         options,
         currSeed,
         elems.newGoals.value,
+        elems.statMax.value,
         elems.godspeedMode.checked,
         elems.mapColor.value,
         elems.alucardPalette.value,
@@ -1298,6 +1301,7 @@
         }).then(randomize(options,
           currSeed,
           elems.newGoals.value,
+          elems.statMax.value,
           elems.godspeedMode.checked,
           elems.mapColor.value,
           elems.alucardPalette.value,

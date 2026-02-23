@@ -102,7 +102,7 @@ BrowserConstants.elems = {
     devStashMode: document.getElementById('dev-stash'),
     statMax: document.getElementById('statMax'),
     statMaxCurrentValue: document.getElementById('statMaxCurrentValue'),
-    startingStats: document.getElementById('startingStats'),
+    startStatRandoMode: document.getElementById('startingStats'),
     seasonalPhrasesMode: document.getElementById('seasonal-phrases'),
     bossMusicSeparation: document.getElementById('boss-music-separation'),
     accessibilityPatches: document.getElementById('accessibility-patches'),

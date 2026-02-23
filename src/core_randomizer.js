@@ -168,6 +168,7 @@ async function randomize(
     options,
     seed,
     newGoals,
+    startStatMax,
     godSpeedShoes,
     mapColor,
     alucardPalette,
@@ -470,8 +471,12 @@ async function randomize(
             if (options.startStatRandoMode || applied.startStatRandoMode) { // Starting Stat Randomizer - eldrich
                 optFlag = true
                 rng = getRNG(options, seed);
-                if (options.startStatRandoMode !== undefined) {
-                    ssOpt = Number(options.startStatRandoMode)
+                if (options.startStatRandoMode !== undefined) {// need to confirm if in applied or options.
+                    if (startStatMax !== null) {
+                        ssOpt = Number(startStatMax)// special condition to pull from website interface
+                    } else {
+                        ssOpt = Number(options.startStatRandoMode)
+                    }
                 } else {
                     if (applied.startStatRandoMode !== undefined) {
                         ssOpt = Number(applied.startStatRandoMode)
