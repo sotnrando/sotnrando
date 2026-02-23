@@ -5744,6 +5744,7 @@
     offset = data.writeWord(offset,0x00000000)
     offset = data.writeWord(offset,0x27bdffe0)
     offset = data.writeWord(offset,0xafbf0004)
+    offset = data.writeWord(offset,0xafa20010)
     offset = data.writeWord(offset,0x3402006d)
     offset = data.writeWord(offset,0x16220041)
     offset = data.writeWord(offset,0x00000000)
@@ -5811,6 +5812,7 @@
     offset = data.writeWord(offset,0x15e20002)
     offset = data.writeWord(offset,0x00000000)
     offset = data.writeWord(offset,0x26100020)
+    offset = data.writeWord(offset,0x8fa20010)
     offset = data.writeWord(offset,0x8fbf0004)
     offset = data.writeWord(offset,0x00000000)
     offset = data.writeWord(offset,0x27bd0020)
@@ -5818,6 +5820,7 @@
     offset = data.writeWord(offset,0x00000000)
     offset = data.writeWord(offset,0x00000000)
     offset = data.writeWord(offset,0xffffffff)
+
     
     // Hook Master function into gameplay loop.
     data.writeWord(0xFAA38,0x0C02622D)
