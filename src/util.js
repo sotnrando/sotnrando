@@ -8967,6 +8967,10 @@
     offset = 0x000b102a
     data.writeChar(offset, 0x32)  // costs 50 Hearts
 
+    // Fix Dark Shield enemy i-frames
+    offset = 0x03ceab34
+    sata.writeWord(offset, 0x3402000a)
+
     return data
   }
 
