@@ -8970,7 +8970,7 @@
 
     // Fix Dark Shield enemy i-frames
     offset = 0x03ceab34
-    sata.writeWord(offset, 0x3402000a)
+    data.writeWord(offset, 0x3402000a)
 
     return data
   }
