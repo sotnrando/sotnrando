@@ -1840,33 +1840,164 @@
   }
 
   function foilFamiliarCards(data, rng, options){
-    // Foil Familiar Cards; Code by eldri7ch, idea by eldri7ch
+    // Foil Familiar Cards; Code by eldri7ch, idea by eldri7ch, familiar colors by Wecoc
     // Adds "foil" familiar cards and "inverse foil" familiar cards by changing palette ID in the relic definition tables.
     // all arrays sorted from top-to-bottom or left to right: 
     // Bat Card, Ghost Card, Faerie Card, Demon Card, Sword Card, Sprite Card, Nosedevil Card
-    let cardAddrArray = [0x000B57A2,0x000B57B2,0x000B57C2,0x000B57D2,0x000B57E2,0x000B57F2,0x000B5802]
-    let offset
+    let foilOffset
+    let paletteOffset
     let roll
+    let familiarArray = ["bat","gho","fae","dem","swo","spr","nos"]
     let foilArray = [0x00C2, 0x00BC, 0x00C4, 0x00CD, 0x00C3, 0x00BF, 0x0072]
     let inverseFoilArray = [0x0100, 0x0103, 0x0107, 0x0108, 0x0105, 0x0106, 0x0109]
     let detection = 0
 
+    function shinyFamilarWrites(friend,foilOffset,paletteOffset,colorFromArray){
+      switch (friend){
+        case "bat":
+          foilOffset = 0x000B57A2
+
+          paletteOffset = 0x041a6860
+          paletteOffset = data.writeWord(paletteOffset, 0x04210000)
+          paletteOffset = data.writeWord(paletteOffset, 0x14a50c63)
+          paletteOffset = data.writeWord(paletteOffset, 0x294a1ce7)
+          paletteOffset = data.writeWord(paletteOffset, 0x421035ad)
+          paletteOffset = data.writeWord(paletteOffset, 0x182603e0)
+          paletteOffset = data.writeWord(paletteOffset, 0x4430342c)
+          paletteOffset = data.writeWord(paletteOffset, 0x192d5c35)
+          data.writeWord(paletteOffset, 0x01182dd0)
+          break
+        case "gho":
+          foilOffset = 0x000B57B2
+
+          paletteOffset = 0x041ccfb0
+          paletteOffset = data.writeWord(paletteOffset, 0x07e10000)
+          paletteOffset = data.writeWord(paletteOffset, 0x125b19f9)
+          paletteOffset = data.writeWord(paletteOffset, 0x2f7f2f3f)
+          paletteOffset = data.writeWord(paletteOffset, 0x37df339f)
+          paletteOffset = data.writeWord(paletteOffset, 0x94838421)
+          paletteOffset = data.writeWord(paletteOffset, 0xc66da928)
+          paletteOffset = data.writeWord(paletteOffset, 0xeb96db31)
+          paletteOffset = data.writeWord(paletteOffset, 0x843ffbfd)
+          paletteOffset = data.writeWord(paletteOffset, 0x07e10000)
+          paletteOffset = data.writeWord(paletteOffset, 0x325b25f9)
+          paletteOffset = data.writeWord(paletteOffset, 0x5bbf4b3f)
+          paletteOffset = data.writeWord(paletteOffset, 0x5fdf5fdf)
+          paletteOffset = data.writeWord(paletteOffset, 0x94838021)
+          paletteOffset = data.writeWord(paletteOffset, 0xb1c898c4)
+          paletteOffset = data.writeWord(paletteOffset, 0xdb12caac)
+          data.writeWord(paletteOffset, 0x842fef9a)
+          break
+        case "fae": 
+          foilOffset = 0x000B57C2
+
+          paletteOffset = 0x041f5aa0
+          paletteOffset = data.writeWord(paletteOffset, 0x14430000)
+          paletteOffset = data.writeWord(paletteOffset, 0x3511202b)
+          paletteOffset = data.writeWord(paletteOffset, 0x1c6859d8)
+          paletteOffset = data.writeWord(paletteOffset, 0x46302d4d)
+          paletteOffset = data.writeWord(paletteOffset, 0x84edfc1f)
+          paletteOffset = data.writeWord(paletteOffset, 0xa5b49531)
+          paletteOffset = data.writeWord(paletteOffset, 0xba779553)
+          data.writeWord(paletteOffset, 0xdaf991ba)
+
+          break
+        case "dem":
+          foilOffset = 0x000B57D2
+
+          paletteOffset = 0x0421b7a8
+          paletteOffset = data.writeWord(paletteOffset, 0x00440000)
+          paletteOffset = data.writeWord(paletteOffset, 0x08ae0c68)
+          paletteOffset = data.writeWord(paletteOffset, 0x1d96150f)
+          paletteOffset = data.writeWord(paletteOffset, 0x235d3abb)
+          paletteOffset = data.writeWord(paletteOffset, 0x84488044)
+          paletteOffset = data.writeWord(paletteOffset, 0x9491906d)
+          paletteOffset = data.writeWord(paletteOffset, 0x90989494)
+          paletteOffset = data.writeWord(paletteOffset, 0xb5baa11b)
+          paletteOffset = data.writeWord(paletteOffset, 0x00c80000)
+          paletteOffset = data.writeWord(paletteOffset, 0x19f50d2d)
+          paletteOffset = data.writeWord(paletteOffset, 0x3def235d)
+          paletteOffset = data.writeWord(paletteOffset, 0x80006738)
+          paletteOffset += 0x10
+          paletteOffset = data.writeWord(paletteOffset, 0x00c80000)
+          paletteOffset = data.writeWord(paletteOffset, 0x19f50d2d)
+          paletteOffset = data.writeWord(paletteOffset, 0x3def235d)
+          data.writeWord(paletteOffset, 0x80006738)
+
+          break
+        case "swo":
+          foilOffset = 0x000B57E2
+
+          paletteOffset = 0x0423DD98
+          paletteOffset = data.writeWord(paletteOffset, 0x04210000)
+          paletteOffset = data.writeWord(paletteOffset, 0x14a50c63)
+          paletteOffset = data.writeWord(paletteOffset, 0x29481ce7)
+          paletteOffset = data.writeWord(paletteOffset, 0x6a042948)
+          paletteOffset = data.writeWord(paletteOffset, 0x294872c5)
+          paletteOffset = data.writeWord(paletteOffset, 0x4a4f318a)
+          paletteOffset = data.writeWord(paletteOffset, 0x000a5af8)
+          data.writeWord(paletteOffset, 0x00160010)
+          break
+        case "spr":
+          foilOffset = 0x000B57F2
+
+          paletteOffset = 0x042663a0
+          paletteOffset = data.writeWord(paletteOffset, 0x04430000)
+          paletteOffset = data.writeWord(paletteOffset, 0x057300c9)
+          paletteOffset = data.writeWord(paletteOffset, 0x10c60a98)
+          paletteOffset = data.writeWord(paletteOffset, 0x52f6420e)
+          paletteOffset = data.writeWord(paletteOffset, 0x88c7fc1f)
+          paletteOffset = data.writeWord(paletteOffset, 0x9570890d)
+          paletteOffset = data.writeWord(paletteOffset, 0xa236c5d3)
+          data.writeWord(paletteOffset, 0xcafadaba)
+          break
+        case "nos":
+          foilOffset = 0x000B5802
+
+          paletteOffset = 0x0428BCE0
+          paletteOffset = data.writeWord(paletteOffset, 0x10620000)
+          paletteOffset = data.writeWord(paletteOffset, 0x254d1ce9)
+          paletteOffset = data.writeWord(paletteOffset, 0x42562db0)
+          paletteOffset = data.writeWord(paletteOffset, 0x001e5b3d)
+          paletteOffset = data.writeWord(paletteOffset, 0xa8829823)
+          paletteOffset = data.writeWord(paletteOffset, 0xd186c144)
+          paletteOffset = data.writeWord(paletteOffset, 0xea91e24b)
+          paletteOffset = data.writeWord(paletteOffset, 0xfff9ff33)
+          paletteOffset = data.writeWord(paletteOffset, 0x00440000)
+          paletteOffset = data.writeWord(paletteOffset, 0x192d0886)
+          paletteOffset = data.writeWord(paletteOffset, 0x3def21d6)
+          paletteOffset = data.writeWord(paletteOffset, 0x80006738)
+          paletteOffset += 0x10
+          paletteOffset = data.writeWord(paletteOffset, 0x00440000)
+          paletteOffset = data.writeWord(paletteOffset, 0x192d0886)
+          paletteOffset = data.writeWord(paletteOffset, 0x3def21d6)
+          data.writeWord(paletteOffset, 0x80006738)
+
+          break
+        default:
+          console.log("How did you get here?")
+      }
+
+      data.writeShort(foilOffset, colorFromArray)                               // Apply the color
+    }
+
+    // Start the process of actually doing the rolls
+
     if (options.tournamentMode) {                                               // Force the card array to be shuffled if Tournament mode is enabled
-      cardAddrArray = shuffled(rng, cardAddrArray)                              // This way no one can say "I saw shiny Demon Card" in a race
+      foilArray = shuffled(rng, foilArray)                                      // This way no one can say "I saw foil Demon Card" in a race
     }
 
     for (let i = 0; i < 7; i++) {                                               // Cycle through the cards
       roll = Math.floor(rng() * 69)                                             // Foils are a 1 in 69 chance
+      // roll = 1
 
-      offset = cardAddrArray.pop()                                              // Remove an address from the array regardless if it rolled foil
-      colorFromArray = foilArray.pop()                                          // Remove the colors from the array regardless to maintain card / color synch
-
-      // console.log(offset)
-      // console.log("Roll: " + roll + " | colorID: " + colorFromArray)
+      friend = familiarArray.pop()                                              // Remove a friend from the array regardless if it rolled foil
+      colorFromArray = foilArray.pop()                                          // Remove the colors from the array regardless to maintain card / color sync
 
       if (roll === 1) {                                                         // Only apply the new color if the roll was 0
         detection++                                                             // Detection to alert players if there may be foils
-        data.writeShort(offset, colorFromArray)                                  // Apply the color
+
+        shinyFamilarWrites(friend,foilOffset,paletteOffset,colorFromArray)      // apply writes where the colors of the cards and the familiars
       }
     }
 
@@ -1875,25 +2006,23 @@
     }
 
     detection = 0                                                               // detection reset
-
-    cardAddrArray = [0x000B57A2,0x000B57B2,0x000B57C2,0x000B57D2,0x000B57E2,0x000B57F2,0x000B5802]
+    familiarArray = ["bat","gho","fae","dem","swo","spr","nos"]
 
     if (options.tournamentMode) {                                               // Force the card array to be shuffled if Tournament mode is enabled
-      cardAddrArray = shuffled(rng, cardAddrArray)                              // This way no one can say "I saw shiny Demon Card" in a race
+      inverseFoilArray = shuffled(rng, inverseFoilArray)                        // This way no one can say "I saw foil Demon Card" in a race
     }
 
     for (let i = 0; i < 7; i++) {                                               // Cycle through the cards
       roll = Math.floor(rng() * 420)                                            // Inverse Foils are a 1 in 420 chance
+      // roll = 1
 
-      offset = cardAddrArray.pop()                                              // Remove an address from the array regardless if it rolled inverse foil
-      colorFromArray = inverseFoilArray.pop()                                   // Remove the colors from the array regardless to maintain card / color synch
-      
-      // console.log(offset)
-      // console.log("Roll: " + roll + " | colorID: " + colorFromArray)
+      friend = familiarArray.pop()                                              // Remove a friend from the array regardless if it rolled inverse foil
+      colorFromArray = inverseFoilArray.pop()                                   // Remove the colors from the array regardless to maintain card / color sync
 
       if (roll === 1) {                                                         // Only apply the new color if the roll was 0
-        detection++                                                             // Detection to alert players if there may be foils
-        data.writeShort(offset, colorFromArray)                                  // Apply the color
+        detection++                                                             // Detection to alert players if there may be inverse foils
+
+        shinyFamilarWrites(friend,foilOffset,paletteOffset,colorFromArray)      // apply writes where the colors of the cards and the familiars
       }
     }
     
