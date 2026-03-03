@@ -1935,7 +1935,7 @@
             paletteOffset = data.writeWord(paletteOffset, 0x1ce561d0)           // Normal Foil
             paletteOffset = data.writeWord(paletteOffset, 0x6732462d)           // Normal Foil
             paletteOffset = data.writeWord(paletteOffset, 0x8466fc1f)           // Normal Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x950c8ca9)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa0aa8ca9)           // Normal Foil
             paletteOffset = data.writeWord(paletteOffset, 0xa170b490)           // Normal Foil
             data.writeWord(paletteOffset, 0xba34c536)                           // Normal Foil
           } else {
