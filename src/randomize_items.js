@@ -1853,6 +1853,10 @@
     let detection = 0
     let foilMode
 
+    function isEven(number) {
+      return number % 2 === 0;
+    }
+
     function shinyFamilarWrites(friend,foilOffset,paletteOffset,colorFromArray,foilMode){
       switch (friend){
         case "bat":
@@ -2076,22 +2080,22 @@
             paletteOffset = data.writeWord(paletteOffset, 0x3def21d6)           // Normal Foil
             data.writeWord(paletteOffset, 0x80006738)                           // Normal Foil
           } else {
-            paletteOffset = data.writeWord(paletteOffset, 0x84210000)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0xa46a9866)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0xbd11a8ac)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x7876c9d6)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x90638822)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0xa4e69cc5)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0xb9acb149)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0xce93c610)           // Inverse Foil
             paletteOffset = data.writeWord(paletteOffset, 0x04210000)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x086b0845)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x3def10b0)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x000a0005)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x0011000b)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x001e18d5)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xb4849025)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xd92ac8c7)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xe214d58e)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xda79da79)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x04230000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x116708a4)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def29ed)           // Inverse Foil
             paletteOffset = data.writeWord(paletteOffset, 0x80006738)           // Inverse Foil
             paletteOffset += 0x10                                               // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x04210000)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x086b0845)           // Inverse Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x3def10b0)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x04230000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x116708a4)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def29ed)           // Inverse Foil
             data.writeWord(paletteOffset, 0x80006738)                           // Inverse Foil
           }
 
