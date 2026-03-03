@@ -1936,8 +1936,8 @@
             paletteOffset = data.writeWord(paletteOffset, 0x6732462d)           // Normal Foil
             paletteOffset = data.writeWord(paletteOffset, 0x8466fc1f)           // Normal Foil
             paletteOffset = data.writeWord(paletteOffset, 0x950c8ca9)           // Normal Foil
-            paletteOffset = data.writeWord(paletteOffset, 0xa170c1e4)           // Normal Foil
-            data.writeWord(paletteOffset, 0xba34da69)                           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa170b490)           // Normal Foil
+            data.writeWord(paletteOffset, 0xba34c536)                           // Normal Foil
           } else {
             paletteOffset = data.writeWord(paletteOffset, 0x14430000)           // Inverse Foil
             paletteOffset = data.writeWord(paletteOffset, 0x3511202b)           // Inverse Foil
@@ -2037,14 +2037,14 @@
           paletteOffset = 0x042663a0
 
           if (foilMode==="normal") {
-            paletteOffset = data.writeWord(paletteOffset, 0x88640000)           // Normal Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x813080aa)           // Normal Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x886495f6)           // Normal Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x897380aa)           // Normal Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x90e4fc1f)           // Normal Foil
-            paletteOffset = data.writeWord(paletteOffset, 0x96099166)           // Normal Foil
-            paletteOffset = data.writeWord(paletteOffset, 0xa28b9553)           // Normal Foil
-            data.writeWord(paletteOffset, 0xc312c1d8)                           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x08450000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x21b1050c)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x18a63a58)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x5e9741d0)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x8cc1fc1f)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x99859123)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xaa08920b)           // Normal Foil
+            data.writeWord(paletteOffset, 0xc28fa6cf)                           // Normal Foil
           } else {
             paletteOffset = data.writeWord(paletteOffset, 0x04430000)           // Inverse Foil
             paletteOffset = data.writeWord(paletteOffset, 0x057300c9)           // Inverse Foil
