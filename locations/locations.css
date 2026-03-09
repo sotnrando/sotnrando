@@ -1,0 +1,100 @@
+/* Main wrapper */
+main {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Container that holds everything */
+.logic-container {
+    width: 100%;
+    max-width: 1100px; 
+    margin: 0 auto;
+}
+
+/* Title */
+main h2, main h3 {
+    color: white;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Dropdown */
+.logic-dropdown {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #666;
+    background-color: #222;
+    color: white;
+    display: block;
+}
+
+/* Results container */
+#checksContainer {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-color: 1px white;
+    width: 100%;
+    padding: 2em;
+    border: 2px solid white;
+}
+
+/* Default message */
+#checksContainer p {
+    color: white;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* Individual check block */
+.logic-check {
+    color: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #555;
+}
+
+/* Remove border from last item */
+.logic-check:last-child {
+    border-bottom: none;
+}
+
+/* Check title */
+.logic-check strong {
+    font-size: 1.2rem;
+}
+
+/* Requirement text */
+.logic-check span {
+    display: block;
+    margin-top: 6px;
+    color: #ddd;
+}
+.logic-map {
+    text-align: center;
+    margin-bottom: 15px;
+
+    /* Enable pinch‑to‑zoom + dragging */
+    overflow: auto;
+    touch-action: pinch-zoom;
+    -ms-touch-action: pinch-zoom;
+}
+
+.logic-map-image {
+    max-width: 100%;
+    margin: auto;
+    border-radius: 6px;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.45));
+
+    /* Allow the image to scale when zoomed */
+    transform-origin: center center;
+    display: block;
+}
+.area-note {
+    margin: 10px 0 15px 0;
+    font-style: italic;
+    opacity: 0.6;
+}

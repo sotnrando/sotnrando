@@ -1,0 +1,89 @@
+{
+  "tricks": [
+    {
+      "id": "colosseumAirReset",
+      "title": "Colosseum with only an Air Reset",
+      "difficulty": 1,
+      "utility": 3,
+      "content": "<p>Similarly to the trick below, you can reset your air state by using a transformation or thrust sword to access the double jump state. This state allows you to dive kick, which can be used to bounce on top of candles for extra height. In particular, if you go to the clock room you will notice there is a candle below the path to the Colosseum/Olrox Quarters. If you jump, then above the candle you reset your state with a thrust sword or transformation, you can divekick into the candle to gain extra height and access this route.</p>",
+      "video": ""
+    },{
+        "id": "blindBat",
+        "title": "Blind Bat",
+        "difficulty": 3,
+        "utility": 4,
+        "content": "<p>Blind Bat is a very common trick that allows you to go through the Dark Room leading to the Spike Breaker location without having Echo of Bat. This technique requires a bit of practice as the setup is precise, but you will notice that with some practice you’ll be able to execute it without issues.</p>",
+        "video": "https://www.youtube.com/embed/MnO8NQ4Nfow"
+    },{
+        "id": "bridgeBreak",
+        "title": "Bridge Break",
+        "difficulty": 1,
+        "utility":5,
+        "content": "<p>Bridge Break is a hidden option that allows you to access the Mines/Catacombs without having to use the explosive barrel to open the bridge. Exclusive to the PSX version, if a player presses triangle on their 2nd controller when in the bridge room, the bridge will open directly. For those using the Launcher, this button comes already set up to L3/LS (pressing down the left stick).</p>",
+        "video": "https://www.youtube.com/embed/XTgfQAer3C8"
+    },{
+        "id": "fleaLadder",
+        "title": "Flea Ladder",
+        "difficulty": 4,
+        "utility": 1,
+        "content": "<p>Flea Ladder is one of the masterful tricks for the game. This trick will allow you to access the Power of Mist check without flight. To do it you need Leap Stone. In this trick you will have to set up the Leap Stone room so that all of the Flea Riders are on screen following you, then, you will start jumping and dive kicking on top of them to gain height, and as you gain height they will also follow, allowing you to do more divekicks for further height. It’s very tricky and it doesn’t come too often as it is risky and can be a considerable time loss if you fail multiple times, but if you’re looking for a new advanced trick to learn, this is for you.</p>",
+        "video": "https://www.youtube.com/embed/A9Nws-GhZMU"
+    },{
+        "id": "jumpResetBoots",
+        "title": "Jump Reset for Gravity Boots",
+        "difficulty": 1,
+        "utility": 5,
+        "content": "<p>When you find Gravity Boots without Leap Stone, you’ll notice that you can’t chain Gravity Boots. This is because in order to do chain gravity jumps, you need to be in the double jump air state. If you don’t have double jump, you can access this air state by transforming and untransforming mid-air (any transformation) or using a thrust sword special mid-air and then chaining gravity jumps. This can be very useful to access some flight-required checks that you would otherwise not be able to access. Check Understanding Air States for more info.</p>",
+        "video": ""
+    },{
+        "id": "libOnlyMist",
+        "title": "Library Checks with Only Mist",
+        "difficulty": 3,
+        "utility": 2,
+        "content": "<p>The Library contains a total of 4 different checks within it, two of which are out of reach: Soul of Bat and Fairy Card. Fairy Card usually requires Leap Stone or some form of flight, while Soul of Bat requires Leap Stone/Flight and Form of Mist. But with some careful setup you will be able to access both checks by only using Mist. </p>",
+        "video": "https://www.youtube.com/embed/HE9eNhBlqfI"
+    },{
+        "id": "noXformAkmo",
+        "title": "Akmodan without Transformation",
+        "difficulty": 5,
+        "utility": 1,
+        "content": "<p>Another master trick. This trick is very specific and doesn’t come up too often. By sliding and crouching into the pillar that blocks Akmodan in the second castle, you can narrowly get below it. It requires a very precise setup but will allow you to access the Akmodan fight when you can’t transform.</p>",
+        "video": ""
+    },{
+        "id": "reliclessFairyCard",
+        "title": "Relic-less Fairy Card (Big Toss into Fairy Card)",
+        "difficulty": 5,
+        "utility": 1,
+        "content": "",
+        "video": ""
+    },{
+        "id": "reliclessKeep",
+        "title": "Reaching Keep without Relics",
+        "difficulty": 3,
+        "utility": 2,
+        "content": "<p>By carefully timing your jumps, you can go from Outer Wall to Clock Tower and then Castle Keep, even though the bridges in the way usually break if you do so. This is because each bridge has a small sweet spot between them where they don’t break, and also you have a small timeframe where you can still jump off a bridge that’s about to break.</p>",
+        "video": "https://www.youtube.com/embed/1J_BdV2GuAw"
+    },{
+        "id": "spikeIFrames",
+        "title": "Spike Corridor Invulnerability Frames",
+        "difficulty": 2,
+        "utility": 4,
+        "content": "<p>When going through the Spike Corridor leading to the Silver Ring check, you can use the invulnerability frames given by items or spells to go through the spikes and through the blue door. The easiest way to do this is by having multiple iframe items such as the healing potions, but some players have also found ways to do this by using spells like Hellfire or Summon Spirit, which also grant iframes.</p>",
+        "video": "https://www.youtube.com/embed/9Yn8QD1O78c"
+    },{
+        "id": "wolfFairyCard",
+        "title": "Wolf only Fairy Card",
+        "difficulty": 3,
+        "utility": 2,
+        "content": "",
+        "video": ""
+    },{
+        "id": "wolfLeapBatCard",
+        "title": "Bat Card with Jump Reset",
+        "difficulty": 3,
+        "utility": 1,
+        "content": "<p>Another specific trick. When you untransform from wolf while touching the ceiling, you will gain an additional jump. This is something that isn’t useful most of the time, but in the Slogra & Gaibon room you can run from the ledge in wolf form, untransform while touching the ceiling, jump, then transform again… Do this multiple times and you will eventually reach the Bat Card location. It’s very slow and usually isn’t worth it, but it can be useful if you think that location contains an important relic.</p>",
+        "video": ""
+    }
+  ]
+}

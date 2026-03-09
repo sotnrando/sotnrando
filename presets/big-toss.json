@@ -1874,6 +1874,22 @@
     "type": "word",
     "value": "0x3c038004",
     "comment": "lui v1, 0x8004"
+  }, 
+  
+  {
+    "type": "word",
+    "value": "0x3402000F",
+    "comment": "ori v0, 0x000F"
+  }, {
+    "comment": "Opens Jewel sword",
+    "type": "word",
+    "value": "0xa062BE1F",
+    "comment": "sb v0, 0xBE1F (v1)"
+  }, {
+    "comment": "Opens Beryl circlet",
+    "type": "word",
+    "value": "0xa062BE27",
+    "comment": "sb v0, 0xBE27 (v1)"
   },
   
   {

@@ -1,0 +1,26 @@
+{
+  "tricks": [
+    {
+      "id": "legDaySuperJump",
+      "title": "Leg Day Super Jump",
+      "difficulty": 1,
+      "utility": 5,
+      "content": "<p>When in the falling air state, if you try to jump as soon as you start to fall, Alucard will do a small “desperate jump” that goes much faster than a regular jump, but with much less horizontal control. This is usually not useful, but in the Leg Day preset where you have unlimited jumps, you can use this mechanic to get extra fast jumps. To do it, walk off a ledge and as soon as you start falling start jumping. These series of jumps will all be “desperate jumps”, which will allow you to move vertically much faster</p>",
+      "video": ""
+    },{
+        "id": "lycanDeathSkip",
+        "title": "Lycanthrope Death Skip",
+        "difficulty": 2,
+        "utility": 5,
+        "content": "<p>By carefully using Power of Wolf and then jumping and untransforming before the Death room, you will be able to go through Death, which means you won’t lose your starting equipment.</p>",
+        "video": "https://www.youtube.com/embed/MYlcStiF7OE"
+    },{
+        "id": "lycanDopp10Skip",
+        "title": "Lycanthrope Dopp10 Skip",
+        "difficulty": 2,
+        "utility": 5,
+        "content": "<p>If you use the extra jump height from wolf by timing your jump correctly, you will be able to go directly from the Outer Wall entrance from the Gallery to the elevator room.</p>",
+        "video": "https://www.youtube.com/embed/OwKIvwsx984"
+    }
+  ]
+}

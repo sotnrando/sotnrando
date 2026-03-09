@@ -1838,6 +1838,327 @@
     offset = data.writeWord(offset, 0xAE020008)                                 // blue to 0x8003cac8
     data.writeWord(offset, 0x34020001)                                          // r2 needed to be set to 1 after this.
   }
+
+  function foilFamiliarCards(data, rng, options){
+    // Foil Familiar Cards; Code by eldri7ch, idea by eldri7ch, familiar colors by Wecoc
+    // Adds "foil" familiar cards and "inverse foil" familiar cards by changing palette ID in the relic definition tables.
+    // all arrays sorted from top-to-bottom or left to right: 
+    // Bat Card, Ghost Card, Faerie Card, Demon Card, Sword Card, Sprite Card, Nosedevil Card
+    let foilOffset
+    let paletteOffset
+    let roll
+    let familiarArray = ["bat","gho","fae","dem","swo","spr","nos"]
+    let foilArray = [0x00C2, 0x00BC, 0x00C4, 0x00CD, 0x00C3, 0x00BF, 0x0072]
+    let inverseFoilArray = [0x0100, 0x0103, 0x0107, 0x0108, 0x0105, 0x0106, 0x0109]
+    let detection = 0
+    let foilMode
+
+    function isEven(number) {
+      return number % 2 === 0;
+    }
+
+    function shinyFamilarWrites(friend,foilOffset,paletteOffset,colorFromArray,foilMode){
+      switch (friend){
+        case "bat":
+          foilOffset = 0x000B57A2
+          paletteOffset = 0x041a6860
+
+          if (foilMode==="normal") {
+            paletteOffset = data.writeWord(paletteOffset, 0x04210000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x14a50c63)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x294a1ce7)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x421035ad)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x182603e0)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x4430342c)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x192d5c35)           // Normal Foil
+            data.writeWord(paletteOffset, 0x01182dd0)                           // Normal Foil
+          } else {
+            paletteOffset = data.writeWord(paletteOffset, 0x04210000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x20631822)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x314b24a6)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x421005ad)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x188103e0)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x45613501)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x192d4223)           // Inverse Foil
+            data.writeWord(paletteOffset, 0x06632dd0)                           // Inverse Foil
+          }
+
+          break
+        case "gho":
+          foilOffset = 0x000B57B2
+          paletteOffset = 0x041ccfb0
+
+          if (foilMode==="normal") {
+            paletteOffset = data.writeWord(paletteOffset, 0x07e10000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x125b19f9)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x2f7f2f3f)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x37df339f)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x94838421)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xc66da928)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xeb96db31)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x843ffbfd)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x07e10000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x325b25f9)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x5bbf4b3f)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x5fdf5fdf)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x94838021)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xb1c898c4)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xdb12caac)           // Normal Foil
+            data.writeWord(paletteOffset, 0x842fef9a)                           // Normal Foil
+          } else {
+            paletteOffset = data.writeWord(paletteOffset, 0x07e10000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x100d0007)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x00180431)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x259f211f)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x84a68421)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa5a79508)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xb6e7b647)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x9bfbfb9c)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x07e10000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x30261825)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x5850404c)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x4d9c3cfc)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x84638421)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x994488a4)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xb268adc5)           // Inverse Foil
+            data.writeWord(paletteOffset, 0x8357ef18)                           // Inverse Foil
+          }
+
+          break
+        case "fae": 
+          foilOffset = 0x000B57C2
+          paletteOffset = 0x041f5aa0
+
+          if (foilMode==="normal") {
+            paletteOffset = data.writeWord(paletteOffset, 0x14420000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x450c3026)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x1ce561d0)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x6732462d)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x8466fc1f)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa0aa8ca9)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa170b490)           // Normal Foil
+            data.writeWord(paletteOffset, 0xba34c536)                           // Normal Foil
+          } else {
+            paletteOffset = data.writeWord(paletteOffset, 0x14430000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3511202b)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x1c6859d8)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x46302d4d)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x84edfc1f)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa5b49531)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xba779553)           // Inverse Foil
+            data.writeWord(paletteOffset, 0xdaf991ba)                           // Inverse Foil
+          }
+
+          break
+        case "dem":
+          foilOffset = 0x000B57D2
+          paletteOffset = 0x0421b7a8
+
+          if (foilMode==="normal") {
+            paletteOffset = data.writeWord(paletteOffset, 0x84210000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa46a9866)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xbd11a8ac)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x7876c9d6)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x90638822)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa4e69cc5)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xb9acb149)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xce93c610)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x04210000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x086b0845)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def10b0)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x80006738)           // Normal Foil
+            paletteOffset += 0x10                                               // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x04210000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x086b0845)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def10b0)           // Normal Foil
+            data.writeWord(paletteOffset, 0x80006738)                           // Normal Foil
+          } else {
+            paletteOffset = data.writeWord(paletteOffset, 0x00440000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x08ae0c68)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x1d96150f)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x235d3abb)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x84488044)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x9491906d)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x90989494)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xb5baa11b)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x00c80000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x19f50d2d)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def235d)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x80006738)           // Inverse Foil
+            paletteOffset += 0x10                                               // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x00c80000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x19f50d2d)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def235d)           // Inverse Foil
+            data.writeWord(paletteOffset, 0x80006738)                           // Inverse Foil
+          }
+          
+          break
+        case "swo":
+          foilOffset = 0x000B57E2
+          paletteOffset = 0x0423DD98
+          
+          if (foilMode==="normal") {
+            paletteOffset = data.writeWord(paletteOffset, 0x04220000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x014e0064)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x57ff02ff)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x37bf37bf)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x0cca37bf)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x42781152)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x05404eda)           // Normal Foil
+            data.writeWord(paletteOffset, 0x0ec00a00)                           // Normal Foil
+          } else {
+            let forceAlignment = Math.floor(rng() * 100)                        // select a random number and compare odd or even 
+            forceAlignment = isEven(forceAlignment)                             // to choose which we use between jedi, sith
+
+            if (forceAlignment) {
+              paletteOffset = data.writeWord(paletteOffset, 0x04210000)         // Inverse Foil Jedi
+              paletteOffset = data.writeWord(paletteOffset, 0x14a50c63)         // Inverse Foil Jedi
+              paletteOffset = data.writeWord(paletteOffset, 0x29481ce7)         // Inverse Foil Jedi
+              paletteOffset = data.writeWord(paletteOffset, 0x6a042948)         // Inverse Foil Jedi
+              paletteOffset = data.writeWord(paletteOffset, 0x294872c5)         // Inverse Foil Jedi
+              paletteOffset = data.writeWord(paletteOffset, 0x4a4f318a)         // Inverse Foil Jedi
+              paletteOffset = data.writeWord(paletteOffset, 0x000a5af8)         // Inverse Foil Jedi
+              data.writeWord(paletteOffset, 0x00160010)                         // Inverse Foil Jedi
+            } else {
+              paletteOffset = data.writeWord(paletteOffset, 0x04210000)         // Inverse Foil Sith
+              paletteOffset = data.writeWord(paletteOffset, 0x000b0004)         // Inverse Foil Sith
+              paletteOffset = data.writeWord(paletteOffset, 0x0cba0015)         // Inverse Foil Sith
+              paletteOffset = data.writeWord(paletteOffset, 0x045f0015)         // Inverse Foil Sith
+              paletteOffset = data.writeWord(paletteOffset, 0x04211d3f)         // Inverse Foil Sith
+              paletteOffset = data.writeWord(paletteOffset, 0x14861064)         // Inverse Foil Sith
+              paletteOffset = data.writeWord(paletteOffset, 0x294020e9)         // Inverse Foil Sith
+              data.writeWord(paletteOffset, 0x5ac04200)                         // Inverse Foil Sith
+            }
+          }
+
+          break
+        case "spr":
+          foilOffset = 0x000B57F2
+          paletteOffset = 0x042663a0
+
+          if (foilMode==="normal") {
+            paletteOffset = data.writeWord(paletteOffset, 0x08450000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x21b1050c)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x18a63a58)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x5e9741d0)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x8cc1fc1f)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x99859123)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xaa08920b)           // Normal Foil
+            data.writeWord(paletteOffset, 0xc28fa6cf)                           // Normal Foil
+          } else {
+            paletteOffset = data.writeWord(paletteOffset, 0x04430000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x057300c9)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x10c60a98)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x52f6420e)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x88c7fc1f)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x9570890d)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa236c5d3)           // Inverse Foil
+            data.writeWord(paletteOffset, 0xcafadaba)                           // Inverse Foil
+          }
+
+          break
+        case "nos":
+          foilOffset = 0x000B5802
+          paletteOffset = 0x0428BCE0
+
+          if (foilMode==="normal") {
+            paletteOffset = data.writeWord(paletteOffset, 0x10620000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x254d1ce9)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x42562db0)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x001e5b3d)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xa8829823)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xd186c144)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xea91e24b)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xfff9ff33)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x00440000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x192d0886)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def21d6)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x80006738)           // Normal Foil
+            paletteOffset += 0x10                                               // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x00440000)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x192d0886)           // Normal Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def21d6)           // Normal Foil
+            data.writeWord(paletteOffset, 0x80006738)                           // Normal Foil
+          } else {
+            paletteOffset = data.writeWord(paletteOffset, 0x04210000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x000a0005)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x0011000b)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x001e18d5)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xb4849025)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xd92ac8c7)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xe214d58e)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0xda79da79)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x04230000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x116708a4)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def29ed)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x80006738)           // Inverse Foil
+            paletteOffset += 0x10                                               // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x04230000)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x116708a4)           // Inverse Foil
+            paletteOffset = data.writeWord(paletteOffset, 0x3def29ed)           // Inverse Foil
+            data.writeWord(paletteOffset, 0x80006738)                           // Inverse Foil
+          }
+
+          break
+        default:
+          console.log("How did you get here?")
+      }
+
+      data.writeShort(foilOffset, colorFromArray)                               // Apply the color
+    }
+
+    // Start the process of actually doing the rolls
+
+    if (options.tournamentMode) {                                               // Force the card array to be shuffled if Tournament mode is enabled
+      foilArray = shuffled(rng, foilArray)                                      // This way no one can say "I saw foil Demon Card" in a race
+    }
+
+    foilMode = "normal"
+
+    for (let i = 0; i < 7; i++) {                                               // Cycle through the cards
+      roll = Math.floor(rng() * 69)                                             // Foils are a 1 in 69 chance
+      // roll = 1
+
+      friend = familiarArray.pop()                                              // Remove a friend from the array regardless if it rolled foil
+      colorFromArray = foilArray.pop()                                          // Remove the colors from the array regardless to maintain card / color sync
+
+      if (roll === 1) {                                                         // Only apply the new color if the roll was 0
+        detection++                                                             // Detection to alert players if there may be foils
+
+        shinyFamilarWrites(friend,foilOffset,paletteOffset,colorFromArray,foilMode) // apply writes where the colors of the cards and the familiars
+      }
+    }
+
+    if (detection > 0){                                                         // If a foil was detected, let the player know
+      console.log("Foil Detected!")
+    }
+
+    detection = 0                                                               // detection reset
+    familiarArray = ["bat","gho","fae","dem","swo","spr","nos"]
+    foilMode = "inverse"
+
+    if (options.tournamentMode) {                                               // Force the card array to be shuffled if Tournament mode is enabled
+      inverseFoilArray = shuffled(rng, inverseFoilArray)                        // This way no one can say "I saw foil Demon Card" in a race
+    }
+
+    for (let i = 0; i < 7; i++) {                                               // Cycle through the cards
+      roll = Math.floor(rng() * 420)                                            // Inverse Foils are a 1 in 420 chance
+      // roll = 1
+
+      friend = familiarArray.pop()                                              // Remove a friend from the array regardless if it rolled inverse foil
+      colorFromArray = inverseFoilArray.pop()                                   // Remove the colors from the array regardless to maintain card / color sync
+
+      if (roll === 1) {                                                         // Only apply the new color if the roll was 0
+        detection++                                                             // Detection to alert players if there may be inverse foils
+
+        shinyFamilarWrites(friend,foilOffset,paletteOffset,colorFromArray,foilMode) // apply writes where the colors of the cards and the familiars
+      }
+    }
+    
+    if (detection > 0){                                                         // If an inverse foil was detected, let the player know
+      console.log("Inverse Foil Detected!")
+    }
+  }
   
   function randomizeItems(rng, items, newNames, options) {
     const data = new util.checked()
@@ -1901,6 +2222,20 @@
           delete item.tiles
           return item
         })
+        // Exclude goal items from the regular item pool so they only
+        // spawn at relic locations.
+        if (options.relicLocations
+            && typeof(options.relicLocations) === 'object'
+            && options.relicLocations.goalItems) {
+          const goalItemNames = options.relicLocations.goalItems.map(
+            function(gi) {
+              return gi.item
+            }
+          )
+          pool = pool.filter(function(item) {
+            return goalItemNames.indexOf(item.name) === -1
+          })
+        }
         // Randomizations.
         if (options.itemLocations) {
           // Randomize candles.
@@ -1971,6 +2306,7 @@
           randomizeDraculaCape(data,rng)
           randomizeMariaColor(data,rng)
           randomizeMenuBgColor(data, rng)
+          foilFamiliarCards(data, rng, options)
         }
         // Write items to ROM.
         if (options.itemLocations

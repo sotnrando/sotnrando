@@ -1,0 +1,670 @@
+{
+    "Castle Entrance": [
+        {
+            "name": "Cube of Zoe",
+            "requirements": "None",
+            "set": "All"
+        },
+        {
+            "name": "Power of Wolf (Entrance)",
+            "requirements": "Flight",
+            "set": "All"
+        },
+        {
+            "name": "Holy Mail",
+            "requirements": "Gravity Boots or Flight",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Jewel Sword (Wolf-Bat Hallway)",
+            "requirements": "Soul of Wolf and Soul of Bat",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Alchemy Laboratory": [
+        {
+            "name": "Skill of Wolf",
+            "requirements": "Gravity Boots or Flight",
+            "set": "All"
+        },
+        {
+            "name": "Bat Card (Slogra and Gaibon)",
+            "requirements": "Gravity Boots or Flight",
+            "set": "All"
+        },
+        {
+            "name": "Basilard (Cannon)",
+            "requirements": "None",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Cloth Cape",
+            "requirements": "None",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Sunglasses",
+            "requirements": "None",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Marble Gallery": [
+        {
+            "name": "Spirit Orb",
+            "requirements": "None",
+            "set": "All"
+        },
+        {
+            "name": "Gravity Boots",
+            "requirements": "Flight",
+            "set": "All"
+        },
+        {
+            "name": "Holy Glasses",
+            "requirements": "Equipped Silver Ring and Gold Ring",
+            "set": "All"
+        },
+        {
+            "name": "AlucarT Sword",
+            "requirements": "Use Stopwatch Subweapon",
+            "set": "Equipment, Extended, Scenic"
+        }
+    ],
+
+    "Outer Wall": [
+        {
+            "name": "Soul of Wolf (Elevator)",
+            "requirements": "None",
+            "set": "All"
+        },
+        {
+            "name": "Jewel Knuckles",
+            "requirements": "None",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Gladius",
+            "requirements": "None",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Telescope",
+            "requirements": "None",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Long Library": [
+        {
+            "name": "Faerie Scroll",
+            "requirements": "None",
+            "set": "All"
+        },
+        {
+            "name": "Jewel of Open",
+            "requirements": "None",
+            "set": "All"
+        },
+        {
+            "name": "Faerie Card",
+            "requirements": "Gravity Boots or Flight",
+            "set": "All"
+        },
+        {
+            "name": "Soul of Bat",
+            "requirements": "Leap Stone and Form of Mist",
+            "set": "All"
+        },
+        {
+            "name": "Bronze Cuirass",
+            "requirements": "None",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Holy Rod",
+            "requirements": "Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Library Onyx",
+            "requirements": "Leap Stone",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Clock Tower": [
+        {
+            "name": "Fire of Bat",
+            "requirements": "Flight",
+            "set": "All"
+        },
+        {
+            "name": "Bekatowa",
+            "requirements": "Gravity Boots or Flight",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Gold Plate",
+            "requirements": "Leap Stone or Jewel of Open",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Cloaked Knight",
+            "requirements": "Leap Stone or Jewel of Open",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Castle Keep": [
+        {
+            "name": "Leap Stone",
+            "requirements": "Jewel of Open or Leap Stone",
+            "set": "All"
+        },
+        {
+            "name": "Power of Mist",
+            "requirements": "Flight",
+            "set": "All"
+        },
+        {
+            "name": "Ghost Card (Attic Relic)",
+            "requirements": "Flight",
+            "set": "All"
+        },
+        {
+            "name": "Falchion",
+            "requirements": "Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Platinum Mail",
+            "requirements": "Flight",
+            "set": "Equipment, Extended, Scenic"
+        }
+    ],
+
+    "Royal Chapel": [
+        {
+            "name": "Silver Ring",
+            "requirements": "Spike Breaker, Mist, and Jewel of Open",
+            "set": "All"
+        },
+        {
+            "name": "Goggles",
+            "requirements": "Jewel of Open or Leap Stone",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Morningstar",
+            "requirements": "Jewel of Open and Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Ankh of Life",
+            "requirements": "Jewel of Open and Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Mystic Pendant",
+            "requirements": "Jewel of Open or Leap Stone",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Silver Plate",
+            "requirements": "Jewel of Open or Leap Stone",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Cutlass",
+            "requirements": "Jewel of Open or Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Confessional",
+            "requirements": "Jewel of Open or Leap Stone",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Olrox's Quarters": [
+        {
+            "name": "Sword Card",
+            "requirements": "Flight",
+            "set": "All"
+        },
+        {
+            "name": "Echo of Bat (Olrox)",
+            "requirements": "Flight and Soul of Wolf, Soul of Bat, or Form of Mist",
+            "set": "All"
+        },
+        {
+            "name": "Olrox Onyx",
+            "requirements": "Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Estoc",
+            "requirements": "Flight",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Olrox Garnet",
+            "requirements": "Flight",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Colosseum": [
+        {
+            "name": "Form of Mist",
+            "requirements": "Leap Stone",
+            "set": "All"
+        },
+        {
+            "name": "Shield Rod",
+            "requirements": "Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Blood Cloak",
+            "requirements": "Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Holy Sword",
+            "requirements": "Gravity Boots or Flight",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Knight Shield",
+            "requirements": "Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Green Tea (Grave Keeper / Fountain)",
+            "requirements": "Leap Stone",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Underground Caverns": [
+        {
+            "name": "Crystal Cloak",
+            "requirements": "Jewel of Open",
+            "set": "Guarded, Spread, Equipment"
+        },
+        {
+            "name": "Merman Statue",
+            "requirements": "Jewel of Open",
+            "set": "All"
+        },
+        {
+            "name": "Gold Ring",
+            "requirements": "Jewel of Open and Flight",
+            "set": "All"
+        },
+        {
+            "name": "Holy Symbol",
+            "requirements": "Jewel of Open and Merman Statue",
+            "set": "All"
+        },
+        {
+            "name": "Bandanna",
+            "requirements": "Jewel of Open",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Nunchaku",
+            "requirements": "Jewel of Open and Holy Symbol",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Secret Boots",
+            "requirements": "Jewel of Open and Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Knuckle Duster",
+            "requirements": "Jewel of Open and Holy Symbol",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Caverns Onyx",
+            "requirements": "Jewel of Open",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Waterfall Cave",
+            "requirements": "Jewel of Open",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Abandoned Mines": [
+        {
+            "name": "Demon Card",
+            "requirements": "Jewel of Open and Leap Stone",
+            "set": "All"
+        },
+        {
+            "name": "Combat Knife",
+            "requirements": "Jewel of Open and Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Ring of Ares",
+            "requirements": "Jewel of Open, Leap Stone, and active Demon Card",
+            "set": "Equipment, Extended, Scenic"
+        }
+    ],
+
+    "Catacombs": [
+        {
+            "name": "Mormegil",
+            "requirements": "Jewel of Open and Leap Stone",
+            "set": "Guarded, GuardedPlus, Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Spike Breaker",
+            "requirements": "Jewel of Open, Soul of Bat and Echo of Bat",
+            "set": "All"
+        },
+        {
+            "name": "Bloodstone",
+            "requirements": "Jewel of Open and Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Icebrand",
+            "requirements": "Jewel of Open and Leap Stone",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Walk Armor",
+            "requirements": "Jewel of Open and Leap Stone",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Reverse Keep": [
+        {
+            "name": "Bastard Sword",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Royal Cloak",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Sword of Dawn",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Lightning Mail",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "High Potion (Window Sill)",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Reverse Clock Tower": [
+        {
+            "name": "Darkwing Bat",
+            "requirements": "Flight and Holy Glasses",
+            "set": "All"
+        },
+        {
+            "name": "Moon Rod",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Dragon Helm",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Luminus",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Sunstone",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Anti-Chapel": [
+        {
+            "name": "Medusa",
+            "requirements": "Flight and Holy Glasses",
+            "set": "All"
+        },
+        {
+            "name": "Talwar",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Twilight Cloak",
+            "requirements": "Flight, Mist and Holy Glasses",
+            "set": "Equipment, Extended, Scenic"
+        }
+    ],
+
+    "Deathwing's Lair": [
+        {
+            "name": "Akmodan II",
+            "requirements": "Flight, Transformation and Holy Glasses",
+            "set": "All"
+        },
+        {
+            "name": "Alucard Mail",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Sword of Hador",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Reverse Colosseum": [
+        {
+            "name": "Trio (Fake Friends / CVIII Heroes)",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Guarded, GuardedPlus, Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Gram",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Fury Plate",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Zircon (Reverse Shield Rod)",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Necromancy Laboratory": [
+        {
+            "name": "Beelzebub (Beez)",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Guarded, GuardedPlus, Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Katana",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Goddess Shield",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Black Marble Gallery": [
+        {
+            "name": "Reverse Alucart Sword",
+            "requirements": "Flight, Cube of Zoe, and Holy Glasses",
+            "set": "Extended, Scenic"
+        },
+        {
+            "name": "Meal Ticket (Reverse Jewel of Open Switch)",
+            "requirements": "Flight, Holy Glasses, and Jewel of Open",
+            "set": "Extended, Scenic"
+        },
+        {
+            "name": "Library Card (Reverse Forbidden Route)",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Reverse Outer Wall": [
+        {
+            "name": "The Creature",
+            "requirements": "Flight and Holy Glasses",
+            "set": "All"
+        },
+        {
+            "name": "Shotel",
+            "requirements": "Form of Mist, Flight, and Holy Glasses",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Reverce Caverns": [
+        {
+            "name": "Dark Blade (Doppelganger 40)",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Guarded, GuardedPlus, Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Force of Echo",
+            "requirements": "Flight and Holy Glasses",
+            "set": "All"
+        },
+        {
+            "name": "Reverse Caverns Diamond",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Reverse Caverns Opal",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Reverse Caverns Garnet",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Osafune Katana",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Alucard Shield",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        }
+    ],
+
+    "Cave": [
+        {
+            "name": "Death",
+            "requirements": "Flight and Holy Glasses",
+            "set": "All"
+        },
+        {
+            "name": "Alucard Sword",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Life Apple (Reverse Demon Switch Door)",
+            "requirements": "Flight, Holy Glasses, and Demon Card",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Floating Catacombs": [
+        {
+            "name": "Gas Cloud (Galamoth)",
+            "requirements": "Flight and Holy Glasses",
+            "set": "All"
+        },
+        {
+            "name": "Necklace of J",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Floating Catacombs Diamond",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Floating Catacombs Elixir (Reverse Spike Breaker)",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Reverse Entrance": [
+        {
+            "name": "Talisman",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, Scenic"
+        },
+        {
+            "name": "Beryl Circlet",
+            "requirements": "Holy Glasses, Soul of Bat, Soul of Wolf",
+            "set": "Equipment, Extended, Scenic"
+        },
+        {
+            "name": "Reverse Entrance Antivenom (Reverse Power of Wolf)",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Extended, Scenic"
+        }
+    ],
+
+    "Forbidden Library": [
+        {
+            "name": "Forbidden Library Opal",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, GuardedPlus, Extended, Scenic"
+        },
+        {
+            "name": "Badelaire",
+            "requirements": "Flight and Holy Glasses",
+            "set": "Equipment, GuardedPlus, Extended, Scenic"
+        },
+        {
+            "name": "Staurolite",
+            "requirements": "Form of Mist, Flight, and Holy Glasses",
+            "set": "Equipment, Scenic"
+        }
+    ]
+}
+

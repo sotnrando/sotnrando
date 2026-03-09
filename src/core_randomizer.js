@@ -168,6 +168,7 @@ async function randomize(
     options,
     seed,
     newGoals,
+    startStatMax,
     godSpeedShoes,
     mapColor,
     alucardPalette,
@@ -181,7 +182,8 @@ async function randomize(
     urlHandler,
     fileOutputHandler,
     fileCloseHandler,
-    fileToCheck
+    fileToCheck,
+    presetName = options.preset
 ){
     try {
         let check
@@ -218,6 +220,7 @@ async function randomize(
             console.error('\n' + err.message)
             if(!isBrowser()) process.exit(1);
         }
+        // console.log(applied)
         try {
             let rng
             let result
@@ -315,6 +318,8 @@ async function randomize(
                 optWrite = optWrite + 0x80000000
             }
             check.apply(util.randoFuncMaster(optWrite))
+
+            check.apply(util.applySwordBuffPatches())
 
             let seasonAllowed = options.seasonalPhrasesMode || applied.seasonalPhrasesMode
             check.apply(util.applySplashText(rng,seasonAllowed))
@@ -458,6 +463,33 @@ async function randomize(
             }
             debugMessage(debugEnabled, 'Elemental Chaos | ' + optFlag)
             optFlag = false
+            if (options.singleHitGearMode || applied.singleHitGearMode) { // Single-Hit Gears - eldrich
+                optFlag = true
+                check.apply(util.applySingleHitGearPatches())
+            }
+            debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
+            optFlag = false
+            let ssOpt = 0
+            if (options.startStatRandoMode || applied.startStatRandoMode) { // Starting Stat Randomizer - eldrich
+                optFlag = true
+                rng = getRNG(options, seed);
+                if (options.startStatRandoMode !== undefined) {// need to confirm if in applied or options.
+                    if (startStatMax !== null) {
+                        ssOpt = Number(startStatMax)// special condition to pull from website interface
+                    } else {
+                        ssOpt = Number(options.startStatRandoMode)
+                    }
+                } else {
+                    if (applied.startStatRandoMode !== undefined) {
+                        ssOpt = Number(applied.startStatRandoMode)
+                    } else {
+                        ssOpt = 0
+                    }
+                }
+                check.apply(util.applyStartStatRandoPatches(rng,ssOpt))
+            }
+            debugMessage(debugEnabled, '| Starting Stat Randomizer | ' + optFlag + " | " + ssOpt)
+            optFlag = false
             if (options.easyMode || applied.easyMode) { // Simplifies spell inputs and extends i-frames - eldrich
                 // Apply easy mode patches. - eldri7ch
                 optFlag = true
@@ -519,12 +551,6 @@ async function randomize(
             }
             debugMessage(debugEnabled, 'Alucard Liner')
             optFlag = false
-            if (options.singleHitGearMode || applied.singleHitGearMode) { // Single-Hit Gears - eldrich
-                optFlag = true
-                check.apply(util.applySingleHitGearPatches())
-            }
-            debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
-            optFlag = false
             debugMessage(debugEnabled, 'Apply Writes')
             // Apply writes.
             check.apply(util.applyWrites(rng, applied))
@@ -543,7 +569,7 @@ async function randomize(
             check,
             seed,
             version,
-            options.preset,
+            presetName,
             options.tournamentMode,
         )
         debugMessage(debugEnabled, 'Apply tracking byte for tracker data')

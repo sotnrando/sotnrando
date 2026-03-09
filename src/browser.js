@@ -649,7 +649,7 @@
         "enemyStatRandoMode", "shopPriceRandoMode", "startRoomRandoMode",
         "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
         "godspeedMode", "libraryShortcut", "elemChaosMode", "easyMode",
-        "devStashMode", "bossMusicSeparation", "singleHitGearMode"
+        "devStashMode", "bossMusicSeparation", "singleHitGearMode","startStatRandoMode"
       ];
 
       const keysToRemove = ["music", "bossMusicSeparation"];
@@ -670,7 +670,7 @@
 
       // HARD OVERRIDE: presets cannot enable singleHitGearMode
       // It is always false unless the user manually checks it
-      elems.singleHitGearMode.checked = false;
+      // elems.singleHitGearMode.checked = false;
 
       // Compatibility disables still apply
       DISABLE_RULES.forEach(rule => {
@@ -722,10 +722,11 @@
       "showRelicLocations",
       "showSolutions",
       "showSpoilers",
-      "show-relics",
-      "show-solutions",
+      "showRelics",
+      "showSolutions",
       "startingEquipment",
       "singleHitGearMode",
+      "startStatRandoMode",
       "startRoomRando2ndMode",
       "startRoomRandoMode",
       "stats",
@@ -761,6 +762,7 @@
       const allRadios = document.querySelectorAll("input[type='radio']");
       allRadios.forEach(r => r.disabled = false);
     }
+    ChangeHandlers.tournamentModeChange();
   }
 
   function complexityChange() {
@@ -794,6 +796,19 @@
       elems.complexity.value = max
     }
   }
+
+  function statMaxChange() {
+    elems.statMaxCurrentValue.innerText = `(${elems.statMax.value})`;
+  }
+
+  function statMaxSlider() {
+    const saved = localStorage.getItem('statMax') || "25";
+    elems.statMax.value = saved;
+    elems.statMaxCurrentValue.innerText = `(${saved})`;
+
+    elems.statMax.addEventListener('input', statMaxChange);
+  }
+
 
   document.addEventListener('DOMContentLoaded', () => {
     const slider = document.getElementById('complexity');
@@ -1034,7 +1049,8 @@
       'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
       'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
       'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
-      'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode'
+      'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode',
+      'startStatRandoMode'
     ]
 
     formOptions.forEach(key => {
@@ -1083,7 +1099,7 @@
       'startRoomRandoMode', 'startRoomRando2ndMode', 'dominoMode', 'rlbcMode',
       'immunityPotionMode', 'godspeedMode', 'libraryShortcut', 'elemChaosMode',
       'easyMode', 'devStashMode', 'seasonalPhrasesMode',
-      'bossMusicSeparation', 'singleHitGearMode', 'tournamentMode'
+      'bossMusicSeparation', 'singleHitGearMode', 'startStatRandoMode', 'tournamentMode'
     ]
     clearFields.forEach(key => elems[key].disabled = false)
 
@@ -1234,6 +1250,7 @@
         options,
         currSeed,
         elems.newGoals.value,
+        elems.statMax.value,
         elems.godspeedMode.checked,
         elems.mapColor.value,
         elems.alucardPalette.value,
@@ -1284,6 +1301,7 @@
         }).then(randomize(options,
           currSeed,
           elems.newGoals.value,
+          elems.statMax.value,
           elems.godspeedMode.checked,
           elems.mapColor.value,
           elems.alucardPalette.value,
@@ -1340,6 +1358,7 @@
     loadMenuOptions();
     showHiddenTooltips();
     presetIdChange();
+    statMaxSlider();
   }
 
   initializeBrowser();
