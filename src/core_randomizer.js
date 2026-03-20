@@ -31,20 +31,20 @@ function generateSeedName() {
     let nouns;
 
     let month = new Date().getMonth() + 1;
-
+    constants = isBrowser() ? window.sotnRando.constants : require("./constants");
     switch (month) {
         case 10:
-            adjectives = sotnRando.constants.adjectivesHalloween;
-            nouns = sotnRando.constants.nounsHalloween;
+            adjectives = constants.adjectivesHalloween;
+            nouns = constants.nounsHalloween;
             break;
         case 12:
-            adjectives = sotnRando.constants.adjectivesHolidays;
-            nouns = sotnRando.constants.nounsNormal;
+            adjectives = constants.adjectivesHolidays;
+            nouns = constants.nounsNormal;
             break;
 
         default:
-            adjectives = sotnRando.constants.adjectivesNormal;
-            nouns = sotnRando.constants.nounsNormal;
+            adjectives = constants.adjectivesNormal;
+            nouns = constants.nounsNormal;
             break;
     }
 
@@ -76,24 +76,26 @@ function isBrowserDev(url) {
     return url.hostname !== releaseHostname
 }
 
-function getVersion() {
+async function loadVersionInBrowser() {
+    const isDev = isBrowserDev(url);
+    const response = await fetch('../package.json', { cache: 'no-store' });
+    if (response.ok) {
+        const json = await response.json();
+        version = json.version;
+        if (isDev && !version.match(/-/)) {
+            version += 'D'
+        }
+    }
+}
+
+async function getVersion() {
     version = "0.0.0D";
     if(!isBrowser()){
         version = require('../package.json').version
     }else{
-        const url = new URL(window.location.href)
-        const isDev = isBrowserDev(url);
+        const url = new URL(window.location.href)        
         if (url.protocol !== 'file:') {
-            fetch('package.json', { cache: 'no-store' }).then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (json) {
-                        version = json.version
-                        if (isDev && !version.match(/-/)) {
-                            version += 'D'
-                        }
-                    })
-                }
-            })
+            await loadVersionInBrowser();
         }
     }
     return version;
@@ -190,7 +192,7 @@ async function randomize(
         let checksum
         let startTime
         let optFlag
-        getVersion();
+        await getVersion();
         startTime = performance.now()
         loadRequirements();
         check = new util.checked(fileToCheck) // typeof(fd) === 'object' ? undefined : fd
