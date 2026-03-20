@@ -31,20 +31,20 @@ function generateSeedName() {
     let nouns;
 
     let month = new Date().getMonth() + 1;
-
+    constants = isBrowser() ? window.sotnRando.constants : require("./constants");
     switch (month) {
         case 10:
-            adjectives = sotnRando.constants.adjectivesHalloween;
-            nouns = sotnRando.constants.nounsHalloween;
+            adjectives = constants.adjectivesHalloween;
+            nouns = constants.nounsHalloween;
             break;
         case 12:
-            adjectives = sotnRando.constants.adjectivesHolidays;
-            nouns = sotnRando.constants.nounsNormal;
+            adjectives = constants.adjectivesHolidays;
+            nouns = constants.nounsNormal;
             break;
 
         default:
-            adjectives = sotnRando.constants.adjectivesNormal;
-            nouns = sotnRando.constants.nounsNormal;
+            adjectives = constants.adjectivesNormal;
+            nouns = constants.nounsNormal;
             break;
     }
 
@@ -84,7 +84,7 @@ function getVersion() {
         const url = new URL(window.location.href)
         const isDev = isBrowserDev(url);
         if (url.protocol !== 'file:') {
-            fetch('package.json', { cache: 'no-store' }).then(function (response) {
+            fetch('../package.json', { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (json) {
                         version = json.version
