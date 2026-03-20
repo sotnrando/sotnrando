@@ -388,6 +388,12 @@
     }
   }
 
+  function loadVersion() {
+    CoreRandomizer.getVersion().then(version => {
+      document.getElementById('version').innerText = version;
+    });
+  }
+
   function addCheckboxesHandlers() {
     const checkboxesToStore = document.querySelectorAll('[data-store-checkbox="true"], [data-store-checkbox="false"]');
     checkboxesToStore.forEach(el => {
@@ -1338,8 +1344,7 @@
     isAprilFools = month === 4 && day === 1;
     // Load presets
     loadPresets();
-
-    document.getElementById('version').innerText = CoreRandomizer.getVersion();
+    loadVersion();
 
     loadOption('excludeSongsOption', showExcludeMenu, false);
     loadSongs();

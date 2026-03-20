@@ -76,24 +76,26 @@ function isBrowserDev(url) {
     return url.hostname !== releaseHostname
 }
 
-function getVersion() {
+async function loadVersionInBrowser() {
+    const isDev = isBrowserDev(url);
+    const response = await fetch('../package.json', { cache: 'no-store' });
+    if (response.ok) {
+        const json = await response.json();
+        version = json.version;
+        if (isDev && !version.match(/-/)) {
+            version += 'D'
+        }
+    }
+}
+
+async function getVersion() {
     version = "0.0.0D";
     if(!isBrowser()){
         version = require('../package.json').version
     }else{
-        const url = new URL(window.location.href)
-        const isDev = isBrowserDev(url);
+        const url = new URL(window.location.href)        
         if (url.protocol !== 'file:') {
-            fetch('../package.json', { cache: 'no-store' }).then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (json) {
-                        version = json.version
-                        if (isDev && !version.match(/-/)) {
-                            version += 'D'
-                        }
-                    })
-                }
-            })
+            await loadVersionInBrowser();
         }
     }
     return version;
@@ -190,7 +192,7 @@ async function randomize(
         let checksum
         let startTime
         let optFlag
-        getVersion();
+        await getVersion();
         startTime = performance.now()
         loadRequirements();
         check = new util.checked(fileToCheck) // typeof(fd) === 'object' ? undefined : fd
