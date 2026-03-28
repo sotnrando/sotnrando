@@ -1056,7 +1056,8 @@
       'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
       'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
       'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode',
-      'startStatRandoMode'
+      'startStatRandoMode', "turkeyMode", "stats", "accessibilityPatches","enemyDrops",
+      "itemLocations", "newGoals", "prologueRewards", "startingEquipment"
     ]
 
     formOptions.forEach(key => {

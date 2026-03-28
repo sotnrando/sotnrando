@@ -1,0 +1,246 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* MOBILE FIRST — smallest screens */
+.viewportWindow {
+    position: relative;
+    width: 300px;
+    /* base mobile width */
+    aspect-ratio: 3 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+}
+
+.layer {
+    position: absolute;
+    pointer-events: none;
+    image-rendering: pixelated;
+    transform: translateX(-50%);
+}
+
+/* MOBILE defaults */
+.logoLayer {
+    top: 5%;
+    left: 50%;
+    width: 100px;
+    z-index: 3;
+}
+
+.layer1,
+.layer2 {
+    width: 30px;
+    bottom: 5%;
+    z-index: 2;
+}
+
+.layer1 {
+    right: 30%;
+}
+
+.layer2 {
+    left: 30%;
+}
+
+.centerLayer {
+    top: 56%;
+    left: 50%;
+    width: 30px;
+    z-index: 2;
+    opacity: 0; 
+    transform: scaleY(-1); 
+}
+
+/* BUTTON — mobile */
+.goButton {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    pointer-events: auto;
+
+    padding: 4px 8px;
+    font-size: 8px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+
+    background: #c62828;
+    color: white;
+    border: 3px solid #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+.goButton.showButton {
+    opacity: 1;
+}
+
+.goButton:hover {
+    background: #ff4444;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* --------------------------------------------- */
+/* TABLET — medium screens */
+/* --------------------------------------------- */
+@media (min-width: 600px) {
+    .viewportWindow {
+        width: 600px;
+    }
+
+    .logoLayer {
+        width: 200px;
+        top: 5%;
+    }
+
+    .layer1 {
+        right: 30%;
+    }
+
+    .layer2 {
+        left: 30%;
+    }
+
+    .layer1,
+    .layer2 {
+        width: 60px;
+    }
+    
+    .centerLayer {
+        width: 60px;
+    }
+    .goButton {
+        top: 40%;
+        font-size: 10px;
+        padding: 10px 15px;
+    }
+}
+
+/* --------------------------------------------- */
+/* DESKTOP — full layout */
+/* --------------------------------------------- */
+@media (min-width: 900px) {
+    .viewportWindow {
+        width: 900px;
+    }
+
+    .logoLayer {
+        width: 300px;
+        top: 5%;
+    }
+
+    .layer1 {
+        right: 30%;
+    }
+
+    .layer2 {
+        left: 30%;
+    }
+
+    .layer1,
+    .layer2 {
+        width: 90px;
+    }
+    .centerLayer {
+        width: 90px;
+    }
+
+    .goButton {
+        top: 40%;
+        font-size: 20px;
+        padding: 12px 28px;
+    }
+}
+
+.centerLayer {
+    transform: scaleX(-1);
+}
+
+
+
+/* LEFT CHARACTER */
+.charEnter {
+    opacity: 0;
+    animation: charSlideFadeLeft 0.8s ease-out forwards;
+}
+
+@keyframes charSlideFadeLeft {
+    0% {
+        opacity: 0;
+        transform: scaleX(-1) translateX(-50%) translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleX(-1) translateX(-50%) translateX(0);
+    }
+}
+
+/* RIGHT CHARACTER */
+.charEnterRight {
+    opacity: 0;
+    animation: charSlideFadeRight 0.8s ease-out forwards;
+}
+
+@keyframes charSlideFadeRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateX(0);
+    }
+}
+/*CENTER CHARACTER*/
+.centerEnter {
+    opacity: 0;
+    animation: centerFade 0.8s ease-out forwards;
+}
+
+@keyframes centerFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%);
+    }
+}
+#logo {
+    opacity: 0;
+}
+.logoFadeIn {
+    animation: logoFade 0.8s ease-out forwards;
+}
+
+@keyframes logoFade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
