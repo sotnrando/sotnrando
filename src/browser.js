@@ -14,7 +14,6 @@
   let newGoalsLock
   let alucardPaletteLock
   let alucardLinerLock
-  let isAprilFools
   let options
   let seed
   let applied
@@ -1339,10 +1338,6 @@
     loadEvent();
     resetState();
     addDefaultEventListeners();
-    // Set April Fools flag
-    const month = new Date().getMonth() + 1;
-    const day = new Date().getDate();
-    isAprilFools = month === 4 && day === 1;
     // Load presets
     loadPresets();
     loadVersion();
