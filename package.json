@@ -88,7 +88,8 @@
     "rampage-aut25te",
     "lycanthrope-spr26te",
     "nimble-lite-spr26te",
-    "warlock-spr26te"
+    "warlock-spr26te",
+    "april-fools"
   ],
   "engines": {
     "node": ">=15"
