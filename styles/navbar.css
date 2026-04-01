@@ -1,0 +1,123 @@
+.menu {
+    display: none;
+    position: absolute;
+    left: 20;
+    width: 40%;
+    background-color: rgb(0, 0, 61);
+    border: 2px solid white;
+}
+
+.menu-btn {
+    display: block;
+    padding: 1em;
+    color: white;
+}
+
+.menu-btn::after {
+    content: "\2630";
+}
+
+#checkbox-toggle {
+    display: none;
+}
+
+#checkbox-toggle:checked ~ .menu {
+    display: block;
+}
+
+#checkbox-toggle:checked ~ .menu-btn {
+    content: "\2716";
+}
+
+.navbar {
+    border-bottom: 2px solid white;
+}
+
+.navbar a {
+    display: block;
+    padding: .25em 1em;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar ul {
+    padding: 1em;
+    list-style-type: none;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+    text-decoration: underline;
+}
+
+.navbar a.current {
+    border: 2px solid;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.menu li:has(.submenu) {
+    position: relative;
+}
+
+.menu li:has(.submenu) small::after {
+    content: "\25b6";
+}
+
+.menu li:has(.submenu) small {
+    margin-left: 1em;
+}
+
+.menu li:has(.submenu):hover > .submenu {
+    display: block;
+}
+
+.submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: rgb(0, 0, 61);
+    border: 2px solid;
+    border-radius: 10px;
+    color: white;
+    display: none;
+    width: 110%;
+    z-index: 10;
+}
+
+.submenu > li a {
+    margin: 2px;
+}
+
+/* Desktop breakpoint */
+@media only screen and (min-width: 1692px) {
+    .menu {
+        position: relative;
+        left: 0;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .navbar a.current {
+        width: fit-content;
+    }
+
+    .menu-btn {
+        display: none;
+    }
+
+    #checkbox-toggle:checked ~ .menu {
+        display: flex;
+    }
+
+    .menu li:has(.submenu) small::after {
+        content: "\25bc";
+    }
+
+    .submenu {
+        top: auto;
+        left: 0;
+        width: 160%;
+    }
+}

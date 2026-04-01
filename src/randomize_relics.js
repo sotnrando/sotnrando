@@ -1127,10 +1127,36 @@
         throw new errors.SoftlockError()
       }
     })
+    // Find the final Vlad relic (longest chain to access).
+    const vladAbilities = [
+      constants.RELIC.HEART_OF_VLAD,
+      constants.RELIC.TOOTH_OF_VLAD,
+      constants.RELIC.RIB_OF_VLAD,
+      constants.RELIC.RING_OF_VLAD,
+      constants.RELIC.EYE_OF_VLAD,
+    ]
+    let finalVlad
+    let maxVladDepth = -1
+    vladAbilities.forEach(function(ability) {
+      const node = graphed.find(function(n) { return n.item === ability })
+      if (node) {
+        let nodeDepth = 1
+        if (node.locks && node.locks.length) {
+          const visited = new WeakSet()
+          visited.add(node)
+          nodeDepth += node.locks.reduce(lockDepth(visited), 0)
+        }
+        if (nodeDepth > maxVladDepth) {
+          maxVladDepth = nodeDepth
+          finalVlad = ability
+        }
+      }
+    })
     return {
       mapping: mapping,
       solutions: solutions,
       depth: depth,
+      finalVlad: finalVlad,
     }
   }
 
@@ -1409,6 +1435,14 @@
           thrustSword,
         )
         info[4]['Complexity'] = result.depth
+      }
+      if (result.finalVlad) {
+        const vladRelic = enabledRelics.find(function(r) {
+          return r.ability === result.finalVlad
+        })
+        if (vladRelic) {
+          info[4]['Final Vlad relic'] = vladRelic.name
+        }
       }
     }
     let trackbyte

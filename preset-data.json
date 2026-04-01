@@ -1293,5 +1293,25 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal"
+  },
+  {
+    "name": "April Fools",
+    "id": "april-fools",
+    "description": "April Fools preset Released on April 1st, 2026.",
+    "author": [
+      "eldri7ch",
+      "MottZilla",
+      "SacredLucy"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Normal",
+    "moddedLevel": "Moderately",
+    "castleType": "Normal",
+    "transformEarly": "Yes",
+    "transformFocus": "Bat",
+    "winCondition": "April Fools",
+    "metaExtension": "Scenic",
+    "metaComplexity": "7",
+    "itemStats": "Normal"
   }
 ]

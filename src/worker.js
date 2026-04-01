@@ -25,11 +25,12 @@ function randomizeWorker() {
       url + 'build/presets/adventure.js',
       url + 'build/presets/nimble.js',
       url + 'build/presets/open.js',
+      url + 'build/presets/nimble-lite.js',
       url + 'src/randomize_items.js',
       url + 'src/randomize_relics.js',
       url + 'src/ecc-edc-recalc-js.js',
     )
-    let loadedPresets = ["casual", "safe", "adventure", "nimble", "open"]
+    let loadedPresets = ["casual", "safe", "adventure", "nimble", "open", "nimble-lite"]
     
     if(selectedPreset !== null && !(selectedPreset in loadedPresets)){
       importScripts(url + `build/presets/${selectedPreset}.js`)

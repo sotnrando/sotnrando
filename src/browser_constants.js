@@ -7,6 +7,7 @@ BrowserConstants.paletteDisplay = elemByQuery('alucardPaletteDisplay');
 BrowserConstants.linerDisplay = elemByQuery('alucardLinerDisplay');
 BrowserConstants.mapColorSelect = elemByQuery('mapColor');
 BrowserConstants.mapColorDisplay = elemByQuery('mapColorDisplay');
+BrowserConstants.isAprilFools = (new Date().getMonth() + 1) === 4 && new Date().getDate() === 1;
 
 BrowserConstants.relicLocationsExtensionCache = null;
 

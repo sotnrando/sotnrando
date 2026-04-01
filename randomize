@@ -1413,7 +1413,7 @@ function getOption(option){
 
 core_randomizer.randomize(
     options,
-    'seed' in argv ? argv.seed : generateSeedName(),
+    'seed' in argv ? argv.seed : core_randomizer.generateSeedName(),
     getOption('newGoals'),
     null,
     getOption('godspeed'),
