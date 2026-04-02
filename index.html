@@ -26,38 +26,38 @@
 
     <script>
         const backgrounds = [
-            "https://i.ibb.co/ycCv0ZwC/background.png"
+            "https://ik.imagekit.io/xr0nkioc2q/background.png"
         ];
 
         const logos = [
-            "https://i.ibb.co/Q3HpQW9X/logo.png"
+            "https://ik.imagekit.io/xr0nkioc2q/logo.png"
         ];
 
         const centerGroup = [
-            "https://i.ibb.co/7xS7djst/Dracula-Yellow.png",
-            "https://i.ibb.co/5WHmWJnz/Dracula-Purple.png",
-            "https://i.ibb.co/sJ3rn6bM/Dracula-Pink.png",
-            "https://i.ibb.co/rKGBPkRx/Dracula-Green.png",
-            "https://i.ibb.co/CK1KLsz2/Dracula-Blue.png",
-            "https://i.ibb.co/pv6fYHtZ/Dracula-Default.png"
+            "https://ik.imagekit.io/xr0nkioc2q/DraculaYellow.png",
+            "https://ik.imagekit.io/xr0nkioc2q/DraculaPurple.png",
+            "https://ik.imagekit.io/xr0nkioc2q/DraculaPink.png",
+            "https://ik.imagekit.io/xr0nkioc2q/DraculaGreen.png",
+            "https://ik.imagekit.io/xr0nkioc2q/DraculaBlue.png",
+            "https://ik.imagekit.io/xr0nkioc2q/DraculaDefault.png"
         ];
 
         const groupA = [
-            "https://i.ibb.co/zVj5krKs/Grey-Richter.png",
-            "https://i.ibb.co/kgPc8XV8/RICHTER.png",
-            "https://i.ibb.co/JFKmrrw2/Cyan-Richter.png",
-            "https://i.ibb.co/Sw4PqRf1/Green-Richter.png",
-            "https://i.ibb.co/Ldg7LqY5/Orange-Richter.png",
-            "https://i.ibb.co/n8q4mfCM/Pink-Richter.png",
-            "https://i.ibb.co/KcDnTwHz/Purple-Richter.png",
-            "https://i.ibb.co/0yGGBmsp/Yellow-Richter.png"
+            "https://ik.imagekit.io/xr0nkioc2q/Purple%20Richter.png",
+            "https://ik.imagekit.io/xr0nkioc2q/Yellow%20Richter.png",
+            "https://ik.imagekit.io/xr0nkioc2q/Pink%20Richter.png",
+            "https://ik.imagekit.io/xr0nkioc2q/Green%20Richter.png",
+            "https://ik.imagekit.io/xr0nkioc2q/Orange%20Richter.png",
+            "https://ik.imagekit.io/xr0nkioc2q/RICHTER.png",
+            "https://ik.imagekit.io/xr0nkioc2q/Cyan%20Richter.png",
+            "https://ik.imagekit.io/xr0nkioc2q/Grey%20Richter.png"
         ];
 
         const groupB = [
-            "https://i.ibb.co/Q7cZ61Zc/Red-Alucard.png",
-            "https://i.ibb.co/HpXjzc8p/Purple-Alucard.png",
-            "https://i.ibb.co/HpXjzc8p/Purple-Alucard.png",
-            "https://i.ibb.co/b51TVDSF/ALUCARD.png"
+            "https://ik.imagekit.io/xr0nkioc2q/RedAlucard.png",
+            "https://ik.imagekit.io/xr0nkioc2q/BlueAlucard.png",
+            "https://ik.imagekit.io/xr0nkioc2q/PurpleAlucard.png",
+            "https://ik.imagekit.io/xr0nkioc2q/ALUCARD.png"
         ];
 
         function pickRandom(arr) {
@@ -77,7 +77,7 @@
             // Logo selection
             const now = new Date();
             const isJune = now.getMonth() === 5;
-            logoEl.src = isJune ? "https://i.ibb.co/bRBg2MPV/logopride.png" : pickRandom(logos);
+            logoEl.src = isJune ? "https://ik.imagekit.io/xr0nkioc2q/logopride.png" : pickRandom(logos);
 
             const leftGroup = Math.random() < 0.5 ? groupA : groupB;
             const rightGroup = leftGroup === groupA ? groupB : groupA;

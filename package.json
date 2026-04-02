@@ -1,6 +1,6 @@
 {
   "name": "SotN-Randomizer",
-  "version": "26.03.03",
+  "version": "26.04.02",
   "description": "This is a romhacking tool to randomize some things about `Castlevania: Symphony of the Night`.",
   "dependencies": {
     "colors": "^1.4.0",
@@ -89,7 +89,8 @@
     "lycanthrope-spr26te",
     "nimble-lite-spr26te",
     "warlock-spr26te",
-    "april-fools"
+    "april-fools",
+    "gourmet-race"
   ],
   "engines": {
     "node": ">=15"
