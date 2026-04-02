@@ -1313,5 +1313,25 @@
     "metaExtension": "Scenic",
     "metaComplexity": "7",
     "itemStats": "Normal"
+  },
+  {
+    "name": "Gourmet Race",
+    "id": "gourmet-race",
+    "description": "April Fools Preset released on April 1st, 2026. Start with the initial load out from the 'Nimble-Lite' preset but with the Scenic relic extension. Reverse Library Cards are enabled with Down + Input to activate. Stopwatches are guaranteed under the statues with Cube of Zoe. Collect all of the food to win!",
+    "author": [
+      "eldri7ch",
+      "MottZilla",
+      "SacredLucy"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Normal",
+    "moddedLevel": "Moderately",
+    "castleType": "Normal",
+    "transformEarly": "Yes",
+    "transformFocus": "Bat",
+    "winCondition": "Collect Food",
+    "metaExtension": "Scenic",
+    "metaComplexity": "7",
+    "itemStats": "Normal"
   }
 ]

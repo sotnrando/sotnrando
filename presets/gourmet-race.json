@@ -1,0 +1,695 @@
+{
+  "metadata": {
+    "id": "gourmet-race",
+    "name": "Gourmet Race",
+    "description": "April Fools Preset released on April 1st, 2026. Start with the initial load out from the 'Nimble-Lite' preset but with the Scenic relic extension. Reverse Library Cards are enabled with Down + Input to activate. Stopwatches are guaranteed under the statues with Cube of Zoe. Collect all of the food to win!",
+    "author": [
+      "eldri7ch",
+      "MottZilla",
+      "SacredLucy"
+    ],
+    "weight": -3950,
+    "knowledgeCheck": "None",
+    "metaExtension": "Scenic",
+    "metaComplexity": "7",
+    "itemStats": "Normal",
+    "timeFrame": "Normal",
+    "moddedLevel": "Moderately",
+    "castleType": "Normal",
+    "transformEarly": "Yes",
+    "transformFocus": "Bat",
+    "winCondition": "Collect Food"
+  },
+  
+  "inherits": "nimble-lite",
+  "relicLocationsExtension": "scenic",
+  "stats": false,
+  "music": false,
+  "mypurseMode": true,
+  "rlbcMode": true,
+  "singleHitGearMode": true,
+
+  "complexityGoal": {
+    "min": 7,
+    "goals": [
+      "Holy glasses + Tooth of Vlad + Ring of Vlad + Rib of Vlad + Heart of Vlad + Eye of Vlad"
+    ]
+  },
+  
+  "placeRelic": [{
+    "location": "Cube of Zoe",
+    "relic": "Faerie Scroll"
+  }],
+
+  "replaceRelic": [{
+    "relic": "Tooth of Vlad",
+    "item": "Orange"
+  }, {
+    "relic": "Ring of Vlad",
+    "item": "Apple"
+  }, {
+    "relic": "Rib of Vlad",
+    "item": "Banana"
+  }, {
+    "relic": "Heart of Vlad",
+    "item": "Grapes"
+  }, {
+    "relic": "Eye of Vlad",
+    "item": "Strawberry"
+  }],
+
+  "blockItems": [{
+    "zone": "*",
+    "item": "*",
+    "replacement": [
+      "Orange",
+      "Apple",
+      "Banana",
+      "Grapes",
+      "Strawberry",
+      "Meal ticket"
+    ]
+  }],
+
+  "blockDrops": [{
+    "enemy": "*",
+    "items": [
+      "Orange",
+      "Apple",
+      "Banana",
+      "Grapes",
+      "Strawberry",
+      "Meal ticket"
+    ]
+  }],
+
+  "itemLocations": [{
+    "comment": "Place Stopwatch in the Clock Room",
+    "zone": "NO0",
+    "item": "Big heart",
+    "index": 16,
+    "replacement": "Stopwatch"
+  }, {
+    "comment": "Place Stopwatch in the Clock Room",
+    "zone": "NO0",
+    "item": "Big heart",
+    "index": 17,
+    "replacement": "Stopwatch"
+  }, {
+    "comment": "Place Library Card in Reverce Entrance",
+    "zone": "RNO3",
+    "item": "Hammer",
+    "replacement": "Library card"
+  }],
+
+  "goalItem": [{
+    "item": "Pineapple",
+    "alias": "pineapple"
+    }, {
+    "item": "Peanuts",
+    "alias": "peanuts"
+    }, {
+    "item": "Toadstool",
+    "alias": "toadstool"
+    }, {
+    "item": "Shiitake",
+    "alias": "shiitake"
+    }, {
+    "item": "Cheesecake",
+    "alias": "cheesecake"
+    }, {
+    "item": "Shortcake",
+    "alias": "shortcake"
+    }, {
+    "item": "Tart",
+    "alias": "tart"
+    }, {
+    "item": "Parfait",
+    "alias": "parfait"
+    }, {
+    "item": "Pudding",
+    "alias": "pudding"
+    }, {
+    "item": "Ice cream",
+    "alias": "icecream"
+    }, {
+    "item": "Frankfurter",
+    "alias": "frankfurter"
+    }, {
+    "item": "Hamburger",
+    "alias": "hamburger"
+    }, {
+    "item": "Pizza",
+    "alias": "pizza"
+    }, {
+    "item": "Cheese",
+    "alias": "cheese"
+    }, {
+    "item": "Ham and eggs",
+    "alias": "hamandeggs"
+    }, {
+    "item": "Omelette",
+    "alias": "omelette"
+    }, {
+    "item": "Morning set",
+    "alias": "morningset"
+    }, {
+    "item": "Lunch A",
+    "alias": "luncha"
+    }, {
+    "item": "Lunch B",
+    "alias": "lunchb"
+    }, {
+    "item": "Curry rice",
+    "alias": "curryrice"
+    }, {
+    "item": "Gyros plate",
+    "alias": "gyrosplate"
+    }, {
+    "item": "Spaghetti",
+    "alias": "spaghetti"
+    }, {
+    "item": "Grape juice",
+    "alias": "grapejuice"
+    }, {
+    "item": "Barley tea",
+    "alias": "barleytea"
+    }, {
+    "item": "Green tea",
+    "alias": "greentea"
+    }, {
+    "item": "Natou",
+    "alias": "natou"
+    }, {
+    "item": "Ramen",
+    "alias": "ramen"
+    }, {
+    "item": "Miso soup",
+    "alias": "misosoup"
+    }, {
+    "item": "Sushi",
+    "alias": "sushi"
+    }, {
+    "item": "Pork bun",
+    "alias": "porkbun"
+    }, {
+    "item": "Red bean bun",
+    "alias": "redbeanbun"
+    }, {
+    "item": "Chinese bun",
+    "alias": "chinesebun"
+    }, {
+    "item": "Dim Sum set",
+    "alias": "dimsumset"
+    }, {
+    "item": "Pot roast",
+    "alias": "potroast"
+    }, {
+    "item": "Sirloin",
+    "alias": "sirloin"
+    }, {
+    "item": "Turkey",
+    "alias": "turkey"
+    }
+  ],
+  
+  "writes": [{
+    "comment": "Make all food infinite use (Non-consumable)",
+    "address": "0xB1809",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Orange"
+  }, {
+    "address": "0xB183D",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Apple"
+  }, {
+    "address": "0xB1871",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Banana"
+  }, {
+    "address": "0xB18A5",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Grapes"
+  }, {
+    "address": "0xB18D9",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Strawberry"
+  }, {
+    "address": "0xB190D",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Pineapple"
+  }, {
+    "address": "0xB1941",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Peanuts"
+  }, {
+    "address": "0xB1975",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Toadstool"
+  }, {
+    "address": "0xB19A9",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Shiitake"
+  }, {
+    "address": "0xB19DD",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Cheesecake"
+  }, {
+    "address": "0xB1A11",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Shortcake"
+  }, {
+    "address": "0xB1A45",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Tart"
+  }, {
+    "address": "0xB1A79",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Parfait"
+  }, {
+    "address": "0xB1AAD",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Pudding"
+  }, {
+    "address": "0xB1AE1",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Ice cream"
+  }, {
+    "address": "0xB1B15",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Frankfurter"
+  }, {
+    "address": "0xB1B49",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Hamburger"
+  }, {
+    "address": "0xB1B7D",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Pizza"
+  }, {
+    "address": "0xB1BB1",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Cheese"
+  }, {
+    "address": "0xB1BE5",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Ham and eggs"
+  }, {
+    "address": "0xB1C19",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Omelette"
+  }, {
+    "address": "0xB1C4D",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Morning set"
+  }, {
+    "address": "0xB1C81",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Lunch A"
+  }, {
+    "address": "0xB1CB5",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Lunch B"
+  }, {
+    "address": "0xB1CE9",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Curry rice"
+  }, {
+    "address": "0xB1D1D",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Gyros plate"
+  }, {
+    "address": "0xB1D51",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Spaghetti"
+  }, {
+    "address": "0xB1D85",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Grape juice"
+  }, {
+    "address": "0xB1DB9",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Barley tea"
+  }, {
+    "address": "0xB1DED",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Green tea"
+  }, {
+    "address": "0xB1E21",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Natou"
+  }, {
+    "address": "0xB1E55",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Ramen"
+  }, {
+    "address": "0xB1E89",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Miso soup"
+  }, {
+    "address": "0xB1EBD",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Sushi"
+  }, {
+    "address": "0xB1EF1",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Pork bun"
+  }, {
+    "address": "0xB2055",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Red bean bun"
+  }, {
+    "address": "0xB2089",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Chinese bun"
+  }, {
+    "address": "0xB20BD",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Dim Sum set"
+  }, {
+    "address": "0xB20F1",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Pot roast"
+  }, {
+    "address": "0xB2125",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Sirlion"
+  }, {
+    "address": "0xB2159",
+    "type": "char",
+    "value": "0x00",
+    "comment": "Turkey"
+  },
+  
+  {
+    "comment": "Food opens Drac Door Hook",
+    "type": "word",
+    "address": "0x4FCF814",
+    "value": "0x08074fbc"
+  }, 
+
+  {
+    "comment": "Food opens Drac Door",
+    "type": "word",
+    "address": "0x4FE4F68",
+    "value": "0x27BDFFE0"
+  }, {
+    "type": "word",
+    "value": "0xAFBF0010"
+  }, {
+    "type": "word",
+    "value": "0xAFB00004"
+  }, {
+    "type": "word",
+    "value": "0xAFB10008"
+  }, {
+    "type": "word",
+    "value": "0xAFB2000C"
+  }, {
+    "type": "word",
+    "value": "0x3C108009"
+  }, {
+    "type": "word",
+    "value": "0x361079A7"
+  }, {
+    "type": "word",
+    "value": "0x34080000"
+  }, {
+    "type": "word",
+    "value": "0x3C118009"
+  }, {
+    "type": "word",
+    "value": "0x363179D0"
+  }, {
+    "type": "word",
+    "value": "0x92120000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x12400002"
+  }, {
+    "type": "word",
+    "value": "0x26100001"
+  }, {
+    "type": "word",
+    "value": "0x25080001"
+  }, {
+    "type": "word",
+    "value": "0x1611FFFA"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x2508FFD7"
+  }, {
+    "type": "word",
+    "value": "0x05000008"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x8FB00004"
+  }, {
+    "type": "word",
+    "value": "0x8FB10008"
+  }, {
+    "type": "word",
+    "value": "0x8FB2000C"
+  }, {
+    "type": "word",
+    "value": "0x8FBF0010"
+  }, {
+    "type": "word",
+    "value": "0x27BD0020"
+  }, {
+    "type": "word",
+    "value": "0x080704E4"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x8FB00004"
+  }, {
+    "type": "word",
+    "value": "0x8FB10008"
+  }, {
+    "type": "word",
+    "value": "0x8FB2000C"
+  }, {
+    "type": "word",
+    "value": "0x8FBF0010"
+  }, {
+    "type": "word",
+    "value": "0x27BD0020"
+  }, {
+    "type": "word",
+    "value": "0x080705E4"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  },
+  
+  {
+    "comment": "Remove need for vlads",
+    "address": "0x000b5772",
+    "type": "char",
+    "value": "0x00"
+  },
+  
+  {
+    "comment": "Cook Book Color",
+    "address": "0x04fcf7f3",
+    "type": "char",
+    "value": "0x34"
+  },
+  
+  {
+    "comment": "Cook Book Name Offset",
+    "address": "0x000b5768",
+    "type": "char",
+    "value": "0x7c"
+  },
+  
+  {
+    "comment": "Cook Book Name and Description",
+    "type": "word",
+    "address": "0xF5690",
+    "value": "0x656B614D"
+  }, {
+    "type": "word",
+    "value": "0x6F792073"
+  }, {
+    "type": "word",
+    "value": "0x75682075"
+  }, {
+    "type": "word",
+    "value": "0x7972676E"
+  }, {
+    "type": "word",
+    "value": "0x00000020"
+  }, {
+    "type": "word",
+    "value": "0x2044814C"
+  }, {
+    "type": "word",
+    "value": "0x20448152"
+  }, {
+    "type": "word",
+    "value": "0x6B6F6F43"
+  }, {
+    "type": "word",
+    "value": "0x6B6F6F62"
+  }, {
+    "type": "word",
+    "value": "0x00000020"
+  },
+  
+  {
+    "comment": "Food Sound Hook",
+    "address": "0x001171EC",
+    "type": "word",
+    "value": "0x0802682d"
+  }, 
+
+  {
+    "comment": "Food Noise",
+    "type": "word",
+    "address": "0x37135FC",
+    "value": "0x90820000"
+  }, {
+    "type": "word",
+    "value": "0x27BDFFE0"
+  }, {
+    "type": "word",
+    "value": "0xAFBF0004"
+  }, {
+    "type": "word",
+    "value": "0xAFA20008"
+  }, {
+    "type": "word",
+    "value": "0xAFA3000C"
+  }, {
+    "type": "word",
+    "value": "0xAFA50010"
+  }, {
+    "type": "word",
+    "value": "0xAFBA0014"
+  }, {
+    "type": "word",
+    "value": "0x340A001D"
+  }, {
+    "type": "word",
+    "value": "0x34CB0000"
+  }, {
+    "type": "word",
+    "value": "0x016A5823"
+  }, {
+    "type": "word",
+    "value": "0x0560000C"
+  }, {
+    "type": "word",
+    "value": "0x34CB0000"
+  }, {
+    "type": "word",
+    "value": "0x340A0045"
+  }, {
+    "type": "word",
+    "value": "0x014B5023"
+  }, {
+    "type": "word",
+    "value": "0x05400008"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x14A00006"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x348A0000"
+  }, {
+    "type": "word",
+    "value": "0x0C04D1FE"
+  }, {
+    "type": "word",
+    "value": "0x34040687"
+  }, {
+    "type": "word",
+    "value": "0x35440000"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "type": "word",
+    "value": "0x8FBA0014"
+  }, {
+    "type": "word",
+    "value": "0x8FA50010"
+  }, {
+    "type": "word",
+    "value": "0x8FA3000C"
+  }, {
+    "type": "word",
+    "value": "0x8FA20008"
+  }, {
+    "type": "word",
+    "value": "0x8FBF0004"
+  }, {
+    "type": "word",
+    "value": "0x27BD0020"
+  }, {
+    "type": "word",
+    "value": "0x0803F62E"
+  }, {
+    "type": "word",
+    "value": "0x00000000"
+  }]
+}
