@@ -5,7 +5,7 @@ function loadNavbar() {
         <input type="checkbox" id="checkbox-toggle">
         <label for="checkbox-toggle" class="menu-btn"></label>
         <ul class="menu">
-            <li><a href="/index.html">Randomizer</a></li>
+            <li><a href="/randomizer.html">Randomizer</a></li>
             <li><a href="/faq/index.html">FAQ</a></li>
             <li><a href="https://ppf.sotn.io">PPF Patcher</a></li>
             <li><a href="/community.html">Leaderboards</a></li>
