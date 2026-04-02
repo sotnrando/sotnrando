@@ -618,7 +618,10 @@
     adjustMaxComplexity();
 
     // Unified logic with corrected disabling behavior
-    const applyOptions = (options = {}, presetId) => {
+    function applyOptions(options = {}, presetId) {
+      const STRUCTURED_KEYS = ["startingEquipment", "enemyDrops", "itemLocations"];
+
+      // Set complexity
       elems.complexity.value = complexity;
       elems.complexityCurrentValue.innerText = `(${complexity})`;
 
@@ -626,14 +629,16 @@
         const el = elems[key];
         if (!el) return;
         el.checked = !!condition;
-        el.disabled = false; // preset never disables
+        el.disabled = false; // presets never disable these
       };
 
+      // Basic boolean options
       setCheckDisable("enemyDrops", options.enemyDrops);
       setCheckDisable("startingEquipment", options.startingEquipment);
       setCheckDisable("itemLocations", options.itemLocations);
       setCheckDisable("prologueRewards", options.prologueRewards);
 
+      // Relic locations
       elems.relicLocations.checked = !!options.relicLocations;
 
       const ext = options.relicLocations?.extension;
@@ -647,6 +652,7 @@
         extSet.classic.checked = !ext;
       }
 
+      // All toggleable keys
       const allKeys = [
         "stats", "music", "turkeyMode", "magicmaxMode", "colorrandoMode",
         "antiFreezeMode", "mypurseMode", "iwsMode", "fastwarpMode",
@@ -654,7 +660,8 @@
         "enemyStatRandoMode", "shopPriceRandoMode", "startRoomRandoMode",
         "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
         "godspeedMode", "libraryShortcut", "elemChaosMode", "easyMode",
-        "devStashMode", "bossMusicSeparation", "singleHitGearMode","startStatRandoMode"
+        "devStashMode", "bossMusicSeparation", "singleHitGearMode",
+        "startStatRandoMode"
       ];
 
       const keysToRemove = ["music", "bossMusicSeparation"];
@@ -664,18 +671,26 @@
         const el = elems[key];
         if (!el) return;
 
-        if (key in options) {
-          el.checked = !!options[key];
-        } else {
-          el.checked = false; // force default false when undefined
+        const presetValue = options[key];
+
+        // If preset defines structured data, preserve it and lock checkbox ON
+        if (STRUCTURED_KEYS.includes(key) && typeof presetValue === "object") {
+          el.checked = true;
+          return;
         }
 
-        el.disabled = false; // preset never disables
+        // If preset does NOT define this key at all, reset it to false
+        if (!(key in options)) {
+          el.checked = false;
+          return;
+        }
+
+        // Normal boolean behavior
+        el.checked = !!presetValue;
       });
 
       // HARD OVERRIDE: presets cannot enable singleHitGearMode
-      // It is always false unless the user manually checks it
-      // elems.singleHitGearMode.checked = false;
+      // el.checked = false; (if you want to enforce this)
 
       // Compatibility disables still apply
       DISABLE_RULES.forEach(rule => {
@@ -689,7 +704,7 @@
           });
         }
       });
-    };
+    }
 
     enforceGoalCompatibility(preset.id);
     applyOptions(options, preset.id);
@@ -1055,18 +1070,24 @@
       'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
       'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
       'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode',
-      'startStatRandoMode', "turkeyMode", "stats",
-      "itemLocations", "newGoals"
+      'startStatRandoMode', "turkeyMode", "stats", "accessibilityPatches", "enemyDrops",
+      "itemLocations", "newGoals", "prologueRewards", "startingEquipment"
     ]
 
+    const STRUCTURED_KEYS = ["startingEquipment", "enemyDrops", "itemLocations", "prologueRewards"];
+
     formOptions.forEach(key => {
-      if (elems[key]?.checked) {
-        options[key] = true
+      const presetValue = sotnRando.presets[elems.presetId.selectedIndex].options()[key];
+
+      // If preset defines structured data, DO NOT override it
+      if (STRUCTURED_KEYS.includes(key) && typeof presetValue === "object") {
+        options[key] = presetValue;   // preserve preset data
+        return;
       }
-      else {
-        options[key] = false
-      }
-    })
+
+      // Otherwise use form checkbox
+      options[key] = !!elems[key]?.checked;
+    });
 
     return options
   }
