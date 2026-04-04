@@ -3,7 +3,6 @@
   let constants
   let errors
   let extension
-  let presets
   let relics
   let util
   let cores
@@ -11,14 +10,12 @@
     constants = self.sotnRando.constants
     errors = self.sotnRando.errors
     extension = self.sotnRando.extension
-    presets = self.sotnRando.presets
     relics = self.sotnRando.relics
     util = self.sotnRando.util
   } else {
     constants = require('./constants')
     errors = require('./errors')
     extension = require('./extension')
-    presets = require('../build/presets')()
     relics = require('./relics')
     util = require('./util')
   }

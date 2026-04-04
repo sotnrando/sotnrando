@@ -15,7 +15,7 @@ function isBrowser(){
 
 function loadRequirements(preset) {
     util = isBrowser() ? window.sotnRando.util : require("./util");
-    presets = isBrowser() ? window.sotnRando.presets : require("../build/presets")(preset);
+    presets = isBrowser() ? window.sotnRando.presets : require("../build/presets").loadInheritancePresets(preset);
     randomizeStats = isBrowser() ? window.sotnRando.randomizeStats : require("./randomize_stats");
     os = isBrowser() ? null : require("os");
     randomizeMusic = isBrowser() ? window.sotnRando.randomizeMusic : require("./randomize_music");
