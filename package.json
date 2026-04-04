@@ -14,7 +14,7 @@
     "url": "git+https://github.com/3snowp7im/SotN-Randomizer.git"
   },
   "resolutions": {
-    "brace-expansion": "1.1.12"
+    "brace-expansion": "1.1.13"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",

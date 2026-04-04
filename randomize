@@ -799,7 +799,7 @@ if ('help' in argv) {
     yargs.showHelp()
     process.exit()
   }
-  const presets = require('./build/presets')
+  const presets = require('./build/presets')()
   const presetHelp = [
     'Presets specify collection of randomization options. A preset is enabled',
     'by using argument syntax.',
@@ -922,7 +922,6 @@ if ('preset' in argv) {
       options || {},
       util.optionsFromString('p:' + argv.preset)
     )
-    process.env.chosenPreset = argv.preset
   } catch (e) {
     yargs.showHelp()
     console.error('\n' + e.message)

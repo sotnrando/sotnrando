@@ -13,9 +13,9 @@ function isBrowser(){
     return (typeof window !== "undefined" && typeof window.document !== "undefined")
 }
 
-function loadRequirements() {
+function loadRequirements(preset) {
     util = isBrowser() ? window.sotnRando.util : require("./util");
-    presets = isBrowser() ? window.sotnRando.presets : require("../build/presets");
+    presets = isBrowser() ? window.sotnRando.presets : require("../build/presets")(preset);
     randomizeStats = isBrowser() ? window.sotnRando.randomizeStats : require("./randomize_stats");
     os = isBrowser() ? null : require("os");
     randomizeMusic = isBrowser() ? window.sotnRando.randomizeMusic : require("./randomize_music");
@@ -194,7 +194,7 @@ async function randomize(
         let optFlag
         await getVersion();
         startTime = performance.now()
-        loadRequirements();
+        loadRequirements(presetName);
         check = new util.checked(fileToCheck) // typeof(fd) === 'object' ? undefined : fd
         if(typeof info === "undefined" || !info){
             info = util.newInfo();

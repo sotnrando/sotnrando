@@ -1760,7 +1760,7 @@
       if (self) {
         return self.sotnRando.presets
       } else {
-        return require('../build/presets')
+        return require('../build/presets')()
       }
     } catch (err) {
       return []
@@ -9042,7 +9042,6 @@
     // Write the text
     let i = 0
     let strHex = []
-    console.log(strText)
     // Convert each character of the text to hex code.
     // Loops through each character in the string and assigns
     // a hex code for that character to be written.
