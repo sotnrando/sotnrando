@@ -553,6 +553,13 @@ const yargs = require('yargs')
     type: 'string',
     requiresArg: true,
     conflicts: ['preset'],
+  }) 
+  .option('preset-javascript', {
+    alias: 'j',
+    describe: 'Use preset js to create dynamic json object',
+    type: 'string',
+    requiresArg: true,
+    conflicts: ['preset','preset-file'],
   })
   .option('complexity', {
     alias: 'c',
@@ -944,6 +951,27 @@ if ('presetFile' in argv) {
     util.PresetBuilder.fromJSON(preset).build().options()
   )
 }
+// Check for preset JS file to make dynamic JSON object
+if ('preset-javascript' in argv)
+{
+  if ('debug' in argv) {console.log("Creating dynamic preset JSON from Javascript file");}
+  if (options && 'preset' in options) {
+    yargs.showHelp()
+    console.error('\nCannot specify options string preset when using a preset '
+                  + 'file')
+    process.exit(1)
+  }
+ 
+  const relative = path.relative(path.dirname(__filename), argv['preset-javascript']);
+  const script = require('./' + relative);
+  console.log(script);
+  const JSONObject = script.proceduralJson(argv);
+    
+  options = Object.assign(
+    options || {},
+    util.PresetBuilder.fromJSON(JSONObject).build().options()
+  )
+} 
 // If a preset and an options string are specified, determine if the options
 // are just duplicate options of the preset.
 let presetName
