@@ -1760,7 +1760,7 @@
       if (self) {
         return self.sotnRando.presets
       } else {
-        return require('../build/presets')()
+        return require('../build/presets').loadPresets()
       }
     } catch (err) {
       return []
