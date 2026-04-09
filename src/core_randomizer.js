@@ -1,629 +1,701 @@
-let util ;
-let presets ;
-let randomizeStats;
-let os;
-let NodeWorker;
-let randomizeMusic;
-let errors;
-let applyAccessibilityPatches;
-let randomizeRelics;
-let version;
+let util
+let presets
+let randomizeStats
+let os
+let NodeWorker
+let randomizeMusic
+let errors
+let applyAccessibilityPatches
+let randomizeRelics
+let version
 
 function isBrowser(){
-    return (typeof window !== "undefined" && typeof window.document !== "undefined")
+  return typeof window !== 'undefined' && typeof window.document !== 'undefined'
 }
 
 function loadRequirements(preset) {
-    util = isBrowser() ? window.sotnRando.util : require("./util");
-    presets = isBrowser() ? window.sotnRando.presets : require("../build/presets").loadInheritancePresets(preset);
-    randomizeStats = isBrowser() ? window.sotnRando.randomizeStats : require("./randomize_stats");
-    os = isBrowser() ? null : require("os");
-    randomizeMusic = isBrowser() ? window.sotnRando.randomizeMusic : require("./randomize_music");
-    errors = isBrowser() ? window.sotnRando.errors : require("./errors");
-    applyAccessibilityPatches = isBrowser() ? window.sotnRando.applyAccessibilityPatches : require("./accessibility_patches");
-    randomizeRelics = isBrowser() ? window.sotnRando.randomizeRelics : require("./randomize_relics");
-    NodeWorker = !isBrowser() ? require("worker_threads").Worker : null;
-    constants = isBrowser() ? window.sotnRando.constants : require("./constants");
+  if (isBrowser()) {
+    util = window.sotnRando.util
+    presets = window.sotnRando.presets
+    randomizeStats = window.sotnRando.randomizeStats
+    randomizeMusic = window.sotnRando.randomizeMusic
+    errors = window.sotnRando.errors
+    applyAccessibilityPatches = window.sotnRando.applyAccessibilityPatches
+    randomizeRelics = window.sotnRando.randomizeRelics
+    constants = window.sotnRando.constants
+  } else {
+    util = require('./util')
+    presets = require('../build/presets').loadInheritancePresets(preset)
+    randomizeStats = require('./randomize_stats')
+    os = require('os')
+    randomizeMusic = require('./randomize_music')
+    errors = require('./errors')
+    applyAccessibilityPatches = require('./accessibility_patches')
+    randomizeRelics = require('./randomize_relics')
+    NodeWorker = require('worker_threads').Worker
+    constants = require('./constants')
+  }
 }
 
 function generateSeedName() {
-    let adjectives;
-    let nouns;
+  let adjectives
+  let nouns
 
-    let month = new Date().getMonth() + 1;
-    constants = isBrowser() ? window.sotnRando.constants : require("./constants");
-    switch (month) {
-        case 10:
-            adjectives = constants.adjectivesHalloween;
-            nouns = constants.nounsHalloween;
-            break;
-        case 12:
-            adjectives = constants.adjectivesHolidays;
-            nouns = constants.nounsNormal;
-            break;
+  const month = new Date().getMonth() + 1
+  constants = isBrowser() ? window.sotnRando.constants : require('./constants')
+  switch (month) {
+  case 10:
+    adjectives = constants.adjectivesHalloween
+    nouns = constants.nounsHalloween
+    break
+  case 12:
+    adjectives = constants.adjectivesHolidays
+    nouns = constants.nounsNormal
+    break
 
-        default:
-            adjectives = constants.adjectivesNormal;
-            nouns = constants.nounsNormal;
-            break;
-    }
+  default:
+    adjectives = constants.adjectivesNormal
+    nouns = constants.nounsNormal
+    break
+  }
 
-    let adjective = adjectives[Math.floor(Math.random() * Math.floor(adjectives.length - 1))];
-    let noun = nouns[Math.floor(Math.random() * Math.floor(nouns.length - 1))];
-    let number = Math.floor(Math.random() * 999);
-    if (number % 100 === 69) {
-        number = '69Nice';
-    }
+  const adjIdx = Math.floor(Math.random() * (adjectives.length - 1))
+  const adjective = adjectives[adjIdx]
+  const noun = nouns[Math.floor(Math.random() * (nouns.length - 1))]
+  let number = Math.floor(Math.random() * 999)
+  if (number % 100 === 69) {
+    number = '69Nice'
+  }
 
-    let suffix = '';
+  let suffix = ''
 
-    return adjective + noun + number + suffix;
+  return adjective + noun + number + suffix
 }
 
 function getBrowserUrl(){
-    const url = new URL(window.location.href)
-    if (url.protocol === 'file:') {
-        return 'file://'
-            + window.location.pathname.split('/').slice(0, -1).join('/') + '/'
-    } else {
-        return window.location.protocol + '//' + window.location.host + '/'
-    }
+  const url = new URL(window.location.href)
+  if (url.protocol === 'file:') {
+    return 'file://'
+      + window.location.pathname.split('/').slice(0, -1).join('/') + '/'
+  } else {
+    return window.location.protocol + '//' + window.location.host + '/'
+  }
 }
 
 function isBrowserDev(url) {
-    const releaseBaseUrl = sotnRando.constants.optionsUrls[sotnRando.constants.defaultOptions]
-    const releaseHostname = new URL(releaseBaseUrl).hostname
-    return url.hostname !== releaseHostname
+  const defaultOpts = sotnRando.constants.defaultOptions
+  const releaseBaseUrl = sotnRando.constants.optionsUrls[defaultOpts]
+  const releaseHostname = new URL(releaseBaseUrl).hostname
+  return url.hostname !== releaseHostname
 }
 
 async function loadVersionInBrowser() {
-    const isDev = isBrowserDev(url);
-    const response = await fetch('../package.json', { cache: 'no-store' });
-    if (response.ok) {
-        const json = await response.json();
-        version = json.version;
-        if (isDev && !version.match(/-/)) {
-            version += 'D'
-        }
+  const isDev = isBrowserDev(url)
+  const response = await fetch('../package.json', { cache: 'no-store' })
+  if (response.ok) {
+    const json = await response.json()
+    version = json.version
+    if (isDev && !version.match(/-/)) {
+      version += 'D'
     }
+  }
 }
 
 async function getVersion() {
-    version = "0.0.0D";
-    if(!isBrowser()){
-        version = require('../package.json').version
-    }else{
-        const url = new URL(window.location.href)        
-        if (url.protocol !== 'file:') {
-            await loadVersionInBrowser();
-        }
+  version = '0.0.0D'
+  if (!isBrowser()) {
+    version = require('../package.json').version
+  } else {
+    const url = new URL(window.location.href)        
+    if (url.protocol !== 'file:') {
+      await loadVersionInBrowser()
     }
-    return version;
+  }
+  return version
 }
 
 function getRNG(options, seed){
-    const seedrandom = isBrowser() ? Math.seedrandom : require('seedrandom');
-    return new seedrandom(util.saltSeed(
-        version,
-        options,
-        seed,
-        3,
-    ));
+  const seedrandom = isBrowser() ? Math.seedrandom : require('seedrandom')
+  return new seedrandom(util.saltSeed(
+    version,
+    options,
+    seed,
+    3,
+  ))
 }
 
 function browserWorkerCount() {
-    // Get the number of potential workers from cores
-    const cores = navigator.hardwareConcurrency
-    const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    if (isFirefox) {
-        return Math.max(Math.floor(cores / 2), 1)
-    }
-    return sotnRando.util.workerCountFromCores(cores)
+  // Get the number of potential workers from cores
+  const cores = navigator.hardwareConcurrency
+  const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+  if (isFirefox) {
+    return Math.max(Math.floor(cores / 2), 1)
+  }
+  return sotnRando.util.workerCountFromCores(cores)
 }
 
 function browserWorkers(count){
-    // Instantiate Workers
-    const workers = Array(count)
-    const url = new URL(window.location.href)
-    let randomizeWorkerString;
-    if (url.protocol === 'file:') {
-        randomizeWorkerString = randomizeWorker.toString()
-        const source = '(' + randomizeWorkerString + ')()'
-        for (let i = 0; i < count; i++) {
-            workers[i] = new Worker(
-                URL.createObjectURL(new Blob([source], {
-                    type: 'text/javascript',
-                }))
-            )
-        }
-    } else {
-        for (let i = 0; i < count; i++) {
-            workers[i] = new Worker('src/worker.js')
-        }
+  // Instantiate Workers
+  const workers = Array(count)
+  const url = new URL(window.location.href)
+  let randomizeWorkerString
+  if (url.protocol === 'file:') {
+    randomizeWorkerString = randomizeWorker.toString()
+    const source = '(' + randomizeWorkerString + ')()'
+    for (let i = 0; i < count; i++) {
+      workers[i] = new Worker(
+        URL.createObjectURL(new Blob([source], {
+          type: 'text/javascript',
+        }))
+      )
     }
-    return workers
+  } else {
+    for (let i = 0; i < count; i++) {
+      workers[i] = new Worker('src/worker.js')
+    }
+  }
+  return workers
 }
 
 function cliWorkers(){
-    const cores = os.cpus().length
-    const workers = Array(util.workerCountFromCores(cores))
-    for (let i = 0; i < workers.length; i++) {
-        workers[i] = new NodeWorker('./src/worker.js')
-    }
-    return workers
+  const cores = os.cpus().length
+  const workers = Array(util.workerCountFromCores(cores))
+  for (let i = 0; i < workers.length; i++) {
+    workers[i] = new NodeWorker('./src/worker.js')
+  }
+  return workers
 }
 
 function getWorkers(){
-    return isBrowser() ? browserWorkers(browserWorkerCount()) : cliWorkers();
+  return isBrowser() ? browserWorkers(browserWorkerCount()) : cliWorkers()
 }
 
 function getSingleWorker(){
-    return isBrowser() ? browserWorkers(1)[0] : new NodeWorker('./src/worker.js');
+  return isBrowser() ? browserWorkers(1)[0] : new NodeWorker('./src/worker.js')
 }
 
 function debugMessage(debugEnabled, msg) {
-    if(!debugEnabled) return;
+  if (debugEnabled) {
     console.log(`randomize | function: randomize | ${msg}`)
+  }
 }
 
 async function randomize(
-    options,
-    seed,
-    newGoals,
-    startStatMax,
-    godSpeedShoes,
-    mapColor,
-    alucardPalette,
-    alucardLiner,
-    enableAccessibilityPatches,
-    haveChecksum,
-    expectChecksum,
-    debugEnabled,
-    spoilerHandler,
-    helpHandler,
-    urlHandler,
-    fileOutputHandler,
-    fileCloseHandler,
-    fileToCheck,
-    presetName = options.preset
+  options,
+  seed,
+  newGoals,
+  startStatMax,
+  godSpeedShoes,
+  mapColor,
+  alucardPalette,
+  alucardLiner,
+  enableAccessibilityPatches,
+  haveChecksum,
+  expectChecksum,
+  debugEnabled,
+  spoilerHandler,
+  helpHandler,
+  urlHandler,
+  fileOutputHandler,
+  fileCloseHandler,
+  fileToCheck,
+  presetName = options.preset,
 ){
-    try {
-        let check
-        let checksum
-        let startTime
-        let optFlag
-        await getVersion();
-        startTime = performance.now()
-        loadRequirements(presetName);
-        check = new util.checked(fileToCheck) // typeof(fd) === 'object' ? undefined : fd
-        if(typeof info === "undefined" || !info){
-            info = util.newInfo();
-            info[1]['Seed'] = seed
-        }
-        let applied
-        try {
-            debugMessage(debugEnabled, "Check for overriding preset");
-            // Check for overriding preset.
-            let override
-            for (let preset of presets) {
-                if (preset.override) {
-                    applied = preset.options();
-                    override = true;
-                    break;
-                }
-            }
-            debugMessage(debugEnabled, 'Retrieve user-specified options');
-            // Get user specified options.
-            if (!override) {
-                applied = util.Preset.options(options)
-            }
-        } catch (err) {
-            if(helpHandler) helpHandler(); // yargs.showHelp()
-            console.error('\n' + err.message)
-            if(!isBrowser()) process.exit(1);
-        }
-        // console.log(applied)
-        try {
-            let rng
-            let result
-            debugMessage(debugEnabled, 'Randomize stats');
-            // Randomize stats.
-            rng = getRNG(options, seed);
-            result = randomizeStats(rng, applied)
-            const newNames = result.newNames
-            check.apply(result.data)
-            debugMessage(debugEnabled, 'Randomize Relics: Assemble Workers');
-            // Randomize relics.
-            const workers = getWorkers();
-            debugMessage(debugEnabled, 'Randomize Relics:call util function');
-            result = await util.randomizeRelics(
-                version,
-                applied,
-                options,
-                seed,
-                newNames,
-                workers,
-                4,
-                isBrowser() ? getBrowserUrl() : undefined
-            )
-
-            util.mergeInfo(info, result.info)
-            debugMessage(debugEnabled, 'Randomize Relics:Write new relic map');
-            // Write relics mapping.
-            rng = getRNG(options, seed);
-            result = randomizeRelics.writeRelics(
-                rng,
-                applied,
-                result,
-                newNames,
-            )
-            check.apply(result.data)
-            debugMessage(debugEnabled, 'Randomize Items: call util function');
-            // Randomize items.
-            result = await util.randomizeItems(
-                version,
-                applied,
-                options,
-                seed,
-                getSingleWorker(),
-                2,
-                result.items,
-                newNames,
-                isBrowser() ? getBrowserUrl() : undefined
-            )
-            debugMessage(debugEnabled, 'Randomize Items: Write new item map');
-            check.apply(result.data)
-            util.mergeInfo(info, result.info)
-            debugMessage(debugEnabled, 'Randomize Music');
-            // Randomize music.
-            // console.log("Music Randomizer: " + applied.music)
-            if (applied.music == true && applied.music !== undefined) {
-                rng = getRNG(options, seed);
-                check.apply(randomizeMusic(rng, applied))
-            }
-            debugMessage(debugEnabled, 'Apply options / writes function master');
-            // Start the function master
-            let optWrite = 0x00000000                   // This variable lets the ASM used in the Master Function know if it needs to run certain code or sets flags for the tracker to use
-            let nGoal = newGoals !== "default" ? newGoals : undefined;
-            if (nGoal === undefined || nGoal === false) {
-                if (options.newGoalsSet === undefined && applied.newGoalsSet === undefined) {
-                    nGoal = false
-                } else if (options.newGoalsSet === undefined) {
-                    nGoal = applied.newGoalsSet
-                } else {
-                    nGoal = options.newGoalsSet
-                }
-            }
-            debugMessage(debugEnabled, 'newGoalsCheck | ' + nGoal + ':' + options.newGoalsSet + ':' + applied.newGoalsSet)
-            if (nGoal) {                                      // Sets flag for the tracker to know which goals to use
-                switch(nGoal) {
-                    case "b":                                 // all bosses flag
-                        optWrite = optWrite + 0x01
-                        break
-                    case "r":                                 // all relics flag
-                        optWrite = optWrite + 0x02
-                        break
-                    case "a":                                 //  all bosses and relics flag
-                        optWrite = optWrite + 0x03
-                        break
-                    case "v":                                 //  all bosses and vlad relics flag
-                    case "x":                                 //  all bosses and bounties flag
-                        optWrite = optWrite + 0x05
-                        break
-                    default:
-                        break
-                }
-                // console.log('optwrite ' + optWrite)
-            }
-            // Apply Godspeed Shoes Patches
-            if (godSpeedShoes || options.godspeedMode || applied.godspeedMode) {
-                optWrite = optWrite + 0x80000000
-            }
-            check.apply(util.randoFuncMaster(optWrite))
-
-            check.apply(util.applySwordBuffPatches())
-
-            let seasonAllowed = options.seasonalPhrasesMode || applied.seasonalPhrasesMode
-            check.apply(util.applySplashText(rng,seasonAllowed))
-
-            debugMessage(debugEnabled, 'Apply patches from options');
-            optFlag = false
-            if (options.tournamentMode) {
-                // Apply tournament mode patches.
-                optFlag = true
-                check.apply(util.applyTournamentModePatches())
-            }
-            debugMessage(debugEnabled, 'Tournament Mode | ' + optFlag);
-            optFlag = false
-            if (options.magicmaxMode || applied.magicmaxMode) { // Adds MP Vessel to replace Heart Vessel - eldrich
-                // Apply magic max mode patches. - MottZilla
-                optFlag = true
-                check.apply(util.applyMagicMaxPatches())
-            }
-            debugMessage(debugEnabled, 'Magicmax Mode | ' + optFlag)
-            optFlag = false
-            if (options.antiFreezeMode || applied.antiFreezeMode) { // Removes screen freezes on relic / vessel collection and level-up - eldrich
-                // Apply anti-freeze mode patches. - eldri7ch
-                optFlag = true
-                check.apply(util.applyAntiFreezePatches())
-            }
-            debugMessage(debugEnabled, 'Anti-Freeze Mode | ' + optFlag)
-            optFlag = false
-            if (options.mypurseMode || applied.mypurseMode) { // Removes Death from Entrance - eldrich
-                // Apply Death repellant patches. - eldri7ch
-                optFlag = true
-                check.apply(util.applyMyPursePatches())
-            }
-            debugMessage(debugEnabled, 'That\'s my purse! Mode | ' + optFlag);
-            optFlag = false
-            if (options.iwsMode || applied.iwsMode) { // Makes wing smash essentially infinite - eldrich
-                // Apply infinite wing smashe mode patches. - eldri7ch
-                optFlag = true
-                check.apply(util.applyiwsPatches())
-            }
-            debugMessage(debugEnabled, 'Infinite Wing Smash Mode | ' + optFlag);
-            optFlag = false
-            if (options.fastwarpMode || applied.fastwarpMode) { // Quickens teleporter warp animations - eldrich
-                // Apply fast warp mode patches. - eldri7ch
-                optFlag = true
-                check.apply(util.applyfastwarpPatches())
-            }
-            debugMessage(debugEnabled, 'Fast Warps Mode | ' + optFlag)
-            optFlag = false
-            if (options.noprologueMode || applied.noprologueMode) { // removes prologue - eldrich
-                // Apply no prologue mode patches. - eldri7ch
-                optFlag = false
-                check.apply(util.applynoprologuePatches())
-            }
-            debugMessage(debugEnabled, 'No Prologue Mode | ' + optFlag)
-            optFlag = false
-            if (options.unlockedMode || applied.unlockedMode) { // Unlocks shortcuts - eldrich
-                // Apply unlocked mode patches. - eldri7ch
-                optFlag = true
-                check.apply(util.applyunlockedPatches())
-            }
-            debugMessage(debugEnabled, 'Unlocked Mode | ' + optFlag)
-            optFlag = false
-            if (options.surpriseMode || applied.surpriseMode) { // Hides relics behind the same sprite - eldrich
-                // Apply surprise mode patches. - eldri7ch
-                optFlag = true
-                check.apply(util.applysurprisePatches())
-            }
-            debugMessage(debugEnabled, 'Surprise Mode | ' + optFlag)
-            optFlag = false
-            if (options.enemyStatRandoMode || applied.enemyStatRandoMode) { // Randomizes enemy stats - eldrich
-                // Apply Enemy Stat Rando mode patches. - eldri7ch
-                optFlag = true
-                rng = getRNG(options, seed);
-                let chaosFlag = false
-                if (options.elemChaosMode || applied.elemChaosMode) {
-                    chaosFlag = true
-                }
-                check.apply(util.applyenemyStatRandoPatches(rng,chaosFlag))
-            }
-            debugMessage(debugEnabled, 'Enemy Stat Randomizer Mode | ' + optFlag)
-            optFlag = false
-            if (options.shopPriceRandoMode || applied.shopPriceRandoMode) { // Randomizes shop prices - eldrich
-                // Apply shop price Rando mode patches. - eldri7ch
-                optFlag = true
-                rng = getRNG(options, seed);
-                check.apply(util.applyShopPriceRandoPatches(rng))
-            }
-            debugMessage(debugEnabled, 'Shop Price Randomizer Mode | ' + optFlag)
-            optFlag = false
-            if (options.startRoomRandoMode || applied.startRoomRandoMode || options.startRoomRando2ndMode || applied.startRoomRando2ndMode) { // Randomizes starting room - eldrich & MottZilla
-                // Apply starting room Rando mode patches. - eldri7ch
-                optFlag = true
-                rng = getRNG(options, seed);
-                let castleFlag = 0x00
-                if (options.startRoomRandoMode || applied.startRoomRandoMode) {
-                    castleFlag = castleFlag + 0x01
-                }
-                if (options.startRoomRando2ndMode || applied.startRoomRando2ndMode) {
-                    castleFlag = castleFlag + 0x10
-                }
-                check.apply(util.applyStartRoomRandoPatches(rng,castleFlag))
-            }
-            debugMessage(debugEnabled, 'Starting Room Randomizer Mode | ' + optFlag)
-            optFlag = false
-            if (options.dominoMode || applied.dominoMode) { // Guarantees drops - eldrich
-                // Apply guaranteed drops patches. - eldri7ch
-                optFlag = true
-                check.apply(util.applyDominoPatches())
-            }
-            debugMessage(debugEnabled, 'Guaranteed Drops Mode | ' + optFlag)
-            optFlag = false
-            if (options.rlbcMode || applied.rlbcMode) { // reverse library cards - eldrich
-                // Apply reverse library card patches. - eldri7ch
-                optFlag = true
-                check.apply(util.applyRLBCPatches())
-            }
-            debugMessage(debugEnabled, 'Reverse Library Card Mode | ' + optFlag)
-            optFlag = false
-            if (options.immunityPotionMode || applied.immunityPotionMode) { // todo: Change this to Resist to Immune Potions "mode" or option.
-                // Apply resist to immune potion patches. - MottZilla
-                optFlag = true
-                check.apply(util.applyResistToImmunePotionsPatches())
-            }
-            debugMessage(debugEnabled, 'Immunity Potions Mode | ' + optFlag)
-            optFlag = false
-            if (options.godspeedMode || applied.godspeedMode) { // godspeed shoes - eldrich
-                optFlag = true
-            }
-            debugMessage(debugEnabled, 'Godspeed Mode | ' + optFlag)
-            optFlag = false
-            if (options.libraryShortcut || applied.libraryShortcut) { // library shortcut - eldrich
-                optFlag = true
-                check.apply(util.applyLibraryShortcutPatches())
-            }
-            debugMessage(debugEnabled, 'Library Shortcut | ' + optFlag)
-            optFlag = false
-            if (options.elemChaosMode || applied.elemChaosMode) { // elemental chaos - eldrich
-                optFlag = true
-                rng = getRNG(options, seed);
-                check.apply(util.applyElemChaosPatches(rng))
-            }
-            debugMessage(debugEnabled, 'Elemental Chaos | ' + optFlag)
-            optFlag = false
-            if (options.singleHitGearMode || applied.singleHitGearMode) { // Single-Hit Gears - eldrich
-                optFlag = true
-                check.apply(util.applySingleHitGearPatches())
-            }
-            debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
-            optFlag = false
-            let ssOpt = 0
-            if (options.startStatRandoMode || applied.startStatRandoMode) { // Starting Stat Randomizer - eldrich
-                optFlag = true
-                rng = getRNG(options, seed);
-                if (options.startStatRandoMode !== undefined) {// need to confirm if in applied or options.
-                    if (startStatMax !== null) {
-                        ssOpt = Number(startStatMax)// special condition to pull from website interface
-                    } else {
-                        ssOpt = Number(options.startStatRandoMode)
-                    }
-                } else {
-                    if (applied.startStatRandoMode !== undefined) {
-                        ssOpt = Number(applied.startStatRandoMode)
-                    } else {
-                        ssOpt = 0
-                    }
-                }
-                check.apply(util.applyStartStatRandoPatches(rng,ssOpt))
-            }
-            debugMessage(debugEnabled, '| Starting Stat Randomizer | ' + optFlag + " | " + ssOpt)
-            optFlag = false
-            if (options.easyMode || applied.easyMode) { // Simplifies spell inputs and extends i-frames - eldrich
-                // Apply easy mode patches. - eldri7ch
-                optFlag = true
-                check.apply(util.applyEasyModePatches())
-            }
-            debugMessage(debugEnabled, 'Easy Mode | ' + optFlag)
-            optFlag = false
-            if (options.devStashMode || applied.devStashMode) { // dev's stash - eldrich
-                optFlag = true
-                check.apply(util.applyDevsStashPatches())
-            }
-            debugMessage(debugEnabled, '| Dev\'s Stash | ' + optFlag)
-            optFlag = false
-            if (options.seasonalPhrasesMode || applied.seasonalPhrasesMode) { // Seasonal Phrases - eldrich
-                optFlag = true
-            }
-            debugMessage(debugEnabled, 'Seasonal Phrases Mode | ' + optFlag)
-            optFlag = false
-            if (options.bossMusicSeparation || applied.bossMusicSeparation) { // separate boss music - eldrich
-                // verify boss music separate. - eldri7ch
-                optFlag = true
-            }
-            debugMessage(debugEnabled, 'Boss Music Separator | ' + optFlag)
-
-            if (mapColor && mapColor !== "default") { // Colors the map - eldrich
-                // Apply map color patches. - eldri7ch
-                check.apply(util.applyMapColor(mapColor))
-            }
-            debugMessage(debugEnabled, 'Map colors')
-            if (options.newGoalsSet || applied.newGoalsSet) { // changes the goals - eldrich
-                // Apply new goal patches. - eldri7ch
-                if (options.newGoalsSet !== undefined){
-                    nGoal = options.newGoalsSet
-                } else {
-                    nGoal = applied.newGoalsSet
-                }
-                if (nGoal === "h") {
-                    check.apply(util.applyBountyHunterTargets(rng,0))                 // 0 = normal Bounty Hunter; 1 = buffed drop rates and guaranteed relics after card obtained
-                } else if (nGoal === "t") {
-                    check.apply(util.applyBountyHunterTargets(rng,2))                 // 0 = normal Bounty Hunter; 1 = buffed drop rates and guaranteed relics after card obtained
-                } else if (nGoal === "w") {
-                    check.apply(util.applyBountyHunterTargets(rng,1))                 // 0 = normal Bounty Hunter; 1 = buffed drop rates and guaranteed relics after card obtained
-                }else if (nGoal === "x") {
-                    check.apply(util.applyNewGoals(nGoal))
-                    check.apply(util.applyBountyHunterTargets(rng,2))                 // 0 = normal Bounty Hunter; 1 = buffed drop rates and guaranteed relics after card obtained
-                } else {
-                    check.apply(util.applyNewGoals(nGoal))
-                }
-            }
-            debugMessage(debugEnabled, 'New Goals')
-            if (alucardPalette) { // Changes Alucard's Palette. -Crazy4blades
-                // Apply new goal patches. - eldri7ch
-                check.apply(util.applyAlucardPalette(alucardPalette))
-            }
-            debugMessage(debugEnabled, 'Alucard Palette')
-            if (alucardLiner) { // Changes Alucard's Palette. -Crazy4blades
-                // Apply new goal patches. - eldri7ch
-                check.apply(util.applyAlucardLiner(alucardLiner))
-            }
-            debugMessage(debugEnabled, 'Alucard Liner')
-            optFlag = false
-            debugMessage(debugEnabled, 'Apply Writes')
-            // Apply writes.
-            check.apply(util.applyWrites(rng, applied))
-        } catch (err) {
-            debugMessage(debugEnabled, 'Error catching')
-            console.error('Seed: ' + seed)
-            if (errors.isError(err)) {
-                console.error('Error: ' + err.message)
-            } else {
-                console.error(err.stack)
-            }
-            if(!isBrowser()) process.exit(1);
-        }
-        debugMessage(debugEnabled, 'Set seed text in menu')
-        util.setSeedText(
-            check,
-            seed,
-            version,
-            presetName,
-            options.tournamentMode,
-        )
-        debugMessage(debugEnabled, 'Apply tracking byte for tracker data')
-        check.apply(util.applyTrackingByte())
-        checksum = await check.sum()
-        debugMessage(debugEnabled, 'Checksum verification')
-        // Verify expected checksum matches actual checksum.
-        if (haveChecksum && expectChecksum !== checksum) {
-            console.error('Checksum mismatch.')
-            if(!isBrowser()) process.exit(1)
-        }
-
-        debugMessage(debugEnabled, 'Accessibility patches')
-        if (enableAccessibilityPatches) {
-            // Apply accessibility patches.
-            check.apply(applyAccessibilityPatches())
-        }
-        let result;
-        if(isBrowser()){
-            result = await util.finalizeData(
-                seed,
-                version,
-                options.preset,
-                options.tournamentMode,
-                fileToCheck,
-                check,
-                getSingleWorker(),
-                getBrowserUrl(),
-            )
-        }
-
-        debugMessage(debugEnabled, 'Show url if provided as arg')
-        // Show url if not provided as arg.
-        if(urlHandler) urlHandler(checksum);
-        debugMessage(debugEnabled, 'Show spoilers')
-        // Print spoilers.
-        spoilerHandler(info, startTime);
-        debugMessage(debugEnabled, 'Write File Output')
-        fileOutputHandler(check, seed, result);
-    } finally {
-        debugMessage(debugEnabled, 'Wrap-up')
-        if(fileCloseHandler) fileCloseHandler();
+  try {
+    let check
+    let checksum
+    let startTime
+    let optFlag
+    await getVersion()
+    startTime = performance.now()
+    loadRequirements(presetName)
+    check = new util.checked(fileToCheck) // typeof(fd) === 'object' ? undefined : fd
+    if (typeof info === 'undefined' || !info) {
+      info = util.newInfo()
+      info[1]['Seed'] = seed
     }
+    let applied
+    try {
+      debugMessage(debugEnabled, 'Check for overriding preset')
+      // Check for overriding preset.
+      let override
+      for (let preset of presets) {
+        if (preset.override) {
+          applied = preset.options()
+          override = true
+          break
+        }
+      }
+      debugMessage(debugEnabled, 'Retrieve user-specified options')
+      // Get user specified options.
+      if (!override) {
+        applied = util.Preset.options(options)
+      }
+    } catch (err) {
+      if (helpHandler) {
+        helpHandler() // yargs.showHelp()
+      }
+      console.error('\n' + err.message)
+      if (!isBrowser()) {
+        process.exit(1)
+      }
+    }
+    // console.log(applied)
+    try {
+      let rng
+      let result
+      debugMessage(debugEnabled, 'Randomize stats')
+      // Randomize stats.
+      rng = getRNG(options, seed)
+      result = randomizeStats(rng, applied)
+      const newNames = result.newNames
+      check.apply(result.data)
+      debugMessage(debugEnabled, 'Randomize Relics: Assemble Workers')
+      // Randomize relics.
+      const workers = getWorkers()
+      debugMessage(debugEnabled, 'Randomize Relics:call util function')
+      result = await util.randomizeRelics(
+        version,
+        applied,
+        options,
+        seed,
+        newNames,
+        workers,
+        4,
+        isBrowser() ? getBrowserUrl() : undefined,
+      )
+
+      util.mergeInfo(info, result.info)
+      debugMessage(debugEnabled, 'Randomize Relics:Write new relic map')
+      // Write relics mapping.
+      rng = getRNG(options, seed)
+      result = randomizeRelics.writeRelics(
+        rng,
+        applied,
+        result,
+        newNames,
+      )
+      check.apply(result.data)
+      debugMessage(debugEnabled, 'Randomize Items: call util function')
+      // Randomize items.
+      result = await util.randomizeItems(
+        version,
+        applied,
+        options,
+        seed,
+        getSingleWorker(),
+        2,
+        result.items,
+        newNames,
+        isBrowser() ? getBrowserUrl() : undefined,
+      )
+      debugMessage(debugEnabled, 'Randomize Items: Write new item map')
+      check.apply(result.data)
+      util.mergeInfo(info, result.info)
+      debugMessage(debugEnabled, 'Randomize Music')
+      // Randomize music.
+      // console.log('Music Randomizer: ' + applied.music)
+      if (applied.music == true && applied.music !== undefined) {
+        rng = getRNG(options, seed)
+        check.apply(randomizeMusic(rng, applied))
+      }
+      debugMessage(debugEnabled, 'Apply options / writes function master')
+      // Start the function master
+      // This variable lets the ASM used in the Master Function know if it needs
+      // to run certain code or sets flags for the tracker to use
+      let optWrite = 0x00000000
+      let nGoal = newGoals !== 'default' ? newGoals : undefined
+      if (nGoal === undefined || nGoal === false) {
+        if (options.newGoalsSet === undefined
+            && applied.newGoalsSet === undefined) {
+          nGoal = false
+        } else if (options.newGoalsSet === undefined) {
+          nGoal = applied.newGoalsSet
+        } else {
+          nGoal = options.newGoalsSet
+        }
+      }
+      debugMessage(
+        debugEnabled,
+        'newGoalsCheck | '
+          + nGoal + ':' + options.newGoalsSet + ':' + applied.newGoalsSet)
+      if (nGoal) {
+        // Sets flag for the tracker to know which goals to use
+        switch(nGoal) {
+        // All bosses flag
+        case 'b':
+          optWrite = optWrite + 0x01
+          break
+        // All relics flag
+        case 'r':
+          optWrite = optWrite + 0x02
+          break
+        // All bosses and relics flag
+        case 'a':
+          optWrite = optWrite + 0x03
+          break
+        // All bosses and vlad relics flag
+        case 'v':
+        // All bosses and bounties flag
+        case 'x':
+          optWrite = optWrite + 0x05
+          break
+        default:
+          break
+        }
+        // console.log('optwrite ' + optWrite)
+      }
+      // Apply Godspeed Shoes Patches
+      if (godSpeedShoes || options.godspeedMode || applied.godspeedMode) {
+        optWrite = optWrite + 0x80000000
+      }
+      check.apply(util.randoFuncMaster(optWrite))
+      check.apply(util.applySwordBuffPatches())
+      let seasonAllowed =
+          options.seasonalPhrasesMode
+          || applied.seasonalPhrasesMode
+      check.apply(util.applySplashText(rng,seasonAllowed))
+
+      debugMessage(debugEnabled, 'Apply patches from options')
+      optFlag = false
+      if (options.tournamentMode) {
+        // Apply tournament mode patches.
+        optFlag = true
+        check.apply(util.applyTournamentModePatches())
+      }
+      debugMessage(debugEnabled, 'Tournament Mode | ' + optFlag)
+      optFlag = false
+      // Adds MP Vessel to replace Heart Vessel - eldrich
+      if (options.magicmaxMode || applied.magicmaxMode) {
+        // Apply magic max mode patches. - MottZilla
+        optFlag = true
+        check.apply(util.applyMagicMaxPatches())
+      }
+      debugMessage(debugEnabled, 'Magicmax Mode | ' + optFlag)
+      optFlag = false
+      // Removes screen freezes on relic / vessel collection and
+      // level-up - eldrich
+      if (options.antiFreezeMode || applied.antiFreezeMode) {
+        // Apply anti-freeze mode patches. - eldri7ch
+        optFlag = true
+        check.apply(util.applyAntiFreezePatches())
+      }
+      debugMessage(debugEnabled, 'Anti-Freeze Mode | ' + optFlag)
+      optFlag = false
+      // Removes Death from Entrance - eldrich
+      if (options.mypurseMode || applied.mypurseMode) {
+        // Apply Death repellant patches. - eldri7ch
+        optFlag = true
+        check.apply(util.applyMyPursePatches())
+      }
+      debugMessage(debugEnabled, 'That\'s my purse! Mode | ' + optFlag)
+      optFlag = false
+      // Makes wing smash essentially infinite - eldrich
+      if (options.iwsMode || applied.iwsMode) {
+        // Apply infinite wing smashe mode patches. - eldri7ch
+        optFlag = true
+        check.apply(util.applyiwsPatches())
+      }
+      debugMessage(debugEnabled, 'Infinite Wing Smash Mode | ' + optFlag)
+      optFlag = false
+      // Quickens teleporter warp animations - eldrich
+      if (options.fastwarpMode || applied.fastwarpMode) {
+        // Apply fast warp mode patches. - eldri7ch
+        optFlag = true
+        check.apply(util.applyfastwarpPatches())
+      }
+      debugMessage(debugEnabled, 'Fast Warps Mode | ' + optFlag)
+      optFlag = false
+      // Removes prologue - eldrich
+      if (options.noprologueMode || applied.noprologueMode) {
+        // Apply no prologue mode patches. - eldri7ch
+        optFlag = false
+        check.apply(util.applynoprologuePatches())
+      }
+      debugMessage(debugEnabled, 'No Prologue Mode | ' + optFlag)
+      optFlag = false
+      // Unlocks shortcuts - eldrich
+      if (options.unlockedMode || applied.unlockedMode) {
+        // Apply unlocked mode patches. - eldri7ch
+        optFlag = true
+        check.apply(util.applyunlockedPatches())
+      }
+      debugMessage(debugEnabled, 'Unlocked Mode | ' + optFlag)
+      optFlag = false
+      // Hides relics behind the same sprite - eldrich
+      if (options.surpriseMode || applied.surpriseMode) {
+        // Apply surprise mode patches. - eldri7ch
+        optFlag = true
+        check.apply(util.applysurprisePatches())
+      }
+      debugMessage(debugEnabled, 'Surprise Mode | ' + optFlag)
+      optFlag = false
+      // Randomizes enemy stats - eldrich
+      if (options.enemyStatRandoMode || applied.enemyStatRandoMode) {
+        // Apply Enemy Stat Rando mode patches. - eldri7ch
+        optFlag = true
+        rng = getRNG(options, seed)
+        let chaosFlag = false
+        if (options.elemChaosMode || applied.elemChaosMode) {
+          chaosFlag = true
+        }
+        check.apply(util.applyenemyStatRandoPatches(rng,chaosFlag))
+      }
+      debugMessage(debugEnabled, 'Enemy Stat Randomizer Mode | ' + optFlag)
+      optFlag = false
+      // Randomizes shop prices - eldrich
+      if (options.shopPriceRandoMode || applied.shopPriceRandoMode) {
+        // Apply shop price Rando mode patches. - eldri7ch
+        optFlag = true
+        rng = getRNG(options, seed)
+        check.apply(util.applyShopPriceRandoPatches(rng))
+      }
+      debugMessage(debugEnabled, 'Shop Price Randomizer Mode | ' + optFlag)
+      optFlag = false
+      // Randomizes starting room - eldrich & MottZilla
+      if (options.startRoomRandoMode
+          || applied.startRoomRandoMode
+          || options.startRoomRando2ndMode
+          || applied.startRoomRando2ndMode) {
+        // Apply starting room Rando mode patches. - eldri7ch
+        optFlag = true
+        rng = getRNG(options, seed)
+        let castleFlag = 0x00
+        if (options.startRoomRandoMode || applied.startRoomRandoMode) {
+          castleFlag = castleFlag + 0x01
+        }
+        if (options.startRoomRando2ndMode || applied.startRoomRando2ndMode) {
+          castleFlag = castleFlag + 0x10
+        }
+        check.apply(util.applyStartRoomRandoPatches(rng,castleFlag))
+      }
+      debugMessage(debugEnabled, 'Starting Room Randomizer Mode | ' + optFlag)
+      optFlag = false
+      // Guarantees drops - eldrich
+      if (options.dominoMode || applied.dominoMode) {
+        // Apply guaranteed drops patches. - eldri7ch
+        optFlag = true
+        check.apply(util.applyDominoPatches())
+      }
+      debugMessage(debugEnabled, 'Guaranteed Drops Mode | ' + optFlag)
+      optFlag = false
+      // Reverse library cards - eldrich
+      if (options.rlbcMode || applied.rlbcMode) {
+        // Apply reverse library card patches. - eldri7ch
+        optFlag = true
+        check.apply(util.applyRLBCPatches())
+      }
+      debugMessage(debugEnabled, 'Reverse Library Card Mode | ' + optFlag)
+      optFlag = false
+      // Apply resist to immune potion patches. - MottZilla
+      if (options.immunityPotionMode || applied.immunityPotionMode) {
+        // todo: Change this to Resist to Immune Potions 'mode' or option.
+        optFlag = true
+        check.apply(util.applyResistToImmunePotionsPatches())
+      }
+      debugMessage(debugEnabled, 'Immunity Potions Mode | ' + optFlag)
+      optFlag = false
+      // Godspeed shoes - eldrich
+      if (options.godspeedMode || applied.godspeedMode) {
+        optFlag = true
+      }
+      debugMessage(debugEnabled, 'Godspeed Mode | ' + optFlag)
+      optFlag = false
+      // Library shortcut - eldrich
+      if (options.libraryShortcut || applied.libraryShortcut) {
+        optFlag = true
+        check.apply(util.applyLibraryShortcutPatches())
+      }
+      debugMessage(debugEnabled, 'Library Shortcut | ' + optFlag)
+      optFlag = false
+      // Elemental chaos - eldrich
+      if (options.elemChaosMode || applied.elemChaosMode) {
+        optFlag = true
+        rng = getRNG(options, seed)
+        check.apply(util.applyElemChaosPatches(rng))
+      }
+      debugMessage(debugEnabled, 'Elemental Chaos | ' + optFlag)
+      optFlag = false
+      // Single-Hit Gears - eldrich
+      if (options.singleHitGearMode || applied.singleHitGearMode) {
+        optFlag = true
+        check.apply(util.applySingleHitGearPatches())
+      }
+      debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
+      optFlag = false
+      let ssOpt = 0
+      // Starting Stat Randomizer - eldrich
+      if (options.startStatRandoMode || applied.startStatRandoMode) {
+        optFlag = true
+        rng = getRNG(options, seed)
+        // Need to confirm if in applied or options.
+        if (options.startStatRandoMode !== undefined) {
+          if (startStatMax !== null) {
+            // Special condition to pull from website interface
+            ssOpt = Number(startStatMax)
+          } else {
+            ssOpt = Number(options.startStatRandoMode)
+          }
+        } else {
+          if (applied.startStatRandoMode !== undefined) {
+            ssOpt = Number(applied.startStatRandoMode)
+          } else {
+            ssOpt = 0
+          }
+        }
+        check.apply(util.applyStartStatRandoPatches(rng,ssOpt))
+      }
+      debugMessage(
+        debugEnabled,
+        '| Starting Stat Randomizer | ' + optFlag + ' | ' + ssOpt
+      )
+      optFlag = false
+      // Simplifies spell inputs and extends i-frames - eldrich
+      if (options.easyMode || applied.easyMode) {
+        // Apply easy mode patches. - eldri7ch
+        optFlag = true
+        check.apply(util.applyEasyModePatches())
+      }
+      debugMessage(debugEnabled, 'Easy Mode | ' + optFlag)
+      optFlag = false
+      // Dev's stash - eldrich
+      if (options.devStashMode || applied.devStashMode) {
+        optFlag = true
+        check.apply(util.applyDevsStashPatches())
+      }
+      debugMessage(debugEnabled, '| Dev\'s Stash | ' + optFlag)
+      optFlag = false
+      // Seasonal Phrases - eldrich
+      if (options.seasonalPhrasesMode || applied.seasonalPhrasesMode) {
+        optFlag = true
+      }
+      debugMessage(debugEnabled, 'Seasonal Phrases Mode | ' + optFlag)
+      optFlag = false
+      // Separate boss music - eldrich
+      if (options.bossMusicSeparation || applied.bossMusicSeparation) {
+        // verify boss music separate. - eldri7ch
+        optFlag = true
+      }
+      debugMessage(debugEnabled, 'Boss Music Separator | ' + optFlag)
+      // Colors the map - eldrich
+      if (mapColor && mapColor !== 'default') {
+        // Apply map color patches. - eldri7ch
+        check.apply(util.applyMapColor(mapColor))
+      }
+      debugMessage(debugEnabled, 'Map colors')
+      // Changes the goals - eldrich
+      if (options.newGoalsSet || applied.newGoalsSet) {
+        // Apply new goal patches. - eldri7ch
+        if (options.newGoalsSet !== undefined){
+          nGoal = options.newGoalsSet
+        } else {
+          nGoal = applied.newGoalsSet
+        }
+        if (nGoal === 'h') {
+          check.apply(util.applyBountyHunterTargets(rng, 0))
+        } else if (nGoal === 't') {
+          check.apply(util.applyBountyHunterTargets(rng, 2))
+        } else if (nGoal === 'w') {
+          check.apply(util.applyBountyHunterTargets(rng, 1))
+        }else if (nGoal === 'x') {
+          check.apply(util.applyNewGoals(nGoal))
+          check.apply(util.applyBountyHunterTargets(rng, 2))
+        } else {
+          check.apply(util.applyNewGoals(nGoal))
+        }
+      }
+      debugMessage(debugEnabled, 'New Goals')
+      if (alucardPalette) { // Changes Alucard's Palette. -Crazy4blades
+        // Apply new goal patches. - eldri7ch
+        check.apply(util.applyAlucardPalette(alucardPalette))
+      }
+      debugMessage(debugEnabled, 'Alucard Palette')
+      if (alucardLiner) { // Changes Alucard's Palette. -Crazy4blades
+        // Apply new goal patches. - eldri7ch
+        check.apply(util.applyAlucardLiner(alucardLiner))
+      }
+      debugMessage(debugEnabled, 'Alucard Liner')
+      optFlag = false
+      debugMessage(debugEnabled, 'Apply Writes')
+      // Apply writes.
+      check.apply(util.applyWrites(rng, applied))
+    } catch (err) {
+      debugMessage(debugEnabled, 'Error catching')
+      console.error('Seed: ' + seed)
+      if (errors.isError(err)) {
+        console.error('Error: ' + err.message)
+      } else {
+        console.error(err.stack)
+      }
+      if (!isBrowser()) {
+        process.exit(1)
+      }
+    }
+    debugMessage(debugEnabled, 'Set seed text in menu')
+    util.setSeedText(
+      check,
+      seed,
+      version,
+      presetName,
+      options.tournamentMode,
+    )
+    debugMessage(debugEnabled, 'Apply tracking byte for tracker data')
+    check.apply(util.applyTrackingByte())
+    checksum = await check.sum()
+    debugMessage(debugEnabled, 'Checksum verification')
+    // Verify expected checksum matches actual checksum.
+    if (haveChecksum && expectChecksum !== checksum) {
+      console.error('Checksum mismatch.')
+      if (!isBrowser()) {
+        process.exit(1)
+      }
+    }
+
+    debugMessage(debugEnabled, 'Accessibility patches')
+    if (enableAccessibilityPatches) {
+      // Apply accessibility patches.
+      check.apply(applyAccessibilityPatches())
+    }
+    let result
+    if (isBrowser()) {
+      result = await util.finalizeData(
+        seed,
+        version,
+        options.preset,
+        options.tournamentMode,
+        fileToCheck,
+        check,
+        getSingleWorker(),
+        getBrowserUrl(),
+      )
+    }
+
+    debugMessage(debugEnabled, 'Show url if provided as arg')
+    // Show url if not provided as arg.
+    if(urlHandler) urlHandler(checksum)
+    debugMessage(debugEnabled, 'Show spoilers')
+    // Print spoilers.
+    spoilerHandler(info, startTime)
+    debugMessage(debugEnabled, 'Write File Output')
+    fileOutputHandler(check, seed, result)
+  } finally {
+    debugMessage(debugEnabled, 'Wrap-up')
+    if (fileCloseHandler) {
+      fileCloseHandler()
+    }
+  }
 }
 
-if(isBrowser()){
-    window.CoreRandomizer = window.CoreRandomizer || {};
-    CoreRandomizer.isDev = isBrowserDev;
-    CoreRandomizer.getVersion = getVersion;
-    CoreRandomizer.randomize = randomize;
-    CoreRandomizer.generateSeedName = generateSeedName;
-    window.url = new URL(window.location.href)
-}else{
-    module.exports = {randomize, generateSeedName}
+if (isBrowser()) {
+  window.CoreRandomizer = window.CoreRandomizer || {}
+  CoreRandomizer.isDev = isBrowserDev
+  CoreRandomizer.getVersion = getVersion
+  CoreRandomizer.randomize = randomize
+  CoreRandomizer.generateSeedName = generateSeedName
+  window.url = new URL(window.location.href)
+} else {
+  module.exports = {
+    randomize,
+    generateSeedName,
+  }
 }

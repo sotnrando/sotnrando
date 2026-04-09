@@ -8230,6 +8230,11 @@
     return data
   }
 
+  // TODO(MottZilla): Use an enum style constants for possible values of bhmode.
+  // Which is more clear for devs?
+  // applyBountyHunterTargets(rng, 0)
+  // or:
+  // applyBounterHunterTargets(rng, BHMODE_NORMAL)
   function applyBountyHunterTargets(rng,bhmode) {
     // Written By: MottZilla
     // Selects 5 Enemies as Bounty Hunter Targets, sets their drops and applies hints to the Cards.
