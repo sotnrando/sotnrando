@@ -7541,12 +7541,23 @@
   }
 
   function applyStartRoomRandoPatches(rng,castleFlag) {
-    const startRoomData = constants.startRoomData
+    const castleOneRoomData = constants.startRoomData.filter(room => room.stage < 0x20)
+    const castleTwoRoomData = constants.startRoomData.filter(room => room.stage >= 0x20)
     const data = new checked()
     // Patch the starting room being randomized
     let offset
     let newWrite
     let randRoomId
+
+    // If castleFlag == 0x01, then use the 1st castle room data
+    // If castleFlag == 0x10, then use the 2nd castle room data
+    // If castleFlag == 0x11, then use the combined room data
+    let startRoomData = constants.startRoomData
+    if(castleFlag === 0x01) {
+      startRoomData = castleOneRoomData
+    } else if(castleFlag === 0x10) {
+      startRoomData = castleTwoRoomData
+    }
 
     randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))           // Select a starting room at random
 
@@ -7561,22 +7572,6 @@
 
     // console.log("Last Room in Data is: id = " + startRoomData[Math.floor(0.999 * (startRoomData.length))].id + " : " + startRoomData[Math.floor(0.999 * (startRoomData.length))].comment)
     // End of Debug Messages
-
-    if(castleFlag === 0x01)        // 1st Castle Only
-    {
-      while(startRoomData[randRoomId].stage >= 0x20)
-      {
-        randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 2nd Castle but we did not choose to include it.
-      }
-    }
-
-    if(castleFlag === 0x10)        // 2nd Castle Only
-    {
-      while(startRoomData[randRoomId].stage < 0x20)
-      {
-        randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))       // Re-roll if Room is 1st Castle but we did not choose to include it.
-      }
-    }
     
     // Old debug code
     /*while(startRoomData[randRoomId].id === undefined | startRoomData[randRoomId].xyWrite === undefined
