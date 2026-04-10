@@ -1869,7 +1869,6 @@
     "The original Metroidvania!",
     "The second best randomizer website!",
     "Patricide Simulator \'97!",
-    "Now with larger statue dongs!",
     "Keep that 'Thang on ya!",
     "We patched it!",
     "Randomizer? I hardly know her!",
