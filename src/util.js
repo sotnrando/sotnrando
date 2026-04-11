@@ -190,46 +190,54 @@
         'f1': 'â', 'f2': 'ä', // â is the shield icon; ä is the armor icon
         'f6': 'à', 'f7': 'å', // à is the ring icon; å is the potion icon
         'ff': 'ÿ' // This is the label end character
-    };
-
-    let result = '';
-    for (let i = 0; i < input.length; i++) {
-        const char = input[i];
-        const hexKey = Object.keys(hexMapping).find(key => hexMapping[key] === char);
-        if (hexKey) {
-            result += hexKey;
-        } else {
-            result += char; // Keeps characters that aren't in the mapping unchanged
-        }
     }
 
-    return '0x' + result;
+    let result = ''
+    for (let i = 0; i < input.length; i++) {
+      const char = input[i]
+      const hexKey = Object.keys(hexMapping).find(function(key) {
+        return hexMapping[key] === char
+      })
+      if (hexKey) {
+        result += hexKey
+      } else {
+        // Keeps characters that aren't in the mapping unchanged
+        result += char
+      }
+    }
+
+    return '0x' + result
   }
 
   function isEven(n) {
-    n = Number(n);
-    return n === 0 || !!(n && !(n%2));
+    n = Number(n)
+    return n === 0 || !!(n && !(n%2))
   }
 
   function findRequiredNumbers(total, numbers) {
-    // This returns the numbers that compose a value. For example, if the total is 12 and the possible numbers are 1, 2, 4 and 8, it will return [8, 4]
+    // This returns the numbers that compose a value. For example,
+    // if the total is 12 and the possible numbers are 1, 2, 4 and 8,
+    // it will return [8, 4]
     // Sort the numbers in descending order
-    numbers.sort((a, b) => b - a);
+    numbers.sort(function(a, b) {
+      return b - a
+    })
 
     // Initialize an array to store the result
-    let result = [];
+    let result = []
 
     // Iterate through the sorted numbers
     for (let number of numbers) {
-        if (total >= number) {
-            // If the current number can be subtracted from the total, add it to the result
-            result.push(number);
-            total -= number;
-        }
+      if (total >= number) {
+        // If the current number can be subtracted from the total,
+        // add it to the result
+        result.push(number)
+        total -= number
+      }
     }
 
     // Return the list of required numbers
-    return result;
+    return result
   }
 
   function itemFromTileId(items, id) {
@@ -552,15 +560,17 @@
     oldStr.substring(0,index) + newStr + oldStr.substring(index + newStr.length)
   }
 
-  function shuffle(rng,array) {
+  function shuffle(rng, array) {
     for (let i = array.length - 1; i > 0; i--) {
       // Generate a random index from 0 to i
-      const randomIndex = Math.floor(rng() * (i + 1));                          // random based on rng from seed
-  
+      // random based on rng from seed
+      const randomIndex = Math.floor(rng() * (i + 1))
       // Swap the elements at i and randomIndex
-      [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+      let tmp = array[i]
+      array[i] = array[randomIndex]
+      array[randomIndex] = tmp
     }
-    return array;
+    return array
   }
 
   checked.prototype.writeChar = function writeChar(address, val) {
@@ -577,9 +587,13 @@
       len: 1,
       val: val & 0xff,
     }
-    address = address + 1					// Step adddress. 
-    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
-      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    // Step adddress. 
+    address = address + 1
+    // Then check if new address is beyond User Data section.
+    if (Math.floor(address % 2352) > 2071) {
+      // If beyond user data section then return the beginning
+      // of the next sector's user data section. - MottZilla
+      address = ( Math.floor(address / 2352) * 2352) + 2376
     }
     return address
   }
@@ -607,9 +621,13 @@
       len: 2,
       val: val & 0xffff,
     }
-    address = address + 2					// Step adddress. 
-    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
-      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    // Step adddress.
+    address = address + 2
+    // Then check if new address is beyond User Data section.
+    if (Math.floor(address % 2352) > 2071) {
+      // If beyond user data section then return the beginning
+      // of the next sector's user data section. - MottZilla
+      address = ( Math.floor(address / 2352) * 2352) + 2376
     }
     return address
   }
@@ -639,9 +657,13 @@
       len: 4,
       val: val & 0xffffffff,
     }
-    address = address + 4					// Step adddress. 
-    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
-      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    // Step adddress.
+    address = address + 4
+    // Then check if new address is beyond User Data section.
+    if (Math.floor(address % 2352) > 2071) {
+      // If beyond user data section then return the beginning
+      // of the next sector's user data section. - MottZilla
+      address = (Math.floor(address / 2352) * 2352) + 2376
     }
     return address
   }
@@ -675,9 +697,13 @@
       len: 8,
       val: val,
     }
-    address = address + 8					// Step adddress. 
-    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
-      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    // Step adddress.
+    address = address + 8
+    // Then check if new address is beyond User Data section.
+    if (Math.floor(address % 2352) > 2071) {
+      // If beyond user data section then return the beginning
+      // of the next sector's user data section. - MottZilla
+      address = ( Math.floor(address / 2352) * 2352) + 2376
     }
     return address
   }
@@ -728,9 +754,13 @@
       len: 2,
       val: highColor15Value & 0xffff,
     }
-    address = address + 2					// Step adddress. 
-    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
-      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    // Step adddress.
+    address = address + 2
+    // Then check if new address is beyond User Data section.
+    if (Math.floor(address % 2352) > 2071) {
+      // If beyond user data section then return the beginning
+      // of the next sector's user data section. - MottZilla
+      address = ( Math.floor(address / 2352) * 2352) + 2376
     }
     return address
   }
@@ -767,7 +797,7 @@
       size += 9 + writes[address].len
     })
     const patch = new Uint8Array(size)
-    const magic = "PPF30"
+    const magic = 'PPF30'
     let c = 0
     for (let i = 0; i < magic.length; i++) {
       patch[c++] = magic.charCodeAt(i)
@@ -1285,7 +1315,8 @@
         options.itemLocations = itemLocations
         break
       } // end item location selection from args/options - eldri7ch
-      case 'b': { // start prologue rewards selection from args/options - eldri7ch
+      case 'b': {
+        // start prologue rewards selection from args/options - eldri7ch
         if (negate) {
           options.prologueRewards = false
           break
@@ -1367,7 +1398,8 @@
         options.prologueRewards = prologueRewards
         break
       } // end prologue rewards selection from args/options - eldri7ch
-      case 'r': { // start relic locations selection from args/options - eldri7ch
+      case 'r': {
+        // start relic locations selection from args/options - eldri7ch
         if (negate) {
           options.relicLocations = false
           break
@@ -1583,7 +1615,7 @@
           break
         }
         options.stats = true
-        break;
+        break
       } // end stats selection from args/options - eldri7ch
       case 'm': { // start music selection from args/options - eldri7ch
         if (negate) {
@@ -1737,7 +1769,8 @@
         options.writes = writes
         break
       } // end writes selection from args/options - eldri7ch
-      case 't': { // start tournament mode selection from args/options - eldri7ch
+      case 't': {
+        // start tournament mode selection from args/options - eldri7ch
         if (negate) {
           options.tournamentMode = false
           break
@@ -1746,10 +1779,12 @@
         break
       } // end tournament mode selection from args/options - eldri7ch
       default:
-        throw new Error('Invalid randomization: ' + c) // kick out the remainder of options - eldri7ch
+         // kick out the remainder of options - eldri7ch
+        throw new Error('Invalid randomization: ' + c)
       }
     }
-    if (!Object.getOwnPropertyNames(options).length) { // error out if all randomization negated - eldri7ch
+    // error out if all randomization negated - eldri7ch
+    if (!Object.getOwnPropertyNames(options).length) {
       throw new Error('No randomizations')
     }
     return options
@@ -1804,107 +1839,129 @@
     }
     let randomize = []
     while (Object.getOwnPropertyNames(options).length) {
-      if ('tournamentMode' in options) { // stunts spoilers, changes seed randomization, opens statue in clock room and $0 relic in shop - eldri7ch
+      // stunts spoilers, changes seed randomization,
+      // opens statue in clock room and $0 relic in shop - eldri7ch
+      if ('tournamentMode' in options) {
         if (options.tournamentMode) {
           randomize.push('t')
         }
         delete options.tournamentMode
-      } else  if ('colorrandoMode' in options) { // randomizes cape, grav boots, and hydro storm colors - eldri7ch
+      } else  if ('colorrandoMode' in options) {
+        // randomizes cape, grav boots, and hydro storm colors - eldri7ch
         if (options.colorrandoMode) {
           randomize.push('l')
         }
         delete options.colorrandoMode
-      } else if ('magicmaxMode' in options) { // replaces Heart Vessel with Magic Vessel - eldri7ch
+      } else if ('magicmaxMode' in options) {
+        // replaces Heart Vessel with Magic Vessel - eldri7ch
         if (options.magicmaxMode) {
           randomize.push('x')
         }
         delete options.magicmaxMode
-      } else if ('antiFreezeMode' in options) { // Removes screen freezes from level-up and acquisitions - eldrich
+      } else if ('antiFreezeMode' in options) {
+        // Removes screen freezes from level-up and acquisitions - eldrich
         if (options.antiFreezeMode) {
           randomize.push('z')
         }
         delete options.antiFreezeMode
-      } else if ('mypurseMode' in options) { // Removes Death from entrance - eldri7ch
+      } else if ('mypurseMode' in options) {
+        // Removes Death from entrance - eldri7ch
         if (options.mypurseMode) {
           randomize.push('y')
         }
         delete options.mypurseMode
-      } else if ('iwsMode' in options) { // Allows for infinite wing smash on first input - eldri7ch
+      } else if ('iwsMode' in options) {
+        // Allows for infinite wing smash on first input - eldri7ch
         if (options.iwsMode) {
           randomize.push('b')
         }
         delete options.iwsMode
-      } else if ('fastwarpMode' in options) { // quickensd the teleporter warp animations - eldri7ch
+      } else if ('fastwarpMode' in options) {
+        // quickensd the teleporter warp animations - eldri7ch
         if (options.fastwarpMode) {
           randomize.push('9')
         }
         delete options.fastwarpMode
-      } else if ('noprologueMode' in options) { // Removes prologue - eldri7ch
+      } else if ('noprologueMode' in options) {
+        // Removes prologue - eldri7ch
         if (options.noprologueMode) {
           randomize.push('R')
         }
         delete options.noprologueMode
-      } else if ('unlockedMode' in options) { // Opens shortcuts - eldri7ch
+      } else if ('unlockedMode' in options) {
+        // Opens shortcuts - eldri7ch
         if (options.unlockedMode) {
           randomize.push('U')
         }
         delete options.unlockedMode
-      } else if ('surpriseMode' in options) { // Hides relics behind the same sprite - eldri7ch
+      } else if ('surpriseMode' in options) {
+        // Hides relics behind the same sprite - eldri7ch
         if (options.surpriseMode) {
           randomize.push('S')
         }
         delete options.surpriseMode
-      } else if ('enemyStatRandoMode' in options) { // randomize enemy stats - eldri7ch
+      } else if ('enemyStatRandoMode' in options) {
+        // randomize enemy stats - eldri7ch
         if (options.enemyStatRandoMode) {
           randomize.push('E')
         }
         delete options.enemyStatRandoMode
-      } else if ('elemChaosMode' in options) { // elemental chaos - eldri7ch
+      } else if ('elemChaosMode' in options) {
+        // elemental chaos - eldri7ch
         if (options.elemChaosMode) {
           randomize.push('ec')
         }
         delete options.elemChaosMode
-      } else if ('shopPriceRandoMode' in options) { // randomize shop prices - eldri7ch
+      } else if ('shopPriceRandoMode' in options) {
+        // randomize shop prices - eldri7ch
         if (options.shopPriceRandoMode) {
           randomize.push('sh')
         }
         delete options.shopPriceRandoMode
-      } else if ('startRoomRandoMode' in options) { // randomize starting room - eldri7ch
+      } else if ('startRoomRandoMode' in options) {
+        // randomize starting room - eldri7ch
         if (options.startRoomRandoMode) {
           randomize.push('ori')
         }
         delete options.startRoomRandoMode
-      } else if ('startRoomRando2ndMode' in options) { // randomize starting room 2nd castle - MottZilla
+      } else if ('startRoomRando2ndMode' in options) {
+        // randomize starting room 2nd castle - MottZilla
         if (options.startRoomRando2ndMode) {
           randomize.push('ori2')
         }
         delete options.startRoomRando2ndMode
-      } else if ('dominoMode' in options) { // guaranteed drops - eldri7ch
+      } else if ('dominoMode' in options) {
+        // guaranteed drops - eldri7ch
         if (options.dominoMode) {
           randomize.push('gd')
         }
         delete options.dominoMode
-      } else if ('rlbcMode' in options) { // reverse library cards - eldri7ch
+      } else if ('rlbcMode' in options) {
+        // reverse library cards - eldri7ch
         if (options.rlbcMode) {
           randomize.push('rl')
         }
         delete options.rlbcMode
-      } else if ('immunityPotionMode' in options) { // immuntiy potions - eldri7ch
+      } else if ('immunityPotionMode' in options) {
+        // immuntiy potions - eldri7ch
         if (options.immunityPotionMode) {
           randomize.push('ip')
         }
         delete options.immunityPotionMode
-      } else if ('godspeedMode' in options) { // godspeed shoes - eldri7ch
+      } else if ('godspeedMode' in options) {
+        // godspeed shoes - eldri7ch
         if (options.godspeedMode) {
           randomize.push('gss')
         }
         delete options.godspeedMode
-      } else if ('libraryShortcut' in options) { // library shortcut - eldri7ch
+      } else if ('libraryShortcut' in options) {
+        // library shortcut - eldri7ch
         if (options.libraryShortcut) {
           randomize.push('ls')
         }
         delete options.libraryShortcut
-      } else if ('singleHitGearMode' in options) { // Single-Hit Gears - eldri7ch
+      } else if ('singleHitGearMode' in options) {
+        // Single-Hit Gears - eldri7ch
         if (options.singleHitGearMode) {
           randomize.push('gp')
         }
@@ -1912,39 +1969,48 @@
       } else if ('newGoalsSet' in options) { // Change the goals
         randomize.push('g:' + options.newGoalsSet)
         delete options.newGoalsSet
-      } else if ('startStatRandoMode' in options) { // Starting Stat Randomizer - eldri7ch
+      } else if ('startStatRandoMode' in options) {
+        // Starting Stat Randomizer - eldri7ch
         randomize.push('ss:' + options.startStatRandoMode)
         delete options.startStatRandoMode
-      } else if ('easyMode' in options) { // simple input - eldri7ch
+      } else if ('easyMode' in options) {
+        // simple input - eldri7ch
         if (options.easyMode) {
           randomize.push('ez')
         }
         delete options.easyMode
-      } else if ('devStashMode' in options) { // dev's stash - eldri7ch
+      } else if ('devStashMode' in options) {
+        // dev's stash - eldri7ch
         if (options.devStashMode) {
           randomize.push('dev')
         }
         delete options.devStashMode
-      } else if ('seasonalPhrasesMode' in options) { // seasonal phrases - eldri7ch
+      } else if ('seasonalPhrasesMode' in options) {
+        // seasonal phrases - eldri7ch
         if (options.seasonalPhrasesMode) {
           randomize.push('sp')
         }
         delete options.seasonalPhrasesMode
-      } else if ('mapcolorTheme' in options) { // switch map color
+      } else if ('mapcolorTheme' in options) {
+        // switch map color
         randomize.push('m:' + options.mapcolorTheme)
         delete options.mapcolorTheme
-      } else if ('bossMusicSeparation' in options) { // boss Music Separation- eldri7ch
+      } else if ('bossMusicSeparation' in options) {
+        // boss Music Separation- eldri7ch
         if (options.bossMusicSeparation) {
           randomize.push('bm')
         }
         delete options.bossMusicSeparation
-      } else if ('alucardPaletteSet' in options) { // alucard's palette - crazy4blades
+      } else if ('alucardPaletteSet' in options) {
+        // alucard's palette - crazy4blades
         randomize.push('ap:' + options.alucardPaletteSet)
         delete options.alucardPaletteSet
-      }else if ('alucardLinerSet' in options) { // alucard's Liner - Crazy4blades
+      } else if ('alucardLinerSet' in options) {
+        // alucard's Liner - Crazy4blades
         randomize.push('al:' + options.alucardLinerSet)
         delete options.alucardLinerSet
-      } else if ('excludesongs' in options) { // Exclude songs - eldri7ch
+      } else if ('excludesongs' in options) {
+        // Exclude songs - eldri7ch
         randomize.push('eds:' + options.excludesongs)
         delete options.excludesongs
       } else if ('preset' in options) {
@@ -2262,11 +2328,13 @@
             locations.filter(function(location) {
               const extensions = []
               switch (options.relicLocations.extension) {
-              case constants.EXTENSION.EXTENDED: // This is a smaller distribution than Equipment but includes all Scenic checks + GuardedPlus + some Equipment - eldri7ch
-                  extensions.push(constants.EXTENSION.EXTENDED)
-                  extensions.push(constants.EXTENSION.GUARDEDPLUS)
-                  extensions.push(constants.EXTENSION.GUARDED) 
-                  break 
+              case constants.EXTENSION.EXTENDED:
+                // This is a smaller distribution than Equipment but includes
+                // all Scenic checks + GuardedPlus + some Equipment - eldri7ch
+                extensions.push(constants.EXTENSION.EXTENDED)
+                extensions.push(constants.EXTENSION.GUARDEDPLUS)
+                extensions.push(constants.EXTENSION.GUARDED) 
+                break
               case constants.EXTENSION.SCENIC:
                 extensions.push(constants.EXTENSION.SCENIC)
               case constants.EXTENSION.EQUIPMENT:
@@ -2349,7 +2417,8 @@
           randomize.push('s')
         }
         delete options.stats
-      } else if ('itemNameRandoMode' in options) { // randomize item names with item stat rando - MottZilla
+      } else if ('itemNameRandoMode' in options) {
+        // randomize item names with item stat rando - MottZilla
         if (options.itemNameRandoMode) {
           randomize.push('in')
         }
@@ -2573,7 +2642,7 @@
     nonce = nonce || 0
     return JSON.stringify({
       version: version,
-      tournamentMode: "tournamentMode" in options,
+      tournamentMode: 'tournamentMode' in options,
       seed: seed,
       nonce: nonce,
     })
@@ -2765,7 +2834,7 @@
       })
     }
     if (result.trackbyte) {
-      // console.log("trackbyte: " + result.trackbyte)
+      // console.log('trackbyte: ' + result.trackbyte)
     }
   }
 
@@ -3803,14 +3872,14 @@
     if ('singleHitGearMode' in json) {
       builder.singleHitGearMode(json.singleHitGearMode)
     }
-    // ============================== Preset: Argument ==========================
+    // ============================= Preset: Argument =========================
     if ('newGoalsSet' in json) {
       builder.newGoalsSet(json.newGoalsSet)
     }
     if ('startStatRandoMode' in json) {
       builder.startStatRandoMode(json.startStatRandoMode)
     }
-    // ============================ Website Only: Boolean =======================
+    // =========================== Website Only: Boolean ======================
     if ('easyMode' in json) {
       builder.easyMode(json.easyMode)
     }
@@ -4182,14 +4251,14 @@
     if ('singleHitGearMode' in preset) {
       this.singleHitGear = preset.singleHitGearMode
     }
-    // ============================== Preset: Argument ==========================
+    // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
       this.newGoals = preset.newGoalsSet
     }
     if ('startStatRandoMode' in preset) {
       this.startStatRando = preset.startStatRandoMode
     }
-    // ============================ Website Only: Boolean =======================
+    // =========================== Website Only: Boolean ======================
     if ('easyMode' in preset) {
       this.easy = preset.easyMode
     }
@@ -4571,13 +4640,13 @@
           })[0]
           assert(replace, 'Unknown item: ' + replaceName)
           map[number - 1].push(replace)
-        };
-        replaceNames.forEach(name => {
-            if(name instanceof Array) {
-              name.forEach(replaceFunc)
-            } else {
-              replaceFunc(name)
-            }
+        }
+        replaceNames.forEach(function(name) {
+          if(name instanceof Array) {
+            name.forEach(replaceFunc)
+          } else {
+            replaceFunc(name)
+          }
         })
         this.items[zoneName].set(item, map)
       }
@@ -4931,9 +5000,10 @@
   }
 
   // Enable Enemy Stat Rando - eldri7ch
-  PresetBuilder.prototype.enemyStatRandoMode = function enemyStatRandoMode(enabled) {
-    this.enemyStatRando = enabled
-  }
+  PresetBuilder.prototype.enemyStatRandoMode =
+    function enemyStatRandoMode(enabled) {
+      this.enemyStatRando = enabled
+    }
   
   // Enable Elemental Chaos - eldri7ch
   PresetBuilder.prototype.elemChaosMode = function elemChaosMode(enabled) {
@@ -4941,19 +5011,22 @@
   }
 
   // Enable Shop Price Rando - eldri7ch
-  PresetBuilder.prototype.shopPriceRandoMode = function shopPriceRandoMode(enabled) {
-    this.shopPriceRando = enabled
-  }
+  PresetBuilder.prototype.shopPriceRandoMode =
+    function shopPriceRandoMode(enabled) {
+      this.shopPriceRando = enabled
+    }
 
   // Enable Starting Room Rando - eldri7ch
-  PresetBuilder.prototype.startRoomRandoMode = function startRoomRandoMode(enabled) {
-    this.startRoomRando = enabled
-  }
+  PresetBuilder.prototype.startRoomRandoMode =
+    function startRoomRandoMode(enabled) {
+      this.startRoomRando = enabled
+    }
 
   // Enable Starting Room Rando 2nd - MottZilla
-  PresetBuilder.prototype.startRoomRando2ndMode = function startRoomRando2ndMode(enabled) {
-    this.startRoomRando2nd = enabled
-  }
+  PresetBuilder.prototype.startRoomRando2ndMode =
+    function startRoomRando2ndMode(enabled) {
+      this.startRoomRando2nd = enabled
+    }
 
   // Enable Guaranteed Drops - eldri7ch
   PresetBuilder.prototype.dominoMode = function dominoMode(enabled) {
@@ -4966,9 +5039,10 @@
   }
 
   // Enable Immunity Potions - eldri7ch
-  PresetBuilder.prototype.immunityPotionMode = function immunityPotionMode(enabled) {
-    this.immunityPotion = enabled
-  }
+  PresetBuilder.prototype.immunityPotionMode =
+    function immunityPotionMode(enabled) {
+      this.immunityPotion = enabled
+    }
 
   // Enable Godspeed Shoes - eldri7ch
   PresetBuilder.prototype.godspeedMode = function godspeedMode(enabled) {
@@ -4981,9 +5055,10 @@
   }
 
   // Enable Single-Hit Gears - eldri7ch
-  PresetBuilder.prototype.singleHitGearMode = function singleHitGearMode(enabled) {
-    this.singleHitGear = enabled
-  }
+  PresetBuilder.prototype.singleHitGearMode =
+    function singleHitGearMode(enabled) {
+      this.singleHitGear = enabled
+    }
   
   // ============================== Preset: Argument ==========================
   
@@ -4994,10 +5069,11 @@
   }
 
   // Enable Starting Stat Randomizer - eldri7ch
-  PresetBuilder.prototype.startStatRandoMode = function startStatRandoMode(ssMax) {
-    assert.oneOf(typeof(ssMax), ['boolean', 'number'])
-    this.startStatRando = ssMax
-  }
+  PresetBuilder.prototype.startStatRandoMode =
+    function startStatRandoMode(ssMax) {
+      assert.oneOf(typeof(ssMax), ['boolean', 'number'])
+      this.startStatRando = ssMax
+    }
 
   // Enable Simplified Inputs - eldri7ch
   // PresetBuilder.prototype.easyMode = function easyMode(enabled) {
@@ -5010,14 +5086,16 @@
   // }
 
   // // Enable Seasonal Phrases - eldri7ch
-  // PresetBuilder.prototype.seasonalPhrasesMode = function seasonalPhrasesMode(enabled) {
-  //   this.seasonalPhrases = enabled
-  // }
+  // PresetBuilder.prototype.seasonalPhrasesMode =
+  //   function seasonalPhrasesMode(enabled) {
+  //     this.seasonalPhrases = enabled
+  //   }
 
   // // Enable boss music separation - eldri7ch
-  // PresetBuilder.prototype.bossMusicSeparation = function bossMusicSeparation(enabled) {
-  //   this.bossMusic = enabled
-  // }
+  // PresetBuilder.prototype.bossMusicSeparation =
+  //   function bossMusicSeparation(enabled) {
+  //     this.bossMusic = enabled
+  //   }
 
   // Write a character.
   PresetBuilder.prototype.writeChar = function writeChar(address, value) {
@@ -5032,9 +5110,13 @@
       address: address,
       value: value,
     })
-    address = address + 1					// Step adddress. 
-    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
-      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    // Step adddress.
+    address = address + 1
+    // Then check if new address is beyond User Data section.
+    if (Math.floor(address % 2352) > 2071) {
+      // If beyond user data section then return the beginning
+      // of the next sector's user data section. - MottZilla
+      address = ( Math.floor(address / 2352) * 2352) + 2376
     }
     return address
   }
@@ -5050,9 +5132,13 @@
       address: address,
       value: value,
     })
-    address = address + 2					// Step adddress. 
-    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
-      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    // Step adddress.
+    address = address + 2
+    // Then check if new address is beyond User Data section.
+    if (Math.floor(address % 2352) > 2071) {
+      // If beyond user data section then return the beginning
+      // of the next sector's user data section. - MottZilla
+      address = ( Math.floor(address / 2352) * 2352) + 2376
     }
     return address
   }
@@ -5068,9 +5154,13 @@
       address: address,
       value: value,
     })
-    address = address + 4					// Step adddress. 
-    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
-      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    // Step adddress.
+    address = address + 4
+    // Then check if new address is beyond User Data section.
+    if (Math.floor(address % 2352) > 2071) {
+      // If beyond user data section then return the beginning
+      // of the next sector's user data section. - MottZilla
+      address = ( Math.floor(address / 2352) * 2352) + 2376
     }
     return address
   }
@@ -5083,9 +5173,13 @@
       address: address,
       value: value,
     })
-    address = address + 8					// Step adddress. 
-    if (Math.floor(address % 2352) > 2071) {			// Then check if new address is beyond User Data section.
-      address = ( Math.floor(address / 2352) * 2352) + 2376	// If beyond user data section then return the beginning of the next sector's user data section. - MottZilla
+    // Step adddress.
+    address = address + 8
+    // Then check if new address is beyond User Data section.
+    if (Math.floor(address % 2352) > 2071) {
+      // If beyond user data section then return the beginning
+      // of the next sector's user data section. - MottZilla
+      address = ( Math.floor(address / 2352) * 2352) + 2376
     }
     return address
   }
@@ -5436,376 +5530,385 @@
 
   function applyTrackingByte() {
     const data = new checked()
-    data.writeChar(0x037135F8,numToHex(trackByteM))
+    data.writeChar(0x037135f8,numToHex(trackByteM))
     return data
   }
 
-  function randoFuncMaster(optWrite) {                // A master function and table series to handle randomizer options that require additional code
-    const data = new checked()                        // randomizer options that require additional code. 0x3711A68 is loaded from CD by separate code
+  // A master function and table series to handle randomizer options
+  // that require additional code
+  function randoFuncMaster(optWrite) {
+    // randomizer options that require additional code.
+    // 0x3711a68 is loaded from CD by separate code
+    const data = new checked()
     let offset
     
     // console.log('optwrite: ' + optWrite)
 
-    offset = 0xF96D8
-    offset = data.writeWord(offset, 0x0c038ba6)       // call the sector load
+    offset = 0xf96d8
+    // call the sector load
+    offset = data.writeWord(offset, 0x0c038ba6)
     data.writeWord(offset, 0x00000000)
 
-    offset = 0xF87B0                                  // Sector Load Function
-    offset = data.writeWord(offset, 0x3C01800A)
-    offset = data.writeWord(offset, 0xAC208850)
-    offset = data.writeWord(offset, 0x27BDFFE0)
-    offset = data.writeWord(offset, 0x3C020026)
+    // Sector Load Function
+    offset = 0xf87b0
+    offset = data.writeWord(offset, 0x3c01800a)
+    offset = data.writeWord(offset, 0xac208850)
+    offset = data.writeWord(offset, 0x27bdffe0)
+    offset = data.writeWord(offset, 0x3c020026)
     offset = data.writeWord(offset, 0x34422905)
     offset = data.writeWord(offset, 0x34040002)
-    offset = data.writeWord(offset, 0x27A50010)
+    offset = data.writeWord(offset, 0x27a50010)
     offset = data.writeWord(offset, 0x34060000)
-    offset = data.writeWord(offset, 0xAFBF0018)
-    offset = data.writeWord(offset, 0x0C006578)
-    offset = data.writeWord(offset, 0xAFA20010)
-    offset = data.writeWord(offset, 0x3404000E)
-    offset = data.writeWord(offset, 0x3C058009)
-    offset = data.writeWord(offset, 0x34A588B0)
-    offset = data.writeWord(offset, 0x0C007020)
+    offset = data.writeWord(offset, 0xafbf0018)
+    offset = data.writeWord(offset, 0x0c006578)
+    offset = data.writeWord(offset, 0xafa20010)
+    offset = data.writeWord(offset, 0x3404000e)
+    offset = data.writeWord(offset, 0x3c058009)
+    offset = data.writeWord(offset, 0x34a588b0)
+    offset = data.writeWord(offset, 0x0c007020)
     offset = data.writeWord(offset, 0x34060080)
     offset = data.writeWord(offset, 0x34040000)
-    offset = data.writeWord(offset, 0x0C007062)
+    offset = data.writeWord(offset, 0x0c007062)
     offset = data.writeWord(offset, 0x34050000)
     offset = data.writeWord(offset, 0x34020000)
-    offset = data.writeWord(offset, 0x8FBF0018)
-    offset = data.writeWord(offset, 0x27BD0020)
-    offset = data.writeWord(offset, 0x03E00008)
+    offset = data.writeWord(offset, 0x8fbf0018)
+    offset = data.writeWord(offset, 0x27bd0020)
+    offset = data.writeWord(offset, 0x03e00008)
     offset = data.writeWord(offset, 0x00000000)
 
-    offset = 0x3711A68                                // Start the master function with jump tables
+    // Start the master function with jump tables
+    offset = 0x3711a68
 
-    offset = data.writeWord(offset, optWrite)         // optionWrite is a bit indicator of all options marked for reading later by ASM or tracker
-	  offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08026239)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08026257)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x080262e9)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x080262f8)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08026333)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe0)
-    offset = data.writeWord(offset,0xafbf0010)
-    offset = data.writeWord(offset,0x0c03c182)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c048009)
-    offset = data.writeWord(offset,0x348488b0)
-    offset = data.writeWord(offset,0x8c860000)
-    offset = data.writeWord(offset,0x3c058000)
-    offset = data.writeWord(offset,0x34a50000)
-    offset = data.writeWord(offset,0x00c53024)
-    offset = data.writeWord(offset,0x10c00003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0c026276)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c048009)
-    offset = data.writeWord(offset,0x348488b0)
-    offset = data.writeWord(offset,0x8c850014)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34a60000)
-    offset = data.writeWord(offset,0x3c078000)
-    offset = data.writeWord(offset,0x34e70000)
-    offset = data.writeWord(offset,0x00c73024)
-    offset = data.writeWord(offset,0x10c00003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00a0f809)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x8fbf0010)
-    offset = data.writeWord(offset,0x27bd0020)
-    offset = data.writeWord(offset,0x03e00008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028004)
-    offset = data.writeWord(offset,0x9045925d)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x38a500ff)
-    offset = data.writeWord(offset,0x30a50040)
-    offset = data.writeWord(offset,0x10a00008)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x9042bbfb)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x10400004)
-    offset = data.writeWord(offset,0x34180022)
-    offset = data.writeWord(offset,0x341988be)
-    offset = data.writeWord(offset,0x18000003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34180002)
-    offset = data.writeWord(offset,0x34197c0e)
-    offset = data.writeWord(offset,0x3c02800f)
-    offset = data.writeWord(offset,0xa0581724)
-    offset = data.writeWord(offset,0x3b180020)
-    offset = data.writeWord(offset,0xa05832a4)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c02800a)
-    offset = data.writeWord(offset,0xa4593c98)
-    offset = data.writeWord(offset,0x34040000)
-    offset = data.writeWord(offset,0x0804390b)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe0)
-    offset = data.writeWord(offset,0xafbf0004)
-    offset = data.writeWord(offset,0x3c068009)
-    offset = data.writeWord(offset,0x34c689c4)
-    offset = data.writeWord(offset,0x3c078009)
-    offset = data.writeWord(offset,0x8cc40000)
-    offset = data.writeWord(offset,0x34e77490)
-    offset = data.writeWord(offset,0x94e50000)
-    offset = data.writeWord(offset,0x10800007)
-    offset = data.writeWord(offset,0x30a5a000)
-    offset = data.writeWord(offset,0x14a00039)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0c0262bf)
-    offset = data.writeWord(offset,0x34040000)
-    offset = data.writeWord(offset,0x080262ba)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x94e40004)
-    offset = data.writeWord(offset,0x94e20004)
-    offset = data.writeWord(offset,0x3c068009)
-    offset = data.writeWord(offset,0x34c689c8)
-    offset = data.writeWord(offset,0x30848000)
-    offset = data.writeWord(offset,0x10800005)
-    offset = data.writeWord(offset,0x8cc50000)
-    offset = data.writeWord(offset,0x34040010)
-    offset = data.writeWord(offset,0x24a50001)
-    offset = data.writeWord(offset,0xacc50000)
-    offset = data.writeWord(offset,0xacc40004)
-    offset = data.writeWord(offset,0x30422000)
-    offset = data.writeWord(offset,0x10400006)
-    offset = data.writeWord(offset,0x8cc50008)
-    offset = data.writeWord(offset,0x34040010)
-    offset = data.writeWord(offset,0x24a50001)
-    offset = data.writeWord(offset,0xacc50008)
-    offset = data.writeWord(offset,0x34050010)
-    offset = data.writeWord(offset,0xacc4000c)
-    offset = data.writeWord(offset,0x8cc50004)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x10a00005)
-    offset = data.writeWord(offset,0x24a5ffff)
-    offset = data.writeWord(offset,0xacc50004)
-    offset = data.writeWord(offset,0x14a00002)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xacc00000)
-    offset = data.writeWord(offset,0x8cc5000c)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x10a00005)
-    offset = data.writeWord(offset,0x24a5ffff)
-    offset = data.writeWord(offset,0xacc5000c)
-    offset = data.writeWord(offset,0x14a00002)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xacc00008)
-    offset = data.writeWord(offset,0x8cc50000)
-    offset = data.writeWord(offset,0x8cc20008)
-    offset = data.writeWord(offset,0x34070002)
-    offset = data.writeWord(offset,0x10a70004)
-    offset = data.writeWord(offset,0x10470003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x080262ba)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xacc00000)
-    offset = data.writeWord(offset,0xacc00004)
-    offset = data.writeWord(offset,0xacc00008)
-    offset = data.writeWord(offset,0xacc0000c)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0c0262bf)
-    offset = data.writeWord(offset,0x34040001)
-    offset = data.writeWord(offset,0x080262ba)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x8fbf0004)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bd0020)
-    offset = data.writeWord(offset,0x03e00008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c068009)
-    offset = data.writeWord(offset,0x34c689c4)
-    offset = data.writeWord(offset,0xacc40000)
-    offset = data.writeWord(offset,0x10800008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34050002)
-    offset = data.writeWord(offset,0x34044000)
-    offset = data.writeWord(offset,0x3408c000)
-    offset = data.writeWord(offset,0x3407fffd)
-    offset = data.writeWord(offset,0x34020002)
-    offset = data.writeWord(offset,0x080262d0)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34050001)
-    offset = data.writeWord(offset,0x34048000)
-    offset = data.writeWord(offset,0x34084000)
-    offset = data.writeWord(offset,0x3407fffe)
-    offset = data.writeWord(offset,0x34020003)
-    offset = data.writeWord(offset,0x3c068011)
-    offset = data.writeWord(offset,0xa4c52b7c)
-    offset = data.writeWord(offset,0xa4c42b84)
-    offset = data.writeWord(offset,0xa4c52d8c)
-    offset = data.writeWord(offset,0xa4c42d94)
-    offset = data.writeWord(offset,0xa4c52cdc)
-    offset = data.writeWord(offset,0xa4c42ce4)
-    offset = data.writeWord(offset,0xa4c52f84)
-    offset = data.writeWord(offset,0xa4c42f88)
-    offset = data.writeWord(offset,0xa4c82f68)
-    offset = data.writeWord(offset,0xa4c72f64)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c06800a)
-    offset = data.writeWord(offset,0x34c6e000)
-    offset = data.writeWord(offset,0xa4c20488)
-    offset = data.writeWord(offset,0xa4c20490)
-    offset = data.writeWord(offset,0xa4c20498)
-    offset = data.writeWord(offset,0xa4c204a0)
-    offset = data.writeWord(offset,0xa4c204a8)
-    offset = data.writeWord(offset,0xa4c204b0)
-    offset = data.writeWord(offset,0xa4c204b8)
-    offset = data.writeWord(offset,0xa4c204c0)
-    offset = data.writeWord(offset,0x03e00008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x8c422eec)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34430000)
-    offset = data.writeWord(offset,0x30630001)
-    offset = data.writeWord(offset,0x10600007)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0c03f8ea)
-    offset = data.writeWord(offset,0x3404000c)
-    offset = data.writeWord(offset,0x10400003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08044185)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0804414a)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028009)
-    offset = data.writeWord(offset,0x94437494)
-    offset = data.writeWord(offset,0x94427490)
-    offset = data.writeWord(offset,0x34050002)
-    offset = data.writeWord(offset,0x10850013)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34050003)
-    offset = data.writeWord(offset,0x10850021)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x30420400)
-    offset = data.writeWord(offset,0x10400008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34041000)
-    offset = data.writeWord(offset,0x14640005)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe8)
-    offset = data.writeWord(offset,0xafbf0010)
-    offset = data.writeWord(offset,0x08044527)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x8c422ee8)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x080444ad)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x30420400)
-    offset = data.writeWord(offset,0x1040000a)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34044000)
-    offset = data.writeWord(offset,0x14640007)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34050002)
-    offset = data.writeWord(offset,0xac453404)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xafbf0010)
-    offset = data.writeWord(offset,0x0804448e)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x8c422ee8)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08044409)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x30420400)
-    offset = data.writeWord(offset,0x10400008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3063a000)
-    offset = data.writeWord(offset,0x10600005)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe0)
-    offset = data.writeWord(offset,0xafbf0018)
-    offset = data.writeWord(offset,0x080443e0)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x8c422ee8)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08044381)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x06030100)
-    offset = data.writeWord(offset,0x2017100a)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x16220003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0803d3b3)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe0)
-    offset = data.writeWord(offset,0xafbf0004)
-    offset = data.writeWord(offset,0xafb60008)
-    offset = data.writeWord(offset,0xafaf000c)
-    offset = data.writeWord(offset,0x3402006d)
-    offset = data.writeWord(offset,0x1622002a)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028009)
-    offset = data.writeWord(offset,0x34427c14)
-    offset = data.writeWord(offset,0x8c420000)
-    offset = data.writeWord(offset,0x340f0045)
-    offset = data.writeWord(offset,0x01e27823)
-    offset = data.writeWord(offset,0x34560000)
-    offset = data.writeWord(offset,0x05e00022)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x340f003f)
-    offset = data.writeWord(offset,0x02cfb023)
-    offset = data.writeWord(offset,0x06c0001e)
-    offset = data.writeWord(offset,0x26cf0005)
-    offset = data.writeWord(offset,0x3c168009)
-    offset = data.writeWord(offset,0x36d68cc0)
-    offset = data.writeWord(offset,0x02cfb021)
-    offset = data.writeWord(offset,0x92c20000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x02028021)
-    offset = data.writeWord(offset,0x3c028009)
-    offset = data.writeWord(offset,0x34427c18)
-    offset = data.writeWord(offset,0x8c420000)
-    offset = data.writeWord(offset,0x340f0045)
-    offset = data.writeWord(offset,0x01e27823)
-    offset = data.writeWord(offset,0x34560000)
-    offset = data.writeWord(offset,0x05e00010)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x340f003f)
-    offset = data.writeWord(offset,0x02cfb023)
-    offset = data.writeWord(offset,0x06c0000c)
-    offset = data.writeWord(offset,0x26cf0005)
-    offset = data.writeWord(offset,0x3c168009)
-    offset = data.writeWord(offset,0x36d68cc0)
-    offset = data.writeWord(offset,0x02cfb021)
-    offset = data.writeWord(offset,0x92c20000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x02028021)
-    offset = data.writeWord(offset,0x34160000)
-    offset = data.writeWord(offset,0x3c028009)
-    offset = data.writeWord(offset,0x34427c00)
-    offset = data.writeWord(offset,0x14530001)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x8faf000c)
-    offset = data.writeWord(offset,0x8fb60008)
-    offset = data.writeWord(offset,0x8fbf0004)
-    offset = data.writeWord(offset,0x27bd0020)
-    offset = data.writeWord(offset,0x3402007e)
-    offset = data.writeWord(offset,0x0803d3b9)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xffffffff)
+    // optionWrite is a bit indicator of all options
+    // marked for reading later by ASM or tracker
+    offset = data.writeWord(offset, optWrite)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08026239)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08026257)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x080262e9)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x080262f8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08026333)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27bdffe0)
+    offset = data.writeWord(offset, 0xafbf0010)
+    offset = data.writeWord(offset, 0x0c03c182)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c048009)
+    offset = data.writeWord(offset, 0x348488b0)
+    offset = data.writeWord(offset, 0x8c860000)
+    offset = data.writeWord(offset, 0x3c058000)
+    offset = data.writeWord(offset, 0x34a50000)
+    offset = data.writeWord(offset, 0x00c53024)
+    offset = data.writeWord(offset, 0x10c00003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0c026276)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c048009)
+    offset = data.writeWord(offset, 0x348488b0)
+    offset = data.writeWord(offset, 0x8c850014)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34a60000)
+    offset = data.writeWord(offset, 0x3c078000)
+    offset = data.writeWord(offset, 0x34e70000)
+    offset = data.writeWord(offset, 0x00c73024)
+    offset = data.writeWord(offset, 0x10c00003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00a0f809)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8fbf0010)
+    offset = data.writeWord(offset, 0x27bd0020)
+    offset = data.writeWord(offset, 0x03e00008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c028004)
+    offset = data.writeWord(offset, 0x9045925d)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x38a500ff)
+    offset = data.writeWord(offset, 0x30a50040)
+    offset = data.writeWord(offset, 0x10a00008)
+    offset = data.writeWord(offset, 0x3c028007)
+    offset = data.writeWord(offset, 0x9042bbfb)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x10400004)
+    offset = data.writeWord(offset, 0x34180022)
+    offset = data.writeWord(offset, 0x341988be)
+    offset = data.writeWord(offset, 0x18000003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34180002)
+    offset = data.writeWord(offset, 0x34197c0e)
+    offset = data.writeWord(offset, 0x3c02800f)
+    offset = data.writeWord(offset, 0xa0581724)
+    offset = data.writeWord(offset, 0x3b180020)
+    offset = data.writeWord(offset, 0xa05832a4)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c02800a)
+    offset = data.writeWord(offset, 0xa4593c98)
+    offset = data.writeWord(offset, 0x34040000)
+    offset = data.writeWord(offset, 0x0804390b)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27bdffe0)
+    offset = data.writeWord(offset, 0xafbf0004)
+    offset = data.writeWord(offset, 0x3c068009)
+    offset = data.writeWord(offset, 0x34c689c4)
+    offset = data.writeWord(offset, 0x3c078009)
+    offset = data.writeWord(offset, 0x8cc40000)
+    offset = data.writeWord(offset, 0x34e77490)
+    offset = data.writeWord(offset, 0x94e50000)
+    offset = data.writeWord(offset, 0x10800007)
+    offset = data.writeWord(offset, 0x30a5a000)
+    offset = data.writeWord(offset, 0x14a00039)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0c0262bf)
+    offset = data.writeWord(offset, 0x34040000)
+    offset = data.writeWord(offset, 0x080262ba)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x94e40004)
+    offset = data.writeWord(offset, 0x94e20004)
+    offset = data.writeWord(offset, 0x3c068009)
+    offset = data.writeWord(offset, 0x34c689c8)
+    offset = data.writeWord(offset, 0x30848000)
+    offset = data.writeWord(offset, 0x10800005)
+    offset = data.writeWord(offset, 0x8cc50000)
+    offset = data.writeWord(offset, 0x34040010)
+    offset = data.writeWord(offset, 0x24a50001)
+    offset = data.writeWord(offset, 0xacc50000)
+    offset = data.writeWord(offset, 0xacc40004)
+    offset = data.writeWord(offset, 0x30422000)
+    offset = data.writeWord(offset, 0x10400006)
+    offset = data.writeWord(offset, 0x8cc50008)
+    offset = data.writeWord(offset, 0x34040010)
+    offset = data.writeWord(offset, 0x24a50001)
+    offset = data.writeWord(offset, 0xacc50008)
+    offset = data.writeWord(offset, 0x34050010)
+    offset = data.writeWord(offset, 0xacc4000c)
+    offset = data.writeWord(offset, 0x8cc50004)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x10a00005)
+    offset = data.writeWord(offset, 0x24a5ffff)
+    offset = data.writeWord(offset, 0xacc50004)
+    offset = data.writeWord(offset, 0x14a00002)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xacc00000)
+    offset = data.writeWord(offset, 0x8cc5000c)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x10a00005)
+    offset = data.writeWord(offset, 0x24a5ffff)
+    offset = data.writeWord(offset, 0xacc5000c)
+    offset = data.writeWord(offset, 0x14a00002)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xacc00008)
+    offset = data.writeWord(offset, 0x8cc50000)
+    offset = data.writeWord(offset, 0x8cc20008)
+    offset = data.writeWord(offset, 0x34070002)
+    offset = data.writeWord(offset, 0x10a70004)
+    offset = data.writeWord(offset, 0x10470003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x080262ba)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xacc00000)
+    offset = data.writeWord(offset, 0xacc00004)
+    offset = data.writeWord(offset, 0xacc00008)
+    offset = data.writeWord(offset, 0xacc0000c)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0c0262bf)
+    offset = data.writeWord(offset, 0x34040001)
+    offset = data.writeWord(offset, 0x080262ba)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8fbf0004)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27bd0020)
+    offset = data.writeWord(offset, 0x03e00008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c068009)
+    offset = data.writeWord(offset, 0x34c689c4)
+    offset = data.writeWord(offset, 0xacc40000)
+    offset = data.writeWord(offset, 0x10800008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34050002)
+    offset = data.writeWord(offset, 0x34044000)
+    offset = data.writeWord(offset, 0x3408c000)
+    offset = data.writeWord(offset, 0x3407fffd)
+    offset = data.writeWord(offset, 0x34020002)
+    offset = data.writeWord(offset, 0x080262d0)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34050001)
+    offset = data.writeWord(offset, 0x34048000)
+    offset = data.writeWord(offset, 0x34084000)
+    offset = data.writeWord(offset, 0x3407fffe)
+    offset = data.writeWord(offset, 0x34020003)
+    offset = data.writeWord(offset, 0x3c068011)
+    offset = data.writeWord(offset, 0xa4c52b7c)
+    offset = data.writeWord(offset, 0xa4c42b84)
+    offset = data.writeWord(offset, 0xa4c52d8c)
+    offset = data.writeWord(offset, 0xa4c42d94)
+    offset = data.writeWord(offset, 0xa4c52cdc)
+    offset = data.writeWord(offset, 0xa4c42ce4)
+    offset = data.writeWord(offset, 0xa4c52f84)
+    offset = data.writeWord(offset, 0xa4c42f88)
+    offset = data.writeWord(offset, 0xa4c82f68)
+    offset = data.writeWord(offset, 0xa4c72f64)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c06800a)
+    offset = data.writeWord(offset, 0x34c6e000)
+    offset = data.writeWord(offset, 0xa4c20488)
+    offset = data.writeWord(offset, 0xa4c20490)
+    offset = data.writeWord(offset, 0xa4c20498)
+    offset = data.writeWord(offset, 0xa4c204a0)
+    offset = data.writeWord(offset, 0xa4c204a8)
+    offset = data.writeWord(offset, 0xa4c204b0)
+    offset = data.writeWord(offset, 0xa4c204b8)
+    offset = data.writeWord(offset, 0xa4c204c0)
+    offset = data.writeWord(offset, 0x03e00008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c028007)
+    offset = data.writeWord(offset, 0x8c422eec)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34430000)
+    offset = data.writeWord(offset, 0x30630001)
+    offset = data.writeWord(offset, 0x10600007)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0c03f8ea)
+    offset = data.writeWord(offset, 0x3404000c)
+    offset = data.writeWord(offset, 0x10400003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08044185)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0804414a)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c028009)
+    offset = data.writeWord(offset, 0x94437494)
+    offset = data.writeWord(offset, 0x94427490)
+    offset = data.writeWord(offset, 0x34050002)
+    offset = data.writeWord(offset, 0x10850013)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34050003)
+    offset = data.writeWord(offset, 0x10850021)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x30420400)
+    offset = data.writeWord(offset, 0x10400008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34041000)
+    offset = data.writeWord(offset, 0x14640005)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27bdffe8)
+    offset = data.writeWord(offset, 0xafbf0010)
+    offset = data.writeWord(offset, 0x08044527)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c028007)
+    offset = data.writeWord(offset, 0x8c422ee8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x080444ad)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x30420400)
+    offset = data.writeWord(offset, 0x1040000a)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34044000)
+    offset = data.writeWord(offset, 0x14640007)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34050002)
+    offset = data.writeWord(offset, 0xac453404)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xafbf0010)
+    offset = data.writeWord(offset, 0x0804448e)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c028007)
+    offset = data.writeWord(offset, 0x8c422ee8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08044409)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x30420400)
+    offset = data.writeWord(offset, 0x10400008)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3063a000)
+    offset = data.writeWord(offset, 0x10600005)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27bdffe0)
+    offset = data.writeWord(offset, 0xafbf0018)
+    offset = data.writeWord(offset, 0x080443e0)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c028007)
+    offset = data.writeWord(offset, 0x8c422ee8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08044381)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x06030100)
+    offset = data.writeWord(offset, 0x2017100a)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x16220003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x0803d3b3)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x27bdffe0)
+    offset = data.writeWord(offset, 0xafbf0004)
+    offset = data.writeWord(offset, 0xafb60008)
+    offset = data.writeWord(offset, 0xafaf000c)
+    offset = data.writeWord(offset, 0x3402006d)
+    offset = data.writeWord(offset, 0x1622002a)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c028009)
+    offset = data.writeWord(offset, 0x34427c14)
+    offset = data.writeWord(offset, 0x8c420000)
+    offset = data.writeWord(offset, 0x340f0045)
+    offset = data.writeWord(offset, 0x01e27823)
+    offset = data.writeWord(offset, 0x34560000)
+    offset = data.writeWord(offset, 0x05e00022)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x340f003f)
+    offset = data.writeWord(offset, 0x02cfb023)
+    offset = data.writeWord(offset, 0x06c0001e)
+    offset = data.writeWord(offset, 0x26cf0005)
+    offset = data.writeWord(offset, 0x3c168009)
+    offset = data.writeWord(offset, 0x36d68cc0)
+    offset = data.writeWord(offset, 0x02cfb021)
+    offset = data.writeWord(offset, 0x92c20000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x02028021)
+    offset = data.writeWord(offset, 0x3c028009)
+    offset = data.writeWord(offset, 0x34427c18)
+    offset = data.writeWord(offset, 0x8c420000)
+    offset = data.writeWord(offset, 0x340f0045)
+    offset = data.writeWord(offset, 0x01e27823)
+    offset = data.writeWord(offset, 0x34560000)
+    offset = data.writeWord(offset, 0x05e00010)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x340f003f)
+    offset = data.writeWord(offset, 0x02cfb023)
+    offset = data.writeWord(offset, 0x06c0000c)
+    offset = data.writeWord(offset, 0x26cf0005)
+    offset = data.writeWord(offset, 0x3c168009)
+    offset = data.writeWord(offset, 0x36d68cc0)
+    offset = data.writeWord(offset, 0x02cfb021)
+    offset = data.writeWord(offset, 0x92c20000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x02028021)
+    offset = data.writeWord(offset, 0x34160000)
+    offset = data.writeWord(offset, 0x3c028009)
+    offset = data.writeWord(offset, 0x34427c00)
+    offset = data.writeWord(offset, 0x14530001)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8faf000c)
+    offset = data.writeWord(offset, 0x8fb60008)
+    offset = data.writeWord(offset, 0x8fbf0004)
+    offset = data.writeWord(offset, 0x27bd0020)
+    offset = data.writeWord(offset, 0x3402007e)
+    offset = data.writeWord(offset, 0x0803d3b9)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xffffffff)
     
     // Hook Master function into gameplay loop.
-    data.writeWord(0xFAA38,0x0C02622D)
+    data.writeWord(0xfaa38, 0x0c02622d)
 
     return data
   }
@@ -5823,11 +5926,14 @@
     data.writeWord(0x04fcf264, 0x3c020002)
     return data
   }
-	
-  function applyMagicMaxPatches() { // Adds MP Vessel to replace Heart Vessel - eldrich
+
+  // Adds MP Vessel to replace Heart Vessel - eldrich
+  function applyMagicMaxPatches() {
     const data = new checked()
-    let offset = 0x00117b50	// Set Starting Offset
-    // Patch MP Vessels function Heart Vessels - code by MottZilla & graphics drawn by eldri7ch
+    // Set Starting Offset
+    let offset = 0x00117b50
+    // Patch MP Vessels function Heart Vessels
+    // - code by MottZilla & graphics drawn by eldri7ch
     offset = data.writeWord(offset, 0x3c028004)
     offset = data.writeWord(offset, 0x8c42c9a0)
     offset = data.writeWord(offset, 0x00000000)
@@ -5990,83 +6096,99 @@
   function applyAntiFreezePatches() {
     const data = new checked()
     // Patch screen freeze value - eldri7ch
-    data.writeChar(0x00140a2c, 0x00)	// Patch from Boss-Rush / MottZilla
+    // Patch from Boss-Rush / MottZilla
+    data.writeChar(0x00140a2c, 0x00)
     return data
   }
 
   function applyMyPursePatches() {
     const data = new checked()
     // Patch Death goes home - eldri7ch
-    data.writeWord(0x04baea08, 0x18000006)	// Patch from Boss-Rush / MottZilla
+    // Patch from Boss-Rush / MottZilla
+    data.writeWord(0x04baea08, 0x18000006)
     return data
   }
 
   function applyiwsPatches() {
     const data = new checked()
     // Patch wing smash duration - eldri7ch
-    data.writeChar(0x00134074, 0x00)	// Patch from Bat-Master / MottZilla
+    // Patch from Bat-Master / MottZilla
+    data.writeChar(0x00134074, 0x00)
     return data
   }
 
   function applyfastwarpPatches() {
     const data = new checked()
     // Patch warp animation speed - eldri7ch
-    data.writeChar(0x0588be90, 0x02)	// Patch from Aperture / MottZilla
+    // Patch from Aperture / MottZilla
+    data.writeChar(0x0588be90, 0x02)
     data.writeChar(0x05a78fe4, 0x02)
     return data
   }
 
   function applynoprologuePatches() {
     const data = new checked()
-    // Patch prologue removal; specifically setting the first room to enter as NO3 instead of ST0 - eldri7ch
+    // Patch prologue removal; specifically setting the first room
+    // to enter as NO3 instead of ST0 - eldri7ch
     let offset
 
-    data.writeChar(0x04392b1c, 0x41)	              // Patch from Chaos-Lite / MottZilla
+    // Patch from Chaos-Lite / MottZilla
+    data.writeChar(0x04392b1c, 0x41)
 
-    offset = 0x00119b98                             // hook address to reset time attack
-    offset = data.writeWord(offset,0x0803fef0)      // place hook in relic reset
-    offset = data.writeWord(offset,0x00000000)
+    // hook address to reset time attack
+    offset = 0x00119b98
+    // place hook in relic reset
+    offset = data.writeWord(offset, 0x0803fef0)
+    offset = data.writeWord(offset, 0x00000000)
 
-    offset = 0x001199b8                             // start code in richter (no use in no-prologue) 
-    offset = data.writeWord(offset,0xa0600000)      // reset the time attack to allow bosses to spawn
-    offset = data.writeWord(offset,0x2610ffff)
-    offset = data.writeWord(offset,0x0601fffd)
-    offset = data.writeWord(offset,0x2463ffff)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c038003)
-    offset = data.writeWord(offset,0x3463ca28)
-    offset = data.writeWord(offset,0x3410001b)
-    offset = data.writeWord(offset,0xac600000)
-    offset = data.writeWord(offset,0x2610ffff)
-    offset = data.writeWord(offset,0x0601fffd)
-    offset = data.writeWord(offset,0x24630004)
-    offset = data.writeWord(offset,0x3C028009)
-    offset = data.writeWord(offset,0x34427C34)
-    offset = data.writeWord(offset,0xAC400000)
-    offset = data.writeWord(offset,0xAC400004)
-    offset = data.writeWord(offset,0xAC400008)
-    offset = data.writeWord(offset,0x0803ff6c)
-    offset = data.writeWord(offset,0x00000000)
+    // start code in richter (no use in no-prologue) 
+    offset = 0x001199b8
+    // reset the time attack to allow bosses to spawn
+    offset = data.writeWord(offset, 0xa0600000)
+    offset = data.writeWord(offset, 0x2610ffff)
+    offset = data.writeWord(offset, 0x0601fffd)
+    offset = data.writeWord(offset, 0x2463ffff)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x3c038003)
+    offset = data.writeWord(offset, 0x3463ca28)
+    offset = data.writeWord(offset, 0x3410001b)
+    offset = data.writeWord(offset, 0xac600000)
+    offset = data.writeWord(offset, 0x2610ffff)
+    offset = data.writeWord(offset, 0x0601fffd)
+    offset = data.writeWord(offset, 0x24630004)
+    offset = data.writeWord(offset, 0x3c028009)
+    offset = data.writeWord(offset, 0x34427c34)
+    offset = data.writeWord(offset, 0xac400000)
+    offset = data.writeWord(offset, 0xac400004)
+    offset = data.writeWord(offset, 0xac400008)
+    offset = data.writeWord(offset, 0x0803ff6c)
+    offset = data.writeWord(offset, 0x00000000)
 
-    data.writeChar(0xAE663, 0x02)
-    data.writeChar(0xAE664, 0x00)	// Change Room
+    data.writeChar(0xae663, 0x02)
+    // Change Room
+    data.writeChar(0xae664, 0x00)
 
-    offset = 0x119C98				// Always get HR & NB Prologue Rewards
-    offset = data.writeWord(offset,0x18000002)
-    offset = data.writeWord(offset,0x00000000)
-    offset = 0x119CFC
-    offset = data.writeWord(offset,0x00000000)
+    // Always get HR & NB Prologue Rewards
+    offset = 0x119c98
+    offset = data.writeWord(offset, 0x18000002)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = 0x119cfc
+    offset = data.writeWord(offset, 0x00000000)
 
     return data
   }
 
   function applyunlockedPatches() {
     const data = new checked()
-    const tileRemove = 0x00000000 //set tile overwrites to remove them
-    const memorySkip = 0x34020001 //set register 2 to 01 instead of whatever RAM said
-    const nopValue = 0x00000000 //nop instruction follow-up
+    //set tile overwrites to remove them
+    const tileRemove = 0x00000000
+    //set register 2 to 01 instead of whatever RAM said
+    const memorySkip = 0x34020001
+    //nop instruction follow-up
+    const nopValue = 0x00000000
     // Patch the reverse entrance shortcut - eldri7ch
-    let offset = 0x051caaee           // remove the blocking tiles - eldri7ch
+    // remove the blocking tiles - eldri7ch
+    let offset = 0x051caaee
     data.writeWord(offset,tileRemove)
     offset += 0x40
     data.writeWord(offset,tileRemove)
@@ -6082,175 +6204,197 @@
     data.writeWord(offset,tileRemove)
     offset += 0x40
     data.writeWord(offset,tileRemove)
-    data.writeShort(0x051b03c2,0x030e) // move the entity down - eldri7ch
-    data.writeShort(0x051afb80,0x030e)
+    // move the entity down - eldri7ch
+    data.writeShort(0x051b03c2, 0x030e)
+    data.writeShort(0x051afb80, 0x030e)
     // Patch Underground Caverns - Entrance shortcut - eldri7ch
     offset = 0x05430050
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x05430518
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x04ba840c
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x04ba88ac
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     // Patch Marble Gallery - Entrance shortcut - eldri7ch
     offset = 0x04ba8bc4
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x04ba8dd4
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x04ba8e00
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x04ba918c
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x04ba91b4
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x05430844
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x05430a80
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x05430bd0
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x05430e3c
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x05430e64
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     // Patch Warp Room - Entrance shortcut - eldri7ch
     offset = 0x04bab2d4
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x04bab534
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x04bab674
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x054325dc
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x0543283c
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x0543297c
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     // Patch Olrox's Quarters - Royal Chapel shortcut - eldri7ch
     offset = 0x046c082c
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     // Patch Colosseum - Royal Chapel shortcut - eldri7ch
     offset = 0x0440100c
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     offset = 0x04401100
-    offset = data.writeWord(offset,memorySkip)
-    offset = data.writeWord(offset,nopValue)
+    offset = data.writeWord(offset, memorySkip)
+    offset = data.writeWord(offset, nopValue)
     return data
   }
 
   function applysurprisePatches() {
     const data = new checked()
-    const spritePal = 0x01020111 //set tile overwrites to remove them
+    //set tile overwrites to remove them
+    const spritePal = 0x01020111
     // Patch the sprites for each relic - eldri7ch; code by MottZilla
-    let offset = 0x000b5550           // start with Soul of Bat - eldri7ch
-    data.writeWord(offset,spritePal)
+    // start with Soul of Bat - eldri7ch
+    let offset = 0x000b5550
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x140
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
-    data.writeWord(offset,spritePal)
+    data.writeWord(offset, spritePal)
     offset += 0x10
     return data
   }
 
-  function enemyNumStatRand(randomFloat,statAmt) {                              // a function to return a new value for a stat based on the stat's original value
-    let tempAmt                                                                 // temp holding space for the number to be converted
-    let newAmt                                                                  // this will ultimately be our output
-    tempAmt = Math.round(randomFloat * statAmt)                                 // set the temp to the new value for the stat
-    newAmt = numToHex(tempAmt,4)                                                // convert the new stat amount to hex width 4 to avoid giving large HP enemies 15k+ HP
-    return newAmt                                                               // return the resulting hex for implementation
+  // a function to return a new value for a stat based on the
+  // stat's original value
+  function enemyNumStatRand(randomFloat, statAmt) {
+    // temp holding space for the number to be converted
+    let tempAmt
+    // this will ultimately be our output
+    let newAmt
+    // set the temp to the new value for the stat
+    tempAmt = Math.round(randomFloat * statAmt)
+    // convert the new stat amount to hex width 4 to avoid giving
+    // large HP enemies 15k+ HP
+    newAmt = numToHex(tempAmt, 4)
+    // return the resulting hex for implementation
+    return newAmt
   }
 
-  function itemPriceStatRand(rng,priceAmt) {                                    // a function to return a new value for a stat based on the stat's original value
-    let randomFloat                                                             // set aside for floating decimal
-    let tempAmt                                                                 // temp holding space for the number to be converted
-    let newAmt                                                                  // this will ultimately be our output
-    randomFloat = ((Math.floor(rng() * 100) +50)/ 100)                          // select a random % between 50% and 150%
-    tempAmt = Math.round(randomFloat * priceAmt)                                // set the temp to the new value for the price
-    newAmt = numToHex(tempAmt,8)                                                // convert the new stat amount to hex width 8 to match the current format
-    return newAmt                                                               // return the resulting hex for implementation
+  // a function to return a new value for a stat based on the
+  // stat's original value
+  function itemPriceStatRand(rng, priceAmt) {
+    // set aside for floating decimal
+    let randomFloat
+    // temp holding space for the number to be converted
+    let tempAmt
+    // this will ultimately be our output
+    let newAmt
+    // select a random % between 50% and 150%
+    randomFloat = (Math.floor(rng() * 100) +50) / 100
+    // set the temp to the new value for the price
+    tempAmt = Math.round(randomFloat * priceAmt)
+    // convert the new stat amount to hex width 8 to match the current format
+    newAmt = numToHex(tempAmt, 8)
+    // return the resulting hex for implementation
+    return newAmt
   }
 
   function halfChanceElementRando(rng) {
     let newType
     // We want nothing 50% of the time, and a random type all other times
-    if(rng() >= 0.5) return 0x0000;
+    if(rng() >= 0.5) {
+      return 0x0000
+    }
     
     let typeList = [
       0x0020, // hit
@@ -6271,7 +6415,9 @@
   function thirdChanceElementRando(rng) {
     let newType
     // We want nothing 33% of the time, and a random type all other times
-    if(rng() >= 0.33) return 0x0000;
+    if(rng() >= 0.33) {
+      return 0x0000
+    }
     
     let typeList = [
       0x0020, // hit
@@ -6292,7 +6438,9 @@
   function quarterChanceElementRando(rng) {
     let newType
     // We want nothing 50% of the time, and a random type all other times
-    if(rng() >= 0.25) return 0x0000;
+    if(rng() >= 0.25) {
+      return 0x0000
+    }
     
     let typeList = [
       0x0020, // hit
@@ -6350,12 +6498,19 @@
     let newType
     let typeList = [
       // 0x0000, // No hitbox - Do not combine
-      // 0x1000, // Hit 1/6 - Do not combine within the 0xn000 tier. These do not combine with each other. Do not combine with the 0x0n00 tier.
-      // 0x2000, // hit - Do not combine within the 0xn000 tier. These do not combine with each other.
-      // 0x4000, // cut - Do not combine within the 0xn000 tier. These do not combine with each other.
-      // 0x5000, // cut 1/6 - Do not combine within the 0xn000 tier. These do not combine with each other. Do not combine with the 0x0n00 tier.
+      // 0x1000, // Hit 1/6 - Do not combine within the 0xn000 tier.
+      //         // These do not combine with each other.
+      //         // Do not combine with the 0x0n00 tier.
+      // 0x2000, // hit - Do not combine within the 0xn000 tier.
+      //         // These do not combine with each other.
+      // 0x4000, // cut - Do not combine within the 0xn000 tier.
+      //         // These do not combine with each other.
+      // 0x5000, // cut 1/6 - Do not combine within the 0xn000 tier.
+      //         // These do not combine with each other.
+      //         // Do not combine with the 0x0n00 tier.
       // 0x6000, // weak cut - Do not combine
-      // 0x8000, // Poison - Do not combine within the 0xn000 tier. These do not combine with each other.
+      // 0x8000, // Poison - Do not combine within the 0xn000 tier.
+      //         // These do not combine with each other.
       // 0x0001, // Curse
       // 0x0002, // Stone
       // 0x0004, // Water
@@ -6364,10 +6519,13 @@
       // 0x0020, // Ice
       // 0x0040, // Lightning
       // 0x0080, // Fire
-      // 0x0200, // Weak Hit - do not combine within the 0x0n00 tier. These do not combine with each other.
-      // 0x0400, // Big Toss - do not combine within the 0x0n00 tier. These do not combine with each other.
+      // 0x0200, // Weak Hit - do not combine within the 0x0n00 tier.
+      //         // These do not combine with each other.
+      // 0x0400, // Big Toss - do not combine within the 0x0n00 tier.
+      //         // These do not combine with each other.
       // 0x0600, // guard - do not combine.
-      // 0x0700, // Cat - do not combine within the 0x0n00 tier. These do not combine with each other.
+      // 0x0700, // Cat - do not combine within the 0x0n00 tier.
+      //         // These do not combine with each other.
       0x0000, // No hitbox
       0x0000, // No hitbox
       0x0000, // No hitbox
@@ -6449,12 +6607,12 @@
       0x9021, // Hit Holy Fire
       0x9021, // Hit Holy Fire
       0x9021, // Hit Holy Fire
-      0xA021, // Hit Ice Fire
-      0xA021, // Hit Ice Fire
-      0xA021, // Hit Ice Fire
-      0xC021, // Hit Lightning Fire
-      0xC021, // Hit Lightning Fire
-      0xC021, // Hit Lightning Fire
+      0xa021, // Hit Ice Fire
+      0xa021, // Hit Ice Fire
+      0xa021, // Hit Ice Fire
+      0xc021, // Hit Lightning Fire
+      0xc021, // Hit Lightning Fire
+      0xc021, // Hit Lightning Fire
       0x0124, // Hit Curse
       0x0224, // Hit Stone
       0x0324, // Hit Stone Curse
@@ -6527,12 +6685,12 @@
       0x9024, // Hit Holy Fire
       0x9024, // Hit Holy Fire
       0x9024, // Hit Holy Fire
-      0xA024, // Hit Ice Fire
-      0xA024, // Hit Ice Fire
-      0xA024, // Hit Ice Fire
-      0xC024, // Hit Lightning Fire
-      0xC024, // Hit Lightning Fire
-      0xC024, // Hit Lightning Fire
+      0xa024, // Hit Ice Fire
+      0xa024, // Hit Ice Fire
+      0xa024, // Hit Ice Fire
+      0xc024, // Hit Lightning Fire
+      0xc024, // Hit Lightning Fire
+      0xc024, // Hit Lightning Fire
       0x0041, // Normal Cut
       0x0041, // Normal Cut
       0x0041, // Normal Cut
@@ -6608,12 +6766,12 @@
       0x9041, // Cut Holy Fire
       0x9041, // Cut Holy Fire
       0x9041, // Cut Holy Fire
-      0xA041, // Cut Ice Fire
-      0xA041, // Cut Ice Fire
-      0xA041, // Cut Ice Fire
-      0xC041, // Cut Lightning Fire
-      0xC041, // Cut Lightning Fire
-      0xC041, // Cut Lightning Fire
+      0xa041, // Cut Ice Fire
+      0xa041, // Cut Ice Fire
+      0xa041, // Cut Ice Fire
+      0xc041, // Cut Lightning Fire
+      0xc041, // Cut Lightning Fire
+      0xc041, // Cut Lightning Fire
       0x0044, // Normal Cut
       0x0044, // Normal Cut
       0x0044, // Normal Cut
@@ -6689,12 +6847,12 @@
       0x9044, // Cut Holy Fire
       0x9044, // Cut Holy Fire
       0x9044, // Cut Holy Fire
-      0xA044, // Cut Ice Fire
-      0xA044, // Cut Ice Fire
-      0xA044, // Cut Ice Fire
-      0xC044, // Cut Lightning Fire
-      0xC044, // Cut Lightning Fire
-      0xC044, // Cut Lightning Fire
+      0xa044, // Cut Ice Fire
+      0xa044, // Cut Ice Fire
+      0xa044, // Cut Ice Fire
+      0xc044, // Cut Lightning Fire
+      0xc044, // Cut Lightning Fire
+      0xc044, // Cut Lightning Fire
       0x0080, // Normal Poison
       0x0080, // Normal Poison
       0x0080, // Normal Poison
@@ -6824,12 +6982,12 @@
       0x9011, // Hit 1/6 Holy Fire
       0x9011, // Hit 1/6 Holy Fire
       0x9011, // Hit 1/6 Holy Fire
-      0xA011, // Hit 1/6 Ice Fire
-      0xA011, // Hit 1/6 Ice Fire
-      0xA011, // Hit 1/6 Ice Fire
-      0xC011, // Hit 1/6 Lightning Fire
-      0xC011, // Hit 1/6 Lightning Fire
-      0xC011, // Hit 1/6 Lightning Fire
+      0xa011, // Hit 1/6 Ice Fire
+      0xa011, // Hit 1/6 Ice Fire
+      0xa011, // Hit 1/6 Ice Fire
+      0xc011, // Hit 1/6 Lightning Fire
+      0xc011, // Hit 1/6 Lightning Fire
+      0xc011, // Hit 1/6 Lightning Fire
       0x0051, // Normal Cut 1/6
       0x0051, // Normal Cut 1/6
       0x0051, // Normal Cut 1/6
@@ -6890,12 +7048,12 @@
       0x9051, // Cut 1/6 Holy Fire
       0x9051, // Cut 1/6 Holy Fire
       0x9051, // Cut 1/6 Holy Fire
-      0xA051, // Cut 1/6 Ice Fire
-      0xA051, // Cut 1/6 Ice Fire
-      0xA051, // Cut 1/6 Ice Fire
-      0xC051, // Cut 1/6 Lightning Fire
-      0xC051, // Cut 1/6 Lightning Fire
-      0xC051, // Cut 1/6 Lightning Fire
+      0xa051, // Cut 1/6 Ice Fire
+      0xa051, // Cut 1/6 Ice Fire
+      0xa051, // Cut 1/6 Ice Fire
+      0xc051, // Cut 1/6 Lightning Fire
+      0xc051, // Cut 1/6 Lightning Fire
+      0xc051, // Cut 1/6 Lightning Fire
     ]
     newType = typeList[Math.floor(rng() * Math.floor(typeList.length - 1))]
     return newType
@@ -6904,53 +7062,53 @@
   function hexValueToDamageString(hexValue) {
     // Hit types can't be combined
     let hitTypes = {
-        0: "",     // No Hit Box
-        1: "",     // Hit 16%
-        2: "",     // Hit
-        4: "",     // Cut
-        5: "",     // Cut 16%
-        6: "",     // Cut Weak
-        8: "30"      // Poison
+      0: '',     // No Hit Box
+      1: '',     // Hit 16%
+      2: '',     // Hit
+      4: '',     // Cut
+      5: '',     // Cut 16%
+      6: '',     // Cut Weak
+      8: '30'    // Poison
     }
 
     // Hit effects can't be combined
     let hitEffects = {
-        0: "",         // No Hit Box
-        1: "",         // Ignore normal attack styles
-        2: "",       // Hit Weak
-        4: "",       // Big Toss
-        6: "",       // Guard
-        7: "23"        // Cat
+      0: '',     // No Hit Box
+      1: '',     // Ignore normal attack styles
+      2: '',     // Hit Weak
+      4: '',     // Big Toss
+      6: '',     // Guard
+      7: '23'    // Cat
     }
 
     // Damage Types CAN be combined
     let damageTypes = {
-        0: "",         // None
-        1: "28",        // Holy
-        2: "29",        // Ice
-        4: "2c",        // Lightning
-        8: "26"         // Fire
+      0: '',     // None
+      1: '28',   // Holy
+      2: '29',   // Ice
+      4: '2c',   // Lightning
+      8: '26'    // Fire
     }
 
     // Special Types CAN be combined
     let specialTypes = {
-        0: "",          // None
-        1: "35",         // Curse
-        2: "33",         // Stone
-        4: "37",         // Water
-        8: "24"          // Dark
+      0: '',     // None
+      1: '35',   // Curse
+      2: '33',   // Stone
+      4: '37',   // Water
+      8: '24'    // Dark
     }
 
-    let hitTypeValue = (hexValue >> 4) & 0xF;
+    let hitTypeValue = (hexValue >> 4) & 0xf
     let hitType = hitTypes[hitTypeValue]
 
-    let hitEffectValue = hexValue & 0xF
+    let hitEffectValue = hexValue & 0xf
     let hitEffect = hitEffects[hitEffectValue]
 
-    let damageTypeValue = (hexValue >> 12) & 0xF;
-    let damageType = getStatType(damageTypes, damageTypeValue);
+    let damageTypeValue = (hexValue >> 12) & 0xf
+    let damageType = getStatType(damageTypes, damageTypeValue)
 
-    let specialTypeValue = (hexValue >> 8) & 0xF;
+    let specialTypeValue = (hexValue >> 8) & 0xf
     let specialType = getStatType(specialTypes, specialTypeValue)
 
     return `${hitType}${hitEffect}${damageType}${specialType}`
@@ -6959,53 +7117,53 @@
   function hexValueToDefenceString(hexValue) {
     // Hit types can't be combined
     let hitTypes = {
-        0: "3f",     // No Resistance
-        1: "",     // Hit 16%
-        2: "03",     // Hit
-        4: "0f",     // Cut
-        5: "",     // Cut 16%
-        6: "",     // Cut Weak
-        8: "30"      // Poison
+      0: '3f',   // No Resistance
+      1: '',     // Hit 16%
+      2: '03',   // Hit
+      4: '0f',   // Cut
+      5: '',     // Cut 16%
+      6: '',     // Cut Weak
+      8: '30'    // Poison
     }
 
     // Hit effects can't be combined
     let hitEffects = {
-        0: "",         // No Hit Box
-        1: "",         // Ignore normal attack styles
-        2: "",       // Hit Weak
-        4: "",       // Big Toss
-        6: "",       // Guard
-        7: "23"        // Cat
+      0: '',     // No Hit Box
+      1: '',     // Ignore normal attack styles
+      2: '',     // Hit Weak
+      4: '',     // Big Toss
+      6: '',     // Guard
+      7: '23'    // Cat
     }
 
     // Damage Types CAN be combined
     let damageTypes = {
-        0: "",         // None
-        1: "28",        // Holy
-        2: "29",        // Ice
-        4: "2c",        // Lightning
-        8: "26"         // Fire
+      0: '',     // None
+      1: '28',   // Holy
+      2: '29',   // Ice
+      4: '2c',   // Lightning
+      8: '26'    // Fire
     }
 
     // Special Types CAN be combined
     let specialTypes = {
-        0: "",          // None
-        1: "35",         // Curse
-        2: "33",         // Stone
-        4: "37",         // Water
-        8: "24"          // Dark
+      0: '',     // None
+      1: '35',   // Curse
+      2: '33',   // Stone
+      4: '37',   // Water
+      8: '24'    // Dark
     }
 
-    let hitTypeValue = (hexValue >> 4) & 0xF;
+    let hitTypeValue = (hexValue >> 4) & 0xf
     let hitType = hitTypes[hitTypeValue]
 
-    let hitEffectValue = hexValue & 0xF
+    let hitEffectValue = hexValue & 0xf
     let hitEffect = hitEffects[hitEffectValue]
 
-    let damageTypeValue = (hexValue >> 12) & 0xF;
-    let damageType = getStatType(damageTypes, damageTypeValue);
+    let damageTypeValue = (hexValue >> 12) & 0xf
+    let damageType = getStatType(damageTypes, damageTypeValue)
 
-    let specialTypeValue = (hexValue >> 8) & 0xF;
+    let specialTypeValue = (hexValue >> 8) & 0xf
     let specialType = getStatType(specialTypes, specialTypeValue)
 
     return `${hitType}${hitEffect}${damageType}${specialType}`
@@ -7013,417 +7171,702 @@
 
   function getStatType(typeObj, value){
     let valuesForDamage = findRequiredNumbers(value, Object.keys(typeObj))
-    valuesForDamage.sort((a, b) => a - b);  // Sort them ascending
-    let valueType = ""
-    for(value of valuesForDamage){
-        valueType += typeObj[value]
+    // Sort them ascending
+    valuesForDamage.sort(function(a, b) {
+      return a - b
+    })
+    let valueType = ''
+    for (value of valuesForDamage){
+      valueType += typeObj[value]
     }
     return valueType
   }
 
-  function applyenemyStatRandoPatches(rng,chaos) {
+  function applyenemyStatRandoPatches(rng, chaos) {
     const enemyStats = enemies.enemyStats
     const data = new checked()
     // Patch the enemy stats being randomized
-    let offset                                                                  // enemy offset addr - eldri7ch
-    let hexOffset                                                               // the offset converted to hex
-    let statHp                                                                  // The starting HP amount
-    let newHp                                                                   // The adjusted HP amount
-    let statAtk                                                                 // The starting attack amount
-    let newAtk                                                                  // The adjusted attack amount
-    let statDef                                                                 // The starting defense amount
-    let newDef                                                                  // The adjusted defense amount
-    let disclosureCard                                                          // Tracks the disclosure card contents before they are applied to the name of the enemy
-    let newAtkType                                                              // The new damage type for an attack
-    let newWeakType                                                             // The new damage type for weakness stat
-    let newResistType                                                           // The new damage type for resist stat
-    let newImmuneType                                                           // The new damage type for Guard / Absorb stat
-    let newDisclosure                                                           // this is a holding spot for re-formatting before inclusion into the main disclosure
-    let newResistDisclosure                                                     // Adding new disclosure info for the weakness resist
-    let childIter                                                               // The counter for iterating through child entities of an enemy
-    let childrenType                                                            // Stores the type of variable returned for "children" flag
-    let bossChildAtkType                                                        // Randomizing the elements of certain boss 
+    // enemy offset addr - eldri7ch
+    let offset
+    // the offset converted to hex
+    let hexOffset
+    // The starting HP amount
+    let statHp
+    // The adjusted HP amount
+    let newHp
+    // The starting attack amount
+    let statAtk
+    // The adjusted attack amount
+    let newAtk
+    // The starting defense amount
+    let statDef
+    // The adjusted defense amount
+    let newDef
+    // Tracks the disclosure card contents before they are
+    // applied to the name of the enemy
+    let disclosureCard
+    // The new damage type for an attack
+    let newAtkType
+    // The new damage type for weakness stat
+    let newWeakType
+    // The new damage type for resist stat
+    let newResistType
+    // The new damage type for Guard / Absorb stat
+    let newImmuneType
+    // this is a holding spot for re-formatting before
+    // inclusion into the main disclosure
+    let newDisclosure
+    // Adding new disclosure info for the weakness resist
+    let newResistDisclosure
+    // The counter for iterating through child entities of an enemy
+    let childIter
+    // Stores the type of variable returned for 'children' flag
+    let childrenType
+    // Randomizing the elements of certain boss 
+    let bossChildAtkType
     let newHpMod
     let newAtkMod
     let newDefMod
 
     enemyStats.forEach(function(enemy) {
-      statHp = enemy.hpValue                                                    // obtain the HP value from the enemy data
-      statAtk = enemy.atkValue                                                  // obtain the Atk value from the enemy data
-      statDef = enemy.defValue                                                  // obtain the Def value from the enemy data
+      // obtain the HP value from the enemy data
+      statHp = enemy.hpValue
+      // obtain the Atk value from the enemy data
+      statAtk = enemy.atkValue
+      // obtain the Def value from the enemy data
+      statDef = enemy.defValue
 
       // console.log(enemy.index + ' ' + enemy.name)
-      
-      newHpMod = ((Math.floor(rng() * 175) +25)/ 100)                           // select a random % between 25% and 200%
-      newHp = enemyNumStatRand(newHpMod,statHp)                                 // Randomly adjust by 25%-200%
-      data.writeShort(enemy.hpOffset,newHp)                                     // Write the HP
-      switch(enemy.index){
-        case 27:                                                                // special condition for Merman
-          statHp = 10                                                           // HP = 10
-          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
-          data.writeShort(0x0b5ce4,newHp)                                       // Assign the new HP value
-          break
-        case 14:                                                                // special condition for Flying Zombie
-          statHp = 190                                                          // HP = 190
-          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
-          data.writeShort(0x0b5ab4,newHp)                                       // Assign the new HP value
-          break
-        case 45:                                                                // special condition for Bone ark
-          statHp = 140                                                          // HP = 140
-          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
-          data.writeShort(0x0b60bc,newHp)                                       // Assign the new HP value
-          break
-        case 158:                                                               // special condition for Corpse weed
-          statHp = 20                                                           // HP = 20
-          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
-          data.writeShort(0x0b74c4,newHp)                                       // Assign the new HP value
-          break
-        case 161:                                                               // special condition for venus weed
-          statHp = 500                                                          // HP = 500
-          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
-          data.writeShort(0x0b753c,newHp)                                       // Assign the new HP value
-          break
-        case 392:                                                               // special condition for blue venus weed
-          statHp = 550                                                          // HP = 500
-          newHp = enemyNumStatRand(newHpMod,statHp)                             // Randomize HP
-          data.writeShort(0x0b9e14,newHp)                                       // Assign the new HP value
-          break
-      }
 
-      newAtkMod = ((Math.floor(rng() * 175) +25)/ 100)                          // select a random % between 25% and 200%
-      newAtk = enemyNumStatRand(newAtkMod,statAtk)                              // Randomly adjust by 25%-200%
-      data.writeShort(enemy.atkOffset,newAtk)                                   // Write the Atk
-      switch (enemy.index){
-        case 379:                                                               // special condition for Dracula
-          statAtk = 70                                                          // Hand attack = 70
-          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
-          data.writeShort(0x0b9c0e,newAtk)                                      // Assign the new attack value
-          break
-        case 27:                                                                // special condition for Merman
-          statAtk = 14                                                          // Hand attack = 70
-          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
-          data.writeShort(0x0b5ce6,newAtk)                                      // Assign the new attack value
-          break
-        case 14:                                                                // special condition for Flying Zombie
-          statAtk = 37                                                          // Hand attack = 37
-          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
-          data.writeShort(0x0b5ab6,newAtk)                                      // Assign the new attack value
-          break
-        case 45:                                                                // special condition for Bone ark
-          statAtk = 20                                                          // Hand attack = 20
-          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
-          data.writeShort(0x0b60be,newAtk)                                      // Assign the new attack value
-          break
-        case 158:                                                               // special condition for Corpse weed
-          statAtk = 20                                                          // Hand attack = 20
-          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
-          data.writeShort(0x0b74c6,newAtk)                                      // Assign the new attack value
-          break
-        case 161:                                                               // special condition for venus weed
-          statAtk = 28                                                          // Hand attack = 28
-          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
-          data.writeShort(0x0b753e,newAtk)                                      // Assign the new attack value
-          break
-        case 392:                                                               // special condition for blue venus weed
-          statAtk = 45                                                          // Hand attack = 28
-          newAtk = enemyNumStatRand(newAtkMod,statAtk)                          // Randomize Hand attack
-          data.writeShort(0x0b9e16,newAtk)                                      // Assign the new attack value
-          break
-      }
-
-      newDefMod = ((Math.floor(rng() * 175) +25)/ 100)                          // select a random % between 25% and 200%
-      newDef = enemyNumStatRand(newDefMod,statDef)                              // Randomly adjust by 25%-200%
-      data.writeShort(enemy.defOffset,newDef)                                   // Write the Def
+      // select a random % between 25% and 200%
+      newHpMod = ((Math.floor(rng() * 175) +25)/ 100)
+      // Randomly adjust by 25%-200%
+      newHp = enemyNumStatRand(newHpMod,statHp)
+      // Write the HP
+      data.writeShort(enemy.hpOffset, newHp)
       switch (enemy.index) {
-        case 379:                                                               // special condition for Dracula
-          statDef = 20                                                          // Hand defense = 20
-          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize Hand defense
-          data.writeShort(0x0b9c12,newDef)                                      // Assign the new defense value
-          break
-        case 27:                                                                // special condition for Merman
-          statDef = 1                                                           // Defense = 1
-          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
-          data.writeShort(0x0b5ce6,newDef)                                      // Assign the new defense value
-          break
-        case 14:                                                                // special condition for Flying Zombie
-          statDef = 10                                                          // Defense = 10
-          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
-          data.writeShort(0x0b5aba,newDef)                                      // Assign the new defense value
-          break
-        case 45:                                                                // special condition for Bone ark
-          statDef = 2                                                           // Defense = 2
-          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
-          data.writeShort(0x0b60c2,newDef)                                      // Assign the new defense value
-          break
-        case 158:                                                               // special condition for corpse weed
-          statDef = 1                                                           // Defense = 1
-          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
-          data.writeShort(0x0b74ca,newDef)                                      // Assign the new defense value
-          break
-        case 161:                                                               // special condition for venus weed
-          statDef = 1                                                           // Defense = 1
-          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
-          data.writeShort(0x0b7542,newDef)                                      // Assign the new defense value
-          break
-        case 392:                                                               // special condition for blue venus weed
-          statDef = 1                                                           // Defense = 1
-          newDef = enemyNumStatRand(newDefMod,statDef)                          // Randomize defense
-          data.writeShort(0x0b9e1a,newDef)                                      // Assign the new defense value
-          break
+      case 27:
+        // special condition for Merman
+        // HP = 10
+        statHp = 10
+        // Randomize HP
+        newHp = enemyNumStatRand(newHpMod, statHp)
+        // Assign the new HP value
+        data.writeShort(0x0b5ce4, newHp)
+        break
+      case 14:
+        // special condition for Flying Zombie
+        // HP = 190
+        statHp = 190
+        // Randomize HP
+        newHp = enemyNumStatRand(newHpMod, statHp)
+        // Assign the new HP value
+        data.writeShort(0x0b5ab4, newHp)
+        break
+      case 45:
+        // special condition for Bone ark
+        // HP = 140
+        statHp = 140
+        // Randomize HP
+        newHp = enemyNumStatRand(newHpMod, statHp)
+        // Assign the new HP value
+        data.writeShort(0x0b60bc, newHp)
+        break
+      case 158:
+        // special condition for Corpse weed
+        // HP = 20
+        statHp = 20
+        // Randomize HP
+        newHp = enemyNumStatRand(newHpMod, statHp)
+        // Assign the new HP value
+        data.writeShort(0x0b74c4, newHp)
+        break
+      case 161:
+        // special condition for venus weed
+        // HP = 500
+        statHp = 500
+        // Randomize HP
+        newHp = enemyNumStatRand(newHpMod, statHp)
+        // Assign the new HP value
+        data.writeShort(0x0b753c, newHp)
+        break
+      case 392:
+        // special condition for blue venus weed
+        // HP = 500
+        statHp = 550
+        // Randomize HP
+        newHp = enemyNumStatRand(newHpMod, statHp)
+        // Assign the new HP value
+        data.writeShort(0x0b9e14, newHp)
+        break
       }
 
-      newAtkType = enemyAtkTypeStatRand(rng)                                    // Select a random attack type
-      data.writeShort(enemy.atkTypeOffset,newAtkType)                           // Write the attack type
+      // select a random % between 25% and 200%
+      newAtkMod = ((Math.floor(rng() * 175) + 25) / 100)
+      // Randomly adjust by 25%-200%
+      newAtk = enemyNumStatRand(newAtkMod, statAtk)
+      // Write the Atk
+      data.writeShort(enemy.atkOffset, newAtk)
       switch (enemy.index) {
-        case 279:                                                               // special condition for Dracula
-          data.writeShort(0x0b9c10,newAtkType)                                  // Assign the new attack type
-          break
-        case 246:                                                               // Special case for axe knights
-          data.writeShort(0x0b9f08,newAtkType)                                  // Assign the new attack type to the Green Axe Knights as well
-          break
-        case 146:                                                               // special condition for Dhuron
-          data.writeShort(0x0b72e8,newAtkType)                                  // Assign the new attack type
-          break
+      case 379:
+        // special condition for Dracula
+        // Hand attack = 70
+        statAtk = 70
+        // Randomize Hand attack
+        newAtk = enemyNumStatRand(newAtkMod, statAtk)
+        // Assign the new attack value
+        data.writeShort(0x0b9c0e, newAtk)
+        break
+      case 27:
+        // special condition for Merman
+        // Hand attack = 70
+        statAtk = 14
+        // Randomize Hand attack
+        newAtk = enemyNumStatRand(newAtkMod, statAtk)
+        // Assign the new attack value
+        data.writeShort(0x0b5ce6, newAtk)
+        break
+      case 14:
+        // special condition for Flying Zombie
+        // Hand attack = 37
+        statAtk = 37
+        // Randomize Hand attack
+        newAtk = enemyNumStatRand(newAtkMod, statAtk)
+        // Assign the new attack value
+        data.writeShort(0x0b5ab6, newAtk)
+        break
+      case 45:
+        // special condition for Bone ark
+        // Hand attack = 20
+        statAtk = 20
+        // Randomize Hand attack
+        newAtk = enemyNumStatRand(newAtkMod, statAtk)
+        // Assign the new attack value
+        data.writeShort(0x0b60be, newAtk)
+        break
+      case 158:
+        // special condition for Corpse weed
+        // Hand attack = 20
+        statAtk = 20
+        // Randomize Hand attack
+        newAtk = enemyNumStatRand(newAtkMod, statAtk)
+        // Assign the new attack value
+        data.writeShort(0x0b74c6, newAtk)
+        break
+      case 161:
+        // special condition for venus weed
+        // Hand attack = 28
+        statAtk = 28
+        // Randomize Hand attack
+        newAtk = enemyNumStatRand(newAtkMod, statAtk)
+        // Assign the new attack value
+        data.writeShort(0x0b753e, newAtk)
+        break
+      case 392:
+        // special condition for blue venus weed
+        // Hand attack = 28
+        statAtk = 45
+        // Randomize Hand attack
+        newAtk = enemyNumStatRand(newAtkMod, statAtk)
+        // Assign the new attack value
+        data.writeShort(0x0b9e16, newAtk)
+        break
+      }
+
+      // select a random % between 25% and 200%
+      newDefMod = ((Math.floor(rng() * 175) + 25) / 100)
+      // Randomly adjust by 25%-200%
+      newDef = enemyNumStatRand(newDefMod, statDef)
+      // Write the Def
+      data.writeShort(enemy.defOffset, newDef)
+      switch (enemy.index) {
+      case 379:
+        // special condition for Dracula
+        // Hand defense = 20
+        statDef = 20
+        // Randomize Hand defense
+        newDef = enemyNumStatRand(newDefMod, statDef)
+        // Assign the new defense value
+        data.writeShort(0x0b9c12, newDef)
+        break
+      case 27:
+        // special condition for Merman
+        // Defense = 1
+        statDef = 1
+        // Randomize defense
+        newDef = enemyNumStatRand(newDefMod, statDef)
+        // Assign the new defense value
+        data.writeShort(0x0b5ce6, newDef)
+        break
+      case 14:
+        // special condition for Flying Zombie
+        // Defense = 10
+        statDef = 10
+        // Randomize defense
+        newDef = enemyNumStatRand(newDefMod, statDef)
+        // Assign the new defense value
+        data.writeShort(0x0b5aba, newDef)
+        break
+      case 45:
+        // special condition for Bone ark
+        // Defense = 2
+        statDef = 2
+        // Randomize defense
+        newDef = enemyNumStatRand(newDefMod, statDef)
+        // Assign the new defense value
+        data.writeShort(0x0b60c2, newDef)
+        break
+      case 158:
+        // special condition for corpse weed
+        // Defense = 1
+        statDef = 1
+        // Randomize defense
+        newDef = enemyNumStatRand(newDefMod, statDef)
+        // Assign the new defense value
+        data.writeShort(0x0b74ca, newDef)
+        break
+      case 161:
+        // special condition for venus weed
+        // Defense = 1
+        statDef = 1
+        // Randomize defense
+        newDef = enemyNumStatRand(newDefMod, statDef)
+        // Assign the new defense value
+        data.writeShort(0x0b7542, newDef)
+        break
+      case 392:
+        // special condition for blue venus weed
+        // Defense = 1
+        statDef = 1
+        // Randomize defense
+        newDef = enemyNumStatRand(newDefMod, statDef)
+        // Assign the new defense value
+        data.writeShort(0x0b9e1a, newDef)
+        break
+      }
+
+      // Select a random attack type
+      newAtkType = enemyAtkTypeStatRand(rng)
+      // Write the attack type
+      data.writeShort(enemy.atkTypeOffset, newAtkType)
+      switch (enemy.index) {
+      case 279:
+        // special condition for Dracula
+        // Assign the new attack type
+        data.writeShort(0x0b9c10, newAtkType)
+        break
+      case 246:
+        // Special case for axe knights
+        // Assign the new attack type to the Green Axe Knights as well
+        data.writeShort(0x0b9f08, newAtkType)
+        break
+      case 146:
+        // special condition for Dhuron
+        // Assign the new attack type
+        data.writeShort(0x0b72e8, newAtkType)
+        break
       }
       childrenType = typeof enemy.children
-      if(childrenType !== 'undefined') {                                        // Start the process of assigning the new damage type to the child entities of an enemy
-        childIter = 1                                                           // Minimum jump will be 0x28 which is 40 in dec. 1 * 40
-        offset = enemy.atkTypeOffset + (childIter * 0x28)                       // now we're writing to the offset set to 0x28 * [ordinal of children] plus the base address
-        while(childIter <= enemy.children){                                     // make this a while loop so that it should include the max
-          if ([55,71,233,253,287,296,300,307,324,342,351,356,372,379].includes(enemy.index) || chaos === true) { // Certain bosses will have non-uniform attack elements
-            bossChildAtkType = enemyAtkTypeStatRand(rng)                        // Establish a new attack type for each child
-            data.writeShort(offset,bossChildAtkType)                             // make sure that new attack elements are used for all children by writing
-            offset += 0x28                                                      // advance offset by 0x28
-            childIter++                                                         // advance the iteration once every time this loops
-          } else {                                                              // Normal enemies will have their other attacks share a type with their body
-            data.writeShort(offset,newAtkType)                                   // make sure that the same attack element is used for all children by writing
-            offset += 0x28                                                      // advance offset by 0x28
-            childIter++                                                         // advance the iteration once every time this loops
+      if (childrenType !== 'undefined') {
+        // Start the process of assigning the new damage type
+        // to the child entities of an enemy
+        // Minimum jump will be 0x28 which is 40 in dec. 1 * 40
+        childIter = 1
+        // now we're writing to the offset set to 0x28 * [ordinal of children]
+        // plus the base address
+        offset = enemy.atkTypeOffset + (childIter * 0x28)
+        // make this a while loop so that it should include the max
+        while (childIter <= enemy.children) {
+          // TODO: Why are these hardcoded numbers and not constants????
+          // Certain bosses will have non-uniform attack elements
+          const bosses = [
+            55,
+            71,
+            233,
+            253,
+            287,
+            296,
+            300,
+            307,
+            324,
+            342,
+            351,
+            356,
+            372,
+            379,
+          ]
+          if (bosses.includes(enemy.index) || chaos === true) {
+            // Establish a new attack type for each child
+            bossChildAtkType = enemyAtkTypeStatRand(rng)
+            // make sure that new attack elements are used for
+            // all children by writing
+            data.writeShort(offset, bossChildAtkType)
+            // advance offset by 0x28
+            offset += 0x28
+            // advance the iteration once every time this loops
+            childIter++
+          } else {
+            // Normal enemies will have their other attacks share
+            // a type with their body
+            // make sure that the same attack element is used
+            // for all children by writing
+            data.writeShort(offset, newAtkType)
+            // advance offset by 0x28
+            offset += 0x28
+            // advance the iteration once every time this loops
+            childIter++
           }
         }
       }
 
-      newWeakType = enemyWeakTypeStatRand(rng)                                  // Select a random weakness type
-      data.writeShort(enemy.weakOffset,newWeakType)                             // Write the weakness type
+      // Select a random weakness type
+      newWeakType = enemyWeakTypeStatRand(rng)
+      // Write the weakness type
+      data.writeShort(enemy.weakOffset, newWeakType)
       switch (enemy.index) {
-        case 379:                                                               // special condition for Dracula
-          data.writeShort(0x0b9c16,newWeakType)                                 // Assign the new weakness type
-          break
-        case 27:                                                                // special condition for Merman
-          data.writeShort(0x0b5cee,newWeakType)                                 // Assign the new weakness type
-          break
-        case 14:                                                                // special condition for Flying Zombie
-          data.writeShort(0x0b5abe,newWeakType)                                 // Assign the new weakness type
-          break
-        case 45:                                                                // special condition for Bone ark
-          data.writeShort(0x0b60c6,newWeakType)                                 // Assign the new weakness type
-          break
-        case 158:                                                               // special condition for Corpse weed
-          data.writeShort(0x0b74ce,newWeakType)                                 // Assign the new weakness type
-          break
-        case 161:                                                               // special condition for venus weed
-          data.writeShort(0x0b7546,newWeakType)                                 // Assign the new weakness type
-          break
-        case 392:                                                               // special condition for blue venus weed
-          data.writeShort(0x0b9e1e,newWeakType)                                 // Assign the new weakness type
-          break
+      case 379:
+        // special condition for Dracula
+        // Assign the new weakness type
+        data.writeShort(0x0b9c16, newWeakType)
+        break
+      case 27:
+        // special condition for Merman
+        // Assign the new weakness type
+        data.writeShort(0x0b5cee, newWeakType)
+        break
+      case 14:
+        // special condition for Flying Zombie
+        // Assign the new weakness type
+        data.writeShort(0x0b5abe, newWeakType)
+        break
+      case 45:
+        // special condition for Bone ark
+        // Assign the new weakness type
+        data.writeShort(0x0b60c6, newWeakType)
+        break
+      case 158:
+        // special condition for Corpse weed
+        // Assign the new weakness type
+        data.writeShort(0x0b74ce, newWeakType)
+        break
+      case 161:
+        // special condition for venus weed
+        // Assign the new weakness type
+        data.writeShort(0x0b7546, newWeakType)
+        break
+      case 392:
+        // special condition for blue venus weed
+        // Assign the new weakness type
+        data.writeShort(0x0b9e1e, newWeakType)
+        break
       }
 
-      newResistType = halfChanceElementRando(rng)                              // Select a random resist type
-      while(newResistType === newWeakType){                                     // resist / immunity overlap removal
+      // Select a random resist type
+      newResistType = halfChanceElementRando(rng)
+      // resist / immunity overlap removal
+      while (newResistType === newWeakType) {
         newResistType = halfChanceElementRando(rng)
       }
-      data.writeShort(enemy.resistOffset,newResistType)                         // Write the resist type
+      // Write the resist type
+      data.writeShort(enemy.resistOffset, newResistType)
       switch (enemy.index) {
-        case 379:                                                               // special condition for Dracula
-          data.writeShort(0x0b9c18,newResistType)                               // Assign the new resist type
-          break
-        case 27:                                                                // special condition for Merman
-          data.writeShort(0x0b5cf0,newResistType)                               // Assign the new weakness type
-          break
-        case 14:                                                                // special condition for Flying Zombie
-          data.writeShort(0x0b5ac0,newResistType)                               // Assign the new weakness type
-          break
-        case 45:                                                                // special condition for Bone ark
-          data.writeShort(0x0b60c8,newResistType)                                // Assign the new weakness type
-          break
-        case 158:                                                               // special condition for Corpse weed
-          data.writeShort(0x0b74d0,newResistType)                               // Assign the new weakness type
-          break
-        case 161:                                                               // special condition for venus weed
-          data.writeShort(0x0b7548,newResistType)                               // Assign the new weakness type
-          break
-        case 392:                                                               // special condition for blue venus weed
-          data.writeShort(0x0b9e20,newResistType)                               // Assign the new weakness type
-          break
+      case 379:
+        // special condition for Dracula
+        // Assign the new resist type
+        data.writeShort(0x0b9c18, newResistType)
+        break
+      case 27:
+        // special condition for Merman
+        // Assign the new weakness type
+        data.writeShort(0x0b5cf0, newResistType)
+        break
+      case 14:
+        // special condition for Flying Zombie
+        // Assign the new weakness type
+        data.writeShort(0x0b5ac0, newResistType)
+        break
+      case 45:
+        // special condition for Bone ark
+        // Assign the new weakness type
+        data.writeShort(0x0b60c8, newResistType)
+        break
+      case 158:
+        // special condition for Corpse weed
+        // Assign the new weakness type
+        data.writeShort(0x0b74d0, newResistType)
+        break
+      case 161:
+        // special condition for venus weed
+        // Assign the new weakness type
+        data.writeShort(0x0b7548, newResistType)
+        break
+      case 392:
+        // special condition for blue venus weed
+        // Assign the new weakness type
+        data.writeShort(0x0b9e20, newResistType)
+        break
       }
 
-      switch (newResistType) {                                                  // create a new code for disclosure card based on weakness value
-        case 0:
-          newResistDisclosure = '3f'
-        case 8192:
-          newResistDisclosure = '03'
-        case 16384:
-          newResistDisclosure = '0f'
+      // create a new code for disclosure card based on weakness value
+      switch (newResistType) {
+      case 0:
+        newResistDisclosure = '3f'
+      case 8192:
+        newResistDisclosure = '03'
+      case 16384:
+        newResistDisclosure = '0f'
       }
 
-      let resIndex = Math.floor(rng() * 100)                                    // select a random number between 0, 1 to choose which we use between guard, absorb
+      // select a random number between 0, 1 to choose which we use
+      // between guard, absorb
+      let resIndex = Math.floor(rng() * 100)
       resIndex = isEven(resIndex)
-      switch (resIndex) {                                                       // start selection and execution process based on teh random selection
-        case false: 
-          offset = enemy.guardOffset                                            // Goto guard
-          newImmuneType = halfChanceElementRando(rng)                          // Select a random guard type
-          while(newImmuneType === newWeakType){                                 // weakness / immunity overlap removal
-            newImmuneType = halfChanceElementRando(rng)
-          }
-          data.writeShort(offset,newImmuneType)                                 // Write the guard type
-          switch (enemy.index) {
-            case 379:                                                           // special condition for Dracula
-              data.writeShort(0x0b9c1a,newImmuneType)                           // Assign the new guard type
-              break
-            case 27:                                                            // special condition for Merman
-              data.writeShort(0x0b5cf2,newImmuneType)                           // Assign the new weakness type
-              break
-            case 14:                                                            // special condition for Flying zombie
-              data.writeShort(0x0b5ac2,newImmuneType)                           // Assign the new weakness type
-              break
-            case 45:                                                            // special condition for Bone ark
-              data.writeShort(0x0b60ca,newImmuneType)                           // Assign the new weakness type
-              break
-            case 158:                                                           // special condition for corpse weed
-              data.writeShort(0x0b74d2,newImmuneType)                           // Assign the new weakness type
-              break
-            case 161:                                                           // special condition for venus weed
-              data.writeShort(0x0b754a,newImmuneType)                           // Assign the new weakness type
-              break
-            case 392:                                                           // special condition for blue venus weed
-              data.writeShort(0x0b9e22,newImmuneType)                           // Assign the new weakness type
-              break
-          }
-          data.writeShort(enemy.absorbOffset,0x0000)                            // remove absorbs
+      // start selection and execution process based on teh random selection
+      if (!resIndex) {
+        // Goto guard
+        offset = enemy.guardOffset
+        // Select a random guard type
+        newImmuneType = halfChanceElementRando(rng)
+        // weakness / immunity overlap removal
+        while (newImmuneType === newWeakType) {
+          newImmuneType = halfChanceElementRando(rng)
+        }
+        // Write the guard type
+        data.writeShort(offset, newImmuneType)
+        switch (enemy.index) {
+        case 379:
+          // special condition for Dracula
+          // Assign the new guard type
+          data.writeShort(0x0b9c1a, newImmuneType)
           break
-        case true:
-          offset = enemy.absorbOffset                                           // Goto absorb
-          newImmuneType = halfChanceElementRando(rng)                          // Select a random absorb type
-          while(newImmuneType === newWeakType){                                 // weakness / immunity overlap removal
-            newImmuneType = halfChanceElementRando(rng)
-          }
-          data.writeShort(offset,newImmuneType)                                 // Write the absorb type
-          switch (enemy.index) {
-            case 379:                                                           // special condition for Dracula
-              data.writeShort(0x0b9c1c,newImmuneType)                           // Assign the new absorb type
-              break
-            case 27:                                                            // special condition for Merman
-              data.writeShort(0x0b5cf4,newImmuneType)                           // Assign the new weakness type
-              break
-            case 14:                                                            // special condition for Flying zombie
-              data.writeShort(0x0b5ac4,newImmuneType)                           // Assign the new weakness type
-              break
-            case 45:                                                            // special condition for Bone ark
-              data.writeShort(0x0b60cc,newImmuneType)                           // Assign the new weakness type
-              break
-            case 158:                                                           // special condition for Corpse weed
-              data.writeShort(0x0b74d4,newImmuneType)                           // Assign the new weakness type
-              break
-            case 161:                                                           // special condition for venus weed
-              data.writeShort(0x0b754c,newImmuneType)                           // Assign the new weakness type
-              break
-            case 392:                                                           // special condition for blue venus weed
-              data.writeShort(0x0b9e24,newImmuneType)                           // Assign the new weakness type
-              break
-          }
-          data.writeShort(enemy.guardOffset,0x0000)                             // remove immunities
+        case 27:
+          // special condition for Merman
+          // Assign the new weakness type
+          data.writeShort(0x0b5cf2, newImmuneType)
           break
+        case 14:
+          // special condition for Flying zombie
+          // Assign the new weakness type
+          data.writeShort(0x0b5ac2, newImmuneType)
+          break
+        case 45:
+          // special condition for Bone ark
+          // Assign the new weakness type
+          data.writeShort(0x0b60ca, newImmuneType)
+          break
+        case 158:
+          // special condition for corpse weed
+          // Assign the new weakness type
+          data.writeShort(0x0b74d2, newImmuneType)
+          break
+        case 161:
+          // special condition for venus weed
+          // Assign the new weakness type
+          data.writeShort(0x0b754a, newImmuneType)
+          break
+        case 392:
+          // special condition for blue venus weed
+          // Assign the new weakness type
+          data.writeShort(0x0b9e22, newImmuneType)
+          break
+        }
+        // remove absorbs
+        data.writeShort(enemy.absorbOffset,  0x0000)
+      } else {
+        // Goto absorb
+        offset = enemy.absorbOffset
+        // Select a random absorb type
+        newImmuneType = halfChanceElementRando(rng)
+        // weakness / immunity overlap removal
+        while (newImmuneType === newWeakType) {
+          newImmuneType = halfChanceElementRando(rng)
+        }
+        // Write the absorb type
+        data.writeShort(offset, newImmuneType)
+        switch (enemy.index) {
+        case 379:
+          // special condition for Dracula
+          // Assign the new absorb type
+          data.writeShort(0x0b9c1c, newImmuneType)
+          break
+        case 27:
+          // special condition for Merman
+          // Assign the new weakness type
+          data.writeShort(0x0b5cf4, newImmuneType)
+          break
+        case 14:
+          // special condition for Flying zombie
+          // Assign the new weakness type
+          data.writeShort(0x0b5ac4, newImmuneType)
+          break
+        case 45:
+          // special condition for Bone ark
+          // Assign the new weakness type
+          data.writeShort(0x0b60cc, newImmuneType)
+          break
+        case 158:
+          // special condition for Corpse weed
+          // Assign the new weakness type
+          data.writeShort(0x0b74d4, newImmuneType)
+          break
+        case 161:
+          // special condition for venus weed
+          // Assign the new weakness type
+          data.writeShort(0x0b754c, newImmuneType)
+          break
+        case 392:
+          // special condition for blue venus weed
+          // Assign the new weakness type
+          data.writeShort(0x0b9e24, newImmuneType)
+          break
+        }
+        // remove immunities
+        data.writeShort(enemy.guardOffset, 0x0000)
       }
 
-      disclosureCard = 'f0'                                                     // start the Disclosure with the attack elements by indicating a sword.
+      // start the Disclosure with the attack elements by indicating a sword.
+      disclosureCard = 'f0'
       newDisclosure = hexValueToDamageString(newAtkType)
-      if (newDisclosure.startsWith('05')) {                                     // if the attack type is a 16% hit or cut, use %dam indicator
-        replaceTextAtIndex(newDisclosure,'00',0)
-        disclosureCard += '05'                                                  // if the % is used, space out the %
-      } else if (newDisclosure.startsWith('3f')) {                              // if the attack was negated by becoming no hitbox or guard, use no-hit indicator
-        replaceTextAtIndex(newDisclosure,'00',0)
-        disclosureCard += '3f'                                                  // if the % is used, space out the _
-      } else if (newAtk > statAtk) {                                            // Determine the direction of the arrow based on the attack stat differences
+      if (newDisclosure.startsWith('05')) {
+        // if the attack type is a 16% hit or cut, use %dam indicator
+        replaceTextAtIndex(newDisclosure,'00', 0)
+        // if the % is used, space out the %
+        disclosureCard += '05'
+      } else if (newDisclosure.startsWith('3f')) {
+        // if the attack was negated by becoming no hitbox or guard,
+        // use no-hit indicator
+        replaceTextAtIndex(newDisclosure,'00', 0)
+        // if the % is used, space out the _
+        disclosureCard += '3f'
+      } else if (newAtk > statAtk) {
+        // Determine the direction of the arrow based on the
+        // attack stat differences
         disclosureCard += 'e2'
       } else {
         disclosureCard += 'e6'
       }
-      disclosureCard += newDisclosure + 'f1'                                    // continue the Disclosure with the defense elements by indicating a shield.
-      if (((newHpMod + newDefMod) / 2) > 1) {                                   // Determine the direction of the arrow based on the attack stat differences
+      // continue the Disclosure with the defense elements by
+      // indicating a shield.
+      disclosureCard += newDisclosure + 'f1'
+      if (((newHpMod + newDefMod) / 2) > 1) {
+        // Determine the direction of the arrow based on the
+        // attack stat differences
         disclosureCard += 'e2'
       } else {
         disclosureCard += 'e6'
-      }                                                  
-      newDisclosure = hexValueToDefenceString(newWeakType).slice(-2)            // create a new code for disclosure card based on weakness value
-      disclosureCard += newDisclosure
-      newDisclosure = hexValueToDefenceString(newResistType).slice(-2)          // create a new code for disclosure card based on Resist value
-      disclosureCard += newDisclosure
-      switch (resIndex) {                                                       // This is already selected above between guard and absorb
-        case false:                                                             // Process if Guard
-          disclosureCard += 'f7'                                                // add final character to Disclosure Card 3
-          newDisclosure = hexValueToDefenceString(newImmuneType).slice(-2)      // indicate that this is a guard
-          disclosureCard += newDisclosure                                       // adds indicators to tell the player what guard the monster has
-          break
-        case true:                                                              // Process if Absorb
-          disclosureCard += 'f6'                                                // add final character to Disclosure Card 3
-          newDisclosure = hexValueToDefenceString(newImmuneType).slice(-2)      // indicate that this is an absorb ex: é↓#!HLâ↑I/FàS (11)
-          disclosureCard += newDisclosure                                       // adds indicators to tell the player what absorb the monster has
-          break
       }
-      disclosureCard += 'ff'                                                    // cap the label
-      while (disclosureCard.length < 24) {                                      // add zeroes to space out different names from before
+      // create a new code for disclosure card based on weakness value
+      newDisclosure = hexValueToDefenceString(newWeakType).slice(-2)
+      disclosureCard += newDisclosure
+      // create a new code for disclosure card based on Resist value
+      newDisclosure = hexValueToDefenceString(newResistType).slice(-2)
+      disclosureCard += newDisclosure
+      // This is already selected above between guard and absorb
+      if (!resIndex) {
+        // Process if Guard
+        // add final character to Disclosure Card 3
+        disclosureCard += 'f7'
+        // indicate that this is a guard
+        newDisclosure = hexValueToDefenceString(newImmuneType).slice(-2)
+        // adds indicators to tell the player what guard the monster has
+        disclosureCard += newDisclosure
+      } else {
+        // Process if Absorb
+        // add final character to Disclosure Card 3
+        disclosureCard += 'f6'
+        // indicate that this is an absorb ex: é↓#!HLâ↑I/FàS (11)
+        newDisclosure = hexValueToDefenceString(newImmuneType).slice(-2)
+        // adds indicators to tell the player what absorb the monster has
+        disclosureCard += newDisclosure
+      }
+      // cap the label
+      disclosureCard += 'ff'
+      // add zeroes to space out different names from before
+      while (disclosureCard.length < 24) {
         disclosureCard += '00'
       }
-      if ([55,295,356,379].includes(enemy.index)) {                             // exclude enemies who cannot have new name data written
+      // exclude enemies who cannot have new name data written
+      // TODO: Why are these hard-coded numbers instead of constants???
+      if ([55,295,356,379].includes(enemy.index)) {
       } else {
-        offset = enemy.newNameText                                              // pull enemy name location in BIN
-        for (let i = 0; i < disclosureCard.length; i += 2) {                    // write 1 byte at a time
+        // pull enemy name location in BIN
+        offset = enemy.newNameText
+        // write 1 byte at a time
+        for (let i = 0; i < disclosureCard.length; i += 2) {
           const twoChars = '0x' + disclosureCard.slice(i, i + 2)
-          offset = data.writeChar(offset,twoChars)
+          offset = data.writeChar(offset, twoChars)
         }
       }
-      data.writeWord(enemy.nameOffset,enemy.newNameReference)                   // Change the reference for the name to match the new address for the disclosure.
+      // Change the reference for the name to match the new address
+      // for the disclosure.
+      data.writeWord(enemy.nameOffset, enemy.newNameReference)
     })
 
-    offset = 0x0f6138                                                           // move to writing normal / extra name content
-    let normalNames = '0024524143554C41FF0027414C414D4F5448FF00F700214C4CFF00274F4F44002C55434BFF00' // identify what to write: "Dracula Galamoth Immune All Good Luck"
+    // move to writing normal / extra name content
+    offset = 0x0f6138
+    // identify what to write: 'Dracula Galamoth Immune All Good Luck'
+    let normalNames =
+        '0024524143554C41FF'
+        + '0027414C414D4F5448FF'
+        + '00F700214C4CFF'
+        + '00274F4F44002C55434BFF00'
 
-    for (let i = 0; i < normalNames.length; i += 2) {                           // write 1 byte at a time
+    // write 1 byte at a time
+    for (let i = 0; i < normalNames.length; i += 2) {
       const twoChars = '0x' + normalNames.slice(i, i + 2)
-      offset = data.writeChar(offset,twoChars)
+      offset = data.writeChar(offset, twoChars)
     }
 
-    offset = 0x0b9ca8                                                           // Fix Stone Skull reference
-    data.writeWord(offset,0x800e0cf4)                                           // Shows Immune All
+    // Fix Stone Skull reference
+    offset = 0x0b9ca8
+    // Shows Immune All
+    data.writeWord(offset, 0x800e0cf4)
 
-    offset = 0x0b5ce0                                                           // fix Merman Name reference
-    data.writeWord(offset,0x800e0c5c)                                           // Make both mermen use the same name
+    // fix Merman Name reference
+    offset = 0x0b5ce0
+    // Make both mermen use the same name
+    data.writeWord(offset, 0x800e0c5c)
 
-    offset = 0x0b5ab0                                                           // fix Flying zombie Name reference
-    data.writeWord(offset,0x800e0c98)                                           // Make both halves use the same name
+    // fix Flying zombie Name reference
+    offset = 0x0b5ab0
+    // Make both halves use the same name
+    data.writeWord(offset, 0x800e0c98)
 
-    offset = 0x0b60b8                                                           // fix Bone ark Name reference
-    data.writeWord(offset,0x800e0bfc)                                           // Make both Bone ark sections use the same name
+    // fix Bone ark Name reference
+    offset = 0x0b60b8
+    // Make both Bone ark sections use the same name
+    data.writeWord(offset, 0x800e0bfc)
     
-    offset = 0x0b74c0                                                           // fix corpse weed Name reference
-    data.writeWord(offset,0x800e092c)                                           // Make both corpse weed use the same name
+    // fix corpse weed Name reference
+    offset = 0x0b74c0
+    // Make both corpse weed use the same name
+    data.writeWord(offset, 0x800e092c)
 
-    offset = 0x0b7538                                                           // fix venus weed Name reference
-    data.writeWord(offset,0x800e0920)                                           // Make both venus weed use the same name
+    // fix venus weed Name reference
+    offset = 0x0b7538
+    // Make both venus weed use the same name
+    data.writeWord(offset, 0x800e0920)
 
-    offset = 0x0b9e10                                                           // fix blue venus weed Name reference
-    data.writeWord(offset,0x800e05e4)                                           // Make both blue venus weed use the same name
+    // fix blue venus weed Name reference
+    offset = 0x0b9e10
+    // Make both blue venus weed use the same name
+    data.writeWord(offset, 0x800e05e4)
 
-    const faerieScrollForceAddresses = constants.faerieScrollForceAddresses     // summon the faerie scroll force on locations
+    // summon the faerie scroll force on locations
+    const faerieScrollForceAddresses = constants.faerieScrollForceAddresses
 
     faerieScrollForceAddresses.forEach(function(address) {
-      const forceOn = 0x34020003                                                // Faerie Scroll is forced "on"
-      const forceNop = 0x00000000                                               // replace the line after with a 'nop' that negates the other half of the data move to r2
+      // Faerie Scroll is forced 'on'
+      const forceOn = 0x34020003
+      // replace the line after with a 'nop' that negates the
+      // other half of the data move to r2
+      const forceNop = 0x00000000
       offset = address
 
-      offset = data.writeWord(offset,forceOn)                                   // Overwrite the first half of the movbp instr
-      data.writeWord(offset,forceNop)                                           // Overwrite the second half of the movbp instr
+      // Overwrite the first half of the movbp instr
+      offset = data.writeWord(offset, forceOn)
+      // Overwrite the second half of the movbp instr
+      data.writeWord(offset, forceNop)
     })
 
     return data
@@ -7436,7 +7879,7 @@
     const specials = equipment.weaponSpecials
     const spellsArr = spells
     let offset
-    let newElem                                                                 // first weapon element offset
+    let newElem // first weapon element offset
     let weakElem
     let resistElem
     let guardElem
@@ -7444,73 +7887,111 @@
 
     handItems.forEach(function(item) {
       // console.log(item.index + ' ' + item.itemName)
-      newElem = weaponElemRando(rng)                                            // assign a new element
-      if (item.categoryHex === 0x09) {                                          // special circumstance where we re-roll cut and bludgeon off of shields
-        while ([0x0040,0x0020].includes(newElem)) {
+      // assign a new element
+      newElem = weaponElemRando(rng)
+      // special circumstance where we re-roll cut and bludgeon off of shields
+      if (item.categoryHex === 0x09) {
+        while ([0x0040, 0x0020].includes(newElem)) {
           newElem = weaponElemRando(rng)
         }
       }
       offset = item.elementOffset
-      data.writeShort(offset,newElem)                                           // write the new elemental value
+      // write the new elemental value
+      data.writeShort(offset, newElem)
     })
 
-    // this process will randomize wearable items weak / resist / guard / absorb. it is intended that we will have very few absorbs compared to anything else by the 
-    // nature of the fact that it is the last thing rolled. Each of these has a 50% chance to be nothing each time it is rolled, so if it initially rolls something 
-    // that is the same as a previous element then it has another 66%/50%/66%/75% chance to roll nothing. This also means that Alucard will invariably become weak to more things.
+    // This process will randomize wearable items
+    // weak / resist / guard / absorb. It is intended that we will have very
+    // few absorbs compared to anything else by the nature of the fact that
+    // it is the last thing rolled. Each of these has a 50% chance to be nothing
+    // each time it is rolled, so if it initially rolls something that is the
+    // same as a previous element then it has another 66%/50%/66%/75% chance to
+    // roll nothing. This also means that Alucard will invariably become weak to
+    // more things.
     
-    wearItems.forEach(function(item) {                                          // start the randomization process for armor, helms, capes, and rings to have random attributes.
+    // start the randomization process for armor, helms, capes, and rings to
+    // have random attributes.
+    wearItems.forEach(function(item) {
       // console.log(item.index + ' ' + item.itemName)
-      weakElem = thirdChanceElementRando(rng)                                    // Assign a random element to potentially be weak to
+      // Assign a random element to potentially be weak to
+      weakElem = thirdChanceElementRando(rng)
       offset = item.elemWeakOffset
-      data.writeShort(offset,weakElem)                                          // Commit writes
+      // Commit writes
+      data.writeShort(offset, weakElem)
 
-      resistElem = halfChanceElementRando(rng)                                  // initial randomization of resist
-      if (resistElem !== 0x0000) {                                              // don't re-randomize if resist is nothing
-        while ([weakElem].includes(resistElem)) {                               // If it's not nothing, then change what it is if it's the same as weak
+      // initial randomization of resist
+      resistElem = halfChanceElementRando(rng)
+      // don't re-randomize if resist is nothing
+      if (resistElem !== 0x0000) {
+        // If it's not nothing, then change what it is if it's the same as weak
+        while ([weakElem].includes(resistElem)) {
           resistElem = halfChanceElementRando(rng)
         }
       }
       offset = item.elemResistOffset
-      data.writeShort(offset,resistElem)                                        // Commit writes
+      // Commit writes
+      data.writeShort(offset, resistElem)
 
-      guardElem = thirdChanceElementRando(rng)                                  // initial randomization of guard
-      if (guardElem !== 0x0000) {                                               // don't re-randomize if guard is nothing
-        while ([weakElem,resistElem].includes(guardElem)) {                     // If it's not nothing, then change what it is if it's the same as anything before
+      // initial randomization of guard
+      guardElem = thirdChanceElementRando(rng)
+      // don't re-randomize if guard is nothing
+      if (guardElem !== 0x0000) {
+        // If it's not nothing, then change what it is if it's the same as
+        // anything before
+        while ([weakElem, resistElem].includes(guardElem)) {
           guardElem = halfChanceElementRando(rng)
         }
       }
       offset = item.elemGuardOffset
-      data.writeShort(offset,guardElem)                                         // Commit writes
+      // Commit writes
+      data.writeShort(offset, guardElem)
 
-      absorbElem = quarterChanceElementRando(rng)                               // initial randomization of absorb
-      if (absorbElem !== 0x0000) {                                              // don't re-randomize if guard is nothing
-        while ([weakElem,resistElem,guardElem].includes(absorbElem)) {          // If it's not nothing, then change what it is if it's the same as anything before
+      // initial randomization of absorb
+      absorbElem = quarterChanceElementRando(rng)
+      // don't re-randomize if guard is nothing
+      if (absorbElem !== 0x0000) {
+        // If it's not nothing, then change what it is if it's the same
+        // as anything before
+        while ([weakElem, resistElem, guardElem].includes(absorbElem)) {
           absorbElem = halfChanceElementRando(rng)
         }
       }
       offset = item.elemAbsorbOffset
-      data.writeShort(offset,absorbElem)                                        // Commit writes
+      // Commit writes
+      data.writeShort(offset, absorbElem)
     })
 
-    spellsArr.forEach(function(spell) {                                         // cycle through spells (and familiar and xform damages)
+    // cycle through spells (and familiar and xform damages)
+    spellsArr.forEach(function(spell) {
       // console.log(spell.spellName)
-      newElem = weaponElemRando(rng)                                            // identify new element
-      offset = spell.spellElementOffset                                         // assign offset to update
-      data.writeShort(offset,newElem)                                           // Commit writes
+      // identify new element
+      newElem = weaponElemRando(rng)
+      // assign offset to update
+      offset = spell.spellElementOffset
+      // Commit writes
+      data.writeShort(offset, newElem)
     })
 
-    subWeapons.forEach(function(subWea) {                                       // cycle through spells (and familiar and xform damages)
+    // cycle through spells (and familiar and xform damages)
+    subWeapons.forEach(function(subWea) {
       // console.log(subWea.subWeaName)
-      newElem = weaponElemRando(rng)                                            // identify new element
-      offset = subWea.elemOffset                                                // assign offset to update
-      data.writeShort(offset,newElem)                                           // Commit writes
+      // identify new element
+      newElem = weaponElemRando(rng)
+      // assign offset to update
+      offset = subWea.elemOffset
+      // Commit writes
+      data.writeShort(offset, newElem)
     })
 
-    specials.forEach(function(special) {                                        // cycle through weapon specials (and shield spells)
+    // cycle through weapon specials (and shield spells)
+    specials.forEach(function(special) {
       // console.log(special.itemName)
-      newElem = weaponElemRando(rng)                                            // identify new element
-      offset = special.elementOffset                                            // assign offset to update
-      data.writeShort(offset,newElem)                                           // Commit writes
+      // identify new element
+      newElem = weaponElemRando(rng)
+      // assign offset to update
+      offset = special.elementOffset
+      // Commit writes
+      data.writeShort(offset,newElem)
     })
 
     return data
@@ -7524,25 +8005,36 @@
     let newItemPrice
     let itemShuffArray = []
     
-    shopItemsData.forEach(function(item) {                                      // Randomize the price to be 50% - 150% of the original price
-      oldItemPrice = item.itemPriceD                                            // pull the base decimal value of the price
-      newItemPrice = itemPriceStatRand(rng,oldItemPrice)                        // randomize the price using a function and oputput into hex
+    // Randomize the price to be 50% - 150% of the original price
+    shopItemsData.forEach(function(item) {
+      // pull the base decimal value of the price
+      oldItemPrice = item.itemPriceD
+      // randomize the price using a function and oputput into hex
+      newItemPrice = itemPriceStatRand(rng, oldItemPrice)
 
-      itemShuffArray.push(newItemPrice)                                         // store the new price in a temp array
+      // store the new price in a temp array
+      itemShuffArray.push(newItemPrice)
     })
 
-    itemShuffArray = shuffle(rng,itemShuffArray)                                // Randomly shuffle the list of prices
+    // Randomly shuffle the list of prices
+    itemShuffArray = shuffle(rng, itemShuffArray)
 
-    shopItemsData.forEach(function(item) {                                      // cycle through the item list and pull the last shuffled price from the tmp array and write it.
+    // cycle through the item list and pull the last shuffled price
+    // from the tmp array and write it.
+    shopItemsData.forEach(function(item) {
       data.writeWord(item.priceAddress,itemShuffArray.pop())
     })
 
     return data
   }
 
-  function applyStartRoomRandoPatches(rng,castleFlag) {
-    const castleOneRoomData = constants.startRoomData.filter(room => room.stage < 0x20)
-    const castleTwoRoomData = constants.startRoomData.filter(room => room.stage >= 0x20)
+  function applyStartRoomRandoPatches(rng, castleFlag) {
+    const castleOneRoomData = constants.startRoomData.filter(function(room) {
+      return room.stage < 0x20
+    })
+    const castleTwoRoomData = constants.startRoomData.filter(function(room) {
+      return room.stage >= 0x20
+    })
     const data = new checked()
     // Patch the starting room being randomized
     let offset
@@ -7559,175 +8051,209 @@
       startRoomData = castleTwoRoomData
     }
 
-    randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))           // Select a starting room at random
+    // Select a starting room at random
+    randRoomId = Math.floor(rng() * Math.floor(startRoomData.length))
 
     // Debug Messages
     // if(options.startRoomRandoMode){
-    //   console.log("Starting Room Rando 1st Castle on!")
+    //   console.log('Starting Room Rando 1st Castle on!')
     // }
 
     // if(options.startRoomRando2ndMode){
-    //   console.log("Starting Room Rando 2nd Castle on!")
+    //   console.log('Starting Room Rando 2nd Castle on!')
     // }
 
-    // console.log("Last Room in Data is: id = " + startRoomData[Math.floor(0.999 * (startRoomData.length))].id + " : " + startRoomData[Math.floor(0.999 * (startRoomData.length))].comment)
+    // console.log('Last Room in Data is: id = '
+    // + startRoomData[startRoomData.length - 1].id + ' : '
+    // + startRoomData[startRoomData.length - 1].comment)
     // End of Debug Messages
     
     // Old debug code
-    /*while(startRoomData[randRoomId].id === undefined | startRoomData[randRoomId].xyWrite === undefined
-      | startRoomData[randRoomId].roomWrite === undefined | startRoomData[randRoomId].stageWrite === undefined
-    ){
-      randRoomId = Math.floor(rng() * Math.floor(startRoomData.length - 1))     // re-roll undefined seeds
-    }*/
+    // while (startRoomData[randRoomId].id === undefined
+    //        || startRoomData[randRoomId].xyWrite === undefined
+    //        || startRoomData[randRoomId].roomWrite === undefined
+    //        || startRoomData[randRoomId].stageWrite === undefined
+    // ){
+    //   // re-roll undefined seeds
+    //   randRoomId = Math.floor(
+    //     rng() * Math.floor(startRoomData.length - 1)
+    //   )
+    // }
 
-    // 2nd Castle Use Gravity Boots & Leap Stone until leaving patch by: MottZilla
+    // 2nd Castle Use Gravity Boots & Leap Stone until leaving
+    // patch by: MottZilla
     // Basic operation:
-    // Hooks check for relic when using gravity boots/leap stone so we can add another condition
-    // If Zone == 2nd Castle and Two specific Map tiles have not been visited, behave as though we have the relic.
-    // The two map tiles are the Keep Teleporter and the Library Card destination tile.
-    if(startRoomData[randRoomId].stage >= 0x20)
-    {
-      offset = 0xF0230                            // Code Block
-      offset = data.writeWord(offset,0x3C028009)
-      offset = data.writeWord(offset,0x8C4274A0)
-      offset = data.writeWord(offset,0x00000000)
-      offset = data.writeWord(offset,0x30420020)
-      offset = data.writeWord(offset,0x10400010)
-      offset = data.writeWord(offset,0x00000000)
-      offset = data.writeWord(offset,0x3C028007)
-      offset = data.writeWord(offset,0x9042BBFB)
-      offset = data.writeWord(offset,0x00000000)
-	    offset = data.writeWord(offset,0x30420001)
-      offset = data.writeWord(offset,0x1440000A)
-      offset = data.writeWord(offset,0x00000000)
-      offset = data.writeWord(offset,0x3C028007)
-      offset = data.writeWord(offset,0x9042BCC0)
-      offset = data.writeWord(offset,0x00000000)
-	    offset = data.writeWord(offset,0x30420004)
-      offset = data.writeWord(offset,0x14400004)
-      offset = data.writeWord(offset,0x00000000)
-      offset = data.writeWord(offset,0x34020001)
-      offset = data.writeWord(offset,0x03E00008)
-      offset = data.writeWord(offset,0x00000000)
-      offset = data.writeWord(offset,0x0803F8EA)
-      offset = data.writeWord(offset,0x00000000)
-  
+    // Hooks check for relic when using gravity boots/leap stone so we can
+    // add another condition.
+    // If Zone == 2nd Castle and Two specific Map tiles have not been visited,
+    // behave as though we have the relic.
+    // The two map tiles are the Keep Teleporter and the Library Card
+    // destination tile.
+    if (startRoomData[randRoomId].stage >= 0x20) {
+      // Code Block
+      offset = 0xf0230
+      offset = data.writeWord(offset, 0x3c028009)
+      offset = data.writeWord(offset, 0x8c4274a0)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x30420020)
+      offset = data.writeWord(offset, 0x10400010)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x3c028007)
+      offset = data.writeWord(offset, 0x9042bbfb)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x30420001)
+      offset = data.writeWord(offset, 0x1440000a)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x3c028007)
+      offset = data.writeWord(offset, 0x9042bcc0)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x30420004)
+      offset = data.writeWord(offset, 0x14400004)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x34020001)
+      offset = data.writeWord(offset, 0x03e00008)
+      offset = data.writeWord(offset, 0x00000000)
+      offset = data.writeWord(offset, 0x0803f8ea)
+      offset = data.writeWord(offset, 0x00000000)
+      
       // Hooks
-      offset = 0x12C7B0
-      data.writeShort(offset,0x6E6E)
-      offset = 0x12CB00
-      data.writeShort(offset,0x6E6E)
+      offset = 0x12c7b0
+      data.writeShort(offset, 0x6e6e)
+      offset = 0x12cb00
+      data.writeShort(offset, 0x6e6e)
       // Disable Richter Cutscene
       offset = 0x5641220
-      offset = data.writeWord(offset,0x34020001)
-      offset = data.writeWord(offset,0x00000000)
+      offset = data.writeWord(offset, 0x34020001)
+      offset = data.writeWord(offset, 0x00000000)
 
       // Patch Zone with Hatch Entity (required for 2nd to work)
-      offset = 0x4BA934C
-      offset = data.writeWord(offset,0x34040020)  // mov r4,20h
-      offset = data.writeWord(offset,0x3C058009)  // mov r5,80090000h
-      offset = data.writeWord(offset,0xACA474A0)  // mov [r5+74a0h],r4
-	    offset = data.writeWord(offset,0xA6000026)  // movh [r16+26h],0
-	    offset = data.writeWord(offset,0xAE000028)  // mov [r16+28h],0
-	    offset = data.writeWord(offset,0x0C03C848)  // call 800F2120h
-	    offset = data.writeWord(offset,0x00000000)  // nop
-	    offset = data.writeWord(offset,0x3C058013)  // mov r5,80130000h
-	    offset = data.writeWord(offset,0x34A5AED0)  // or r5,0AED0h
-	    offset = data.writeWord(offset,0xACA00000)  // mov [r5],0
-      offset = data.writeWord(offset,0x0806E92B)  // jmp 801BA4ACh
-      offset = data.writeWord(offset,0x00000000)  // nop
+      offset = 0x4ba934c
+      offset = data.writeWord(offset, 0x34040020)  // mov r4,20h
+      offset = data.writeWord(offset, 0x3c058009)  // mov r5,80090000h
+      offset = data.writeWord(offset, 0xaca474a0)  // mov [r5+74a0h],r4
+      offset = data.writeWord(offset, 0xa6000026)  // movh [r16+26h], 0
+      offset = data.writeWord(offset, 0xae000028)  // mov [r16+28h], 0
+      offset = data.writeWord(offset, 0x0c03c848)  // call 800F2120h
+      offset = data.writeWord(offset, 0x00000000)  // nop
+      offset = data.writeWord(offset, 0x3c058013)  // mov r5,80130000h
+      offset = data.writeWord(offset, 0x34a5aed0)  // or r5, 0AED0h
+      offset = data.writeWord(offset, 0xaca00000)  // mov [r5], 0
+      offset = data.writeWord(offset, 0x0806e92b)  // jmp 801BA4ACh
+      offset = data.writeWord(offset, 0x00000000)  // nop
     }
 
     offset = 0x4b6ab0c
-    offset = data.writeWord(offset,0x28042804)                                  // Setting up the CD room
-    offset = data.writeWord(offset,0x34000015)
-    offset = data.writeWord(offset,0x28052805)
-    data.writeWord(offset,0x0000ff64)
+    // Setting up the CD room
+    offset = data.writeWord(offset, 0x28042804)
+    offset = data.writeWord(offset, 0x34000015)
+    offset = data.writeWord(offset, 0x28052805)
+    data.writeWord(offset, 0x0000ff64)
 
     offset = 0x4b66a44
-    offset = data.writeChar(offset,0x04)
-    offset = data.writeChar(offset,0x4a)
-    offset = data.writeChar(offset,0x00)
-    offset = data.writeChar(offset,0x41)
-    data.writeChar(offset,0x64)
+    offset = data.writeChar(offset, 0x04)
+    offset = data.writeChar(offset, 0x4a)
+    offset = data.writeChar(offset, 0x00)
+    offset = data.writeChar(offset, 0x41)
+    data.writeChar(offset, 0x64)
 
-    // console.log("randRoomId = " + randRoomId + ", Room id = " + startRoomData[randRoomId].id + " Desc:" + startRoomData[randRoomId].comment)
+    // console.log(
+    //   'randRoomId = ' + randRoomId
+    //   + ', Room id = ' + startRoomData[randRoomId].id
+    //   + ' Desc:' + startRoomData[randRoomId].comment
+    // )
 
-    offset = 0xae95c                                                            // change the destination
-    newWrite = startRoomData[randRoomId].xyWrite                                // Write X,Y Position
+    // change the destination
+    offset = 0xae95c
+    // Write X,Y Position
+    newWrite = startRoomData[randRoomId].xyWrite
     offset = data.writeWord(offset,newWrite)
 
     //console.log(numToHex(newWrite,8))
 
-    newWrite = startRoomData[randRoomId].roomWrite                              // Write Rooms Used
+    // Write Rooms Used
+    newWrite = startRoomData[randRoomId].roomWrite
     offset = data.writeWord(offset,newWrite)
 
     //console.log(numToHex(newWrite,8))
 
-    newWrite = startRoomData[randRoomId].stageWrite                             // Write destination stage Used
+    // Write destination stage Used
+    newWrite = startRoomData[randRoomId].stageWrite
     offset = data.writeShort(offset,newWrite)
 
     //console.log(numToHex(newWrite,4))
 
-    if(startRoomData[randRoomId].stageWrite === 0x03 | startRoomData[randRoomId].stageWrite === 0x05) {
-      offset = 0x45f55a2                                                        // Solve soft lock if player starts near Room 0 in Abandoned Mines
-      offset = data.writeChar(offset,0x42)
-      data.writeChar(offset,0x03)
+    if (startRoomData[randRoomId].stageWrite === 0x03
+        || startRoomData[randRoomId].stageWrite === 0x05) {
+      // Solve soft lock if player starts near Room 0 in Abandoned Mines
+      offset = 0x45f55a2
+      offset = data.writeChar(offset, 0x42)
+      data.writeChar(offset, 0x03)
 
-      offset = 0x45f52a2                                                        // Solve soft lock if player starts near Room 0 in Abandoned Mines
-      offset = data.writeChar(offset,0x42)
-      data.writeChar(offset,0x03)
+      // Solve soft lock if player starts near Room 0 in Abandoned Mines
+      offset = 0x45f52a2
+      offset = data.writeChar(offset, 0x42)
+      data.writeChar(offset, 0x03)
 
-      offset = 0x45f5142                                                        // Solve soft lock if player starts near Room 0 in Abandoned Mines
-      offset = data.writeChar(offset,0x42)
-      data.writeChar(offset,0x03)
+      // Solve soft lock if player starts near Room 0 in Abandoned Mines
+      offset = 0x45f5142
+      offset = data.writeChar(offset, 0x42)
+      data.writeChar(offset, 0x03)
 
-      offset = 0x45f4eec                                                        // Solve soft lock if player starts near Room 0 in Abandoned Mines
-      offset = data.writeChar(offset,0x42)
-      data.writeChar(offset,0x03)
+      // Solve soft lock if player starts near Room 0 in Abandoned Mines
+      offset = 0x45f4eec
+      offset = data.writeChar(offset, 0x42)
+      data.writeChar(offset, 0x03)
 
-      offset = 0x45f67bc                                                        // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = data.writeChar(offset,0x67)
-      offset = data.writeChar(offset,0x00)
-      offset = data.writeChar(offset,0x68)
-      data.writeChar(offset,0x00)
+      // Solve soft lock if player starts near Room 3 in Abandoned Mines
+      offset = 0x45f67bc
+      offset = data.writeChar(offset, 0x67)
+      offset = data.writeChar(offset, 0x00)
+      offset = data.writeChar(offset, 0x68)
+      data.writeChar(offset, 0x00)
 
-      offset = 0x45f65dc                                                        // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      data.writeChar(offset,0x23)
+      // Solve soft lock if player starts near Room 3 in Abandoned Mines
+      offset = 0x45f65dc
+      data.writeChar(offset, 0x23)
       
-      offset = 0x45f655a                                                        // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = data.writeChar(offset,0x68)
-      data.writeChar(offset,0x00)
+      // Solve soft lock if player starts near Room 3 in Abandoned Mines
+      offset = 0x45f655a
+      offset = data.writeChar(offset, 0x68)
+      data.writeChar(offset, 0x00)
 
-      offset = 0x45f64dc                                                        // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = data.writeChar(offset,0x42)
-      data.writeChar(offset,0x03)
+      // Solve soft lock if player starts near Room 3 in Abandoned Mines
+      offset = 0x45f64dc
+      offset = data.writeChar(offset, 0x42)
+      data.writeChar(offset, 0x03)
 
-      offset = 0x45f644e                                                        // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = data.writeChar(offset,0x67)
-      offset = data.writeChar(offset,0x00)
-      offset = data.writeChar(offset,0x68)
-      data.writeChar(offset,0x00)
+      // Solve soft lock if player starts near Room 3 in Abandoned Mines
+      offset = 0x45f644e
+      offset = data.writeChar(offset, 0x67)
+      offset = data.writeChar(offset, 0x00)
+      offset = data.writeChar(offset, 0x68)
+      data.writeChar(offset, 0x00)
 
-      offset = 0x45f6168                                                        // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = data.writeChar(offset,0xda)
-      data.writeChar(offset,0x01)
+      // Solve soft lock if player starts near Room 3 in Abandoned Mines
+      offset = 0x45f6168
+      offset = data.writeChar(offset, 0xda)
+      data.writeChar(offset, 0x01)
 
-      data.writeWord(0x45f8de2,0x03430342)                                      // Solve soft lock if player starts near Room 8 in Abandoned Mines
-      data.writeShort(0x45f8a92,0x0342)
-      data.writeShort(0x45f897c,0x0343)
-      data.writeWord(0x45f879a,0x03430342)
+      // Solve soft lock if player starts near Room 8 in Abandoned Mines
+      data.writeWord(0x45f8de2, 0x03430342)
+      data.writeShort(0x45f8a92, 0x0342)
+      data.writeShort(0x45f897c, 0x0343)
+      data.writeWord(0x45f879a, 0x03430342)
     }
 
-    if(startRoomData[randRoomId].stageWrite === 0x0b) {                         // Solve soft lock if player starts in the Keep Attic
-      offset = 0x0563E4C0
-      offset = data.writeWord(offset,0x34020001)
-      data.writeChar(offset,0x00000000)
+    // Solve soft lock if player starts in the Keep Attic
+    if (startRoomData[randRoomId].stageWrite === 0x0b) {
+      offset = 0x0563e4c0
+      offset = data.writeWord(offset, 0x34020001)
+      data.writeChar(offset, 0x00000000)
 
-      data.writeWord(0x0563E7A8,0x34020001)
-      data.writeWord(0x0563EBCC,0x34020001)
-      data.writeWord(0x0563EA20,0x34020001)
-      data.writeWord(0x0563EC40,0x34020001)
+      data.writeWord(0x0563e7a8, 0x34020001)
+      data.writeWord(0x0563ebcc, 0x34020001)
+      data.writeWord(0x0563ea20, 0x34020001)
+      data.writeWord(0x0563ec40, 0x34020001)
     }
 
     return data
@@ -7739,23 +8265,23 @@
     
     offset = 0x119128
     offset = data.writeWord(offset, 0x34020100) // mov r2,100h
-    offset = data.writeWord(offset, 0x03E00008) // ret
+    offset = data.writeWord(offset, 0x03e00008) // ret
     offset = data.writeWord(offset, 0x00000000) // nop
 
     // Alternate between Rare and Uncommon Drops based on Kill Count - MottZilla
     offset = 0x119188 				// PSX MainRam 800FF4C0h
-    offset = data.writeWord(offset, 0x3C068009) // mov r6,80090000h
-    offset = data.writeWord(offset, 0x34C67BF4) // or r6,7BF4h
-    offset = data.writeWord(offset, 0x8CC20000) // mov r2,[r6]
+    offset = data.writeWord(offset, 0x3c068009) // mov r6,80090000h
+    offset = data.writeWord(offset, 0x34c67bf4) // or r6,7BF4h
+    offset = data.writeWord(offset, 0x8cc20000) // mov r2,[r6]
     offset = data.writeWord(offset, 0x00000000) // nop
     offset = data.writeWord(offset, 0x30420001) // and r2,1h
     offset = data.writeWord(offset, 0x14400004) // jnz r2,800FF4E8h
     offset = data.writeWord(offset, 0x00000000) // nop
     offset = data.writeWord(offset, 0x34020020) // mov r2,20h
-    offset = data.writeWord(offset, 0x0803FD7A) // jmp 800FF5E8h
+    offset = data.writeWord(offset, 0x0803fd7a) // jmp 800FF5E8h
     offset = data.writeWord(offset, 0x00000000) // nop
     offset = data.writeWord(offset, 0x34020040) // mov r2,40h
-    offset = data.writeWord(offset, 0x0803FD7A) // jmp 800FF5E8h
+    offset = data.writeWord(offset, 0x0803fd7a) // jmp 800FF5E8h
     offset = data.writeWord(offset, 0x00000000) // nop
 
     return data
@@ -7766,246 +8292,249 @@
     let offset
     
     // Patch the reverse library card function
-    offset = 0x12B534                                 // Hook to our new LBC function
-    data.writeWord(offset, 0x0C02622F)                // No "nop" instr needed as it's already a call
+    // Hook to our new LBC function
+    offset = 0x12b534
+    // No 'nop' instr needed as it's already a call
+    data.writeWord(offset, 0x0c02622f)
     // Update description
-    offset = 0xF1DE8
-    offset = data.writeWord(offset,0x65766552)
-    offset = data.writeWord(offset,0x62697372)
-    offset = data.writeWord(offset,0x6C20656C)
-    offset = data.writeWord(offset,0x61726269)
-    offset = data.writeWord(offset,0x63207972)
-    offset = data.writeWord(offset,0x20647261)
-    offset = data.writeWord(offset,0x73756D81)
-    offset = data.writeWord(offset,0x006E8165)
+    offset = 0xf1de8
+    offset = data.writeWord(offset, 0x65766552)
+    offset = data.writeWord(offset, 0x62697372)
+    offset = data.writeWord(offset, 0x6c20656c)
+    offset = data.writeWord(offset, 0x61726269)
+    offset = data.writeWord(offset, 0x63207972)
+    offset = data.writeWord(offset, 0x20647261)
+    offset = data.writeWord(offset, 0x73756d81)
+    offset = data.writeWord(offset, 0x006e8165)
     // Update Name
-    data.writeShort(0xF1E14,0xFFE6)
+    data.writeShort(0xf1e14, 0xffe6)
 
     return data
   }
 
   function applyResistToImmunePotionsPatches() {
     // Written By: MottZilla
-    // Changes Resist Potions to grant immunity and gives i-frames like Potion, High Potion, etc.
+    // Changes Resist Potions to grant immunity and gives
+    // i-frames like Potion, High Potion, etc.
     // console.log('potions ran')
-	  const data = new checked()
-	  let offset = 0x13F7D8
-	  offset = data.writeWord(offset,0x0C04D1FE)	// Assembly patch
-	  offset = data.writeWord(offset,0x34040668)
-	  offset = data.writeWord(offset,0x8E240018)
-	  offset = data.writeWord(offset,0x00000000)
-	  offset = data.writeWord(offset,0x2C8F0005)
-	  offset = data.writeWord(offset,0x2C8E0080)
-	  offset = data.writeWord(offset,0x15E00003)
-	  offset = data.writeWord(offset,0x34040001)
-	  offset = data.writeWord(offset,0x0C04385A)
-	  offset = data.writeWord(offset,0x34050040)
-	  offset = data.writeWord(offset,0x11C00003)
-	  offset = data.writeWord(offset,0x8E240018)
-	  offset = data.writeWord(offset,0x0C03FC3D)
-	  offset = data.writeWord(offset,0x00000000)
-	  offset = data.writeWord(offset,0x08048367)
-	  offset = data.writeWord(offset,0x00000000)
-	  // Assembly adjustmetns
-	  data.writeChar(0x10D6DC,0x2C)
-	  data.writeChar(0x10D6EC,0x2C)
-	  data.writeChar(0x10D708,0x2C)
-	  data.writeChar(0x10D718,0x2C)
-	  data.writeChar(0x10D734,0x2C)
-	  data.writeChar(0x10D744,0x2C)
-	  data.writeChar(0x10D760,0x2C)
-	  data.writeChar(0x10D770,0x2C)
-	  data.writeChar(0x10D78C,0x2C)
-	  data.writeChar(0x10D79C,0x2C)
-	  data.writeChar(0x10D7E4,0x2C)
-	  data.writeChar(0x10D7F4,0x2C)
-	  // Name Change
-	  offset = 0xF204C
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF2018
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF1FE8
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF1FB8
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF1F8C
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  offset = 0xF1F60
-	  offset = data.writeWord(offset,0x554D4D29)
-	  offset = data.writeShort(offset,0x454E)
-	  return data
+    const data = new checked()
+    let offset = 0x13f7d8
+    offset = data.writeWord(offset, 0x0c04d1fe)	// Assembly patch
+    offset = data.writeWord(offset, 0x34040668)
+    offset = data.writeWord(offset, 0x8e240018)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x2c8f0005)
+    offset = data.writeWord(offset, 0x2c8e0080)
+    offset = data.writeWord(offset, 0x15e00003)
+    offset = data.writeWord(offset, 0x34040001)
+    offset = data.writeWord(offset, 0x0c04385a)
+    offset = data.writeWord(offset, 0x34050040)
+    offset = data.writeWord(offset, 0x11c00003)
+    offset = data.writeWord(offset, 0x8e240018)
+    offset = data.writeWord(offset, 0x0c03fc3d)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x08048367)
+    offset = data.writeWord(offset, 0x00000000)
+    // Assembly adjustmetns
+    data.writeChar(0x10d6dc, 0x2c)
+    data.writeChar(0x10d6ec, 0x2c)
+    data.writeChar(0x10d708, 0x2c)
+    data.writeChar(0x10d718, 0x2c)
+    data.writeChar(0x10d734, 0x2c)
+    data.writeChar(0x10d744, 0x2c)
+    data.writeChar(0x10d760, 0x2c)
+    data.writeChar(0x10d770, 0x2c)
+    data.writeChar(0x10d78c, 0x2c)
+    data.writeChar(0x10d79c, 0x2c)
+    data.writeChar(0x10d7e4, 0x2c)
+    data.writeChar(0x10d7f4, 0x2c)
+    // Name Change
+    offset = 0xf204c
+    offset = data.writeWord(offset, 0x554d4d29)
+    offset = data.writeShort(offset, 0x454e)
+    offset = 0xf2018
+    offset = data.writeWord(offset, 0x554d4d29)
+    offset = data.writeShort(offset, 0x454e)
+    offset = 0xf1fe8
+    offset = data.writeWord(offset, 0x554d4d29)
+    offset = data.writeShort(offset, 0x454e)
+    offset = 0xf1fb8
+    offset = data.writeWord(offset, 0x554d4d29)
+    offset = data.writeShort(offset, 0x454e)
+    offset = 0xf1f8c
+    offset = data.writeWord(offset, 0x554d4d29)
+    offset = data.writeShort(offset, 0x454e)
+    offset = 0xf1f60
+    offset = data.writeWord(offset, 0x554d4d29)
+    offset = data.writeShort(offset, 0x454e)
+    return data
   }
 
   function applyLibraryShortcutPatches() {
     const data = new checked()
     let offset = 0x47c22ea
-    offset = data.writeWord(offset,0x02400254)
-    offset = data.writeWord(offset,0x02630221)
-    offset = data.writeWord(offset,0x02320233)
-    offset = data.writeWord(offset,0x02320233)
-    offset = data.writeWord(offset,0x02320233)
-    offset = data.writeWord(offset,0x02320233)
-    offset = data.writeWord(offset,0x02320233)
-    data.writeWord(offset,0x02320233)
+    offset = data.writeWord(offset, 0x02400254)
+    offset = data.writeWord(offset, 0x02630221)
+    offset = data.writeWord(offset, 0x02320233)
+    offset = data.writeWord(offset, 0x02320233)
+    offset = data.writeWord(offset, 0x02320233)
+    offset = data.writeWord(offset, 0x02320233)
+    offset = data.writeWord(offset, 0x02320233)
+    data.writeWord(offset, 0x02320233)
     
     offset = 0x47c23c8
-    offset = data.writeWord(offset,0x022f022e)
-    offset = data.writeWord(offset,0x023a022f)
-    offset = data.writeWord(offset,0x023b023a)
-    offset = data.writeWord(offset,0x023b023a)
-    offset = data.writeWord(offset,0x023b023a)
-    offset = data.writeWord(offset,0x023b023a)
-    offset = data.writeWord(offset,0x023b023a)
-    offset = data.writeWord(offset,0x023b023a)
-    data.writeShort(offset,0x023a)
+    offset = data.writeWord(offset, 0x022f022e)
+    offset = data.writeWord(offset, 0x023a022f)
+    offset = data.writeWord(offset, 0x023b023a)
+    offset = data.writeWord(offset, 0x023b023a)
+    offset = data.writeWord(offset, 0x023b023a)
+    offset = data.writeWord(offset, 0x023b023a)
+    offset = data.writeWord(offset, 0x023b023a)
+    offset = data.writeWord(offset, 0x023b023a)
+    data.writeShort(offset, 0x023a)
     
     offset = 0x47c24a8
-    offset = data.writeWord(offset,0x00b3026e)
-    offset = data.writeWord(offset,0x014100e7)
-    offset = data.writeWord(offset,0x013f0141)
-    offset = data.writeWord(offset,0x026e00b3)
-    offset = data.writeWord(offset,0x026c026f)
-    offset = data.writeWord(offset,0x026c026d)
-    offset = data.writeWord(offset,0x026c026d)
-    offset = data.writeWord(offset,0x026c026d)
-    data.writeShort(offset,0x026d)
+    offset = data.writeWord(offset, 0x00b3026e)
+    offset = data.writeWord(offset, 0x014100e7)
+    offset = data.writeWord(offset, 0x013f0141)
+    offset = data.writeWord(offset, 0x026e00b3)
+    offset = data.writeWord(offset, 0x026c026f)
+    offset = data.writeWord(offset, 0x026c026d)
+    offset = data.writeWord(offset, 0x026c026d)
+    offset = data.writeWord(offset, 0x026c026d)
+    data.writeShort(offset, 0x026d)
     
     offset = 0x47c26b6
-    offset = data.writeWord(offset,0x026c0251)
-    offset = data.writeWord(offset,0x00e800b4)
-    offset = data.writeWord(offset,0x00ea00e9)
-    offset = data.writeWord(offset,0x00b400eb)
-    offset = data.writeWord(offset,0x0255026c)
-    offset = data.writeWord(offset,0x025d025c)
-    offset = data.writeWord(offset,0x025d025c)
-    offset = data.writeWord(offset,0x025d025c)
-    data.writeWord(offset,0x025d025c)
+    offset = data.writeWord(offset, 0x026c0251)
+    offset = data.writeWord(offset, 0x00e800b4)
+    offset = data.writeWord(offset, 0x00ea00e9)
+    offset = data.writeWord(offset, 0x00b400eb)
+    offset = data.writeWord(offset, 0x0255026c)
+    offset = data.writeWord(offset, 0x025d025c)
+    offset = data.writeWord(offset, 0x025d025c)
+    offset = data.writeWord(offset, 0x025d025c)
+    data.writeWord(offset, 0x025d025c)
     
     offset = 0x47c2794
-    offset = data.writeWord(offset,0x0251025a)
-    offset = data.writeWord(offset,0x00b5026e)
-    offset = data.writeWord(offset,0x00ed00ec)
-    offset = data.writeWord(offset,0x00ef00ee)
-    offset = data.writeWord(offset,0x026e00b5)
-    offset = data.writeWord(offset,0x01fd025d)
-    offset = data.writeWord(offset,0x021001f3)
-    offset = data.writeWord(offset,0x01fa01f3)
-    offset = data.writeWord(offset,0x01f40210)
-    data.writeShort(offset,0x0204)
+    offset = data.writeWord(offset, 0x0251025a)
+    offset = data.writeWord(offset, 0x00b5026e)
+    offset = data.writeWord(offset, 0x00ed00ec)
+    offset = data.writeWord(offset, 0x00ef00ee)
+    offset = data.writeWord(offset, 0x026e00b5)
+    offset = data.writeWord(offset, 0x01fd025d)
+    offset = data.writeWord(offset, 0x021001f3)
+    offset = data.writeWord(offset, 0x01fa01f3)
+    offset = data.writeWord(offset, 0x01f40210)
+    data.writeShort(offset, 0x0204)
     
     offset = 0x47c2872
-    offset = data.writeWord(offset,0x02500278)
-    offset = data.writeWord(offset,0x026c0259)
-    offset = data.writeWord(offset,0x00f000b6)
-    offset = data.writeWord(offset,0x00f200f1)
-    offset = data.writeWord(offset,0x00b600f3)
-    offset = data.writeWord(offset,0x0255026c)
-    offset = data.writeWord(offset,0x01f901fe)
-    offset = data.writeWord(offset,0x01f3020f)
-    offset = data.writeWord(offset,0x020f01f4)
-    data.writeWord(offset,0x02020272)
+    offset = data.writeWord(offset, 0x02500278)
+    offset = data.writeWord(offset, 0x026c0259)
+    offset = data.writeWord(offset, 0x00f000b6)
+    offset = data.writeWord(offset, 0x00f200f1)
+    offset = data.writeWord(offset, 0x00b600f3)
+    offset = data.writeWord(offset, 0x0255026c)
+    offset = data.writeWord(offset, 0x01f901fe)
+    offset = data.writeWord(offset, 0x01f3020f)
+    offset = data.writeWord(offset, 0x020f01f4)
+    data.writeWord(offset, 0x02020272)
     
     offset = 0x47c2950
-    offset = data.writeWord(offset,0x020501f7)
-    offset = data.writeWord(offset,0x02510250)
-    offset = data.writeWord(offset,0x00b7026e)
-    offset = data.writeWord(offset,0x00f500f4)
-    offset = data.writeWord(offset,0x00f700f6)
-    offset = data.writeWord(offset,0x026e00b7)
-    offset = data.writeWord(offset,0x0200025d)
-    offset = data.writeWord(offset,0x02bb01f6)
-    offset = data.writeWord(offset,0x01f801f9)
-    offset = data.writeWord(offset,0x01f30212)
-    data.writeShort(offset,0x0278)
+    offset = data.writeWord(offset, 0x020501f7)
+    offset = data.writeWord(offset, 0x02510250)
+    offset = data.writeWord(offset, 0x00b7026e)
+    offset = data.writeWord(offset, 0x00f500f4)
+    offset = data.writeWord(offset, 0x00f700f6)
+    offset = data.writeWord(offset, 0x026e00b7)
+    offset = data.writeWord(offset, 0x0200025d)
+    offset = data.writeWord(offset, 0x02bb01f6)
+    offset = data.writeWord(offset, 0x01f801f9)
+    offset = data.writeWord(offset, 0x01f30212)
+    data.writeShort(offset, 0x0278)
     
     offset = 0x47c2a2e
-    offset = data.writeWord(offset,0x02720273)
-    offset = data.writeWord(offset,0x025a0205)
-    offset = data.writeWord(offset,0x026c0251)
-    offset = data.writeWord(offset,0x00f800b8)
-    offset = data.writeWord(offset,0x00fa00f9)
-    offset = data.writeWord(offset,0x00b800fb)
-    offset = data.writeWord(offset,0x0255026c)
-    offset = data.writeWord(offset,0x020301fe)
-    offset = data.writeWord(offset,0x01fa02bb)
-    offset = data.writeWord(offset,0x02bb01fa)
-    data.writeWord(offset,0x020101f6)
+    offset = data.writeWord(offset, 0x02720273)
+    offset = data.writeWord(offset, 0x025a0205)
+    offset = data.writeWord(offset, 0x026c0251)
+    offset = data.writeWord(offset, 0x00f800b8)
+    offset = data.writeWord(offset, 0x00fa00f9)
+    offset = data.writeWord(offset, 0x00b800fb)
+    offset = data.writeWord(offset, 0x0255026c)
+    offset = data.writeWord(offset, 0x020301fe)
+    offset = data.writeWord(offset, 0x01fa02bb)
+    offset = data.writeWord(offset, 0x02bb01fa)
+    data.writeWord(offset, 0x020101f6)
     
     offset = 0x47c2b0c
-    offset = data.writeWord(offset,0x021101f7)
-    offset = data.writeWord(offset,0x02bc01fa)
-    offset = data.writeWord(offset,0x02510252)
-    offset = data.writeWord(offset,0x00b9026e)
-    offset = data.writeWord(offset,0x00fd00fc)
-    offset = data.writeWord(offset,0x00ff00fe)
-    offset = data.writeWord(offset,0x026e00b9)
-    offset = data.writeWord(offset,0x0276025d)
-    offset = data.writeWord(offset,0x02120272)
-    offset = data.writeWord(offset,0x01f301f6)
-    offset = data.writeWord(offset,0x02740273)
-    data.writeShort(offset,0x0203)
+    offset = data.writeWord(offset, 0x021101f7)
+    offset = data.writeWord(offset, 0x02bc01fa)
+    offset = data.writeWord(offset, 0x02510252)
+    offset = data.writeWord(offset, 0x00b9026e)
+    offset = data.writeWord(offset, 0x00fd00fc)
+    offset = data.writeWord(offset, 0x00ff00fe)
+    offset = data.writeWord(offset, 0x026e00b9)
+    offset = data.writeWord(offset, 0x0276025d)
+    offset = data.writeWord(offset, 0x02120272)
+    offset = data.writeWord(offset, 0x01f301f6)
+    offset = data.writeWord(offset, 0x02740273)
+    data.writeShort(offset, 0x0203)
     
     offset = 0x47c2bea
-    offset = data.writeWord(offset,0x02540255)
-    offset = data.writeWord(offset,0x02540255)
-    offset = data.writeWord(offset,0x02460255)
-    offset = data.writeWord(offset,0x026c0247)
-    offset = data.writeWord(offset,0x00c300ba)
-    offset = data.writeWord(offset,0x00c500c4)
-    offset = data.writeWord(offset,0x00ba00c6)
-    offset = data.writeWord(offset,0x0255026c)
-    offset = data.writeWord(offset,0x02550254)
-    offset = data.writeWord(offset,0x02550254)
-    offset = data.writeWord(offset,0x02550248)
-    data.writeShort(offset,0x0254)
+    offset = data.writeWord(offset, 0x02540255)
+    offset = data.writeWord(offset, 0x02540255)
+    offset = data.writeWord(offset, 0x02460255)
+    offset = data.writeWord(offset, 0x026c0247)
+    offset = data.writeWord(offset, 0x00c300ba)
+    offset = data.writeWord(offset, 0x00c500c4)
+    offset = data.writeWord(offset, 0x00ba00c6)
+    offset = data.writeWord(offset, 0x0255026c)
+    offset = data.writeWord(offset, 0x02550254)
+    offset = data.writeWord(offset, 0x02550254)
+    offset = data.writeWord(offset, 0x02550248)
+    data.writeShort(offset, 0x0254)
     
     offset = 0x47c2cc8
-    offset = data.writeWord(offset,0x025d025c)
-    offset = data.writeWord(offset,0x025d025c)
-    offset = data.writeWord(offset,0x025d025c)
-    offset = data.writeWord(offset,0x024f024e)
-    offset = data.writeWord(offset,0x00bb026e)
-    offset = data.writeWord(offset,0x00c800c7)
-    offset = data.writeWord(offset,0x00ca00c9)
-    offset = data.writeWord(offset,0x026e00bb)
-    offset = data.writeWord(offset,0x025c025d)
-    offset = data.writeWord(offset,0x025c025d)
-    offset = data.writeWord(offset,0x025c025d)
-    data.writeShort(offset,0x025d)
+    offset = data.writeWord(offset, 0x025d025c)
+    offset = data.writeWord(offset, 0x025d025c)
+    offset = data.writeWord(offset, 0x025d025c)
+    offset = data.writeWord(offset, 0x024f024e)
+    offset = data.writeWord(offset, 0x00bb026e)
+    offset = data.writeWord(offset, 0x00c800c7)
+    offset = data.writeWord(offset, 0x00ca00c9)
+    offset = data.writeWord(offset, 0x026e00bb)
+    offset = data.writeWord(offset, 0x025c025d)
+    offset = data.writeWord(offset, 0x025c025d)
+    offset = data.writeWord(offset, 0x025c025d)
+    data.writeShort(offset, 0x025d)
     
     offset = 0x47c2da8
-    offset = data.writeWord(offset,0x02210220)
-    offset = data.writeWord(offset,0x02210221)
-    offset = data.writeWord(offset,0x02210221)
-    offset = data.writeWord(offset,0x02210221)
-    offset = data.writeWord(offset,0x02210221)
-    offset = data.writeWord(offset,0x02210221)
-    offset = data.writeWord(offset,0x02210221)
-    offset = data.writeWord(offset,0x021f0221)
-    offset = data.writeWord(offset,0x021f021f)
-    offset = data.writeWord(offset,0x01fd0237)
-    offset = data.writeWord(offset,0x01fa0272)
-    data.writeShort(offset,0x01f9)
+    offset = data.writeWord(offset, 0x02210220)
+    offset = data.writeWord(offset, 0x02210221)
+    offset = data.writeWord(offset, 0x02210221)
+    offset = data.writeWord(offset, 0x02210221)
+    offset = data.writeWord(offset, 0x02210221)
+    offset = data.writeWord(offset, 0x02210221)
+    offset = data.writeWord(offset, 0x02210221)
+    offset = data.writeWord(offset, 0x021f0221)
+    offset = data.writeWord(offset, 0x021f021f)
+    offset = data.writeWord(offset, 0x01fd0237)
+    offset = data.writeWord(offset, 0x01fa0272)
+    data.writeShort(offset, 0x01f9)
     
-    offset = 0x47C2E8A
-    offset = data.writeWord(offset,0x02280228)
-    offset = data.writeWord(offset,0x02280228)
-    offset = data.writeWord(offset,0x02280228)
-    data.writeShort(offset,0x0228)
-        
-    offset = 0x47C2FC8
-    offset = data.writeWord(offset,0x02280228)
-    offset = data.writeWord(offset,0x02280228)
-    offset = data.writeWord(offset,0x02280228)
-    offset = data.writeWord(offset,0x02280228)
-    offset = data.writeWord(offset,0x02280228)
-    offset = data.writeWord(offset,0x0200022A)
-    data.writeShort(offset,0x01F3)
+    offset = 0x47c2e8a
+    offset = data.writeWord(offset, 0x02280228)
+    offset = data.writeWord(offset, 0x02280228)
+    offset = data.writeWord(offset, 0x02280228)
+    data.writeShort(offset, 0x0228)
+    
+    offset = 0x47c2fc8
+    offset = data.writeWord(offset, 0x02280228)
+    offset = data.writeWord(offset, 0x02280228)
+    offset = data.writeWord(offset, 0x02280228)
+    offset = data.writeWord(offset, 0x02280228)
+    offset = data.writeWord(offset, 0x02280228)
+    offset = data.writeWord(offset, 0x0200022a)
+    data.writeShort(offset, 0x01f3)
 
     return data
   }
@@ -8017,21 +8546,31 @@
     let offset
 
     // First Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
-    offset = 0x055A0F04
-    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
-    offset = data.writeWord(offset, 0xa4230fd0)                                 // assign the value to RAM
-    offset = data.writeWord(offset, 0x0c06d6f8)                                 // Call sfx player
-    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
-    offset = data.writeWord(offset, 0x0806a29c)                                 // Jump to 0x801A8A70
+    offset = 0x055a0f04
+    // Set the regisater for door open
+    offset = data.writeWord(offset, 0x2403000f)
+    // assign the value to RAM
+    offset = data.writeWord(offset, 0xa4230fd0)
+    // Call sfx player
+    offset = data.writeWord(offset, 0x0c06d6f8)
+    // set register for which sfx to play
+    offset = data.writeWord(offset, 0x34040676)
+    // Jump to 0x801a8a70
+    offset = data.writeWord(offset, 0x0806a29c)
     data.writeWord(offset, 0x00000000)
 
     // Second Castle Gear Puzzle - Code by Forat Negre; added by eldri7ch
-    offset = 0x059E92D8
-    offset = data.writeWord(offset, 0x2403000f)                                 // Set the regisater for door open
-    offset = data.writeWord(offset, 0xa4230f6c)                                 // assign the value to RAM
-    offset = data.writeWord(offset, 0x0c04d1fe)                                 // Call sfx player
-    offset = data.writeWord(offset, 0x34040676)                                 // set register for which sfx to play
-    offset = data.writeWord(offset, 0x0806a0d9)                                 // Jump to 0x801A8364
+    offset = 0x059e92d8
+    // Set the regisater for door open
+    offset = data.writeWord(offset, 0x2403000f)
+    // assign the value to RAM
+    offset = data.writeWord(offset, 0xa4230f6c)
+    // Call sfx player
+    offset = data.writeWord(offset, 0x0c04d1fe)
+    // set register for which sfx to play
+    offset = data.writeWord(offset, 0x34040676)
+    // Jump to 0x801a8364
+    offset = data.writeWord(offset, 0x0806a0d9)
     data.writeWord(offset, 0x00000000)
 
     return data
@@ -8043,49 +8582,49 @@
 
     // console.log('Jewel Sword')
     // Jewel Sword Patch Hook - code and idea by eldri7ch
-    data.writeWord(0x0010D2A0, 0x08026236)
+    data.writeWord(0x0010d2a0, 0x08026236)
 
     // Badelaire Patch - code by eldri7ch and idea by MottZilla
-    data.writeChar(0x10D238,0x34)
+    data.writeChar(0x10d238, 0x34)
 
     // Yasutsuna Hitbox Fix by MottZilla
     // RIGHT HAND
-    // offset = 0x3BFB314
+    // offset = 0x3bfb314
     // offset = data.writeWord(offset, 0x18000024)
     // offset = data.writeWord(offset, 0x00000000)
 
-    // offset = 0x3BFB3A8
-    // offset = data.writeWord(offset, 0x3C178007)
-    // offset = data.writeWord(offset, 0x36F733D8)
+    // offset = 0x3bfb3a8
+    // offset = data.writeWord(offset, 0x3c178007)
+    // offset = data.writeWord(offset, 0x36f733d8)
     // offset = data.writeWord(offset, 0x00000000)
-    // offset = data.writeWord(offset, 0x8EF60000)
-    // offset = data.writeWord(offset, 0x8EF50004)
-    // offset = data.writeWord(offset, 0x96F40014)
-    // offset = data.writeWord(offset, 0xAE360000)
-    // offset = data.writeWord(offset, 0xAE350004)
-    // offset = data.writeWord(offset, 0xA6340014)
-    // offset = data.writeWord(offset, 0x8FBF0030)
-    // offset = data.writeWord(offset, 0x8FB7002C)
-    // offset = data.writeWord(offset, 0x1800FFD1)
+    // offset = data.writeWord(offset, 0x8ef60000)
+    // offset = data.writeWord(offset, 0x8ef50004)
+    // offset = data.writeWord(offset, 0x96f40014)
+    // offset = data.writeWord(offset, 0xae360000)
+    // offset = data.writeWord(offset, 0xae350004)
+    // offset = data.writeWord(offset, 0xa6340014)
+    // offset = data.writeWord(offset, 0x8fbf0030)
+    // offset = data.writeWord(offset, 0x8fb7002c)
+    // offset = data.writeWord(offset, 0x1800ffd1)
 
     //LEFT HAND
-    // offset = 0x3DD57F4
+    // offset = 0x3dd57f4
     // offset = data.writeWord(offset, 0x18000024)
     // offset = data.writeWord(offset, 0x00000000)
 
-    // offset = 0x3DD5888
-    // offset = data.writeWord(offset, 0x3C178007)
-    // offset = data.writeWord(offset, 0x36F733D8)
+    // offset = 0x3dd5888
+    // offset = data.writeWord(offset, 0x3c178007)
+    // offset = data.writeWord(offset, 0x36f733d8)
     // offset = data.writeWord(offset, 0x00000000)
-    // offset = data.writeWord(offset, 0x8EF60000)
-    // offset = data.writeWord(offset, 0x8EF50004)
-    // offset = data.writeWord(offset, 0x96F40014)
-    // offset = data.writeWord(offset, 0xAE360000)
-    // offset = data.writeWord(offset, 0xAE350004)
-    // offset = data.writeWord(offset, 0xA6340014)
-    // offset = data.writeWord(offset, 0x8FBF0030)
-    // offset = data.writeWord(offset, 0x8FB7002C)
-    // offset = data.writeWord(offset, 0x1800FFD1)
+    // offset = data.writeWord(offset, 0x8ef60000)
+    // offset = data.writeWord(offset, 0x8ef50004)
+    // offset = data.writeWord(offset, 0x96f40014)
+    // offset = data.writeWord(offset, 0xae360000)
+    // offset = data.writeWord(offset, 0xae350004)
+    // offset = data.writeWord(offset, 0xa6340014)
+    // offset = data.writeWord(offset, 0x8fbf0030)
+    // offset = data.writeWord(offset, 0x8fb7002c)
+    // offset = data.writeWord(offset, 0x1800ffd1)
 
     return data
   }
@@ -8094,134 +8633,142 @@
   //  #region Preset: Argument 
   // =========================================================================
 
-  function applyNewGoals(nGoal) {	// Research and function by MottZilla & eldri7ch.
+  // Research and function by MottZilla & eldri7ch.
+  function applyNewGoals(nGoal) {
     const data = new checked()
-    const jmpAddr = 0x04fcf814                                                  // define address to hook
-    const funcAddress = 0x04fe4f68                                              // define address for functions (inside Black Marble Gallery Overlay)
+    // define address to hook
+    const jmpAddr = 0x04fcf814
+    // define address for functions (inside Black Marble Gallery Overlay)
+    const funcAddress = 0x04fe4f68
     let offset
-                                                                                // Patch new goals - eldri7ch
+    // Patch new goals - eldri7ch
     switch (nGoal) {
-    case 'b':                                                                   // All Bosses
+    case 'b':
+      // All Bosses
       offset = jmpAddr
       data.writeWord(offset, 0x08074fbc)
 
       offset = funcAddress
-      offset = data.writeWord(offset, 0x3C108003)
-      offset = data.writeWord(offset, 0x3610CA2C)
-      offset = data.writeWord(offset, 0x3C118003)
-      offset = data.writeWord(offset, 0x3631CA80)
-      offset = data.writeWord(offset, 0x8E120000)
+      offset = data.writeWord(offset, 0x3c108003)
+      offset = data.writeWord(offset, 0x3610ca2c)
+      offset = data.writeWord(offset, 0x3c118003)
+      offset = data.writeWord(offset, 0x3631ca80)
+      offset = data.writeWord(offset, 0x8e120000)
       offset = data.writeWord(offset, 0x00000000)
       offset = data.writeWord(offset, 0x12400005)
       offset = data.writeWord(offset, 0x26100004)
-      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x1611fffb)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080704E4)
+      offset = data.writeWord(offset, 0x080704e4)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080705E4)
+      offset = data.writeWord(offset, 0x080705e4)
       offset = data.writeWord(offset, 0x00000000)
 
-      offset = 0x04fcf7f3                                                       // Remove need for Vlads
+      // Remove need for Vlads
+      offset = 0x04fcf7f3
       data.writeChar(offset, 0x34)
       break
-    case 'r':                                                                   // All Relics
+    case 'r':
+      // All Relics
       offset = jmpAddr
       data.writeWord(offset, 0x08074fbc)
 
       offset = funcAddress
-      offset = data.writeWord(offset, 0x3C108009)
+      offset = data.writeWord(offset, 0x3c108009)
       offset = data.writeWord(offset, 0x36107964)
-      offset = data.writeWord(offset, 0x3C118009)
-      offset = data.writeWord(offset, 0x3631797B)
+      offset = data.writeWord(offset, 0x3c118009)
+      offset = data.writeWord(offset, 0x3631797b)
       offset = data.writeWord(offset, 0x92120000)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x1240000F)
+      offset = data.writeWord(offset, 0x1240000f)
       offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x1611fffb)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x3C108009)
-      offset = data.writeWord(offset, 0x3610797D)
-      offset = data.writeWord(offset, 0x3C118009)
+      offset = data.writeWord(offset, 0x3c108009)
+      offset = data.writeWord(offset, 0x3610797d)
+      offset = data.writeWord(offset, 0x3c118009)
       offset = data.writeWord(offset, 0x36317982)
       offset = data.writeWord(offset, 0x92120000)
       offset = data.writeWord(offset, 0x00000000)
       offset = data.writeWord(offset, 0x12400005)
       offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x1611fffb)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080704E4)
+      offset = data.writeWord(offset, 0x080704e4)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080705E4)
+      offset = data.writeWord(offset, 0x080705e4)
       offset = data.writeWord(offset, 0x00000000)
       break
-    case 'a':                                                                   // All Bosses & Relics (ABRSR)
+    case 'a':
+      // All Bosses & Relics (ABRSR)
       offset = jmpAddr
       data.writeWord(offset, 0x08074fbc)
 
       offset = funcAddress
-      offset = data.writeWord(offset, 0x3C108003)
-      offset = data.writeWord(offset, 0x3610CA2C)
-      offset = data.writeWord(offset, 0x3C118003)
-      offset = data.writeWord(offset, 0x3631CA80)
-      offset = data.writeWord(offset, 0x8E120000)
+      offset = data.writeWord(offset, 0x3c108003)
+      offset = data.writeWord(offset, 0x3610ca2c)
+      offset = data.writeWord(offset, 0x3c118003)
+      offset = data.writeWord(offset, 0x3631ca80)
+      offset = data.writeWord(offset, 0x8e120000)
       offset = data.writeWord(offset, 0x00000000)
       offset = data.writeWord(offset, 0x12400019)
       offset = data.writeWord(offset, 0x26100004)
-      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x1611fffb)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x3C108009)
+      offset = data.writeWord(offset, 0x3c108009)
       offset = data.writeWord(offset, 0x36107964)
-      offset = data.writeWord(offset, 0x3C118009)
-      offset = data.writeWord(offset, 0x3631797B)
+      offset = data.writeWord(offset, 0x3c118009)
+      offset = data.writeWord(offset, 0x3631797b)
       offset = data.writeWord(offset, 0x92120000)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x1240000F)
+      offset = data.writeWord(offset, 0x1240000f)
       offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x1611fffb)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x3C108009)
-      offset = data.writeWord(offset, 0x3610797D)
-      offset = data.writeWord(offset, 0x3C118009)
+      offset = data.writeWord(offset, 0x3c108009)
+      offset = data.writeWord(offset, 0x3610797d)
+      offset = data.writeWord(offset, 0x3c118009)
       offset = data.writeWord(offset, 0x36317982)
       offset = data.writeWord(offset, 0x92120000)
       offset = data.writeWord(offset, 0x00000000)
       offset = data.writeWord(offset, 0x12400005)
       offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x1611fffb)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080704E4)
+      offset = data.writeWord(offset, 0x080704e4)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080705E4)
+      offset = data.writeWord(offset, 0x080705e4)
       offset = data.writeWord(offset, 0x00000000)
       break
-    case 'v':                                                                   // All Bosses All Vlads
+    case 'v':
+      // All Bosses All Vlads
       offset = jmpAddr
       data.writeWord(offset, 0x08074fbc)
 
       offset = funcAddress
-      offset = data.writeWord(offset, 0x3C108003)
-      offset = data.writeWord(offset, 0x3610CA2C)
-      offset = data.writeWord(offset, 0x3C118003)
-      offset = data.writeWord(offset, 0x3631CA80)
-      offset = data.writeWord(offset, 0x8E120000)
+      offset = data.writeWord(offset, 0x3c108003)
+      offset = data.writeWord(offset, 0x3610ca2c)
+      offset = data.writeWord(offset, 0x3c118003)
+      offset = data.writeWord(offset, 0x3631ca80)
+      offset = data.writeWord(offset, 0x8e120000)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x1240000F)
+      offset = data.writeWord(offset, 0x1240000f)
       offset = data.writeWord(offset, 0x26100004)
-      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x1611fffb)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x3C108009)
-      offset = data.writeWord(offset, 0x3610797D)
-      offset = data.writeWord(offset, 0x3C118009)
+      offset = data.writeWord(offset, 0x3c108009)
+      offset = data.writeWord(offset, 0x3610797d)
+      offset = data.writeWord(offset, 0x3c118009)
       offset = data.writeWord(offset, 0x36317982)
       offset = data.writeWord(offset, 0x92120000)
       offset = data.writeWord(offset, 0x00000000)
       offset = data.writeWord(offset, 0x12400005)
       offset = data.writeWord(offset, 0x26100001)
-      offset = data.writeWord(offset, 0x1611FFFB)
+      offset = data.writeWord(offset, 0x1611fffb)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080704E4)
+      offset = data.writeWord(offset, 0x080704e4)
       offset = data.writeWord(offset, 0x00000000)
-      offset = data.writeWord(offset, 0x080705E4)
+      offset = data.writeWord(offset, 0x080705e4)
       offset = data.writeWord(offset, 0x00000000)
       break
     }
@@ -8230,186 +8777,283 @@
     return data
   }
 
-  // TODO(MottZilla): Use an enum style constants for possible values of bhmode.
-  // Which is more clear for devs?
-  // applyBountyHunterTargets(rng, 0)
-  // or:
-  // applyBounterHunterTargets(rng, BHMODE_NORMAL)
-  function applyBountyHunterTargets(rng,bhmode) {
+  function applyBountyHunterTargets(rng, bhmode) {
     // Written By: MottZilla
-    // Selects 5 Enemies as Bounty Hunter Targets, sets their drops and applies hints to the Cards.
+    // Selects 5 Enemies as Bounty Hunter Targets, sets their drops and
+    // applies hints to the Cards.
     const bountyHunterTargets = enemies.bountyHunterTargets
     const data = new checked()
     
     // console.log('Apply BH components')
-    let TargetHeartId,TargetToothId,TargetRibId,TargetRingId,TargetEyeId
-    let TargetHeartEnemyId,TargetToothEnemyId,TargetRibEnemyId,TargetRingEnemyId,TargetEyeEnemyId	
+    let TargetHeartId
+    let TargetToothId
+    let TargetRibId
+    let TargetRingId
+    let TargetEyeId
+    let TargetHeartEnemyId
+    let TargetToothEnemyId
+    let TargetRibEnemyId
+    let TargetRingEnemyId
+    let TargetEyeEnemyId	
     let VladDropRate = 16
     let offset
-    let EBase = 0xB5858
+    let EBase = 0xb5858
     let dindex = 6
+
+    const BHMODE = constants.BHMODE
     
     // Support Functions
-    function getEnemyOffset(id)
-    {
-      let offset_e,offset_s
-      offset_e = id * 0x28
-      offset_s = Math.floor((offset_e+0x100) / 0x800) * 0x130
-      return EBase + offset_e + offset_s
+    function getEnemyOffset(id) {
+      let offsetE, offsetS
+      offsetE = id * 0x28
+      offsetS = Math.floor((offsetE + 0x100) / 0x800) * 0x130
+      return EBase + offsetE + offsetS
     }
-    
-    function writeTargetText(TargetOfs)
-    {
-      TargetOfs = data.writeWord(TargetOfs,0x47524154)	// TARG
-      TargetOfs = data.writeShort(TargetOfs,0x5445)		// ET
-      TargetOfs = data.writeChar(TargetOfs,0x20)			// ' '		
+
+    function writeTargetText(TargetOfs) {
+      TargetOfs = data.writeWord(TargetOfs, 0x47524154)  // TARG
+      TargetOfs = data.writeShort(TargetOfs, 0x5445)     // ET
+      TargetOfs = data.writeChar(TargetOfs, 0x20)        // ' '
       return TargetOfs
     }
     
-    function writeEnemyText(TargetId)
-    {
-      for(let i = 0; i < bountyHunterTargets[TargetId].name.length; i++)
-      {	offset = data.writeChar(offset,bountyHunterTargets[TargetId].name.charCodeAt(i) )	}
-      data.writeChar(offset,0)	// String Termination
+    function writeEnemyText(TargetId) {
+      for(let i = 0; i < bountyHunterTargets[TargetId].name.length; i++) {
+        offset = data.writeChar(
+          offset,
+          bountyHunterTargets[TargetId].name.charCodeAt(i),
+        )
+      }
+      data.writeChar(offset, 0) // String Termination
     }
     
-    function writeTargetData(Id,EnemyId,HintOffset,VladNumber)
-    {
+    function writeTargetData(Id, EnemyId, HintOffset, VladNumber) {
       offset = getEnemyOffset(EnemyId)
-      data.writeShort(offset + 0x1A,0xB5 + VladNumber)
-      data.writeShort(offset + 0x1E,VladDropRate)
-      if(bhmode == 2) { data.writeChar(offset + 0x25,0) }
-      if(HintOffset > 0)
-      {
-        offset = writeTargetText(HintOffset)				// Writing Hint String
-        writeEnemyText(Id)									// Write Enemy Name on Card
+      data.writeShort(offset + 0x1a, 0xb5 + VladNumber)
+      data.writeShort(offset + 0x1e, VladDropRate)
+      if(bhmode === BHMODE.HITMAN) {
+        data.writeChar(offset + 0x25, 0)
+      }
+      if(HintOffset > 0) {
+        // Writing Hint String
+        offset = writeTargetText(HintOffset)
+        // Write Enemy Name on Card
+        writeEnemyText(Id) 
       }
     }
     
-    function changeCardNames()
-    {
-      offset = 0xF5581							// Set Relic Name (Heart Card)
-      offset = data.writeWord(offset,0x72616548)
-      offset = data.writeChar(offset,0x74)
-      offset = 0xF55AC							// Set Relic Name (Tooth Card)
-      offset = data.writeWord(offset,0x746F6F54)
-      offset = data.writeChar(offset,0x68)
-      offset = 0xF55D9							// Set Relic Name (Rib Card)
-      offset = data.writeWord(offset,0x20626952)
-      offset = data.writeWord(offset,0x64726143)
-      offset = data.writeChar(offset,0)
-      offset = 0xF5608							// Set Relic Name (Ring Card)
-      offset = data.writeWord(offset,0x676E6952)
-      offset = data.writeWord(offset,0x72614320)
-      offset = data.writeShort(offset,0x0064)
-      offset = 0xF5635							// Set Relic Name (Eye Card)
-      offset = data.writeWord(offset,0x20657945)
-      offset = data.writeWord(offset,0x64726143)
-      offset = data.writeChar(offset,0)
+    function changeCardNames() {
+      // Set Relic Name (Heart Card)
+      offset = 0xf5581
+      offset = data.writeWord(offset, 0x72616548)
+      offset = data.writeChar(offset, 0x74)
+      // Set Relic Name (Tooth Card)
+      offset = 0xf55ac
+      offset = data.writeWord(offset, 0x746f6f54)
+      offset = data.writeChar(offset, 0x68)
+      // Set Relic Name (Rib Card)
+      offset = 0xf55d9
+      offset = data.writeWord(offset, 0x20626952)
+      offset = data.writeWord(offset, 0x64726143)
+      offset = data.writeChar(offset, 0)
+      // Set Relic Name (Ring Card)
+      offset = 0xf5608
+      offset = data.writeWord(offset, 0x676e6952)
+      offset = data.writeWord(offset, 0x72614320)
+      offset = data.writeShort(offset, 0x0064)
+      // Set Relic Name (Eye Card)
+      offset = 0xf5635
+      offset = data.writeWord(offset, 0x20657945)
+      offset = data.writeWord(offset, 0x64726143)
+      offset = data.writeChar(offset, 0)
     }
     
-    function enemyHasVlad(enemyId)
-    {
+    function enemyHasVlad(enemyId) {
       let VladReturn = 0
       // Handle Duplicates
-      if(enemyId == 246) { enemyId = 6 }	// Axe Knight
-      if(enemyId == 15) { enemyId = 14 }	// Flying Zombie
-      if(enemyId == 29) { enemyId = 27 }	// Merman
-      if(enemyId == 136 || enemyId == 138) { enemyId = 129 }	// Spectral sword
-      if(enemyId == 159) { enemyId = 158 }	// CORPSEWEED
-      if(enemyId == 162) { enemyId = 161 }	// VENUS WEED
-      if(enemyId == 304) { enemyId = 303 }	// Medusa head
-      if(enemyId == 393) { enemyId = 392 }	// Blue Venus WEED
-      if(enemyId == 46) { enemyId = 45 }		// Bone ARK
-      if(enemyId == 142 || enemyId == 143) { enemyId = 141 }	// OROBOUROUS
-      
-      if(TargetHeartEnemyId == enemyId) { VladReturn = 1 }
-      if(TargetToothEnemyId == enemyId) { VladReturn = 2 }
-      if(TargetRibEnemyId == enemyId) { VladReturn = 3 }
-      if(TargetRingEnemyId == enemyId) { VladReturn = 4 }
-      if(TargetEyeEnemyId == enemyId) { VladReturn = 5 }
+      // Axe Knight
+      if (enemyId == 246) {
+        enemyId = 6
+      }
+      // Flying Zombie
+      if (enemyId == 15) {
+        enemyId = 14
+      }
+      // Merman
+      if (enemyId == 29) {
+        enemyId = 27
+      }
+      // Spectral sword
+      if (enemyId == 136 || enemyId == 138) {
+        enemyId = 129
+      }
+      // CORPSEWEED
+      if (enemyId == 159) {
+        enemyId = 158
+      }
+      // VENUS WEED
+      if (enemyId == 162) {
+        enemyId = 161
+      }
+      // Medusa head
+      if (enemyId == 304) {
+        enemyId = 303
+      }
+      // Blue Venus WEED
+      if (enemyId == 393) {
+        enemyId = 392
+      }
+      // Bone ARK
+      if (enemyId == 46) {
+        enemyId = 45
+      }
+      // OROBOUROUS
+      if (enemyId == 142 || enemyId == 143) {
+        enemyId = 141
+      }
+
+      if (TargetHeartEnemyId == enemyId) {
+        VladReturn = 1
+      }
+      if (TargetToothEnemyId == enemyId) {
+        VladReturn = 2
+      }
+      if (TargetRibEnemyId == enemyId) {
+        VladReturn = 3
+      }
+      if (TargetRingEnemyId == enemyId) {
+        VladReturn = 4
+      }
+      if (TargetEyeEnemyId == enemyId) {
+        VladReturn = 5
+      }
       return VladReturn
     }
     
-    function selectTargets()
-    {
-      TargetHeartId = TargetToothId = TargetRibId = TargetRingId = TargetEyeId = 0
-      while(TargetHeartId == 0)
-      {	TargetHeartId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}
-      TargetHeartEnemyId = bountyHunterTargets[TargetHeartId].enemyid						// Heart of Vlad - Pick Enemy Id
-      while(TargetToothId == TargetHeartId || TargetToothId == 0)	
-      {	TargetToothId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Tooth of Vlad - Pick Enemy Id (Can't match Heart)
+    function selectTargets() {
+      TargetHeartId =
+        TargetToothId =
+        TargetRibId =
+        TargetRingId =
+        TargetEyeId = 0
+      while (TargetHeartId == 0) {
+        TargetHeartId = Math.floor(
+          rng() * Math.floor(bountyHunterTargets.length)
+        )
+      }
+      // Heart of Vlad - Pick Enemy Id
+      TargetHeartEnemyId = bountyHunterTargets[TargetHeartId].enemyid
+      while (TargetToothId == TargetHeartId || TargetToothId == 0) {
+        // Tooth of Vlad - Pick Enemy Id (Can't match Heart)
+        TargetToothId = Math.floor(
+          rng() * Math.floor(bountyHunterTargets.length))
+      }
       TargetToothEnemyId = bountyHunterTargets[TargetToothId].enemyid
-      while(TargetRibId == TargetHeartId || TargetRibId == TargetToothId || TargetRibId == 0)	
-      {	TargetRibId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Rib of Vlad - Pick Enemy Id (Can't Match Heart, Tooth)
+      while (TargetRibId == TargetHeartId
+             || TargetRibId == TargetToothId
+             || TargetRibId == 0) {
+        // Rib of Vlad - Pick Enemy Id (Can't Match Heart, Tooth)
+        TargetRibId = Math.floor(
+          rng() * Math.floor(bountyHunterTargets.length)
+        )
+      }
       TargetRibEnemyId = bountyHunterTargets[TargetRibId].enemyid		
-      while(TargetRingId == TargetHeartId || TargetRingId == TargetToothId || TargetRingId == TargetRibId || TargetRingId == 0)
-      {	TargetRingId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Ring of Vlad - Pick Enemy Id (Can't Match Heart, Tooth, Rib)
+      while (TargetRingId == TargetHeartId
+             || TargetRingId == TargetToothId
+             || TargetRingId == TargetRibId || TargetRingId == 0) {
+        // Ring of Vlad - Pick Enemy Id (Can't Match Heart, Tooth, Rib)
+        TargetRingId = Math.floor(
+          rng() * Math.floor(bountyHunterTargets.length)
+        )
+      }
       TargetRingEnemyId = bountyHunterTargets[TargetRingId].enemyid
-      while(TargetEyeId == TargetHeartId || TargetEyeId == TargetToothId || TargetEyeId == TargetRibId || TargetEyeId == TargetRingId || TargetEyeId == 0)	
-      {	TargetEyeId = Math.floor(rng() * Math.floor(bountyHunterTargets.length))	}	// Eye of Vlad - Pick Enemy Id (Can't Match Heart, Tooth, Rib, Ring)
+      // Eye of Vlad - Pick Enemy Id (Can't Match Heart, Tooth, Rib, Ring)
+      while (TargetEyeId == TargetHeartId
+             || TargetEyeId == TargetToothId
+             || TargetEyeId == TargetRibId
+             || TargetEyeId == TargetRingId
+             || TargetEyeId == 0) {
+        TargetEyeId = Math.floor(
+          rng() * Math.floor(bountyHunterTargets.length)
+        )
+      }
       TargetEyeEnemyId = bountyHunterTargets[TargetEyeId].enemyid		
     }
-    
-    function handleDuplicateDefs()
-    {
-      if(enemyHasVlad(6) > 0)	// AXE KNIGHT
-      {	writeTargetData(0,246,0,enemyHasVlad(6))	}		
-      if(enemyHasVlad(14) > 0)	// FLYING ZOMBIE
-      {	writeTargetData(0,15,0,enemyHasVlad(14))	}	
-      if(enemyHasVlad(27) > 0)	// MERMAN
-      {	writeTargetData(0,29,0,enemyHasVlad(27))	}
-      if(enemyHasVlad(129) > 0)	// SPECTRAL SWORD
-      {
-        writeTargetData(0,136,0,enemyHasVlad(129))
-        writeTargetData(0,138,0,enemyHasVlad(129))
+
+    function handleDuplicateDefs() {
+      // AXE KNIGHT
+      if (enemyHasVlad(6) > 0) {
+        writeTargetData(0, 246, 0, enemyHasVlad(6))
       }
-      if(enemyHasVlad(158) > 0)	// CORPSEWEED
-      {	writeTargetData(0,159,0,enemyHasVlad(158))	}
-      if(enemyHasVlad(161) > 0)	// VENUS WEED
-      {	writeTargetData(0,162,0,enemyHasVlad(161))	}
-      if(enemyHasVlad(303) > 0)	// MEDUSA HEAD
-      {	writeTargetData(0,304,0,enemyHasVlad(303))	}
-      if(enemyHasVlad(392) > 0)	// BLUE VENUS WEED
-      {	writeTargetData(0,393,0,enemyHasVlad(392))	}
-      if(enemyHasVlad(45) > 0)	// BONE ARK
-      {	writeTargetData(0,46,0,enemyHasVlad(45))	}
-      if(enemyHasVlad(141) > 0)	// OROBOUROUS
-      {
-        writeTargetData(0,142,0,enemyHasVlad(141))
-        writeTargetData(0,143,0,enemyHasVlad(141))
-        if(bhmode < 2) { data.writeChar(0xB6ED5,0x24) }
+      // FLYING ZOMBIE
+      if (enemyHasVlad(14) > 0) {
+        writeTargetData(0, 15, 0, enemyHasVlad(14))
+      }
+      // MERMAN
+      if (enemyHasVlad(27) > 0) {
+        writeTargetData(0, 29, 0, enemyHasVlad(27))
+      }
+      // SPECTRAL SWORD
+      if (enemyHasVlad(129) > 0) {
+        writeTargetData(0, 136, 0, enemyHasVlad(129))
+        writeTargetData(0, 138, 0, enemyHasVlad(129))
+      }
+      // CORPSEWEED
+      if (enemyHasVlad(158) > 0) {
+        writeTargetData(0, 159, 0, enemyHasVlad(158))
+      }
+      // VENUS WEED
+      if (enemyHasVlad(161) > 0) {
+        writeTargetData(0, 162, 0, enemyHasVlad(161))
+      }
+      // MEDUSA HEAD
+      if (enemyHasVlad(303) > 0) {
+        writeTargetData(0, 304, 0, enemyHasVlad(303))
+      }
+      // BLUE VENUS WEED
+      if (enemyHasVlad(392) > 0) {
+        writeTargetData(0, 393, 0, enemyHasVlad(392))
+      }
+      // BONE ARK
+      if (enemyHasVlad(45) > 0) {
+        writeTargetData(0, 46, 0, enemyHasVlad(45))
+      }
+      // OROBOUROUS
+      if (enemyHasVlad(141) > 0) {
+        writeTargetData(0, 142, 0, enemyHasVlad(141))
+        writeTargetData(0, 143, 0, enemyHasVlad(141))
+        if (bhmode < BHMODE.HITMAN) {
+          data.writeChar(0xb6ed5, 0x24)
+        }
       }		
     }
     
-    function checkForDropRateBoost()
-    {
-      if(bhmode > 0)	// bhmode ~ 0:Normal, 1:Hitman, 2:TargetConfirmed
-      {
-        while(dindex < 397)				// Buff item Drops for Hitman & Target Confirmed
-        {
-          if(enemyHasVlad(dindex) == 0)		// Only change Item Drop Rates on Enemies without Vlads.
-          {
+    function checkForDropRateBoost() {
+      if (bhmode > BHMODE.NORMAL) {
+        // Buff item Drops for Hitman & Target Confirmed
+        while (dindex < 397) {
+          // Only change Item Drop Rates on Enemies without Vlads.
+          if (enemyHasVlad(dindex) == 0) {
             offset = getEnemyOffset(dindex)
-            data.writeShort(offset + 0x1E,16)
-            data.writeShort(offset + 0x20,32)		
-          }	
+            data.writeShort(offset + 0x1e, 16)
+            data.writeShort(offset + 0x20, 32)
+          }
           dindex = dindex + 1
         }
       }		
     }
     
     // Execution
-    if(bhmode > 0)
-    {
-      VladDropRate = 256	// Vlad Drop Rate increased for Hitman & Target Confirmed
+    if(bhmode > BHMODE.NORMAL) {
+      // Vlad Drop Rate increased for Hitman & Target Confirmed
+      VladDropRate = 256
     }
     selectTargets()
-    writeTargetData(TargetHeartId,TargetHeartEnemyId,0xF5560,1)
-    writeTargetData(TargetToothId,TargetToothEnemyId,0xF558C,2)
-    writeTargetData(TargetRibId,TargetRibEnemyId,0xF55B8,3)
-    writeTargetData(TargetRingId,TargetRingEnemyId,0xF55E8,4)
-    writeTargetData(TargetEyeId,TargetEyeEnemyId,0xF5614,5)
+    writeTargetData(TargetHeartId,TargetHeartEnemyId, 0xf5560, 1)
+    writeTargetData(TargetToothId,TargetToothEnemyId, 0xf558c, 2)
+    writeTargetData(TargetRibId,TargetRibEnemyId, 0xf55b8, 3)
+    writeTargetData(TargetRingId,TargetRingEnemyId, 0xf55e8, 4)
+    writeTargetData(TargetEyeId,TargetEyeEnemyId, 0xf5614, 5)
     changeCardNames()
     handleDuplicateDefs()
     checkForDropRateBoost()
@@ -8417,14 +9061,12 @@
     return data
   }
 
-  function alucardStatRando(rng,max) {
-    let newAmt                                                                  // set aside for return
-    newAmt = Math.floor(rng() * max) + 1                                        // random between 0 and the maximum. Max will never be more than 98
-    
-    return newAmt
+  function alucardStatRando(rng, max) {
+    // random between 0 and the maximum. Max will never be more than 98
+    return Math.floor(rng() * max) + 1
   }
 
-  function applyStartStatRandoPatches(rng,max) {
+  function applyStartStatRandoPatches(rng, max) {
     const data = new checked()
     let offset
     let newStr
@@ -8433,12 +9075,12 @@
     let newLck
     const r2Assign = 0x34020000
 
-    // console.log("STATS MAX: " + parseInt(max))
+    // console.log('STATS MAX: ' + parseInt(max))
 
-    newStr = alucardStatRando(rng,max)
-    newCon = alucardStatRando(rng,max)
-    newInt = alucardStatRando(rng,max)
-    newLck = alucardStatRando(rng,max)
+    newStr = alucardStatRando(rng, max)
+    newCon = alucardStatRando(rng, max)
+    newInt = alucardStatRando(rng, max)
+    newLck = alucardStatRando(rng, max)
 
     // console.log(newStr)
     // console.log(newCon)
@@ -8452,24 +9094,24 @@
     newInt = numToHex(r2Assign + newInt)
     newLck = numToHex(r2Assign + newLck)
 
-    offset = 0x00119B6C
-    offset = data.writeWord(offset,0x3C018009)
-    offset = data.writeWord(offset,newStr)
+    offset = 0x00119b6c
+    offset = data.writeWord(offset, 0x3c018009)
+    offset = data.writeWord(offset, newStr)
     offset += 0x4
 
     // console.log(numToHex(offset))
 
-    offset = data.writeWord(offset,newCon)
+    offset = data.writeWord(offset, newCon)
     offset += 0x4
 
     // console.log(numToHex(offset))
 
-    offset = data.writeWord(offset,newInt)
+    offset = data.writeWord(offset, newInt)
     offset += 0x4
 
     // console.log(numToHex(offset))
 
-    offset = data.writeWord(offset,newLck)
+    offset = data.writeWord(offset, newLck)
 
     return data
   }
@@ -8481,25 +9123,34 @@
   function applyEasyModePatches() {
     const data = new checked()
     let offset
-    
-    offset = 0x0012ca48                                                         // Address for adding new inputs to gravity boots
-    offset = data.writeWord(offset,0x08026232)                                  // instructs the game to jump to the new command detection code
-    data.writeWord(offset,0x00000000)
 
-    offset = 0x0012da34                                                         // Address for adding new inputs to soul steal
-    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
-    data.writeWord(offset,0x34040001)
+    // Address for adding new inputs to gravity boots
+    offset = 0x0012ca48
+    // instructs the game to jump to the new command detection code
+    offset = data.writeWord(offset, 0x08026232)
+    data.writeWord(offset, 0x00000000)
 
-    offset = 0x0012d7a4                                                         // Address for adding new inputs to tetra spirit
-    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
-    data.writeWord(offset,0x34040002)
+    // Address for adding new inputs to soul steal
+    offset = 0x0012da34
+    // instructs the game to jump to the new command detection code
+    offset = data.writeWord(offset, 0x08026234)
+    data.writeWord(offset, 0x34040001)
 
-    offset = 0x0012d454                                                         // Address for adding new inputs to hellfire
-    offset = data.writeWord(offset,0x08026234)                                  // instructs the game to jump to the new command detection code
-    data.writeWord(offset,0x34040003)
+    // Address for adding new inputs to tetra spirit
+    offset = 0x0012d7a4
+    // instructs the game to jump to the new command detection code
+    offset = data.writeWord(offset, 0x08026234)
+    data.writeWord(offset, 0x34040002)
 
-    data.writeWord(0x0012A234,0x26310004)                                       // 'add r17,4h' adds 4 frames of invincibility to everything which
-                                                                                // adds i-frames, including getting hit.
+    // Address for adding new inputs to hellfire
+    offset = 0x0012d454
+    // instructs the game to jump to the new command detection code
+    offset = data.writeWord(offset, 0x08026234)
+    data.writeWord(offset, 0x34040003)
+
+    // 'add r17,4h' adds 4 frames of invincibility to everything which
+    data.writeWord(0x0012a234, 0x26310004)
+    // adds i-frames, including getting hit.
     return data
   }
 
@@ -8510,84 +9161,84 @@
     let offset
 
     // Apply Four Beasts Hook
-    offset = 0x10B17C
+    offset = 0x10b17c
     data.writeWord(offset, 0x08026780)
 
     // Apply Four Beasts Spell by MottZilla and eldri7ch
     offset = 0x3713218
-    offset = data.writeWord(offset, 0x0C04296F)
+    offset = data.writeWord(offset, 0x0c04296f)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x27BDFFE0)
-    offset = data.writeWord(offset, 0xAFBF0010)
-    offset = data.writeWord(offset, 0x0C0267D5)
+    offset = data.writeWord(offset, 0x27bdffe0)
+    offset = data.writeWord(offset, 0xafbf0010)
+    offset = data.writeWord(offset, 0x0c0267d5)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x0C0267E6)
+    offset = data.writeWord(offset, 0x0c0267e6)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x3C088009)
-    offset = data.writeWord(offset, 0x3406FFFF)
-    offset = data.writeWord(offset, 0x950F7490)
-    offset = data.writeWord(offset, 0x3C0E8009)
-    offset = data.writeWord(offset, 0x35CE9F3C)
-    offset = data.writeWord(offset, 0x3C0D8009)
-    offset = data.writeWord(offset, 0x35AD9F28)
-    offset = data.writeWord(offset, 0x8DA50000)
-    offset = data.writeWord(offset, 0x31EFF000)
-    offset = data.writeWord(offset, 0x01C57021)
-    offset = data.writeWord(offset, 0x01C57021)
-    offset = data.writeWord(offset, 0x95CC0000)
+    offset = data.writeWord(offset, 0x3c088009)
+    offset = data.writeWord(offset, 0x3406ffff)
+    offset = data.writeWord(offset, 0x950f7490)
+    offset = data.writeWord(offset, 0x3c0e8009)
+    offset = data.writeWord(offset, 0x35ce9f3c)
+    offset = data.writeWord(offset, 0x3c0d8009)
+    offset = data.writeWord(offset, 0x35ad9f28)
+    offset = data.writeWord(offset, 0x8da50000)
+    offset = data.writeWord(offset, 0x31eff000)
+    offset = data.writeWord(offset, 0x01c57021)
+    offset = data.writeWord(offset, 0x01c57021)
+    offset = data.writeWord(offset, 0x95cc0000)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x11860008)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x15EC0004)
+    offset = data.writeWord(offset, 0x15ec0004)
     offset = data.writeWord(offset, 0x34070014)
-    offset = data.writeWord(offset, 0x24A50001)
-    offset = data.writeWord(offset, 0xA5A50000)
-    offset = data.writeWord(offset, 0xA5A70004)
-    offset = data.writeWord(offset, 0x080267C6)
+    offset = data.writeWord(offset, 0x24a50001)
+    offset = data.writeWord(offset, 0xa5a50000)
+    offset = data.writeWord(offset, 0xa5a70004)
+    offset = data.writeWord(offset, 0x080267c6)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x3C0B8009)
-    offset = data.writeWord(offset, 0x356B9F34)
-    offset = data.writeWord(offset, 0x340C1000)
-    offset = data.writeWord(offset, 0x3C0E8009)
-    offset = data.writeWord(offset, 0x35CE9F30)
-    offset = data.writeWord(offset, 0x8DC40000)
-    offset = data.writeWord(offset, 0x158F0008)
+    offset = data.writeWord(offset, 0x3c0b8009)
+    offset = data.writeWord(offset, 0x356b9f34)
+    offset = data.writeWord(offset, 0x340c1000)
+    offset = data.writeWord(offset, 0x3c0e8009)
+    offset = data.writeWord(offset, 0x35ce9f30)
+    offset = data.writeWord(offset, 0x8dc40000)
+    offset = data.writeWord(offset, 0x158f0008)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x24840001)
-    offset = data.writeWord(offset, 0xADC40000)
-    offset = data.writeWord(offset, 0x3406001E)
-    offset = data.writeWord(offset, 0xAD660000)
-    offset = data.writeWord(offset, 0xADA60004)
-    offset = data.writeWord(offset, 0x080267C6)
+    offset = data.writeWord(offset, 0xadc40000)
+    offset = data.writeWord(offset, 0x3406001e)
+    offset = data.writeWord(offset, 0xad660000)
+    offset = data.writeWord(offset, 0xada60004)
+    offset = data.writeWord(offset, 0x080267c6)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x2484FFD6)
+    offset = data.writeWord(offset, 0x2484ffd6)
     offset = data.writeWord(offset, 0x04810005)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0xADA00000)
-    offset = data.writeWord(offset, 0xA5A00004)
-    offset = data.writeWord(offset, 0x080267C6)
+    offset = data.writeWord(offset, 0xada00000)
+    offset = data.writeWord(offset, 0xa5a00004)
+    offset = data.writeWord(offset, 0x080267c6)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x8D640000)
+    offset = data.writeWord(offset, 0x8d640000)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x1080000D)
+    offset = data.writeWord(offset, 0x1080000d)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x2484FFFF)
-    offset = data.writeWord(offset, 0xAD640000)
+    offset = data.writeWord(offset, 0x2484ffff)
+    offset = data.writeWord(offset, 0xad640000)
     offset = data.writeWord(offset, 0x34064000)
-    offset = data.writeWord(offset, 0x14CF000A)
+    offset = data.writeWord(offset, 0x14cf000a)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x950F7494)
+    offset = data.writeWord(offset, 0x950f7494)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x31EF0010)
-    offset = data.writeWord(offset, 0x11E00005)
+    offset = data.writeWord(offset, 0x31ef0010)
+    offset = data.writeWord(offset, 0x11e00005)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x0C026807)
+    offset = data.writeWord(offset, 0x0c026807)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0xADA00000)
-    offset = data.writeWord(offset, 0xA5A00004)
-    offset = data.writeWord(offset, 0x8FBF0010)
-    offset = data.writeWord(offset, 0x27BD0020)
-    offset = data.writeWord(offset, 0x0803CC4F)
+    offset = data.writeWord(offset, 0xada00000)
+    offset = data.writeWord(offset, 0xa5a00004)
+    offset = data.writeWord(offset, 0x8fbf0010)
+    offset = data.writeWord(offset, 0x27bd0020)
+    offset = data.writeWord(offset, 0x0803cc4f)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x00000000)
@@ -8596,376 +9247,376 @@
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x30001000)
     offset = data.writeWord(offset, 0x60002000)
-    offset = data.writeWord(offset, 0xC0004000)
+    offset = data.writeWord(offset, 0xc0004000)
     offset = data.writeWord(offset, 0x90008000)
-    offset = data.writeWord(offset, 0xFFFF1000)
+    offset = data.writeWord(offset, 0xffff1000)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x3C04800A)
-    offset = data.writeWord(offset, 0x8C849F2C)
+    offset = data.writeWord(offset, 0x3c04800a)
+    offset = data.writeWord(offset, 0x8c849f2c)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x10800008)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x2484FFFF)
-    offset = data.writeWord(offset, 0x3C0F8009)
-    offset = data.writeWord(offset, 0x35EF9F2C)
-    offset = data.writeWord(offset, 0xADE40000)
+    offset = data.writeWord(offset, 0x2484ffff)
+    offset = data.writeWord(offset, 0x3c0f8009)
+    offset = data.writeWord(offset, 0x35ef9f2c)
+    offset = data.writeWord(offset, 0xade40000)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x080267E4)
+    offset = data.writeWord(offset, 0x080267e4)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x3C048009)
-    offset = data.writeWord(offset, 0x34849F28)
-    offset = data.writeWord(offset, 0xAC800000)
-    offset = data.writeWord(offset, 0x03E00008)
+    offset = data.writeWord(offset, 0x3c048009)
+    offset = data.writeWord(offset, 0x34849f28)
+    offset = data.writeWord(offset, 0xac800000)
+    offset = data.writeWord(offset, 0x03e00008)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x3C04800A)
-    offset = data.writeWord(offset, 0x8C849F38)
+    offset = data.writeWord(offset, 0x3c04800a)
+    offset = data.writeWord(offset, 0x8c849f38)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x1080000C)
+    offset = data.writeWord(offset, 0x1080000c)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x3406816E)
-    offset = data.writeWord(offset, 0x3C098007)
+    offset = data.writeWord(offset, 0x3406816e)
+    offset = data.writeWord(offset, 0x3c098007)
     offset = data.writeWord(offset, 0x35290000)
-    offset = data.writeWord(offset, 0x2484FFFF)
-    offset = data.writeWord(offset, 0x3C0F8009)
-    offset = data.writeWord(offset, 0x35EF9F38)
-    offset = data.writeWord(offset, 0xADE40000)
-    offset = data.writeWord(offset, 0xA52633EE)
+    offset = data.writeWord(offset, 0x2484ffff)
+    offset = data.writeWord(offset, 0x3c0f8009)
+    offset = data.writeWord(offset, 0x35ef9f38)
+    offset = data.writeWord(offset, 0xade40000)
+    offset = data.writeWord(offset, 0xa52633ee)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x08026805)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x3C098007)
+    offset = data.writeWord(offset, 0x3c098007)
     offset = data.writeWord(offset, 0x35290000)
-    offset = data.writeWord(offset, 0xA5203418)
-    offset = data.writeWord(offset, 0xA5203420)
-    offset = data.writeWord(offset, 0x952533EE)
-    offset = data.writeWord(offset, 0x3406816E)
-    offset = data.writeWord(offset, 0x14A60002)
+    offset = data.writeWord(offset, 0xa5203418)
+    offset = data.writeWord(offset, 0xa5203420)
+    offset = data.writeWord(offset, 0x952533ee)
+    offset = data.writeWord(offset, 0x3406816e)
+    offset = data.writeWord(offset, 0x14a60002)
     offset = data.writeWord(offset, 0x34048100)
-    offset = data.writeWord(offset, 0xA52433EE)
+    offset = data.writeWord(offset, 0xa52433ee)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x3C048010)
-    offset = data.writeWord(offset, 0x3484BEA8)
-    offset = data.writeWord(offset, 0x3C05A040)
-    offset = data.writeWord(offset, 0x34A50049)
-    offset = data.writeWord(offset, 0xAC850000)
-    offset = data.writeWord(offset, 0x03E00008)
+    offset = data.writeWord(offset, 0x3c048010)
+    offset = data.writeWord(offset, 0x3484bea8)
+    offset = data.writeWord(offset, 0x3c05a040)
+    offset = data.writeWord(offset, 0x34a50049)
+    offset = data.writeWord(offset, 0xac850000)
+    offset = data.writeWord(offset, 0x03e00008)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x3C098007)
+    offset = data.writeWord(offset, 0x3c098007)
     offset = data.writeWord(offset, 0x35290000)
-    offset = data.writeWord(offset, 0x3C088009)
-    offset = data.writeWord(offset, 0x35087BC0)
+    offset = data.writeWord(offset, 0x3c088009)
+    offset = data.writeWord(offset, 0x35087bc0)
     offset = data.writeWord(offset, 0x91263404)
     offset = data.writeWord(offset, 0x34070002)
-    offset = data.writeWord(offset, 0x14C7001B)
-    offset = data.writeWord(offset, 0x8D07FFF0)
+    offset = data.writeWord(offset, 0x14c7001b)
+    offset = data.writeWord(offset, 0x8d07fff0)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x24E7FFBA)
-    offset = data.writeWord(offset, 0x04E00017)
-    offset = data.writeWord(offset, 0x3C0F8009)
-    offset = data.writeWord(offset, 0x35EF9F38)
-    offset = data.writeWord(offset, 0x340404B0)
-    offset = data.writeWord(offset, 0x8D050000)
-    offset = data.writeWord(offset, 0xA5E40000)
-    offset = data.writeWord(offset, 0xA5253418)
+    offset = data.writeWord(offset, 0x24e7ffba)
+    offset = data.writeWord(offset, 0x04e00017)
+    offset = data.writeWord(offset, 0x3c0f8009)
+    offset = data.writeWord(offset, 0x35ef9f38)
+    offset = data.writeWord(offset, 0x340404b0)
+    offset = data.writeWord(offset, 0x8d050000)
+    offset = data.writeWord(offset, 0xa5e40000)
+    offset = data.writeWord(offset, 0xa5253418)
     offset = data.writeWord(offset, 0x34041400)
-    offset = data.writeWord(offset, 0x340504CE)
-    offset = data.writeWord(offset, 0x3406816E)
-    offset = data.writeWord(offset, 0xA5243420)
-    offset = data.writeWord(offset, 0xA5252F1C)
-    offset = data.writeWord(offset, 0xA52633EE)
-    offset = data.writeWord(offset, 0xAD07FFF0)
-    offset = data.writeWord(offset, 0x340400BA)
+    offset = data.writeWord(offset, 0x340504ce)
+    offset = data.writeWord(offset, 0x3406816e)
+    offset = data.writeWord(offset, 0xa5243420)
+    offset = data.writeWord(offset, 0xa5252f1c)
+    offset = data.writeWord(offset, 0xa52633ee)
+    offset = data.writeWord(offset, 0xad07fff0)
+    offset = data.writeWord(offset, 0x340400ba)
     offset = data.writeWord(offset, 0x34050020)
-    offset = data.writeWord(offset, 0xA5243484)
-    offset = data.writeWord(offset, 0xAD203428)
-    offset = data.writeWord(offset, 0xAD20342C)
-    offset = data.writeWord(offset, 0xA5253404)
-    offset = data.writeWord(offset, 0xA5203406)
-    offset = data.writeWord(offset, 0x3C048010)
-    offset = data.writeWord(offset, 0x3484BEA8)
-    offset = data.writeWord(offset, 0xAC800000)
-    offset = data.writeWord(offset, 0x03E00008)
+    offset = data.writeWord(offset, 0xa5243484)
+    offset = data.writeWord(offset, 0xad203428)
+    offset = data.writeWord(offset, 0xad20342c)
+    offset = data.writeWord(offset, 0xa5253404)
+    offset = data.writeWord(offset, 0xa5203406)
+    offset = data.writeWord(offset, 0x3c048010)
+    offset = data.writeWord(offset, 0x3484bea8)
+    offset = data.writeWord(offset, 0xac800000)
+    offset = data.writeWord(offset, 0x03e00008)
     data.writeWord(offset, 0x00000000)
 
     // Apply Forbidden Route Shortcut
     offset = 0x49153b8
-    offset = data.writeWord(offset,0x023b023b)
-    offset = data.writeWord(offset,0x0000023a)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x02390000)
-    data.writeWord(offset,0x023b023b)
+    offset = data.writeWord(offset, 0x023b023b)
+    offset = data.writeWord(offset, 0x0000023a)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x02390000)
+    data.writeWord(offset, 0x023b023b)
 
     offset = 0x4915478
-    offset = data.writeWord(offset,0x023c023c)
-    offset = data.writeWord(offset,0x0000023d)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x023c023c)
+    offset = data.writeWord(offset, 0x023c023c)
+    offset = data.writeWord(offset, 0x0000023d)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x023c023c)
 
     offset = 0x491553e
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x003d003c)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x003d003c)
 
     offset = 0x49155fe
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x0020001f)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x0020001f)
 
     offset = 0x49156be
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x00240000)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x00240000)
 
     offset = 0x491577c
-    offset = data.writeWord(offset,0x023b0004)
-    offset = data.writeWord(offset,0x0000023a)
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x00040000)
+    offset = data.writeWord(offset, 0x023b0004)
+    offset = data.writeWord(offset, 0x0000023a)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x00040000)
 
     offset = 0x491583c
-    offset = data.writeWord(offset,0x023c0004)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x00040000)
+    offset = data.writeWord(offset, 0x023c0004)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x00040000)
 
     offset = 0x49158fc
-    offset = data.writeWord(offset,0x00370004)
-    offset = data.writeWord(offset,0x00000041)
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x00040000)
+    offset = data.writeWord(offset, 0x00370004)
+    offset = data.writeWord(offset, 0x00000041)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x00040000)
 
     offset = 0x49159be
-    offset = data.writeWord(offset,0x00070006)
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset, 0x00070006)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x00000000)
 
     offset = 0x4915a80
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x00000000)
 
     offset = 0x4917d38
-    offset = data.writeWord(offset,0x00190019)
-    offset = data.writeWord(offset,0x00190019)
-    offset = data.writeWord(offset,0x00190019)
-    offset = data.writeWord(offset,0x00190019)
-    data.writeWord(offset,0x00190019)
+    offset = data.writeWord(offset, 0x00190019)
+    offset = data.writeWord(offset, 0x00190019)
+    offset = data.writeWord(offset, 0x00190019)
+    offset = data.writeWord(offset, 0x00190019)
+    data.writeWord(offset, 0x00190019)
 
     offset = 0x4917dfe
-    offset = data.writeWord(offset,0x006a0012)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeShort(offset,0x0000)
+    offset = data.writeWord(offset, 0x006a0012)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeShort(offset, 0x0000)
 
     offset = 0x4917ebe
-    offset = data.writeWord(offset,0x006a0000)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x0000)
+    offset = data.writeWord(offset, 0x006a0000)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x0000)
 
     offset = 0x4917f7e
-    offset = data.writeWord(offset,0x006a0000)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x00000012)
+    offset = data.writeWord(offset, 0x006a0000)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x00000012)
 
     offset = 0x491816e
-    offset = data.writeWord(offset,0x006a0000)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x00000096)
+    offset = data.writeWord(offset, 0x006a0000)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x00000096)
 
     offset = 0x491822e
-    offset = data.writeWord(offset,0x00180000)
-    offset = data.writeWord(offset,0x00190019)
-    data.writeWord(offset,0x0000001a)
+    offset = data.writeWord(offset, 0x00180000)
+    offset = data.writeWord(offset, 0x00190019)
+    data.writeWord(offset, 0x0000001a)
 
     offset = 0x49182ee
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x0000006c)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x0000006c)
 
     offset = 0x49183ae
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x0000006c)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x0000006c)
 
     offset = 0x491846e
-    offset = data.writeWord(offset,0x00000012)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x0012006c)
+    offset = data.writeWord(offset, 0x00000012)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x0012006c)
 
     offset = 0x491852e
-    offset = data.writeWord(offset,0x00950012)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x0012006c)
+    offset = data.writeWord(offset, 0x00950012)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x0012006c)
 
     offset = 0x49185ee
-    offset = data.writeWord(offset,0x009c0095)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x0096006e)
+    offset = data.writeWord(offset, 0x009c0095)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x0096006e)
 
     offset = 0x49186ae
-    offset = data.writeWord(offset,0x00190018)
-    offset = data.writeWord(offset,0x00190019)
-    data.writeWord(offset,0x001a0019)
+    offset = data.writeWord(offset, 0x00190018)
+    offset = data.writeWord(offset, 0x00190019)
+    data.writeWord(offset, 0x001a0019)
 
     offset = 0x491876e
-    offset = data.writeWord(offset,0x0066006a)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x006c0066)
+    offset = data.writeWord(offset, 0x0066006a)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x006c0066)
 
     offset = 0x491882e
-    offset = data.writeWord(offset,0x0066009c)
-    offset = data.writeWord(offset,0x00490083)
-    data.writeWord(offset,0x006e0066)
+    offset = data.writeWord(offset, 0x0066009c)
+    offset = data.writeWord(offset, 0x00490083)
+    data.writeWord(offset, 0x006e0066)
 
     // Forbidden Scroll Entity Remover
     offset = 0x048fcff4
-    offset = data.writeWord(offset,0x008005F0)
-    offset = data.writeWord(offset,0x00320011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x008005f0)
+    offset = data.writeWord(offset, 0x00320011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fdf30
-    offset = data.writeWord(offset,0x008005F0)
-    offset = data.writeWord(offset,0x00320011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x008005f0)
+    offset = data.writeWord(offset, 0x00320011)
+    data.writeShort(offset, 0x0013)
 
-    offset = 0x048FCFB8
-    offset = data.writeWord(offset,0x018004f8)
-    offset = data.writeWord(offset,0x00300011)
-    data.writeShort(offset,0x0013)
+    offset = 0x048fcfb8
+    offset = data.writeWord(offset, 0x018004f8)
+    offset = data.writeWord(offset, 0x00300011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fe00c
-    offset = data.writeWord(offset,0x018004f8)
-    offset = data.writeWord(offset,0x00300011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x018004f8)
+    offset = data.writeWord(offset, 0x00300011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fcfc2
-    offset = data.writeWord(offset,0x02a00500)
-    offset = data.writeWord(offset,0x00310011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x02a00500)
+    offset = data.writeWord(offset, 0x00310011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fe0d4
-    offset = data.writeWord(offset,0x02a00500)
-    offset = data.writeWord(offset,0x00310011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x02a00500)
+    offset = data.writeWord(offset, 0x00310011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fce78
-    offset = data.writeWord(offset,0x00800150)
-    offset = data.writeWord(offset,0x00300011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x00800150)
+    offset = data.writeWord(offset, 0x00300011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fdf26
-    offset = data.writeWord(offset,0x00800150)
-    offset = data.writeWord(offset,0x00300011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x00800150)
+    offset = data.writeWord(offset, 0x00300011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fce82
-    offset = data.writeWord(offset,0x01800150)
-    offset = data.writeWord(offset,0x00310011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x01800150)
+    offset = data.writeWord(offset, 0x00310011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fdfee
-    offset = data.writeWord(offset,0x01800150)
-    offset = data.writeWord(offset,0x00310011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x01800150)
+    offset = data.writeWord(offset, 0x00310011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fce32
-    offset = data.writeWord(offset,0x02800010)
-    offset = data.writeWord(offset,0x00300011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x02800010)
+    offset = data.writeWord(offset, 0x00300011)
+    data.writeShort(offset, 0x0013)
 
     offset = 0x048fe034
-    offset = data.writeWord(offset,0x02800010)
-    offset = data.writeWord(offset,0x00300011)
-    data.writeShort(offset,0x0013)
+    offset = data.writeWord(offset, 0x02800010)
+    offset = data.writeWord(offset, 0x00300011)
+    data.writeShort(offset, 0x0013)
 
     // Max Attack Muramasa by eldri7ch
-    offset = 0x10D250
-    offset = data.writeWord(offset,0x3c04000e)
-    data.writeWord(offset,0x34846000)
+    offset = 0x10d250
+    offset = data.writeWord(offset, 0x3c04000e)
+    data.writeWord(offset, 0x34846000)
 
     //Sword of Dawn Scaling by MottZilla
-    offset = 0x3B428F8
-    offset = data.writeWord(offset,0x3C028009)
-    offset = data.writeWord(offset,0x8C427BD8)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xA6220040)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34020001)
-    offset = data.writeWord(offset,0x34030004)
-    data.writeWord(offset,0x03E00008)
+    offset = 0x3b428f8
+    offset = data.writeWord(offset, 0x3c028009)
+    offset = data.writeWord(offset, 0x8c427bd8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xa6220040)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34020001)
+    offset = data.writeWord(offset, 0x34030004)
+    data.writeWord(offset, 0x03e00008)
 
-    data.writeChar(0xB39B4,0x0F)
+    data.writeChar(0xb39b4, 0x0f)
 
-    offset = 0x3B41654
-    offset = data.writeWord(offset,0x0C05F314)
-    data.writeWord(offset,0x00000000)
+    offset = 0x3b41654
+    offset = data.writeWord(offset, 0x0c05f314)
+    data.writeWord(offset, 0x00000000)
 
-    offset = 0x3B4219C
-    offset = data.writeWord(offset,0x0C05F314)
-    data.writeWord(offset,0x00000000)
+    offset = 0x3b4219c
+    offset = data.writeWord(offset, 0x0c05f314)
+    data.writeWord(offset, 0x00000000)
 
     // Entrance Trap Door Tiles and Platforms by eldri7ch
-    data.writeWord(0x540F22A,0x05270526)
-    data.writeShort(0x540F6DC,0x04F6)
-    data.writeShort(0x540F798,0x04F6)
-    data.writeShort(0x540F898,0x04F6)
-    data.writeShort(0x540FADC,0x0554)
-    data.writeShort(0x540FB98,0x0554)
-    data.writeShort(0x540FC98,0x0554)
+    data.writeWord(0x540f22a, 0x05270526)
+    data.writeShort(0x540f6dc, 0x04f6)
+    data.writeShort(0x540f798, 0x04f6)
+    data.writeShort(0x540f898, 0x04f6)
+    data.writeShort(0x540fadc, 0x0554)
+    data.writeShort(0x540fb98, 0x0554)
+    data.writeShort(0x540fc98, 0x0554)
 
-    // Entrance Trap Door Save Room Corrections"
-    data.writeChar(0x53F8A8B,0x2F)
+    // Entrance Trap Door Save Room Corrections'
+    data.writeChar(0x53f8a8b, 0x2f)
     
     // Entrance Trap Door Opens by MottZilla
     offset = 0x5431030
-    offset = data.writeWord(offset,0x3C028009)
-    offset = data.writeWord(offset,0x90427974)
-    offset = data.writeWord(offset,0x34030003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    data.writeWord(offset,0x1043000C)
+    offset = data.writeWord(offset, 0x3c028009)
+    offset = data.writeWord(offset, 0x90427974)
+    offset = data.writeWord(offset, 0x34030003)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x00000000)
+    data.writeWord(offset, 0x1043000c)
     
     // Entrance Trap Door Entity Slot Fix by MottZilla
-    data.writeChar(0x53F8EB8,0x12)
-    data.writeChar(0x53F97A6,0x12)
+    data.writeChar(0x53f8eb8, 0x12)
+    data.writeChar(0x53f97a6, 0x12)
 
     // Yasutsuna Hitbox Fix by MottZilla
     // RIGHT HAND
-    offset = 0x3BFB314
+    offset = 0x3bfb314
     offset = data.writeWord(offset, 0x18000024)
     offset = data.writeWord(offset, 0x00000000)
 
-    offset = 0x3BFB3A8
-    offset = data.writeWord(offset, 0x3C178007)
-    offset = data.writeWord(offset, 0x36F733D8)
+    offset = 0x3bfb3a8
+    offset = data.writeWord(offset, 0x3c178007)
+    offset = data.writeWord(offset, 0x36f733d8)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x8EF60000)
-    offset = data.writeWord(offset, 0x8EF50004)
-    offset = data.writeWord(offset, 0x96F40014)
-    offset = data.writeWord(offset, 0xAE360000)
-    offset = data.writeWord(offset, 0xAE350004)
-    offset = data.writeWord(offset, 0xA6340014)
-    offset = data.writeWord(offset, 0x8FBF0030)
-    offset = data.writeWord(offset, 0x8FB7002C)
-    offset = data.writeWord(offset, 0x1800FFD1)
+    offset = data.writeWord(offset, 0x8ef60000)
+    offset = data.writeWord(offset, 0x8ef50004)
+    offset = data.writeWord(offset, 0x96f40014)
+    offset = data.writeWord(offset, 0xae360000)
+    offset = data.writeWord(offset, 0xae350004)
+    offset = data.writeWord(offset, 0xa6340014)
+    offset = data.writeWord(offset, 0x8fbf0030)
+    offset = data.writeWord(offset, 0x8fb7002c)
+    offset = data.writeWord(offset, 0x1800ffd1)
 
     //LEFT HAND
-    offset = 0x3DD57F4
+    offset = 0x3dd57f4
     offset = data.writeWord(offset, 0x18000024)
     offset = data.writeWord(offset, 0x00000000)
 
-    offset = 0x3DD5888
-    offset = data.writeWord(offset, 0x3C178007)
-    offset = data.writeWord(offset, 0x36F733D8)
+    offset = 0x3dd5888
+    offset = data.writeWord(offset, 0x3c178007)
+    offset = data.writeWord(offset, 0x36f733d8)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x8EF60000)
-    offset = data.writeWord(offset, 0x8EF50004)
-    offset = data.writeWord(offset, 0x96F40014)
-    offset = data.writeWord(offset, 0xAE360000)
-    offset = data.writeWord(offset, 0xAE350004)
-    offset = data.writeWord(offset, 0xA6340014)
-    offset = data.writeWord(offset, 0x8FBF0030)
-    offset = data.writeWord(offset, 0x8FB7002C)
-    offset = data.writeWord(offset, 0x1800FFD1)
+    offset = data.writeWord(offset, 0x8ef60000)
+    offset = data.writeWord(offset, 0x8ef50004)
+    offset = data.writeWord(offset, 0x96f40014)
+    offset = data.writeWord(offset, 0xae360000)
+    offset = data.writeWord(offset, 0xae350004)
+    offset = data.writeWord(offset, 0xa6340014)
+    offset = data.writeWord(offset, 0x8fbf0030)
+    offset = data.writeWord(offset, 0x8fb7002c)
+    offset = data.writeWord(offset, 0x1800ffd1)
 
     // Holy Cross Fixes
     offset = 0x000b1036
@@ -8982,16 +9633,23 @@
     return data
   }
 
-  function applySplashText(rng,seasonAllowed) {                                               // Splash text; ASM by MottZilla, JS by 3snow_p7im, eldri7ch, and DotChris
-    const month = new Date().getMonth() + 1                                     // Acquire the month the code is run
+  // Splash text; ASM by MottZilla, JS by 3snow_p7im, eldri7ch, and DotChris
+  function applySplashText(rng, seasonAllowed) {
+    // Acquire the month the code is run
+    const month = new Date().getMonth() + 1
     let splashPhrases = []
 
-    if (seasonAllowed) {                                                    // check if seasonal phrases are allowed
-      switch (month) {                                                          // Establish different sets of phrases from constants.js based on the month
-      case 6:                                                                   // Pride month
+    // check if seasonal phrases are allowed
+    if (seasonAllowed) {
+      // Establish different sets of phrases from constants.js
+      // based on the month
+      switch (month) {
+      case 6:
+        // Pride month
         splashPhrases = constants.prideSplashPhrases
         break
-      default:                                                                  // Any other month
+      default:
+        // Any other month
         splashPhrases = constants.splashPhrases
         break
       }
@@ -9009,35 +9667,36 @@
     strId= Math.floor(rng() * Math.floor(splashPhrases.length))
     strText = splashPhrases[strId]
     strLength = strText.length
-    newXPos = numToHex(0x3404004b + (180-((strLength * 8) / 2)))
+    newXPos = numToHex(0x3404004b + (180 - ((strLength * 8) / 2)))
     // Start writing the code - code by MottZilla
     // Title Screen Display Text through Debug
-    offset = 0x4398AD0
-    offset = data.writeWord(offset, 0x3C04801B)
+    offset = 0x4398ad0
+    offset = data.writeWord(offset, 0x3c04801b)
     offset = data.writeWord(offset, 0x34844880)
-    offset = data.writeWord(offset, 0x0C004657)
+    offset = data.writeWord(offset, 0x0c004657)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x2404FFFF)
-    offset = data.writeWord(offset, 0x0C0045BF)
+    offset = data.writeWord(offset, 0x2404ffff)
+    offset = data.writeWord(offset, 0x0c0045bf)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x34040020)
-    offset = data.writeWord(offset, 0x3C058003)
-    offset = data.writeWord(offset, 0xA0A4B768)
-    offset = data.writeWord(offset, 0x340400C1)                                 // y posoition for text
-    offset = data.writeWord(offset, 0xA0A4B76A)
-    offset = data.writeWord(offset, 0x3C028009)
+    offset = data.writeWord(offset, 0x3c058003)
+    offset = data.writeWord(offset, 0xa0a4b768)
+    // y position for text
+    offset = data.writeWord(offset, 0x340400c1)
+    offset = data.writeWord(offset, 0xa0a4b76a)
+    offset = data.writeWord(offset, 0x3c028009)
     offset = data.writeWord(offset, 0x94427494)
-    offset = data.writeWord(offset, 0x0806D200)
+    offset = data.writeWord(offset, 0x0806d200)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x00000000)
     offset = data.writeWord(offset, 0x00007845)
     // Write Text Hook
-    offset = 0x439895C
+    offset = 0x439895c
     offset = data.writeWord(offset, 0x0806d20e)
     offset = data.writeWord(offset, 0x00000000)
     // Write the new X pos for the text
-    offset = 0x4398AF0
+    offset = 0x4398af0
     data.writeWord(offset, newXPos)
     // Write the text
     let i = 0
@@ -9045,23 +9704,32 @@
     // Convert each character of the text to hex code.
     // Loops through each character in the string and assigns
     // a hex code for that character to be written.
-    while (i < (strLength)) {                                                   // code runs as long as the string still has characters in it
-      if (i < strLength) {                                                      // run if the character is not the end of the string
-        if (strText[i] == "\\") {                                               // Check for apostrophes
+    // Code runs as long as the string still has characters in it
+    while (i < (strLength)) {
+      // Run if the character is not the end of the string
+      if (i < strLength) {
+        // Check for apostrophes
+        if (strText[i] == '\\') {
           strhex[i] = 0x27
-        } else {                                                                // if it's not an apostrophe, write the hex code for the text
+        } else {
+          // If it's not an apostrophe, write the hex code for the text
           strHex[i] = strText.charCodeAt(i)
         }
-      } else {                                                                  // if it IS the end of the string, add a termination 0x00
+      } else {
+        // If it IS the end of the string, add a termination 0x00
         strHex[i] = 0x00
       }
-      i++                                                                       // advance the integer in 'i'
+      // advance the integer in 'i'
+      i++
     }
     // perform the write
-    offset = 0x4398B18
-    strHex[strLength + 1] = 0x00                                                // add an additional termination 0x00 in case the past one failed
-    offset = data.writeString(offset, strHex)                                   // actually write the text we need
-    offset = data.writeChar(offset, 0x00)                                       // I know, it seems redundant, but add an additional termination 0x00
+    offset = 0x4398b18
+    // add an additional termination 0x00 in case the past one failed
+    strHex[strLength + 1] = 0x00
+    // actually write the text we need
+    offset = data.writeString(offset, strHex)
+    // I know, it seems redundant, but add an additional termination 0x00
+    offset = data.writeChar(offset, 0x00)
     
     return data
   }
@@ -9071,12 +9739,15 @@
   // =========================================================================
 
   function rgba32ToHighColor15(rgba32) {
-    // SOTN uses the Playstation's 15-bit high-color palette, with 5 bits for red, green, and blue and 1 bit for alpha
-    // NOTE(sestren): 0x00 through 0x07 will map to 0, 0x08 through 0x0f will map to 1, and so on, with 0xf8 through 0xff mapping to 31
-    const red = Math.floor(Number("0x" + rgba32.substring(1, 3)) / 8)
-    const green = Math.floor(Number("0x" + rgba32.substring(3, 5)) / 8)
-    const blue = Math.floor(Number("0x" + rgba32.substring(5, 7)) / 8)
-    const alpha = Math.floor(Number("0x" + rgba32.substring(7, 9)) / 128)
+    // SOTN uses the Playstation's 15-bit high-color palette,
+    // with 5 bits for red, green, and blue and 1 bit for alpha
+    // NOTE(sestren): 0x00 through 0x07 will map to 0,
+    // 0x08 through 0x0f will map to 1, and so on,
+    // with 0xf8 through 0xff mapping to 31
+    const red = Math.floor(Number('0x' + rgba32.substring(1, 3)) / 8)
+    const green = Math.floor(Number('0x' + rgba32.substring(3, 5)) / 8)
+    const blue = Math.floor(Number('0x' + rgba32.substring(5, 7)) / 8)
+    const alpha = Math.floor(Number('0x' + rgba32.substring(7, 9)) / 128)
     const highColor15 = (alpha << 15) + (blue << 10) + (green << 5) + red
     return highColor15
   }
@@ -9090,7 +9761,8 @@
     const blue = value % 32
     value = Math.floor(value / 32)
     const alpha = value % 32
-    // NOTE(sestren): 0 will map to 0x00, 1 will map to 0x08, and so on, with 31 mapping to 0xf8
+    // NOTE(sestren): 0 will map to 0x00, 1 will map to 0x08, and so on,
+    // with 31 mapping to 0xf8
     const rr = (8 * red).toString(16).padStart(2, '0')
     const gg = (8 * green).toString(16).padStart(2, '0')
     const bb = (8 * blue).toString(16).padStart(2, '0')
@@ -9099,21 +9771,23 @@
     return rgba32
   }
 
-  function applyMapColor(mapColor) {	// Researched by MottZilla & eldri7ch. Function by eldri7ch
-    // NOTE(sestren): Most of the castle map's palette are not used in the vanilla game or are prevented from being used
+  function applyMapColor(mapColor) {
+    // Researched by MottZilla & eldri7ch. Function by eldri7ch
+    // NOTE(sestren): Most of the castle map's palette are not used
+    // in the vanilla game or are prevented from being used
     // Default colors are given below for illustration purposes
     const data = new checked()
     let paletteIndexes = {
       // Used for unrevealed portions of the map (i.e., transparency)
-      unrevealed: { index: 0x0, defaultColor: "#0000007f" },
+      unrevealed: { index: 0x0, defaultColor: '#0000007f' },
       // Used when exploring the map
-      exploredFills:   { index: 0x1, defaultColor: "#5070f8ff" },
-      exploredBorders: { index: 0xE, defaultColor: "#c0c0c0ff" },
-      saveRoomFills:   { index: 0x4, defaultColor: "#f80000ff" },
-      warpRoomFills:   { index: 0x5, defaultColor: "#f88000ff" },
+      exploredFills:   { index: 0x1, defaultColor: '#5070f8ff' },
+      exploredBorders: { index: 0xe, defaultColor: '#c0c0c0ff' },
+      saveRoomFills:   { index: 0x4, defaultColor: '#f80000ff' },
+      warpRoomFills:   { index: 0x5, defaultColor: '#f88000ff' },
       // Used when purchasing the Castle Map from the Shop
-      revealedFills:   { index: 0x3, defaultColor: "#383860ff" },
-      revealedBorders: { index: 0xD, defaultColor: "#909090ff" },
+      revealedFills:   { index: 0x3, defaultColor: '#383860ff' },
+      revealedBorders: { index: 0xd, defaultColor: '#909090ff' },
     }
     switch (mapColor) {
     case 'u': // Dark Blue
@@ -9147,28 +9821,33 @@
       break
     }
     const paletteAddresses = {
-      "Castle Map Color Palette (DRA)": 0x03874848,
-      "Castle Map Color Palette (RIC)": 0x038C0508,
+      'Castle Map Color Palette (DRA)': 0x03874848,
+      'Castle Map Color Palette (RIC)': 0x038c0508,
     }
     // In the switch-case above, various 'color' properties were added
-    // The presence of this property is used as a signal to update a color using the given RGBA32-formatted string value
+    // The presence of this property is used as a signal to update a color
+    // using the given RGBA32-formatted string value
     Object.values(paletteIndexes)
-    .filter((paletteIndex) => {
-      return 'color' in paletteIndex
-    })
-    .forEach((paletteIndex) => {
-      Object.values(paletteAddresses)
-      .forEach((paletteAddress) => {
-        const bytesPerColor = 0x02
-        data.writeColor(paletteAddress + bytesPerColor * paletteIndex.index, paletteIndex.color)
+      .filter(function(paletteIndex) {
+        return 'color' in paletteIndex
       })
-    })
+      .forEach(function(paletteIndex) {
+        Object.values(paletteAddresses)
+          .forEach(function(paletteAddress) {
+            const bytesPerColor = 0x02
+            data.writeColor(
+              paletteAddress + bytesPerColor * paletteIndex.index,
+              paletteIndex.color,
+            )
+          })
+      })
     return data
   }
 
-  function applyAlucardPalette(alColP){                  //Alucard Palette Randomizer - CRAZY4BLADES, palettes by eldri7ch
+  // Alucard Palette Randomizer - CRAZY4BLADES, palettes by eldri7ch
+  function applyAlucardPalette(alColP) {
     const data = new checked()
-    let colorAlucardBright = 1//Math.floor(rng() * 2)
+    let colorAlucardBright = 1 //Math.floor(rng() * 2)
     let colorAlucardSet= 0
     const palettesAlucard = [
       [0x8404, 0x8c28, 0x8c4c, 0xa552, 0xb9f3, 0xcad8, 0xf39c], // Bloody Tears
@@ -9181,63 +9860,71 @@
       [0x8000, 0x8c42, 0x98a5, 0xa0e9, 0xa96d, 0xb9f1, 0xc655]  // Shadow Prince
     ]
     const palettesWolfCloth = [
-      [0x8005,0x802a,0x8cad,0xa4f6,0x810d,0xbdf8,0x81f9,0xa31f,0x82df,0x8003,0x8023,0x8447,0x94ab,0xa112],
-      [0xa465,0xb884,0xc8e6,0xd58b,0x8d21,0xe690,0x9a42,0xb6e8,0xa360,0x9802,0x9423,0xa863,0xb908,0xc147],
-      [0x8063,0x80c7,0x8509,0x954e,0xa42a,0xadd4,0xc454,0xd55a,0xe85a,0x8021,0x8042,0x8064,0x8886,0xa4eb],
-      [0x8c64,0xa0e8,0xad6b,0xde52,0xb4e0,0xfb9a,0xe5e0,0xfe27,0xfea0,0x8422,0x8c64,0x9484,0xb129,0xd1ef],
-      [0xa465,0xb447,0xb88b,0xd94f,0x98c7,0xd9d8,0xad8e,0xca75,0xbe36,0x9802,0x9423,0xa445,0xa067,0xb0cd],
-      [0x9826,0xa46c,0xb8f2,0xe1d8,0x8422,0xfaba,0x8844,0x9086,0x90cb,0x8c03,0x8c24,0x9c69,0xb50d,0xcd2f],
-      [0x8c61,0x9502,0xa183,0xae4a,0xa427,0xbed6,0xc80a,0xcc8c,0xec16,0x8841,0x8841,0x90a2,0x98e4,0x9d65],
-      [0x8822,0x8c43,0x98a5,0xa0e9,0x808d,0xa96d,0x80f9,0x8d9e,0x813f,0x8421,0x8822,0x8822,0x9063,0x9484]
+      [0x8005, 0x802a, 0x8cad, 0xa4f6, 0x810d, 0xbdf8, 0x81f9,
+       0xa31f, 0x82df, 0x8003, 0x8023, 0x8447, 0x94ab, 0xa112],
+      [0xa465, 0xb884, 0xc8e6, 0xd58b, 0x8d21, 0xe690, 0x9a42,
+       0xb6e8, 0xa360, 0x9802, 0x9423, 0xa863, 0xb908, 0xc147],
+      [0x8063, 0x80c7, 0x8509, 0x954e, 0xa42a, 0xadd4, 0xc454,
+       0xd55a, 0xe85a, 0x8021, 0x8042, 0x8064, 0x8886, 0xa4eb],
+      [0x8c64, 0xa0e8, 0xad6b, 0xde52, 0xb4e0, 0xfb9a, 0xe5e0,
+       0xfe27, 0xfea0, 0x8422, 0x8c64, 0x9484, 0xb129, 0xd1ef],
+      [0xa465, 0xb447, 0xb88b, 0xd94f, 0x98c7, 0xd9d8, 0xad8e,
+       0xca75, 0xbe36, 0x9802, 0x9423, 0xa445, 0xa067, 0xb0cd],
+      [0x9826, 0xa46c, 0xb8f2, 0xe1d8, 0x8422, 0xfaba, 0x8844,
+       0x9086, 0x90cb, 0x8c03, 0x8c24, 0x9c69, 0xb50d, 0xcd2f],
+      [0x8c61, 0x9502, 0xa183, 0xae4a, 0xa427, 0xbed6, 0xc80a,
+       0xcc8c, 0xec16, 0x8841, 0x8841, 0x90a2, 0x98e4, 0x9d65],
+      [0x8822, 0x8c43, 0x98a5, 0xa0e9, 0x808d, 0xa96d, 0x80f9,
+       0x8d9e, 0x813f, 0x8421, 0x8822, 0x8822, 0x9063, 0x9484]
     ]
     switch (alColP){
-      case 'r':
-        colorAlucardSet = 0
-        break
-      case 'b':
-        colorAlucardSet = 1
-        break
-      case 'g':
-        colorAlucardSet = 2
-        break
-      case 'w':
-        colorAlucardSet = 3
-        break
-      case 'l':
-        colorAlucardSet = 4
-        break
-      case 'p':
-        colorAlucardSet = 5
-        break
-      case 'm':
-        colorAlucardSet = 6
-        break
-      case 's':
-        colorAlucardSet = 7
-        break
+    case 'r':
+      colorAlucardSet = 0
+      break
+    case 'b':
+      colorAlucardSet = 1
+      break
+    case 'g':
+      colorAlucardSet = 2
+      break
+    case 'w':
+      colorAlucardSet = 3
+      break
+    case 'l':
+      colorAlucardSet = 4
+      break
+    case 'p':
+      colorAlucardSet = 5
+      break
+    case 'm':
+      colorAlucardSet = 6
+      break
+    case 's':
+      colorAlucardSet = 7
+      break
     }
-        
+    
     // Cloth
-    offset = 0xEF952
+    offset = 0xef952
     for (let i = 0; i < 5; i++) {
       index = i + colorAlucardBright + 1
       offset = data.writeShort(offset, palettesAlucard[colorAlucardSet][index])
     }
     // Darkest color
-    offset = 0xEF93E
+    offset = 0xef93e
     index = colorAlucardBright
     offset = data.writeShort(offset,palettesAlucard[colorAlucardSet][index])
 
-    offset = 0xEF9C0
+    offset = 0xef9c0
     for (let i = 0; i < 4; i++) { //0-3
       offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][i])
     }
     offset += 0x0a
-    for (let i = 4; i < 9; i++) {//4-8
+    for (let i = 4; i < 9; i++) { //4-8
       offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][i])
     }
     offset += 0x04
-    for (let i = 9; i < 13; i++) {//10-13
+    for (let i = 9; i < 13; i++) { //10-13
       offset = data.writeShort(offset, palettesWolfCloth[colorAlucardSet][i])
     }
     offset += 0x0c
@@ -9245,7 +9932,7 @@
     return data
   }
 
-  function applyAlucardLiner(alColL){
+  function applyAlucardLiner(alColL) {
     const data = new checked()
     let colorAlucardLiner = 0
     const palettesAlucardLiner = [
@@ -9256,44 +9943,52 @@
       [0xa8ac, 0xad0f, 0xadb3, 0xbe16]  // Coral Trim
     ]
     const palettesWolfSkin = [
-      [0x9db5,0xbebd,0xff9a,0x8888,0x98f0,0x90ec,0xa990,0xa9f6,0x8023,0x8049],
-      [0x94eb,0xa56e,0xba14,0x8445,0x9089,0x8c66,0x94a8,0xa0eb,0x8023,0x8445],
-      [0xc1cf,0xded6,0xff9a,0x98a5,0xb14b,0xa509,0xb9ce,0xc611,0x8421,0x98a5],
-      [0xa52c,0xa98a,0x9cc7,0x8c44,0x98a8,0x9486,0x9ce7,0xa509,0x8001,0x8c44],
-      [0xbdf9,0xce7d,0xdf7c,0x948a,0xb553,0xa10f,0xbdd3,0xbdf8,0x8403,0x904b]
+      [0x9db5, 0xbebd, 0xff9a, 0x8888, 0x98f0,
+       0x90ec, 0xa990, 0xa9f6, 0x8023, 0x8049],
+      [0x94eb, 0xa56e, 0xba14, 0x8445, 0x9089,
+       0x8c66, 0x94a8, 0xa0eb, 0x8023, 0x8445],
+      [0xc1cf, 0xded6, 0xff9a, 0x98a5, 0xb14b,
+       0xa509, 0xb9ce, 0xc611, 0x8421, 0x98a5],
+      [0xa52c, 0xa98a, 0x9cc7, 0x8c44, 0x98a8,
+       0x9486, 0x9ce7, 0xa509, 0x8001, 0x8c44],
+      [0xbdf9, 0xce7d, 0xdf7c, 0x948a, 0xb553,
+       0xa10f, 0xbdd3, 0xbdf8, 0x8403, 0x904b]
     ]
     
     switch(alColL){
-      case 'z':
-        colorAlucardLiner = [0]
-        break
-      case "x":
-        colorAlucardLiner = [1]
-        break
-      case 'y':
-        colorAlucardLiner = [2]
-        break
-      case 'w':
-        colorAlucardLiner = [3]
-        break
-      case 'v':
-        colorAlucardLiner = [4]
-        break
+    case 'z':
+      colorAlucardLiner = [0]
+      break
+    case 'x':
+      colorAlucardLiner = [1]
+      break
+    case 'y':
+      colorAlucardLiner = [2]
+      break
+    case 'w':
+      colorAlucardLiner = [3]
+      break
+    case 'v':
+      colorAlucardLiner = [4]
+      break
     }
     if (colorAlucardLiner > 4) {
-      colorAlucardLiner = 0;
+      colorAlucardLiner = 0
     }
-    offset = 0xEF940
+    offset = 0xef940
     for (let i = 0; i < 4; i++) {
-      offset = data.writeShort(offset,palettesAlucardLiner[colorAlucardLiner][i])
+      offset = data.writeShort(
+        offset,
+        palettesAlucardLiner[colorAlucardLiner][i],
+      )
     }
-    offset = 0xEF9C8
+    offset = 0xef9c8
     for (let i = 0; i< 5; i++) {
-      offset = data.writeShort(offset,palettesWolfSkin[colorAlucardLiner][i])
+      offset = data.writeShort(offset, palettesWolfSkin[colorAlucardLiner][i])
     }
     offset += 0x16
     for (let i = 5; i< 10; i++) {
-      offset = data.writeShort(offset,palettesWolfSkin[colorAlucardLiner][i])
+      offset = data.writeShort(offset, palettesWolfSkin[colorAlucardLiner][i])
     }
     return data
   }
@@ -9422,12 +10117,16 @@
 
   function applyWrites(rng, options) {
     const data = new checked()
-    const relicsForShuffle = relics                                                 // pull the entirety of the relics list from relics.js for reference
+    // pull the entirety of the relics list from relics.js for reference
+    const relicsForShuffle = relics
     let relicShuffleArray = []
     let hexCharShuffleArray = []
     let hexArrayShuffFlag = 0
-    relicsForShuffle.forEach(function(relic) {                                      // build the list of relic addresses
-      if (relic.relicId < 30) {                                                     // import all of the actual relic menu addresses into the array for shuffling
+    // build the list of relic addresses
+    relicsForShuffle.forEach(function(relic) {
+      // import all of the actual relic menu addresses
+      // into the array for shuffling
+      if (relic.relicId < 30) {
         relicShuffleArray.push(numToHex(relic.invAddress))
       }
     })
@@ -9442,45 +10141,54 @@
           valueCheck = String(write.value)
           if (value === 'random') {
             value = Math.floor(rng() * 0x100)
-          }
-          else if (value === 'random1') {
+          } else if (value === 'random1') {
             // randomizes between 0 and 1 - eldri7ch
             let randomInt
             randomInt = Math.floor(rng() * 1)
             value = '0x0' + randomInt
-          }
-          else if (value === 'random3') {
+          } else if (value === 'random3') {
             // randomizes between 0 and 3 - eldri7ch
             let randomInt
             randomInt = Math.floor(rng() * 3)
             value = '0x0' + randomInt
-          }
-          else if (value === 'random10') {
+          } else if (value === 'random10') {
             // randomizes between 1 and 10 - eldri7ch
             let randomInt
             randomInt = Math.floor(rng() * 9) + 1
             value = numToHex(randomInt)
-          }
-          else if (value === 'random99') {
+          } else if (value === 'random99') {
             // randomizes between 1 and 99 - eldri7ch
             let randomInt
             randomInt = Math.floor(rng() * 98) + 1
             value = numToHex(randomInt)
-          }
-          else if (valueCheck.includes('randomHexChar')) {
-            // randomizes a shuffled array of digits between two hex values - eldri7ch
-            if (hexArrayShuffFlag == 0) {                                                                   // Check if the list has been shuffled already
-              let formatArray = ['<','>','-']                                                               // establish the characters required for this to be a complete command
-              if (formatArray.every(char => value.includes(char))) {                                        // check that every character required exists
-                let start = Number(value.substring(14, 18))                                                 // pull the starting hex address for the array
-                let finish = Number(value.substring(19, 23))                                                // pull the ending address for the array
-                hexArrayShuffFlag = 1                                                                       // set the flag to never re-randomize these
-                hexCharShuffleArray = Array.from({length: finish - start + 1}, (_, a) => a + start)         // build the array from the starting and ending addresses
-                hexCharShuffleArray = shuffle(rng,hexCharShuffleArray)                                      // Shuffle the hex array
-                }
+          } else if (valueCheck.includes('randomHexChar')) {
+            // randomizes a shuffled array of digits between two hex values
+            // - eldri7ch
+            // Check if the list has been shuffled already
+            if (hexArrayShuffFlag == 0) {
+              // establish the characters required for this to be
+              // a complete command
+              let formatArray = ['<','>','-']
+              // check that every character required exists
+              if (formatArray.every(char => value.includes(char))) {
+                // pull the starting hex address for the array
+                let start = Number(value.substring(14, 18))
+                // pull the ending address for the array
+                let finish = Number(value.substring(19, 23))
+                // set the flag to never re-randomize these
+                hexArrayShuffFlag = 1
+                // build the array from the starting and ending addresses
+                hexCharShuffleArray = Array.from({
+                  length: finish - start + 1
+                }, (_, a) => a + start)
+                // Shuffle the hex array
+                hexCharShuffleArray = shuffle(rng, hexCharShuffleArray)
+              }
             }
-            let itemNum = hexCharShuffleArray.pop()                                                         // must pop the number into a variable for numToHex to work
-            value = numToHex(itemNum)                                                                       // actively assign the value to be written
+            // must pop the number into a variable for numToHex to work
+            let itemNum = hexCharShuffleArray.pop()
+            // actively assign the value to be written
+            value = numToHex(itemNum)
           }
           data.writeChar(write.address, value)
           break
@@ -9488,9 +10196,9 @@
           value = write.value
           if (value === 'random') {
             value = Math.floor(rng() * 0x10000)
-          } 
-          else if (value === 'randomRelic') {
-            // "2690808163" translates to the address before the relic hex is added - eldri7ch
+          } else if (value === 'randomRelic') {
+            // '2690808163' translates to the address before the
+            // relic hex is added - eldri7ch
             // let relicHex
             // relicHex = Math.floor(rng() * 29) + 2690808164
             value = relicShuffleArray.pop()
@@ -9857,10 +10565,10 @@
     applyElemChaosPatches: applyElemChaosPatches,
     applyShopPriceRandoPatches: applyShopPriceRandoPatches,
     applyStartRoomRandoPatches: applyStartRoomRandoPatches,
-	  applyBountyHunterTargets: applyBountyHunterTargets,
+    applyBountyHunterTargets: applyBountyHunterTargets,
     applyDominoPatches: applyDominoPatches,
     applyRLBCPatches: applyRLBCPatches,
-	  applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
+    applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
     applySingleHitGearPatches: applySingleHitGearPatches,
     applySwordBuffPatches: applySwordBuffPatches,

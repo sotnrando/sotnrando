@@ -1,3 +1,4 @@
+let constants
 let util
 let presets
 let randomizeStats
@@ -591,15 +592,16 @@ async function randomize(
         } else {
           nGoal = applied.newGoalsSet
         }
+        const BH = constants.BHMODE
         if (nGoal === 'h') {
-          check.apply(util.applyBountyHunterTargets(rng, 0))
+          check.apply(util.applyBountyHunterTargets(rng, BH.NORMAL))
         } else if (nGoal === 't') {
-          check.apply(util.applyBountyHunterTargets(rng, 2))
+          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
         } else if (nGoal === 'w') {
-          check.apply(util.applyBountyHunterTargets(rng, 1))
+          check.apply(util.applyBountyHunterTargets(rng, BH.HITMAN))
         }else if (nGoal === 'x') {
           check.apply(util.applyNewGoals(nGoal))
-          check.apply(util.applyBountyHunterTargets(rng, 2))
+          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
         } else {
           check.apply(util.applyNewGoals(nGoal))
         }
