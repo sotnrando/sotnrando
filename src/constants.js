@@ -2801,6 +2801,12 @@
   const digest =
         'ce01203a9df93e001b88ef4c350889c19f11ffba89d20f214bdd8dec0b2d8d7c'
 
+  const BHMODE = {
+    NORMAL: 0,
+    HITMAN: 1,
+    TARGET_CONFIRMED: 3,
+  }
+
   const exports = {
     devBaseUrl: devBaseUrl,
     defaultOptions: defaultOptions,
@@ -2857,7 +2863,8 @@
     nounsHalloween: nounsHalloween,
     nounsNormal: nounsNormal,
     seasonalEvents: seasonalEvents,
-    songsList: songsList
+    songsList: songsList,
+    BHMODE: BHMODE,
   }
 
   if (self) {
