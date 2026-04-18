@@ -688,27 +688,12 @@
         // Normal boolean behavior
         el.checked = !!presetValue;
       });
-
-      // HARD OVERRIDE: presets cannot enable singleHitGearMode
-      // el.checked = false; (if you want to enforce this)
-
-      // Compatibility disables still apply
-      DISABLE_RULES.forEach(rule => {
-        if (rule.ids.includes(presetId)) {
-          rule.elems.forEach(key => {
-            const el = elems[key];
-            if (!el) return;
-            const wasChecked = el.checked;
-            el.disabled = true;
-            el.checked = wasChecked;
-          });
-        }
-      });
     }
 
     enforceGoalCompatibility(preset.id);
     applyOptions(options, preset.id);
     relicLocationsExtensionChange();
+
     const TOURNAMENT_LOCKED = [
       "accessibilityPatches",
       "antiFreezeMode",
@@ -783,6 +768,18 @@
       allRadios.forEach(r => r.disabled = false);
     }
     ChangeHandlers.tournamentModeChange();
+    DISABLE_RULES.forEach(rule => {
+      if (rule.ids.includes(preset.id)) {
+        rule.elems.forEach(key => {
+          const el = elems[key];
+          if (!el) return;
+
+          const wasChecked = el.checked;
+          el.disabled = true;
+          el.checked = wasChecked;
+        });
+      }
+    });
   }
 
   function complexityChange() {
