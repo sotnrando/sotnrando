@@ -1904,6 +1904,12 @@
     "Made of 28 percent spaghetti!",
     "Stages, and overlays, and entities, oh my!",
     "Happy 40th, Castlevania!",
+    "0 teraFLOPS!",
+    "Play nuts outside!",
+    "We have phones!",
+    "It just works!",
+    "Do the math!",
+    "Definitely real!",
     "BUFFER DO NOT DELETE!"
   ]
 
