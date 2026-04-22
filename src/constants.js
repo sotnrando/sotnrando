@@ -1889,6 +1889,7 @@
     "For Shakey!",
     "Barley Teas!",
     "But DerDrach has full-cleared second castle!",
+    "2020 Tournament Champion Dr4gonBlitz!",
     "Spring Tournament 2022 Champion JupiterClimb",
     "Spring Tournament 2023 Champion Dr4gonBlitz!",
     "Spring Tournament 2024 Champion the__swarm!",
@@ -1903,6 +1904,12 @@
     "Made of 28 percent spaghetti!",
     "Stages, and overlays, and entities, oh my!",
     "Happy 40th, Castlevania!",
+    "0 teraFLOPS!",
+    "Play nuts outside!",
+    "We have phones!",
+    "It just works!",
+    "Do the math!",
+    "Definitely real!",
     "BUFFER DO NOT DELETE!"
   ]
 
