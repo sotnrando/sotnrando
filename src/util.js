@@ -8239,78 +8239,86 @@
 
     //console.log(numToHex(newWrite,4))
 
-    if (startRoomData[randRoomId].stageWrite === 0x03
-        || startRoomData[randRoomId].stageWrite === 0x05) {
-      // Solve soft lock if player starts near Room 0 in Abandoned Mines
-      offset = 0x45f55a2
-      offset = data.writeChar(offset, 0x42)
-      data.writeChar(offset, 0x03)
+    switch (startRoomData[randRoomId].stageWrite) {
+      case 0x03:
+      case 0x05:
+        // Solve soft lock if player starts near Room 0 in Abandoned Mines
+        offset = 0x45f55a2
+        offset = data.writeChar(offset, 0x42)
+        data.writeChar(offset, 0x03)
 
-      // Solve soft lock if player starts near Room 0 in Abandoned Mines
-      offset = 0x45f52a2
-      offset = data.writeChar(offset, 0x42)
-      data.writeChar(offset, 0x03)
+        // Solve soft lock if player starts near Room 0 in Abandoned Mines
+        offset = 0x45f52a2
+        offset = data.writeChar(offset, 0x42)
+        data.writeChar(offset, 0x03)
 
-      // Solve soft lock if player starts near Room 0 in Abandoned Mines
-      offset = 0x45f5142
-      offset = data.writeChar(offset, 0x42)
-      data.writeChar(offset, 0x03)
+        // Solve soft lock if player starts near Room 0 in Abandoned Mines
+        offset = 0x45f5142
+        offset = data.writeChar(offset, 0x42)
+        data.writeChar(offset, 0x03)
 
-      // Solve soft lock if player starts near Room 0 in Abandoned Mines
-      offset = 0x45f4eec
-      offset = data.writeChar(offset, 0x42)
-      data.writeChar(offset, 0x03)
+        // Solve soft lock if player starts near Room 0 in Abandoned Mines
+        offset = 0x45f4eec
+        offset = data.writeChar(offset, 0x42)
+        data.writeChar(offset, 0x03)
 
-      // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = 0x45f67bc
-      offset = data.writeChar(offset, 0x67)
-      offset = data.writeChar(offset, 0x00)
-      offset = data.writeChar(offset, 0x68)
-      data.writeChar(offset, 0x00)
+        // Solve soft lock if player starts near Room 3 in Abandoned Mines
+        offset = 0x45f67bc
+        offset = data.writeChar(offset, 0x67)
+        offset = data.writeChar(offset, 0x00)
+        offset = data.writeChar(offset, 0x68)
+        data.writeChar(offset, 0x00)
 
-      // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = 0x45f65dc
-      data.writeChar(offset, 0x23)
-      
-      // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = 0x45f655a
-      offset = data.writeChar(offset, 0x68)
-      data.writeChar(offset, 0x00)
+        // Solve soft lock if player starts near Room 3 in Abandoned Mines
+        offset = 0x45f65dc
+        data.writeChar(offset, 0x23)
+        
+        // Solve soft lock if player starts near Room 3 in Abandoned Mines
+        offset = 0x45f655a
+        offset = data.writeChar(offset, 0x68)
+        data.writeChar(offset, 0x00)
 
-      // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = 0x45f64dc
-      offset = data.writeChar(offset, 0x42)
-      data.writeChar(offset, 0x03)
+        // Solve soft lock if player starts near Room 3 in Abandoned Mines
+        offset = 0x45f64dc
+        offset = data.writeChar(offset, 0x42)
+        data.writeChar(offset, 0x03)
 
-      // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = 0x45f644e
-      offset = data.writeChar(offset, 0x67)
-      offset = data.writeChar(offset, 0x00)
-      offset = data.writeChar(offset, 0x68)
-      data.writeChar(offset, 0x00)
+        // Solve soft lock if player starts near Room 3 in Abandoned Mines
+        offset = 0x45f644e
+        offset = data.writeChar(offset, 0x67)
+        offset = data.writeChar(offset, 0x00)
+        offset = data.writeChar(offset, 0x68)
+        data.writeChar(offset, 0x00)
 
-      // Solve soft lock if player starts near Room 3 in Abandoned Mines
-      offset = 0x45f6168
-      offset = data.writeChar(offset, 0xda)
-      data.writeChar(offset, 0x01)
+        // Solve soft lock if player starts near Room 3 in Abandoned Mines
+        offset = 0x45f6168
+        offset = data.writeChar(offset, 0xda)
+        data.writeChar(offset, 0x01)
 
-      // Solve soft lock if player starts near Room 8 in Abandoned Mines
-      data.writeWord(0x45f8de2, 0x03430342)
-      data.writeShort(0x45f8a92, 0x0342)
-      data.writeShort(0x45f897c, 0x0343)
-      data.writeWord(0x45f879a, 0x03430342)
-    }
+        // Solve soft lock if player starts near Room 8 in Abandoned Mines
+        data.writeWord(0x45f8de2, 0x03430342)
+        data.writeShort(0x45f8a92, 0x0342)
+        data.writeShort(0x45f897c, 0x0343)
+        data.writeWord(0x45f879a, 0x03430342)
+        break
+      case 0x06:
+        // Patch Colosseum - Royal Chapel shortcut - eldri7ch
+        offset = 0x0440100c
+        offset = data.writeWord(offset, 0x34020001)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = 0x04401100
+        offset = data.writeWord(offset, 0x34020001)
+        offset = data.writeWord(offset, 0x00000000)
+        break
+      case 0x0b:
+        offset = 0x0563e4c0
+        offset = data.writeWord(offset, 0x34020001)
+        data.writeChar(offset, 0x00000000)
 
-    // Solve soft lock if player starts in the Keep Attic
-    if (startRoomData[randRoomId].stageWrite === 0x0b) {
-      offset = 0x0563e4c0
-      offset = data.writeWord(offset, 0x34020001)
-      data.writeChar(offset, 0x00000000)
-
-      data.writeWord(0x0563e7a8, 0x34020001)
-      data.writeWord(0x0563ebcc, 0x34020001)
-      data.writeWord(0x0563ea20, 0x34020001)
-      data.writeWord(0x0563ec40, 0x34020001)
+        data.writeWord(0x0563e7a8, 0x34020001)
+        data.writeWord(0x0563ebcc, 0x34020001)
+        data.writeWord(0x0563ea20, 0x34020001)
+        data.writeWord(0x0563ec40, 0x34020001)
     }
 
     return data
