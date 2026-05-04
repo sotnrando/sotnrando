@@ -8309,6 +8309,9 @@
         offset = 0x04401100
         offset = data.writeWord(offset, 0x34020001)
         offset = data.writeWord(offset, 0x00000000)
+        // Patch Jewel of Open Door to Alchemy
+        offset = 0x54b41f3
+        offset = data.writeChar(offset, 0x01)
         break
       case 0x0b:
         offset = 0x0563e4c0
