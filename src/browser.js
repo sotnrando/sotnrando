@@ -101,264 +101,231 @@
   }
 
   function addDefaultEventListeners() {
-    mapColorSelect.addEventListener("click", updateMapColorPreview);
-    window.addEventListener("load", function () {
-      if (mapColorSelect.value) {
-        updateMapColorPreview();
-      }
+    // --- Window events ---
+    window.addEventListener("load", () => {
+      if (mapColorSelect.value) updateMapColorPreview();
+      if (paletteSelect.value || linerSelect.value) updateAlucardPreview();
     });
-    body.addEventListener('dragover', dragOverListener)
-    body.addEventListener('dragleave', dragLeaveListener)
-    body.addEventListener('drop', dropListener)
-    elems.output.ppf.addEventListener('change', outputChange)
-    elems.output.bin.addEventListener('change', outputChange)
-    elems.file.addEventListener('change', fileChange)
-    elems.form.addEventListener('submit', submitListener)
-    elems.seed.addEventListener('change', seedChange)
-    elems.presetId.addEventListener('change', presetIdChange)
-    elems.complexity.addEventListener('change', complexityChange)
-    elems.complexity.addEventListener('input', updateCurrentComplexityValue);
-    elems.relicLocationsExtension.guarded.addEventListener(
-      'change',
-      relicLocationsExtensionChange,
-    )
-    elems.relicLocationsExtension.guardedplus.addEventListener(
-      'change',
-      relicLocationsExtensionChange,
-    )
-    elems.relicLocationsExtension.equipment.addEventListener(
-      'change',
-      relicLocationsExtensionChange,
-    )
-    elems.relicLocationsExtension.scenic.addEventListener(
-      'change',
-      relicLocationsExtensionChange,
-    )
-    elems.relicLocationsExtension.extended.addEventListener(
-      'change',
-      relicLocationsExtensionChange,
-    )
-    elems.relicLocationsExtension.classic.addEventListener(
-      'change',
-      relicLocationsExtensionChange,
-    )
 
-    elems.clear.addEventListener('click', clearHandler)
-    elems.theme.addEventListener('change', themeChange)
-    elems.mapColor.addEventListener('change', mapColorChange)
-    elems.newGoals.addEventListener('change', newGoalsChange)
-    elems.alucardPalette.addEventListener('change', alucardPaletteChange)
-    elems.alucardLiner.addEventListener('change', alucardLinerChange)
-    elems.copy.addEventListener('click', copyHandler)
-    elems.showOlder.addEventListener('click', showOlderHandler)
-    elems.excludeSongsOption.addEventListener('change', showExcludeMenu)
-    elems.esMoveToRight.addEventListener('click', excludeSong)
-    elems.esMoveToLeft.addEventListener('click', includeSong)
+    // --- Map color preview ---
+    mapColorSelect.addEventListener("click", updateMapColorPreview);
+
+    // --- Drag & Drop ---
+    body.addEventListener("dragover", dragOverListener);
+    body.addEventListener("dragleave", dragLeaveListener);
+    body.addEventListener("drop", dropListener);
+
+    // --- Output type changes ---
+    [elems.output.ppf, elems.output.bin].forEach(el =>
+      el.addEventListener("change", outputChange)
+    );
+
+    // --- File + form ---
+    elems.file.addEventListener("change", fileChange);
+    elems.form.addEventListener("submit", submitListener);
+
+    // --- Seed + preset + complexity ---
+    elems.seed.addEventListener("change", seedChange);
+    elems.presetId.addEventListener("change", presetIdChange);
+    elems.complexity.addEventListener("change", complexityChange);
+    elems.complexity.addEventListener("input", updateCurrentComplexityValue);
+
+    // --- Relic extension radios ---
+    Object.values(elems.relicLocationsExtension).forEach(el =>
+      el.addEventListener("change", relicLocationsExtensionChange)
+    );
+
+    // --- Buttons ---
+    elems.clear.addEventListener("click", clearHandler);
+    elems.copy.addEventListener("click", copyHandler);
+    elems.showOlder.addEventListener("click", showOlderHandler);
+
+    // --- Theme + map color + goals ---
+    elems.theme.addEventListener("change", themeChange);
+    elems.mapColor.addEventListener("change", mapColorChange);
+    elems.newGoals.addEventListener("change", newGoalsChange);
+
+    // --- Alucard palette + liner ---
+    elems.alucardPalette.addEventListener("change", alucardPaletteChange);
+    elems.alucardLiner.addEventListener("change", alucardLinerChange);
+
+    // --- Alucard preview selects ---
     paletteSelect.addEventListener("change", updateAlucardPreview);
     linerSelect.addEventListener("change", updateAlucardPreview);
-    window.addEventListener("load", function () {
-      if (paletteSelect.value || linerSelect.value) {
-        updateAlucardPreview();
-      }
-    });
+
+    // --- Exclude songs ---
+    elems.excludeSongsOption.addEventListener("change", showExcludeMenu);
+    elems.esMoveToRight.addEventListener("click", excludeSong);
+    elems.esMoveToLeft.addEventListener("click", includeSong);
   }
 
   function loadOptionsFromUrl() {
-    // This logic allows for the existence of option URLs for seeds.
-    const rs = sotnRando.util.optionsFromUrl(window.location.href)
-    options = rs.options
-    const applied = sotnRando.util.Preset.options(options)
-    seed = rs.seed
-    if (!Number.isNaN(rs.checksum)) {
-      expectChecksum = rs.checksum
-    }
-    if (typeof (seed) === 'string') {
-      elems.seed.value = seed
-      seedChange()
-      haveChecksum = true
-    }
-    if (seed.length) {
-      elems.seed.disabled = true
-    }
-    if (options.preset) {
-      let index = 0
-      for (let i = 0; i < sotnRando.presets.length; i++) {
-        if (sotnRando.presets[i].id === options.preset) {
-          elems.presetId.selectedIndex = index
-          break
-        }
-        if (!sotnRando.presets.hidden) {
-          index++
-        }
-      }
-      presetIdChange()
+    const rs = sotnRando.util.optionsFromUrl(window.location.href);
+    options = rs.options;
+    const applied = sotnRando.util.Preset.options(options);
 
-    } else {
-      elems.presetId.selectedIndex = 0
+    seed = rs.seed;
+    if (!Number.isNaN(rs.checksum)) expectChecksum = rs.checksum;
+
+    // --- Seed handling ---
+    if (typeof seed === "string") {
+      elems.seed.value = seed;
+      seedChange();
+      haveChecksum = true;
     }
-    presetChange()
+    if (seed.length) elems.seed.disabled = true;
+
+    // --- Preset selection ---
+    if (options.preset) {
+      const index = sotnRando.presets.findIndex(p => p.id === options.preset);
+      elems.presetId.selectedIndex = index >= 0 ? index : 0;
+      presetIdChange();
+    } else {
+      elems.presetId.selectedIndex = 0;
+    }
+
+    presetChange();
+
+    // --- Tournament mode ---
     elems.tournamentMode.checked = options.tournamentMode;
-    ChangeHandlers.tournamentModeChange()
-    elems.tournamentMode.disabled = true
-    let locations
-    if (typeof (applied.relicLocations) === 'object') {
-      locations = applied.relicLocations
-    } else {
-      locations = safe.options().relicLocations
-    }
-    Object.getOwnPropertyNames(locations).forEach(
-      function (key) {
-        if (/^[0-9]+(-[0-9]+)?$/.test(key)) {
-          elems.complexity.value = key.split('-').shift()
-        }
+    ChangeHandlers.tournamentModeChange();
+    elems.tournamentMode.disabled = true;
+
+    // --- Complexity from relicLocations ---
+    const relicLoc = typeof applied.relicLocations === "object"
+      ? applied.relicLocations
+      : safe.options().relicLocations;
+
+    Object.keys(relicLoc).forEach(key => {
+      if (/^[0-9]+(-[0-9]+)?$/.test(key)) {
+        elems.complexity.value = key.split("-")[0];
       }
-    )
-    elems.enemyDrops.checked = applied.enemyDrops
-    let enemyDropsArg = ''
-    if (typeof (options.enemyDrops) === 'object') {
-      enemyDropsArg = sotnRando.util.optionsToString({
-        enemyDrops: options.enemyDrops,
-      })
-    }
-    elems.enemyDropsArg.value = enemyDropsArg
-    elems.startingEquipment.checked = applied.startingEquipment
-    let startingEquipmentArg = ''
-    if (typeof (options.startingEquipment) === 'object') {
-      startingEquipmentArg = sotnRando.util.optionsToString({
-        startingEquipment: options.startingEquipment,
-      })
-    }
-    elems.startingEquipmentArg.value = startingEquipmentArg
-    elems.itemLocations.checked = applied.itemLocations
-    let itemLocationsArg = ''
-    if (typeof (options.itemLocations) === 'object') {
-      itemLocationsArg = sotnRando.util.optionsToString({
-        itemLocations: options.itemLocations,
-      })
-    }
-    elems.itemLocationsArg.value = itemLocationsArg
-    elems.prologueRewards.checked = applied.prologueRewards
-    let prologueRewardsArg = ''
-    if (typeof (options.prologueRewards) === 'object') {
-      prologueRewardsArg = sotnRando.util.optionsToString({
-        prologueRewards: options.prologueRewards,
-      })
-    }
-    elems.prologueRewardsArg.value = prologueRewardsArg
-    elems.relicLocations.checked = !!applied.relicLocations
-    let relicLocationsArg = ''
-    if (typeof (options.relicLocations) === 'object') {
-      // This is a hacky way to get all possible relic location locks
-      // serialized, without including the relic locations extension.
-      const relicOptions = sotnRando.util.optionsFromString(sotnRando.util.optionsToString({
-        relicLocations: Object.assign({}, applied.relicLocations, {
-          extension: sotnRando.constants.EXTENSION.SCENIC,
-        }),
-      }).replace(new RegExp(':?' + sotnRando.util.optionsToString({
+    });
+
+    // --- Helper: assign checkbox + argument field ---
+    const assignOption = (name) => {
+      elems[name].checked = applied[name];
+
+      let arg = "";
+      if (typeof options[name] === "object") {
+        arg = sotnRando.util.optionsToString({ [name]: options[name] });
+      }
+      elems[name + "Arg"].value = arg;
+    };
+
+    assignOption("enemyDrops");
+    assignOption("startingEquipment");
+    assignOption("itemLocations");
+    assignOption("prologueRewards");
+
+    // --- Relic locations ---
+    elems.relicLocations.checked = !!applied.relicLocations;
+
+    let relicLocationsArg = "";
+    if (typeof options.relicLocations === "object") {
+      const serialized = sotnRando.util.optionsToString({
         relicLocations: {
-          extension: sotnRando.constants.EXTENSION.SCENIC,
-        },
-      }).slice(2)), ''))
-      // Restore original extension from URL.
-      if ('extension' in options.relicLocations) {
-        relicOptions.relicLocations.extension
-          = options.relicLocations.extension
+          ...applied.relicLocations,
+          extension: sotnRando.constants.EXTENSION.SCENIC
+        }
+      });
+
+      const scenicStr = sotnRando.util.optionsToString({
+        relicLocations: { extension: sotnRando.constants.EXTENSION.SCENIC }
+      }).slice(2);
+
+      const relicOptions = sotnRando.util.optionsFromString(
+        serialized.replace(new RegExp(":?" + scenicStr), "")
+      );
+
+      if ("extension" in options.relicLocations) {
+        relicOptions.relicLocations.extension = options.relicLocations.extension;
       }
-      relicLocationsArg = sotnRando.util.optionsToString(relicOptions)
+
+      relicLocationsArg = sotnRando.util.optionsToString(relicOptions);
     }
-    elems.relicLocationsArg.value = relicLocationsArg
-    elems.relicLocationsExtension.extended.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EXTENDED
-    elems.relicLocationsExtension.scenic.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.SCENIC
-    elems.relicLocationsExtension.guarded.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDED
-    elems.relicLocationsExtension.guardedplus.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.GUARDEDPLUS
-    elems.relicLocationsExtension.equipment.checked =
-      applied.relicLocations
-      && applied.relicLocations.extension === sotnRando.constants.EXTENSION.EQUIPMENT
-    elems.relicLocationsExtension.classic.checked =
-      applied.relicLocations
-      && !applied.relicLocations.extension
-    relicLocationsExtensionChange()
-    let writes = ''
-    if (options.writes) {
-      writes = sotnRando.util.optionsToString({ writes: options.writes })
-    }
-    elems.writes.value = writes
-    elems.stats.checked = applied.stats
+
+    elems.relicLocationsArg.value = relicLocationsArg;
+
+    // --- Relic extension radios ---
+    const ext = applied.relicLocations?.extension;
+    const EXT = sotnRando.constants.EXTENSION;
+
+    elems.relicLocationsExtension.extended.checked = ext === EXT.EXTENDED;
+    elems.relicLocationsExtension.scenic.checked = ext === EXT.SCENIC;
+    elems.relicLocationsExtension.guarded.checked = ext === EXT.GUARDED;
+    elems.relicLocationsExtension.guardedplus.checked = ext === EXT.GUARDEDPLUS;
+    elems.relicLocationsExtension.equipment.checked = ext === EXT.EQUIPMENT;
+    elems.relicLocationsExtension.classic.checked = !ext;
+
+    relicLocationsExtensionChange();
+
+    // --- Writes ---
+    elems.writes.value = options.writes
+      ? sotnRando.util.optionsToString({ writes: options.writes })
+      : "";
+
+    // --- Stats, music, turkey ---
+    elems.stats.checked = applied.stats;
     ChangeHandlers.statsChange();
-    elems.music.checked = applied.music
-    elems.turkeyMode.checked = applied.turkeyMode
-    elems.presetId.disabled = true
-    elems.complexity.disabled = true
-    elems.enemyDrops.disabled = true
-    elems.startingEquipment.disabled = true
-    elems.itemLocations.disabled = true
-    elems.prologueRewards.disabled = true
-    elems.relicLocations.disabled = false
-    elems.relicLocationsSet.disabled = false
-    elems.stats.disabled = true
-    elems.music.disabled = true
-    elems.turkeyMode.disabled = true
-    elems.clear.classList.remove('hidden')
-    const baseUrl = url.origin + url.pathname
-    window.history.replaceState({}, document.title, baseUrl)
+
+    elems.music.checked = applied.music;
+    elems.turkeyMode.checked = applied.turkeyMode;
+
+    // --- Disable UI for seed replay mode ---
+    [
+      "presetId", "complexity", "enemyDrops", "startingEquipment",
+      "itemLocations", "prologueRewards", "stats", "music", "turkeyMode"
+    ].forEach(key => elems[key].disabled = true);
+
+    elems.relicLocations.disabled = false;
+    elems.relicLocationsSet.disabled = false;
+
+    elems.clear.classList.remove("hidden");
+
+    // --- Clean URL ---
+    const baseUrl = url.origin + url.pathname;
+    window.history.replaceState({}, document.title, baseUrl);
   }
 
   function loadPastOptions() {
-    loadOption('complexity', complexityChange, 7)
+    // --- Complexity ---
+    loadOption("complexity", complexityChange, 7);
 
-    let relicLocationsExtension =
-      localStorage.getItem('relicLocationsExtension')
-    if (typeof (relicLocationsExtension) === 'string') {
-      switch (relicLocationsExtension) {
-        case sotnRando.constants.EXTENSION.GUARDED:
-          elems.relicLocationsExtension.guarded.checked = true
-          break
-        case sotnRando.constants.EXTENSION.GUARDEDPLUS:
-          elems.relicLocationsExtension.guardedplus.checked = true
-          break
-        case sotnRando.constants.EXTENSION.EQUIPMENT:
-          elems.relicLocationsExtension.equipment.checked = true
-          break
-        case sotnRando.constants.EXTENSION.EXTENDED:
-          elems.relicLocationsExtension.extended.checked = true
-          break
-        case sotnRando.constants.EXTENSION.SCENIC:
-          elems.relicLocationsExtension.scenic.checked = true
-          break
-        default:
-          elems.relicLocationsExtension.classic.checked = true
-          break
-      }
+    // --- Relic Locations Extension ---
+    const EXT = sotnRando.constants.EXTENSION;
+    const savedExt = localStorage.getItem("relicLocationsExtension");
+
+    const extensionMap = {
+      [EXT.GUARDED]: "guarded",
+      [EXT.GUARDEDPLUS]: "guardedplus",
+      [EXT.EQUIPMENT]: "equipment",
+      [EXT.EXTENDED]: "extended",
+      [EXT.SCENIC]: "scenic",
+    };
+
+    if (typeof savedExt === "string") {
+      const key = extensionMap[savedExt] || "classic";
+      elems.relicLocationsExtension[key].checked = true;
     } else if (sotnRando.constants.defaultExtension) {
-      elems.relicLocationsExtension[sotnRando.constants.defaultExtension].checked = true
+      elems.relicLocationsExtension[sotnRando.constants.defaultExtension].checked = true;
     } else {
-      elems.relicLocationsExtension.classic.checked = true
+      elems.relicLocationsExtension.classic.checked = true;
     }
-    relicLocationsExtensionChange()
-    let presetId = localStorage.getItem('presetId')
-    if (typeof (presetId) !== 'string') {
-      presetId = 'casual'
-    }
-    let index = 0
-    for (let i = 0; i < sotnRando.presets.length; i++) {
-      if (sotnRando.presets[i].id === presetId) {
-        elems.presetId.selectedIndex = index
-        break
-      }
-      if (!sotnRando.presets.hidden) {
-        index++
-      }
-    }
-    presetIdChange()
-    loadOption('preset', presetChange, true)
+
+    relicLocationsExtensionChange();
+
+    // --- Preset ID ---
+    let presetId = localStorage.getItem("presetId");
+    if (typeof presetId !== "string") presetId = "casual";
+
+    const index = sotnRando.presets.findIndex(p => p.id === presetId);
+    elems.presetId.selectedIndex = index >= 0 ? index : 0;
+
+    presetIdChange();
+
+    // --- Load preset option ---
+    loadOption("preset", presetChange, true);
   }
 
   function showDevWarning() {
@@ -427,19 +394,20 @@
 
   //#region Event Handlers & Listeners
   function outputChange(event) {
-    if (elems.output.ppf.checked) {
-      elems.target.classList.add('hide')
-      localStorage.setItem('output', 'ppf')
-      elems.randomize.disabled = false
-    } else {
-      elems.target.classList.remove('hide')
-      elems.target.classList.remove('hidden')
-      localStorage.setItem('output', 'bin')
-      elems.randomize.disabled = true
-    }
-    if (event) {
-      elems.target.classList.add('animate')
-    }
+    const isPPF = elems.output.ppf.checked;
+
+    // Toggle visibility
+    elems.target.classList.toggle('hide', isPPF);
+    if (!isPPF) elems.target.classList.remove('hidden');
+
+    // Persist output type
+    localStorage.setItem('output', isPPF ? 'ppf' : 'bin');
+
+    // Enable/disable Randomize button
+    elems.randomize.disabled = !isPPF;
+
+    // Animate only when triggered by user interaction
+    if (event) elems.target.classList.add('animate');
   }
 
   function seedChange() {
@@ -459,19 +427,23 @@
   }
 
   function updateAlucardPreview() {
-    // Ensure required elements exist
-    if (!paletteSelect || !linerSelect || !paletteDisplay || !linerDisplay) return;
+  if (!paletteSelect || !linerSelect || !paletteDisplay || !linerDisplay) return;
 
-    // Fix liner Y position
-    linerDisplay.style.backgroundPositionY = "64px";
+  // Constants for sprite sheet offsets
+  const PALETTE_OFFSET_X = 864;
+  const LINER_OFFSET_X = 768;
+  const SPRITE_WIDTH = 96;
 
-    // Calculate background X positions based on selected indices
-    const paletteIndex = paletteSelect.selectedIndex;
-    const linerIndex = linerSelect.selectedIndex;
+  // Fix liner Y position
+  linerDisplay.style.backgroundPositionY = "64px";
 
-    paletteDisplay.style.backgroundPositionX = (864 - paletteIndex * 96) + "px";
-    linerDisplay.style.backgroundPositionX = (768 - linerIndex * 96) + "px";
-  }
+  // Calculate X offsets
+  const paletteX = PALETTE_OFFSET_X - paletteSelect.selectedIndex * SPRITE_WIDTH;
+  const linerX = LINER_OFFSET_X - linerSelect.selectedIndex * SPRITE_WIDTH;
+
+  paletteDisplay.style.backgroundPositionX = `${paletteX}px`;
+  linerDisplay.style.backgroundPositionX = `${linerX}px`;
+}
 
   function updateMapColorPreview() {
     // Calculate current position based on the selected options
@@ -741,6 +713,8 @@
       "unlockedMode"
     ];
 
+    // TE presets end in -sprXXte, -winXXte, etc.
+    // These enforce tournament-legal settings and lock most UI controls.
     const isTeLocked =
       /-spr[0-9]{2}te$/.test(preset.id) ||
       /-win[0-9]{2}te$/.test(preset.id) ||
@@ -768,6 +742,8 @@
       allRadios.forEach(r => r.disabled = false);
     }
     ChangeHandlers.tournamentModeChange();
+    // Preset-specific UI disable rules.
+    // If a preset appears in `ids`, the listed UI elements in `elems` are disabled.
     DISABLE_RULES.forEach(rule => {
       if (rule.ids.includes(preset.id)) {
         rule.elems.forEach(key => {
@@ -801,6 +777,8 @@
   }
 
   function adjustMaxComplexity() {
+    // EQUIPMENT and SCENIC extensions allow more complex logic paths,
+    // so they raise the maximum allowed complexity from 11 to 15.
     const EXT = sotnRando.constants.EXTENSION
     const highCap = [EXT.EQUIPMENT, EXT.SCENIC].includes(relicLocationsExtensionCache)
     const max = highCap ? 15 : 11
@@ -872,7 +850,7 @@
     const selected = elems.theme.value
     localStorage.setItem('theme', selected)
 
-    body.classList.remove('menu', 'light', 'dark')
+    body.classList.remove('blue', 'light', 'dark')
     body.classList.add(selected)
   }
 
@@ -971,6 +949,8 @@
   }
 
   function dropListener(event) {
+    // Some browsers expose dropped files via dataTransfer.items,
+    // others via dataTransfer.files. Support both for compatibility.
     event.preventDefault()
     event.stopPropagation()
     resetState()
