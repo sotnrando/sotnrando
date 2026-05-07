@@ -420,7 +420,7 @@
   // These are the offset addresses for various codespaces in the ISO
   // SOTN Consists of multiple BIN files as well as an initiation program
   // for the PSX.
-  // The EXE for SOTN on the disc starts at the offset provided by "exe"
+  // The DRA.BIN for SOTN on the disc starts at the offset provided by "exe"
   // "...Off" = "Offset", meaning the ISO address for that item
   // "...Len" = "Length", meaning the number of bytes each item takes
   const exe = { pos: 0x0abb28, len: 703272 }
