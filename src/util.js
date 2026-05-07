@@ -9970,6 +9970,8 @@
     case 's':
       colorAlucardSet = 7
       break
+    default:
+      return data
     }
     
     // Cloth
