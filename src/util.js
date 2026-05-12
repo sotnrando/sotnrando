@@ -8899,7 +8899,7 @@
       offset = getEnemyOffset(EnemyId)
       data.writeShort(offset + 0x1a, 0xb5 + VladNumber)
       data.writeShort(offset + 0x1e, VladDropRate)
-      if(bhmode === BHMODE.HITMAN) {
+      if(bhmode === BHMODE.TARGET_CONFIRMED) {
         data.writeChar(offset + 0x25, 0)
       }
       if(HintOffset > 0) {
@@ -9090,9 +9090,8 @@
       if (enemyHasVlad(141) > 0) {
         writeTargetData(0, 142, 0, enemyHasVlad(141))
         writeTargetData(0, 143, 0, enemyHasVlad(141))
-        if (bhmode < BHMODE.HITMAN) {
-          data.writeChar(0xb6ed5, 0x24)
-        }
+		// enable drop
+        data.writeChar(0xb6ed5, 0x24)
       }		
     }
     
