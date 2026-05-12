@@ -1970,7 +1970,7 @@
   const BHMODE = {
     NORMAL: 0,
     HITMAN: 1,
-    TARGET_CONFIRMED: 3,
+    TARGET_CONFIRMED: 2,
   }
   
   // #region Splash Phrases
