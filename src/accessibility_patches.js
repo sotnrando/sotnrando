@@ -130,7 +130,8 @@
 
   // Force the scroll lock entity in forbidden route to spawn
   function patchForbiddenRouteScrollLock(data) {
-    data.writeChar(0x435FB77,0xA0)
+    data.writeChar(0x048fcfc7,0xa0)
+    data.writeChar(0x048fe0d9,0xa0)
   }
 
   function applyAccessibilityPatches() {

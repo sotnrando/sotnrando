@@ -2,7 +2,8 @@
 
   const devBaseUrl = 'https://dev.sotn.io/'
   const defaultOptions = 'p:safe'
-
+  
+  // #region Basic Necessities
   const optionsUrls = {
     'p:safe': 'https://sotn.io/',
     'p:adventure': 'https://a.sotn.io/',
@@ -26,6 +27,7 @@
     'tp:gem-farmer': 'https://gf.t.sotn.io/',
   }
 
+  // Allows the randomizer to categoirize items for randomization.
   const TYPE = {
     HEART: 0,
     GOLD: 1,
@@ -57,6 +59,8 @@
     'USABLE',
   ]
 
+  // Stages are named here in comments; the names of the foldewrs are there
+  // characters each. The randomizer numbers them for ease of processing.
   const ZONE = {
     ST0:  0,  // Final Stage: Bloodlines
     ARE:  1,  // Colosseum
@@ -110,7 +114,7 @@
     RBO8: 49, // Galamoth
   }
 
-  // List of zone strings for logging.
+  // List of stage strings for logging.
   const zoneNames = [
     'ST0',
     'ARE',
@@ -413,6 +417,12 @@
     rewards: 0x2334,
   }]
 
+  // These are the offset addresses for various codespaces in the ISO
+  // SOTN Consists of multiple BIN files as well as an initiation program
+  // for the PSX.
+  // The DRA.BIN for SOTN on the disc starts at the offset provided by "exe"
+  // "...Off" = "Offset", meaning the ISO address for that item
+  // "...Len" = "Length", meaning the number of bytes each item takes
   const exe = { pos: 0x0abb28, len: 703272 }
   const enemyListOff = 0xe90
   const enemyListLen = 292
@@ -429,6 +439,8 @@
   const accessoryListOff = 0x7e38
   const accessoryListLen = 33
 
+  // Relics and progression items will be identified in "applied" or 
+  // "relicLocations" using these letters. 
   const RELIC = {
     SOUL_OF_BAT: 'B',
     FIRE_OF_BAT: 'f',
@@ -476,6 +488,8 @@
   // This is applied to equipment ids to get the inventory slot it occupies.
   const equipmentInvIdOffset = 0x798a
 
+  // These are the yargs arguments for the various equipment at the start of 
+  // the game.
   const SLOT = {
     RIGHT_HAND: 'r',
     LEFT_HAND: 'l',
@@ -488,6 +502,8 @@
     LUCK_MODE: 'x',
   }
 
+  // These are the RAM addresses for the equipment. CHanging these without 
+  // using the in-game equipment load function does nothing.
   const slots = {
     'r':  0x097c00,
     'l':  0x097c04,
@@ -498,6 +514,30 @@
     'o2': 0x097c18,
   }
 
+  // These are the randomizer extensions. Missing: "false" or "Classic" using 
+  // only 28 relic locations and not randomizing Holy glasses, Spike Breaker or
+  // either of the GOld or Silver rings. Also omits Nosedevil and Sprite 
+  // familiars.
+  //
+  // Full breakdown of the relic extensions, inspiration / design identity, and
+  // numnber of checks:
+  // -  Classic       28  Checks
+  //    Matches Vanilla NA PSX Relic locations      
+  // -  Guarded       37  Checks
+  //    Relics are guarded by Bosses and includes progression items
+  // -  Equipment     105 Checks
+  // -  Relics and progressions are found in most locations where equipment 
+  //    would spawn throughout both castles.
+  // -  GuardedPlus   39  Checks
+  //    This extension was meant to "balance" routing by adding two more checks
+  //    to left side of second castle in the Forbidden Library.
+  // -  Scenic        118 Checks
+  //    Every single check in the randomizer.
+  // -  Extended      70  Checks
+  //    This extension makes the player visit interesting locations and unique 
+  //    rooms throughout both castles. It was intended to be a "healthy" option
+  //    to prevent the player from being overwhelmed by the sheer number of 
+  //    checks but to offer a more fulfilling experience than Guarded.
   const EXTENSION = {
     GUARDED:   'guarded',
     EQUIPMENT: 'equipment',
@@ -508,6 +548,12 @@
 
   const defaultExtension = EXTENSION.GUARDED
 
+  // This is not every location in the game, it is only every location not 
+  // included in Classic, it also does not include the locations for Holy 
+  // glasses, Silver ring, Gold ring, or Spike Breaker
+  //
+  // If you want to add a new relic location to the randomizer, it must be 
+  // added to this list.
   const LOCATION = {
     CRYSTAL_CLOAK:               'Crystal cloak',
     MORMEGIL:                    'Mormegil',
@@ -597,9 +643,13 @@
     REVERSE_KEEP_HIGH_POTION:    'Reverse Keep High Potion',
   }
 
+  // This is an assignment of Global drops, the drops which every enemy in the
+  // game can drop: Hearts, Big Hearts, Money, and Meal ticket.
   const GLOBAL_DROP = 'Global'
   const globalDropsCount = 32
 
+  // Helps works identify what they are working on randomizing or what point of
+  // the process they're in.
   const WORKER_ACTION = {
     STATS:     1,
     RELICS:    2,
@@ -607,6 +657,63 @@
     FINALIZE:  4,
   }
 
+  // These are the character codes used by SOTN to display large text in the 
+  // menus and on screen for relics.
+  const characterMap = {
+    ',': [ 0x81, 0x43 ],
+    '.': [ 0x81, 0x44 ],
+    '•': [ 0x81, 0x45 ],
+    ':': [ 0x81, 0x46 ],
+    ';': [ 0x81, 0x47 ],
+    '?': [ 0x81, 0x48 ],
+    '!': [ 0x81, 0x49 ],
+    '°': [ 0x81, 0x4b ],
+    '`': [ 0x81, 0x4d ],
+    '"': [ 0x81, 0x4e ],
+    '^': [ 0x81, 0x4f ],
+    '‾': [ 0x81, 0x50 ],
+    '_': [ 0x81, 0x51 ],
+    '—': [ 0x81, 0x5c ],
+    '/': [ 0x81, 0x5e ],
+    '\\': [ 0x81, 0x5f ],
+    '~': [ 0x81, 0x60 ],
+    '|': [ 0x81, 0x62 ],
+    '¨': [ 0x81, 0x64 ],
+    '‘': [ 0x81, 0x65 ],
+    '\'': [ 0x81, 0x66 ],
+    '“': [ 0x81, 0x67 ],
+    '”': [ 0x81, 0x68 ],
+    '(': [ 0x81, 0x69 ],
+    ')': [ 0x81, 0x6a ],
+    '[': [ 0x81, 0x6d ],
+    ']': [ 0x81, 0x6e ],
+    '{': [ 0x81, 0x6f ],
+    '}': [ 0x81, 0x70 ],
+    '+': [ 0x81, 0x7b ],
+    '-': [ 0x81, 0x7c ],
+    '±': [ 0x81, 0x7d ],
+    '×': [ 0x81, 0x7e ],
+    '%': [ 0x81, 0x93 ],
+    '0': [ 0x82, 0x4f ],
+    '1': [ 0x82, 0x50 ],
+    '2': [ 0x82, 0x51 ],
+    '3': [ 0x82, 0x52 ],
+    '4': [ 0x82, 0x53 ],
+    '5': [ 0x82, 0x54 ],
+    '6': [ 0x82, 0x55 ],
+    '7': [ 0x82, 0x56 ],
+    '8': [ 0x82, 0x57 ],
+    '9': [ 0x82, 0x58 ],
+  }
+
+  // This is the ECC digest. It is used for verifying if the BIN given to the
+  // randomizer was vanilla.
+  const digest =
+        'ce01203a9df93e001b88ef4c350889c19f11ffba89d20f214bdd8dec0b2d8d7c'
+
+  // #region Music Options
+  // M=These are music ID's for every song in the game. Referenced when 
+  // applying / manipulating the music randomizer.
   const MUSIC = {
     LOST_PAINTING: 0x01,          // Lost Painting
     CURSE_ZONE: 0x03,             // Curse Zone
@@ -647,6 +754,9 @@
     // SPOKEN: 0x42,
   }
 
+  // These are basically the same as the list above but culled for the boss 
+  // music to be used when "Separate Boss Music" is used. (This could be 
+  // improved.)
   const TRAVEL_MUSIC = {
     LOST_PAINTING: 0x01,          // Lost Painting
     CURSE_ZONE: 0x03,             // Curse Zone
@@ -681,6 +791,9 @@
     // SPOKEN: 0x42,
   }
 
+  // These are basically the same as the list above but is only the boss 
+  // music to be used when "Separate Boss Music" is used. (This could be 
+  // improved.)
   const BOSS_MUSIC = {
     FESTIVAL_OF_SERVANTS: 0x1d,   // Festival of Servants
     ENCHANTED_BANQUET: 0x30,      // Enchanted Banquet
@@ -690,6 +803,35 @@
     // BLACK_BANQUET: 0x3a,       // Black Banquet
   }
 
+  let songsList = [
+    "Lost Painting",
+    "Curse Zone",
+    "Requiem For The Gods",
+    "Rainbow Cemetary",
+    "Wood Carving Partita",
+    "Crystal Teardrops",
+    "Marble Gallery",
+    "Draculas Castle",
+    "The Tragic Prince",
+    "Tower of Mist",
+    "Door of Holy Spirits",
+    "Dance of Pales",
+    "Abandoned Pit",
+    "Heavenly Doorway",
+    "Festival of Servants",
+    "Wandering Ghosts",
+    "The Door to the Abyss",
+    "Dance of Gold",
+    "Enchanted Banquet",
+    "Death Ballad",
+    "Final Toccata",
+    "Dance of Illusions",
+    "Blood Relations"
+  ]
+
+  // #region Equipped items
+  // These are the weapon class used by the game for sorting and 
+  // identifying certain weapon properties like if they are two-handed.
   const HAND_TYPE = {
     SHORT_SWORD: 0x00,
     SWORD: 0x01,
@@ -718,6 +860,9 @@
     'OTHER',
   ]
 
+  // #region Options Constants
+  // #region Enemy Stat Rando
+  // These are used by Enemy Stat Randomizer to force the names to display.
   const faerieScrollForceAddresses = [
     0x04403938,
     0x044d4948,
@@ -772,308 +917,310 @@
     0x06a7da5c,
   ]
 
-  const characterMap = {
-    ',': [ 0x81, 0x43 ],
-    '.': [ 0x81, 0x44 ],
-    '•': [ 0x81, 0x45 ],
-    ':': [ 0x81, 0x46 ],
-    ';': [ 0x81, 0x47 ],
-    '?': [ 0x81, 0x48 ],
-    '!': [ 0x81, 0x49 ],
-    '°': [ 0x81, 0x4b ],
-    '`': [ 0x81, 0x4d ],
-    '"': [ 0x81, 0x4e ],
-    '^': [ 0x81, 0x4f ],
-    '‾': [ 0x81, 0x50 ],
-    '_': [ 0x81, 0x51 ],
-    '—': [ 0x81, 0x5c ],
-    '/': [ 0x81, 0x5e ],
-    '\\': [ 0x81, 0x5f ],
-    '~': [ 0x81, 0x60 ],
-    '|': [ 0x81, 0x62 ],
-    '¨': [ 0x81, 0x64 ],
-    '‘': [ 0x81, 0x65 ],
-    '\'': [ 0x81, 0x66 ],
-    '“': [ 0x81, 0x67 ],
-    '”': [ 0x81, 0x68 ],
-    '(': [ 0x81, 0x69 ],
-    ')': [ 0x81, 0x6a ],
-    '[': [ 0x81, 0x6d ],
-    ']': [ 0x81, 0x6e ],
-    '{': [ 0x81, 0x6f ],
-    '}': [ 0x81, 0x70 ],
-    '+': [ 0x81, 0x7b ],
-    '-': [ 0x81, 0x7c ],
-    '±': [ 0x81, 0x7d ],
-    '×': [ 0x81, 0x7e ],
-    '%': [ 0x81, 0x93 ],
-    '0': [ 0x82, 0x4f ],
-    '1': [ 0x82, 0x50 ],
-    '2': [ 0x82, 0x51 ],
-    '3': [ 0x82, 0x52 ],
-    '4': [ 0x82, 0x53 ],
-    '5': [ 0x82, 0x54 ],
-    '6': [ 0x82, 0x55 ],
-    '7': [ 0x82, 0x56 ],
-    '8': [ 0x82, 0x57 ],
-    '9': [ 0x82, 0x58 ],
-  }
-
+  // #region Shop Price Rando
+  // Shop price data is used when using Shop Price Randomizer.
   const shopItemsData = [
     {
       id: 1,
       itemName: "Potion",
-      itemPriceH: 0x00000320, //normally 800
+      // The price is normally 800
+      itemPriceH: 0x00000320, 
       itemPriceD: 800,
       priceAddress: 0x047a30a0
     }, {
       id: 2,
       itemName: "High potion",
-      itemPriceH: 0x000007d0, //normally 2000
+      // The price is normally 2000
+      itemPriceH: 0x000007d0, 
       itemPriceD: 2000,
       priceAddress: 0x047a30a8
     }, {
       id: 3,
       itemName: "Elixir",
-      itemPriceH: 0x00001f40, //normally 8000
+      // The price is normally 8000
+      itemPriceH: 0x00001f40, 
       itemPriceD: 8000,
       priceAddress: 0x047a30b0
     }, {
       id: 4,
       itemName: "Manna prism",
-      itemPriceH: 0x00000fa0, //normally 4000
+      // The price is normally 4000
+      itemPriceH: 0x00000fa0, 
       itemPriceD: 4000,
       priceAddress: 0x047a30b8
     }, {
       id: 5,
       itemName: "Antivenom",
-      itemPriceH: 0x000000c8, //normally 200
+      // The price is normally 200
+      itemPriceH: 0x000000c8, 
       itemPriceD: 200,
       priceAddress: 0x047a30c0
     }, {
       id: 6,
       itemName: "Uncurse",
-      itemPriceH: 0x000000c8, //normally 200
+      // The price is normally 200
+      itemPriceH: 0x000000c8, 
       itemPriceD: 200,
       priceAddress: 0x047a30c8
     }, {
       id: 7,
       itemName: "Hammer",
-      itemPriceH: 0x000000c8, //normally 200
+      // The price is normally 200
+      itemPriceH: 0x000000c8,
       itemPriceD: 200,
       priceAddress: 0x047a30d0
     }, {
       id: 8,
       itemName: "Magic Missile",
-      itemPriceH: 0x0000012c, //normally 300
+      // The price is normally 300
+      itemPriceH: 0x0000012c,
       itemPriceD: 300,
       priceAddress: 0x047a30d8
     }, {
       id: 9,
       itemName: "Bwaka knife",
-      itemPriceH: 0x00000190, //normally 400
+      // The price is normally 400
+      itemPriceH: 0x00000190,
       itemPriceD: 400,
       priceAddress: 0x047a30e0
     }, {
       id: 10,
       itemName: "Boomerang",
-      itemPriceH: 0x000001f4, //normally 500
+      // The price is normally 500
+      itemPriceH: 0x000001f4,
       itemPriceD: 500,
       priceAddress: 0x047a30e8
     }, {
       id: 11,
       itemName: "Javelin",
-      itemPriceH: 0x00000320, //normally 800
+      // The price is normally 800
+      itemPriceH: 0x00000320,
       itemPriceD: 800,
       priceAddress: 0x047a30f0
     }, {
       id: 12,
       itemName: "Fire boomerang",
-      itemPriceH: 0x000003e8, //normally 1000
+      // The price is normally 1000
+      itemPriceH: 0x000003e8,
       itemPriceD: 1000,
       priceAddress: 0x047a30f8
     }, {
       id: 13,
       itemName: "Shuriken",
-      itemPriceH: 0x00000960, //normally 2400
+      // The price is normally 2400
+      itemPriceH: 0x00000960,
       itemPriceD: 2400,
       priceAddress: 0x047a3100
     }, {
       id: 14,
       itemName: "Cross shuriken",
-      itemPriceH: 0x00001388, //normally 5000
+      // The price is normally 5000
+      itemPriceH: 0x00001388,
       itemPriceD: 5000,
       priceAddress: 0x047a3108
     }, {
       id: 15,
       itemName: "Buffalo star",
-      itemPriceH: 0x00001f40, //normally 8000
+      // The price is normally 8000
+      itemPriceH: 0x00001f40,
       itemPriceD: 8000,
       priceAddress: 0x047a3110
     }, {
       id: 16,
       itemName: "Flame star",
-      itemPriceH: 0x00003a98, //normally 15000
+      // The price is normally 15000
+      itemPriceH: 0x00003a98,
       itemPriceD: 15000,
       priceAddress: 0x047a3118
     }, {
       id: 17,
       itemName: "Library card",
-      itemPriceH: 0x000001f4, //normally 500
+      // The price is normally 500
+      itemPriceH: 0x000001f4,
       itemPriceD: 500,
       priceAddress: 0x047a3120
     }, {
       id: 18,
       itemName: "Meal ticket",
-      itemPriceH: 0x000007d0, //normally 2000
+      // The price is normally 2000
+      itemPriceH: 0x000007d0,
       itemPriceD: 2000,
       priceAddress: 0x047a3128
     }, {
       id: 19,
       itemName: "Saber",
-      itemPriceH: 0x000005dc, //normally 1500
+      // The price is normally 1500
+      itemPriceH: 0x000005dc,
       itemPriceD: 1500,
       priceAddress: 0x047a3130
     }, {
       id: 20,
       itemName: "Mace",
-      itemPriceH: 0x000007d0, //normally 2000
+      // The price is normally 2000
+      itemPriceH: 0x000007d0,
       itemPriceD: 2000,
       priceAddress: 0x047a3138
     }, {
       id: 21,
       itemName: "Damascus sword",
-      itemPriceH: 0x00000fa0, //normally 4000
+      // The price is normally 4000
+      itemPriceH: 0x00000fa0,
       itemPriceD: 4000,
       priceAddress: 0x047a3140
     }, {
       id: 22,
       itemName: "Firebrand",
-      itemPriceH: 0x00002710, //normally 10000
+      // The price is normally 10000
+      itemPriceH: 0x00002710,
       itemPriceD: 10000,
       priceAddress: 0x047a3148
     }, {
       id: 23,
       itemName: "Icebrand",
-      itemPriceH: 0x00002710, //normally 10000
+      // The price is normally 10000
+      itemPriceH: 0x00002710,
       itemPriceD: 10000,
       priceAddress: 0x047a3150
     }, {
       id: 24,
       itemName: "Thunderbrand",
-      itemPriceH: 0x00002710, //normally 10000
+      // The price is normally 10000
+      itemPriceH: 0x00002710,
       itemPriceD: 10000,
       priceAddress: 0x047a3158
     }, {
       id: 25,
       itemName: "Harper",
-      itemPriceH: 0x00002ee0, //normally 12000
+      // The price is normally 12000
+      itemPriceH: 0x00002ee0,
       itemPriceD: 12000,
       priceAddress: 0x047a3160
     }, {
       id: 26,
       itemName: "Leather shield",
-      itemPriceH: 0x00000190, //normally 400
+      // The price is normally 400
+      itemPriceH: 0x00000190,
       itemPriceD: 400,
       priceAddress: 0x047a3168
     }, {
       id: 27,
       itemName: "Iron shield",
-      itemPriceH: 0x00000fbc, //normally 3980
+      // The price is normally 3980
+      itemPriceH: 0x00000fbc,
       itemPriceD: 3980,
       priceAddress: 0x047a3170
     }, {
       id: 28,
       itemName: "Velvet hat",
-      itemPriceH: 0x00000190, //normally 400
+      // The price is normally 400
+      itemPriceH: 0x00000190,
       itemPriceD: 400,
       priceAddress: 0x047a3178
     }, {
       id: 29,
       itemName: "Leather hat",
-      itemPriceH: 0x000003e8, //normally 1000
+      // The price is normally 1000
+      itemPriceH: 0x000003e8,
       itemPriceD: 1000,
       priceAddress: 0x047a3180
     }, {
       id: 30,
       itemName: "Circlet",
-      itemPriceH: 0x00000fa0, //normally 4000
+      // The price is normally 4000
+      itemPriceH: 0x00000fa0,
       itemPriceD: 4000,
       priceAddress: 0x047a3188
     }, {
       id: 31,
       itemName: "Silver crown",
-      itemPriceH: 0x00002ee0, //normally 12000
+      // The price is normally 12000
+      itemPriceH: 0x00002ee0,
       itemPriceD: 12000,
       priceAddress: 0x047a3190
     }, {
       id: 32,
       itemName: "Iron cuirass",
-      itemPriceH: 0x000005dc, //normally 1500
+      // The price is normally 1500
+      itemPriceH: 0x000005dc,
       itemPriceD: 1500,
       priceAddress: 0x047a3198
     }, {
       id: 33,
       itemName: "Steel cuirass",
-      itemPriceH: 0x00000fa0, //normally 4000
+      // The price is normally 4000
+      itemPriceH: 0x00000fa0,
       itemPriceD: 4000,
       priceAddress: 0x047a31a0
     }, {
       id: 34,
       itemName: "Diamond plate",
-      itemPriceH: 0x00002ee0, //normally 12000
+      // The price is normally 12000
+      itemPriceH: 0x00002ee0,
       itemPriceD: 12000,
       priceAddress: 0x047a31a8
     }, {
       id: 35,
       itemName: "Reverse cloak",
-      itemPriceH: 0x000007d0, //normally 2000
+      // The price is normally 2000
+      itemPriceH: 0x000007d0,
       itemPriceD: 2000,
       priceAddress: 0x047a31b0
     }, {
       id: 36,
       itemName: "Elven cloak",
-      itemPriceH: 0x00000bb8, //normally 3000
+      // The price is normally 3000
+      itemPriceH: 0x00000bb8,
       itemPriceD: 3000,
       priceAddress: 0x047a31b8
     }, {
       id: 37,
       itemName: "Joseph's cloak",
-      itemPriceH: 0x00007530, //normally 30000
+      // The price is normally 30000
+      itemPriceH: 0x00007530,
       itemPriceD: 30000,
       priceAddress: 0x047a31c0
     }, {
       id: 38,
       itemName: "Medal",
-      itemPriceH: 0x00000bb8, //normally 3000
+      // The price is normally 3000
+      itemPriceH: 0x00000bb8,
       itemPriceD: 3000,
       priceAddress: 0x047a31c8
     }, {
       id: 39,
       itemName: "Ring of Pales",
-      itemPriceH: 0x00000fa0, //normally 4000
+      // The price is normally 4000
+      itemPriceH: 0x00000fa0,
       itemPriceD: 4000,
       priceAddress: 0x047a31d0
     }, {
       id: 40,
       itemName: "Gauntlet",
-      itemPriceH: 0x00001f40, //normally 8000
+      // The price is normally 8000
+      itemPriceH: 0x00001f40,
       itemPriceD: 8000,
       priceAddress: 0x047a31d8
     }, {
       id: 41,
       itemName: "Duplicator",
-      itemPriceH: 0x0007a120, //normally 500000
+      // The price is normally 500000
+      itemPriceH: 0x0007a120,
       itemPriceD: 500000,
       priceAddress: 0x047a31e0
     }
   ]
 
-  const startRoomData = [                                                       // Data provided for starting room randomizer (Writes are used, other fields are reference)
+  // #region Start Room Rando
+  // This data is provided for the starting room randomizer. Writes are used
+  // for writing where Alucard goes. The stage is used for detecting when we
+  // need special accomodations for the player to escape or for improving user
+  // experience. Other fields are for programmer reference.
+  const startRoomData = [
     {
+      // Stage 0x00 NO0 Marble Gallery
       id: 1,
       comment: "Bottom of Forbidden Route",
-      stage: 0x00,                                                                 //Marble Gallery
+      stage: 0x00,
       room: 0,
       xPos: 48,
       yPos: 644,
@@ -1083,7 +1230,7 @@
     }, {
       id: 2,
       comment: "Top of Spirit Orb room",
-      stage: 0x00,                                                                 //Marble Gallery
+      stage: 0x00,
       room: 2,
       xPos: 332,
       yPos: 244,
@@ -1093,7 +1240,7 @@
     }, {
       id: 3,
       comment: "Middle of the long hallway",
-      stage: 0x00,                                                                 //Marble Gallery
+      stage: 0x00,
       room: 8,
       xPos: 1920,
       yPos: 164,
@@ -1104,7 +1251,7 @@
     }, {
       id: 4,
       comment: "Alucart room",
-      stage: 0x00,                                                                 //Marble Gallery
+      stage: 0x00,
       room: 14,
       xPos: 128,
       yPos: 164,
@@ -1115,7 +1262,7 @@
     }, {
       id: 5,
       comment: "Gravity Boots items",
-      stage: 0x00,                                                                 //Marble Gallery
+      stage: 0x00,
       room: 20,
       xPos: 192,
       yPos: 148,
@@ -1123,9 +1270,10 @@
       roomWrite: 0x004100a0,
       stageWrite: 0x0000
     }, {
+      // Stage 0x01 NO1 Outer Wall
       id: 6,
       comment: "Same room but across from Telescope",
-      stage: 0x01,                                                                 //Outer Wall
+      stage: 0x01,
       room: 3,
       xPos: 724,
       yPos: 164,
@@ -1135,7 +1283,7 @@
     }, {
       id: 7,
       comment: "Secret elevator room",
-      stage: 0x01,                                                                 //Outer Wall
+      stage: 0x01,
       room: 6,
       xPos: 56,
       yPos: 164,
@@ -1145,7 +1293,7 @@
     }, {
       id: 8,
       comment: "Gladius room",
-      stage: 0x01,                                                                 //Outer Wall
+      stage: 0x01,
       room: 12,
       xPos: 128,
       yPos: 164,
@@ -1153,9 +1301,10 @@
       roomWrite: 0x00410060,
       stageWrite: 0x0001
     }, {
+      // Stage 0x02 LIB Long Library
       id: 9,
       comment: "Bookshelf room",
-      stage: 0x02,                                                                 //Long Library
+      stage: 0x02,
       room: 1,
       xPos: 88,
       yPos: 148,
@@ -1165,7 +1314,7 @@
     }, {
       id: 10,
       comment: "Shop hallway",
-      stage: 0x02,                                                                 //Long Library
+      stage: 0x02,
       room: 5,
       xPos: 16,
       yPos: 148,
@@ -1175,7 +1324,7 @@
     }, {
       id: 11,
       comment: "Faerie Card room",
-      stage: 0x02,                                                                 //Long Library
+      stage: 0x02,
       room: 7,
       xPos: 208,
       yPos: 148,
@@ -1183,9 +1332,10 @@
       roomWrite: 0x00410038,
       stageWrite: 0x0002
     }, {
+      // Stage 0x03 CAT Catacombs
       id: 12,
       comment: "One-dollar room",
-      stage: 0x03,                                                                 //Catacombs
+      stage: 0x03,
       room: 5,
       xPos: 100,
       yPos: 164,
@@ -1195,7 +1345,7 @@
     }, {
       id: 13,
       comment: "Icebrand room",
-      stage: 0x03,                                                                 //Catacombs
+      stage: 0x03,
       room: 9,
       xPos: 56,
       yPos: 164,
@@ -1205,7 +1355,7 @@
     }, {
       id: 14,
       comment: "Elevator in Slime room",
-      stage: 0x03,                                                                 //Catacombs
+      stage: 0x03,
       room: 23,
       xPos: 352,
       yPos: 228,
@@ -1213,9 +1363,10 @@
       roomWrite: 0x004100B8,
       stageWrite: 0x0003
     }, {
+      // Stage 0x04 NO2 Olrox's Quarters
       id: 15,
       comment: "Top left of Spectral Sword room",
-      stage: 0x04,                                                                 //Olrox's Quarters
+      stage: 0x04,
       room: 2,
       xPos: 48,
       yPos: 132,
@@ -1225,7 +1376,7 @@
     }, {
       id: 16,
       comment: "Vase shaft",
-      stage: 0x04,                                                                 //Olrox's Quarters
+      stage: 0x04,
       room: 6,
       xPos: 118,
       yPos: 388,
@@ -1235,7 +1386,7 @@
     }, {
       id: 17,
       comment: "Olrox Garnet room",
-      stage: 0x04,                                                                 //Olrox's Quarters
+      stage: 0x04,
       room: 10,
       xPos: 128,
       yPos: 164,
@@ -1245,7 +1396,7 @@
     }, {
       id: 18,
       comment: "Item cubby in boss hallway",
-      stage: 0x04,                                                                 //Olrox's Quarters
+      stage: 0x04,
       room: 11,
       xPos: 468,
       yPos: 208,
@@ -1253,9 +1404,10 @@
       roomWrite: 0x00410058,
       stageWrite: 0x0004
     }, {
+      // Stage 0x05 CHI Abandoned Mine
       id: 19,
       comment: "Room before Cerberus",
-      stage: 0x05,                                                                 //Abandoned Mine
+      stage: 0x05,
       room: 1,
       xPos: 254,
       yPos: 148,
@@ -1265,7 +1417,7 @@
     }, {
       id: 20,
       comment: "Combat Knife room",
-      stage: 0x05,                                                                 //Abandoned Mine
+      stage: 0x05,
       room: 9,
       xPos: 208,
       yPos: 148,
@@ -1273,9 +1425,10 @@
       roomWrite: 0x00410048,
       stageWrite: 0x0005
     }, {
+      // Stage 0x06 DAI Royal Chapel
       id: 21,
       comment: "Spike hallway",
-      stage: 0x06,                                                                 //Royal Chapel
+      stage: 0x06,
       room: 1,
       xPos: 1064,
       yPos: 132,
@@ -1285,7 +1438,7 @@
     }, {
       id: 22,
       comment: "Confessional",
-      stage: 0x06,                                                                 //Royal Chapel
+      stage: 0x06,
       room: 7,
       xPos: 96,
       yPos: 164,
@@ -1295,7 +1448,7 @@
     }, {
       id: 23,
       comment: "Goggles location",
-      stage: 0x06,                                                                 //Royal Chapel
+      stage: 0x06,
       room: 8,
       xPos: 196,
       yPos: 276,
@@ -1305,7 +1458,7 @@
     }, {
       id: 24,
       comment: "Bottom of the Stairs",
-      stage: 0x06,                                                                 //Royal Chapel
+      stage: 0x06,
       room: 11,
       xPos: 208,
       yPos: 1700,
@@ -1315,7 +1468,7 @@
     }, {
       id: 25,
       comment: "Top of the tower closest to Keep",
-      stage: 0x06,                                                                 //Royal Chapel
+      stage: 0x06,
       room: 17,
       xPos: 510,
       yPos: 228,
@@ -1323,9 +1476,10 @@
       roomWrite: 0x00410088,
       stageWrite: 0x0006
     }, {
+      // Stage 0x07 NP3 Castle Entrance
       id: 26,
       comment: "Power of Wolf",
-      stage: 0x07,                                                                 //Castle Entrance
+      stage: 0x07,
       room: 0,
       xPos: 220,
       yPos: 132,
@@ -1335,7 +1489,7 @@
     }, {
       id: 27,
       comment: "Holy Mail ledge",
-      stage: 0x07,                                                                 //Castle Entrance
+      stage: 0x07,
       room: 3,
       xPos: 110,
       yPos: 72,
@@ -1345,7 +1499,7 @@
     }, {
       id: 28,
       comment: "On the Teleporter shortcut switch",
-      stage: 0x07,                                                                 //Castle Entrance
+      stage: 0x07,
       room: 16,
       xPos: 104,
       yPos: 160,
@@ -1353,9 +1507,10 @@
       roomWrite: 0x00410080,
       stageWrite: 0x0007
     }, {
+      // Stage 0x09 NO4 Underground Caverns
       id: 29,
       comment: "Drawer room",
-      stage: 0x09,                                                                 //Underground Caverns
+      stage: 0x09,
       room: 4,
       xPos: 224,
       yPos: 148,
@@ -1365,7 +1520,7 @@
     }, {
       id: 30,
       comment: "Top of Succubus stairs",
-      stage: 0x09,                                                                 //Underground Caverns
+      stage: 0x09,
       room: 6,
       xPos: 172,
       yPos: 132,
@@ -1375,7 +1530,7 @@
     }, {
       id: 31,
       comment: "Bottom of waterfall",
-      stage: 0x09,                                                                 //Underground Caverns
+      stage: 0x09,
       room: 26,
       xPos: 316,
       yPos: 1412,
@@ -1385,7 +1540,7 @@
     }, {
       id: 32,
       comment: "Merman Statue room",
-      stage: 0x09,                                                                 //Underground Caverns
+      stage: 0x09,
       room: 21,
       xPos: 208,
       yPos: 132,
@@ -1393,9 +1548,10 @@
       roomWrite: 0x004100A8,
       stageWrite: 0x0009
     }, {
+      // Stage 0x0A ARE Colosseum
       id: 33,
       comment: "Opening shortcut",
-      stage: 0x0a,                                                                 //Colosseum
+      stage: 0x0a,
       room: 4,
       xPos: 168,
       yPos: 156,
@@ -1405,7 +1561,7 @@
     }, {
       id: 34,
       comment: "Open elevator",
-      stage: 0x0a,                                                                 //Colosseum
+      stage: 0x0a,
       room: 6,
       xPos: 72,
       yPos: 128,
@@ -1415,7 +1571,7 @@
     }, {
       id: 35,
       comment: "Blood cloak room",
-      stage: 0x0a,                                                                 //Colosseum
+      stage: 0x0a,
       room: 10,
       xPos: 54,
       yPos: 164,
@@ -1423,9 +1579,10 @@
       roomWrite: 0x00410050,
       stageWrite: 0x000A
     }, {
+      // Stage 0x0B TOP Caslte Keep
       id: 36,
       comment: "Attic",
-      stage: 0x0b,                                                                 //Castle Keep
+      stage: 0x0b,
       room: 0,
       xPos: 64,
       yPos: 164,
@@ -1435,7 +1592,7 @@
     }, {
       id: 37,
       comment: "Falchion room",
-      stage: 0x0b,                                                                 //Castle Keep
+      stage: 0x0b,
       room: 5,
       xPos: 100,
       yPos: 164,
@@ -1445,7 +1602,7 @@
     }, {
       id: 38,
       comment: "Tyrfing room",
-      stage: 0x0b,                                                                 //Castle Keep
+      stage: 0x0b,
       room: 8,
       xPos: 156,
       yPos: 164,
@@ -1453,9 +1610,10 @@
       roomWrite: 0x00410040,
       stageWrite: 0x000B
     }, {
+      // Stage 0x0C NZ0 Alchemy Laboratory
       id: 39,
       comment: "Cloth cape room",
-      stage: 0x0c,                                                                 //Alchemy Laboratory
+      stage: 0x0c,
       room: 5,
       xPos: 128,
       yPos: 164,
@@ -1465,7 +1623,7 @@
     }, {
       id: 40,
       comment: "Sunglasses room",
-      stage: 0x0c,                                                                 //Alchemy Laboratory
+      stage: 0x0c,
       room: 6,
       xPos: 128,
       yPos: 164,
@@ -1475,7 +1633,7 @@
     }, {
       id: 41,
       comment: "Skill of Wolf room",
-      stage: 0x0c,                                                                 //Alchemy Laboratory
+      stage: 0x0c,
       room: 8,
       xPos: 208,
       yPos: 132,
@@ -1483,9 +1641,10 @@
       roomWrite: 0x00410040,
       stageWrite: 0x000C
     }, {
+      // Stage 0x0D NZ1 Clock Tower
       id: 42,
       comment: "Middle of the maze room with pendulums",
-      stage: 0x0d,                                                                 //Clock Tower
+      stage: 0x0d,
       room: 3,
       xPos: 1090,
       yPos: 84,
@@ -1495,7 +1654,7 @@
     }, {
       id: 43,
       comment: "Fire of Bat ledge in large room",
-      stage: 0x0d,                                                                 //Clock Tower
+      stage: 0x0d,
       room: 10,
       xPos: 1456,
       yPos: 132,
@@ -1505,15 +1664,18 @@
     }, {
       id: 44,
       comment: "Ledge with a column (left side of large room)",
-      stage: 0x0d,                                                                 //Clock Tower
+      stage: 0x0d,
       room: 10,
       xPos: 216,
       yPos: 308,
       xyWrite: 0x013400d8,
       roomWrite: 0x00410050,
       stageWrite: 0x000d
-    }, {
-      id: 45,                                                                      // IMPORTANT CASTLE 2 NOTES: stage number must be correct, but stageWrite should mask off bit 0x20.
+    }, 
+    // IMPORTANT CASTLE 2 NOTES: stage number must be correct, but stageWrite 
+    // should mask off bit 0x20.
+    {
+      id: 45,                                                                      
       comment: "Black Marble Gallery (Reverse Forbidden)",
       stage: 0x20,
       room: 0,
@@ -1521,7 +1683,7 @@
       yPos: 540,
       xyWrite: 0x021c0090,
       roomWrite: 0x00270000,
-      stageWrite: 0x0000                                                           // Castle 2 Stage Numbers should mask off the 0x20 bit.
+      stageWrite: 0x0000
     }, {
       id: 46,
       comment: "Black Marble Gallery (Reverse Alucart)",
@@ -1803,7 +1965,23 @@
       stageWrite: 0x000d
     }
   ]
+
+  // These are the modes used for the Bounty Hunter options.
+  const BHMODE = {
+    NORMAL: 0,
+    HITMAN: 1,
+    TARGET_CONFIRMED: 2,
+  }
   
+  // #region Splash Phrases
+  // Splash phrases are used on the main title window where the player is 
+  // normally asked to just "Press Start". These phrases cannot exceed 45 
+  // characters long, including the exclamation point. Vanilla phrases should 
+  // be family-friendly, and should be related to SOTN or the SOTN community.
+  // Non SOTN-related phrases should be widely-understood memes or pop culture
+  // references. Generally, we prefer them to end or include an Exclamation 
+  // point. Most other characters besides letters, numbers, and basic 
+  // punctuation do not render on screen.
   const splashPhrases = [
     "Moving like Dracula, we get it back in blood!",
     "Diagon strats!",
@@ -1850,7 +2028,7 @@
     "Hydro Storm!",
     "Vial Stacks!",
     "Dark Wolf!",
-    "This ain\’t nothing to me, man!",
+    "This ain't nothing to me, man!",
     "This is a PlayStation black disc!",
     "Fear has an address ... it's 0x04369767!",
     "Sword of Brawn!",
@@ -1868,7 +2046,7 @@
     "Track one contains a dubstep banger!",
     "The original Metroidvania!",
     "The second best randomizer website!",
-    "Patricide Simulator \'97!",
+    "Patricide Simulator '97!",
     "Keep that 'Thang on ya!",
     "We patched it!",
     "Randomizer? I hardly know her!",
@@ -1877,11 +2055,10 @@
     "Bora, bora, bora, bora!",
     "Ay, vamos!",
     "Klasse!",
-    "C\’est genial!",
+    "C'est genial!",
     "Fifty dollar gift card!",
     "eldri7ch checks!",
-    "At least it\'s better than Spellbound!",
-    "There's no \'world record\' for randomizers!",
+    "There's no 'world record' for randomizers!",
     "Rest in Peace, Scott.",
     "Now starting season 28!",
     "Really good, actually!",
@@ -1890,7 +2067,7 @@
     "Barley Teas!",
     "But DerDrach has full-cleared second castle!",
     "2020 Tournament Champion Dr4gonBlitz!",
-    "Spring Tournament 2022 Champion JupiterClimb",
+    "Spring Tournament 2022 Champion JupiterClimb!",
     "Spring Tournament 2023 Champion Dr4gonBlitz!",
     "Spring Tournament 2024 Champion the__swarm!",
     "Spring Tournament 2025 Champion DerDrach!",
@@ -1909,10 +2086,12 @@
     "We have phones!",
     "It just works!",
     "Do the math!",
-    "Definitely real!",
+    "Definitely a real randomizer!",
     "BUFFER DO NOT DELETE!"
   ]
 
+  // Prides splash phrases are considered part of the "Seasonal Phrases" for 
+  // the option to turn them off. 
   const prideSplashPhrases = [
     "Happy Pride!",
     "Trans rights are human rights!",
@@ -1971,6 +2150,12 @@
     "A moose once bit my sister!"
   ]
 
+  // #region Seed Naming
+  // Adjectives and Nouns are used for when the randomizer generates its own 
+  // seed names. This replaced the function where seed names were numbers by 
+  // default. We are aware that certain Adjective and Noun combinations may 
+  // not seed differently than each other. Another part of it is entertainment
+  // value.
   const adjectivesNormal = [
     "Invincible",
     "Burning",
@@ -2767,6 +2952,8 @@
     "Jingly"
   ];
 
+  // #region Web Elements
+  // These are used for identifying seasonal events for the web page.
   const seasonalEvents = [
     {
       "eventName": "Pride Month",
@@ -2779,41 +2966,7 @@
     }
   ]
 
-  let songsList = [
-    "Lost Painting",
-    "Curse Zone",
-    "Requiem For The Gods",
-    "Rainbow Cemetary",
-    "Wood Carving Partita",
-    "Crystal Teardrops",
-    "Marble Gallery",
-    "Draculas Castle",
-    "The Tragic Prince",
-    "Tower of Mist",
-    "Door of Holy Spirits",
-    "Dance of Pales",
-    "Abandoned Pit",
-    "Heavenly Doorway",
-    "Festival of Servants",
-    "Wandering Ghosts",
-    "The Door to the Abyss",
-    "Dance of Gold",
-    "Enchanted Banquet",
-    "Death Ballad",
-    "Final Toccata",
-    "Dance of Illusions",
-    "Blood Relations"
-  ]
-
-  const digest =
-        'ce01203a9df93e001b88ef4c350889c19f11ffba89d20f214bdd8dec0b2d8d7c'
-
-  const BHMODE = {
-    NORMAL: 0,
-    HITMAN: 1,
-    TARGET_CONFIRMED: 3,
-  }
-
+  // #region Exports
   const exports = {
     devBaseUrl: devBaseUrl,
     defaultOptions: defaultOptions,

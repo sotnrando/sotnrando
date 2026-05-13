@@ -382,7 +382,7 @@ new::after{           /* Creates a *New label to mark what is new on the website
 
 /* Menu mode */
 
-body.menu {
+body.blue {
     background: linear-gradient(
         180deg,
         rgba(2,0,36,1) 0%,
@@ -391,36 +391,36 @@ body.menu {
     ) fixed;
 }
 
-.menu {
+.blue {
     color: #fff;
     background: transparent;
 }
 
-.menu a:link {
+.blue a:link {
     color: white;
 }
 
-.menu a:visited {
+.blue a:visited {
     color: white;
 }
 
-.menu .contact {
+.blue .contact {
     filter: invert(1);
 }
 
-.menu select,
-.menu input[type="text"],
-.menu input[type="number"],
-.menu #spoilers {
+.blue select,
+.blue input[type="text"],
+.blue input[type="number"],
+.blue #spoilers {
     color: #fff;
     background: transparent;
 }
 
-.menu select {
+.blue select {
     background: rgb(32,32,75,1);
 }
 
-.menu input[type="submit"] {
+.blue input[type="submit"] {
     font-weight: bold;
     color: #fff;
     background: transparent;
@@ -429,39 +429,39 @@ body.menu {
     padding: 6px;
 }
 
-.menu input[type="submit"]:disabled {
+.blue input[type="submit"]:disabled {
     visibility: hidden;
 }
 
-.menu input[type="submit"]#randomize:enabled {
+.blue input[type="submit"]#randomize:enabled {
     animation: pulse 1s infinite;
 }
 
-.menu #target.animate {
+.blue #target.animate {
     animation: expand-target .5s;
     overflow: hidden;
 }
 
-.menu #target {
+.blue #target {
     border-width: 10px;
     border-style: dashed;
     border-color: #ccc;
 }
 
-.menu #spoilers-container {
+.blue #spoilers-container {
     border: 1px #fff solid;
 }
 
-.menu #target.error {
+.blue #target.error {
     animation: pulse 1s infinite;
 }
 
-.menu #target.animate.hide {
+.blue #target.animate.hide {
     animation: shrink-target .5s;
     animation-fill-mode: forwards;
 }
 
-/* .menu #target > div {
+/* .blue #target > div {
     width: 30em;
     white-space: nowrap;
 } */
@@ -505,7 +505,7 @@ body.menu {
     }
 }
 
-.menu .tooltip-wrapper:hover .tooltip {
+.blue .tooltip-wrapper:hover .tooltip {
     width: 320px;
     opacity: 1;
     pointer-events: auto;
@@ -513,13 +513,13 @@ body.menu {
     overflow: hidden;
 }
 
-.menu .tooltip-wrapper .tooltip > span {
+.blue .tooltip-wrapper .tooltip > span {
     width: 280px;
     padding: 20px;
     display: block;
 }
 
-.menu fieldset {
+.blue fieldset {
     border: 1px #fff solid;
 }
 
@@ -534,24 +534,24 @@ body.menu {
     }
 }
 
-.menu .tooltip-indicator {
+.blue .tooltip-indicator {
     background: #fff;
     color: #999;
 }
 
-.menu .navbar{
+.blue .navbar{
     background-color: rgb(0, 0, 61);
 }
-.menu .menu-list{
-    background-color: rgb(0, 0, 61);
-}
-
-.menu .submenu{
+.blue .menu-list{
     background-color: rgb(0, 0, 61);
 }
 
+.blue .submenu{
+    background-color: rgb(0, 0, 61);
+}
 
-.menu .tooltip-wrapper .tooltip {
+
+.blue .tooltip-wrapper .tooltip {
     background: linear-gradient(
         180deg,
         rgba(2,0,36,1) 0%,
@@ -561,15 +561,15 @@ body.menu {
     border: 1px #fff solid;
 }
 
-.menu input[type="radio"]:disabled {
+.blue input[type="radio"]:disabled {
     opacity: .45;
 }
 
-.menu input[type="radio"]:checked:disabled {
+.blue input[type="radio"]:checked:disabled {
     opacity: 1;
 }
 
-.menu #notification {
+.blue #notification {
     animation: expand 2s;
     overflow: hidden;
     border: 1px #fff solid;
@@ -581,11 +581,11 @@ body.menu {
     ) fixed;
 }
 
-.menu #notification.hide {
+.blue #notification.hide {
     animation: shrink .5s;
 }
 
-.menu #notification span {
+.blue #notification span {
     display: inline-block;
     position: absolute;
     bottom: .3em;
@@ -618,12 +618,12 @@ body.menu {
     }
 }
 
-.menu #spoilers-container.hide {
+.blue #spoilers-container.hide {
     animation: hide-spoilers 1s;
     animation-fill-mode: forwards;
 }
 
-.menu #spoilers-container {
+.blue #spoilers-container {
     animation: show-spoilers 1s;
 }
 
@@ -654,12 +654,12 @@ body.menu {
     }
 }
 
-.menu #options.animate.hide {
+.blue #options.animate.hide {
     animation: hide-options .5s;
     animation-fill-mode: forwards;
 }
 
-.menu #options.animate {
+.blue #options.animate {
     animation: show-options .5s;
 }
 
@@ -1022,149 +1022,4 @@ ul{
 }
 .dark .menu-list {
     background-color: #313131;
-}
-
-/* Navbar Styles */
-
-
-header {
-    padding: 1em;
-}
-.menu-list{
-    display: none;
-    position: absolute;
-    left: 20;
-    width: 30%;
-    margin: 0;
-    border: 2px solid white;
-}
-.navbar {
-  border: 2px solid white;
-
-  ul {
-    padding: 1em;
-    list-style-type: none;
-  }
-
-  a {
-    display: block;
-    padding: 0.25em 1em;
-    text-decoration: none;
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-
-    &.current {
-      border: 2px solid;
-      border-radius: 10px;
-      width: fit-content;
-    }
-  }
-}
-
-.menu-list {
-  li:has(.submenu) {
-    position: relative;
-
-    small {
-      margin-left: 1em;
-
-      &::after {
-        content: "\25b6";
-      }
-    }
-
-    &:hover > .submenu {
-      display: block;
-    }
-  }
-}
-
-.submenu {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    border: 2px solid;
-    border-radius: 10px;
-    color: white;
-    display: none;
-    width: 100%;
-    z-index: 1;
-}
-
-.menu-list li:has(.submenu)  small::after{
-		content: "\25bc";
-}
-.menu-btn {
-    display: block;
-    padding: 1em;
-    color: white;
-}
-.menu-btn::after {
-    content: "\2630";
-}
-#checkbox-toggle{
-    display: none;
-}
-#checkbox-toggle:checked ~ .menu-list{
-    display: block;
-}
-#checkbox-toggle:checked ~ .menu-btn{
-    content: "\2716";
-}
-
-.listbox-container {
-    display: flex;
-    gap: 20px;    
-}
-
-.listbox {
-    width: 200px;
-    height: 200px;
-}
-
-.listbox-button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-}
-
-.listbox-button {
-    padding: 5px 10px;
-    color: #000;
-    font-weight: bolder;
-}
-@media only screen and (min-width: 1184px) {
-  .menu-list {
-    display: flex;
-    justify-content: space-around;
-    position: relative;
-    left: 0;
-    width: 100%;
-  }
-
-  .navbar a.current {
-    width: fit-content;
-  }
-
-  .menu-btn {
-    display: none;
-  }
-
-  #checkbox-toggle:checked ~ .menu-list {
-    display: flex;
-  }
-
-  .menu-list li:has(.submenu) small::after {
-    content: "\25BC"; /* Unicode for downward triangle */
-  }
-
-  .submenu {
-    top: auto;
-    left: 0;
-    width: 160%;
-  }
 }
