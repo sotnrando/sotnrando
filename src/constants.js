@@ -1210,6 +1210,46 @@
     }
   ]
 
+  const reverseTeleporterData = [
+	{
+	  stage: 0x2B,	// Vanilla
+	  room: 0,
+	  xPos: 0,
+	  yPos: 0,
+	  xPosWarp: 0,
+	  yPosWarp: 0,
+	  tsLba: 0,
+	  tileofs: 0,
+	  tileval: 0,
+	  mapaddr: 0,
+	  mapmask: 0
+	}, {
+	  stage: 0x21,		// Stage Number
+	  room: 1,			// Room Number in Stage
+	  xPos: 0x27e,		// X Position Alucard to Trigger Warp
+	  yPos: 0x32A7,		// Y Position
+	  xPosWarp: 0x80,	// X Position for Destination, Reverse Castle flips these around
+	  yPosWarp: 0x80,	// based on room size as these must be set correctly.
+	  tsLba: 0x8B26,	// LBA of the tileset file for the Stage
+	  tileofs: 0x505E786,	// BIN Address of Tile to Change to mark the teleporter pad
+	  tileval: 0x0303,		// the Value to Write, if greater than 0xFFFF it will write two tiles
+	  mapaddr: 0,	// RAM Address of map cell
+	  mapmask: 0	// Bitmask to apply
+	}, {
+	  stage: 0x21,
+	  room: 1,
+	  xPos: 0x27e,
+	  yPos: 0x80,
+	  xPosWarp: 0x27e,
+	  yPosWarp: 0x80,
+	  tsLba: 0x8B26,
+	  tileofs: 0,	// BIN Address of Tile to Change
+	  tileval: 0,
+	  mapaddr: 0,	// RAM Address of map cell
+	  mapmask: 0	// Bitmask to apply
+	}
+  ]
+  
   // #region Start Room Rando
   // This data is provided for the starting room randomizer. Writes are used
   // for writing where Alucard goes. The stage is used for detecting when we
