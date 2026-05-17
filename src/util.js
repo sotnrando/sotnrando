@@ -8085,6 +8085,59 @@
     return data
   }
 
+  // prototyping randomizing reverse castle teleporter by MottZilla
+  function applyReverseCastleTeleporterRandoPatches(rng) {
+    const reverseTeleporterData = constants.reverseTeleporterData
+    const data = new checked()
+	let randTp
+	let offset
+	
+	// debug
+	console.log("applyReverseCastleTeleporterRandoPatches executing")
+	
+    // Select random Tp Location
+    randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
+	
+	// Testing, remove later
+	randTp = 1
+	
+	// If Vanilla then we don't write anything.
+	if(reverseTeleporterData[randTp].stage == 0x2B)
+	{
+		return data
+	}
+
+	// Do writes for updating activation and updating destination
+	data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
+	data.writeShort(0x109294, reverseTeleporterData[randTp].stage)	// stage Dest
+	data.writeShort(0x125C50, 0x10000 - reverseTeleporterData[randTp].xPos)	// Trigger
+	data.writeShort(0x125C84, 0x10000 - reverseTeleporterData[randTp].yPos)	// Trigger
+	offset = 0xAE5B6
+	offset = data.writeShort(offset, reverseTeleporterData[randTp].xPosWarp)	// Dest
+	offset = data.writeShort(offset, reverseTeleporterData[randTp].yPosWarp)	// Dest
+	offset = data.writeShort(offset, reverseTeleporterData[randTp].room * 8)	// Dest
+	
+	data.writeShort(0xB084C,reverseTeleporterData[randTp].tsLba)	// Tileset update
+	
+	// Optional Tile update to mark the location visually
+	if(reverseTeleporterData[randTp].tileofs > 0)
+	{
+		if(reverseTeleporterData[randTp].tileofs > 0xFFFF)
+		{
+			data.writeWord(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
+		}
+		else
+		{
+			data.writeShort(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
+		}
+	}
+	
+	// todo: record the location for the in game map to be used by the rando master function
+	// this will let us reveal it for random 2nd castle start.
+	
+    return data
+  }
+	
   function applyStartRoomRandoPatches(rng, castleFlag) {
     const castleOneRoomData = constants.startRoomData.filter(function(room) {
       return room.stage < 0x20
