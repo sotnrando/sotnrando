@@ -870,7 +870,7 @@
         c = randomize[i++]
       }
       switch (c) {
-      case 'p': { // start preset selection from args/options - eldri7ch
+      case 'p': { // start preset selection from args/options
         // Check for an argument.
         if (negate) {
           throw new Error('Cannot negate preset option')
@@ -894,8 +894,8 @@
           i++
         }
         break
-      } // end preset selection from args/options - eldri7ch
-      case 'd': { // start drops selection from args/options - eldri7ch
+      } // end preset selection from args/options
+      case 'd': { // start drops selection from args/options
         if (negate) {
           options.enemyDrops = false
           break
@@ -1029,8 +1029,8 @@
         }
         options.enemyDrops = enemyDrops
         break
-      } // end drops selection from args/options - eldri7ch
-      case 'e': { // start equipment selection from args/options - eldri7ch
+      } // end drops selection from args/options
+      case 'e': { // start equipment selection from args/options
         if (negate) {
           options.startingEquipment = false
           break
@@ -1177,8 +1177,8 @@
         }
         options.startingEquipment = startingEquipment
         break
-      } // end equipment selection from args/options - eldri7ch
-      case 'i': { // start item location selection from args/options - eldri7ch
+      } // end equipment selection from args/options
+      case 'i': { // start item location selection from args/options
         if (negate) {
           options.itemLocations = false
           break
@@ -1314,9 +1314,9 @@
         }
         options.itemLocations = itemLocations
         break
-      } // end item location selection from args/options - eldri7ch
+      } // end item location selection from args/options
       case 'b': {
-        // start prologue rewards selection from args/options - eldri7ch
+        // start prologue rewards selection from args/options
         if (negate) {
           options.prologueRewards = false
           break
@@ -1397,9 +1397,9 @@
         }
         options.prologueRewards = prologueRewards
         break
-      } // end prologue rewards selection from args/options - eldri7ch
+      } // end prologue rewards selection from args/options
       case 'r': {
-        // start relic locations selection from args/options - eldri7ch
+        // start relic locations selection from args/options
         if (negate) {
           options.relicLocations = false
           break
@@ -1608,32 +1608,32 @@
         }
         options.relicLocations = relicLocations
         break
-      } // end relic locations selection from args/options - eldri7ch
-      case 's': { // start stats selection from args/options - eldri7ch
+      } // end relic locations selection from args/options
+      case 's': { // start stats selection from args/options
         if (negate) {
           options.stats = false
           break
         }
         options.stats = true
         break
-      } // end stats selection from args/options - eldri7ch
-      case 'm': { // start music selection from args/options - eldri7ch
+      } // end stats selection from args/options
+      case 'm': { // start music selection from args/options
         if (negate) {
           options.music = false
           break
         }
         options.music = true
         break
-      } // end music selection from args/options - eldri7ch
-      case 'k': { // start turkey mode selection from args/options - eldri7ch
+      } // end music selection from args/options
+      case 'k': { // start turkey mode selection from args/options
         if (negate) {
           options.turkeyMode = false
           break
         }
         options.turkeyMode = true
         break
-      } // end turkey mode selection from args/options - eldri7ch
-      case 'w': { // start writes selection from args/options - eldri7ch
+      } // end turkey mode selection from args/options
+      case 'w': { // start writes selection from args/options
         if (negate) {
           break
         }
@@ -1768,22 +1768,22 @@
         }
         options.writes = writes
         break
-      } // end writes selection from args/options - eldri7ch
+      } // end writes selection from args/options
       case 't': {
-        // start tournament mode selection from args/options - eldri7ch
+        // start tournament mode selection from args/options
         if (negate) {
           options.tournamentMode = false
           break
         }
         options.tournamentMode = true
         break
-      } // end tournament mode selection from args/options - eldri7ch
+      } // end tournament mode selection from args/options
       default:
-         // kick out the remainder of options - eldri7ch
+         // kick out the remainder of options
         throw new Error('Invalid randomization: ' + c)
       }
     }
-    // error out if all randomization negated - eldri7ch
+    // error out if all randomization negated
     if (!Object.getOwnPropertyNames(options).length) {
       throw new Error('No randomizations')
     }
@@ -1840,86 +1840,86 @@
     let randomize = []
     while (Object.getOwnPropertyNames(options).length) {
       // stunts spoilers, changes seed randomization,
-      // opens statue in clock room and $0 relic in shop - eldri7ch
+      // opens statue in clock room and $0 relic in shop
       if ('tournamentMode' in options) {
         if (options.tournamentMode) {
           randomize.push('t')
         }
         delete options.tournamentMode
       } else  if ('colorrandoMode' in options) {
-        // randomizes cape, grav boots, and hydro storm colors - eldri7ch
+        // randomizes cape, grav boots, and hydro storm colors
         if (options.colorrandoMode) {
           randomize.push('l')
         }
         delete options.colorrandoMode
       } else if ('magicmaxMode' in options) {
-        // replaces Heart Vessel with Magic Vessel - eldri7ch
+        // replaces Heart Vessel with Magic Vessel
         if (options.magicmaxMode) {
           randomize.push('x')
         }
         delete options.magicmaxMode
       } else if ('antiFreezeMode' in options) {
-        // Removes screen freezes from level-up and acquisitions - eldrich
+        // Removes screen freezes from level-up and acquisitions
         if (options.antiFreezeMode) {
           randomize.push('z')
         }
         delete options.antiFreezeMode
       } else if ('mypurseMode' in options) {
-        // Removes Death from entrance - eldri7ch
+        // Removes Death from entrance
         if (options.mypurseMode) {
           randomize.push('y')
         }
         delete options.mypurseMode
       } else if ('iwsMode' in options) {
-        // Allows for infinite wing smash on first input - eldri7ch
+        // Allows for infinite wing smash on first input
         if (options.iwsMode) {
           randomize.push('b')
         }
         delete options.iwsMode
       } else if ('fastwarpMode' in options) {
-        // quickensd the teleporter warp animations - eldri7ch
+        // quickensd the teleporter warp animations
         if (options.fastwarpMode) {
           randomize.push('9')
         }
         delete options.fastwarpMode
       } else if ('noprologueMode' in options) {
-        // Removes prologue - eldri7ch
+        // Removes prologue
         if (options.noprologueMode) {
           randomize.push('R')
         }
         delete options.noprologueMode
       } else if ('unlockedMode' in options) {
-        // Opens shortcuts - eldri7ch
+        // Opens shortcuts
         if (options.unlockedMode) {
           randomize.push('U')
         }
         delete options.unlockedMode
       } else if ('surpriseMode' in options) {
-        // Hides relics behind the same sprite - eldri7ch
+        // Hides relics behind the same sprite
         if (options.surpriseMode) {
           randomize.push('S')
         }
         delete options.surpriseMode
       } else if ('enemyStatRandoMode' in options) {
-        // randomize enemy stats - eldri7ch
+        // randomize enemy stats
         if (options.enemyStatRandoMode) {
           randomize.push('E')
         }
         delete options.enemyStatRandoMode
       } else if ('elemChaosMode' in options) {
-        // elemental chaos - eldri7ch
+        // elemental chaos
         if (options.elemChaosMode) {
           randomize.push('ec')
         }
         delete options.elemChaosMode
       } else if ('shopPriceRandoMode' in options) {
-        // randomize shop prices - eldri7ch
+        // randomize shop prices
         if (options.shopPriceRandoMode) {
           randomize.push('sh')
         }
         delete options.shopPriceRandoMode
       } else if ('startRoomRandoMode' in options) {
-        // randomize starting room - eldri7ch
+        // randomize starting room
         if (options.startRoomRandoMode) {
           randomize.push('ori')
         }
@@ -1931,62 +1931,69 @@
         }
         delete options.startRoomRando2ndMode
       } else if ('dominoMode' in options) {
-        // guaranteed drops - eldri7ch
+        // guaranteed drops
         if (options.dominoMode) {
           randomize.push('gd')
         }
         delete options.dominoMode
       } else if ('rlbcMode' in options) {
-        // reverse library cards - eldri7ch
+        // reverse library cards
         if (options.rlbcMode) {
           randomize.push('rl')
         }
         delete options.rlbcMode
       } else if ('immunityPotionMode' in options) {
-        // immuntiy potions - eldri7ch
+        // immuntiy potions
         if (options.immunityPotionMode) {
           randomize.push('ip')
         }
         delete options.immunityPotionMode
       } else if ('godspeedMode' in options) {
-        // godspeed shoes - eldri7ch
+        // godspeed shoes
         if (options.godspeedMode) {
           randomize.push('gss')
         }
         delete options.godspeedMode
       } else if ('libraryShortcut' in options) {
-        // library shortcut - eldri7ch
+        // library shortcut
         if (options.libraryShortcut) {
           randomize.push('ls')
         }
         delete options.libraryShortcut
       } else if ('singleHitGearMode' in options) {
-        // Single-Hit Gears - eldri7ch
+        // Single-Hit Gears
         if (options.singleHitGearMode) {
           randomize.push('gp')
         }
         delete options.singleHitGearMode
-      } else if ('newGoalsSet' in options) { // Change the goals
+      } else if ('revCastleTeleportRando' in options) {
+        // Reverse Castle Teleporter Randomizer
+        if (options.revCastleTeleportRando) {
+          randomize.push('c2r')
+        }
+        delete options.revCastleTeleportRando
+      } else if ('newGoalsSet' in options) { 
+        // Change the goals
         randomize.push('g:' + options.newGoalsSet)
         delete options.newGoalsSet
       } else if ('startStatRandoMode' in options) {
-        // Starting Stat Randomizer - eldri7ch
+        // Starting Stat Randomizer
         randomize.push('ss:' + options.startStatRandoMode)
         delete options.startStatRandoMode
       } else if ('easyMode' in options) {
-        // simple input - eldri7ch
+        // simple input
         if (options.easyMode) {
           randomize.push('ez')
         }
         delete options.easyMode
       } else if ('devStashMode' in options) {
-        // dev's stash - eldri7ch
+        // dev's stash
         if (options.devStashMode) {
           randomize.push('dev')
         }
         delete options.devStashMode
       } else if ('seasonalPhrasesMode' in options) {
-        // seasonal phrases - eldri7ch
+        // seasonal phrases
         if (options.seasonalPhrasesMode) {
           randomize.push('sp')
         }
@@ -2010,7 +2017,7 @@
         randomize.push('al:' + options.alucardLinerSet)
         delete options.alucardLinerSet
       } else if ('excludesongs' in options) {
-        // Exclude songs - eldri7ch
+        // Exclude songs
         randomize.push('eds:' + options.excludesongs)
         delete options.excludesongs
       } else if ('preset' in options) {
@@ -2330,7 +2337,7 @@
               switch (options.relicLocations.extension) {
               case constants.EXTENSION.EXTENDED:
                 // This is a smaller distribution than Equipment but includes
-                // all Scenic checks + GuardedPlus + some Equipment - eldri7ch
+                // all Scenic checks + GuardedPlus + some Equipment
                 extensions.push(constants.EXTENSION.EXTENDED)
                 extensions.push(constants.EXTENSION.GUARDEDPLUS)
                 extensions.push(constants.EXTENSION.GUARDED) 
@@ -3270,6 +3277,7 @@
     godspeedMode,
     libraryShortcut,
     singleHitGearMode,
+    revCastleTeleportRando,
     newGoalsSet,
     startStatRandoMode,
     // easyMode,
@@ -3325,6 +3333,7 @@
     this.godspeedMode = godspeedMode
     this.libraryShortcut = libraryShortcut
     this.singleHitGearMode = singleHitGearMode
+    this.revCastleTeleportRando = revCastleTeleportRando
     this.newGoalsSet = newGoalsSet
     this.startStatRandoMode = startStatRandoMode
     // this.easyMode = easyMode
@@ -3505,6 +3514,8 @@
     this.libShort = false
     // Single-Hit Gears
     this.singleHitGear = false
+    // Reverse Castle Teleport Randomizer
+    this.revCastleTeleport = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
@@ -3871,6 +3882,9 @@
     }
     if ('singleHitGearMode' in json) {
       builder.singleHitGearMode(json.singleHitGearMode)
+    }
+    if ('revCastleTeleportRando' in json) {
+      builder.revCastleTeleportRando(json.revCastleTeleportRando)
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in json) {
@@ -4250,6 +4264,9 @@
     }
     if ('singleHitGearMode' in preset) {
       this.singleHitGear = preset.singleHitGearMode
+    }
+    if ('revCastleTeleportRando' in preset) {
+      this.revCastleTeleport = preset.revCastleTeleportRando
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
@@ -4964,59 +4981,59 @@
     this.magicmax = enabled
   }
 
-  // remove screen freezes from level up, relic, vessel. - eldri7ch & MottZilla
+  // remove screen freezes from level up, relic, vessel. & MottZilla
   PresetBuilder.prototype.antiFreezeMode = function antiFreezeMode(enabled) {
     this.antifreeze = enabled
   }
 
-  // Prevent Death from stealing equipment - eldri7ch
+  // Prevent Death from stealing equipment
   PresetBuilder.prototype.mypurseMode = function mypurseMode(enabled) {
     this.mypurse = enabled
   }
 
-  // Enable Infinite Wing Smash - eldri7ch
+  // Enable Infinite Wing Smash
   PresetBuilder.prototype.iwsMode = function iwsMode(enabled) {
     this.iws = enabled
   }
 
-  // Enable Faster Warps - eldri7ch
+  // Enable Faster Warps
   PresetBuilder.prototype.fastwarpMode = function fastwarpMode(enabled) {
     this.fastwarp = enabled
   }
 
-  // Enable Prologue Skip - eldri7ch
+  // Enable Prologue Skip
   PresetBuilder.prototype.noprologueMode = function noprologueMode(enabled) {
     this.noprologue = enabled
   }
 
-  // Enable Unlocked - eldri7ch
+  // Enable Unlocked
   PresetBuilder.prototype.unlockedMode = function unlockedMode(enabled) {
     this.unlocked = enabled
   }
 
-  // Enable Surprise - eldri7ch
+  // Enable Surprise
   PresetBuilder.prototype.surpriseMode = function surpriseMode(enabled) {
     this.surprise = enabled
   }
 
-  // Enable Enemy Stat Rando - eldri7ch
+  // Enable Enemy Stat Rando
   PresetBuilder.prototype.enemyStatRandoMode =
     function enemyStatRandoMode(enabled) {
       this.enemyStatRando = enabled
     }
   
-  // Enable Elemental Chaos - eldri7ch
+  // Enable Elemental Chaos
   PresetBuilder.prototype.elemChaosMode = function elemChaosMode(enabled) {
     this.elemChaos = enabled
   }
 
-  // Enable Shop Price Rando - eldri7ch
+  // Enable Shop Price Rando
   PresetBuilder.prototype.shopPriceRandoMode =
     function shopPriceRandoMode(enabled) {
       this.shopPriceRando = enabled
     }
 
-  // Enable Starting Room Rando - eldri7ch
+  // Enable Starting Room Rando
   PresetBuilder.prototype.startRoomRandoMode =
     function startRoomRandoMode(enabled) {
       this.startRoomRando = enabled
@@ -5028,70 +5045,76 @@
       this.startRoomRando2nd = enabled
     }
 
-  // Enable Guaranteed Drops - eldri7ch
+  // Enable Guaranteed Drops
   PresetBuilder.prototype.dominoMode = function dominoMode(enabled) {
     this.domino = enabled
   }
 
-  // Enable Reverse Library Cards - eldri7ch
+  // Enable Reverse Library Cards
   PresetBuilder.prototype.rlbcMode = function rlbcMode(enabled) {
     this.rlbc = enabled
   }
 
-  // Enable Immunity Potions - eldri7ch
+  // Enable Immunity Potions
   PresetBuilder.prototype.immunityPotionMode =
     function immunityPotionMode(enabled) {
       this.immunityPotion = enabled
     }
 
-  // Enable Godspeed Shoes - eldri7ch
+  // Enable Godspeed Shoes
   PresetBuilder.prototype.godspeedMode = function godspeedMode(enabled) {
     this.godspeed = enabled
   }
 
-  // Enable Library Shortcut - eldri7ch
+  // Enable Library Shortcut
   PresetBuilder.prototype.libraryShortcut = function libraryShortcut(enabled) {
     this.libShort = enabled
   }
 
-  // Enable Single-Hit Gears - eldri7ch
+  // Enable Single-Hit Gears
   PresetBuilder.prototype.singleHitGearMode =
     function singleHitGearMode(enabled) {
       this.singleHitGear = enabled
     }
+
+  // Enable Reverse Castle Teleporter Randomization
+  PresetBuilder.prototype.revCastleTeleportRando =
+    function revCastleTeleportRando(enabled) {
+      this.revCastleTeleport = enabled
+    }
   
   // ============================== Preset: Argument ==========================
   
-  // Assign New Goals - eldri7ch
+  // Assign New Goals
   PresetBuilder.prototype.newGoalsSet = function newGoalsSet(nGoals) {
     assert.oneOf(typeof(nGoals), ['boolean', 'string'])
     this.newGoals = nGoals
   }
 
-  // Enable Starting Stat Randomizer - eldri7ch
+  // Enable Starting Stat Randomizer
   PresetBuilder.prototype.startStatRandoMode =
     function startStatRandoMode(ssMax) {
       assert.oneOf(typeof(ssMax), ['boolean', 'number'])
       this.startStatRando = ssMax
     }
 
-  // Enable Simplified Inputs - eldri7ch
+  // Enable Simplified Inputs
   // PresetBuilder.prototype.easyMode = function easyMode(enabled) {
   //   this.easy = enabled
   // }
 
-  // // Enable Dev's Stash - eldri7ch
+  // // Enable Dev's Stash
   // PresetBuilder.prototype.devStashMode = function devStashMode(enabled) {
   //   this.devStash = enabled
   // }
 
-  // // Enable Seasonal Phrases - eldri7ch
+  // // Enable Seasonal Phrases
   // PresetBuilder.prototype.seasonalPhrasesMode =
   //   function seasonalPhrasesMode(enabled) {
   //     this.seasonalPhrases = enabled
   //   }
 
-  // // Enable boss music separation - eldri7ch
+  // // Enable boss music separation
   // PresetBuilder.prototype.bossMusicSeparation =
   //   function bossMusicSeparation(enabled) {
   //     this.bossMusic = enabled
@@ -5437,6 +5460,7 @@
     const godspeed = self.godspeed
     const libShort = self.libShort
     const singleHitGear = self.singleHitGear
+    const revCastleTeleport = self.revCastleTeleport
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
     // const easy = false
@@ -5492,6 +5516,7 @@
       godspeed,
       libShort,
       singleHitGear,
+      revCastleTeleport,
       newGoals,
       startStatRando,
       // easy,
@@ -6041,7 +6066,7 @@
     return data
   }
 
-  // Adds MP Vessel to replace Heart Vessel - eldrich
+  // Adds MP Vessel to replace Heart Vessel
   function applyMagicMaxPatches() {
     const data = new checked()
     // Set Starting Offset
@@ -6209,7 +6234,7 @@
 
   function applyAntiFreezePatches() {
     const data = new checked()
-    // Patch screen freeze value - eldri7ch
+    // Patch screen freeze value
     // Patch from Boss-Rush / MottZilla
     data.writeChar(0x00140a2c, 0x00)
     return data
@@ -6217,7 +6242,7 @@
 
   function applyMyPursePatches() {
     const data = new checked()
-    // Patch Death goes home - eldri7ch
+    // Patch Death goes home
     // Patch from Boss-Rush / MottZilla
     data.writeWord(0x04baea08, 0x18000006)
     return data
@@ -6225,7 +6250,7 @@
 
   function applyiwsPatches() {
     const data = new checked()
-    // Patch wing smash duration - eldri7ch
+    // Patch wing smash duration
     // Patch from Bat-Master / MottZilla
     data.writeChar(0x00134074, 0x00)
     return data
@@ -6233,7 +6258,7 @@
 
   function applyfastwarpPatches() {
     const data = new checked()
-    // Patch warp animation speed - eldri7ch
+    // Patch warp animation speed
     // Patch from Aperture / MottZilla
     data.writeChar(0x0588be90, 0x02)
     data.writeChar(0x05a78fe4, 0x02)
@@ -6243,7 +6268,7 @@
   function applynoprologuePatches() {
     const data = new checked()
     // Patch prologue removal; specifically setting the first room
-    // to enter as NO3 instead of ST0 - eldri7ch
+    // to enter as NO3 instead of ST0
     let offset
 
     // Patch from Chaos-Lite / MottZilla
@@ -6300,8 +6325,8 @@
     const memorySkip = 0x34020001
     //nop instruction follow-up
     const nopValue = 0x00000000
-    // Patch the reverse entrance shortcut - eldri7ch
-    // remove the blocking tiles - eldri7ch
+    // Patch the reverse entrance shortcut
+    // remove the blocking tiles
     let offset = 0x051caaee
     data.writeWord(offset,tileRemove)
     offset += 0x40
@@ -6318,10 +6343,10 @@
     data.writeWord(offset,tileRemove)
     offset += 0x40
     data.writeWord(offset,tileRemove)
-    // move the entity down - eldri7ch
+    // move the entity down
     data.writeShort(0x051b03c2, 0x030e)
     data.writeShort(0x051afb80, 0x030e)
-    // Patch Underground Caverns - Entrance shortcut - eldri7ch
+    // Patch Underground Caverns - Entrance shortcut
     offset = 0x05430050
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
@@ -6334,7 +6359,7 @@
     offset = 0x04ba88ac
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
-    // Patch Marble Gallery - Entrance shortcut - eldri7ch
+    // Patch Marble Gallery - Entrance shortcut
     offset = 0x04ba8bc4
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
@@ -6365,7 +6390,7 @@
     offset = 0x05430e64
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
-    // Patch Warp Room - Entrance shortcut - eldri7ch
+    // Patch Warp Room - Entrance shortcut
     offset = 0x04bab2d4
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
@@ -6384,11 +6409,11 @@
     offset = 0x0543297c
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
-    // Patch Olrox's Quarters - Royal Chapel shortcut - eldri7ch
+    // Patch Olrox's Quarters - Royal Chapel shortcut
     offset = 0x046c082c
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
-    // Patch Colosseum - Royal Chapel shortcut - eldri7ch
+    // Patch Colosseum - Royal Chapel shortcut
     offset = 0x0440100c
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
@@ -6402,8 +6427,8 @@
     const data = new checked()
     //set tile overwrites to remove them
     const spritePal = 0x01020111
-    // Patch the sprites for each relic - eldri7ch; code by MottZilla
-    // start with Soul of Bat - eldri7ch
+    // Patch the sprites for each relic; code by MottZilla
+    // start with Soul of Bat
     let offset = 0x000b5550
     data.writeWord(offset, spritePal)
     offset += 0x10
@@ -7300,7 +7325,7 @@
     const enemyStats = enemies.enemyStats
     const data = new checked()
     // Patch the enemy stats being randomized
-    // enemy offset addr - eldri7ch
+    // enemy offset addr
     let offset
     // the offset converted to hex
     let hexOffset
@@ -8359,7 +8384,7 @@
         data.writeWord(0x45f879a, 0x03430342)
         break
       case 0x06:
-        // Patch Colosseum - Royal Chapel shortcut - eldri7ch
+        // Patch Colosseum - Royal Chapel shortcut
         offset = 0x0440100c
         offset = data.writeWord(offset, 0x34020001)
         offset = data.writeWord(offset, 0x00000000)
@@ -8700,7 +8725,6 @@
 
     return data
   }
-
   
   // prototyping randomizing reverse castle teleporter by MottZilla
   function applyReverseCastleTeleporterRandoPatches(rng) {
@@ -8767,7 +8791,7 @@
     // define address for functions (inside Black Marble Gallery Overlay)
     const funcAddress = 0x04fe4f68
     let offset
-    // Patch new goals - eldri7ch
+    // Patch new goals
     switch (nGoal) {
     case 'b':
       // All Bosses
@@ -10344,28 +10368,28 @@
           if (value === 'random') {
             value = Math.floor(rng() * 0x100)
           } else if (value === 'random1') {
-            // randomizes between 0 and 1 - eldri7ch
+            // randomizes between 0 and 1
             let randomInt
             randomInt = Math.floor(rng() * 1)
             value = '0x0' + randomInt
           } else if (value === 'random3') {
-            // randomizes between 0 and 3 - eldri7ch
+            // randomizes between 0 and 3
             let randomInt
             randomInt = Math.floor(rng() * 3)
             value = '0x0' + randomInt
           } else if (value === 'random10') {
-            // randomizes between 1 and 10 - eldri7ch
+            // randomizes between 1 and 10
             let randomInt
             randomInt = Math.floor(rng() * 9) + 1
             value = numToHex(randomInt)
           } else if (value === 'random99') {
-            // randomizes between 1 and 99 - eldri7ch
+            // randomizes between 1 and 99
             let randomInt
             randomInt = Math.floor(rng() * 98) + 1
             value = numToHex(randomInt)
           } else if (valueCheck.includes('randomHexChar')) {
             // randomizes a shuffled array of digits between two hex values
-            // - eldri7ch
+            //
             // Check if the list has been shuffled already
             if (hexArrayShuffFlag == 0) {
               // establish the characters required for this to be
@@ -10400,7 +10424,7 @@
             value = Math.floor(rng() * 0x10000)
           } else if (value === 'randomRelic') {
             // '2690808163' translates to the address before the
-            // relic hex is added - eldri7ch
+            // relic hex is added
             // let relicHex
             // relicHex = Math.floor(rng() * 29) + 2690808164
             value = relicShuffleArray.pop()
@@ -10773,6 +10797,7 @@
     applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
     applySingleHitGearPatches: applySingleHitGearPatches,
+    applyReverseCastleTeleporterRandoPatches: applyReverseCastleTeleporterRandoPatches,
     applySwordBuffPatches: applySwordBuffPatches,
     applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,

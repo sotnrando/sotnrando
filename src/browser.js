@@ -633,7 +633,7 @@
         "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
         "godspeedMode", "libraryShortcut", "elemChaosMode", "easyMode",
         "devStashMode", "bossMusicSeparation", "singleHitGearMode",
-        "startStatRandoMode"
+        "startStatRandoMode", "revCastleTeleportRando"
       ];
 
       const keysToRemove = ["music", "bossMusicSeparation"];
@@ -694,6 +694,7 @@
       "prologueRewards",
       "relicLocations",
       "relicLocationsSet",
+      "revCastleTeleportRando",
       "rlbcMode",
       "shopPriceRandoMode",
       "showRelicLocations",
@@ -1046,9 +1047,10 @@
       'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
       'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
       'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
-      'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode',
-      'startStatRandoMode', "turkeyMode", "stats", "accessibilityPatches", "enemyDrops",
-      "itemLocations", "newGoals", "prologueRewards", "startingEquipment"
+      'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 
+      'singleHitGearMode', 'revCastleTeleportRando', 'startStatRandoMode', 
+      'turkeyMode', 'stats', 'accessibilityPatches', 'enemyDrops',
+      'itemLocations', 'newGoals', 'prologueRewards', 'startingEquipment'
     ]
 
     const STRUCTURED_KEYS = ["startingEquipment", "enemyDrops", "itemLocations", "prologueRewards"];
@@ -1102,8 +1104,9 @@
       'surpriseMode', 'enemyStatRandoMode', 'shopPriceRandoMode',
       'startRoomRandoMode', 'startRoomRando2ndMode', 'dominoMode', 'rlbcMode',
       'immunityPotionMode', 'godspeedMode', 'libraryShortcut', 'elemChaosMode',
-      'easyMode', 'devStashMode', 'seasonalPhrasesMode',
-      'bossMusicSeparation', 'singleHitGearMode', 'startStatRandoMode', 'tournamentMode'
+      'easyMode', 'devStashMode', 'seasonalPhrasesMode', 'bossMusicSeparation',
+      'singleHitGearMode', 'startStatRandoMode', 'revCastleTeleportRando', 
+      'tournamentMode'
     ]
     clearFields.forEach(key => elems[key].disabled = false)
 

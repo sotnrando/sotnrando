@@ -99,6 +99,7 @@ BrowserConstants.elems = {
     libraryShortcut: document.getElementById('library-shortcut'),
     elemChaosMode: document.getElementById('elem-chaos'),
     singleHitGearMode: document.getElementById('single-hit-gear'),
+    revCastleTeleportRando: document.getElementById('rev-castle-teleport-rando'),
     easyMode: document.getElementById('easy-mode'),
     devStashMode: document.getElementById('dev-stash'),
     statMax: document.getElementById('statMax'),
