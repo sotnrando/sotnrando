@@ -5969,6 +5969,63 @@
 
     return data
   }
+
+  // =========================================================================
+  //  #region Randomizer Enhancements
+  // =========================================================================
+
+  function applySwordBuffPatches() {
+    const data = new checked()
+    let offset
+
+    // console.log('Jewel Sword')
+    // Jewel Sword Patch Hook - code and idea by eldri7ch
+    data.writeWord(0x0010d2a0, 0x08026236)
+
+    // Badelaire Patch - code by eldri7ch and idea by MottZilla
+    data.writeChar(0x10d238, 0x34)
+
+    // Yasutsuna Hitbox Fix by MottZilla
+    // RIGHT HAND
+    // offset = 0x3bfb314
+    // offset = data.writeWord(offset, 0x18000024)
+    // offset = data.writeWord(offset, 0x00000000)
+
+    // offset = 0x3bfb3a8
+    // offset = data.writeWord(offset, 0x3c178007)
+    // offset = data.writeWord(offset, 0x36f733d8)
+    // offset = data.writeWord(offset, 0x00000000)
+    // offset = data.writeWord(offset, 0x8ef60000)
+    // offset = data.writeWord(offset, 0x8ef50004)
+    // offset = data.writeWord(offset, 0x96f40014)
+    // offset = data.writeWord(offset, 0xae360000)
+    // offset = data.writeWord(offset, 0xae350004)
+    // offset = data.writeWord(offset, 0xa6340014)
+    // offset = data.writeWord(offset, 0x8fbf0030)
+    // offset = data.writeWord(offset, 0x8fb7002c)
+    // offset = data.writeWord(offset, 0x1800ffd1)
+
+    //LEFT HAND
+    // offset = 0x3dd57f4
+    // offset = data.writeWord(offset, 0x18000024)
+    // offset = data.writeWord(offset, 0x00000000)
+
+    // offset = 0x3dd5888
+    // offset = data.writeWord(offset, 0x3c178007)
+    // offset = data.writeWord(offset, 0x36f733d8)
+    // offset = data.writeWord(offset, 0x00000000)
+    // offset = data.writeWord(offset, 0x8ef60000)
+    // offset = data.writeWord(offset, 0x8ef50004)
+    // offset = data.writeWord(offset, 0x96f40014)
+    // offset = data.writeWord(offset, 0xae360000)
+    // offset = data.writeWord(offset, 0xae350004)
+    // offset = data.writeWord(offset, 0xa6340014)
+    // offset = data.writeWord(offset, 0x8fbf0030)
+    // offset = data.writeWord(offset, 0x8fb7002c)
+    // offset = data.writeWord(offset, 0x1800ffd1)
+
+    return data
+  }
   
   // =========================================================================
   // region# Preset: Boolean 
@@ -8084,59 +8141,6 @@
 
     return data
   }
-
-  // prototyping randomizing reverse castle teleporter by MottZilla
-  function applyReverseCastleTeleporterRandoPatches(rng) {
-    const reverseTeleporterData = constants.reverseTeleporterData
-    const data = new checked()
-	let randTp
-	let offset
-	
-	// debug
-	console.log("applyReverseCastleTeleporterRandoPatches executing")
-	
-    // Select random Tp Location
-    randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
-	
-	// Testing, remove later
-	randTp = 1
-	
-	// If Vanilla then we don't write anything.
-	if(reverseTeleporterData[randTp].stage == 0x2B)
-	{
-		return data
-	}
-
-	// Do writes for updating activation and updating destination
-	data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
-	data.writeShort(0x109294, reverseTeleporterData[randTp].stage)	// stage Dest
-	data.writeShort(0x125C50, 0x10000 - reverseTeleporterData[randTp].xPos)	// Trigger
-	data.writeShort(0x125C84, 0x10000 - reverseTeleporterData[randTp].yPos)	// Trigger
-	offset = 0xAE5B6
-	offset = data.writeShort(offset, reverseTeleporterData[randTp].xPosWarp)	// Dest
-	offset = data.writeShort(offset, reverseTeleporterData[randTp].yPosWarp)	// Dest
-	offset = data.writeShort(offset, reverseTeleporterData[randTp].room * 8)	// Dest
-	
-	data.writeShort(0xB084C,reverseTeleporterData[randTp].tsLba)	// Tileset update
-	
-	// Optional Tile update to mark the location visually
-	if(reverseTeleporterData[randTp].tileofs > 0)
-	{
-		if(reverseTeleporterData[randTp].tileofs > 0xFFFF)
-		{
-			data.writeWord(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
-		}
-		else
-		{
-			data.writeShort(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
-		}
-	}
-	
-	// todo: record the location for the in game map to be used by the rando master function
-	// this will let us reveal it for random 2nd castle start.
-	
-    return data
-  }
 	
   function applyStartRoomRandoPatches(rng, castleFlag) {
     const castleOneRoomData = constants.startRoomData.filter(function(room) {
@@ -8697,56 +8701,57 @@
     return data
   }
 
-  function applySwordBuffPatches() {
+  
+  // prototyping randomizing reverse castle teleporter by MottZilla
+  function applyReverseCastleTeleporterRandoPatches(rng) {
+    const reverseTeleporterData = constants.reverseTeleporterData
     const data = new checked()
-    let offset
+	let randTp
+	let offset
+	
+	// debug
+	console.log("applyReverseCastleTeleporterRandoPatches executing")
+	
+    // Select random Tp Location
+    randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
+	
+	// Testing, remove later
+	randTp = 1
+	
+	// If Vanilla then we don't write anything.
+	if(reverseTeleporterData[randTp].stage == 0x2B)
+	{
+		return data
+	}
 
-    // console.log('Jewel Sword')
-    // Jewel Sword Patch Hook - code and idea by eldri7ch
-    data.writeWord(0x0010d2a0, 0x08026236)
-
-    // Badelaire Patch - code by eldri7ch and idea by MottZilla
-    data.writeChar(0x10d238, 0x34)
-
-    // Yasutsuna Hitbox Fix by MottZilla
-    // RIGHT HAND
-    // offset = 0x3bfb314
-    // offset = data.writeWord(offset, 0x18000024)
-    // offset = data.writeWord(offset, 0x00000000)
-
-    // offset = 0x3bfb3a8
-    // offset = data.writeWord(offset, 0x3c178007)
-    // offset = data.writeWord(offset, 0x36f733d8)
-    // offset = data.writeWord(offset, 0x00000000)
-    // offset = data.writeWord(offset, 0x8ef60000)
-    // offset = data.writeWord(offset, 0x8ef50004)
-    // offset = data.writeWord(offset, 0x96f40014)
-    // offset = data.writeWord(offset, 0xae360000)
-    // offset = data.writeWord(offset, 0xae350004)
-    // offset = data.writeWord(offset, 0xa6340014)
-    // offset = data.writeWord(offset, 0x8fbf0030)
-    // offset = data.writeWord(offset, 0x8fb7002c)
-    // offset = data.writeWord(offset, 0x1800ffd1)
-
-    //LEFT HAND
-    // offset = 0x3dd57f4
-    // offset = data.writeWord(offset, 0x18000024)
-    // offset = data.writeWord(offset, 0x00000000)
-
-    // offset = 0x3dd5888
-    // offset = data.writeWord(offset, 0x3c178007)
-    // offset = data.writeWord(offset, 0x36f733d8)
-    // offset = data.writeWord(offset, 0x00000000)
-    // offset = data.writeWord(offset, 0x8ef60000)
-    // offset = data.writeWord(offset, 0x8ef50004)
-    // offset = data.writeWord(offset, 0x96f40014)
-    // offset = data.writeWord(offset, 0xae360000)
-    // offset = data.writeWord(offset, 0xae350004)
-    // offset = data.writeWord(offset, 0xa6340014)
-    // offset = data.writeWord(offset, 0x8fbf0030)
-    // offset = data.writeWord(offset, 0x8fb7002c)
-    // offset = data.writeWord(offset, 0x1800ffd1)
-
+	// Do writes for updating activation and updating destination
+	data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
+	data.writeShort(0x109294, reverseTeleporterData[randTp].stage)	// stage Dest
+	data.writeShort(0x125C50, 0x10000 - reverseTeleporterData[randTp].xPos)	// Trigger
+	data.writeShort(0x125C84, 0x10000 - reverseTeleporterData[randTp].yPos)	// Trigger
+	offset = 0xAE5B6
+	offset = data.writeShort(offset, reverseTeleporterData[randTp].xPosWarp)	// Dest
+	offset = data.writeShort(offset, reverseTeleporterData[randTp].yPosWarp)	// Dest
+	offset = data.writeShort(offset, reverseTeleporterData[randTp].room * 8)	// Dest
+	
+	data.writeShort(0xB084C,reverseTeleporterData[randTp].tsLba)	// Tileset update
+	
+	// Optional Tile update to mark the location visually
+	if(reverseTeleporterData[randTp].tileofs > 0)
+	{
+		if(reverseTeleporterData[randTp].tileofs > 0xFFFF)
+		{
+			data.writeWord(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
+		}
+		else
+		{
+			data.writeShort(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
+		}
+	}
+	
+	// todo: record the location for the in game map to be used by the rando master function
+	// this will let us reveal it for random 2nd castle start.
+	
     return data
   }
 
@@ -9851,6 +9856,81 @@
     // I know, it seems redundant, but add an additional termination 0x00
     offset = data.writeChar(offset, 0x00)
     
+    // This space is for making changes based on which splash text appeared.
+    // Sometimes this is to change graphics for tournament winners or other 
+    // special mentions.
+
+    // switch (strId) {
+    //   case 1:
+    //   case 3:
+    //     // Dr4gonBlitz
+    //     // Name the Eggplant Parmesan
+    //     offset = 0x000f32d4
+    //     offset = data.writeWord(offset, 0x50474725)
+    //     offset = data.writeWord(offset, 0x544E414C)
+    //     offset = data.writeWord(offset, 0x52415000)
+    //     data.writeWord(offset, 0x0000FF4D)
+    //     // Desccribe the Eggplan Parmesan
+    //     offset = 0x000f33d4
+    //     offset = data.writeWord(offset, 0x49206E41)
+    //     offset = data.writeWord(offset, 0x696C6174)
+    //     offset = data.writeWord(offset, 0x63206E61)
+    //     offset = data.writeWord(offset, 0x7373616C)
+    //     offset = data.writeWord(offset, 0x81206369)
+    //     offset = data.writeWord(offset, 0x6573756D)
+    //     offset = data.writeWord(offset, 0x00006E81)
+    //     data.writeWord(offset, 0x00000000)
+    //     // Sprite the Eggplan Parmesan
+    //   case 2:
+    //   case 7:
+    //     // JupiterClimb
+    //     // Name the Fried Fish
+        
+    //     // Describe the Fried Fish
+
+    //     // Sprite the Fried Fish
+    //   case 4:
+    //   case 8:
+    //     // the__swarm
+    //     // Name the 
+        
+    //     // Describe the 
+        
+    //     // Sprite the 
+    //   case 5:
+    //   case 9:
+    //     // DerDrach
+    //     // Name the 
+        
+    //     // Describe the 
+        
+    //     // Sprite the 
+    //   case 6:
+    //     // asdheyb
+    //     // Name the 
+        
+    //     // Describe the 
+        
+    //     // Sprite the 
+    //   case 10:
+    //     // Renantrl
+    //     // Name the Acai Palm
+    //     offset = 0x000f33f0
+    //     offset = data.writeWord(offset, 0x49414321)
+    //     offset = data.writeWord(offset, 0x4C415000)
+    //     data.writeWord(offset, 0xFF4D)
+    //     // Desccribe the Acai Palm
+    //     offset = 0x000f32b4
+    //     offset = data.writeWord(offset, 0x68746957)
+    //     offset = data.writeWord(offset, 0x72656220)
+    //     offset = data.writeWord(offset, 0x73656972)
+    //     offset = data.writeWord(offset, 0x646E6120)
+    //     offset = data.writeWord(offset, 0x6E616220)
+    //     offset = data.writeWord(offset, 0x00616E61)
+    //     data.writeWord(offset, 0x00000000)
+    //     // Sprite the Acai Palm
+    // }
+
     return data
   }
 
