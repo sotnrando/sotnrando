@@ -1212,31 +1212,34 @@
 
   const reverseTeleporterData = [
 	{
-	  stage: 0x2B,	// Vanilla
-	  room: 0,
-	  xPos: 0,
-	  yPos: 0,
-	  xPosWarp: 0,
-	  yPosWarp: 0,
-	  tsLba: 0,
-	  tileofs: 0,
-	  tileval: 0,
-	  mapaddr: 0,
-	  mapmask: 0
+	  title: "R. Keep",		// Location Title
+	  stage: 0x2B,			// Stage Id
+	  room: 0,				// Room Number
+	  xPos: 0,				// X Position Alucard to Trigger Warp
+	  yPos: 0,				// Y Position Alucard to Trigger Warp
+	  xPosWarp: 0,			// X Position for Destination, Reverse Castle flips these around
+	  yPosWarp: 0,			// Y Position for Destination, Reverse Castle flips these around
+	  tsLba: 0,				// LBA of the tileset file for the Stage
+	  tileofs: 0,			// BIN Address of Tile to Change to mark the teleporter pad
+	  tileval: 0,			// the Value to Write, if greater than 0xFFFF it will write two tiles
+	  mapaddr: 0,			// RAM Address of map cell
+	  mapmask: 0			// Bitmask to apply
 	}, {
-	  stage: 0x21,			// Outer Wall Bottom
-	  room: 1,				// Room Number in Stage
-	  xPos: 0x27e,			// X Position Alucard to Trigger Warp
-	  yPos: 0x32A7,			// Y Position
-	  xPosWarp: 0x80,		// X Position for Destination, Reverse Castle flips these around
-	  yPosWarp: 0x80,		// based on room size as these must be set correctly.
-	  tsLba: 0x8B26,		// LBA of the tileset file for the Stage
-	  tileofs: 0x505E786,	// BIN Address of Tile to Change to mark the teleporter pad
-	  tileval: 0x006500A3,	// the Value to Write, if greater than 0xFFFF it will write two tiles
-	  mapaddr: 0x8006C294,	// RAM Address of map cell
-	  mapmask: 0x04			// Bitmask to apply
+	  title: "R. Outer Wall Bottom",
+	  stage: 0x21,
+	  room: 1,
+	  xPos: 0x27e,
+	  yPos: 0x32A7,
+	  xPosWarp: 0x80,
+	  yPosWarp: 0x80,
+	  tsLba: 0x8B26,
+	  tileofs: 0x505E786,
+	  tileval: 0x006500A3,
+	  mapaddr: 0x8006C294,
+	  mapmask: 0x04
 	}, {
-	  stage: 0x20,		// Marble Gallery near Olrox Door
+	  title: "R. Marble Gallery Olrox Door",
+	  stage: 0x20,
 	  room: 0xD,
 	  xPos: 0x2080,
 	  yPos: 0x26A7,
@@ -1245,6 +1248,32 @@
 	  tsLba: 0x89C4,
 	  tileofs: 0x4FAAD16,
 	  tileval: 0x042C042C,
+	  mapaddr: 0,
+	  mapmask: 0
+	}, {
+	  title: "R. Catacombs Behind Galamoth",
+	  stage: 0x23,
+	  room: 0x1,
+	  xPos: 0x2E76,
+	  yPos: 0xDBF,
+	  xPosWarp: 0x8A,
+	  yPosWarp: 0x41,
+	  tsLba: 0x8570,
+	  tileofs: 0,
+	  tileval: 0,
+	  mapaddr: 0,
+	  mapmask: 0
+	}, {
+	  title: "R. Mines Near Alucard Sword",
+	  stage: 0x25,
+	  room: 0xB,
+	  xPos: 0x2260,
+	  yPos: 0x13C7,
+	  xPosWarp: 0xA0,
+	  yPosWarp: 0x39,
+	  tsLba: 0x8697,
+	  tileofs: 0x4DB2A2E,
+	  tileval: 0x01350135,
 	  mapaddr: 0,
 	  mapmask: 0
 	}

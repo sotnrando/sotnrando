@@ -8785,6 +8785,10 @@
     // Select random Tp Location
     randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
 	
+	// For forcing a selection for testing
+	// randTp = 3
+	
+	console.log("Selected: " + reverseTeleporterData[randTp].title)
     // If Vanilla then we don't write anything.
     if(reverseTeleporterData[randTp].stage == 0x2B)
     {
