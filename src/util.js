@@ -8806,7 +8806,7 @@
     // Optional Tile update to mark the location visually
     if(reverseTeleporterData[randTp].tileofs > 0)
     {
-      if(reverseTeleporterData[randTp].tileofs > 0xFFFF)
+      if(reverseTeleporterData[randTp].tileval > 0xFFFF)
       {
         data.writeWord(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
       }
