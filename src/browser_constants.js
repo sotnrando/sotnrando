@@ -100,6 +100,8 @@ BrowserConstants.elems = {
     elemChaosMode: document.getElementById('elem-chaos'),
     singleHitGearMode: document.getElementById('single-hit-gear'),
     revCastleTeleportRando: document.getElementById('rev-castle-teleport-rando'),
+    zeroDollarRelicMode: document.getElementById('zero-relic'),
+    openClockStatueMode: document.getElementById('open-statue'),
     easyMode: document.getElementById('easy-mode'),
     devStashMode: document.getElementById('dev-stash'),
     statMax: document.getElementById('statMax'),

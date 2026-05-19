@@ -531,6 +531,20 @@ async function randomize(
       }
       debugMessage(debugEnabled, '| Reverse Castle Teleporter Randomizer | ' + optFlag)
       optFlag = false
+      // Make Relics Free
+      if (options.zeroDollarRelicMode || applied.zeroDollarRelicMode) {
+        optFlag = true
+        check.apply(util.applyZeroDollarRelicPatches())
+      }
+      debugMessage(debugEnabled, '| Zero-Dollar Relic Mode | ' + optFlag)
+      optFlag = false
+      // Open Clock Room Statue
+      if (options.openClockStatueMode || applied.openClockStatueMode) {
+        optFlag = true
+        check.apply(util.applyOpenClockStatuepatches())
+      }
+      debugMessage(debugEnabled, '| Clock Room Statue Open Mode | ' + optFlag)
+      optFlag = false
       // Starting Stat Randomizer
       let ssOpt = 0
       if (options.startStatRandoMode || applied.startStatRandoMode) {

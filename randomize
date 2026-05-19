@@ -676,6 +676,16 @@ const yargs = require('yargs')
     describe: 'Randomizes where the teleporter after Richter takes the player.',
     type: 'boolean',
   })
+  .option('zeroDollarRelic', {
+    alias: 'zr',
+    describe: 'Makes the shop Relic cost 0.00.',
+    type: 'boolean',
+  })
+  .option('openClockStatue', {
+    alias: 'os',
+    describe: 'Opens the statue to Olroxs Quarters.',
+    type: 'boolean',
+  })
   // #region Non-preset boolean .option
   .option('easy', {
     alias: 'ez',
@@ -1223,6 +1233,16 @@ if ('debug' in argv) {console.log('randomize | Set revCastleTeleport')}
 // Enable Reverse Castle Teleporter Randomizer if specified.
 if (argv.revCastleTeleport) {
   options.revCastleTeleportRando = true
+}
+if ('debug' in argv) {console.log('randomize | Set zeroDollarRelic')}
+// Enable zero-dollar relic mode if specified.
+if (argv.zeroDollarRelic) {
+  options.zeroDollarRelicMode = true
+}
+if ('debug' in argv) {console.log('randomize | Set openClockStatue')}
+// Enable open clockroom statue mode if specified.
+if (argv.openClockStatue) {
+  options.openClockStatueMode = true
 }
 // #region Non-preset boolean argv
 if ('debug' in argv) {console.log('randomize | Set easy')}

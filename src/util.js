@@ -1972,6 +1972,18 @@
           randomize.push('c2r')
         }
         delete options.revCastleTeleportRando
+      } else if ('zeroDollarRelicMode' in options) {
+        // Makes the shop Relic cost 0.00
+        if (options.zeroDollarRelicMode) {
+          randomize.push('zr')
+        }
+        delete options.zeroDollarRelicMode
+      } else if ('openClockStatueMode' in options) {
+        // Opens the statue to Olrox's Quarters
+        if (options.openClockStatueMode) {
+          randomize.push('os')
+        }
+        delete options.openClockStatueMode
       } else if ('newGoalsSet' in options) { 
         // Change the goals
         randomize.push('g:' + options.newGoalsSet)
@@ -3278,6 +3290,8 @@
     libraryShortcut,
     singleHitGearMode,
     revCastleTeleportRando,
+    zeroDollarRelicMode,
+    openClockStatueMode,
     newGoalsSet,
     startStatRandoMode,
     // easyMode,
@@ -3334,6 +3348,8 @@
     this.libraryShortcut = libraryShortcut
     this.singleHitGearMode = singleHitGearMode
     this.revCastleTeleportRando = revCastleTeleportRando
+    this.zeroDollarRelicMode = zeroDollarRelicMode
+    this.openClockStatueMode = openClockStatueMode
     this.newGoalsSet = newGoalsSet
     this.startStatRandoMode = startStatRandoMode
     // this.easyMode = easyMode
@@ -3516,6 +3532,10 @@
     this.singleHitGear = false
     // Reverse Castle Teleport Randomizer
     this.revCastleTeleport = false
+    // Zero Dollar Relics in Library
+    this.zeroDollarRelic = false
+    // Opens the Clock Room Statue
+    this.openClockStatue = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
@@ -3885,6 +3905,12 @@
     }
     if ('revCastleTeleportRando' in json) {
       builder.revCastleTeleportRando(json.revCastleTeleportRando)
+    }
+    if ('zeroDollarRelicMode' in json) {
+      builder.zeroDollarRelicMode(json.zeroDollarRelicMode)
+    }
+    if ('openClockStatueMode' in json) {
+      builder.openClockStatueMode(json.openClockStatueMode)
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in json) {
@@ -4267,6 +4293,12 @@
     }
     if ('revCastleTeleportRando' in preset) {
       this.revCastleTeleport = preset.revCastleTeleportRando
+    }
+    if ('zeroDollarRelicMode' in preset) {
+      this.zeroDollarRelic = preset.zeroDollarRelicMode
+    }
+    if ('openClockStatueMode' in preset) {
+      this.openClockStatue = preset.openClockStatueMode
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
@@ -5082,6 +5114,18 @@
     function revCastleTeleportRando(enabled) {
       this.revCastleTeleport = enabled
     }
+
+  // Enable Free Relics in the Library
+  PresetBuilder.prototype.zeroDollarRelicMode =
+    function zeroDollarRelicMode(enabled) {
+      this.zeroDollarRelic = enabled
+    }
+
+  // Enable CLock Roomk Statue Opening
+  PresetBuilder.prototype.openClockStatueMode =
+    function openClockStatueMode(enabled) {
+      this.openClockStatue = enabled
+    }
   
   // ============================== Preset: Argument ==========================
   
@@ -5461,6 +5505,8 @@
     const libShort = self.libShort
     const singleHitGear = self.singleHitGear
     const revCastleTeleport = self.revCastleTeleport
+    const zeroDollarRelic = self.zeroDollarRelic
+    const openClockStatue = self.openClockStatue
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
     // const easy = false
@@ -5517,6 +5563,8 @@
       libShort,
       singleHitGear,
       revCastleTeleport,
+      zeroDollarRelic,
+      openClockStatue,
       newGoals,
       startStatRando,
       // easy,
@@ -6058,11 +6106,9 @@
 
   function applyTournamentModePatches() {
     const data = new checked()
-    // Patch shop relic cost.
-    data.writeWord(0x047a3098, 0x00000000)
-    // Open clock statue.
-    data.writeWord(0x04951d4c, 0x3c020002)
-    data.writeWord(0x04fcf264, 0x3c020002)
+    // Patch No Clip Mode Out.
+    data.writeChar(0x0012655e, 0x00)
+
     return data
   }
 
@@ -8730,52 +8776,69 @@
   function applyReverseCastleTeleporterRandoPatches(rng) {
     const reverseTeleporterData = constants.reverseTeleporterData
     const data = new checked()
-	let randTp
-	let offset
+    let randTp
+    let offset
 	
-	// debug
-	console.log("applyReverseCastleTeleporterRandoPatches executing")
+    // debug
+    console.log("applyReverseCastleTeleporterRandoPatches executing")
 	
     // Select random Tp Location
     randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
 	
-	// Testing, remove later
-	randTp = 1
+    // Testing, remove later
+    randTp = 1
 	
-	// If Vanilla then we don't write anything.
-	if(reverseTeleporterData[randTp].stage == 0x2B)
-	{
-		return data
-	}
+    // If Vanilla then we don't write anything.
+    if(reverseTeleporterData[randTp].stage == 0x2B)
+    {
+		  return data
+	  }
 
-	// Do writes for updating activation and updating destination
-	data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
-	data.writeShort(0x109294, reverseTeleporterData[randTp].stage)	// stage Dest
-	data.writeShort(0x125C50, 0x10000 - reverseTeleporterData[randTp].xPos)	// Trigger
-	data.writeShort(0x125C84, 0x10000 - reverseTeleporterData[randTp].yPos)	// Trigger
-	offset = 0xAE5B6
-	offset = data.writeShort(offset, reverseTeleporterData[randTp].xPosWarp)	// Dest
-	offset = data.writeShort(offset, reverseTeleporterData[randTp].yPosWarp)	// Dest
-	offset = data.writeShort(offset, reverseTeleporterData[randTp].room * 8)	// Dest
+    // Do writes for updating activation and updating destination
+    data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
+    data.writeShort(0x109294, reverseTeleporterData[randTp].stage)	// stage Dest
+    data.writeShort(0x125C50, 0x10000 - reverseTeleporterData[randTp].xPos)	// Trigger
+    data.writeShort(0x125C84, 0x10000 - reverseTeleporterData[randTp].yPos)	// Trigger
+    offset = 0xAE5B6
+    offset = data.writeShort(offset, reverseTeleporterData[randTp].xPosWarp)	// Dest
+    offset = data.writeShort(offset, reverseTeleporterData[randTp].yPosWarp)	// Dest
+    offset = data.writeShort(offset, reverseTeleporterData[randTp].room * 8)	// Dest
+    
+    data.writeShort(0xB084C,reverseTeleporterData[randTp].tsLba)	// Tileset update
+    
+    // Optional Tile update to mark the location visually
+    if(reverseTeleporterData[randTp].tileofs > 0)
+    {
+      if(reverseTeleporterData[randTp].tileofs > 0xFFFF)
+      {
+        data.writeWord(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
+      }
+      else
+      {
+        data.writeShort(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
+      }
+	  }
 	
-	data.writeShort(0xB084C,reverseTeleporterData[randTp].tsLba)	// Tileset update
+    // todo: record the location for the in game map to be used by the rando master function
+    // this will let us reveal it for random 2nd castle start.
 	
-	// Optional Tile update to mark the location visually
-	if(reverseTeleporterData[randTp].tileofs > 0)
-	{
-		if(reverseTeleporterData[randTp].tileofs > 0xFFFF)
-		{
-			data.writeWord(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
-		}
-		else
-		{
-			data.writeShort(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
-		}
-	}
-	
-	// todo: record the location for the in game map to be used by the rando master function
-	// this will let us reveal it for random 2nd castle start.
-	
+    return data
+  }
+
+  function applyZeroDollarRelicPatches() {
+    const data = new checked()
+    // Patch shop relic cost.
+    data.writeWord(0x047a3098, 0x00000000)
+
+    return data
+  }
+
+  function applyOpenClockStatuepatches() {
+    const data = new checked()
+    // Open clock statue.
+    data.writeWord(0x04951d4c, 0x3c020002)
+    data.writeWord(0x04fcf264, 0x3c020002)
+
     return data
   }
 
@@ -10798,6 +10861,8 @@
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
     applySingleHitGearPatches: applySingleHitGearPatches,
     applyReverseCastleTeleporterRandoPatches: applyReverseCastleTeleporterRandoPatches,
+    applyZeroDollarRelicPatches: applyZeroDollarRelicPatches,
+    applyOpenClockStatuepatches: applyOpenClockStatuepatches,
     applySwordBuffPatches: applySwordBuffPatches,
     applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,

@@ -626,14 +626,37 @@
 
       // All toggleable keys
       const allKeys = [
-        "stats", "music", "turkeyMode", "magicmaxMode", "colorrandoMode",
-        "antiFreezeMode", "mypurseMode", "iwsMode", "fastwarpMode",
-        "itemNameRandoMode", "noprologueMode", "unlockedMode", "surpriseMode",
-        "enemyStatRandoMode", "shopPriceRandoMode", "startRoomRandoMode",
-        "startRoomRando2ndMode", "dominoMode", "rlbcMode", "immunityPotionMode",
-        "godspeedMode", "libraryShortcut", "elemChaosMode", "easyMode",
-        "devStashMode", "bossMusicSeparation", "singleHitGearMode",
-        "startStatRandoMode", "revCastleTeleportRando"
+        "stats", 
+        "music", 
+        "turkeyMode", 
+        "magicmaxMode", 
+        "colorrandoMode",
+        "antiFreezeMode", 
+        "mypurseMode", 
+        "iwsMode", 
+        "fastwarpMode",
+        "itemNameRandoMode", 
+        "noprologueMode", 
+        "unlockedMode", 
+        "surpriseMode",
+        "enemyStatRandoMode", 
+        "shopPriceRandoMode", 
+        "startRoomRandoMode",
+        "startRoomRando2ndMode", 
+        "dominoMode", 
+        "rlbcMode", 
+        "immunityPotionMode",
+        "godspeedMode", 
+        "libraryShortcut", 
+        "elemChaosMode", 
+        "singleHitGearMode",
+        "revCastleTeleportRando",
+        "zeroDollarRelicMode",
+        "openClockStatueMode",
+        "easyMode",
+        "devStashMode", 
+        "bossMusicSeparation", 
+        "startStatRandoMode"
       ];
 
       const keysToRemove = ["music", "bossMusicSeparation"];
@@ -691,6 +714,7 @@
       "mypurseMode",
       "newGoals",
       "noprologueMode",
+      "openClockStatueMode",
       "prologueRewards",
       "relicLocations",
       "relicLocationsSet",
@@ -711,7 +735,8 @@
       "surpriseMode",
       "tournamentMode",
       "turkeyMode",
-      "unlockedMode"
+      "unlockedMode",
+      "zeroDollarRelicMode"
     ];
 
     // TE presets end in -sprXXte, -winXXte, etc.
@@ -851,7 +876,9 @@
     const selected = elems.theme.value
     localStorage.setItem('theme', selected)
 
-    body.classList.remove('blue', 'light', 'dark')
+    body.classList.remove('blue', 
+      'light', 
+      'dark')
     body.classList.add(selected)
   }
 
@@ -1041,16 +1068,45 @@
     }
 
     const formOptions = [
-      'tournamentMode', 'colorrandoMode', 'magicmaxMode', 'antiFreezeMode',
-      'mypurseMode', 'iwsMode', 'fastwarpMode', 'itemNameRandoMode',
-      'noprologueMode', 'unlockedMode', 'surpriseMode', 'enemyStatRandoMode',
-      'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
-      'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
-      'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
-      'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 
-      'singleHitGearMode', 'revCastleTeleportRando', 'startStatRandoMode', 
-      'turkeyMode', 'stats', 'accessibilityPatches', 'enemyDrops',
-      'itemLocations', 'newGoals', 'prologueRewards', 'startingEquipment'
+      'tournamentMode', 
+      'colorrandoMode', 
+      'magicmaxMode', 
+      'antiFreezeMode',
+      'mypurseMode', 
+      'iwsMode', 
+      'fastwarpMode', 
+      'itemNameRandoMode',
+      'noprologueMode', 
+      'unlockedMode', 
+      'surpriseMode', 
+      'enemyStatRandoMode',
+      'shopPriceRandoMode', 
+      'startRoomRandoMode', 
+      'startRoomRando2ndMode',
+      'dominoMode', 
+      'rlbcMode', 
+      'immunityPotionMode', 
+      'godspeedMode',
+      'libraryShortcut', 
+      'elemChaosMode', 
+      'easyMode', 
+      'devStashMode',
+      'seasonalPhrasesMode', 
+      'music', 
+      'bossMusicSeparation', 
+      'singleHitGearMode', 
+      'revCastleTeleportRando', 
+      'zeroDollarRelicMode', 
+      'openClockStatueMode', 
+      'startStatRandoMode', 
+      'turkeyMode', 
+      'stats', 
+      'accessibilityPatches', 
+      'enemyDrops',
+      'itemLocations', 
+      'newGoals', 
+      'prologueRewards', 
+      'startingEquipment'
     ]
 
     const STRUCTURED_KEYS = ["startingEquipment", "enemyDrops", "itemLocations", "prologueRewards"];
@@ -1090,22 +1146,56 @@
 
     // Reset values
     const resetFields = [
-      'seed', 'enemyDropsArg', 'startingEquipmentArg', 'itemLocationsArg',
-      'prologueRewardsArg', 'relicLocationsArg', 'writes', 'newGoals'
+      'seed', 
+      'enemyDropsArg', 
+      'startingEquipmentArg', 
+      'itemLocationsArg',
+      'prologueRewardsArg', 
+      'relicLocationsArg', 
+      'writes', 
+      'newGoals'
     ]
     resetFields.forEach(key => elems[key].value = '')
 
     // Enable toggles
     const clearFields = [
-      'seed', 'presetId', 'enemyDrops', 'startingEquipment', 'itemLocations',
-      'prologueRewards', 'relicLocations', 'relicLocationsSet', 'turkeyMode',
-      'magicmaxMode', 'colorrandoMode', 'antiFreezeMode', 'mypurseMode',
-      'iwsMode', 'fastwarpMode', 'noprologueMode', 'unlockedMode',
-      'surpriseMode', 'enemyStatRandoMode', 'shopPriceRandoMode',
-      'startRoomRandoMode', 'startRoomRando2ndMode', 'dominoMode', 'rlbcMode',
-      'immunityPotionMode', 'godspeedMode', 'libraryShortcut', 'elemChaosMode',
-      'easyMode', 'devStashMode', 'seasonalPhrasesMode', 'bossMusicSeparation',
-      'singleHitGearMode', 'startStatRandoMode', 'revCastleTeleportRando', 
+      'seed', 
+      'presetId', 
+      'enemyDrops', 
+      'startingEquipment', 
+      'itemLocations',
+      'prologueRewards', 
+      'relicLocations', 
+      'relicLocationsSet', 
+      'turkeyMode',
+      'magicmaxMode', 
+      'colorrandoMode', 
+      'antiFreezeMode', 
+      'mypurseMode',
+      'iwsMode', 
+      'fastwarpMode', 
+      'noprologueMode', 
+      'unlockedMode',
+      'surpriseMode', 
+      'enemyStatRandoMode', 
+      'shopPriceRandoMode',
+      'startRoomRandoMode', 
+      'startRoomRando2ndMode', 
+      'dominoMode', 
+      'rlbcMode',
+      'immunityPotionMode', 
+      'godspeedMode', 
+      'libraryShortcut', 
+      'elemChaosMode',
+      'revCastleTeleportRando', 
+      'zeroDollarRelicMode', 
+      'openClockStatueMode', 
+      'easyMode', 
+      'devStashMode', 
+      'seasonalPhrasesMode', 
+      'bossMusicSeparation',
+      'singleHitGearMode', 
+      'startStatRandoMode', 
       'tournamentMode'
     ]
     clearFields.forEach(key => elems[key].disabled = false)
