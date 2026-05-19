@@ -1263,6 +1263,19 @@
 	  tileval: 0,
 	  mapaddr: 0,
 	  mapmask: 0
+	}, {
+	  title: "R. Mines Near Alucard Sword",
+	  stage: 0x25,
+	  room: 0xB,
+	  xPos: 0x2260,
+	  yPos: 0x13C7,
+	  xPosWarp: 0xA0,
+	  yPosWarp: 0x39,
+	  tsLba: 0x8697,
+	  tileofs: 0x4DB2A2E,
+	  tileval: 0x01350135,
+	  mapaddr: 0,
+	  mapmask: 0
 	}
   ]
   
