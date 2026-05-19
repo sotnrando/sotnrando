@@ -1224,17 +1224,17 @@
 	  mapaddr: 0,
 	  mapmask: 0
 	}, {
-	  stage: 0x21,		// Outer Wall Bottom
-	  room: 1,			// Room Number in Stage
-	  xPos: 0x27e,		// X Position Alucard to Trigger Warp
-	  yPos: 0x32A7,		// Y Position
-	  xPosWarp: 0x80,	// X Position for Destination, Reverse Castle flips these around
-	  yPosWarp: 0x80,	// based on room size as these must be set correctly.
-	  tsLba: 0x8B26,	// LBA of the tileset file for the Stage
+	  stage: 0x21,			// Outer Wall Bottom
+	  room: 1,				// Room Number in Stage
+	  xPos: 0x27e,			// X Position Alucard to Trigger Warp
+	  yPos: 0x32A7,			// Y Position
+	  xPosWarp: 0x80,		// X Position for Destination, Reverse Castle flips these around
+	  yPosWarp: 0x80,		// based on room size as these must be set correctly.
+	  tsLba: 0x8B26,		// LBA of the tileset file for the Stage
 	  tileofs: 0x505E786,	// BIN Address of Tile to Change to mark the teleporter pad
-	  tileval: 0x006500A3,		// the Value to Write, if greater than 0xFFFF it will write two tiles
-	  mapaddr: 0,	// RAM Address of map cell
-	  mapmask: 0	// Bitmask to apply
+	  tileval: 0x006500A3,	// the Value to Write, if greater than 0xFFFF it will write two tiles
+	  mapaddr: 0x8006C294,	// RAM Address of map cell
+	  mapmask: 0x04			// Bitmask to apply
 	}, {
 	  stage: 0x20,		// Marble Gallery near Olrox Door
 	  room: 0xD,
@@ -1243,10 +1243,10 @@
 	  xPosWarp: 0x80,
 	  yPosWarp: 0x59,
 	  tsLba: 0x89C4,
-	  tileofs: 0x4FAAD16,	// BIN Address of Tile to Change
+	  tileofs: 0x4FAAD16,
 	  tileval: 0x042C042C,
-	  mapaddr: 0,	// RAM Address of map cell
-	  mapmask: 0	// Bitmask to apply
+	  mapaddr: 0,
+	  mapmask: 0
 	}
   ]
   
