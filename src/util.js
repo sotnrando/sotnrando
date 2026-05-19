@@ -8786,7 +8786,7 @@
     randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
 	
 	// For forcing a selection for testing
-	randTp = 4
+	// randTp = 4
 	
 	console.log("Selected: " + reverseTeleporterData[randTp].title)
 	
@@ -8794,7 +8794,7 @@
     if(reverseTeleporterData[randTp].stage == 0x2B)
     {
 		  return data
-	  }
+	}
 
     // Do writes for updating activation and updating destination
     data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
