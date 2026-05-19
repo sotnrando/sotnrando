@@ -3051,6 +3051,7 @@
     faerieScrollForceAddresses: faerieScrollForceAddresses,
     characterMap: characterMap,
     shopItemsData: shopItemsData,
+	reverseTeleporterData: reverseTeleporterData,
     startRoomData: startRoomData,
     splashPhrases: splashPhrases,
     prideSplashPhrases: prideSplashPhrases,
