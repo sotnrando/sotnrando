@@ -527,7 +527,7 @@ async function randomize(
       // Reverse Castle Teleporter Randomizer
       if (options.revCastleTeleportRando || applied.revCastleTeleportRando) {
         optFlag = true
-        check.apply(util.applyReverseCastleTeleporterRandoPatches())
+        check.apply(util.applyReverseCastleTeleporterRandoPatches(rng))
       }
       debugMessage(debugEnabled, '| Reverse Castle Teleporter Randomizer | ' + optFlag)
       optFlag = false
