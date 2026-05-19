@@ -8785,14 +8785,11 @@
     // Select random Tp Location
     randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
 	
-    // Testing, remove later
-    randTp = 1
-	
     // If Vanilla then we don't write anything.
     if(reverseTeleporterData[randTp].stage == 0x2B)
     {
 		  return data
-	  }
+	}
 
     // Do writes for updating activation and updating destination
     data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
@@ -8817,7 +8814,7 @@
       {
         data.writeShort(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
       }
-	  }
+	}
 	
     // todo: record the location for the in game map to be used by the rando master function
     // this will let us reveal it for random 2nd castle start.
