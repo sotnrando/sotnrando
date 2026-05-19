@@ -33,6 +33,8 @@
   "unlockedMode": true,
   "startRoomRando2ndMode": true,
   "rlbcMode": true,
+  "zeroDollarRelicMode": true,
+  "openClockStatueMode": true,
   "newGoalsSet": "x",
 
   "complexityGoal": {
