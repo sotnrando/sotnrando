@@ -1219,7 +1219,6 @@
 	  yPos: 0,				// Y Position Alucard to Trigger Warp
 	  xPosWarp: 0,			// X Position for Destination, Reverse Castle flips these around
 	  yPosWarp: 0,			// Y Position for Destination, Reverse Castle flips these around
-	  tsLba: 0,				// LBA of the tileset file for the Stage
 	  tileofs: 0,			// BIN Address of Tile to Change to mark the teleporter pad
 	  tileval: 0,			// the Value to Write, if greater than 0xFFFF it will write two tiles
 	  mapaddr: 0,			// RAM Address of map cell
@@ -1232,7 +1231,6 @@
 	  yPos: 0x32A7,
 	  xPosWarp: 0x80,
 	  yPosWarp: 0x80,
-	  tsLba: 0x8B26,
 	  tileofs: 0x505E786,
 	  tileval: 0x006500A3,
 	  mapaddr: 0x8006C294,
@@ -1245,7 +1243,6 @@
 	  yPos: 0x26A7,
 	  xPosWarp: 0x80,
 	  yPosWarp: 0x59,
-	  tsLba: 0x89C4,
 	  tileofs: 0x4FAAD16,
 	  tileval: 0x042C042C,
 	  mapaddr: 0,
@@ -1258,7 +1255,6 @@
 	  yPos: 0xDBF,
 	  xPosWarp: 0x8A,
 	  yPosWarp: 0x41,
-	  tsLba: 0x8570,
 	  tileofs: 0,
 	  tileval: 0,
 	  mapaddr: 0,
@@ -1271,7 +1267,6 @@
 	  yPos: 0x13C7,
 	  xPosWarp: 0xA0,
 	  yPosWarp: 0x39,
-	  tsLba: 0x8697,
 	  tileofs: 0x4DB2A2E,
 	  tileval: 0x01350135,
 	  mapaddr: 0,

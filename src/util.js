@@ -8786,9 +8786,10 @@
     randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
 	
 	// For forcing a selection for testing
-	// randTp = 3
+	// randTp = 4
 	
 	console.log("Selected: " + reverseTeleporterData[randTp].title)
+	
     // If Vanilla then we don't write anything.
     if(reverseTeleporterData[randTp].stage == 0x2B)
     {
@@ -8805,8 +8806,8 @@
     offset = data.writeShort(offset, reverseTeleporterData[randTp].yPosWarp)	// Dest
     offset = data.writeShort(offset, reverseTeleporterData[randTp].room * 8)	// Dest
     
-    data.writeShort(0xB084C,reverseTeleporterData[randTp].tsLba)	// Tileset update
-    
+    data.writeShort(0xFAC7C, reverseTeleporterData[randTp].stage)	// StageId for RTOP teleport load
+	
     // Optional Tile update to mark the location visually
     if(reverseTeleporterData[randTp].tileofs > 0)
     {
@@ -8818,7 +8819,7 @@
       {
         data.writeShort(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
       }
-	}
+	  }
 	
     // todo: record the location for the in game map to be used by the rando master function
     // this will let us reveal it for random 2nd castle start.
