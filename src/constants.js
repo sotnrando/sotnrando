@@ -1211,67 +1211,67 @@
   ]
 
   const reverseTeleporterData = [
-    {
-      title: "R. Keep",		// Location Title
-      stage: 0x2B,			// Stage Id
-      room: 0,				// Room Number
-      xPos: 0,				// X Position Alucard to Trigger Warp
-      yPos: 0,				// Y Position Alucard to Trigger Warp
-      xPosWarp: 0,			// X Position for Destination, Reverse Castle flips these around
-      yPosWarp: 0,			// Y Position for Destination, Reverse Castle flips these around
-      tileofs: 0,			// BIN Address of Tile to Change to mark the teleporter pad
-      tileval: 0,			// the Value to Write, if greater than 0xFFFF it will write two tiles
-      mapaddr: 0,			// RAM Address of map cell
-      mapmask: 0			// Bitmask to apply
-    }, {
-      title: "R. Outer Wall Bottom",
-      stage: 0x21,
-      room: 1,
-      xPos: 0x27e,
-      yPos: 0x32A7,
-      xPosWarp: 0x80,
-      yPosWarp: 0x80,
-      tileofs: 0x505E786,
-      tileval: 0x006500A3,
-      mapaddr: 0x8006C294,
-      mapmask: 0x04
-    }, {
-      title: "R. Marble Gallery Olrox Door",
-      stage: 0x20,
-      room: 0xD,
-      xPos: 0x2080,
-      yPos: 0x26A7,
-      xPosWarp: 0x80,
-      yPosWarp: 0x59,
-      tileofs: 0x4FAAD16,
-      tileval: 0x042C042C,
-      mapaddr: 0,
-      mapmask: 0
-    }, {
-      title: "R. Catacombs Behind Galamoth",
-      stage: 0x23,
-      room: 0x1,
-      xPos: 0x2E76,
-      yPos: 0xDBF,
-      xPosWarp: 0x8A,
-      yPosWarp: 0x41,
-      tileofs: 0,
-      tileval: 0,
-      mapaddr: 0,
-      mapmask: 0
-    }, {
-      title: "R. Mines Near Alucard Sword",
-      stage: 0x25,
-      room: 0xB,
-      xPos: 0x2260,
-      yPos: 0x13C7,
-      xPosWarp: 0xA0,
-      yPosWarp: 0x39,
-      tileofs: 0x4DB2A2E,
-      tileval: 0x01350135,
-      mapaddr: 0,
-      mapmask: 0
-    }, {
+	{
+	  title: "R. Keep",		// Location Title
+	  stage: 0x2B,			// Stage Id
+	  room: 0,				// Room Number
+	  xPos: 0,				// X Position Alucard to Trigger Warp
+	  yPos: 0,				// Y Position Alucard to Trigger Warp
+	  xPosWarp: 0,			// X Position for Destination, Reverse Castle flips these around
+	  yPosWarp: 0,			// Y Position for Destination, Reverse Castle flips these around
+	  tileofs: 0,			// BIN Address of Tile to Change to mark the teleporter pad
+	  tileval: 0,			// the Value to Write, if greater than 0xFFFF it will write two tiles
+	  mapaddr: 0,			// RAM Address of map cell
+	  mapmask: 0			// Bitmask to apply
+	}, {
+	  title: "R. Outer Wall Bottom",
+	  stage: 0x21,
+	  room: 1,
+	  xPos: 0x27e,
+	  yPos: 0x32A7,
+	  xPosWarp: 0x80,
+	  yPosWarp: 0x80,
+	  tileofs: 0x505E786,
+	  tileval: 0x006500A3,
+	  mapaddr: 0x8006C294,
+	  mapmask: 0x04
+	}, {
+	  title: "R. Marble Gallery Olrox Door",
+	  stage: 0x20,
+	  room: 0xD,
+	  xPos: 0x2080,
+	  yPos: 0x26A7,
+	  xPosWarp: 0x80,
+	  yPosWarp: 0x59,
+	  tileofs: 0x4FAAD16,
+	  tileval: 0x042C042C,
+	  mapaddr: 0x8006C1DC,
+	  mapmask: 0x40
+	}, {
+	  title: "R. Catacombs Behind Galamoth",
+	  stage: 0x23,
+	  room: 0x1,
+	  xPos: 0x2E76,
+	  yPos: 0xDB7,
+	  xPosWarp: 0x8A,
+	  yPosWarp: 0x49,
+	  tileofs: 0x4D1072A,
+	  tileval: 0x00C9,
+	  mapaddr: 0x8006C04F,
+	  mapmask: 0x04
+	}, {
+	  title: "R. Mines Near Alucard Sword",
+	  stage: 0x25,
+	  room: 0xB,
+	  xPos: 0x2260,
+	  yPos: 0x13C7,
+	  xPosWarp: 0xA0,
+	  yPosWarp: 0x39,
+	  tileofs: 0x4DB2A2E,
+	  tileval: 0x01350135,
+	  mapaddr: 0x8006C0AC,
+	  mapmask: 0x04
+	}, {
       title: "Antichapel Bottom of Stairs",
       stage: 0x26,
       room: 12,
@@ -1318,6 +1318,30 @@
       tileofs: 0x051c9ffe,
       tileval: 0x05e405c7,
       mapaddr: 0x8006c0ff,
+      mapmask: 0x40
+    }, {
+      title: "R. Olrox Gem Room",
+      stage: 0x24,
+      room: 10,
+      xPos: 0x1E80,
+      yPos: 0x2DB7,
+      xPosWarp: 0x80,
+      yPosWarp: 0x49,
+      tileofs: 0x511B052,
+      tileval: 0x000E000D,
+      mapaddr: 0x8006C24B,
+      mapmask: 0x04
+    }, {
+      title: "R. Colosseum Fountain",
+      stage: 0x2A,
+      room: 9,
+      xPos: 0x2C72,
+      yPos: 0x27A7,
+      xPosWarp: 0x8E,
+      yPosWarp: 0x59,
+      tileofs: 0x576A958,
+      tileval: 0x04BE04BF,
+      mapaddr: 0x8006C1EF,
       mapmask: 0x40
     }
   ]
