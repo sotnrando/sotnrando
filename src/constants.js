@@ -1211,67 +1211,115 @@
   ]
 
   const reverseTeleporterData = [
-	{
-	  title: "R. Keep",		// Location Title
-	  stage: 0x2B,			// Stage Id
-	  room: 0,				// Room Number
-	  xPos: 0,				// X Position Alucard to Trigger Warp
-	  yPos: 0,				// Y Position Alucard to Trigger Warp
-	  xPosWarp: 0,			// X Position for Destination, Reverse Castle flips these around
-	  yPosWarp: 0,			// Y Position for Destination, Reverse Castle flips these around
-	  tileofs: 0,			// BIN Address of Tile to Change to mark the teleporter pad
-	  tileval: 0,			// the Value to Write, if greater than 0xFFFF it will write two tiles
-	  mapaddr: 0,			// RAM Address of map cell
-	  mapmask: 0			// Bitmask to apply
-	}, {
-	  title: "R. Outer Wall Bottom",
-	  stage: 0x21,
-	  room: 1,
-	  xPos: 0x27e,
-	  yPos: 0x32A7,
-	  xPosWarp: 0x80,
-	  yPosWarp: 0x80,
-	  tileofs: 0x505E786,
-	  tileval: 0x006500A3,
-	  mapaddr: 0x8006C294,
-	  mapmask: 0x04
-	}, {
-	  title: "R. Marble Gallery Olrox Door",
-	  stage: 0x20,
-	  room: 0xD,
-	  xPos: 0x2080,
-	  yPos: 0x26A7,
-	  xPosWarp: 0x80,
-	  yPosWarp: 0x59,
-	  tileofs: 0x4FAAD16,
-	  tileval: 0x042C042C,
-	  mapaddr: 0,
-	  mapmask: 0
-	}, {
-	  title: "R. Catacombs Behind Galamoth",
-	  stage: 0x23,
-	  room: 0x1,
-	  xPos: 0x2E76,
-	  yPos: 0xDBF,
-	  xPosWarp: 0x8A,
-	  yPosWarp: 0x41,
-	  tileofs: 0,
-	  tileval: 0,
-	  mapaddr: 0,
-	  mapmask: 0
-	}, {
-	  title: "R. Mines Near Alucard Sword",
-	  stage: 0x25,
-	  room: 0xB,
-	  xPos: 0x2260,
-	  yPos: 0x13C7,
-	  xPosWarp: 0xA0,
-	  yPosWarp: 0x39,
-	  tileofs: 0x4DB2A2E,
-	  tileval: 0x01350135,
-	  mapaddr: 0,
-	  mapmask: 0
-	}
+    {
+      title: "R. Keep",		// Location Title
+      stage: 0x2B,			// Stage Id
+      room: 0,				// Room Number
+      xPos: 0,				// X Position Alucard to Trigger Warp
+      yPos: 0,				// Y Position Alucard to Trigger Warp
+      xPosWarp: 0,			// X Position for Destination, Reverse Castle flips these around
+      yPosWarp: 0,			// Y Position for Destination, Reverse Castle flips these around
+      tileofs: 0,			// BIN Address of Tile to Change to mark the teleporter pad
+      tileval: 0,			// the Value to Write, if greater than 0xFFFF it will write two tiles
+      mapaddr: 0,			// RAM Address of map cell
+      mapmask: 0			// Bitmask to apply
+    }, {
+      title: "R. Outer Wall Bottom",
+      stage: 0x21,
+      room: 1,
+      xPos: 0x27e,
+      yPos: 0x32A7,
+      xPosWarp: 0x80,
+      yPosWarp: 0x80,
+      tileofs: 0x505E786,
+      tileval: 0x006500A3,
+      mapaddr: 0x8006C294,
+      mapmask: 0x04
+    }, {
+      title: "R. Marble Gallery Olrox Door",
+      stage: 0x20,
+      room: 0xD,
+      xPos: 0x2080,
+      yPos: 0x26A7,
+      xPosWarp: 0x80,
+      yPosWarp: 0x59,
+      tileofs: 0x4FAAD16,
+      tileval: 0x042C042C,
+      mapaddr: 0,
+      mapmask: 0
+    }, {
+      title: "R. Catacombs Behind Galamoth",
+      stage: 0x23,
+      room: 0x1,
+      xPos: 0x2E76,
+      yPos: 0xDBF,
+      xPosWarp: 0x8A,
+      yPosWarp: 0x41,
+      tileofs: 0,
+      tileval: 0,
+      mapaddr: 0,
+      mapmask: 0
+    }, {
+      title: "R. Mines Near Alucard Sword",
+      stage: 0x25,
+      room: 0xB,
+      xPos: 0x2260,
+      yPos: 0x13C7,
+      xPosWarp: 0xA0,
+      yPosWarp: 0x39,
+      tileofs: 0x4DB2A2E,
+      tileval: 0x01350135,
+      mapaddr: 0,
+      mapmask: 0
+    }, {
+      title: "Antichapel Bottom of Stairs",
+      stage: 0x26,
+      room: 12,
+      xPos: 0x3c80,
+      yPos: 0x2367,
+      xPosWarp: 0x80,
+      yPosWarp: 0x99,
+      tileofs: 0x04e50236,
+      tileval: 0x0336034c,
+      mapaddr: 0x8006c1B3,
+      mapmask: 0x40
+    }, {
+      title: "Reverse Caverns Alucard Shield",
+      stage: 0x29,
+      room: 17,
+      xPos: 0x2980,
+      yPos: 0x1a87,
+      xPosWarp: 0x80,
+      yPosWarp: 0x79,
+      tileofs: 0x05289dda,
+      tileval: 0x03220333,
+      mapaddr: 0x8006c11e,
+      mapmask: 0x10
+    }, {
+      title: "Necromancy Lab ring of Arcana",
+      stage: 0x2c,
+      room: 0,
+      xPos: 0x3280,
+      yPos: 0x24a7,
+      xPosWarp: 0x80,
+      yPosWarp: 0x59,
+      tileofs: 0x05919892,
+      tileval: 0x001e001f,
+      mapaddr: 0x8006c1c0,
+      mapmask: 0x04
+    }, {
+      title: "Reverse Entrance Spare Room 1",
+      stage: 0x27,
+      room: 14,
+      xPos: 0x2c80,
+      yPos: 0x18b7,
+      xPosWarp: 0x80,
+      yPosWarp: 0x49,
+      tileofs: 0x051c9ffe,
+      tileval: 0x05e405c7,
+      mapaddr: 0x8006c0ff,
+      mapmask: 0x40
+    }
   ]
   
   // #region Start Room Rando
