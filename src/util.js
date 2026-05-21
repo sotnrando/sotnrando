@@ -8801,6 +8801,10 @@
 	
 	// For forcing a selection for testing
 	// randTp = 4
+	while(randTp == 0)
+	{
+		randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
+	}
 	
 	console.log("Selected: " + reverseTeleporterData[randTp].title)
 	
