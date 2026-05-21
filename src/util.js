@@ -8821,7 +8821,19 @@
     offset = data.writeShort(offset, reverseTeleporterData[randTp].room * 8)	// Dest
     
     data.writeShort(0xFAC7C, reverseTeleporterData[randTp].stage)	// StageId for RTOP teleport load
-	
+
+	// Adjust RC Teleport in Y-Position
+	if( reverseTeleporterData[randTp].yPosSpecial > 0)
+	{
+		// Special for rooms that are taller than 1 Screen
+		data.writeShort(0x1091CC, reverseTeleporterData[randTp].yPosSpecial)
+	}
+	else
+	{
+		// Standard for 1 Screen tall rooms uses yPos lower 8-bits.
+		data.writeChar(0x1091CC, reverseTeleporterData[randTp].yPos)
+	}
+	  
     // Optional Tile update to mark the location visually
     if(reverseTeleporterData[randTp].tileofs > 0)
     {
