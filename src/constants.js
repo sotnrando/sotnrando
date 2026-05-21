@@ -1343,6 +1343,18 @@
       tileval: 0x04BE04BF,
       mapaddr: 0x8006C1EF,
       mapmask: 0x40
+    }, {
+      title: "R. Clock Tower Main Room",
+      stage: 0x2d,
+      room: 10,
+      xPos: 0x07f0,
+      yPos: 0x3157,
+      xPosWarp: 0x0310,
+      yPosWarp: 0x03a9,
+      tileofs: 0x059d97e8,
+      tileval: 0x005e0065,
+      mapaddr: 0x8006c285,
+      mapmask: 0x01
     }
   ]
   
