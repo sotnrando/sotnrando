@@ -1217,6 +1217,7 @@
 	  room: 0,				// Room Number
 	  xPos: 0,				// X Position Alucard to Trigger Warp
 	  yPos: 0,				// Y Position Alucard to Trigger Warp
+	  yPosSpecial: 0,		// Y Position Fix for Rooms taller than 1 Screen
 	  xPosWarp: 0,			// X Position for Destination, Reverse Castle flips these around
 	  yPosWarp: 0,			// Y Position for Destination, Reverse Castle flips these around
 	  tileofs: 0,			// BIN Address of Tile to Change to mark the teleporter pad
@@ -1229,6 +1230,7 @@
 	  room: 1,
 	  xPos: 0x27e,
 	  yPos: 0x32A7,
+	  yPosSpecial: 0,
 	  xPosWarp: 0x80,
 	  yPosWarp: 0x80,
 	  tileofs: 0x505E786,
@@ -1241,6 +1243,7 @@
 	  room: 0xD,
 	  xPos: 0x2080,
 	  yPos: 0x26A7,
+	  yPosSpecial: 0,
 	  xPosWarp: 0x80,
 	  yPosWarp: 0x59,
 	  tileofs: 0x4FAAD16,
@@ -1253,6 +1256,7 @@
 	  room: 0x1,
 	  xPos: 0x2E76,
 	  yPos: 0xDB7,
+	  yPosSpecial: 0,
 	  xPosWarp: 0x8A,
 	  yPosWarp: 0x49,
 	  tileofs: 0x4D1072A,
@@ -1265,6 +1269,7 @@
 	  room: 0xB,
 	  xPos: 0x2260,
 	  yPos: 0x13C7,
+	  yPosSpecial: 0,
 	  xPosWarp: 0xA0,
 	  yPosWarp: 0x39,
 	  tileofs: 0x4DB2A2E,
@@ -1277,6 +1282,7 @@
       room: 12,
       xPos: 0x3c80,
       yPos: 0x2367,
+	  yPosSpecial: 0,
       xPosWarp: 0x80,
       yPosWarp: 0x99,
       tileofs: 0x04e50236,
@@ -1289,6 +1295,7 @@
       room: 17,
       xPos: 0x2980,
       yPos: 0x1a87,
+	  yPosSpecial: 0,
       xPosWarp: 0x80,
       yPosWarp: 0x79,
       tileofs: 0x05289dda,
@@ -1301,6 +1308,7 @@
       room: 0,
       xPos: 0x3280,
       yPos: 0x24a7,
+	  yPosSpecial: 0,
       xPosWarp: 0x80,
       yPosWarp: 0x59,
       tileofs: 0x05919892,
@@ -1313,6 +1321,7 @@
       room: 14,
       xPos: 0x2c80,
       yPos: 0x18b7,
+	  yPosSpecial: 0,
       xPosWarp: 0x80,
       yPosWarp: 0x49,
       tileofs: 0x051c9ffe,
@@ -1325,6 +1334,7 @@
       room: 10,
       xPos: 0x1E80,
       yPos: 0x2DB7,
+	  yPosSpecial: 0,
       xPosWarp: 0x80,
       yPosWarp: 0x49,
       tileofs: 0x511B052,
@@ -1337,6 +1347,7 @@
       room: 9,
       xPos: 0x2C72,
       yPos: 0x27A7,
+	  yPosSpecial: 0,
       xPosWarp: 0x8E,
       yPosWarp: 0x59,
       tileofs: 0x576A958,
