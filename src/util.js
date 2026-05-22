@@ -5615,9 +5615,6 @@
     const data = new checked()
     let offset
 	
-	let MapCellAddress = 0	// Todo: The MapCell Address and Mask need to be passed to this function
-	let MapCellMask = 0		// or otherwise the ReverseCastleTeleporter Rando needs to give this function those values.
-    
     // console.log('optwrite: ' + optWrite)
 
     offset = 0xf96d8
@@ -5652,14 +5649,18 @@
     offset = data.writeWord(offset, 0x03e00008)
     offset = data.writeWord(offset, 0x00000000)
 
+	// Note: in master source the first two word writes with values 0x69696969 and 0xFEFEFEFE
+	// are the place holders for optWrite and the MapCell values. Don't include them in the big block of writes
+	// as that would offset everything. The optWrite an MapCell writes are handled below.
     // Start the master function with jump tables
     offset = 0x3711a68
 
     // optionWrite is a bit indicator of all options
     // marked for reading later by ASM or tracker
 	offset = data.writeWord(offset,optWrite)
-	offset = data.writeShort(offset,MapCellAddress)
-	offset = data.writeShort(offset,MapCellMask)
+	// Skip 1 word for the MapCellAddress and Mask, so we jump over offset = 0x3711a6c to 0x3711a70
+	offset = 0x3711a70
+
 	offset = data.writeWord(offset,0x0802623a)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x0802626e)
@@ -8801,7 +8802,7 @@
     randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
 	
 	// For forcing a selection for testing
-  // randTp = 14
+	// randTp = 14
 	while(randTp == 0)
 	{
 		randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
@@ -8827,6 +8828,10 @@
     
     data.writeShort(0xFAC7C, reverseTeleporterData[randTp].stage)	// StageId for RTOP teleport load
 
+	// MapCell reveal
+	data.writeShort(0x3711a6c, reverseTeleporterData[randTp].mapaddr)
+	data.writeShort(0x3711a6e, reverseTeleporterData[randTp].mapmask)
+	  
 	// Adjust RC Teleport in Y-Position
 	if( reverseTeleporterData[randTp].yPosSpecial > 0)
 	{
