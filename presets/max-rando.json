@@ -33,6 +33,7 @@
   "startRoomRando2ndMode": true,
   "immunityPotionMode": true,
   "elemChaosMode": true,
+  "revCastleTeleportRando": true,
   "startStatRandoMode": 99,
 
   "complexityGoal": {
