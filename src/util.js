@@ -5662,13 +5662,13 @@
 	offset = data.writeShort(offset,MapCellMask)
 	offset = data.writeWord(offset,0x0802623a)
 	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x0802626d)
+	offset = data.writeWord(offset,0x0802626e)
 	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x080262ff)
+	offset = data.writeWord(offset,0x08026300)
 	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x0802630e)
+	offset = data.writeWord(offset,0x0802630f)
 	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x08026349)
+	offset = data.writeWord(offset,0x0802634a)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x00)
@@ -5684,13 +5684,14 @@
 	offset = data.writeWord(offset,0x14a60004)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x3c058009)
-	offset = data.writeWord(offset,0x34a58e10)
+	offset = data.writeWord(offset,0x34a58e14)
 	offset = data.writeWord(offset,0xac850000)
 	offset = data.writeWord(offset,0x3c048009)
 	offset = data.writeWord(offset,0x348488b4)
 	offset = data.writeWord(offset,0x3c058006)
 	offset = data.writeWord(offset,0x94860000)
 	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x10c00006)
 	offset = data.writeWord(offset,0x0a62821)
 	offset = data.writeWord(offset,0x90a60000)
 	offset = data.writeWord(offset,0x90870002)
@@ -5705,11 +5706,11 @@
 	offset = data.writeWord(offset,0x0c53024)
 	offset = data.writeWord(offset,0x10c00003)
 	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x0c02628c)
+	offset = data.writeWord(offset,0x0c02628d)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x3c048009)
 	offset = data.writeWord(offset,0x348488b0)
-	offset = data.writeWord(offset,0x8c850014)
+	offset = data.writeWord(offset,0x8c850030)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x34a60000)
 	offset = data.writeWord(offset,0x3c078000)
@@ -5757,7 +5758,7 @@
 	offset = data.writeWord(offset,0x27bdffe0)
 	offset = data.writeWord(offset,0xafbf0004)
 	offset = data.writeWord(offset,0x3c068009)
-	offset = data.writeWord(offset,0x34c68a1c)
+	offset = data.writeWord(offset,0x34c68a20)
 	offset = data.writeWord(offset,0x3c078009)
 	offset = data.writeWord(offset,0x8cc40000)
 	offset = data.writeWord(offset,0x34e77490)
@@ -5766,14 +5767,14 @@
 	offset = data.writeWord(offset,0x30a5a000)
 	offset = data.writeWord(offset,0x14a00039)
 	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x0c0262d5)
+	offset = data.writeWord(offset,0x0c0262d6)
 	offset = data.writeWord(offset,0x34040000)
-	offset = data.writeWord(offset,0x080262d0)
+	offset = data.writeWord(offset,0x080262d1)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x94e40004)
 	offset = data.writeWord(offset,0x94e20004)
 	offset = data.writeWord(offset,0x3c068009)
-	offset = data.writeWord(offset,0x34c68a20)
+	offset = data.writeWord(offset,0x34c68a24)
 	offset = data.writeWord(offset,0x30848000)
 	offset = data.writeWord(offset,0x10800005)
 	offset = data.writeWord(offset,0x8cc50000)
@@ -5811,16 +5812,16 @@
 	offset = data.writeWord(offset,0x10a70004)
 	offset = data.writeWord(offset,0x10470003)
 	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x080262d0)
+	offset = data.writeWord(offset,0x080262d1)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0xacc00000)
 	offset = data.writeWord(offset,0xacc00004)
 	offset = data.writeWord(offset,0xacc00008)
 	offset = data.writeWord(offset,0xacc0000c)
 	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x0c0262d5)
+	offset = data.writeWord(offset,0x0c0262d6)
 	offset = data.writeWord(offset,0x34040001)
-	offset = data.writeWord(offset,0x080262d0)
+	offset = data.writeWord(offset,0x080262d1)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x8fbf0004)
 	offset = data.writeWord(offset,0x00)
@@ -5828,7 +5829,7 @@
 	offset = data.writeWord(offset,0x03e00008)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x3c068009)
-	offset = data.writeWord(offset,0x34c68a1c)
+	offset = data.writeWord(offset,0x34c68a20)
 	offset = data.writeWord(offset,0xacc40000)
 	offset = data.writeWord(offset,0x10800008)
 	offset = data.writeWord(offset,0x00)
@@ -5837,7 +5838,7 @@
 	offset = data.writeWord(offset,0x3408c000)
 	offset = data.writeWord(offset,0x3407fffd)
 	offset = data.writeWord(offset,0x34020002)
-	offset = data.writeWord(offset,0x080262e6)
+	offset = data.writeWord(offset,0x080262e7)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x34050001)
 	offset = data.writeWord(offset,0x34048000)
@@ -5967,7 +5968,7 @@
 	offset = data.writeWord(offset,0x06c0001e)
 	offset = data.writeWord(offset,0x26cf0001)
 	offset = data.writeWord(offset,0x3c168009)
-	offset = data.writeWord(offset,0x36d68d18)
+	offset = data.writeWord(offset,0x36d68d1c)
 	offset = data.writeWord(offset,0x02cfb021)
 	offset = data.writeWord(offset,0x92c20000)
 	offset = data.writeWord(offset,0x00)
@@ -5985,7 +5986,7 @@
 	offset = data.writeWord(offset,0x06c0000c)
 	offset = data.writeWord(offset,0x26cf0001)
 	offset = data.writeWord(offset,0x3c168009)
-	offset = data.writeWord(offset,0x36d68d18)
+	offset = data.writeWord(offset,0x36d68d1c)
 	offset = data.writeWord(offset,0x02cfb021)
 	offset = data.writeWord(offset,0x92c20000)
 	offset = data.writeWord(offset,0x00)
@@ -6020,7 +6021,7 @@
 	offset = data.writeWord(offset,0x34050020)
 	offset = data.writeWord(offset,0xa485ffe6)
 	offset = data.writeWord(offset,0x3c048009)
-	offset = data.writeWord(offset,0x34848eb0)
+	offset = data.writeWord(offset,0x34848eb4)
 	offset = data.writeWord(offset,0x40057000)
 	offset = data.writeWord(offset,0x0c004657)
 	offset = data.writeWord(offset,0x40066800)
@@ -6040,7 +6041,7 @@
 	offset = data.writeWord(offset,0x3c020500)
 	offset = data.writeWord(offset,0x0441025)
 	offset = data.writeWord(offset,0xac220000)
-	offset = data.writeWord(offset,0x080263aa)
+	offset = data.writeWord(offset,0x080263ab)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x73617243)
 	offset = data.writeWord(offset,0x450a2168)
@@ -8801,6 +8802,10 @@
 	
 	// For forcing a selection for testing
 	// randTp = 4
+	while(randTp == 0)
+	{
+		randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
+	}
 	
 	console.log("Selected: " + reverseTeleporterData[randTp].title)
 	
@@ -8821,7 +8826,19 @@
     offset = data.writeShort(offset, reverseTeleporterData[randTp].room * 8)	// Dest
     
     data.writeShort(0xFAC7C, reverseTeleporterData[randTp].stage)	// StageId for RTOP teleport load
-	
+
+	// Adjust RC Teleport in Y-Position
+	if( reverseTeleporterData[randTp].yPosSpecial > 0)
+	{
+		// Special for rooms that are taller than 1 Screen
+		data.writeShort(0x1091CC, reverseTeleporterData[randTp].yPosSpecial)
+	}
+	else
+	{
+		// Standard for 1 Screen tall rooms uses yPos lower 8-bits.
+		data.writeChar(0x1091CC, reverseTeleporterData[randTp].yPos)
+	}
+	  
     // Optional Tile update to mark the location visually
     if(reverseTeleporterData[randTp].tileofs > 0)
     {
