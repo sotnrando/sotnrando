@@ -8801,7 +8801,7 @@
     randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
 	
 	// For forcing a selection for testing
-	// randTp = 4
+  // randTp = 14
 	while(randTp == 0)
 	{
 		randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
