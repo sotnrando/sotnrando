@@ -6054,7 +6054,7 @@
 	offset = data.writeWord(offset,0xffffffff)
 
     // Hook Master function into gameplay loop.
-    data.writeWord(0xfaa38, 0x0c02622d)
+    data.writeWord(0xfaa38, 0x0c02622e)
 
     return data
   }
