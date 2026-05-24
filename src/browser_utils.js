@@ -122,6 +122,7 @@ BrowserUtils.getCurrentOptions = function getCurrentOptions() {
         'revCastleTeleportRando', 
         'zeroDollarRelicMode',
         'openClockStatueMode', 
+        'spikeRoomRando', 
         'easyMode', 
         'devStashMode',
         'seasonalPhrasesMode', 

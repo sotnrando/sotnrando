@@ -686,6 +686,11 @@ const yargs = require('yargs')
     describe: 'Opens the statue to Olroxs Quarters.',
     type: 'boolean',
   })
+  .option('spikeRoom', {
+    alias: 'srr',
+    describe: 'Randomizes the Spike Room before Spike Breaker.',
+    type: 'boolean',
+  })
   // #region Non-preset boolean .option
   .option('easy', {
     alias: 'ez',
@@ -1243,6 +1248,11 @@ if ('debug' in argv) {console.log('randomize | Set openClockStatue')}
 // Enable open clockroom statue mode if specified.
 if (argv.openClockStatue) {
   options.openClockStatueMode = true
+}
+if ('debug' in argv) {console.log('randomize | Set spikeRoom')}
+// Enable open clockroom statue mode if specified.
+if (argv.spikeRoom) {
+  options.spikeRoomRando = true
 }
 // #region Non-preset boolean argv
 if ('debug' in argv) {console.log('randomize | Set easy')}

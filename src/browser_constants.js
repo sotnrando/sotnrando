@@ -102,6 +102,7 @@ BrowserConstants.elems = {
     revCastleTeleportRando: document.getElementById('rev-castle-teleport-rando'),
     zeroDollarRelicMode: document.getElementById('zero-relic'),
     openClockStatueMode: document.getElementById('open-statue'),
+    spikeRoomRando: document.getElementById('spike-room'),
     easyMode: document.getElementById('easy-mode'),
     devStashMode: document.getElementById('dev-stash'),
     statMax: document.getElementById('statMax'),

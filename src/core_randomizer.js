@@ -545,6 +545,13 @@ async function randomize(
       }
       debugMessage(debugEnabled, '| Clock Room Statue Open Mode | ' + optFlag)
       optFlag = false
+      // Randomize Spike Room
+      if (options.spikeRoomRando || applied.spikeRoomRando) {
+        optFlag = true
+        check.apply(util.applySpikeRoomRandoPatches(rng))
+      }
+      debugMessage(debugEnabled, '| Spike Room Randomizer | ' + optFlag)
+      optFlag = false
       // Starting Stat Randomizer
       let ssOpt = 0
       if (options.startStatRandoMode || applied.startStatRandoMode) {
