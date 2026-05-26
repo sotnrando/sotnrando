@@ -3545,7 +3545,7 @@
     // Opens the Clock Room Statue
     this.openClockStatue = false
     // Randomize Spike Room
-    this.spikeRoomRando = false
+    this.spikeRoom = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
