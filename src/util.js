@@ -5529,7 +5529,7 @@
     const revCastleTeleport = self.revCastleTeleport
     const zeroDollarRelic = self.zeroDollarRelic
     const openClockStatue = self.openClockStatue
-    const spikeRoomRando = self.spikeRoomRando
+    const spikeRoom = self.spikeRoom
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
     // const easy = false
@@ -5588,7 +5588,7 @@
       revCastleTeleport,
       zeroDollarRelic,
       openClockStatue,
-      spikeRoomRando,
+      spikeRoom,
       newGoals,
       startStatRando,
       // easy,
