@@ -2299,7 +2299,8 @@
     "It just works!",
     "Do the math!",
     "Definitely a real randomizer!",
-    "BUFFER DO NOT DELETE!"
+    "BUFFER DO NOT DELETE!",
+    "Em memoria de Roberto!"
   ]
 
   // Prides splash phrases are considered part of the "Seasonal Phrases" for 
