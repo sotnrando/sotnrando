@@ -90,7 +90,9 @@
     "nimble-lite-spr26te",
     "warlock-spr26te",
     "april-fools",
-    "gourmet-race"
+    "gourmet-race",
+    "collector",
+    "hoarder"
   ],
   "engines": {
     "node": ">=15"

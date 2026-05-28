@@ -1333,5 +1333,42 @@
     "metaExtension": "Scenic",
     "metaComplexity": "7",
     "itemStats": "Normal"
+  },
+  {
+    "name": "Collector",
+    "id": "collector",
+    "description": "Collect 20* Relics to win. Put & symbol at end of file name to do 25 relics. Test build May21st2026",
+    "author": [
+      "MottZilla"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Normal",
+    "moddedLevel": "None",
+    "castleType": "Normal",
+    "transformEarly": "No",
+    "transformFocus": "None",
+    "winCondition": "Normal",
+    "metaExtension": "Guarded",
+    "metaComplexity": "1",
+    "itemStats": "Normal"
+  },
+  {
+    "name": "Hoarder",
+    "id": "hoarder",
+    "description": "A high-complexity preset where duplicate relics appear for the main progression relics and there are eight Vlad relics. Start in second castle with stat-boosting potions. Six vlads open the doors to Dracula. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
+    "author": [
+      "eldri7ch",
+      "MottZilla"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Normal",
+    "moddedLevel": "None",
+    "castleType": "Normal",
+    "transformEarly": "No",
+    "transformFocus": "None",
+    "winCondition": "Six out of Eight Vlads",
+    "metaExtension": "Guarded",
+    "metaComplexity": "6",
+    "itemStats": "Normal"
   }
 ]
