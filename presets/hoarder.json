@@ -2,7 +2,7 @@
   "metadata": {
     "id": "hoarder",
     "name": "Hoarder",
-    "description": "A high-complexity preset where duplicate relics appear for the main progression relics and there are eight Vlad relics. Start in second castle with stat-boosting potions. Six vlads open the doors to Dracula. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
+    "description": "Collector Variant. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
     "author": [
       "eldri7ch",
       "MottZilla"
@@ -10,20 +10,19 @@
     "weight": -2187,
     "knowledgeCheck": "None",
     "metaExtension": "Guarded",
-    "metaComplexity": "6",
+    "metaComplexity": "1",
     "itemStats": "Normal",
     "timeFrame": "Normal",
     "moddedLevel": "None",
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Six out of Eight Vlads"
+    "winCondition": "20 or 25 Relics"
   },
 
   "stats": false,
   "antiFreezeMode": true,
   "fastwarpMode": true,
-  "startRoomRando2ndMode": true,
   "immunityPotionMode": true,
 
   "alias": [{
@@ -61,7 +60,7 @@
   }],
   
   "complexityGoal": {
-    "min": 6,
+    "min": 1,
     "goals": [
       "Holy glasses"
   ]},
@@ -1456,236 +1455,7 @@
     ]
   }],
 
-  "writes":[{
-    "comment": "Jump to injected code",
-    "address": "0x000fa97c",
-    "type": "word",
-    "value": "0x0c04db00"
-  }, {
-    "address": "0x00158c98",
-    "comment": "Save Return Address for rA (func call)",
-    "type": "word",
-    "value": "0x37F70000"
-  },
-
-  {
-    "comment": "give STR. Potion, Lck Potion, ATK potion, Smart Potion, Shield Potion; assign 94h to r9",
-    "type": "word",
-    "value": "0x34090094"
-  },{
-    "comment": "assign 99h to r8",
-    "type": "word",
-    "value": "0x34080099"
-  },{
-    "comment": "assign 0 to r5",
-    "type": "word",
-    "value": "0x34050000"
-  },{
-    "comment": "assign r9 to r4",
-    "type": "word",
-    "value": "0x35240000"
-  },{
-    "comment": "call give item",
-    "type": "word",
-    "value": "0x0C03F61D"
-  },{
-    "comment": "add 1 to r9",
-    "type": "word",
-    "value": "0x25290001"
-  },{
-    "comment": "if r8 <> r9 then jump back to ",
-    "type": "word",
-    "value": "0x1509fffb"
-  },{
-    "type": "word",
-    "value": "0x00000000"
-  },
-  
-  {
-    "comment": "Recall Return Address for rA (func call)",
-    "type": "word",
-    "value": "0x36FF0000"
-  }, {
-    "type": "word",
-    "value": "0x03E00008",
-    "comment": "nop"
-  }, {
-    "type": "word",
-    "value": "0x00000000",
-    "comment": "nop"
-  }, 
-  
-  {
-    "comment": "Six of Eight Vlads Hook",
-    "type": "word",
-    "address": "0x4FCF814",
-    "value": "0x08074fbc"
-  }, {
-    "comment": "Six of Eight Vlads",
-    "type": "word",
-    "address": "0x4FE4F68",
-    "value": "0x27BDFFE0"
-  }, {
-    "type": "word",
-    "value": "0xAFBF0010"
-  }, {
-    "type": "word",
-    "value": "0xAFB00004"
-  }, {
-    "type": "word",
-    "value": "0xAFB10008"
-  }, {
-    "type": "word",
-    "value": "0xAFB2000C"
-  }, {
-    "type": "word",
-    "value": "0x3C108009"
-  }, {
-    "type": "word",
-    "value": "0x36107967"
-  }, {
-    "type": "word",
-    "value": "0x3C118009"
-  }, {
-    "type": "word",
-    "value": "0x3631796F"
-  }, {
-    "type": "word",
-    "value": "0x92120000"
-  }, {
-    "type": "word",
-    "value": "0x34080000"
-  }, {
-    "type": "word",
-    "value": "0x12400002"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x25080001"
-  }, {
-    "type": "word",
-    "value": "0x92320000"
-  }, {
-    "type": "word",
-    "value": "0x3C108009"
-  }, {
-    "type": "word",
-    "value": "0x36107973"
-  }, {
-    "type": "word",
-    "value": "0x3C118009"
-  }, {
-    "type": "word",
-    "value": "0x36317982"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x12400002"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x25080001"
-  }, {
-    "type": "word",
-    "value": "0x92120000"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x3C108009"
-  }, {
-    "type": "word",
-    "value": "0x3610797D"
-  }, {
-    "type": "word",
-    "value": "0x12400002"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x25080001"
-  }, {
-    "type": "word",
-    "value": "0x92120000"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x12400002"
-  }, {
-    "type": "word",
-    "value": "0x26100001"
-  }, {
-    "type": "word",
-    "value": "0x25080001"
-  }, {
-    "type": "word",
-    "value": "0x1611FFFA"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x2508FFFA"
-  }, {
-    "type": "word",
-    "value": "0x05000008"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x8FB00004"
-  }, {
-    "type": "word",
-    "value": "0x8FB10008"
-  }, {
-    "type": "word",
-    "value": "0x8FB2000C"
-  }, {
-    "type": "word",
-    "value": "0x8FBF0010"
-  }, {
-    "type": "word",
-    "value": "0x27BD0020"
-  }, {
-    "type": "word",
-    "value": "0x080704E4"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x8FB00004"
-  }, {
-    "type": "word",
-    "value": "0x8FB10008"
-  }, {
-    "type": "word",
-    "value": "0x8FB2000C"
-  }, {
-    "type": "word",
-    "value": "0x8FBF0010"
-  }, {
-    "type": "word",
-    "value": "0x27BD0020"
-  }, {
-    "type": "word",
-    "value": "0x080705E4"
-  }, {
-    "comment": "End Six of Eight",
-    "type": "word",
-    "value": "0x00000000"
-  }, 
+  "writes":[
   
   {
     "comment": "Soul of Bat Duplicate",

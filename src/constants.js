@@ -2300,7 +2300,8 @@
     "Do the math!",
     "Definitely a real randomizer!",
     "BUFFER DO NOT DELETE!",
-    "Em memoria de Roberto!"
+    "Em memoria de Roberto!",
+    "Try Twisted Metal V!"
   ]
 
   // Prides splash phrases are considered part of the "Seasonal Phrases" for 

@@ -1355,7 +1355,7 @@
   {
     "name": "Hoarder",
     "id": "hoarder",
-    "description": "A high-complexity preset where duplicate relics appear for the main progression relics and there are eight Vlad relics. Start in second castle with stat-boosting potions. Six vlads open the doors to Dracula. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
+    "description": "Collector Variant. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
     "author": [
       "eldri7ch",
       "MottZilla"
@@ -1366,9 +1366,9 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Six out of Eight Vlads",
+    "winCondition": "20 or 25 Relics",
     "metaExtension": "Guarded",
-    "metaComplexity": "6",
+    "metaComplexity": "1",
     "itemStats": "Normal"
   }
 ]
