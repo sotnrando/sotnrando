@@ -2200,6 +2200,7 @@
     "Spring Tournament 2023 Champion Dr4gonBlitz!",
     "Spring Tournament 2024 Champion the__swarm!",
     "Spring Tournament 2025 Champion DerDrach!",
+    "Spring Tournament 2026 Champion ClassicAdvent!",
     "Fall Tournament 2021 Champion asdheyb!",
     "Fall Tournament 2022 Champion JupiterClimb!",
     "Fall Tournament 2023 Champion the__swarm!",
