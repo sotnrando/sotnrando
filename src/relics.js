@@ -65,6 +65,47 @@
     string[relic.name.length + 0] = 0xff
     string[relic.name.length + 1] = 0x00
     data.writeString(shopRelicNameAddress, string)
+  
+  	// Real Time Relic Name Function By: MottZilla
+    // Uses Relic Definitions to show proper relic names for relics with changed names in various presets.
+  	let offset = 0x47BB398
+  	offset = data.writeWord(offset,0x3c048018)
+  	offset = data.writeWord(offset,0x8c8414d4)
+  	offset = data.writeWord(offset,0x3c05800a)
+  	offset = data.writeWord(offset,0x34a58720)
+  	offset = data.writeWord(offset,0x34060010)
+  	offset = data.writeWord(offset,0x0860019)
+  	offset = data.writeWord(offset,0x03012)
+  	offset = data.writeWord(offset,0x0a62821)
+  	offset = data.writeWord(offset,0x3c04801a)
+  	offset = data.writeWord(offset,0x3484d088)
+  	offset = data.writeWord(offset,0x34060000)
+  	offset = data.writeWord(offset,0x3408000e)
+  	offset = data.writeWord(offset,0x8ca50000)
+  	offset = data.writeWord(offset,0x00)
+  	offset = data.writeWord(offset,0x90a70000)
+  	offset = data.writeWord(offset,0x34090020)
+  	offset = data.writeWord(offset,0x14e90002)
+  	offset = data.writeWord(offset,0x00)
+  	offset = data.writeWord(offset,0x24a50001)
+  	offset = data.writeWord(offset,0x90a70000)
+  	offset = data.writeWord(offset,0x24c60001)
+  	offset = data.writeWord(offset,0x10e00006)
+  	offset = data.writeWord(offset,0x24e7ffe0)
+  	offset = data.writeWord(offset,0xa0870000)
+  	offset = data.writeWord(offset,0x24a50001)
+  	offset = data.writeWord(offset,0x24840001)
+  	offset = data.writeWord(offset,0x14c8fff8)
+  	offset = data.writeWord(offset,0x00)
+  	offset = data.writeWord(offset,0x340700ff)
+  	offset = data.writeWord(offset,0xa0870000)
+  	offset = data.writeWord(offset,0xa0800001)
+  	offset = data.writeWord(offset,0x03e00008)
+  	offset = data.writeWord(offset,0x00)
+  	// Hook
+  	offset = 0x47D9A50
+  	offset = data.writeWord(offset,0x0806591C)
+  	offset = data.writeWord(offset,0x0)
   }
 
   function replaceShopRelicWithItem(data, jewelOfOpen, item) {
