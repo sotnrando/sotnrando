@@ -182,7 +182,6 @@ function debugMessage(debugEnabled, msg) {
 }
 
 async function randomize(
-  source,
   options,
   seed,
   newGoals,
@@ -230,9 +229,7 @@ async function randomize(
       }
       debugMessage(debugEnabled, 'Retrieve user-specified options')
       // Get user specified options.
-      if (source === "browser") {
-        applied = options
-      } else if (!override) {
+      if (!override) {
         applied = util.Preset.options(options)
       }
     } catch (err) {

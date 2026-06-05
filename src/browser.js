@@ -1348,7 +1348,6 @@
     const start = new Date().getTime()
     if (elems.output.ppf.checked) {
       CoreRandomizer.randomize(
-        "browser",
         options,
         currSeed,
         elems.newGoals.value,
