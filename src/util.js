@@ -5627,7 +5627,7 @@
 
   function applyTrackingByte() {
     const data = new checked()
-    data.writeChar(0x037135f8,numToHex(trackByteM))
+    data.writeChar(0x37134C4,numToHex(trackByteM))	// RAM Address 0x 09A0AC
     return data
   }
 
