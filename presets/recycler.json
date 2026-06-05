@@ -4170,7 +4170,7 @@
   {
     "comment": "New Vlad Descriptions",
     "type": "word",
-    "address": "0x37135F8",
+    "address": "0x37135F9",
     "value": "0x6F205082"
   }, {
     "type": "word",
@@ -4274,17 +4274,17 @@
     "comment": "New Tongue Description Pointer",
     "type": "word",
     "address": "0xB576C",
-    "value": "0x8009a0b0"
+    "value": "0x8009a0b1"
   }, {
     "comment": "New Ear Description Pointer",
     "type": "word",
     "address": "0xB55FC",
-    "value": "0x8009a0E0"
+    "value": "0x8009a0E1"
   }, {
     "comment": "New Brain Description Pointer",
     "type": "word",
     "address": "0xB557C",
-    "value": "0x8009a110"
+    "value": "0x8009a111"
   }, 
   
   {
