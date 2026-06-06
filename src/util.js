@@ -3428,6 +3428,26 @@
       }
       delete options.preset
       const presetOptions = preset.options()
+      // temp solution for complexity iossues in teh website
+      let relicLocations = presetOptions.relicLocations;
+      let myOverride = false;
+      if(options.relicLocations) {
+        Object.getOwnPropertyNames(options.relicLocations).forEach(function (key) {
+          if (/^[0-9]+(-[0-9]+)?/.test(key)) {
+            myOverride = true;
+            console.log({myOverride})
+          }
+        })
+      }
+      if( myOverride) {
+        Object.getOwnPropertyNames(relicLocations).forEach(function (key) {
+          if (/^[0-9]+(-[0-9]+)?/.test(key)) {
+            goals = relicLocations[key]
+            console.log({key, goals, relicLocations});
+            delete relicLocations[key]
+          }
+        })
+      }
       merge.call(presetOptions, options)
       return presetOptions
     }
