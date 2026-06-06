@@ -552,6 +552,13 @@ async function randomize(
       }
       debugMessage(debugEnabled, '| Spike Room Randomizer | ' + optFlag)
       optFlag = false
+      // Allow Full Wolf Use
+      if (options.lycanMode || applied.lycanMode) {
+        optFlag = true
+        check.apply(util.applyLycanModePatches())
+      }
+      debugMessage(debugEnabled, '| Lycanthrope Mode | ' + optFlag)
+      optFlag = false
       // Starting Stat Randomizer
       let ssOpt = 0
       if (options.startStatRandoMode || applied.startStatRandoMode) {

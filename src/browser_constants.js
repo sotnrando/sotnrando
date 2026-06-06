@@ -103,6 +103,7 @@ BrowserConstants.elems = {
     zeroDollarRelicMode: document.getElementById('zero-relic'),
     openClockStatueMode: document.getElementById('open-statue'),
     spikeRoomRando: document.getElementById('spike-room'),
+    lycanMode: document.getElementById('lycan-mode'),
     easyMode: document.getElementById('easy-mode'),
     devStashMode: document.getElementById('dev-stash'),
     statMax: document.getElementById('statMax'),

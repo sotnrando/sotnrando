@@ -691,6 +691,11 @@ const yargs = require('yargs')
     describe: 'Randomizes the Spike Room before Spike Breaker.',
     type: 'boolean',
   })
+  .option('lycan', {
+    alias: 'ly',
+    describe: 'Allows the player to use full wolf at reduced cost.',
+    type: 'boolean',
+  })
   // #region Non-preset boolean .option
   .option('easy', {
     alias: 'ez',
@@ -1253,6 +1258,11 @@ if ('debug' in argv) {console.log('randomize | Set spikeRoom')}
 // Enable open clockroom statue mode if specified.
 if (argv.spikeRoom) {
   options.spikeRoomRando = true
+}
+if ('debug' in argv) {console.log('randomize | Set lycan')}
+// Enable open clockroom statue mode if specified.
+if (argv.lycan) {
+  options.lycanMode = true
 }
 // #region Non-preset boolean argv
 if ('debug' in argv) {console.log('randomize | Set easy')}

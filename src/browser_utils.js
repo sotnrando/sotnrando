@@ -123,6 +123,7 @@ BrowserUtils.getCurrentOptions = function getCurrentOptions() {
         'zeroDollarRelicMode',
         'openClockStatueMode', 
         'spikeRoomRando', 
+        'lycanMode',
         'easyMode', 
         'devStashMode',
         'seasonalPhrasesMode', 

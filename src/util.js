@@ -1990,6 +1990,12 @@
           randomize.push('srr')
         }
         delete options.spikeRoomRando
+      } else if ('lycanMode' in options) {
+        // Allow Full Wolf Use
+        if (options.lycanMode) {
+          randomize.push('ly')
+        }
+        delete options.lycanMode
       } else if ('newGoalsSet' in options) { 
         // Change the goals
         randomize.push('g:' + options.newGoalsSet)
@@ -3299,6 +3305,7 @@
     zeroDollarRelicMode,
     openClockStatueMode,
     spikeRoomRando,
+    lycanMode,
     newGoalsSet,
     startStatRandoMode,
     // easyMode,
@@ -3358,6 +3365,7 @@
     this.zeroDollarRelicMode = zeroDollarRelicMode
     this.openClockStatueMode = openClockStatueMode
     this.spikeRoomRando = spikeRoomRando
+    this.lycanMode = lycanMode
     this.newGoalsSet = newGoalsSet
     this.startStatRandoMode = startStatRandoMode
     // this.easyMode = easyMode
@@ -3566,6 +3574,8 @@
     this.openClockStatue = false
     // Randomize Spike Room
     this.spikeRoom = false
+    // Allow Full Wolf Use
+    this.lycan = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
@@ -3944,6 +3954,9 @@
     }
     if ('spikeRoomRando' in json) {
       builder.spikeRoomRando(json.spikeRoomRando)
+    }
+    if ('lycanMode' in json) {
+      builder.lycanMode(json.lycanMode)
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in json) {
@@ -4335,6 +4348,9 @@
     }
     if ('spikeRoomRando' in preset) {
       this.spikeRoom = preset.spikeRoomRando
+    }
+    if ('lycanMode' in preset) {
+      this.lycan = preset.lycanMode
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
@@ -5169,6 +5185,12 @@
       this.spikeRoom = enabled
     }
   
+  // Enable Lycanthrope Mode
+  PresetBuilder.prototype.lycanMode =
+    function lycanMode(enabled) {
+      this.lycan = enabled
+    }
+  
   // ============================== Preset: Argument ==========================
   
   // Assign New Goals
@@ -5550,6 +5572,7 @@
     const zeroDollarRelic = self.zeroDollarRelic
     const openClockStatue = self.openClockStatue
     const spikeRoom = self.spikeRoom
+    const lycan = self.lycan
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
     // const easy = false
@@ -5609,6 +5632,7 @@
       zeroDollarRelic,
       openClockStatue,
       spikeRoom,
+      lycan,
       newGoals,
       startStatRando,
       // easy,
@@ -9901,6 +9925,30 @@
     
     return data
   }
+  
+  function applyLycanModePatches() {
+    const data = new checked()
+    // Enable all wolf relics to be used without the relics.
+    // Soul of Wolf
+    data.writeWord(0x00118b78, 0x0803fbfc)
+    // Power of Wolf (R then L)
+    data.writeWord(0x0014e0d4, 0x0804b5bb)
+    data.writeWord(0x0014e12c, 0x0804b5d1)
+    // Skill of Wolf charge
+    data.writeWord(0x0014d53c, 0x00000000)
+    // Skill of Wolf under water check
+    data.writeWord(0x0014d2c0, 0x00000000)
+    // Skill of Wolf swim
+    data.writeWord(0x0014fb30, 0x00000000)
+
+    // Lower MP cost for Wolf
+    // Stay in Wolf form for free.
+    data.writeShort(0x00118cc8, 0x0000)
+    // Reduce MP consumption for hitting enemies mid-run.
+    data.writeChar(0x000b53b0, 0x01)
+
+    return data
+  }
 
   // =========================================================================
   //  #region Preset: Argument 
@@ -11924,6 +11972,7 @@
     applyZeroDollarRelicPatches: applyZeroDollarRelicPatches,
     applyOpenClockStatuepatches: applyOpenClockStatuepatches,
     applySpikeRoomRandoPatches: applySpikeRoomRandoPatches,
+    applyLycanModePatches: applyLycanModePatches,
     applySwordBuffPatches: applySwordBuffPatches,
     applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,
