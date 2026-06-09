@@ -138,7 +138,6 @@
     // --- Buttons ---
     elems.clear.addEventListener("click", clearHandler);
     elems.copy.addEventListener("click", copyHandler);
-    elems.showOlder.addEventListener("click", showOlderHandler);
 
     // --- Theme + map color + goals ---
     elems.theme.addEventListener("change", themeChange);
@@ -1232,11 +1231,6 @@
       elems.notification.classList.remove('success')
       animationDone = true
     }, 4000)
-  }
-
-  function showOlderHandler(event) {
-    elems.showOlder.classList.add('hidden')
-    elems.older.classList.remove('hidden')
   }
 
   function showExcludeMenu() {

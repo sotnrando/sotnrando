@@ -122,7 +122,6 @@ BrowserConstants.elems = {
     copy: document.getElementById('copy'),
     notification: document.getElementById('notification'),
     seedUrl: document.getElementById('seed-url'),
-    showOlder: document.getElementById('show-older'),
     older: document.getElementById('older'),
     esMoveToLeft: document.getElementById('esMoveToLeft'),
     esMoveToRight: document.getElementById('esMoveToRight'),
