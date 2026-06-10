@@ -598,6 +598,7 @@ async function randomize(
       if (options.devStashMode || applied.devStashMode) {
         optFlag = true
         check.apply(util.applyDevsStashPatches())
+        check.apply(util.applyListOfNames())
       }
       debugMessage(debugEnabled, '| Dev\'s Stash | ' + optFlag)
       optFlag = false
