@@ -49,7 +49,8 @@ function loadNavbar() {
         <ul class="submenu">
             <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
             <li><a href="https://github.com/sotnrando/SotnRandoTools/releases">Rando Tools</a></li>
-            <li><a href="/mapcompare.html">Map Tool</a></li>
+            <li><a href="/mapcompare.html">200.6% Map Tool</a></li>
+            <li><a href="https://wec-codes.forumotion.com/h8-sotn-map">Relic Map</a></li>
         </ul>
         </li>
     </ul>
