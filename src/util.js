@@ -6144,42 +6144,42 @@
 
     // Yasutsuna Hitbox Fix by MottZilla
     // RIGHT HAND
-    // offset = 0x3bfb314
-    // offset = data.writeWord(offset, 0x18000024)
-    // offset = data.writeWord(offset, 0x00000000)
+    offset = 0x3bfb314
+    offset = data.writeWord(offset, 0x18000024)
+    offset = data.writeWord(offset, 0x00000000)
 
-    // offset = 0x3bfb3a8
-    // offset = data.writeWord(offset, 0x3c178007)
-    // offset = data.writeWord(offset, 0x36f733d8)
-    // offset = data.writeWord(offset, 0x00000000)
-    // offset = data.writeWord(offset, 0x8ef60000)
-    // offset = data.writeWord(offset, 0x8ef50004)
-    // offset = data.writeWord(offset, 0x96f40014)
-    // offset = data.writeWord(offset, 0xae360000)
-    // offset = data.writeWord(offset, 0xae350004)
-    // offset = data.writeWord(offset, 0xa6340014)
-    // offset = data.writeWord(offset, 0x8fbf0030)
-    // offset = data.writeWord(offset, 0x8fb7002c)
-    // offset = data.writeWord(offset, 0x1800ffd1)
+    offset = 0x3bfb3a8
+    offset = data.writeWord(offset, 0x3c178007)
+    offset = data.writeWord(offset, 0x36f733d8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8ef60000)
+    offset = data.writeWord(offset, 0x8ef50004)
+    offset = data.writeWord(offset, 0x96f40014)
+    offset = data.writeWord(offset, 0xae360000)
+    offset = data.writeWord(offset, 0xae350004)
+    offset = data.writeWord(offset, 0xa6340014)
+    offset = data.writeWord(offset, 0x8fbf0030)
+    offset = data.writeWord(offset, 0x8fb7002c)
+    offset = data.writeWord(offset, 0x1800ffd1)
 
-    //LEFT HAND
-    // offset = 0x3dd57f4
-    // offset = data.writeWord(offset, 0x18000024)
-    // offset = data.writeWord(offset, 0x00000000)
+    // LEFT HAND
+    offset = 0x3dd57f4
+    offset = data.writeWord(offset, 0x18000024)
+    offset = data.writeWord(offset, 0x00000000)
 
-    // offset = 0x3dd5888
-    // offset = data.writeWord(offset, 0x3c178007)
-    // offset = data.writeWord(offset, 0x36f733d8)
-    // offset = data.writeWord(offset, 0x00000000)
-    // offset = data.writeWord(offset, 0x8ef60000)
-    // offset = data.writeWord(offset, 0x8ef50004)
-    // offset = data.writeWord(offset, 0x96f40014)
-    // offset = data.writeWord(offset, 0xae360000)
-    // offset = data.writeWord(offset, 0xae350004)
-    // offset = data.writeWord(offset, 0xa6340014)
-    // offset = data.writeWord(offset, 0x8fbf0030)
-    // offset = data.writeWord(offset, 0x8fb7002c)
-    // offset = data.writeWord(offset, 0x1800ffd1)
+    offset = 0x3dd5888
+    offset = data.writeWord(offset, 0x3c178007)
+    offset = data.writeWord(offset, 0x36f733d8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8ef60000)
+    offset = data.writeWord(offset, 0x8ef50004)
+    offset = data.writeWord(offset, 0x96f40014)
+    offset = data.writeWord(offset, 0xae360000)
+    offset = data.writeWord(offset, 0xae350004)
+    offset = data.writeWord(offset, 0xa6340014)
+    offset = data.writeWord(offset, 0x8fbf0030)
+    offset = data.writeWord(offset, 0x8fb7002c)
+    offset = data.writeWord(offset, 0x1800ffd1)
 
     return data
   }
@@ -10898,46 +10898,7 @@
     // Entrance Trap Door Entity Slot Fix by MottZilla
     data.writeChar(0x53f8eb8, 0x12)
     data.writeChar(0x53f97a6, 0x12)
-
-    // Yasutsuna Hitbox Fix by MottZilla
-    // RIGHT HAND
-    offset = 0x3bfb314
-    offset = data.writeWord(offset, 0x18000024)
-    offset = data.writeWord(offset, 0x00000000)
-
-    offset = 0x3bfb3a8
-    offset = data.writeWord(offset, 0x3c178007)
-    offset = data.writeWord(offset, 0x36f733d8)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x8ef60000)
-    offset = data.writeWord(offset, 0x8ef50004)
-    offset = data.writeWord(offset, 0x96f40014)
-    offset = data.writeWord(offset, 0xae360000)
-    offset = data.writeWord(offset, 0xae350004)
-    offset = data.writeWord(offset, 0xa6340014)
-    offset = data.writeWord(offset, 0x8fbf0030)
-    offset = data.writeWord(offset, 0x8fb7002c)
-    offset = data.writeWord(offset, 0x1800ffd1)
-
-    //LEFT HAND
-    offset = 0x3dd57f4
-    offset = data.writeWord(offset, 0x18000024)
-    offset = data.writeWord(offset, 0x00000000)
-
-    offset = 0x3dd5888
-    offset = data.writeWord(offset, 0x3c178007)
-    offset = data.writeWord(offset, 0x36f733d8)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x8ef60000)
-    offset = data.writeWord(offset, 0x8ef50004)
-    offset = data.writeWord(offset, 0x96f40014)
-    offset = data.writeWord(offset, 0xae360000)
-    offset = data.writeWord(offset, 0xae350004)
-    offset = data.writeWord(offset, 0xa6340014)
-    offset = data.writeWord(offset, 0x8fbf0030)
-    offset = data.writeWord(offset, 0x8fb7002c)
-    offset = data.writeWord(offset, 0x1800ffd1)
-
+    
     // Holy Cross Fixes
     offset = 0x000b1036
     data.writeChar(offset, 0x82)  // heals hp with orbs

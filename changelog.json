@@ -14,13 +14,15 @@
                     "Added Spike Room Randomizer.",
                     "Added Lycanthrope Mode.",
                     "Separated out the Quality of Life functions from Tournament Mode and added a new security feature to the same.",
-                    "The new homes for the Quality of Life features are Zero-Dollar Relic Mode and Open Clock Statue Mode."
+                    "The new homes for the Quality of Life features are Zero-Dollar Relic Mode and Open Clock Statue Mode.",
+                    "Dev's Stash now may house upcoming changes that have yet to find a home despit being 'complete'."
                 ],
                 "Website Updates": [
                     "Fixed a bug causing presets minimum complexity to override player-selected somplexity."
                 ],
                 "Program Updates": [
-                    "Fixed an issue where renamed relics were incorrectly displayed in the Long Library shop menu."
+                    "Fixed an issue where renamed relics were incorrectly displayed in the Long Library shop menu.",
+                    "Yasutsuna hitbox now follows Alucard like Masamune et al. It's still spammable."
                 ],
                 "Rando Tools Updates": [
                     "Updated Co-Op to work through websocket connection, dramatically simplifying how users activate the mode."
