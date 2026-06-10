@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SotN | Development Guide</title>
+    <link rel="icon" href="images/ICON.jpg">
+    <script src="src/wheel.js"></script>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/navbar.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Castlevania: Symphony of the Night</h1>
+    <h3>Development Guide</h3>
+</header>
+
+<div id="navbar-container"></div>
+<script src="/src/navbar.js"></script>
+
+<section id="introduction">
+    <h3>Introduction</h3>
+
+    <p>So you would like to start developing your own preset? Fantastic! We would love to see your ideas implemented in game and welcome new randomizer modes. To get started you’ll need to complete the installation of the randomizer per our guide.</p>
+
+    <p>Next we’ll need to take a tour of the JSON files used for presets. Here is a Sample JSON file that has an example of almost every feature of the randomizer being used.</p>
+
+    <p>
+    <strong>
+        <a href="./presets/sample.json" download>Sample JSON Download</a>
+    </strong>
+</p>
+
+
+    <p>There is also a lot of documentation within the Randomizer code, itself. All you need to do is open randomize in Visual Studio Code and read the orange text.</p>
+
+    <p>You may also want to familiarize yourself with the information from constants.js so you know how to identify various check locations and the Zone ID’s.</p>
+
+    <p>Then, lastly, you need to make sure that any time you reference an item, it matches exactly with the spelling and capitalization of the item in items.js.</p>
+</section>
+
+<section id="sample-json-sections">
+    <h3>Sample.JSON Sections</h3>
+
+    <ul>
+        <li>metadata</li>
+        <li>comment</li>
+        <li>inherits</li>
+        <li>relicLocationsExtension</li>
+        <li>preventLeaks</li>
+        <li>stats</li>
+        <li>music</li>
+        <li>turkeyMode</li>
+        <li>alias</li>
+        <li>replaceRelic</li>
+        <li>placeRelic</li>
+        <li>lockLocation</li>
+        <li>enemyDrops</li>
+        <li>blockDrops</li>
+        <li>startingEquipment</li>
+        <li>blockEquipment</li>
+        <li>itemLocations</li>
+        <li>prologueRewards</li>
+        <li>blockRewards</li>
+        <li>writes</li>
+        <li>complexityGoal</li>
+        <li>lockLocationAllowed</li>
+    </ul>
+</section>
+<section id="metadata">
+    <h3>metadata</h3>
+
+    <p><strong>Necessity:</strong> Required</p>
+    <p><strong>Used In:</strong> All Presets</p>
+    <p><strong>Use:</strong> Establishes all identifying information about the preset.</p>
+
+    <ul>
+        <li><strong>id:</strong> The name of the preset used by the Randomizer. Must be lowercase.</li>
+        <li><strong>name:</strong> The display name of the preset.</li>
+        <li><strong>description:</strong> A short explanation shown to the player before generating.</li>
+        <li><strong>author:</strong> Your name and collaborators.</li>
+        <li><strong>weight:</strong> To be updated later when merging with the main randomizer.</li>
+    </ul>
+</section>
+
+<section id="comment">
+    <h3>comment</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Sample.json</p>
+    <p><strong>Use:</strong> Provides notes or explanations for future programmers.</p>
+</section>
+
+<section id="inherits">
+    <h3>inherits</h3>
+
+    <p><strong>Necessity:</strong> Optional if using LockLocation; required if not.</p>
+    <p><strong>Used In:</strong> Safe, Expedition, Lycanthrope</p>
+    <p><strong>Use:</strong> Pulls properties from another preset file, which can then be overwritten.</p>
+</section>
+
+<section id="relicLocationsExtension">
+    <h3>relicLocationsExtension</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Adventure, Expedition</p>
+    <p><strong>Use:</strong> Allows the preset to change which relic extension is used.</p>
+
+    <p><strong>Options:</strong></p>
+    <ul>
+        <li>false (Classic)</li>
+        <li>guarded</li>
+        <li>spread</li>
+        <li>equipment</li>
+    </ul>
+</section>
+
+<section id="preventLeaks">
+    <h3>preventLeaks</h3>
+
+    <p><strong>Necessity:</strong> Optional (Recommended)</p>
+    <p><strong>Used In:</strong> O.G.</p>
+    <p><strong>Use:</strong> When set to false, more items may spawn in various areas at the cost of potentially revealing progression information.</p>
+</section>
+
+<section id="stats">
+    <h3>stats</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> O.G., Guarded O.G., Nimble</p>
+    <p><strong>Use:</strong> Set to “false” to disable item stat randomization.</p>
+</section>
+
+<section id="music">
+    <h3>music</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Boss Rush</p>
+    <p><strong>Use:</strong> Set to “false” to disable music randomization.</p>
+</section>
+
+<section id="turkeyMode">
+    <h3>turkeyMode</h3>
+
+    <p><strong>Necessity:</strong> Optional (Recommended)</p>
+    <p><strong>Used In:</strong> Boss Rush</p>
+    <p><strong>Use:</strong> Set to “false” to disable turkeys in sub-weapon vats, randomized cape colors, 2nd castle music decoupling, and accessibility features.</p>
+</section>
+<section id="alias">
+    <h3>alias</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Glitch, Forge</p>
+    <p><strong>Use:</strong> Allows you to rename game elements for use elsewhere in the file.</p>
+
+    <ul>
+        <li><strong>comment:</strong> Explains what is being renamed and why.</li>
+        <li><strong>zone:</strong> Any castle zone (NO3, NP3, TOP, etc.) to be aliased.</li>
+        <li><strong>relic:</strong> Any relic to be aliased.</li>
+        <li><strong>alias:</strong> The new name used throughout the file.</li>
+    </ul>
+</section>
+
+<section id="replaceRelic">
+    <h3>replaceRelic</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Glitch, Forge</p>
+    <p><strong>Use:</strong> Replaces relics with items, either to substitute progression or remove unwanted relics.</p>
+
+    <ul>
+        <li><strong>comment:</strong> Explains which item replaces the relic and why.</li>
+        <li><strong>relic:</strong> The relic being replaced.</li>
+        <li><strong>item:</strong> The item replacing it.</li>
+    </ul>
+</section>
+
+<section id="placeRelic">
+    <h3>placeRelic</h3>
+
+    <p><strong>Necessity:</strong> Optional (may not always function correctly)</p>
+    <p><strong>Used In:</strong> Rat Race, Forge</p>
+    <p><strong>Use:</strong> Forces the randomizer to place a relic (or one of several relics) in a specific location.</p>
+
+    <ul>
+        <li><strong>comment:</strong> Notes which relics are being placed and why.</li>
+        <li><strong>relic:</strong> A relic or list of relics to place.</li>
+        <li><strong>location:</strong> The location where the relic(s) must appear.</li>
+    </ul>
+</section>
+<section id="lockLocation">
+    <h3>lockLocation</h3>
+
+    <p><strong>Necessity:</strong> Optional if using “inherits”, required if not.</p>
+    <p><strong>Used In:</strong> Casual, Speedrun</p>
+    <p><strong>Use:</strong> Defines what is in logic for your preset.</p>
+
+    <ul>
+        <li><strong>location:</strong> The relic or equipment location being affected.</li>
+        <li><strong>comment:</strong> Explains the logic philosophy for the location.</li>
+        <li><strong>locks:</strong> Required relics or combinations of relics/items.</li>
+        <li><strong>block:</strong> Prevents listed relics from appearing at the location.</li>
+        <li><strong>escapeRequires:</strong> Ensures the player can escape the check with items obtained up to that point.</li>
+    </ul>
+</section>
+
+<section id="enemyDrops">
+    <h3>enemyDrops</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Speedrun, Gem Farmer, Boss Rush</p>
+    <p><strong>Use:</strong> Forces specific enemies to drop specific items.</p>
+
+    <ul>
+        <li><strong>comment:</strong> Explains what enemies drop and why.</li>
+        <li><strong>enemy:</strong> Any enemy, or “*” for all enemies.</li>
+        <li><strong>level:</strong> Required for enemies with multiple versions.</li>
+        <li><strong>items:</strong> Defines which items replace the enemy’s normal drops.</li>
+    </ul>
+</section>
+
+<section id="blockDrops">
+    <h3>blockDrops</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Scavenger, Speedrun</p>
+    <p><strong>Use:</strong> Prevents enemies from dropping certain items.</p>
+
+    <ul>
+        <li><strong>enemy:</strong> Any enemy, or “*” for all enemies.</li>
+        <li><strong>level:</strong> Required for enemies with multiple versions.</li>
+        <li><strong>items:</strong> Items that should be prevented from dropping.</li>
+    </ul>
+</section>
+<section id="startingEquipment">
+    <h3>startingEquipment</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Nimble, Expedition, Lycanthrope</p>
+    <p><strong>Use:</strong> Defines which starting gear the player begins with.</p>
+
+    <ul>
+        <li><strong>slot:</strong> The equipment slot to modify.</li>
+    </ul>
+
+    <p><strong>Valid Slots:</strong></p>
+    <ul>
+        <li>Right hand</li>
+        <li>Left hand</li>
+        <li>Head</li>
+        <li>Body</li>
+        <li>Cloak</li>
+        <li>Other</li>
+        <li>AxeArmor</li>
+        <li>Luck Mode</li>
+    </ul>
+
+    <ul>
+        <li><strong>item:</strong> Any item spelled exactly as in <em>items.js</em>.</li>
+    </ul>
+</section>
+
+<section id="blockEquipment">
+    <h3>blockEquipment</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Speedrun, Gem Farmer, Rat Race</p>
+    <p><strong>Use:</strong> Prevents certain equipment from being selected as starting gear.</p>
+
+    <ul>
+        <li><strong>slot:</strong> The equipment slot to restrict.</li>
+    </ul>
+
+    <p><strong>Valid Slots:</strong></p>
+    <ul>
+        <li>Right hand</li>
+        <li>Left hand</li>
+        <li>Head</li>
+        <li>Body</li>
+        <li>Cloak</li>
+        <li>Other</li>
+        <li>AxeArmor</li>
+        <li>Luck Mode</li>
+    </ul>
+
+    <ul>
+        <li><strong>item:</strong> Any item spelled exactly as in <em>items.js</em>.</li>
+    </ul>
+</section>
+<section id="itemLocations">
+    <h3>itemLocations</h3>
+
+    <p><strong>Necessity:</strong> Optional (may not always function correctly)</p>
+    <p><strong>Used In:</strong> Glitch, Boss Rush</p>
+    <p><strong>Use:</strong> Places items directly into known item locations.</p>
+
+    <ul>
+        <li><strong>comment:</strong> Explains what is placed here and why.</li>
+        <li><strong>zone:</strong> Any castle zone (NO3, NP3, TOP, etc.).</li>
+        <li><strong>item:</strong> The item normally found in the game, used to identify the slot.</li>
+        <li><strong>index:</strong> For locations with multiple items, selects which one to replace.</li>
+        <li><strong>replacement:</strong> The item (or list of items) to place here.</li>
+    </ul>
+</section>
+
+<section id="prologueRewards">
+    <h3>prologueRewards</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Forge, Bounty Hunter</p>
+    <p><strong>Use:</strong> Gives the player items at the start based on prologue performance.</p>
+
+    <ul>
+        <li><strong>item:</strong> The item being replaced.</li>
+    </ul>
+
+    <p><strong>Valid Options:</strong></p>
+    <ul>
+        <li>Heart Refresh</li>
+        <li>Neutron bomb</li>
+        <li>Potion</li>
+    </ul>
+
+    <ul>
+        <li><strong>replacement:</strong> The item to give instead.</li>
+    </ul>
+</section>
+
+<section id="blockRewards">
+    <h3>blockRewards</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Forge, Bounty Hunter</p>
+    <p><strong>Use:</strong> Prevents the player from receiving certain prologue reward items.</p>
+
+    <ul>
+        <li><strong>item:</strong> The item being blocked.</li>
+    </ul>
+
+    <p><strong>Valid Options:</strong></p>
+    <ul>
+        <li>Heart Refresh</li>
+        <li>Neutron bomb</li>
+        <li>Potion</li>
+    </ul>
+
+    <ul>
+        <li><strong>replacement:</strong> The item to prevent from being given.</li>
+    </ul>
+</section>
+<section id="writes">
+    <h3>writes</h3>
+
+    <p><strong>Necessity:</strong> Optional</p>
+    <p><strong>Used In:</strong> Lycanthrope, Warlock, Rat Race</p>
+    <p><strong>Use:</strong> Used to make direct changes to the ROM outside of the canned capabilities of the Randomizer.</p>
+
+    <p><strong>Fields:</strong></p>
+    <ul>
+        <li><strong>comment:</strong> Identifies what the writes are doing or noting important aspects of the changes.</li>
+        <li><strong>address:</strong> The ROM address to update.</li>
+        <li><strong>type:</strong> How long the write will be.</li>
+    </ul>
+
+    <p><strong>Valid Types:</strong></p>
+    <ul>
+        <li>char – 2 digits</li>
+        <li>short – 4 digits</li>
+        <li>word – 8 digits</li>
+    </ul>
+
+    <p><strong>value:</strong> The actual code to write to the ROM at the defined address.</p>
+
+    <p><strong>Valid Values:</strong></p>
+    <ul>
+        <li>Actual values written in <code>0x0</code> format</li>
+        <li><code>random</code> — random value matching char/short/word/long</li>
+        <li><code>random1</code> — random digit 0–1</li>
+        <li><code>random3</code> — random digit 0–3</li>
+        <li><code>random10</code> — random digit 1–10</li>
+        <li><code>random99</code> — random digit 1–99</li>
+        <li><code>randomrelic</code> — random relic address</li>
+    </ul>
+
+    <p>Additional notes are found in the “How To Make Writes” section below.</p>
+</section>
+
+<section id="how-to-make-writes">
+    <h3>How to Make Writes</h3>
+
+    <p>You might be wondering how to make writes work for you. This is not going to be an expansive guide, but this will help you get started. This section will be expanded upon as we get more and better examples.</p>
+
+    <h3>Example 1: Game Shark</h3>
+
+    <p>Most of the time, you can infer something that can be done with writes directly from Game Shark codes available for the game. Writing these is fairly easy and we can do it by understanding how the randomizer needs it broken down.</p>
+
+    <p>First, we need to tell it that we're writing to RAM, not ROM. That's where “injected code” comes in. In the Sample.JSON you saw that there was a section with the comment:</p>
+
+    <p><em>“Jump to injected code (Used for editing things requiring to be edited in RAM)”</em></p>
+
+    <p>Anything that is a Game Shark Code is going to occupy this space.</p>
+
+    <p>First, establish which RAM section we're writing to, then use the address to tell it where to write, and then the actual value to write what we need the change to be. Use this diagram to find the information.</p>
+</section>
+
+<section id="writes-example-1">
+    <h3>Injected Code Example</h3>
+
+    <p>To establish the address section to write to, we need to establish that we're going to write to RAM:</p>
+
+    <pre>
+{
+  "comment": "Jump to injected code (Used for editing things requiring to be edited in RAM)",
+  "address": "0x000fa97c",
+  "type": "word",
+  "value": "0x0c04db00"
+}
+    </pre>
+
+    <p>Then we need to tell the randomizer what value we want to write. Using the Player Level V99 code as an example:</p>
+
+    <pre>
+{
+  "address": "0x00158c98",
+  "type": "word",
+  "value": "0x34020fff",
+  "comment": "ori v0, 0x0fff"
+}
+    </pre>
+
+    <p>Now let's tell it where to write, starting with the section:</p>
+
+    <pre>
+{
+  "comment": "Write to 8009 RAM addresses (Granting relics, stats, items, etc.)",
+  "type": "word",
+  "value": "0x3c038009",
+  "comment": "lui v1, 0x8009"
+}
+    </pre>
+
+    <p>And now, we give it a specific sub-address to write to:</p>
+
+    <pre>
+{
+  "comment": "Player Level V99",
+  "type": "word",
+  "value": "0xa0627bee",
+  "comment": "sb v0, 0x7bee (v1)"
+}
+    </pre>
+</section>
+<section id="writes-return">
+    <h3>Return From Injected Code</h3>
+
+    <p>Next we return from the injected code and close the operation.</p>
+
+    <pre>
+{
+  "comment": "Return from injected code",
+  "type": "word",
+  "value": "0x0803924f",
+  "comment": "j 0x800e493c"
+},
+{
+  "comment": "Finish Return from injected code (Writes after this allow for direct editing of the ROM)",
+  "type": "word",
+  "value": "0x00000000",
+  "comment": "nop"
+}
+    </pre>
+
+    <p>Finally, our writes section with just this code should look like this:</p>
+
+    <pre>
+"writes": [{
+  "comment": "Jump to injected code (Used for editing things requiring to be edited in RAM)",
+  "address": "0x000fa97c",
+  "type": "word",
+  "value": "0x0c04db00"
+}, {
+  "address": "0x00158c98",
+  "type": "word",
+  "value": "0x34020fff",
+  "comment": "ori v0, 0x0fff"
+}, {
+  "comment": "Write to 8009 RAM addresses (Granting relics, stats, items, etc.)",
+  "type": "word",
+  "value": "0x3c038009",
+  "comment": "lui v1, 0x8009"
+}, {
+  "comment": "Player Level V99",
+  "type": "word",
+  "value": "0xa0627bee",
+  "comment": "sb v0, 0x7bee (v1)"
+}, {
+  "comment": "Return from injected code",
+  "type": "word",
+  "value": "0x0803924f",
+  "comment": "j 0x800e493c"
+}, {
+  "comment": "Finish Return from injected code (Writes after this allow for direct editing of the ROM)",
+  "type": "word",
+  "value": "0x00000000",
+  "comment": "nop"
+}]
+    </pre>
+
+    <p>Important to note: “sub address” isn’t actually a thing. The whole RAM address is actually 97BEE, but we cannot denote that in the format used by GameShark or the randomizer’s writes section.</p>
+</section>
+
+<section id="complexityGoal">
+    <h3>complexityGoal</h3>
+
+    <p><strong>Necessity:</strong> Required</p>
+    <p><strong>Used In:</strong> All Presets</p>
+    <p><strong>Use:</strong> Identifies the complexity and which items/relics are intended to be placed at the end of the chain of complexity.</p>
+
+    <ul>
+        <li><strong>min:</strong> Minimum complexity where the final relic can be found.</li>
+        <li><strong>max:</strong> Maximum complexity where the preset may place a final relic.</li>
+        <li><strong>comment:</strong> Notes the goals or philosophy of the preset.</li>
+        <li><strong>goals:</strong> A single relic, an array of relics, or multiple arrays representing end‑goal items.</li>
+    </ul>
+</section>
+<section id="lockLocationAllowed">
+    <h3>lockLocationAllowed</h3>
+
+    <p><strong>Necessity:</strong> Required (May not be required after preset is added to SOTN.io, but this is still brand new)</p>
+    <p><strong>Used In:</strong> Aperture, Forge</p>
+    <p><strong>Use:</strong> Not required for the Randomizer but required for the tracker. Tells the Tracker how to identify out‑of‑logic checks in the preset.</p>
+
+    <ul>
+        <li><strong>Location:</strong> Which relic or equipment location is being affected.</li>
+        <li><strong>Comment:</strong> Explains the logic philosophy for the location.</li>
+        <li><strong>Locks:</strong> Required relics or combinations of relics/items.</li>
+        <li><strong>Block:</strong> Prevents listed relics from appearing at the location.</li>
+        <li><strong>EscapeRequires:</strong> Ensures the player can escape the check with items obtained up to that point.</li>
+    </ul>
+</section>
+
+<section id="building-and-testing">
+    <h3>Building and Testing Presets</h3>
+
+    <p>Once you have completed the changes you want to make and are ready to test the preset, you need to complete the following steps to build it and test it:</p>
+
+    <ul>
+        <li>Save the file with the same name as the <strong>id</strong> field from the metadata section. No spaces or special characters.</li>
+        <li>Save the file to: <em>GithubDesktop\Repositories\SotN-Randomizer\presets</em></li>
+        <li>Open <em>package.json</em> in <em>GithubDesktop\Repositories\SotN-Randomizer</em></li>
+        <li>Add your preset to the list under <strong>"presets": [ ]</strong> following the existing formatting.</li>
+        <li>Save and close <em>package.json</em>.</li>
+        <li>Open <em>index.js</em> in <em>GithubDesktop\Repositories\SotN-Randomizer\build\presets</em></li>
+        <li>Add your preset to the list under <strong>exports = [ ]</strong> following the existing formatting.</li>
+        <li>Save and close <em>index.js</em>.</li>
+        <li>Open the folder in Git Bash from GitHub Desktop.</li>
+        <li>Run: <code>npm run build-presets -- [preset name]</code> (without brackets)</li>
+        <li>Git Bash should confirm the preset built successfully.</li>
+    </ul>
+
+    <p>If you encounter an error when building the preset, something is wrong with your file structure or the JSON file wasn’t saved to the correct folder.</p>
+
+    <p>Now you should be able to attempt to generate a seed. If you encounter an error generating the seed, debugging can be difficult. Double‑check capitalization of item/relic names, location names, and zone names. Ensure punctuation is correct. If you still can’t figure it out, ask in the <strong>#tech-support</strong> channel of the Long Library Discord.</p>
+</section>
+<section id="additional-notes">
+    <h3>Additional Notes</h3>
+
+    <p>It should be noted that there was specific intent behind every preset which has been released on SOTN.io and similar stands true for every preset available through TinMan on the Long Library Discord. There are elements which make those presets worthwhile. While not all of them need to be true at once, a good candidate for being added will have most of these checked:</p>
+
+    <ul>
+        <li>The preset teaches players something new about the game.</li>
+        <li>The preset is functionally unique from every preset before it.</li>
+        <li>The preset works with an aspect of the game that players don't normally see.</li>
+        <li>The preset is complete and a satisfying experience to the player.</li>
+        <li>The preset can be completed by the average player of the game, assuming they've beaten the game.</li>
+    </ul>
+
+    <p>These design philosophies will guide any preset development in a positive direction for the community.</p>
+
+    <p>There are also things which have not been done through the Randomizer yet:</p>
+
+    <ul>
+        <li>Assigning only one of an enemy's items and leaving the other item randomized.</li>
+        <li>Counting enemies in complexity.</li>
+        <li>Randomizing where doors lead (There is an Area Randomizer developed by Mottzilla but there may be other compatibility issues depending on the preset.)</li>
+        <li>Placing a progression item in a location that is not a location used by the current extension.</li>
+    </ul>
+
+    <p>There are also limitations which cannot be completed by the randomizer because of limitations with the coding of the game. These are hard barriers that completely prevent the items in question. A few examples include but are not limited to:</p>
+
+    <ul>
+        <li>Enemy locations</li>
+        <li>Randomizing Jewel Doors, Mist Gates, Spike Hallways, and Switches</li>
+        <li>Boss locations</li>
+        <li>Editing the AI of the enemies or Bosses</li>
+        <li>Randomizing room layouts (Adding / removing stairs, platforms, etc.)</li>
+        <li>Adding playable Maria to the PS1 version of Symphony of the Night</li>
+    </ul>
+
+    <p>Please remember that development will require a lot of patience, especially if you want to implement writes that change the code of the game aside from the randomizer's canned capabilities. We look forward to seeing your vision brought to life!</p>
+</section>
+<section id="disclaimer">
+    <h3>Disclaimer</h3>
+
+    <p>This fan-made site is NOT an endorsement of pirating games and does not encourage theft. The file linked in this site is a memory card file (PlayStation One Memory Card Data) of progress in the game. As fans, we want to support the companies that made and supported the games we love.</p>
+
+    <p>PlayStation and the PlayStation BIOS are all trademarks of Sony Computer Entertainment and will never be offered by this website and cannot be obtained from any members of our community. We encourage anyone wanting to play Castlevania: Symphony of the Night PlayStation Discs to purchase an applicable PlayStation One, PlayStation 2, or PlayStation 3 system from a reliable second-hand game sales store. If you really want to support Sony, go watch Spider-Man in the theater or buy a PS5. I also heard their TVs are really nice.</p>
+
+    <p>Castlevania and Castlevania: Symphony of the Night is a registered trademark and property owned by Konami Group Corporation and will never be offered by this website and cannot be obtained from any members of our community. We trust and advocate all players offered assistance by this guide to purchase a PlayStation copy of Castlevania: Symphony of the Night from a reliable second-hand game sales store to use with the Randomizer. You could also do Konami a solid by buying a copy of the current version of C: SOTN from the PlayStation Store, X‑Box Live Arcade, or for your Mobile Device.</p>
+</section>
+
+</body>
+</html>

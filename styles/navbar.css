@@ -1,20 +1,27 @@
+/* ============================
+   MOBILE NAVBAR BASE STYLES
+   ============================ */
+
 .menu {
     display: none;
     position: absolute;
-    left: 20;
+    left: 20px;
     width: 40%;
     background-color: rgb(0, 0, 61);
     border: 2px solid white;
+    color: white;
+    z-index: 1000;
 }
 
 .menu-btn {
     display: block;
     padding: 1em;
     color: white;
+    cursor: pointer;
 }
 
 .menu-btn::after {
-    content: "\2630";
+    content: "\2630"; /* hamburger icon */
 }
 
 #checkbox-toggle {
@@ -25,12 +32,24 @@
     display: block;
 }
 
-#checkbox-toggle:checked ~ .menu-btn {
-    content: "\2716";
+#checkbox-toggle:checked ~ .menu-btn::after {
+    content: "\2716"; /* X icon */
 }
+
+/* ============================
+   NAVBAR CONTAINER
+   ============================ */
 
 .navbar {
     border-bottom: 2px solid white;
+    width: 100%;
+    color: white;
+}
+
+.navbar ul {
+    padding: 1em;
+    list-style-type: none;
+    margin: 0;
 }
 
 .navbar a {
@@ -38,11 +57,6 @@
     padding: .25em 1em;
     text-decoration: none;
     color: white;
-}
-
-.navbar ul {
-    padding: 1em;
-    list-style-type: none;
 }
 
 .navbar a:hover,
@@ -56,19 +70,23 @@
     width: fit-content;
 }
 
-.menu li:has(.submenu) {
+/* ============================
+   SUBMENU
+   ============================ */
+
+.menu li {
     position: relative;
 }
 
-.menu li:has(.submenu) small::after {
-    content: "\25b6";
-}
-
-.menu li:has(.submenu) small {
+.menu li small {
     margin-left: 1em;
 }
 
-.menu li:has(.submenu):hover > .submenu {
+.menu li small::after {
+    content: "\25b6"; /* right arrow */
+}
+
+.menu li:hover > .submenu {
     display: block;
 }
 
@@ -77,31 +95,32 @@
     top: 0;
     left: 100%;
     background-color: rgb(0, 0, 61);
-    border: 2px solid;
+    border: 2px solid white;
     border-radius: 10px;
     color: white;
     display: none;
     width: 110%;
-    z-index: 10;
+    z-index: 2000;
 }
 
 .submenu > li a {
     margin: 2px;
 }
 
-/* Desktop breakpoint */
+/* ============================
+   DESKTOP BREAKPOINT
+   ============================ */
+
 @media only screen and (min-width: 1692px) {
+
     .menu {
         position: relative;
         left: 0;
         display: flex;
         width: 100%;
         justify-content: space-between;
-        margin-bottom: 0;
-    }
-
-    .navbar a.current {
-        width: fit-content;
+        border: none;
+        background-color: transparent;
     }
 
     .menu-btn {
@@ -112,8 +131,8 @@
         display: flex;
     }
 
-    .menu li:has(.submenu) small::after {
-        content: "\25bc";
+    .menu li small::after {
+        content: "\25bc"; /* down arrow */
     }
 
     .submenu {
