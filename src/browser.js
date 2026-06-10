@@ -138,7 +138,6 @@
     // --- Buttons ---
     elems.clear.addEventListener("click", clearHandler);
     elems.copy.addEventListener("click", copyHandler);
-    elems.showOlder.addEventListener("click", showOlderHandler);
 
     // --- Theme + map color + goals ---
     elems.theme.addEventListener("change", themeChange);
@@ -427,23 +426,23 @@
   }
 
   function updateAlucardPreview() {
-  if (!paletteSelect || !linerSelect || !paletteDisplay || !linerDisplay) return;
+    if (!paletteSelect || !linerSelect || !alucardPaletteDisplay || !alucardLinerDisplay) return;
 
-  // Constants for sprite sheet offsets
-  const PALETTE_OFFSET_X = 864;
-  const LINER_OFFSET_X = 768;
-  const SPRITE_WIDTH = 96;
+    const FRAME_WIDTH = 96;   // width of each palette/liner frame
+    const FRAME_HEIGHT = 64;  // height of each row
 
-  // Fix liner Y position
-  linerDisplay.style.backgroundPositionY = "64px";
+    // Calculate X offsets
+    const paletteX = paletteSelect.selectedIndex * FRAME_WIDTH;
+    const linerX = linerSelect.selectedIndex * FRAME_WIDTH;
 
-  // Calculate X offsets
-  const paletteX = PALETTE_OFFSET_X - paletteSelect.selectedIndex * SPRITE_WIDTH;
-  const linerX = LINER_OFFSET_X - linerSelect.selectedIndex * SPRITE_WIDTH;
+    // Y offsets
+    const PALETTE_Y = 0;            // top row
+    const LINER_Y = FRAME_HEIGHT; // bottom row
 
-  paletteDisplay.style.backgroundPositionX = `${paletteX}px`;
-  linerDisplay.style.backgroundPositionX = `${linerX}px`;
-}
+    // Apply background-position to the DIVs
+    alucardPaletteDisplay.style.backgroundPosition = `-${paletteX}px -${PALETTE_Y}px`;
+    alucardLinerDisplay.style.backgroundPosition = `-${linerX}px -${LINER_Y}px`;
+  }
 
   function updateMapColorPreview() {
     // Calculate current position based on the selected options
@@ -626,29 +625,29 @@
 
       // All toggleable keys
       const allKeys = [
-        "stats", 
-        "music", 
-        "turkeyMode", 
-        "magicmaxMode", 
+        "stats",
+        "music",
+        "turkeyMode",
+        "magicmaxMode",
         "colorrandoMode",
-        "antiFreezeMode", 
-        "mypurseMode", 
-        "iwsMode", 
+        "antiFreezeMode",
+        "mypurseMode",
+        "iwsMode",
         "fastwarpMode",
-        "itemNameRandoMode", 
-        "noprologueMode", 
-        "unlockedMode", 
+        "itemNameRandoMode",
+        "noprologueMode",
+        "unlockedMode",
         "surpriseMode",
-        "enemyStatRandoMode", 
-        "shopPriceRandoMode", 
+        "enemyStatRandoMode",
+        "shopPriceRandoMode",
         "startRoomRandoMode",
-        "startRoomRando2ndMode", 
-        "dominoMode", 
-        "rlbcMode", 
+        "startRoomRando2ndMode",
+        "dominoMode",
+        "rlbcMode",
         "immunityPotionMode",
-        "godspeedMode", 
-        "libraryShortcut", 
-        "elemChaosMode", 
+        "godspeedMode",
+        "libraryShortcut",
+        "elemChaosMode",
         "singleHitGearMode",
         "revCastleTeleportRando",
         "zeroDollarRelicMode",
@@ -656,8 +655,8 @@
         "spikeRoomRando",
         "lycanMode",
         "easyMode",
-        "devStashMode", 
-        "bossMusicSeparation", 
+        "devStashMode",
+        "bossMusicSeparation",
         "startStatRandoMode"
       ];
 
@@ -880,8 +879,8 @@
     const selected = elems.theme.value
     localStorage.setItem('theme', selected)
 
-    body.classList.remove('blue', 
-      'light', 
+    body.classList.remove('blue',
+      'light',
       'dark')
     body.classList.add(selected)
   }
@@ -1072,46 +1071,46 @@
     }
 
     const formOptions = [
-      'tournamentMode', 
-      'colorrandoMode', 
-      'magicmaxMode', 
+      'tournamentMode',
+      'colorrandoMode',
+      'magicmaxMode',
       'antiFreezeMode',
-      'mypurseMode', 
-      'iwsMode', 
-      'fastwarpMode', 
+      'mypurseMode',
+      'iwsMode',
+      'fastwarpMode',
       'itemNameRandoMode',
-      'noprologueMode', 
-      'unlockedMode', 
-      'surpriseMode', 
+      'noprologueMode',
+      'unlockedMode',
+      'surpriseMode',
       'enemyStatRandoMode',
-      'shopPriceRandoMode', 
-      'startRoomRandoMode', 
+      'shopPriceRandoMode',
+      'startRoomRandoMode',
       'startRoomRando2ndMode',
-      'dominoMode', 
-      'rlbcMode', 
-      'immunityPotionMode', 
+      'dominoMode',
+      'rlbcMode',
+      'immunityPotionMode',
       'godspeedMode',
-      'libraryShortcut', 
-      'elemChaosMode', 
-      'easyMode', 
+      'libraryShortcut',
+      'elemChaosMode',
+      'easyMode',
       'devStashMode',
-      'seasonalPhrasesMode', 
-      'music', 
-      'bossMusicSeparation', 
-      'singleHitGearMode', 
-      'revCastleTeleportRando', 
-      'zeroDollarRelicMode', 
-      'openClockStatueMode',  
-      'spikeRoomRando', 
+      'seasonalPhrasesMode',
+      'music',
+      'bossMusicSeparation',
+      'singleHitGearMode',
+      'revCastleTeleportRando',
+      'zeroDollarRelicMode',
+      'openClockStatueMode',
+      'spikeRoomRando',
       'lycanMode',
-      'startStatRandoMode', 
-      'turkeyMode', 
-      'stats', 
-      'accessibilityPatches', 
+      'startStatRandoMode',
+      'turkeyMode',
+      'stats',
+      'accessibilityPatches',
       'enemyDrops',
-      'itemLocations', 
-      'newGoals', 
-      'prologueRewards', 
+      'itemLocations',
+      'newGoals',
+      'prologueRewards',
       'startingEquipment'
     ]
 
@@ -1152,58 +1151,58 @@
 
     // Reset values
     const resetFields = [
-      'seed', 
-      'enemyDropsArg', 
-      'startingEquipmentArg', 
+      'seed',
+      'enemyDropsArg',
+      'startingEquipmentArg',
       'itemLocationsArg',
-      'prologueRewardsArg', 
-      'relicLocationsArg', 
-      'writes', 
+      'prologueRewardsArg',
+      'relicLocationsArg',
+      'writes',
       'newGoals'
     ]
     resetFields.forEach(key => elems[key].value = '')
 
     // Enable toggles
     const clearFields = [
-      'seed', 
-      'presetId', 
-      'enemyDrops', 
-      'startingEquipment', 
+      'seed',
+      'presetId',
+      'enemyDrops',
+      'startingEquipment',
       'itemLocations',
-      'prologueRewards', 
-      'relicLocations', 
-      'relicLocationsSet', 
+      'prologueRewards',
+      'relicLocations',
+      'relicLocationsSet',
       'turkeyMode',
-      'magicmaxMode', 
-      'colorrandoMode', 
-      'antiFreezeMode', 
+      'magicmaxMode',
+      'colorrandoMode',
+      'antiFreezeMode',
       'mypurseMode',
-      'iwsMode', 
-      'fastwarpMode', 
-      'noprologueMode', 
+      'iwsMode',
+      'fastwarpMode',
+      'noprologueMode',
       'unlockedMode',
-      'surpriseMode', 
-      'enemyStatRandoMode', 
+      'surpriseMode',
+      'enemyStatRandoMode',
       'shopPriceRandoMode',
-      'startRoomRandoMode', 
-      'startRoomRando2ndMode', 
-      'dominoMode', 
+      'startRoomRandoMode',
+      'startRoomRando2ndMode',
+      'dominoMode',
       'rlbcMode',
-      'immunityPotionMode', 
-      'godspeedMode', 
-      'libraryShortcut', 
+      'immunityPotionMode',
+      'godspeedMode',
+      'libraryShortcut',
       'elemChaosMode',
-      'revCastleTeleportRando', 
-      'zeroDollarRelicMode', 
-      'openClockStatueMode', 
-      'spikeRoomRando', 
+      'revCastleTeleportRando',
+      'zeroDollarRelicMode',
+      'openClockStatueMode',
+      'spikeRoomRando',
       'lycanMode',
-      'easyMode', 
-      'devStashMode', 
-      'seasonalPhrasesMode', 
+      'easyMode',
+      'devStashMode',
+      'seasonalPhrasesMode',
       'bossMusicSeparation',
-      'singleHitGearMode', 
-      'startStatRandoMode', 
+      'singleHitGearMode',
+      'startStatRandoMode',
       'tournamentMode'
     ]
     clearFields.forEach(key => elems[key].disabled = false)
@@ -1232,11 +1231,6 @@
       elems.notification.classList.remove('success')
       animationDone = true
     }, 4000)
-  }
-
-  function showOlderHandler(event) {
-    elems.showOlder.classList.add('hidden')
-    elems.older.classList.remove('hidden')
   }
 
   function showExcludeMenu() {

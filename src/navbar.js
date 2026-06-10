@@ -5,17 +5,23 @@ function loadNavbar() {
         <input type="checkbox" id="checkbox-toggle">
         <label for="checkbox-toggle" class="menu-btn"></label>
         <ul class="menu">
-            <li><a href="/randomizer.html">Randomizer</a></li>
-            <li><a href="/faq/index.html">FAQ</a></li>
+            <li>
+            <a href="./randomizer.html">Randomizer<small></small></a>
+                <ul class="submenu">
+                    <li><a href="./randomizer.html">Randomizer</a></li>
+                    <li><a href="./changelog.html">Changelog</a></li>
+                </ul>
+            </li>
+            <li><a href="./faq/index.html">FAQ</a></li>
             <li><a href="https://ppf.sotn.io">PPF Patcher</a></li>
-            <li><a href="/community.html">Leaderboards</a></li>
-            <li><a href="/wheel.html">Wheel of Fun</a></li>
+            <li><a href="./community.html">Leaderboards</a></li>
+            <li><a href="./wheel.html">Wheel of Fun</a></li>
 
             <li>
             <a href="#">Tips and Tricks<small></small></a>
             <ul class="submenu">
-                <li><a href="/tips&tricks/generalRando.html">General Randomizer</a></li>
-                <li><a href="/tips&tricks/presetSpecific.html">Preset Specific</a></li>
+                <li><a href="./tips&tricks/generalRando.html">General Randomizer</a></li>
+                <li><a href="./tips&tricks/presetSpecific.html">Preset Specific</a></li>
             </ul>
             </li>
 
@@ -33,7 +39,7 @@ function loadNavbar() {
             <ul class="submenu">
                 <li><a href="https://github.com/LuciaRolon/SotNRandomizerLauncher/releases">Randomizer Launcher</a></li>
                 <li><a href="https://github.com/sotnrando/SotnRandoTools/releases">Rando Tools</a></li>
-                <li><a href="/mapcompare.html">Map Tool</a></li>
+                <li><a href="./mapcompare.html">Map Tool</a></li>
             </ul>
             </li>
         </ul>
