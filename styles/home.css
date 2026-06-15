@@ -25,6 +25,35 @@ body {
     height: 100%;
 }
 
+.heroText {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    transform: translateX(-50%) rotate(-20deg);
+    z-index: 5;
+
+    color: gold;
+    font-size: 20px;
+    font-family: "Times New Roman", serif;
+    text-shadow: 2px 2px 4px black;
+    pointer-events: none;
+
+    animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0% {
+        transform: translateX(-50%) rotate(-10deg) scale(1);
+    }
+    50% {
+        transform: translateX(-50%) rotate(-20deg) scale(1.08);
+    }
+    100% {
+        transform: translateX(-50%) rotate(-10deg) scale(1);
+    }
+}
+
+
 .hero-bg {
     position: absolute;
     top: 50%;

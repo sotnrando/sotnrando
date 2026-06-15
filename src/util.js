@@ -870,7 +870,7 @@
         c = randomize[i++]
       }
       switch (c) {
-      case 'p': { // start preset selection from args/options - eldri7ch
+      case 'p': { // start preset selection from args/options
         // Check for an argument.
         if (negate) {
           throw new Error('Cannot negate preset option')
@@ -894,8 +894,8 @@
           i++
         }
         break
-      } // end preset selection from args/options - eldri7ch
-      case 'd': { // start drops selection from args/options - eldri7ch
+      } // end preset selection from args/options
+      case 'd': { // start drops selection from args/options
         if (negate) {
           options.enemyDrops = false
           break
@@ -1029,8 +1029,8 @@
         }
         options.enemyDrops = enemyDrops
         break
-      } // end drops selection from args/options - eldri7ch
-      case 'e': { // start equipment selection from args/options - eldri7ch
+      } // end drops selection from args/options
+      case 'e': { // start equipment selection from args/options
         if (negate) {
           options.startingEquipment = false
           break
@@ -1177,8 +1177,8 @@
         }
         options.startingEquipment = startingEquipment
         break
-      } // end equipment selection from args/options - eldri7ch
-      case 'i': { // start item location selection from args/options - eldri7ch
+      } // end equipment selection from args/options
+      case 'i': { // start item location selection from args/options
         if (negate) {
           options.itemLocations = false
           break
@@ -1314,9 +1314,9 @@
         }
         options.itemLocations = itemLocations
         break
-      } // end item location selection from args/options - eldri7ch
+      } // end item location selection from args/options
       case 'b': {
-        // start prologue rewards selection from args/options - eldri7ch
+        // start prologue rewards selection from args/options
         if (negate) {
           options.prologueRewards = false
           break
@@ -1397,9 +1397,9 @@
         }
         options.prologueRewards = prologueRewards
         break
-      } // end prologue rewards selection from args/options - eldri7ch
+      } // end prologue rewards selection from args/options
       case 'r': {
-        // start relic locations selection from args/options - eldri7ch
+        // start relic locations selection from args/options
         if (negate) {
           options.relicLocations = false
           break
@@ -1608,32 +1608,32 @@
         }
         options.relicLocations = relicLocations
         break
-      } // end relic locations selection from args/options - eldri7ch
-      case 's': { // start stats selection from args/options - eldri7ch
+      } // end relic locations selection from args/options
+      case 's': { // start stats selection from args/options
         if (negate) {
           options.stats = false
           break
         }
         options.stats = true
         break
-      } // end stats selection from args/options - eldri7ch
-      case 'm': { // start music selection from args/options - eldri7ch
+      } // end stats selection from args/options
+      case 'm': { // start music selection from args/options
         if (negate) {
           options.music = false
           break
         }
         options.music = true
         break
-      } // end music selection from args/options - eldri7ch
-      case 'k': { // start turkey mode selection from args/options - eldri7ch
+      } // end music selection from args/options
+      case 'k': { // start turkey mode selection from args/options
         if (negate) {
           options.turkeyMode = false
           break
         }
         options.turkeyMode = true
         break
-      } // end turkey mode selection from args/options - eldri7ch
-      case 'w': { // start writes selection from args/options - eldri7ch
+      } // end turkey mode selection from args/options
+      case 'w': { // start writes selection from args/options
         if (negate) {
           break
         }
@@ -1768,22 +1768,22 @@
         }
         options.writes = writes
         break
-      } // end writes selection from args/options - eldri7ch
+      } // end writes selection from args/options
       case 't': {
-        // start tournament mode selection from args/options - eldri7ch
+        // start tournament mode selection from args/options
         if (negate) {
           options.tournamentMode = false
           break
         }
         options.tournamentMode = true
         break
-      } // end tournament mode selection from args/options - eldri7ch
+      } // end tournament mode selection from args/options
       default:
-         // kick out the remainder of options - eldri7ch
+         // kick out the remainder of options
         throw new Error('Invalid randomization: ' + c)
       }
     }
-    // error out if all randomization negated - eldri7ch
+    // error out if all randomization negated
     if (!Object.getOwnPropertyNames(options).length) {
       throw new Error('No randomizations')
     }
@@ -1840,86 +1840,86 @@
     let randomize = []
     while (Object.getOwnPropertyNames(options).length) {
       // stunts spoilers, changes seed randomization,
-      // opens statue in clock room and $0 relic in shop - eldri7ch
+      // opens statue in clock room and $0 relic in shop
       if ('tournamentMode' in options) {
         if (options.tournamentMode) {
           randomize.push('t')
         }
         delete options.tournamentMode
       } else  if ('colorrandoMode' in options) {
-        // randomizes cape, grav boots, and hydro storm colors - eldri7ch
+        // randomizes cape, grav boots, and hydro storm colors
         if (options.colorrandoMode) {
           randomize.push('l')
         }
         delete options.colorrandoMode
       } else if ('magicmaxMode' in options) {
-        // replaces Heart Vessel with Magic Vessel - eldri7ch
+        // replaces Heart Vessel with Magic Vessel
         if (options.magicmaxMode) {
           randomize.push('x')
         }
         delete options.magicmaxMode
       } else if ('antiFreezeMode' in options) {
-        // Removes screen freezes from level-up and acquisitions - eldrich
+        // Removes screen freezes from level-up and acquisitions
         if (options.antiFreezeMode) {
           randomize.push('z')
         }
         delete options.antiFreezeMode
       } else if ('mypurseMode' in options) {
-        // Removes Death from entrance - eldri7ch
+        // Removes Death from entrance
         if (options.mypurseMode) {
           randomize.push('y')
         }
         delete options.mypurseMode
       } else if ('iwsMode' in options) {
-        // Allows for infinite wing smash on first input - eldri7ch
+        // Allows for infinite wing smash on first input
         if (options.iwsMode) {
           randomize.push('b')
         }
         delete options.iwsMode
       } else if ('fastwarpMode' in options) {
-        // quickensd the teleporter warp animations - eldri7ch
+        // quickensd the teleporter warp animations
         if (options.fastwarpMode) {
           randomize.push('9')
         }
         delete options.fastwarpMode
       } else if ('noprologueMode' in options) {
-        // Removes prologue - eldri7ch
+        // Removes prologue
         if (options.noprologueMode) {
           randomize.push('R')
         }
         delete options.noprologueMode
       } else if ('unlockedMode' in options) {
-        // Opens shortcuts - eldri7ch
+        // Opens shortcuts
         if (options.unlockedMode) {
           randomize.push('U')
         }
         delete options.unlockedMode
       } else if ('surpriseMode' in options) {
-        // Hides relics behind the same sprite - eldri7ch
+        // Hides relics behind the same sprite
         if (options.surpriseMode) {
           randomize.push('S')
         }
         delete options.surpriseMode
       } else if ('enemyStatRandoMode' in options) {
-        // randomize enemy stats - eldri7ch
+        // randomize enemy stats
         if (options.enemyStatRandoMode) {
           randomize.push('E')
         }
         delete options.enemyStatRandoMode
       } else if ('elemChaosMode' in options) {
-        // elemental chaos - eldri7ch
+        // elemental chaos
         if (options.elemChaosMode) {
           randomize.push('ec')
         }
         delete options.elemChaosMode
       } else if ('shopPriceRandoMode' in options) {
-        // randomize shop prices - eldri7ch
+        // randomize shop prices
         if (options.shopPriceRandoMode) {
           randomize.push('sh')
         }
         delete options.shopPriceRandoMode
       } else if ('startRoomRandoMode' in options) {
-        // randomize starting room - eldri7ch
+        // randomize starting room
         if (options.startRoomRandoMode) {
           randomize.push('ori')
         }
@@ -1931,62 +1931,93 @@
         }
         delete options.startRoomRando2ndMode
       } else if ('dominoMode' in options) {
-        // guaranteed drops - eldri7ch
+        // guaranteed drops
         if (options.dominoMode) {
           randomize.push('gd')
         }
         delete options.dominoMode
       } else if ('rlbcMode' in options) {
-        // reverse library cards - eldri7ch
+        // reverse library cards
         if (options.rlbcMode) {
           randomize.push('rl')
         }
         delete options.rlbcMode
       } else if ('immunityPotionMode' in options) {
-        // immuntiy potions - eldri7ch
+        // immuntiy potions
         if (options.immunityPotionMode) {
           randomize.push('ip')
         }
         delete options.immunityPotionMode
       } else if ('godspeedMode' in options) {
-        // godspeed shoes - eldri7ch
+        // godspeed shoes
         if (options.godspeedMode) {
           randomize.push('gss')
         }
         delete options.godspeedMode
       } else if ('libraryShortcut' in options) {
-        // library shortcut - eldri7ch
+        // library shortcut
         if (options.libraryShortcut) {
           randomize.push('ls')
         }
         delete options.libraryShortcut
       } else if ('singleHitGearMode' in options) {
-        // Single-Hit Gears - eldri7ch
+        // Single-Hit Gears
         if (options.singleHitGearMode) {
           randomize.push('gp')
         }
         delete options.singleHitGearMode
-      } else if ('newGoalsSet' in options) { // Change the goals
+      } else if ('revCastleTeleportRando' in options) {
+        // Reverse Castle Teleporter Randomizer
+        if (options.revCastleTeleportRando) {
+          randomize.push('c2r')
+        }
+        delete options.revCastleTeleportRando
+      } else if ('zeroDollarRelicMode' in options) {
+        // Makes the shop Relic cost 0.00
+        if (options.zeroDollarRelicMode) {
+          randomize.push('zr')
+        }
+        delete options.zeroDollarRelicMode
+      } else if ('openClockStatueMode' in options) {
+        // Opens the statue to Olrox's Quarters
+        if (options.openClockStatueMode) {
+          randomize.push('os')
+        }
+        delete options.openClockStatueMode
+      } else if ('spikeRoomRando' in options) {
+        // Randomize Spike Room
+        if (options.spikeRoomRando) {
+          randomize.push('srr')
+        }
+        delete options.spikeRoomRando
+      } else if ('lycanMode' in options) {
+        // Allow Full Wolf Use
+        if (options.lycanMode) {
+          randomize.push('ly')
+        }
+        delete options.lycanMode
+      } else if ('newGoalsSet' in options) { 
+        // Change the goals
         randomize.push('g:' + options.newGoalsSet)
         delete options.newGoalsSet
       } else if ('startStatRandoMode' in options) {
-        // Starting Stat Randomizer - eldri7ch
+        // Starting Stat Randomizer
         randomize.push('ss:' + options.startStatRandoMode)
         delete options.startStatRandoMode
       } else if ('easyMode' in options) {
-        // simple input - eldri7ch
+        // simple input
         if (options.easyMode) {
           randomize.push('ez')
         }
         delete options.easyMode
       } else if ('devStashMode' in options) {
-        // dev's stash - eldri7ch
+        // dev's stash
         if (options.devStashMode) {
           randomize.push('dev')
         }
         delete options.devStashMode
       } else if ('seasonalPhrasesMode' in options) {
-        // seasonal phrases - eldri7ch
+        // seasonal phrases
         if (options.seasonalPhrasesMode) {
           randomize.push('sp')
         }
@@ -2010,7 +2041,7 @@
         randomize.push('al:' + options.alucardLinerSet)
         delete options.alucardLinerSet
       } else if ('excludesongs' in options) {
-        // Exclude songs - eldri7ch
+        // Exclude songs
         randomize.push('eds:' + options.excludesongs)
         delete options.excludesongs
       } else if ('preset' in options) {
@@ -2330,7 +2361,7 @@
               switch (options.relicLocations.extension) {
               case constants.EXTENSION.EXTENDED:
                 // This is a smaller distribution than Equipment but includes
-                // all Scenic checks + GuardedPlus + some Equipment - eldri7ch
+                // all Scenic checks + GuardedPlus + some Equipment
                 extensions.push(constants.EXTENSION.EXTENDED)
                 extensions.push(constants.EXTENSION.GUARDEDPLUS)
                 extensions.push(constants.EXTENSION.GUARDED) 
@@ -3270,6 +3301,11 @@
     godspeedMode,
     libraryShortcut,
     singleHitGearMode,
+    revCastleTeleportRando,
+    zeroDollarRelicMode,
+    openClockStatueMode,
+    spikeRoomRando,
+    lycanMode,
     newGoalsSet,
     startStatRandoMode,
     // easyMode,
@@ -3325,6 +3361,11 @@
     this.godspeedMode = godspeedMode
     this.libraryShortcut = libraryShortcut
     this.singleHitGearMode = singleHitGearMode
+    this.revCastleTeleportRando = revCastleTeleportRando
+    this.zeroDollarRelicMode = zeroDollarRelicMode
+    this.openClockStatueMode = openClockStatueMode
+    this.spikeRoomRando = spikeRoomRando
+    this.lycanMode = lycanMode
     this.newGoalsSet = newGoalsSet
     this.startStatRandoMode = startStatRandoMode
     // this.easyMode = easyMode
@@ -3395,6 +3436,26 @@
       }
       delete options.preset
       const presetOptions = preset.options()
+      // temp solution for complexity iossues in teh website
+      let relicLocations = presetOptions.relicLocations;
+      let myOverride = false;
+      if(options.relicLocations) {
+        Object.getOwnPropertyNames(options.relicLocations).forEach(function (key) {
+          if (/^[0-9]+(-[0-9]+)?/.test(key)) {
+            myOverride = true;
+            console.log({myOverride})
+          }
+        })
+      }
+      if( myOverride) {
+        Object.getOwnPropertyNames(relicLocations).forEach(function (key) {
+          if (/^[0-9]+(-[0-9]+)?/.test(key)) {
+            goals = relicLocations[key]
+            console.log({key, goals, relicLocations});
+            delete relicLocations[key]
+          }
+        })
+      }
       merge.call(presetOptions, options)
       return presetOptions
     }
@@ -3505,6 +3566,16 @@
     this.libShort = false
     // Single-Hit Gears
     this.singleHitGear = false
+    // Reverse Castle Teleport Randomizer
+    this.revCastleTeleport = false
+    // Zero Dollar Relics in Library
+    this.zeroDollarRelic = false
+    // Opens the Clock Room Statue
+    this.openClockStatue = false
+    // Randomize Spike Room
+    this.spikeRoom = false
+    // Allow Full Wolf Use
+    this.lycan = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
@@ -3871,6 +3942,21 @@
     }
     if ('singleHitGearMode' in json) {
       builder.singleHitGearMode(json.singleHitGearMode)
+    }
+    if ('revCastleTeleportRando' in json) {
+      builder.revCastleTeleportRando(json.revCastleTeleportRando)
+    }
+    if ('zeroDollarRelicMode' in json) {
+      builder.zeroDollarRelicMode(json.zeroDollarRelicMode)
+    }
+    if ('openClockStatueMode' in json) {
+      builder.openClockStatueMode(json.openClockStatueMode)
+    }
+    if ('spikeRoomRando' in json) {
+      builder.spikeRoomRando(json.spikeRoomRando)
+    }
+    if ('lycanMode' in json) {
+      builder.lycanMode(json.lycanMode)
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in json) {
@@ -4250,6 +4336,21 @@
     }
     if ('singleHitGearMode' in preset) {
       this.singleHitGear = preset.singleHitGearMode
+    }
+    if ('revCastleTeleportRando' in preset) {
+      this.revCastleTeleport = preset.revCastleTeleportRando
+    }
+    if ('zeroDollarRelicMode' in preset) {
+      this.zeroDollarRelic = preset.zeroDollarRelicMode
+    }
+    if ('openClockStatueMode' in preset) {
+      this.openClockStatue = preset.openClockStatueMode
+    }
+    if ('spikeRoomRando' in preset) {
+      this.spikeRoom = preset.spikeRoomRando
+    }
+    if ('lycanMode' in preset) {
+      this.lycan = preset.lycanMode
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
@@ -4964,59 +5065,59 @@
     this.magicmax = enabled
   }
 
-  // remove screen freezes from level up, relic, vessel. - eldri7ch & MottZilla
+  // remove screen freezes from level up, relic, vessel. & MottZilla
   PresetBuilder.prototype.antiFreezeMode = function antiFreezeMode(enabled) {
     this.antifreeze = enabled
   }
 
-  // Prevent Death from stealing equipment - eldri7ch
+  // Prevent Death from stealing equipment
   PresetBuilder.prototype.mypurseMode = function mypurseMode(enabled) {
     this.mypurse = enabled
   }
 
-  // Enable Infinite Wing Smash - eldri7ch
+  // Enable Infinite Wing Smash
   PresetBuilder.prototype.iwsMode = function iwsMode(enabled) {
     this.iws = enabled
   }
 
-  // Enable Faster Warps - eldri7ch
+  // Enable Faster Warps
   PresetBuilder.prototype.fastwarpMode = function fastwarpMode(enabled) {
     this.fastwarp = enabled
   }
 
-  // Enable Prologue Skip - eldri7ch
+  // Enable Prologue Skip
   PresetBuilder.prototype.noprologueMode = function noprologueMode(enabled) {
     this.noprologue = enabled
   }
 
-  // Enable Unlocked - eldri7ch
+  // Enable Unlocked
   PresetBuilder.prototype.unlockedMode = function unlockedMode(enabled) {
     this.unlocked = enabled
   }
 
-  // Enable Surprise - eldri7ch
+  // Enable Surprise
   PresetBuilder.prototype.surpriseMode = function surpriseMode(enabled) {
     this.surprise = enabled
   }
 
-  // Enable Enemy Stat Rando - eldri7ch
+  // Enable Enemy Stat Rando
   PresetBuilder.prototype.enemyStatRandoMode =
     function enemyStatRandoMode(enabled) {
       this.enemyStatRando = enabled
     }
   
-  // Enable Elemental Chaos - eldri7ch
+  // Enable Elemental Chaos
   PresetBuilder.prototype.elemChaosMode = function elemChaosMode(enabled) {
     this.elemChaos = enabled
   }
 
-  // Enable Shop Price Rando - eldri7ch
+  // Enable Shop Price Rando
   PresetBuilder.prototype.shopPriceRandoMode =
     function shopPriceRandoMode(enabled) {
       this.shopPriceRando = enabled
     }
 
-  // Enable Starting Room Rando - eldri7ch
+  // Enable Starting Room Rando
   PresetBuilder.prototype.startRoomRandoMode =
     function startRoomRandoMode(enabled) {
       this.startRoomRando = enabled
@@ -5028,70 +5129,100 @@
       this.startRoomRando2nd = enabled
     }
 
-  // Enable Guaranteed Drops - eldri7ch
+  // Enable Guaranteed Drops
   PresetBuilder.prototype.dominoMode = function dominoMode(enabled) {
     this.domino = enabled
   }
 
-  // Enable Reverse Library Cards - eldri7ch
+  // Enable Reverse Library Cards
   PresetBuilder.prototype.rlbcMode = function rlbcMode(enabled) {
     this.rlbc = enabled
   }
 
-  // Enable Immunity Potions - eldri7ch
+  // Enable Immunity Potions
   PresetBuilder.prototype.immunityPotionMode =
     function immunityPotionMode(enabled) {
       this.immunityPotion = enabled
     }
 
-  // Enable Godspeed Shoes - eldri7ch
+  // Enable Godspeed Shoes
   PresetBuilder.prototype.godspeedMode = function godspeedMode(enabled) {
     this.godspeed = enabled
   }
 
-  // Enable Library Shortcut - eldri7ch
+  // Enable Library Shortcut
   PresetBuilder.prototype.libraryShortcut = function libraryShortcut(enabled) {
     this.libShort = enabled
   }
 
-  // Enable Single-Hit Gears - eldri7ch
+  // Enable Single-Hit Gears
   PresetBuilder.prototype.singleHitGearMode =
     function singleHitGearMode(enabled) {
       this.singleHitGear = enabled
     }
+
+  // Enable Reverse Castle Teleporter Randomization
+  PresetBuilder.prototype.revCastleTeleportRando =
+    function revCastleTeleportRando(enabled) {
+      this.revCastleTeleport = enabled
+    }
+
+  // Enable Free Relics in the Library
+  PresetBuilder.prototype.zeroDollarRelicMode =
+    function zeroDollarRelicMode(enabled) {
+      this.zeroDollarRelic = enabled
+    }
+
+  // Enable Clock Roomk Statue Opening
+  PresetBuilder.prototype.openClockStatueMode =
+    function openClockStatueMode(enabled) {
+      this.openClockStatue = enabled
+    }
+  
+  // Enable Spike Room Randomizer
+  PresetBuilder.prototype.spikeRoomRando =
+    function spikeRoomRando(enabled) {
+      this.spikeRoom = enabled
+    }
+  
+  // Enable Lycanthrope Mode
+  PresetBuilder.prototype.lycanMode =
+    function lycanMode(enabled) {
+      this.lycan = enabled
+    }
   
   // ============================== Preset: Argument ==========================
   
-  // Assign New Goals - eldri7ch
+  // Assign New Goals
   PresetBuilder.prototype.newGoalsSet = function newGoalsSet(nGoals) {
     assert.oneOf(typeof(nGoals), ['boolean', 'string'])
     this.newGoals = nGoals
   }
 
-  // Enable Starting Stat Randomizer - eldri7ch
+  // Enable Starting Stat Randomizer
   PresetBuilder.prototype.startStatRandoMode =
     function startStatRandoMode(ssMax) {
       assert.oneOf(typeof(ssMax), ['boolean', 'number'])
       this.startStatRando = ssMax
     }
 
-  // Enable Simplified Inputs - eldri7ch
+  // Enable Simplified Inputs
   // PresetBuilder.prototype.easyMode = function easyMode(enabled) {
   //   this.easy = enabled
   // }
 
-  // // Enable Dev's Stash - eldri7ch
+  // // Enable Dev's Stash
   // PresetBuilder.prototype.devStashMode = function devStashMode(enabled) {
   //   this.devStash = enabled
   // }
 
-  // // Enable Seasonal Phrases - eldri7ch
+  // // Enable Seasonal Phrases
   // PresetBuilder.prototype.seasonalPhrasesMode =
   //   function seasonalPhrasesMode(enabled) {
   //     this.seasonalPhrases = enabled
   //   }
 
-  // // Enable boss music separation - eldri7ch
+  // // Enable boss music separation
   // PresetBuilder.prototype.bossMusicSeparation =
   //   function bossMusicSeparation(enabled) {
   //     this.bossMusic = enabled
@@ -5437,6 +5568,11 @@
     const godspeed = self.godspeed
     const libShort = self.libShort
     const singleHitGear = self.singleHitGear
+    const revCastleTeleport = self.revCastleTeleport
+    const zeroDollarRelic = self.zeroDollarRelic
+    const openClockStatue = self.openClockStatue
+    const spikeRoom = self.spikeRoom
+    const lycan = self.lycan
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
     // const easy = false
@@ -5492,6 +5628,11 @@
       godspeed,
       libShort,
       singleHitGear,
+      revCastleTeleport,
+      zeroDollarRelic,
+      openClockStatue,
+      spikeRoom,
+      lycan,
       newGoals,
       startStatRando,
       // easy,
@@ -5530,7 +5671,7 @@
 
   function applyTrackingByte() {
     const data = new checked()
-    data.writeChar(0x037135f8,numToHex(trackByteM))
+    data.writeChar(0x37134C4,numToHex(trackByteM))	// RAM Address 0x 09A0AC
     return data
   }
 
@@ -5541,7 +5682,7 @@
     // 0x3711a68 is loaded from CD by separate code
     const data = new checked()
     let offset
-    
+	
     // console.log('optwrite: ' + optWrite)
 
     offset = 0xf96d8
@@ -5576,396 +5717,469 @@
     offset = data.writeWord(offset, 0x03e00008)
     offset = data.writeWord(offset, 0x00000000)
 
+	// Note: in master source the first two word writes with values 0x69696969 and 0xFEFEFEFE
+	// are the place holders for optWrite and the MapCell values. Don't include them in the big block of writes
+	// as that would offset everything. The optWrite an MapCell writes are handled below.
     // Start the master function with jump tables
     offset = 0x3711a68
 
     // optionWrite is a bit indicator of all options
     // marked for reading later by ASM or tracker
-    offset = data.writeWord(offset, optWrite)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08026239)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08026261)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x080262f3)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08026302)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0802633d)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe0)
-    offset = data.writeWord(offset,0xafbf0010)
-    offset = data.writeWord(offset,0x0c03c182)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34040300)
-    offset = data.writeWord(offset,0x8c850000)
-    offset = data.writeWord(offset,0x3c06b000)
-    offset = data.writeWord(offset,0x34c60000)
-    offset = data.writeWord(offset,0x00a62824)
-    offset = data.writeWord(offset,0x14a60004)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c058009)
-    offset = data.writeWord(offset,0x34a58de0)
-    offset = data.writeWord(offset,0xac850000)
-    offset = data.writeWord(offset,0x3c048009)
-    offset = data.writeWord(offset,0x348488b0)
-    offset = data.writeWord(offset,0x8c860000)
-    offset = data.writeWord(offset,0x3c058000)
-    offset = data.writeWord(offset,0x34a50000)
-    offset = data.writeWord(offset,0x00c53024)
-    offset = data.writeWord(offset,0x10c00003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0c026280)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c048009)
-    offset = data.writeWord(offset,0x348488b0)
-    offset = data.writeWord(offset,0x8c850014)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34a60000)
-    offset = data.writeWord(offset,0x3c078000)
-    offset = data.writeWord(offset,0x34e70000)
-    offset = data.writeWord(offset,0x00c73024)
-    offset = data.writeWord(offset,0x10c00003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00a0f809)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x8fbf0010)
-    offset = data.writeWord(offset,0x27bd0020)
-    offset = data.writeWord(offset,0x03e00008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028004)
-    offset = data.writeWord(offset,0x9045925d)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x38a500ff)
-    offset = data.writeWord(offset,0x30a50040)
-    offset = data.writeWord(offset,0x10a00008)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x9042bbfb)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x10400004)
-    offset = data.writeWord(offset,0x34180022)
-    offset = data.writeWord(offset,0x341988be)
-    offset = data.writeWord(offset,0x18000003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34180002)
-    offset = data.writeWord(offset,0x34197c0e)
-    offset = data.writeWord(offset,0x3c02800f)
-    offset = data.writeWord(offset,0xa0581724)
-    offset = data.writeWord(offset,0x3b180020)
-    offset = data.writeWord(offset,0xa05832a4)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c02800a)
-    offset = data.writeWord(offset,0xa4593c98)
-    offset = data.writeWord(offset,0x34040000)
-    offset = data.writeWord(offset,0x0804390b)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe0)
-    offset = data.writeWord(offset,0xafbf0004)
-    offset = data.writeWord(offset,0x3c068009)
-    offset = data.writeWord(offset,0x34c689ec)
-    offset = data.writeWord(offset,0x3c078009)
-    offset = data.writeWord(offset,0x8cc40000)
-    offset = data.writeWord(offset,0x34e77490)
-    offset = data.writeWord(offset,0x94e50000)
-    offset = data.writeWord(offset,0x10800007)
-    offset = data.writeWord(offset,0x30a5a000)
-    offset = data.writeWord(offset,0x14a00039)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0c0262c9)
-    offset = data.writeWord(offset,0x34040000)
-    offset = data.writeWord(offset,0x080262c4)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x94e40004)
-    offset = data.writeWord(offset,0x94e20004)
-    offset = data.writeWord(offset,0x3c068009)
-    offset = data.writeWord(offset,0x34c689f0)
-    offset = data.writeWord(offset,0x30848000)
-    offset = data.writeWord(offset,0x10800005)
-    offset = data.writeWord(offset,0x8cc50000)
-    offset = data.writeWord(offset,0x34040010)
-    offset = data.writeWord(offset,0x24a50001)
-    offset = data.writeWord(offset,0xacc50000)
-    offset = data.writeWord(offset,0xacc40004)
-    offset = data.writeWord(offset,0x30422000)
-    offset = data.writeWord(offset,0x10400006)
-    offset = data.writeWord(offset,0x8cc50008)
-    offset = data.writeWord(offset,0x34040010)
-    offset = data.writeWord(offset,0x24a50001)
-    offset = data.writeWord(offset,0xacc50008)
-    offset = data.writeWord(offset,0x34050010)
-    offset = data.writeWord(offset,0xacc4000c)
-    offset = data.writeWord(offset,0x8cc50004)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x10a00005)
-    offset = data.writeWord(offset,0x24a5ffff)
-    offset = data.writeWord(offset,0xacc50004)
-    offset = data.writeWord(offset,0x14a00002)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xacc00000)
-    offset = data.writeWord(offset,0x8cc5000c)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x10a00005)
-    offset = data.writeWord(offset,0x24a5ffff)
-    offset = data.writeWord(offset,0xacc5000c)
-    offset = data.writeWord(offset,0x14a00002)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xacc00008)
-    offset = data.writeWord(offset,0x8cc50000)
-    offset = data.writeWord(offset,0x8cc20008)
-    offset = data.writeWord(offset,0x34070002)
-    offset = data.writeWord(offset,0x10a70004)
-    offset = data.writeWord(offset,0x10470003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x080262c4)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xacc00000)
-    offset = data.writeWord(offset,0xacc00004)
-    offset = data.writeWord(offset,0xacc00008)
-    offset = data.writeWord(offset,0xacc0000c)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0c0262c9)
-    offset = data.writeWord(offset,0x34040001)
-    offset = data.writeWord(offset,0x080262c4)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x8fbf0004)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bd0020)
-    offset = data.writeWord(offset,0x03e00008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c068009)
-    offset = data.writeWord(offset,0x34c689ec)
-    offset = data.writeWord(offset,0xacc40000)
-    offset = data.writeWord(offset,0x10800008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34050002)
-    offset = data.writeWord(offset,0x34044000)
-    offset = data.writeWord(offset,0x3408c000)
-    offset = data.writeWord(offset,0x3407fffd)
-    offset = data.writeWord(offset,0x34020002)
-    offset = data.writeWord(offset,0x080262da)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34050001)
-    offset = data.writeWord(offset,0x34048000)
-    offset = data.writeWord(offset,0x34084000)
-    offset = data.writeWord(offset,0x3407fffe)
-    offset = data.writeWord(offset,0x34020003)
-    offset = data.writeWord(offset,0x3c068011)
-    offset = data.writeWord(offset,0xa4c52b7c)
-    offset = data.writeWord(offset,0xa4c42b84)
-    offset = data.writeWord(offset,0xa4c52d8c)
-    offset = data.writeWord(offset,0xa4c42d94)
-    offset = data.writeWord(offset,0xa4c52cdc)
-    offset = data.writeWord(offset,0xa4c42ce4)
-    offset = data.writeWord(offset,0xa4c52f84)
-    offset = data.writeWord(offset,0xa4c42f88)
-    offset = data.writeWord(offset,0xa4c82f68)
-    offset = data.writeWord(offset,0xa4c72f64)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c06800a)
-    offset = data.writeWord(offset,0x34c6e000)
-    offset = data.writeWord(offset,0xa4c20488)
-    offset = data.writeWord(offset,0xa4c20490)
-    offset = data.writeWord(offset,0xa4c20498)
-    offset = data.writeWord(offset,0xa4c204a0)
-    offset = data.writeWord(offset,0xa4c204a8)
-    offset = data.writeWord(offset,0xa4c204b0)
-    offset = data.writeWord(offset,0xa4c204b8)
-    offset = data.writeWord(offset,0xa4c204c0)
-    offset = data.writeWord(offset,0x03e00008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x8c422eec)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34430000)
-    offset = data.writeWord(offset,0x30630001)
-    offset = data.writeWord(offset,0x10600007)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0c03f8ea)
-    offset = data.writeWord(offset,0x3404000c)
-    offset = data.writeWord(offset,0x10400003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08044185)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0804414a)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028009)
-    offset = data.writeWord(offset,0x94437494)
-    offset = data.writeWord(offset,0x94427490)
-    offset = data.writeWord(offset,0x34050002)
-    offset = data.writeWord(offset,0x10850013)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34050003)
-    offset = data.writeWord(offset,0x10850021)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x30420400)
-    offset = data.writeWord(offset,0x10400008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34041000)
-    offset = data.writeWord(offset,0x14640005)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe8)
-    offset = data.writeWord(offset,0xafbf0010)
-    offset = data.writeWord(offset,0x08044527)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x8c422ee8)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x080444ad)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x30420400)
-    offset = data.writeWord(offset,0x1040000a)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34044000)
-    offset = data.writeWord(offset,0x14640007)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x34050002)
-    offset = data.writeWord(offset,0xac453404)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xafbf0010)
-    offset = data.writeWord(offset,0x0804448e)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x8c422ee8)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08044409)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x30420400)
-    offset = data.writeWord(offset,0x10400008)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3063a000)
-    offset = data.writeWord(offset,0x10600005)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe0)
-    offset = data.writeWord(offset,0xafbf0018)
-    offset = data.writeWord(offset,0x080443e0)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028007)
-    offset = data.writeWord(offset,0x8c422ee8)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x08044381)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x06030100)
-    offset = data.writeWord(offset,0x2017100a)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x16220003)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x0803d3b3)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x27bdffe0)
-    offset = data.writeWord(offset,0xafbf0004)
-    offset = data.writeWord(offset,0xafb60008)
-    offset = data.writeWord(offset,0xafaf000c)
-    offset = data.writeWord(offset,0x3402006d)
-    offset = data.writeWord(offset,0x1622002a)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c028009)
-    offset = data.writeWord(offset,0x34427c14)
-    offset = data.writeWord(offset,0x8c420000)
-    offset = data.writeWord(offset,0x340f0045)
-    offset = data.writeWord(offset,0x01e27823)
-    offset = data.writeWord(offset,0x34560000)
-    offset = data.writeWord(offset,0x05e00022)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x340f003f)
-    offset = data.writeWord(offset,0x02cfb023)
-    offset = data.writeWord(offset,0x06c0001e)
-    offset = data.writeWord(offset,0x26cf0005)
-    offset = data.writeWord(offset,0x3c168009)
-    offset = data.writeWord(offset,0x36d68ce8)
-    offset = data.writeWord(offset,0x02cfb021)
-    offset = data.writeWord(offset,0x92c20000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x02028021)
-    offset = data.writeWord(offset,0x3c028009)
-    offset = data.writeWord(offset,0x34427c18)
-    offset = data.writeWord(offset,0x8c420000)
-    offset = data.writeWord(offset,0x340f0045)
-    offset = data.writeWord(offset,0x01e27823)
-    offset = data.writeWord(offset,0x34560000)
-    offset = data.writeWord(offset,0x05e00010)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x340f003f)
-    offset = data.writeWord(offset,0x02cfb023)
-    offset = data.writeWord(offset,0x06c0000c)
-    offset = data.writeWord(offset,0x26cf0005)
-    offset = data.writeWord(offset,0x3c168009)
-    offset = data.writeWord(offset,0x36d68ce8)
-    offset = data.writeWord(offset,0x02cfb021)
-    offset = data.writeWord(offset,0x92c20000)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x02028021)
-    offset = data.writeWord(offset,0x34160000)
-    offset = data.writeWord(offset,0x3c028009)
-    offset = data.writeWord(offset,0x34427c00)
-    offset = data.writeWord(offset,0x14530001)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x8faf000c)
-    offset = data.writeWord(offset,0x8fb60008)
-    offset = data.writeWord(offset,0x8fbf0004)
-    offset = data.writeWord(offset,0x27bd0020)
-    offset = data.writeWord(offset,0x3402007e)
-    offset = data.writeWord(offset,0x0803d3b9)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x3c048013)
-    offset = data.writeWord(offset,0x0c004b24)
-    offset = data.writeWord(offset,0x8c8462cc)
-    offset = data.writeWord(offset,0x3c048002)
-    offset = data.writeWord(offset,0x3484b788)
-    offset = data.writeWord(offset,0xa4800000)
-    offset = data.writeWord(offset,0x34030003)
-    offset = data.writeWord(offset,0xa083ffdb)
-    offset = data.writeWord(offset,0x34030060)
-    offset = data.writeWord(offset,0xa083ffdf)
-    offset = data.writeWord(offset,0x34050040)
-    offset = data.writeWord(offset,0xa485ffe0)
-    offset = data.writeWord(offset,0xa485ffe2)
-    offset = data.writeWord(offset,0x34050080)
-    offset = data.writeWord(offset,0xa485ffe4)
-    offset = data.writeWord(offset,0x34050020)
-    offset = data.writeWord(offset,0xa485ffe6)
-    offset = data.writeWord(offset,0x3c048009)
-    offset = data.writeWord(offset,0x34848e80)
-    offset = data.writeWord(offset,0x40057000)
-    offset = data.writeWord(offset,0x0c004657)
-    offset = data.writeWord(offset,0x40066800)
-    offset = data.writeWord(offset,0x0c0045bf)
-    offset = data.writeWord(offset,0x2404ffff)
-    offset = data.writeWord(offset,0x3c048013)
-    offset = data.writeWord(offset,0x0c004b87)
-    offset = data.writeWord(offset,0x8c8462cc)
-    offset = data.writeWord(offset,0x3c048006)
-    offset = data.writeWord(offset,0x3484c37e)
-    offset = data.writeWord(offset,0x90840000)
-    offset = data.writeWord(offset,0x3c011f80)
-    offset = data.writeWord(offset,0x34211814)
-    offset = data.writeWord(offset,0x38840004)
-    offset = data.writeWord(offset,0x30840004)
-    offset = data.writeWord(offset,0x00042180)
-    offset = data.writeWord(offset,0x3c020500)
-    offset = data.writeWord(offset,0x00441025)
-    offset = data.writeWord(offset,0xac220000)
-    offset = data.writeWord(offset,0x0802639e)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0x73617243)
-    offset = data.writeWord(offset,0x450a2168)
-    offset = data.writeWord(offset,0x253a4350)
-    offset = data.writeWord(offset,0x41430a58)
-    offset = data.writeWord(offset,0x3a455355)
-    offset = data.writeWord(offset,0x00005825)
-    offset = data.writeWord(offset,0x00000000)
-    offset = data.writeWord(offset,0xffffffff)
+	offset = data.writeWord(offset,optWrite)
+	// Skip 1 word for the MapCellAddress and Mask, so we jump over offset = 0x3711a6c to 0x3711a70
+	offset = 0x3711a70
 
-    
+	offset = data.writeWord(offset,0x0802623a)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0802626e)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x08026300)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0802630f)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0802634a)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x27bdffe0)
+	offset = data.writeWord(offset,0xafbf0010)
+	offset = data.writeWord(offset,0x0c03c182)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34040300)
+	offset = data.writeWord(offset,0x8c850000)
+	offset = data.writeWord(offset,0x3c06b000)
+	offset = data.writeWord(offset,0x34c60000)
+	offset = data.writeWord(offset,0x0a62824)
+	offset = data.writeWord(offset,0x14a60004)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c058009)
+	offset = data.writeWord(offset,0x34a58e14)
+	offset = data.writeWord(offset,0xac850000)
+	offset = data.writeWord(offset,0x3c048009)
+	offset = data.writeWord(offset,0x348488b4)
+	offset = data.writeWord(offset,0x3c058006)
+	offset = data.writeWord(offset,0x94860000)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x10c00006)
+	offset = data.writeWord(offset,0x0a62821)
+	offset = data.writeWord(offset,0x90a60000)
+	offset = data.writeWord(offset,0x90870002)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0c73025)
+	offset = data.writeWord(offset,0xa0a60000)
+	offset = data.writeWord(offset,0x3c048009)
+	offset = data.writeWord(offset,0x348488b0)
+	offset = data.writeWord(offset,0x8c860000)
+	offset = data.writeWord(offset,0x3c058000)
+	offset = data.writeWord(offset,0x34a50000)
+	offset = data.writeWord(offset,0x0c53024)
+	offset = data.writeWord(offset,0x10c00003)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0c02628d)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c048009)
+	offset = data.writeWord(offset,0x348488b0)
+	offset = data.writeWord(offset,0x8c850030)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34a60000)
+	offset = data.writeWord(offset,0x3c078000)
+	offset = data.writeWord(offset,0x34e70000)
+	offset = data.writeWord(offset,0x0c73024)
+	offset = data.writeWord(offset,0x10c00003)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0a0f809)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x8fbf0010)
+	offset = data.writeWord(offset,0x27bd0020)
+	offset = data.writeWord(offset,0x03e00008)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c028004)
+	offset = data.writeWord(offset,0x9045925d)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x38a500ff)
+	offset = data.writeWord(offset,0x30a50040)
+	offset = data.writeWord(offset,0x10a00008)
+	offset = data.writeWord(offset,0x3c028007)
+	offset = data.writeWord(offset,0x9042bbfb)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x10400004)
+	offset = data.writeWord(offset,0x34180022)
+	offset = data.writeWord(offset,0x341988be)
+	offset = data.writeWord(offset,0x18000003)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34180002)
+	offset = data.writeWord(offset,0x34197c0e)
+	offset = data.writeWord(offset,0x3c02800f)
+	offset = data.writeWord(offset,0xa0581724)
+	offset = data.writeWord(offset,0x3b180020)
+	offset = data.writeWord(offset,0xa05832a4)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c02800a)
+	offset = data.writeWord(offset,0xa4593c98)
+	offset = data.writeWord(offset,0x34040000)
+	offset = data.writeWord(offset,0x0804390b)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x27bdffe0)
+	offset = data.writeWord(offset,0xafbf0004)
+	offset = data.writeWord(offset,0x3c068009)
+	offset = data.writeWord(offset,0x34c68a20)
+	offset = data.writeWord(offset,0x3c078009)
+	offset = data.writeWord(offset,0x8cc40000)
+	offset = data.writeWord(offset,0x34e77490)
+	offset = data.writeWord(offset,0x94e50000)
+	offset = data.writeWord(offset,0x10800007)
+	offset = data.writeWord(offset,0x30a5a000)
+	offset = data.writeWord(offset,0x14a00039)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0c0262d6)
+	offset = data.writeWord(offset,0x34040000)
+	offset = data.writeWord(offset,0x080262d1)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x94e40004)
+	offset = data.writeWord(offset,0x94e20004)
+	offset = data.writeWord(offset,0x3c068009)
+	offset = data.writeWord(offset,0x34c68a24)
+	offset = data.writeWord(offset,0x30848000)
+	offset = data.writeWord(offset,0x10800005)
+	offset = data.writeWord(offset,0x8cc50000)
+	offset = data.writeWord(offset,0x34040010)
+	offset = data.writeWord(offset,0x24a50001)
+	offset = data.writeWord(offset,0xacc50000)
+	offset = data.writeWord(offset,0xacc40004)
+	offset = data.writeWord(offset,0x30422000)
+	offset = data.writeWord(offset,0x10400006)
+	offset = data.writeWord(offset,0x8cc50008)
+	offset = data.writeWord(offset,0x34040010)
+	offset = data.writeWord(offset,0x24a50001)
+	offset = data.writeWord(offset,0xacc50008)
+	offset = data.writeWord(offset,0x34050010)
+	offset = data.writeWord(offset,0xacc4000c)
+	offset = data.writeWord(offset,0x8cc50004)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x10a00005)
+	offset = data.writeWord(offset,0x24a5ffff)
+	offset = data.writeWord(offset,0xacc50004)
+	offset = data.writeWord(offset,0x14a00002)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0xacc00000)
+	offset = data.writeWord(offset,0x8cc5000c)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x10a00005)
+	offset = data.writeWord(offset,0x24a5ffff)
+	offset = data.writeWord(offset,0xacc5000c)
+	offset = data.writeWord(offset,0x14a00002)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0xacc00008)
+	offset = data.writeWord(offset,0x8cc50000)
+	offset = data.writeWord(offset,0x8cc20008)
+	offset = data.writeWord(offset,0x34070002)
+	offset = data.writeWord(offset,0x10a70004)
+	offset = data.writeWord(offset,0x10470003)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x080262d1)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0xacc00000)
+	offset = data.writeWord(offset,0xacc00004)
+	offset = data.writeWord(offset,0xacc00008)
+	offset = data.writeWord(offset,0xacc0000c)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0c0262d6)
+	offset = data.writeWord(offset,0x34040001)
+	offset = data.writeWord(offset,0x080262d1)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x8fbf0004)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x27bd0020)
+	offset = data.writeWord(offset,0x03e00008)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c068009)
+	offset = data.writeWord(offset,0x34c68a20)
+	offset = data.writeWord(offset,0xacc40000)
+	offset = data.writeWord(offset,0x10800008)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34050002)
+	offset = data.writeWord(offset,0x34044000)
+	offset = data.writeWord(offset,0x3408c000)
+	offset = data.writeWord(offset,0x3407fffd)
+	offset = data.writeWord(offset,0x34020002)
+	offset = data.writeWord(offset,0x080262e7)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34050001)
+	offset = data.writeWord(offset,0x34048000)
+	offset = data.writeWord(offset,0x34084000)
+	offset = data.writeWord(offset,0x3407fffe)
+	offset = data.writeWord(offset,0x34020003)
+	offset = data.writeWord(offset,0x3c068011)
+	offset = data.writeWord(offset,0xa4c52b7c)
+	offset = data.writeWord(offset,0xa4c42b84)
+	offset = data.writeWord(offset,0xa4c52d8c)
+	offset = data.writeWord(offset,0xa4c42d94)
+	offset = data.writeWord(offset,0xa4c52cdc)
+	offset = data.writeWord(offset,0xa4c42ce4)
+	offset = data.writeWord(offset,0xa4c52f84)
+	offset = data.writeWord(offset,0xa4c42f88)
+	offset = data.writeWord(offset,0xa4c82f68)
+	offset = data.writeWord(offset,0xa4c72f64)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c06800a)
+	offset = data.writeWord(offset,0x34c6e000)
+	offset = data.writeWord(offset,0xa4c20488)
+	offset = data.writeWord(offset,0xa4c20490)
+	offset = data.writeWord(offset,0xa4c20498)
+	offset = data.writeWord(offset,0xa4c204a0)
+	offset = data.writeWord(offset,0xa4c204a8)
+	offset = data.writeWord(offset,0xa4c204b0)
+	offset = data.writeWord(offset,0xa4c204b8)
+	offset = data.writeWord(offset,0xa4c204c0)
+	offset = data.writeWord(offset,0x03e00008)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c028007)
+	offset = data.writeWord(offset,0x8c422eec)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34430000)
+	offset = data.writeWord(offset,0x30630001)
+	offset = data.writeWord(offset,0x10600007)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0c03f8ea)
+	offset = data.writeWord(offset,0x3404000c)
+	offset = data.writeWord(offset,0x10400003)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x08044185)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0804414a)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c028009)
+	offset = data.writeWord(offset,0x94437494)
+	offset = data.writeWord(offset,0x94427490)
+	offset = data.writeWord(offset,0x34050002)
+	offset = data.writeWord(offset,0x10850013)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34050003)
+	offset = data.writeWord(offset,0x10850021)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x30420400)
+	offset = data.writeWord(offset,0x10400008)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34041000)
+	offset = data.writeWord(offset,0x14640005)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x27bdffe8)
+	offset = data.writeWord(offset,0xafbf0010)
+	offset = data.writeWord(offset,0x08044527)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c028007)
+	offset = data.writeWord(offset,0x8c422ee8)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x080444ad)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x30420400)
+	offset = data.writeWord(offset,0x1040000a)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34044000)
+	offset = data.writeWord(offset,0x14640007)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x34050002)
+	offset = data.writeWord(offset,0xac453404)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0xafbf0010)
+	offset = data.writeWord(offset,0x0804448e)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c028007)
+	offset = data.writeWord(offset,0x8c422ee8)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x08044409)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x30420400)
+	offset = data.writeWord(offset,0x10400008)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3063a000)
+	offset = data.writeWord(offset,0x10600005)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x27bdffe0)
+	offset = data.writeWord(offset,0xafbf0018)
+	offset = data.writeWord(offset,0x080443e0)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c028007)
+	offset = data.writeWord(offset,0x8c422ee8)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x08044381)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x06030100)
+	offset = data.writeWord(offset,0x2017100a)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x16220003)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x0803d3b3)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x27bdffe0)
+	offset = data.writeWord(offset,0xafbf0004)
+	offset = data.writeWord(offset,0xafb60008)
+	offset = data.writeWord(offset,0xafaf000c)
+	offset = data.writeWord(offset,0x3402006d)
+	offset = data.writeWord(offset,0x1622002a)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c028009)
+	offset = data.writeWord(offset,0x34427c14)
+	offset = data.writeWord(offset,0x8c420000)
+	offset = data.writeWord(offset,0x340f0045)
+	offset = data.writeWord(offset,0x01e27823)
+	offset = data.writeWord(offset,0x34560000)
+	offset = data.writeWord(offset,0x05e00022)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x340f003f)
+	offset = data.writeWord(offset,0x02cfb023)
+	offset = data.writeWord(offset,0x06c0001e)
+	offset = data.writeWord(offset,0x26cf0001)
+	offset = data.writeWord(offset,0x3c168009)
+	offset = data.writeWord(offset,0x36d68d1c)
+	offset = data.writeWord(offset,0x02cfb021)
+	offset = data.writeWord(offset,0x92c20000)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x02028021)
+	offset = data.writeWord(offset,0x3c028009)
+	offset = data.writeWord(offset,0x34427c18)
+	offset = data.writeWord(offset,0x8c420000)
+	offset = data.writeWord(offset,0x340f0045)
+	offset = data.writeWord(offset,0x01e27823)
+	offset = data.writeWord(offset,0x34560000)
+	offset = data.writeWord(offset,0x05e00010)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x340f003f)
+	offset = data.writeWord(offset,0x02cfb023)
+	offset = data.writeWord(offset,0x06c0000c)
+	offset = data.writeWord(offset,0x26cf0001)
+	offset = data.writeWord(offset,0x3c168009)
+	offset = data.writeWord(offset,0x36d68d1c)
+	offset = data.writeWord(offset,0x02cfb021)
+	offset = data.writeWord(offset,0x92c20000)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x02028021)
+	offset = data.writeWord(offset,0x34160000)
+	offset = data.writeWord(offset,0x3c028009)
+	offset = data.writeWord(offset,0x34427c00)
+	offset = data.writeWord(offset,0x14530001)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x8faf000c)
+	offset = data.writeWord(offset,0x8fb60008)
+	offset = data.writeWord(offset,0x8fbf0004)
+	offset = data.writeWord(offset,0x27bd0020)
+	offset = data.writeWord(offset,0x3402007e)
+	offset = data.writeWord(offset,0x0803d3b9)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x3c048013)
+	offset = data.writeWord(offset,0x0c004b24)
+	offset = data.writeWord(offset,0x8c8462cc)
+	offset = data.writeWord(offset,0x3c048002)
+	offset = data.writeWord(offset,0x3484b788)
+	offset = data.writeWord(offset,0xa4800000)
+	offset = data.writeWord(offset,0x34030003)
+	offset = data.writeWord(offset,0xa083ffdb)
+	offset = data.writeWord(offset,0x34030060)
+	offset = data.writeWord(offset,0xa083ffdf)
+	offset = data.writeWord(offset,0x34050040)
+	offset = data.writeWord(offset,0xa485ffe0)
+	offset = data.writeWord(offset,0xa485ffe2)
+	offset = data.writeWord(offset,0x34050080)
+	offset = data.writeWord(offset,0xa485ffe4)
+	offset = data.writeWord(offset,0x34050020)
+	offset = data.writeWord(offset,0xa485ffe6)
+	offset = data.writeWord(offset,0x3c048009)
+	offset = data.writeWord(offset,0x34848eb4)
+	offset = data.writeWord(offset,0x40057000)
+	offset = data.writeWord(offset,0x0c004657)
+	offset = data.writeWord(offset,0x40066800)
+	offset = data.writeWord(offset,0x0c0045bf)
+	offset = data.writeWord(offset,0x2404ffff)
+	offset = data.writeWord(offset,0x3c048013)
+	offset = data.writeWord(offset,0x0c004b87)
+	offset = data.writeWord(offset,0x8c8462cc)
+	offset = data.writeWord(offset,0x3c048006)
+	offset = data.writeWord(offset,0x3484c37e)
+	offset = data.writeWord(offset,0x90840000)
+	offset = data.writeWord(offset,0x3c011f80)
+	offset = data.writeWord(offset,0x34211814)
+	offset = data.writeWord(offset,0x38840004)
+	offset = data.writeWord(offset,0x30840004)
+	offset = data.writeWord(offset,0x042180)
+	offset = data.writeWord(offset,0x3c020500)
+	offset = data.writeWord(offset,0x0441025)
+	offset = data.writeWord(offset,0xac220000)
+	offset = data.writeWord(offset,0x080263ab)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x73617243)
+	offset = data.writeWord(offset,0x450a2168)
+	offset = data.writeWord(offset,0x253a4350)
+	offset = data.writeWord(offset,0x41430a58)
+	offset = data.writeWord(offset,0x3a455355)
+	offset = data.writeWord(offset,0x05825)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0xffffffff)
+
     // Hook Master function into gameplay loop.
-    data.writeWord(0xfaa38, 0x0c02622d)
+    data.writeWord(0xfaa38, 0x0c02622e)
+
+    return data
+  }
+
+  // =========================================================================
+  //  #region Randomizer Enhancements
+  // =========================================================================
+
+  function applySwordBuffPatches() {
+    const data = new checked()
+    let offset
+
+    // console.log('Jewel Sword')
+    // Jewel Sword Patch Hook - code and idea by eldri7ch
+    data.writeWord(0x0010d2a0, 0x08026236)
+
+    // Badelaire Patch - code by eldri7ch and idea by MottZilla
+    data.writeChar(0x10d238, 0x34)
+
+    // Yasutsuna Hitbox Fix by MottZilla
+    // RIGHT HAND
+    offset = 0x3bfb314
+    offset = data.writeWord(offset, 0x18000024)
+    offset = data.writeWord(offset, 0x00000000)
+
+    offset = 0x3bfb3a8
+    offset = data.writeWord(offset, 0x3c178007)
+    offset = data.writeWord(offset, 0x36f733d8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8ef60000)
+    offset = data.writeWord(offset, 0x8ef50004)
+    offset = data.writeWord(offset, 0x96f40014)
+    offset = data.writeWord(offset, 0xae360000)
+    offset = data.writeWord(offset, 0xae350004)
+    offset = data.writeWord(offset, 0xa6340014)
+    offset = data.writeWord(offset, 0x8fbf0030)
+    offset = data.writeWord(offset, 0x8fb7002c)
+    offset = data.writeWord(offset, 0x1800ffd1)
+
+    // LEFT HAND
+    offset = 0x3dd57f4
+    offset = data.writeWord(offset, 0x18000024)
+    offset = data.writeWord(offset, 0x00000000)
+
+    offset = 0x3dd5888
+    offset = data.writeWord(offset, 0x3c178007)
+    offset = data.writeWord(offset, 0x36f733d8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8ef60000)
+    offset = data.writeWord(offset, 0x8ef50004)
+    offset = data.writeWord(offset, 0x96f40014)
+    offset = data.writeWord(offset, 0xae360000)
+    offset = data.writeWord(offset, 0xae350004)
+    offset = data.writeWord(offset, 0xa6340014)
+    offset = data.writeWord(offset, 0x8fbf0030)
+    offset = data.writeWord(offset, 0x8fb7002c)
+    offset = data.writeWord(offset, 0x1800ffd1)
 
     return data
   }
@@ -5976,15 +6190,13 @@
 
   function applyTournamentModePatches() {
     const data = new checked()
-    // Patch shop relic cost.
-    data.writeWord(0x047a3098, 0x00000000)
-    // Open clock statue.
-    data.writeWord(0x04951d4c, 0x3c020002)
-    data.writeWord(0x04fcf264, 0x3c020002)
+    // Patch No Clip Mode Out.
+    data.writeChar(0x0012655e, 0x00)
+
     return data
   }
 
-  // Adds MP Vessel to replace Heart Vessel - eldrich
+  // Adds MP Vessel to replace Heart Vessel
   function applyMagicMaxPatches() {
     const data = new checked()
     // Set Starting Offset
@@ -6152,7 +6364,7 @@
 
   function applyAntiFreezePatches() {
     const data = new checked()
-    // Patch screen freeze value - eldri7ch
+    // Patch screen freeze value
     // Patch from Boss-Rush / MottZilla
     data.writeChar(0x00140a2c, 0x00)
     return data
@@ -6160,7 +6372,7 @@
 
   function applyMyPursePatches() {
     const data = new checked()
-    // Patch Death goes home - eldri7ch
+    // Patch Death goes home
     // Patch from Boss-Rush / MottZilla
     data.writeWord(0x04baea08, 0x18000006)
     return data
@@ -6168,7 +6380,7 @@
 
   function applyiwsPatches() {
     const data = new checked()
-    // Patch wing smash duration - eldri7ch
+    // Patch wing smash duration
     // Patch from Bat-Master / MottZilla
     data.writeChar(0x00134074, 0x00)
     return data
@@ -6176,7 +6388,7 @@
 
   function applyfastwarpPatches() {
     const data = new checked()
-    // Patch warp animation speed - eldri7ch
+    // Patch warp animation speed
     // Patch from Aperture / MottZilla
     data.writeChar(0x0588be90, 0x02)
     data.writeChar(0x05a78fe4, 0x02)
@@ -6186,7 +6398,7 @@
   function applynoprologuePatches() {
     const data = new checked()
     // Patch prologue removal; specifically setting the first room
-    // to enter as NO3 instead of ST0 - eldri7ch
+    // to enter as NO3 instead of ST0
     let offset
 
     // Patch from Chaos-Lite / MottZilla
@@ -6243,8 +6455,8 @@
     const memorySkip = 0x34020001
     //nop instruction follow-up
     const nopValue = 0x00000000
-    // Patch the reverse entrance shortcut - eldri7ch
-    // remove the blocking tiles - eldri7ch
+    // Patch the reverse entrance shortcut
+    // remove the blocking tiles
     let offset = 0x051caaee
     data.writeWord(offset,tileRemove)
     offset += 0x40
@@ -6261,10 +6473,10 @@
     data.writeWord(offset,tileRemove)
     offset += 0x40
     data.writeWord(offset,tileRemove)
-    // move the entity down - eldri7ch
+    // move the entity down
     data.writeShort(0x051b03c2, 0x030e)
     data.writeShort(0x051afb80, 0x030e)
-    // Patch Underground Caverns - Entrance shortcut - eldri7ch
+    // Patch Underground Caverns - Entrance shortcut
     offset = 0x05430050
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
@@ -6277,7 +6489,7 @@
     offset = 0x04ba88ac
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
-    // Patch Marble Gallery - Entrance shortcut - eldri7ch
+    // Patch Marble Gallery - Entrance shortcut
     offset = 0x04ba8bc4
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
@@ -6308,7 +6520,7 @@
     offset = 0x05430e64
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
-    // Patch Warp Room - Entrance shortcut - eldri7ch
+    // Patch Warp Room - Entrance shortcut
     offset = 0x04bab2d4
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
@@ -6327,11 +6539,11 @@
     offset = 0x0543297c
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
-    // Patch Olrox's Quarters - Royal Chapel shortcut - eldri7ch
+    // Patch Olrox's Quarters - Royal Chapel shortcut
     offset = 0x046c082c
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
-    // Patch Colosseum - Royal Chapel shortcut - eldri7ch
+    // Patch Colosseum - Royal Chapel shortcut
     offset = 0x0440100c
     offset = data.writeWord(offset, memorySkip)
     offset = data.writeWord(offset, nopValue)
@@ -6345,8 +6557,8 @@
     const data = new checked()
     //set tile overwrites to remove them
     const spritePal = 0x01020111
-    // Patch the sprites for each relic - eldri7ch; code by MottZilla
-    // start with Soul of Bat - eldri7ch
+    // Patch the sprites for each relic; code by MottZilla
+    // start with Soul of Bat
     let offset = 0x000b5550
     data.writeWord(offset, spritePal)
     offset += 0x10
@@ -7243,7 +7455,7 @@
     const enemyStats = enemies.enemyStats
     const data = new checked()
     // Patch the enemy stats being randomized
-    // enemy offset addr - eldri7ch
+    // enemy offset addr
     let offset
     // the offset converted to hex
     let hexOffset
@@ -8084,7 +8296,7 @@
 
     return data
   }
-
+	
   function applyStartRoomRandoPatches(rng, castleFlag) {
     const castleOneRoomData = constants.startRoomData.filter(function(room) {
       return room.stage < 0x20
@@ -8302,7 +8514,7 @@
         data.writeWord(0x45f879a, 0x03430342)
         break
       case 0x06:
-        // Patch Colosseum - Royal Chapel shortcut - eldri7ch
+        // Patch Colosseum - Royal Chapel shortcut
         offset = 0x0440100c
         offset = data.writeWord(offset, 0x34020001)
         offset = data.writeWord(offset, 0x00000000)
@@ -8643,56 +8855,1097 @@
 
     return data
   }
-
-  function applySwordBuffPatches() {
+  
+  // prototyping randomizing reverse castle teleporter by MottZilla
+  function applyReverseCastleTeleporterRandoPatches(rng) {
+    const reverseTeleporterData = constants.reverseTeleporterData
     const data = new checked()
+    let randTp
     let offset
+	
+    // debug
+    console.log("applyReverseCastleTeleporterRandoPatches executing")
+	
+    // Select random Tp Location
+    randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
+	
+	// For forcing a selection for testing
+	// randTp = 14
+	while(randTp == 0)
+	{
+		randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
+	}
+	
+	console.log("Selected: " + reverseTeleporterData[randTp].title)
+	
+    // If Vanilla then we don't write anything.
+    if(reverseTeleporterData[randTp].stage == 0x2B)
+    {
+		  return data
+	}
 
-    // console.log('Jewel Sword')
-    // Jewel Sword Patch Hook - code and idea by eldri7ch
-    data.writeWord(0x0010d2a0, 0x08026236)
+    // Do writes for updating activation and updating destination
+    data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
+    data.writeShort(0x109294, reverseTeleporterData[randTp].stage)	// stage Dest
+    data.writeShort(0x125C50, 0x10000 - reverseTeleporterData[randTp].xPos)	// Trigger
+    data.writeShort(0x125C84, 0x10000 - reverseTeleporterData[randTp].yPos)	// Trigger
+    offset = 0xAE5B6
+    offset = data.writeShort(offset, reverseTeleporterData[randTp].xPosWarp)	// Dest
+    offset = data.writeShort(offset, reverseTeleporterData[randTp].yPosWarp)	// Dest
+    offset = data.writeShort(offset, reverseTeleporterData[randTp].room * 8)	// Dest
+    
+    data.writeShort(0xFAC7C, reverseTeleporterData[randTp].stage)	// StageId for RTOP teleport load
 
-    // Badelaire Patch - code by eldri7ch and idea by MottZilla
-    data.writeChar(0x10d238, 0x34)
+	// MapCell reveal
+	data.writeShort(0x3711a6c, reverseTeleporterData[randTp].mapaddr)
+	data.writeShort(0x3711a6e, reverseTeleporterData[randTp].mapmask)
+	  
+	// Adjust RC Teleport in Y-Position
+	if( reverseTeleporterData[randTp].yPosSpecial > 0)
+	{
+		// Special for rooms that are taller than 1 Screen
+		data.writeShort(0x1091CC, reverseTeleporterData[randTp].yPosSpecial)
+	}
+	else
+	{
+		// Standard for 1 Screen tall rooms uses yPos lower 8-bits.
+		data.writeChar(0x1091CC, reverseTeleporterData[randTp].yPos)
+	}
+	  
+    // Optional Tile update to mark the location visually
+    if(reverseTeleporterData[randTp].tileofs > 0)
+    {
+      if(reverseTeleporterData[randTp].tileval > 0xFFFF)
+      {
+        data.writeWord(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
+      }
+      else
+      {
+        data.writeShort(reverseTeleporterData[randTp].tileofs, reverseTeleporterData[randTp].tileval)
+      }
+	  }
+	
+    // todo: record the location for the in game map to be used by the rando master function
+    // this will let us reveal it for random 2nd castle start.
+	
+    return data
+  }
 
-    // Yasutsuna Hitbox Fix by MottZilla
-    // RIGHT HAND
-    // offset = 0x3bfb314
-    // offset = data.writeWord(offset, 0x18000024)
-    // offset = data.writeWord(offset, 0x00000000)
+  function applyZeroDollarRelicPatches() {
+    const data = new checked()
+    // Patch shop relic cost.
+    data.writeWord(0x047a3098, 0x00000000)
 
-    // offset = 0x3bfb3a8
-    // offset = data.writeWord(offset, 0x3c178007)
-    // offset = data.writeWord(offset, 0x36f733d8)
-    // offset = data.writeWord(offset, 0x00000000)
-    // offset = data.writeWord(offset, 0x8ef60000)
-    // offset = data.writeWord(offset, 0x8ef50004)
-    // offset = data.writeWord(offset, 0x96f40014)
-    // offset = data.writeWord(offset, 0xae360000)
-    // offset = data.writeWord(offset, 0xae350004)
-    // offset = data.writeWord(offset, 0xa6340014)
-    // offset = data.writeWord(offset, 0x8fbf0030)
-    // offset = data.writeWord(offset, 0x8fb7002c)
-    // offset = data.writeWord(offset, 0x1800ffd1)
+    return data
+  }
 
-    //LEFT HAND
-    // offset = 0x3dd57f4
-    // offset = data.writeWord(offset, 0x18000024)
-    // offset = data.writeWord(offset, 0x00000000)
+  function applyOpenClockStatuepatches() {
+    const data = new checked()
+    // Open clock statue.
+    data.writeWord(0x04951d4c, 0x3c020002)
+    data.writeWord(0x04fcf264, 0x3c020002)
 
-    // offset = 0x3dd5888
-    // offset = data.writeWord(offset, 0x3c178007)
-    // offset = data.writeWord(offset, 0x36f733d8)
-    // offset = data.writeWord(offset, 0x00000000)
-    // offset = data.writeWord(offset, 0x8ef60000)
-    // offset = data.writeWord(offset, 0x8ef50004)
-    // offset = data.writeWord(offset, 0x96f40014)
-    // offset = data.writeWord(offset, 0xae360000)
-    // offset = data.writeWord(offset, 0xae350004)
-    // offset = data.writeWord(offset, 0xa6340014)
-    // offset = data.writeWord(offset, 0x8fbf0030)
-    // offset = data.writeWord(offset, 0x8fb7002c)
-    // offset = data.writeWord(offset, 0x1800ffd1)
+    return data
+  }
+
+  function applySpikeRoomRandoPatches(rng) {
+    const data = new checked()
+    let roomPattern
+
+    // Choose your adventure! (Pick one of the below)
+    roomPattern = Math.floor(rng() * Math.floor(100))
+
+    if ([100,99,98,97].includes(roomPattern)) {
+      roomPattern = "x"
+    } else {
+      roomPattern = Math.floor(rng() * Math.floor(4))
+    }
+
+    // debug code for testing
+    // roomPattern = 3
+
+    // These are simply the writes for each outcome. 
+    switch (roomPattern) {
+      case 0:
+        console.log("Spike Room Debug: Default Layout Chosen")
+        // Nothing because vanilla was also a good arrangement
+        break
+      case 1:
+        console.log("Spike Room Debug: MM Layout Chosen")
+        // The Magic mirror Layout
+        offset = 0x44b7c9e
+        offset = data.writeWord(offset, 0x071a073b)
+        data.writeWord(offset, 0x074d071b)
+          
+        offset = 0x44b7cfe
+        offset = data.writeWord(offset, 0x077d077c)
+        data.writeWord(offset, 0x074e0783)
+          
+        offset = 0x44b7d5e
+        offset = data.writeWord(offset, 0x0754073e)
+        data.writeWord(offset, 0x07320758)
+          
+        offset = 0x44b7e66
+        offset = data.writeWord(offset, 0x07830781)
+        data.writeShort(offset, 0x0782)
+          
+        offset = 0x44b7ec6
+        offset = data.writeWord(offset, 0x0ff00ff0)
+        data.writeShort(offset, 0x0ff0)
+          
+        offset = 0x44b7ede
+        offset = data.writeWord(offset, 0x0746073b)
+        data.writeShort(offset, 0x0753)
+          
+        offset = 0x44b7f26
+        offset = data.writeWord(offset, 0x0ff00ff0)
+        data.writeShort(offset, 0x0ff0)
+          
+        offset = 0x44b7f3e
+        offset = data.writeWord(offset, 0x0746073c)
+        data.writeShort(offset, 0x0753)
+          
+        offset = 0x44b7f86
+        offset = data.writeWord(offset, 0x0ff00ff0)
+        data.writeWord(offset, 0x0ff00ff0)
+          
+        offset = 0x44b7f9e
+        offset = data.writeWord(offset, 0x07830781)
+        data.writeShort(offset, 0x0782)
+          
+        offset = 0x44b7fde
+        offset = data.writeWord(offset, 0x076b076b)
+        offset = data.writeWord(offset, 0x076b0779)
+        offset = data.writeWord(offset, 0x076b076b)
+        offset = data.writeWord(offset, 0x076b0779)
+        offset = data.writeWord(offset, 0x076b0779)
+        data.writeShort(offset, 0x076b)
+          
+        offset = 0x44b82fe
+        offset = data.writeWord(offset, 0x078f0ff0)
+        data.writeWord(offset, 0x0ff0079c)
+          
+        offset = 0x44b835e
+        offset = data.writeWord(offset, 0x07940ff0)
+        data.writeWord(offset, 0x0ff007a2)
+          
+        offset = 0x44b8596
+        offset = data.writeWord(offset, 0x07aa0ff0)
+        data.writeShort(offset, 0x0ff0)
+          
+        offset = 0x44b85f6
+        offset = data.writeWord(offset, 0x0ff00ff0)
+        data.writeShort(offset, 0x0ff0)
+          
+        offset = 0x44b860e
+        offset = data.writeWord(offset, 0x0ff00792)
+        data.writeShort(offset, 0x079e)
+          
+        offset = 0x44b8656
+        offset = data.writeWord(offset, 0x0ff00ff0)
+        data.writeShort(offset, 0x0ff0)
+          
+        offset = 0x44b866e
+        offset = data.writeWord(offset, 0x0ff0079a)
+        data.writeShort(offset, 0x079f)
+          
+        offset = 0x44b86b6
+        offset = data.writeWord(offset, 0x0ff00ff0)
+        data.writeWord(offset, 0x0ff00ff0)
+          
+        offset = 0x44b86d0
+        data.writeShort(offset, 0x07aa)
+          
+        offset = 0x44b870e
+        offset = data.writeWord(offset, 0x07960796)
+        offset = data.writeWord(offset, 0x079607a9)
+        offset = data.writeWord(offset, 0x07960796)
+        offset = data.writeWord(offset, 0x07970796)
+        offset = data.writeWord(offset, 0x07960796)
+        data.writeShort(offset, 0x0796)
+          
+        offset = 0x44b7d1c
+        data.writeWord(offset, 0x075a0ff0)
+
+        break
+      case 2: 
+        console.log("Spike Room Debug: New Layout 1 Chosen")
+        // The new, evil spike room.
+        offset = 0x044b7ac8
+        offset = data.writeWord(offset, 0x0750074f)
+        data.writeWord(offset, 0x074c074b)
+
+        offset = 0x044b7af2
+        offset = data.writeWord(offset, 0x07390728)
+        offset = data.writeWord(offset, 0x0752073a)
+        data.writeWord(offset, 0x072e074d)
+
+        offset = 0x044b7b0c
+        offset = data.writeWord(offset, 0x0738072d)
+        data.writeWord(offset, 0x071a0739)
+
+        offset = 0x044b7b16
+        offset = data.writeWord(offset, 0x0738074e)
+        offset = data.writeWord(offset, 0x07390738)
+        offset = data.writeWord(offset, 0x0774073a)
+        data.writeWord(offset, 0x072e074d)
+
+        data.writeWord(0x044b7c5c, 0x0750074f)
+
+        offset = 0x044b7c86
+        offset = data.writeWord(offset, 0x0771073b)
+        data.writeWord(offset, 0x00000751)
+
+        offset = 0x044b7c9e
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7cae
+        offset = data.writeWord(offset, 0x07740784)
+        data.writeWord(offset, 0x00000751)
+
+        offset = 0x044b7ce6
+        offset = data.writeWord(offset, 0x07730770)
+        data.writeWord(offset, 0x00000772)
+
+        offset = 0x044b7cfe
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7d0e
+        offset = data.writeWord(offset, 0x0774073c)
+        data.writeWord(offset, 0x00000753)
+
+        offset = 0x044b7d46
+        offset = data.writeWord(offset, 0x07710770)
+        data.writeWord(offset, 0x00000775)
+
+        offset = 0x044b7d5e
+        offset = data.writeWord(offset, 0x073f073e)
+        data.writeWord(offset, 0x07320731)
+
+        offset = 0x044b7d6e
+        offset = data.writeWord(offset, 0x0774073d)
+        data.writeWord(offset, 0x00000772)
+
+        offset = 0x044b7da6
+        offset = data.writeWord(offset, 0x0773073c)
+        offset = data.writeWord(offset, 0x07780777)
+        offset = data.writeWord(offset, 0x076b0740)
+        offset = data.writeWord(offset, 0x0731076b)
+        offset = data.writeWord(offset, 0x00000732)
+        data.writeWord(offset, 0x073e0000)
+
+        data.writeWord(0x044b7dc4, 0x00000735)
+
+        offset = 0x044b7dce
+        offset = data.writeWord(offset, 0x07860744)
+        data.writeWord(offset, 0x00000755)
+
+        offset = 0x044b7e06
+        offset = data.writeWord(offset, 0x07340745)
+        offset = data.writeWord(offset, 0x07480747)
+        offset = data.writeWord(offset, 0x07480748)
+        offset = data.writeWord(offset, 0x074a0748)
+        offset = data.writeWord(offset, 0x00000755)
+        data.writeWord(offset, 0x07450000)
+
+        data.writeWord(0x044b7e24, 0x00000772)
+
+        data.writeWord(0x044b7e32, 0x00000782)
+
+        offset = 0x044b7e66
+        offset = data.writeWord(offset, 0x077d0781)
+        offset = data.writeWord(offset, 0x077f077e)
+        offset = data.writeWord(offset, 0x0780077f)
+        offset = data.writeWord(offset, 0x0783077f)
+        offset = data.writeWord(offset, 0x00000782)
+        data.writeWord(offset, 0x07810000)
+
+        offset = 0x044b7e80
+        offset = data.writeWord(offset, 0x074c074b)
+        data.writeWord(offset, 0x00000753)
+
+        offset = 0x044b7e8c
+        offset = data.writeWord(offset, 0x07830781)
+        offset = data.writeWord(offset, 0x00000782)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7ec6
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7ede
+        offset = data.writeWord(offset, 0x074f0784)
+        data.writeWord(offset, 0x07720750)
+
+        offset = 0x044b7eee
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x07870000)
+
+        offset = 0x044b7f26
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7f3e
+        offset = data.writeWord(offset, 0x074b073c)
+        data.writeWord(offset, 0x0772074c)
+
+        offset = 0x044b7f4e
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x076b0740)
+        offset = data.writeWord(offset, 0x07400779)
+        data.writeWord(offset, 0x00330742)
+
+        offset = 0x044b7f86
+        offset = data.writeWord(offset, 0x073f073e)
+        data.writeWord(offset, 0x07320731)
+
+        offset = 0x044b7f9e
+        offset = data.writeWord(offset, 0x074f0770)
+        data.writeWord(offset, 0x07530750)
+
+        offset = 0x044b7fae
+        offset = data.writeWord(offset, 0x0779073f)
+        offset = data.writeWord(offset, 0x075c0742)
+        offset = data.writeWord(offset, 0x075d075d)
+        offset = data.writeWord(offset, 0x075d075d)
+        data.writeWord(offset, 0x074b07b3)
+
+        data.writeWord(0x044b7fdc, 0x076b0740)
+
+        offset = 0x044b7fec
+        offset = data.writeWord(offset, 0x07780777)
+        data.writeWord(offset, 0x076b0740)
+
+        offset = 0x044b7ffe
+        offset = data.writeWord(offset, 0x074b073d)
+        data.writeWord(offset, 0x0775074c)
+
+        offset = 0x044b8010
+        offset = data.writeWord(offset, 0x077a076c)
+        offset = data.writeWord(offset, 0x07620761)
+        offset = data.writeWord(offset, 0x07620762)
+        data.writeWord(offset, 0x07630762)
+
+        offset = 0x044b805a
+        offset = data.writeWord(offset, 0x07430742)
+        offset = data.writeWord(offset, 0x074f0744)
+        offset = data.writeWord(offset, 0x07770750)
+        data.writeWord(offset, 0x07420778)
+
+        offset = 0x044b8070
+        offset = data.writeWord(offset, 0x07520752)
+        offset = data.writeWord(offset, 0x07680767)
+        offset = data.writeWord(offset, 0x07680768)
+        data.writeWord(offset, 0x07690768)
+
+        offset = 0x044b8224
+        offset = data.writeWord(offset, 0x0790078f)
+        offset = data.writeWord(offset, 0x079b0000)
+        data.writeWord(offset, 0x078a079c)
+
+        offset = 0x044b823a
+        offset = data.writeWord(offset, 0x078a078a)
+        data.writeWord(offset, 0x078f078a)
+
+        data.writeWord(0x044b8246, 0x078a079c)
+
+        offset = 0x044b824c
+        offset = data.writeWord(offset, 0x07ae078f)
+        data.writeWord(offset, 0x079b0000)
+
+        offset = 0x044b8286
+        offset = data.writeWord(offset, 0x00000791)
+        data.writeWord(offset, 0x0000079d)
+
+        offset = 0x044b829e
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x078f07af)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b82ae
+        offset = data.writeWord(offset, 0x00000791)
+        data.writeWord(offset, 0x0000079d)
+
+        offset = 0x044b82e6
+        offset = data.writeWord(offset, 0x00000792)
+        data.writeWord(offset, 0x0000079e)
+
+        data.writeWord(0x044b82fe, 0x00000000)
+
+        data.writeWord(0x044b8304, 0x00000000)
+
+        offset = 0x044b830e
+        offset = data.writeWord(offset, 0x00000792)
+        data.writeWord(offset, 0x0000079e)
+
+        offset = 0x044b8346
+        offset = data.writeWord(offset, 0x000007a4)
+        data.writeWord(offset, 0x0000079e)
+
+        offset = 0x044b835e
+        offset = data.writeWord(offset, 0x07940000)
+        data.writeWord(offset, 0x0000078b)
+
+        offset = 0x044b836e
+        offset = data.writeWord(offset, 0x00000793)
+        data.writeWord(offset, 0x0000079f)
+
+        offset = 0x044b83a6
+        offset = data.writeWord(offset, 0x00000793)
+        offset = data.writeWord(offset, 0x079507a7)
+        offset = data.writeWord(offset, 0x07970796)
+        offset = data.writeWord(offset, 0x07a80795)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b83ce
+        offset = data.writeWord(offset, 0x00000799)
+        data.writeWord(offset, 0x0000078d)
+
+        offset = 0x044b8406
+        offset = data.writeWord(offset, 0x0000079a)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b8412
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x0000079f)
+
+        data.writeWord(0x044b841c, 0x0000079a)
+
+        data.writeWord(0x044b8432, 0x0000079d)
+
+        offset = 0x044b8596
+        offset = data.writeWord(offset, 0x07a10000)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x07aa078a)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        data.writeWord(0x044b85b2, 0x079e0000)
+
+        data.writeWord(0x044b85be, 0x079c07af)
+
+        offset = 0x044b85c6
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b85f6
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        data.writeWord(0x044b860e, 0x00000791)
+
+        data.writeWord(0x044b8614, 0x0000079f)
+
+        data.writeWord(0x044b861e, 0x00000000)
+
+        offset = 0x044b8656
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        data.writeWord(0x044b866e, 0x00000792)
+
+        data.writeWord(0x044b8674, 0x0000079e)
+
+        data.writeWord(0x044b867e, 0x00000000)
+
+        offset = 0x044b8684
+        offset = data.writeWord(offset, 0x07960798)
+        offset = data.writeWord(offset, 0x07960796)
+        data.writeWord(offset, 0x07b10796)
+
+        offset = 0x044b86b6
+        offset = data.writeWord(offset, 0x07980000)
+        data.writeWord(offset, 0x07a80794)
+
+        data.writeWord(0x044b86ce, 0x000007a4)
+
+        data.writeWord(0x044b86d4, 0x0000079f)
+
+        offset = 0x044b86de
+        offset = data.writeWord(offset, 0x07960796)
+        data.writeWord(offset, 0x000007b1)
+
+        data.writeWord(0x044b872e, 0x00000793)
+
+        data.writeWord(0x044b8734, 0x000007a6)
+
+        offset = 0x044b878c
+        offset = data.writeWord(offset, 0x07990798)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x07a807a7)
+
+        break  
+      case 3: 
+        console.log("Spike Room Debug: New Layout 2 Chosen")
+        // The new, eviler spike room.
+        offset = 0x044b7aa4
+        offset = data.writeWord(offset, 0x07520752)
+        offset = data.writeWord(offset, 0x07520752)
+        offset = data.writeWord(offset, 0x072c072b)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x072c072c)
+        data.writeWord(offset, 0x072c072c)
+
+        offset = 0x044b7b02
+        offset = data.writeWord(offset, 0x073a0739)
+        offset = data.writeWord(offset, 0x074d0774)
+        offset = data.writeWord(offset, 0x0757074e)
+        offset = data.writeWord(offset, 0x072f072f)
+        offset = data.writeWord(offset, 0x072f072f)
+        offset = data.writeWord(offset, 0x072d072f)
+        offset = data.writeWord(offset, 0x073a0739)
+        offset = data.writeWord(offset, 0x074d074a)
+        data.writeWord(offset, 0x0757074e)
+
+        offset = 0x044b7c94
+        offset = data.writeWord(offset, 0x0774073b)
+        data.writeWord(offset, 0x00000751)
+
+        offset = 0x044b7c9e
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7cac
+        offset = data.writeWord(offset, 0x0774073b)
+        data.writeWord(offset, 0x00000751)
+
+        offset = 0x044b7cf4
+        offset = data.writeWord(offset, 0x0774073c)
+        data.writeWord(offset, 0x00000753)
+
+        offset = 0x044b7cfe
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7d0c
+        offset = data.writeWord(offset, 0x0774073d)
+        data.writeWord(offset, 0x00000753)
+
+        offset = 0x044b7d54
+        offset = data.writeWord(offset, 0x0774073d)
+        data.writeWord(offset, 0x00000753)
+
+        offset = 0x044b7d5e
+        offset = data.writeWord(offset, 0x073e0000)
+        data.writeWord(offset, 0x07320731)
+
+        offset = 0x044b7d6a
+        offset = data.writeWord(offset, 0x0744073e)
+        data.writeWord(offset, 0x07530774)
+
+        offset = 0x044b7db4
+        offset = data.writeWord(offset, 0x07740744)
+        offset = data.writeWord(offset, 0x00000753)
+        offset = data.writeWord(offset, 0x073e0000)
+        offset = data.writeWord(offset, 0x077a0744)
+        data.writeWord(offset, 0x00000735)
+
+        offset = 0x044b7dca
+        offset = data.writeWord(offset, 0x074a0745)
+        data.writeWord(offset, 0x07530776)
+
+        data.writeWord(0x044b7e08, 0x0735074a)
+
+        offset = 0x044b7e14
+        offset = data.writeWord(offset, 0x0776074a)
+        offset = data.writeWord(offset, 0x00000753)
+        offset = data.writeWord(offset, 0x0744073e)
+        offset = data.writeWord(offset, 0x074a074a)
+        data.writeWord(offset, 0x00000753)
+
+        offset = 0x044b7e2a
+        offset = data.writeWord(offset, 0x073a077c)
+        offset = data.writeWord(offset, 0x0755074a)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7e74
+        offset = data.writeWord(offset, 0x074a073a)
+        offset = data.writeWord(offset, 0x00000755)
+        offset = data.writeWord(offset, 0x074a0745)
+        offset = data.writeWord(offset, 0x07740776)
+        data.writeWord(offset, 0x00000753)
+
+        offset = 0x044b7e8c
+        offset = data.writeWord(offset, 0x07830781)
+        offset = data.writeWord(offset, 0x00000782)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7ed4
+        offset = data.writeWord(offset, 0x07830781)
+        offset = data.writeWord(offset, 0x00000782)
+        offset = data.writeWord(offset, 0x073a077c)
+        offset = data.writeWord(offset, 0x0774074a)
+        data.writeWord(offset, 0x00000753)
+
+        offset = 0x044b7eee
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x07430000)
+        offset = data.writeWord(offset, 0x0779073f)
+        data.writeWord(offset, 0x075b0742)
+
+        offset = 0x044b7f3e
+        offset = data.writeWord(offset, 0x073a0781)
+        data.writeWord(offset, 0x07530774)
+
+        offset = 0x044b7f4e
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x07430000)
+        offset = data.writeWord(offset, 0x075c073f)
+        offset = data.writeWord(offset, 0x076d076d)
+        data.writeWord(offset, 0x0033077a)
+
+        offset = 0x044b7fa0
+        offset = data.writeWord(offset, 0x07740784)
+        data.writeWord(offset, 0x00000775)
+
+        offset = 0x044b7fae
+        offset = data.writeWord(offset, 0x075c073f)
+        offset = data.writeWord(offset, 0x076d076d)
+        offset = data.writeWord(offset, 0x0761077a)
+        offset = data.writeWord(offset, 0x076f076f)
+        data.writeWord(offset, 0x074b077b)
+
+        offset = 0x044b8000
+        offset = data.writeWord(offset, 0x0786073d)
+        data.writeWord(offset, 0x07780777)
+
+        offset = 0x044b8010
+        offset = data.writeWord(offset, 0x076f0761)
+        offset = data.writeWord(offset, 0x077b076f)
+        offset = data.writeWord(offset, 0x07680767)
+        data.writeWord(offset, 0x07690768)
+
+        offset = 0x044b805e
+        offset = data.writeWord(offset, 0x07440743)
+        offset = data.writeWord(offset, 0x074b0752)
+        data.writeWord(offset, 0x076b074c)
+
+        offset = 0x044b8070
+        offset = data.writeWord(offset, 0x07680767)
+        offset = data.writeWord(offset, 0x07690768)
+        offset = data.writeWord(offset, 0x074c074b)
+        data.writeWord(offset, 0x074c074b)
+
+        offset = 0x044b80c2
+        offset = data.writeWord(offset, 0x074f077a)
+        data.writeWord(offset, 0x07850750)
+
+        offset = 0x044b80d8
+        offset = data.writeWord(offset, 0x0750074f)
+        data.writeWord(offset, 0x0750074f)
+
+        offset = 0x044b8232
+        offset = data.writeWord(offset, 0x0790078f)
+        offset = data.writeWord(offset, 0x079b0000)
+        offset = data.writeWord(offset, 0x078a079c)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x0790078f)
+        offset = data.writeWord(offset, 0x079b0000)
+        data.writeWord(offset, 0x078a079c)
+
+        offset = 0x044b8294
+        offset = data.writeWord(offset, 0x00000791)
+        data.writeWord(offset, 0x0000079d)
+
+        data.writeWord(0x044b829e, 0x00000000)
+
+        data.writeWord(0x044b82a4, 0x00000000)
+
+        offset = 0x044b82ac
+        offset = data.writeWord(offset, 0x00000791)
+        data.writeWord(offset, 0x0000079d)
+
+        offset = 0x044b82f4
+        offset = data.writeWord(offset, 0x000007a4)
+        data.writeWord(offset, 0x0000079f)
+
+        data.writeWord(0x044b82fe, 0x00000000)
+
+        data.writeWord(0x044b8304, 0x00000000)
+
+        offset = 0x044b830c
+        offset = data.writeWord(offset, 0x00000792)
+        data.writeWord(offset, 0x0000079e)
+
+        offset = 0x044b8354
+        offset = data.writeWord(offset, 0x00000793)
+        data.writeWord(offset, 0x0000079e)
+
+        offset = 0x044b835e
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x0000078b)
+
+        offset = 0x044b836c
+        offset = data.writeWord(offset, 0x00000799)
+        data.writeWord(offset, 0x0000079e)
+
+        offset = 0x044b83b4
+        offset = data.writeWord(offset, 0x00000799)
+        offset = data.writeWord(offset, 0x0000079f)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000799)
+        data.writeWord(offset, 0x0000078d)
+
+        offset = 0x044b83ca
+        offset = data.writeWord(offset, 0x0000079a)
+        data.writeWord(offset, 0x079f0000)
+
+        data.writeWord(0x044b8418, 0x0000079e)
+
+        data.writeWord(0x044b841e, 0x00000799)
+
+        offset = 0x044b842c
+        offset = data.writeWord(offset, 0x00000790)
+        offset = data.writeWord(offset, 0x0000079d)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b85a4
+        offset = data.writeWord(offset, 0x00000790)
+        offset = data.writeWord(offset, 0x0000079d)
+        data.writeWord(offset, 0x0000079a)
+
+        data.writeWord(0x044b85b2, 0x079e0000)
+
+        data.writeWord(0x044b85be, 0x000007af)
+
+        offset = 0x044b85c6
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        data.writeWord(0x044b8606, 0x000007af)
+
+        data.writeWord(0x044b860e, 0x00000790)
+
+        data.writeWord(0x044b8614, 0x0000079f)
+
+        data.writeWord(0x044b861e, 0x00000000)
+
+        offset = 0x044b8628
+        offset = data.writeWord(offset, 0x07950798)
+        data.writeWord(offset, 0x07970796)
+
+        offset = 0x044b8670
+        offset = data.writeWord(offset, 0x00000790)
+        data.writeWord(offset, 0x0000079e)
+
+        offset = 0x044b867e
+        offset = data.writeWord(offset, 0x07950000)
+        offset = data.writeWord(offset, 0x07980797)
+        data.writeWord(offset, 0x000007b0)
+
+        offset = 0x044b86d0
+        offset = data.writeWord(offset, 0x00000792)
+        data.writeWord(offset, 0x000007a6)
+
+        data.writeWord(0x044b86de, 0x000007b0)
+
+        offset = 0x044b8730
+        offset = data.writeWord(offset, 0x00000793)
+        data.writeWord(offset, 0x07a807a7)
+
+        offset = 0x044b878e
+        offset = data.writeWord(offset, 0x07990798)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x07b10000)
+
+        break
+      case "x":
+        console.log("Spike Room Debug: Mercy Layout Chosen")
+        // The "simply walk through" option
+        offset = 0x044b7aa0
+        offset = data.writeWord(offset, 0x07220721)
+        offset = data.writeWord(offset, 0x07220722)
+        offset = data.writeWord(offset, 0x07220722)
+        offset = data.writeWord(offset, 0x07220722)
+        offset = data.writeWord(offset, 0x071e0722)
+        offset = data.writeWord(offset, 0x071f071f)
+        offset = data.writeWord(offset, 0x071f071f)
+        offset = data.writeWord(offset, 0x071f071f)
+        offset = data.writeWord(offset, 0x071d071f)
+        offset = data.writeWord(offset, 0x07b907b8)
+        offset = data.writeWord(offset, 0x07bb07ba)
+        offset = data.writeWord(offset, 0x07bd07bc)
+        data.writeWord(offset, 0x071a07b5)
+
+        offset = 0x044b7af4
+        offset = data.writeWord(offset, 0x073a0739)
+        offset = data.writeWord(offset, 0x074d074a)
+        offset = data.writeWord(offset, 0x073a0783)
+        offset = data.writeWord(offset, 0x072c072b)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x0721072c)
+        offset = data.writeWord(offset, 0x07220722)
+        offset = data.writeWord(offset, 0x07220722)
+        offset = data.writeWord(offset, 0x07220722)
+        offset = data.writeWord(offset, 0x07230722)
+        data.writeWord(offset, 0x071f071e)
+
+        offset = 0x044b7c58
+        offset = data.writeWord(offset, 0x071f071f)
+        offset = data.writeWord(offset, 0x071f071f)
+        data.writeWord(offset, 0x071f071f)
+
+        offset = 0x044b7c86
+        offset = data.writeWord(offset, 0x07830781)
+        offset = data.writeWord(offset, 0x00000782)
+        offset = data.writeWord(offset, 0x077d077c)
+        offset = data.writeWord(offset, 0x072f072f)
+        offset = data.writeWord(offset, 0x072f072f)
+        offset = data.writeWord(offset, 0x072f072e)
+        offset = data.writeWord(offset, 0x0728072f)
+        offset = data.writeWord(offset, 0x072c072b)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x07210736)
+        offset = data.writeWord(offset, 0x07220722)
+        offset = data.writeWord(offset, 0x07220722)
+        data.writeWord(offset, 0x07220722)
+
+        offset = 0x044b7cfe
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x077d077c)
+        offset = data.writeWord(offset, 0x072f072f)
+        offset = data.writeWord(offset, 0x072e072f)
+        offset = data.writeWord(offset, 0x072e072f)
+        offset = data.writeWord(offset, 0x072b0728)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x072c072c)
+        offset = data.writeWord(offset, 0x072c072c)
+        data.writeWord(offset, 0x0736072c)
+
+        offset = 0x044b7d5e
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7d74
+        offset = data.writeWord(offset, 0x077d077c)
+        offset = data.writeWord(offset, 0x072e072f)
+        data.writeWord(offset, 0x0728072f)
+
+        offset = 0x044b7db2
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7dcc
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7e0c
+        offset = data.writeWord(offset, 0x076d076c)
+        offset = data.writeWord(offset, 0x076d076d)
+        offset = data.writeWord(offset, 0x076d076d)
+        offset = data.writeWord(offset, 0x076d076d)
+        offset = data.writeWord(offset, 0x0000077a)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7e2c
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x00000000)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b7e6a
+        offset = data.writeWord(offset, 0x076e0752)
+        offset = data.writeWord(offset, 0x076f076f)
+        offset = data.writeWord(offset, 0x076f076f)
+        offset = data.writeWord(offset, 0x076f076f)
+        offset = data.writeWord(offset, 0x077b076f)
+        offset = data.writeWord(offset, 0x076d076c)
+        offset = data.writeWord(offset, 0x076d076d)
+        offset = data.writeWord(offset, 0x076d076d)
+        offset = data.writeWord(offset, 0x076d076d)
+        offset = data.writeWord(offset, 0x0000077a)
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x075b075b)
+        offset = data.writeWord(offset, 0x075b075b)
+        data.writeWord(offset, 0x0000075b)
+
+        offset = 0x044b7eca
+        offset = data.writeWord(offset, 0x07670752)
+        offset = data.writeWord(offset, 0x07680768)
+        offset = data.writeWord(offset, 0x07680768)
+        offset = data.writeWord(offset, 0x07680768)
+        offset = data.writeWord(offset, 0x07690768)
+        offset = data.writeWord(offset, 0x076f076e)
+        offset = data.writeWord(offset, 0x076f076f)
+        offset = data.writeWord(offset, 0x076f076f)
+        offset = data.writeWord(offset, 0x076f076f)
+        offset = data.writeWord(offset, 0x076c077b)
+        offset = data.writeWord(offset, 0x076d076d)
+        data.writeWord(offset, 0x076d076d)
+
+        offset = 0x044b7f2a
+        offset = data.writeWord(offset, 0x074c074b)
+        offset = data.writeWord(offset, 0x074c074b)
+        offset = data.writeWord(offset, 0x07520752)
+        offset = data.writeWord(offset, 0x074c074b)
+        offset = data.writeWord(offset, 0x074c074b)
+        offset = data.writeWord(offset, 0x07680767)
+        offset = data.writeWord(offset, 0x07680768)
+        offset = data.writeWord(offset, 0x07680768)
+        offset = data.writeWord(offset, 0x07680768)
+        offset = data.writeWord(offset, 0x076e0769)
+        offset = data.writeWord(offset, 0x076f076f)
+        data.writeWord(offset, 0x076f076f)
+
+        offset = 0x044b7f8a
+        offset = data.writeWord(offset, 0x0750074f)
+        offset = data.writeWord(offset, 0x0750074f)
+        offset = data.writeWord(offset, 0x074c074b)
+        offset = data.writeWord(offset, 0x0750074f)
+        offset = data.writeWord(offset, 0x0750074f)
+        offset = data.writeWord(offset, 0x074b0752)
+        offset = data.writeWord(offset, 0x07be074c)
+        offset = data.writeWord(offset, 0x074b07b6)
+        offset = data.writeWord(offset, 0x074b074c)
+        offset = data.writeWord(offset, 0x0767074c)
+        offset = data.writeWord(offset, 0x07680768)
+        data.writeWord(offset, 0x07680768)
+
+        offset = 0x044b7fee
+        offset = data.writeWord(offset, 0x074c074b)
+        offset = data.writeWord(offset, 0x0750074f)
+        offset = data.writeWord(offset, 0x07b407b6)
+        offset = data.writeWord(offset, 0x07b507bd)
+        offset = data.writeWord(offset, 0x074f07be)
+        offset = data.writeWord(offset, 0x074b0750)
+        offset = data.writeWord(offset, 0x074f074c)
+        offset = data.writeWord(offset, 0x074f0750)
+        offset = data.writeWord(offset, 0x07520750)
+        data.writeWord(offset, 0x07b80752)
+
+        offset = 0x044b804e
+        offset = data.writeWord(offset, 0x0750074f)
+        offset = data.writeWord(offset, 0x074c074b)
+        offset = data.writeWord(offset, 0x07b907bf)
+        offset = data.writeWord(offset, 0x07bb07ba)
+        offset = data.writeWord(offset, 0x074b07b6)
+        offset = data.writeWord(offset, 0x074f074c)
+        offset = data.writeWord(offset, 0x074b0750)
+        data.writeWord(offset, 0x074b074c)
+
+        data.writeWord(0x044b8078, 0x07bd07bc)
+
+        offset = 0x044b80ae
+        offset = data.writeWord(offset, 0x07b907bf)
+        offset = data.writeWord(offset, 0x07bb07ba)
+        offset = data.writeWord(offset, 0x07b907bf)
+        offset = data.writeWord(offset, 0x07bb07ba)
+        offset = data.writeWord(offset, 0x074f0752)
+        offset = data.writeWord(offset, 0x07bf0750)
+        offset = data.writeWord(offset, 0x074f07c0)
+        data.writeWord(offset, 0x074f0750)
+
+        offset = 0x044b8226
+        offset = data.writeWord(offset, 0x078a0790)
+        offset = data.writeWord(offset, 0x07af079b)
+        data.writeWord(offset, 0x078a0790)
+
+        data.writeWord(0x044b823e, 0x00000000)
+
+        data.writeWord(0x044b8288, 0x000007af)
+
+        offset = 0x044b8290
+        offset = data.writeWord(offset, 0x078a07aa)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x078a07a0)
+        data.writeWord(offset, 0x0000078a)
+
+        offset = 0x044b82fe
+        offset = data.writeWord(offset, 0x00000000)
+        offset = data.writeWord(offset, 0x07aa078f)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x078a078a)
+        offset = data.writeWord(offset, 0x078a07a0)
+        data.writeWord(offset, 0x0000078a)
+
+        data.writeWord(0x044b835e, 0x00000000)
+
+        data.writeWord(0x044b8364, 0x00000000)
+
+        offset = 0x044b8374
+        offset = data.writeWord(offset, 0x07aa078f)
+        offset = data.writeWord(offset, 0x078a078a)
+        data.writeWord(offset, 0x078f078a)
+
+        offset = 0x044b83ac
+        offset = data.writeWord(offset, 0x07960795)
+        offset = data.writeWord(offset, 0x07970797)
+        data.writeWord(offset, 0x07950797)
+
+        data.writeWord(0x044b83bc, 0x00000797)
+
+        data.writeWord(0x044b83c4, 0x00000000)
+
+        data.writeWord(0x044b83ce, 0x00000000)
+
+        offset = 0x044b841e
+        offset = data.writeWord(offset, 0x079607a3)
+        offset = data.writeWord(offset, 0x07970797)
+        offset = data.writeWord(offset, 0x07950797)
+        offset = data.writeWord(offset, 0x07970796)
+        offset = data.writeWord(offset, 0x00000797)
+        data.writeWord(offset, 0x00000000)
+
+        offset = 0x044b85c0
+        offset = data.writeWord(offset, 0x079507a3)
+        data.writeWord(offset, 0x07960796)
+
+        break
+    }
+    
+    return data
+  }
+  
+  function applyLycanModePatches() {
+    const data = new checked()
+    // Enable all wolf relics to be used without the relics.
+    // Soul of Wolf
+    data.writeWord(0x00118b78, 0x0803fbfc)
+    // Power of Wolf (R then L)
+    data.writeWord(0x0014e0d4, 0x0804b5bb)
+    data.writeWord(0x0014e12c, 0x0804b5d1)
+    // Skill of Wolf charge
+    data.writeWord(0x0014d53c, 0x00000000)
+    // Skill of Wolf under water check
+    data.writeWord(0x0014d2c0, 0x00000000)
+    // Skill of Wolf swim
+    data.writeWord(0x0014fb30, 0x00000000)
+
+    // Lower MP cost for Wolf
+    // Stay in Wolf form for free.
+    data.writeShort(0x00118cc8, 0x0000)
+    // Reduce MP consumption for hitting enemies mid-run.
+    data.writeChar(0x000b53b0, 0x01)
 
     return data
   }
@@ -8709,7 +9962,7 @@
     // define address for functions (inside Black Marble Gallery Overlay)
     const funcAddress = 0x04fe4f68
     let offset
-    // Patch new goals - eldri7ch
+    // Patch new goals
     switch (nGoal) {
     case 'b':
       // All Bosses
@@ -9645,46 +10898,7 @@
     // Entrance Trap Door Entity Slot Fix by MottZilla
     data.writeChar(0x53f8eb8, 0x12)
     data.writeChar(0x53f97a6, 0x12)
-
-    // Yasutsuna Hitbox Fix by MottZilla
-    // RIGHT HAND
-    offset = 0x3bfb314
-    offset = data.writeWord(offset, 0x18000024)
-    offset = data.writeWord(offset, 0x00000000)
-
-    offset = 0x3bfb3a8
-    offset = data.writeWord(offset, 0x3c178007)
-    offset = data.writeWord(offset, 0x36f733d8)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x8ef60000)
-    offset = data.writeWord(offset, 0x8ef50004)
-    offset = data.writeWord(offset, 0x96f40014)
-    offset = data.writeWord(offset, 0xae360000)
-    offset = data.writeWord(offset, 0xae350004)
-    offset = data.writeWord(offset, 0xa6340014)
-    offset = data.writeWord(offset, 0x8fbf0030)
-    offset = data.writeWord(offset, 0x8fb7002c)
-    offset = data.writeWord(offset, 0x1800ffd1)
-
-    //LEFT HAND
-    offset = 0x3dd57f4
-    offset = data.writeWord(offset, 0x18000024)
-    offset = data.writeWord(offset, 0x00000000)
-
-    offset = 0x3dd5888
-    offset = data.writeWord(offset, 0x3c178007)
-    offset = data.writeWord(offset, 0x36f733d8)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x8ef60000)
-    offset = data.writeWord(offset, 0x8ef50004)
-    offset = data.writeWord(offset, 0x96f40014)
-    offset = data.writeWord(offset, 0xae360000)
-    offset = data.writeWord(offset, 0xae350004)
-    offset = data.writeWord(offset, 0xa6340014)
-    offset = data.writeWord(offset, 0x8fbf0030)
-    offset = data.writeWord(offset, 0x8fb7002c)
-    offset = data.writeWord(offset, 0x1800ffd1)
-
+    
     // Holy Cross Fixes
     offset = 0x000b1036
     data.writeChar(offset, 0x82)  // heals hp with orbs
@@ -9798,6 +11012,1205 @@
     // I know, it seems redundant, but add an additional termination 0x00
     offset = data.writeChar(offset, 0x00)
     
+    // This space is for making changes based on which splash text appeared.
+    // Sometimes this is to change graphics for tournament winners or other 
+    // special mentions.
+
+    // switch (strId) {
+    //   case 1:
+    //   case 3:
+    //     // Dr4gonBlitz
+    //     // Name the Eggplant Parmesan
+    //     offset = 0x000f32d4
+    //     offset = data.writeWord(offset, 0x50474725)
+    //     offset = data.writeWord(offset, 0x544E414C)
+    //     offset = data.writeWord(offset, 0x52415000)
+    //     data.writeWord(offset, 0x0000FF4D)
+    //     // Desccribe the Eggplan Parmesan
+    //     offset = 0x000f33d4
+    //     offset = data.writeWord(offset, 0x49206E41)
+    //     offset = data.writeWord(offset, 0x696C6174)
+    //     offset = data.writeWord(offset, 0x63206E61)
+    //     offset = data.writeWord(offset, 0x7373616C)
+    //     offset = data.writeWord(offset, 0x81206369)
+    //     offset = data.writeWord(offset, 0x6573756D)
+    //     offset = data.writeWord(offset, 0x00006E81)
+    //     data.writeWord(offset, 0x00000000)
+    //     // Sprite the Eggplan Parmesan
+    //   case 2:
+    //   case 7:
+    //     // JupiterClimb
+    //     // Name the Fried Fish
+        
+    //     // Describe the Fried Fish
+
+    //     // Sprite the Fried Fish
+    //   case 4:
+    //   case 8:
+    //     // the__swarm
+    //     // Name the 
+        
+    //     // Describe the 
+        
+    //     // Sprite the 
+    //   case 5:
+    //   case 9:
+    //     // DerDrach
+    //     // Name the 
+        
+    //     // Describe the 
+        
+    //     // Sprite the 
+    //   case 6:
+    //     // asdheyb
+    //     // Name the 
+        
+    //     // Describe the 
+        
+    //     // Sprite the 
+    //   case 10:
+    //     // Renantrl
+    //     // Name the Acai Palm
+    //     offset = 0x000f33f0
+    //     offset = data.writeWord(offset, 0x49414321)
+    //     offset = data.writeWord(offset, 0x4C415000)
+    //     data.writeWord(offset, 0xFF4D)
+    //     // Desccribe the Acai Palm
+    //     offset = 0x000f32b4
+    //     offset = data.writeWord(offset, 0x68746957)
+    //     offset = data.writeWord(offset, 0x72656220)
+    //     offset = data.writeWord(offset, 0x73656972)
+    //     offset = data.writeWord(offset, 0x646E6120)
+    //     offset = data.writeWord(offset, 0x6E616220)
+    //     offset = data.writeWord(offset, 0x00616E61)
+    //     data.writeWord(offset, 0x00000000)
+    //     // Sprite the Acai Palm
+    // }
+
+    return data
+  }
+
+  function applyListOfNames() {
+    const data = new checked()
+    let offset
+
+    offset = 0x0438E098
+    offset = data.writeWord(offset,0x414e4926)
+    offset = data.writeWord(offset,0x5527004c)
+    offset = data.writeWord(offset,0xff445241)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x45554c22)
+    offset = data.writeWord(offset,0x554c2100)
+    offset = data.writeWord(offset,0x35004152)
+    offset = data.writeWord(offset,0x00ff454e)
+    offset = data.writeWord(offset,0x4f4e492d)
+    offset = data.writeWord(offset,0x52554154)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4e495033)
+    offset = data.writeWord(offset,0x41452800)
+    offset = data.writeWord(offset,0x0000ff44)
+    offset = data.writeWord(offset,0x50504f24)
+    offset = data.writeWord(offset,0x4147454c)
+    offset = data.writeWord(offset,0x5245474e)
+    offset = data.writeWord(offset,0x14562c00)
+    offset = data.writeWord(offset,0x0000ff10)
+    offset = data.writeWord(offset,0x00454834)
+    offset = data.writeWord(offset,0x41455223)
+    offset = data.writeWord(offset,0x45525554)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x5544452d)
+    offset = data.writeWord(offset,0x00ff4153)
+    offset = data.writeWord(offset,0x42524523)
+    offset = data.writeWord(offset,0x53555245)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x54414524)
+    offset = data.writeWord(offset,0x0000ff48)
+    offset = data.writeWord(offset,0x46414833)
+    offset = data.writeWord(offset,0x0000ff54)
+    offset = data.writeWord(offset,0x4c4c492b)
+    offset = data.writeWord(offset,0x26005245)
+    offset = data.writeWord(offset,0xff485349)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x43435533)
+    offset = data.writeWord(offset,0x53554255)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454b4126)
+    offset = data.writeWord(offset,0x50593300)
+    offset = data.writeWord(offset,0x00ff4148)
+    offset = data.writeWord(offset,0x454b4126)
+    offset = data.writeWord(offset,0x4c413200)
+    offset = data.writeWord(offset,0x00ff4850)
+    offset = data.writeWord(offset,0x454b4126)
+    offset = data.writeWord(offset,0x41522700)
+    offset = data.writeWord(offset,0x00ff544e)
+    offset = data.writeWord(offset,0x4c454522)
+    offset = data.writeWord(offset,0x5542455a)
+    offset = data.writeWord(offset,0x0000ff42)
+    offset = data.writeWord(offset,0xff55592b)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x52414333)
+    offset = data.writeWord(offset,0x4f524345)
+    offset = data.writeWord(offset,0x0000ff57)
+    offset = data.writeWord(offset,0x48434932)
+    offset = data.writeWord(offset,0x00524554)
+    offset = data.writeWord(offset,0x4d4c4522)
+    offset = data.writeWord(offset,0xff544e4f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x48435221)
+    offset = data.writeWord(offset,0x00ff5245)
+    offset = data.writeWord(offset,0x5544452d)
+    offset = data.writeWord(offset,0x28004153)
+    offset = data.writeWord(offset,0xff444145)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x50504928)
+    offset = data.writeWord(offset,0x5952474f)
+    offset = data.writeWord(offset,0x00ff4850)
+    offset = data.writeWord(offset,0x4947452c)
+    offset = data.writeWord(offset,0x00ff4e4f)
+    offset = data.writeWord(offset,0x4c594333)
+    offset = data.writeWord(offset,0x3400414c)
+    offset = data.writeWord(offset,0xff4c4941)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4c594333)
+    offset = data.writeWord(offset,0x00ff414c)
+    offset = data.writeWord(offset,0x4c4c4122)
+    offset = data.writeWord(offset,0xff4e4f4f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0xff504d29)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x504c412d)
+    offset = data.writeWord(offset,0xff534148)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x48534926)
+    offset = data.writeWord(offset,0x41452800)
+    offset = data.writeWord(offset,0x0000ff44)
+    offset = data.writeWord(offset,0x4e414927)
+    offset = data.writeWord(offset,0x41220054)
+    offset = data.writeWord(offset,0x0000ff54)
+    offset = data.writeWord(offset,0x49594c26)
+    offset = data.writeWord(offset,0x2100474e)
+    offset = data.writeWord(offset,0x524f4d52)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4d4d552d)
+    offset = data.writeWord(offset,0x0000ff59)
+    offset = data.writeWord(offset,0x004e4934)
+    offset = data.writeWord(offset,0xff4e412d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4e4f492c)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4e414927)
+    offset = data.writeWord(offset,0x48270054)
+    offset = data.writeWord(offset,0xff54534f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x42494127)
+    offset = data.writeWord(offset,0x00ff4e4f)
+    offset = data.writeWord(offset,0x50504f24)
+    offset = data.writeWord(offset,0x4147454c)
+    offset = data.writeWord(offset,0x5245474e)
+    offset = data.writeWord(offset,0x11562c00)
+    offset = data.writeWord(offset,0x0000ff10)
+    offset = data.writeWord(offset,0x50414537)
+    offset = data.writeWord(offset,0x24004e4f)
+    offset = data.writeWord(offset,0x49544349)
+    offset = data.writeWord(offset,0x52414e4f)
+    offset = data.writeWord(offset,0x0000ff59)
+    offset = data.writeWord(offset,0x53525523)
+    offset = data.writeWord(offset,0x4f230045)
+    offset = data.writeWord(offset,0x00ff4544)
+    offset = data.writeWord(offset,0x474f4c33)
+    offset = data.writeWord(offset,0x00ff4152)
+    offset = data.writeWord(offset,0x50524128)
+    offset = data.writeWord(offset,0x0000ff59)
+    offset = data.writeWord(offset,0x4c495625)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x49564524)
+    offset = data.writeWord(offset,0x0000ff4c)
+    offset = data.writeWord(offset,0x43544937)
+    offset = data.writeWord(offset,0x0000ff48)
+    offset = data.writeWord(offset,0x53414c21)
+    offset = data.writeWord(offset,0xff524f54)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454d452e)
+    offset = data.writeWord(offset,0xff534953)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x424f4b35)
+    offset = data.writeWord(offset,0xff4b4341)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x47415a21)
+    offset = data.writeWord(offset,0xff4c4148)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4f494c21)
+    offset = data.writeWord(offset,0x4e4d5552)
+    offset = data.writeWord(offset,0x00ff5341)
+    offset = data.writeWord(offset,0x5a4f5226)
+    offset = data.writeWord(offset,0x28004e45)
+    offset = data.writeWord(offset,0xff464c41)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4d552a00)
+    offset = data.writeWord(offset,0xff524550)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x0044552d)
+    offset = data.writeWord(offset,0xff4e412d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4e414927)
+    offset = data.writeWord(offset,0x4b330054)
+    offset = data.writeWord(offset,0x54454c45)
+    offset = data.writeWord(offset,0x00ff4e4f)
+    offset = data.writeWord(offset,0x45524537)
+    offset = data.writeWord(offset,0x464c4f57)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x41524127)
+    offset = data.writeWord(offset,0x48544f4d)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4d414c21)
+    offset = data.writeWord(offset,0x43495241)
+    offset = data.writeWord(offset,0x494e3300)
+    offset = data.writeWord(offset,0xff524550)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x544c4f30)
+    offset = data.writeWord(offset,0x45475245)
+    offset = data.writeWord(offset,0xff545349)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x00444532)
+    offset = data.writeWord(offset,0x53414d33)
+    offset = data.writeWord(offset,0xff524548)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4b525527)
+    offset = data.writeWord(offset,0x2d004148)
+    offset = data.writeWord(offset,0x45545341)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x4d4d4128)
+    offset = data.writeWord(offset,0x33005245)
+    offset = data.writeWord(offset,0x454b4148)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x4b495033)
+    offset = data.writeWord(offset,0x22004445)
+    offset = data.writeWord(offset,0xff4c4c41)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4e4f4823)
+    offset = data.writeWord(offset,0x4e4f4843)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4e414c33)
+    offset = data.writeWord(offset,0x55270054)
+    offset = data.writeWord(offset,0x45445241)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x42493200)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x41464e21)
+    offset = data.writeWord(offset,0x494c4755)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x43415224)
+    offset = data.writeWord(offset,0xff414c55)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4b434f32)
+    offset = data.writeWord(offset,0x4d522100)
+    offset = data.writeWord(offset,0x00ff524f)
+    offset = data.writeWord(offset,0x424d4f22)
+    offset = data.writeWord(offset,0x4d522100)
+    offset = data.writeWord(offset,0x00ff524f)
+    offset = data.writeWord(offset,0x52554c21)
+    offset = data.writeWord(offset,0x4e350041)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x50524f23)
+    offset = data.writeWord(offset,0x45574553)
+    offset = data.writeWord(offset,0x00ff4445)
+    offset = data.writeWord(offset,0xff454e35)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x534f4827)
+    offset = data.writeWord(offset,0x0000ff54)
+    offset = data.writeWord(offset,0x50554823)
+    offset = data.writeWord(offset,0x42414341)
+    offset = data.writeWord(offset,0x00ff4152)
+    offset = data.writeWord(offset,0x524e4526)
+    offset = data.writeWord(offset,0x32005249)
+    offset = data.writeWord(offset,0x52454449)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x524e4526)
+    offset = data.writeWord(offset,0x00ff5249)
+    offset = data.writeWord(offset,0x4c4c5524)
+    offset = data.writeWord(offset,0x4e414841)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x47415224)
+    offset = data.writeWord(offset,0x32004e4f)
+    offset = data.writeWord(offset,0x52454449)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x424f522f)
+    offset = data.writeWord(offset,0x4f52554f)
+    offset = data.writeWord(offset,0x32005355)
+    offset = data.writeWord(offset,0x52454449)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x424f522f)
+    offset = data.writeWord(offset,0x4f52554f)
+    offset = data.writeWord(offset,0x00ff5355)
+    offset = data.writeWord(offset,0x41455033)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x524f5733)
+    offset = data.writeWord(offset,0x0000ff44)
+    offset = data.writeWord(offset,0x454c5532)
+    offset = data.writeWord(offset,0x57330052)
+    offset = data.writeWord(offset,0x0044524f)
+    offset = data.writeWord(offset,0x1200562c)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x44414524)
+    offset = data.writeWord(offset,0x4f523400)
+    offset = data.writeWord(offset,0x5245504f)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x48504922)
+    offset = data.writeWord(offset,0xff4e4f52)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454c5532)
+    offset = data.writeWord(offset,0x57330052)
+    offset = data.writeWord(offset,0x0044524f)
+    offset = data.writeWord(offset,0x1100562c)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454c5532)
+    offset = data.writeWord(offset,0x57330052)
+    offset = data.writeWord(offset,0x0044524f)
+    offset = data.writeWord(offset,0x1300562c)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x49594c26)
+    offset = data.writeWord(offset,0x2200474e)
+    offset = data.writeWord(offset,0xff454e4f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x41452200)
+    offset = data.writeWord(offset,0xff52454d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x44414c22)
+    offset = data.writeWord(offset,0x2e005345)
+    offset = data.writeWord(offset,0x4349564f)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x414c2200)
+    offset = data.writeWord(offset,0xff534544)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4c554b33)
+    offset = data.writeWord(offset,0x0000ff4c)
+    offset = data.writeWord(offset,0x43434f33)
+    offset = data.writeWord(offset,0x22005245)
+    offset = data.writeWord(offset,0x00ff594f)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x45503300)
+    offset = data.writeWord(offset,0x00ff5241)
+    offset = data.writeWord(offset,0x4f524834)
+    offset = data.writeWord(offset,0x412d0057)
+    offset = data.writeWord(offset,0x52455453)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x43414c22)
+    offset = data.writeWord(offset,0x5223004b)
+    offset = data.writeWord(offset,0x00ff574f)
+    offset = data.writeWord(offset,0x45554c22)
+    offset = data.writeWord(offset,0x4f522300)
+    offset = data.writeWord(offset,0x0000ff57)
+    offset = data.writeWord(offset,0x424d4f34)
+    offset = data.writeWord(offset,0x4e4f5453)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x56415227)
+    offset = data.writeWord(offset,0x452b0045)
+    offset = data.writeWord(offset,0x52455045)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x424d4f3a)
+    offset = data.writeWord(offset,0x00ff4549)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x43522100)
+    offset = data.writeWord(offset,0xff524548)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x474f5226)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x44414f34)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4c4f3300)
+    offset = data.writeWord(offset,0x52454944)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4f444f24)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4e552700)
+    offset = data.writeWord(offset,0xff4e414d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x5a4f5226)
+    offset = data.writeWord(offset,0x33004e45)
+    offset = data.writeWord(offset,0x45444148)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x56414528)
+    offset = data.writeWord(offset,0x52210059)
+    offset = data.writeWord(offset,0xff524f4d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x47494e2b)
+    offset = data.writeWord(offset,0x00ff5448)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4c493000)
+    offset = data.writeWord(offset,0xff52414c)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4f544325)
+    offset = data.writeWord(offset,0x53414c50)
+    offset = data.writeWord(offset,0x0000ff4d)
+    offset = data.writeWord(offset,0x004e412d)
+    offset = data.writeWord(offset,0x45544125)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x45502100)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x49545221)
+    offset = data.writeWord(offset,0x49544142)
+    offset = data.writeWord(offset,0xff454152)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4d414c26)
+    offset = data.writeWord(offset,0x45240045)
+    offset = data.writeWord(offset,0xff4e4f4d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x43534924)
+    offset = data.writeWord(offset,0x4d522100)
+    offset = data.writeWord(offset,0x00ff524f)
+    offset = data.writeWord(offset,0x4c454b33)
+    offset = data.writeWord(offset,0x4e4f5445)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x55444d21)
+    offset = data.writeWord(offset,0x41494353)
+    offset = data.writeWord(offset,0x0000ff53)
+    offset = data.writeWord(offset,0x00444532)
+    offset = data.writeWord(offset,0x4c454b33)
+    offset = data.writeWord(offset,0x4e4f5445)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x414c2600)
+    offset = data.writeWord(offset,0x00ff4c49)
+    offset = data.writeWord(offset,0x49594c26)
+    offset = data.writeWord(offset,0x3300474e)
+    offset = data.writeWord(offset,0x4c4c554b)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4d494c33)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x4752412c)
+    offset = data.writeWord(offset,0x4c330045)
+    offset = data.writeWord(offset,0xff454d49)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0xff544122)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4e413000)
+    offset = data.writeWord(offset,0x52454854)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4f524c2f)
+    offset = data.writeWord(offset,0x0000ff58)
+    offset = data.writeWord(offset,0x4c4c492b)
+    offset = data.writeWord(offset,0x24005245)
+    offset = data.writeWord(offset,0xff4c4c4f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x41454c26)
+    offset = data.writeWord(offset,0x44493200)
+    offset = data.writeWord(offset,0x00ff5245)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4b522100)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x54494837)
+    offset = data.writeWord(offset,0x52240045)
+    offset = data.writeWord(offset,0x4e4f4741)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4f4d5221)
+    offset = data.writeWord(offset,0x00444552)
+    offset = data.writeWord(offset,0x41454c26)
+    offset = data.writeWord(offset,0xff4e414d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x41454c26)
+    offset = data.writeWord(offset,0x4e412d00)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4b524124)
+    offset = data.writeWord(offset,0x54432f00)
+    offset = data.writeWord(offset,0x5355504f)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x43414c22)
+    offset = data.writeWord(offset,0x4130004b)
+    offset = data.writeWord(offset,0x4548544e)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x41455227)
+    offset = data.writeWord(offset,0x52210054)
+    offset = data.writeWord(offset,0xff524f4d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4f544123)
+    offset = data.writeWord(offset,0x50454c42)
+    offset = data.writeWord(offset,0x00ff5341)
+    offset = data.writeWord(offset,0x4d52452d)
+    offset = data.writeWord(offset,0x00ff4e41)
+    offset = data.writeWord(offset,0x5353452c)
+    offset = data.writeWord(offset,0x24005245)
+    offset = data.writeWord(offset,0x4e4f4d45)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0xff4c572f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x004c572f)
+    offset = data.writeWord(offset,0x4f4d5221)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x48504d21)
+    offset = data.writeWord(offset,0x41425349)
+    offset = data.writeWord(offset,0xff414e45)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x49594c26)
+    offset = data.writeWord(offset,0x3a00474e)
+    offset = data.writeWord(offset,0x49424d4f)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x424d4f3a)
+    offset = data.writeWord(offset,0x33004549)
+    offset = data.writeWord(offset,0x49444c4f)
+    offset = data.writeWord(offset,0x00ff5245)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4f4f2200)
+    offset = data.writeWord(offset,0x4152454d)
+    offset = data.writeWord(offset,0x00ff474e)
+    offset = data.writeWord(offset,0x54434936)
+    offset = data.writeWord(offset,0x0059524f)
+    offset = data.writeWord(offset,0x4f4d5221)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x00455821)
+    offset = data.writeWord(offset,0x4f4d5221)
+    offset = data.writeWord(offset,0x0000ff52)
+
+    offset = 0x000F5900
+    offset = data.writeWord(offset,0x414e4926)
+    offset = data.writeWord(offset,0x5527004c)
+    offset = data.writeWord(offset,0xff445241)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x45554c22)
+    offset = data.writeWord(offset,0x554c2100)
+    offset = data.writeWord(offset,0x35004152)
+    offset = data.writeWord(offset,0x00ff454e)
+    offset = data.writeWord(offset,0x4f4e492d)
+    offset = data.writeWord(offset,0x52554154)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4e495033)
+    offset = data.writeWord(offset,0x41452800)
+    offset = data.writeWord(offset,0x0000ff44)
+    offset = data.writeWord(offset,0x50504f24)
+    offset = data.writeWord(offset,0x4147454c)
+    offset = data.writeWord(offset,0x5245474e)
+    offset = data.writeWord(offset,0x14562c00)
+    offset = data.writeWord(offset,0x0000ff10)
+    offset = data.writeWord(offset,0x00454834)
+    offset = data.writeWord(offset,0x41455223)
+    offset = data.writeWord(offset,0x45525554)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x5544452d)
+    offset = data.writeWord(offset,0x00ff4153)
+    offset = data.writeWord(offset,0x42524523)
+    offset = data.writeWord(offset,0x53555245)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x54414524)
+    offset = data.writeWord(offset,0x0000ff48)
+    offset = data.writeWord(offset,0x46414833)
+    offset = data.writeWord(offset,0x0000ff54)
+    offset = data.writeWord(offset,0x4c4c492b)
+    offset = data.writeWord(offset,0x26005245)
+    offset = data.writeWord(offset,0xff485349)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x43435533)
+    offset = data.writeWord(offset,0x53554255)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454b4126)
+    offset = data.writeWord(offset,0x50593300)
+    offset = data.writeWord(offset,0x00ff4148)
+    offset = data.writeWord(offset,0x454b4126)
+    offset = data.writeWord(offset,0x4c413200)
+    offset = data.writeWord(offset,0x00ff4850)
+    offset = data.writeWord(offset,0x454b4126)
+    offset = data.writeWord(offset,0x41522700)
+    offset = data.writeWord(offset,0x00ff544e)
+    offset = data.writeWord(offset,0x4c454522)
+    offset = data.writeWord(offset,0x5542455a)
+    offset = data.writeWord(offset,0x0000ff42)
+    offset = data.writeWord(offset,0xff55592b)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x52414333)
+    offset = data.writeWord(offset,0x4f524345)
+    offset = data.writeWord(offset,0x0000ff57)
+    offset = data.writeWord(offset,0x48434932)
+    offset = data.writeWord(offset,0x00524554)
+    offset = data.writeWord(offset,0x4d4c4522)
+    offset = data.writeWord(offset,0xff544e4f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x48435221)
+    offset = data.writeWord(offset,0x00ff5245)
+    offset = data.writeWord(offset,0x5544452d)
+    offset = data.writeWord(offset,0x28004153)
+    offset = data.writeWord(offset,0xff444145)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x50504928)
+    offset = data.writeWord(offset,0x5952474f)
+    offset = data.writeWord(offset,0x00ff4850)
+    offset = data.writeWord(offset,0x4947452c)
+    offset = data.writeWord(offset,0x00ff4e4f)
+    offset = data.writeWord(offset,0x4c594333)
+    offset = data.writeWord(offset,0x3400414c)
+    offset = data.writeWord(offset,0xff4c4941)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4c594333)
+    offset = data.writeWord(offset,0x00ff414c)
+    offset = data.writeWord(offset,0x4c4c4122)
+    offset = data.writeWord(offset,0xff4e4f4f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0xff504d29)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x504c412d)
+    offset = data.writeWord(offset,0xff534148)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x48534926)
+    offset = data.writeWord(offset,0x41452800)
+    offset = data.writeWord(offset,0x0000ff44)
+    offset = data.writeWord(offset,0x4e414927)
+    offset = data.writeWord(offset,0x41220054)
+    offset = data.writeWord(offset,0x0000ff54)
+    offset = data.writeWord(offset,0x49594c26)
+    offset = data.writeWord(offset,0x2100474e)
+    offset = data.writeWord(offset,0x524f4d52)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4d4d552d)
+    offset = data.writeWord(offset,0x0000ff59)
+    offset = data.writeWord(offset,0x004e4934)
+    offset = data.writeWord(offset,0xff4e412d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4e4f492c)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4e414927)
+    offset = data.writeWord(offset,0x48270054)
+    offset = data.writeWord(offset,0xff54534f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x42494127)
+    offset = data.writeWord(offset,0x00ff4e4f)
+    offset = data.writeWord(offset,0x50504f24)
+    offset = data.writeWord(offset,0x4147454c)
+    offset = data.writeWord(offset,0x5245474e)
+    offset = data.writeWord(offset,0x11562c00)
+    offset = data.writeWord(offset,0x0000ff10)
+    offset = data.writeWord(offset,0x50414537)
+    offset = data.writeWord(offset,0x24004e4f)
+    offset = data.writeWord(offset,0x49544349)
+    offset = data.writeWord(offset,0x52414e4f)
+    offset = data.writeWord(offset,0x0000ff59)
+    offset = data.writeWord(offset,0x53525523)
+    offset = data.writeWord(offset,0x4f230045)
+    offset = data.writeWord(offset,0x00ff4544)
+    offset = data.writeWord(offset,0x474f4c33)
+    offset = data.writeWord(offset,0x00ff4152)
+    offset = data.writeWord(offset,0x50524128)
+    offset = data.writeWord(offset,0x0000ff59)
+    offset = data.writeWord(offset,0x4c495625)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x49564524)
+    offset = data.writeWord(offset,0x0000ff4c)
+    offset = data.writeWord(offset,0x43544937)
+    offset = data.writeWord(offset,0x0000ff48)
+    offset = data.writeWord(offset,0x53414c21)
+    offset = data.writeWord(offset,0xff524f54)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454d452e)
+    offset = data.writeWord(offset,0xff534953)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x424f4b35)
+    offset = data.writeWord(offset,0xff4b4341)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x47415a21)
+    offset = data.writeWord(offset,0xff4c4148)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4f494c21)
+    offset = data.writeWord(offset,0x4e4d5552)
+    offset = data.writeWord(offset,0x00ff5341)
+    offset = data.writeWord(offset,0x5a4f5226)
+    offset = data.writeWord(offset,0x28004e45)
+    offset = data.writeWord(offset,0xff464c41)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4d552a00)
+    offset = data.writeWord(offset,0xff524550)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x0044552d)
+    offset = data.writeWord(offset,0xff4e412d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4e414927)
+    offset = data.writeWord(offset,0x4b330054)
+    offset = data.writeWord(offset,0x54454c45)
+    offset = data.writeWord(offset,0x00ff4e4f)
+    offset = data.writeWord(offset,0x45524537)
+    offset = data.writeWord(offset,0x464c4f57)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x41524127)
+    offset = data.writeWord(offset,0x48544f4d)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4d414c21)
+    offset = data.writeWord(offset,0x43495241)
+    offset = data.writeWord(offset,0x494e3300)
+    offset = data.writeWord(offset,0xff524550)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x544c4f30)
+    offset = data.writeWord(offset,0x45475245)
+    offset = data.writeWord(offset,0xff545349)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x00444532)
+    offset = data.writeWord(offset,0x53414d33)
+    offset = data.writeWord(offset,0xff524548)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4b525527)
+    offset = data.writeWord(offset,0x2d004148)
+    offset = data.writeWord(offset,0x45545341)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x4d4d4128)
+    offset = data.writeWord(offset,0x33005245)
+    offset = data.writeWord(offset,0x454b4148)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x4b495033)
+    offset = data.writeWord(offset,0x22004445)
+    offset = data.writeWord(offset,0xff4c4c41)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4e4f4823)
+    offset = data.writeWord(offset,0x4e4f4843)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4e414c33)
+    offset = data.writeWord(offset,0x55270054)
+    offset = data.writeWord(offset,0x45445241)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x42493200)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x41464e21)
+    offset = data.writeWord(offset,0x494c4755)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x43415224)
+    offset = data.writeWord(offset,0xff414c55)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4b434f32)
+    offset = data.writeWord(offset,0x4d522100)
+    offset = data.writeWord(offset,0x00ff524f)
+    offset = data.writeWord(offset,0x424d4f22)
+    offset = data.writeWord(offset,0x4d522100)
+    offset = data.writeWord(offset,0x00ff524f)
+    offset = data.writeWord(offset,0x52554c21)
+    offset = data.writeWord(offset,0x4e350041)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x50524f23)
+    offset = data.writeWord(offset,0x45574553)
+    offset = data.writeWord(offset,0x00ff4445)
+    offset = data.writeWord(offset,0xff454e35)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x534f4827)
+    offset = data.writeWord(offset,0x0000ff54)
+    offset = data.writeWord(offset,0x50554823)
+    offset = data.writeWord(offset,0x42414341)
+    offset = data.writeWord(offset,0x00ff4152)
+    offset = data.writeWord(offset,0x524e4526)
+    offset = data.writeWord(offset,0x32005249)
+    offset = data.writeWord(offset,0x52454449)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x524e4526)
+    offset = data.writeWord(offset,0x00ff5249)
+    offset = data.writeWord(offset,0x4c4c5524)
+    offset = data.writeWord(offset,0x4e414841)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x47415224)
+    offset = data.writeWord(offset,0x32004e4f)
+    offset = data.writeWord(offset,0x52454449)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x424f522f)
+    offset = data.writeWord(offset,0x4f52554f)
+    offset = data.writeWord(offset,0x32005355)
+    offset = data.writeWord(offset,0x52454449)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x424f522f)
+    offset = data.writeWord(offset,0x4f52554f)
+    offset = data.writeWord(offset,0x00ff5355)
+    offset = data.writeWord(offset,0x41455033)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x524f5733)
+    offset = data.writeWord(offset,0x0000ff44)
+    offset = data.writeWord(offset,0x454c5532)
+    offset = data.writeWord(offset,0x57330052)
+    offset = data.writeWord(offset,0x0044524f)
+    offset = data.writeWord(offset,0x1200562c)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x44414524)
+    offset = data.writeWord(offset,0x4f523400)
+    offset = data.writeWord(offset,0x5245504f)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x48504922)
+    offset = data.writeWord(offset,0xff4e4f52)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454c5532)
+    offset = data.writeWord(offset,0x57330052)
+    offset = data.writeWord(offset,0x0044524f)
+    offset = data.writeWord(offset,0x1100562c)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454c5532)
+    offset = data.writeWord(offset,0x57330052)
+    offset = data.writeWord(offset,0x0044524f)
+    offset = data.writeWord(offset,0x1300562c)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x49594c26)
+    offset = data.writeWord(offset,0x2200474e)
+    offset = data.writeWord(offset,0xff454e4f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x41452200)
+    offset = data.writeWord(offset,0xff52454d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x44414c22)
+    offset = data.writeWord(offset,0x2e005345)
+    offset = data.writeWord(offset,0x4349564f)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x414c2200)
+    offset = data.writeWord(offset,0xff534544)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4c554b33)
+    offset = data.writeWord(offset,0x0000ff4c)
+    offset = data.writeWord(offset,0x43434f33)
+    offset = data.writeWord(offset,0x22005245)
+    offset = data.writeWord(offset,0x00ff594f)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x45503300)
+    offset = data.writeWord(offset,0x00ff5241)
+    offset = data.writeWord(offset,0x4f524834)
+    offset = data.writeWord(offset,0x412d0057)
+    offset = data.writeWord(offset,0x52455453)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x43414c22)
+    offset = data.writeWord(offset,0x5223004b)
+    offset = data.writeWord(offset,0x00ff574f)
+    offset = data.writeWord(offset,0x45554c22)
+    offset = data.writeWord(offset,0x4f522300)
+    offset = data.writeWord(offset,0x0000ff57)
+    offset = data.writeWord(offset,0x424d4f34)
+    offset = data.writeWord(offset,0x4e4f5453)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x56415227)
+    offset = data.writeWord(offset,0x452b0045)
+    offset = data.writeWord(offset,0x52455045)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x424d4f3a)
+    offset = data.writeWord(offset,0x00ff4549)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x43522100)
+    offset = data.writeWord(offset,0xff524548)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x474f5226)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x44414f34)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4c4f3300)
+    offset = data.writeWord(offset,0x52454944)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4f444f24)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4e552700)
+    offset = data.writeWord(offset,0xff4e414d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x5a4f5226)
+    offset = data.writeWord(offset,0x33004e45)
+    offset = data.writeWord(offset,0x45444148)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x56414528)
+    offset = data.writeWord(offset,0x52210059)
+    offset = data.writeWord(offset,0xff524f4d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x47494e2b)
+    offset = data.writeWord(offset,0x00ff5448)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4c493000)
+    offset = data.writeWord(offset,0xff52414c)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4f544325)
+    offset = data.writeWord(offset,0x53414c50)
+    offset = data.writeWord(offset,0x0000ff4d)
+    offset = data.writeWord(offset,0x004e412d)
+    offset = data.writeWord(offset,0x45544125)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x45502100)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x49545221)
+    offset = data.writeWord(offset,0x49544142)
+    offset = data.writeWord(offset,0xff454152)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4d414c26)
+    offset = data.writeWord(offset,0x45240045)
+    offset = data.writeWord(offset,0xff4e4f4d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x43534924)
+    offset = data.writeWord(offset,0x4d522100)
+    offset = data.writeWord(offset,0x00ff524f)
+    offset = data.writeWord(offset,0x4c454b33)
+    offset = data.writeWord(offset,0x4e4f5445)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x55444d21)
+    offset = data.writeWord(offset,0x41494353)
+    offset = data.writeWord(offset,0x0000ff53)
+    offset = data.writeWord(offset,0x00444532)
+    offset = data.writeWord(offset,0x4c454b33)
+    offset = data.writeWord(offset,0x4e4f5445)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x414c2600)
+    offset = data.writeWord(offset,0x00ff4c49)
+    offset = data.writeWord(offset,0x49594c26)
+    offset = data.writeWord(offset,0x3300474e)
+    offset = data.writeWord(offset,0x4c4c554b)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4d494c33)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x4752412c)
+    offset = data.writeWord(offset,0x4c330045)
+    offset = data.writeWord(offset,0xff454d49)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0xff544122)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4e413000)
+    offset = data.writeWord(offset,0x52454854)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4f524c2f)
+    offset = data.writeWord(offset,0x0000ff58)
+    offset = data.writeWord(offset,0x4c4c492b)
+    offset = data.writeWord(offset,0x24005245)
+    offset = data.writeWord(offset,0xff4c4c4f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x41454c26)
+    offset = data.writeWord(offset,0x44493200)
+    offset = data.writeWord(offset,0x00ff5245)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4b522100)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x54494837)
+    offset = data.writeWord(offset,0x52240045)
+    offset = data.writeWord(offset,0x4e4f4741)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4f4d5221)
+    offset = data.writeWord(offset,0x00444552)
+    offset = data.writeWord(offset,0x41454c26)
+    offset = data.writeWord(offset,0xff4e414d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x41454c26)
+    offset = data.writeWord(offset,0x4e412d00)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x4b524124)
+    offset = data.writeWord(offset,0x54432f00)
+    offset = data.writeWord(offset,0x5355504f)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0x43414c22)
+    offset = data.writeWord(offset,0x4130004b)
+    offset = data.writeWord(offset,0x4548544e)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x41455227)
+    offset = data.writeWord(offset,0x52210054)
+    offset = data.writeWord(offset,0xff524f4d)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x4f544123)
+    offset = data.writeWord(offset,0x50454c42)
+    offset = data.writeWord(offset,0x00ff5341)
+    offset = data.writeWord(offset,0x4d52452d)
+    offset = data.writeWord(offset,0x00ff4e41)
+    offset = data.writeWord(offset,0x5353452c)
+    offset = data.writeWord(offset,0x24005245)
+    offset = data.writeWord(offset,0x4e4f4d45)
+    offset = data.writeWord(offset,0x000000ff)
+    offset = data.writeWord(offset,0xff4c572f)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x004c572f)
+    offset = data.writeWord(offset,0x4f4d5221)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x48504d21)
+    offset = data.writeWord(offset,0x41425349)
+    offset = data.writeWord(offset,0xff414e45)
+    offset = data.writeWord(offset,0x00000000)
+    offset = data.writeWord(offset,0x49594c26)
+    offset = data.writeWord(offset,0x3a00474e)
+    offset = data.writeWord(offset,0x49424d4f)
+    offset = data.writeWord(offset,0x0000ff45)
+    offset = data.writeWord(offset,0x424d4f3a)
+    offset = data.writeWord(offset,0x33004549)
+    offset = data.writeWord(offset,0x49444c4f)
+    offset = data.writeWord(offset,0x00ff5245)
+    offset = data.writeWord(offset,0x454e4f22)
+    offset = data.writeWord(offset,0x4f4f2200)
+    offset = data.writeWord(offset,0x4152454d)
+    offset = data.writeWord(offset,0x00ff474e)
+    offset = data.writeWord(offset,0x54434936)
+    offset = data.writeWord(offset,0x0059524f)
+    offset = data.writeWord(offset,0x4f4d5221)
+    offset = data.writeWord(offset,0x0000ff52)
+    offset = data.writeWord(offset,0x00455821)
+    offset = data.writeWord(offset,0x4f4d5221)
+    offset = data.writeWord(offset,0x0000ff52)
+
+    data.writeWord(0x000b5948, 0x800e0d2c)
+    data.writeWord(0x000b59c0, 0x800e0d1c)
+    data.writeWord(0x000b5a10, 0x800e0d0c)
+    data.writeWord(0x000b5a60, 0x800e0cfc)
+    data.writeWord(0x000b5a88, 0x800e0cec)
+    data.writeWord(0x000b5ab0, 0x800e0cec)
+    data.writeWord(0x000b5ad8, 0x800e0cdc)
+    data.writeWord(0x000b5b78, 0x800e0cd0)
+    data.writeWord(0x000b5bc8, 0x800e0cc8)
+    data.writeWord(0x000b5bf0, 0x800e0cb8)
+    data.writeWord(0x000b5c90, 0x800e0cb0)
+    data.writeWord(0x000b5ce0, 0x800e0cb0)
+    data.writeWord(0x000b5d30, 0x800e0ca4)
+    data.writeWord(0x000b5da8, 0x800e0c94)
+    data.writeWord(0x000b5e20, 0x800e0c84)
+    data.writeWord(0x000b5e48, 0x800e0c74)
+    data.writeWord(0x000b5e98, 0x800e0c68)
+    data.writeWord(0x000b5ec0, 0x800e0c54)
+    data.writeWord(0x000b5f10, 0x800e0c44)
+    data.writeWord(0x000b6090, 0x800e0c38)
+    data.writeWord(0x000b60b8, 0x800e0c38)
+    data.writeWord(0x000b6108, 0x800e0c2c)
+    data.writeWord(0x000b6130, 0x800e0c1c)
+    data.writeWord(0x000b6158, 0x800e0c14)
+    data.writeWord(0x000b6220, 0x800e0c14)
+    data.writeWord(0x000b6310, 0x800e0c04)
+    data.writeWord(0x000b6388, 0x800e0bfc)
+    data.writeWord(0x000b63b0, 0x800e0bec)
+    data.writeWord(0x000b63d8, 0x800e0be4)
+    data.writeWord(0x000b6400, 0x800e0bd4)
+    data.writeWord(0x000b6428, 0x800e0bc8)
+    data.writeWord(0x000b6478, 0x800e0bb8)
+    data.writeWord(0x000b64a0, 0x800e0bac)
+    data.writeWord(0x000b6540, 0x800e0ba0)
+    data.writeWord(0x000b6590, 0x800e0b94)
+    data.writeWord(0x000b65b8, 0x800e0b94)
+    data.writeWord(0x000b65e0, 0x800e0b84)
+    data.writeWord(0x000b6630, 0x800e0b74)
+    data.writeWord(0x000b6680, 0x800e0b68)
+    data.writeWord(0x000b66d0, 0x800e0b5c)
+    data.writeWord(0x000b6748, 0x800e0b50)
+    data.writeWord(0x000b6798, 0x800e0b40)
+    data.writeWord(0x000b6810, 0x800e0b38)
+    data.writeWord(0x000b69e0, 0x800e0b28)
+    data.writeWord(0x000b6a30, 0x800e0b18)
+    data.writeWord(0x000b6aa8, 0x800e0b08)
+    data.writeWord(0x000b6af8, 0x800e0b00)
+    data.writeWord(0x000b6b20, 0x800e0af0)
+    data.writeWord(0x000b6b48, 0x800e0ae8)
+    data.writeWord(0x000b6b70, 0x800e0ae0)
+    data.writeWord(0x000b6b98, 0x800e0ad0)
+    data.writeWord(0x000b6be8, 0x800e0ac8)
+    data.writeWord(0x000b6c10, 0x800e0ab8)
+    data.writeWord(0x000b6c60, 0x800e0aac)
+    data.writeWord(0x000b6c88, 0x800e0aa0)
+    data.writeWord(0x000b6cb0, 0x800e0a94)
+    data.writeWord(0x000b6cd8, 0x800e0a84)
+    data.writeWord(0x000b6d28, 0x800e0a78)
+    data.writeWord(0x000b6d78, 0x800e0a6c)
+    data.writeWord(0x000b6da0, 0x800e0a64)
+    data.writeWord(0x000b6dc8, 0x800e0a54)
+    data.writeWord(0x000b6e18, 0x800e0a44)
+    data.writeWord(0x000b6e68, 0x800e0a34)
+    data.writeWord(0x000b6eb8, 0x800e0a24)
+    data.writeWord(0x000b6ee0, 0x800e09fc)
+    data.writeWord(0x000b6f08, 0x800e09fc)
+    data.writeWord(0x000b6f30, 0x800e09f0)
+    data.writeWord(0x000b6f80, 0x800e09e0)
+    data.writeWord(0x000b6ff8, 0x800e09cc)
+    data.writeWord(0x000b7020, 0x800e09c4)
+    data.writeWord(0x000b7048, 0x800e0a10)
+    data.writeWord(0x000b7070, 0x800e09bc)
+    data.writeWord(0x000b7098, 0x800e09bc)
+    data.writeWord(0x000b70c0, 0x800e09bc)
+    data.writeWord(0x000b70e8, 0x800e09b0)
+    data.writeWord(0x000b7110, 0x800e099c)
+    data.writeWord(0x000b7138, 0x800e098c)
+    data.writeWord(0x000b7160, 0x800e098c)
+    data.writeWord(0x000b7188, 0x800e0980)
+    data.writeWord(0x000b7308, 0x800e0978)
+    data.writeWord(0x000b7380, 0x800e0968)
+    data.writeWord(0x000b73d0, 0x800e095c)
+    data.writeWord(0x000b7448, 0x800e0954)
+    data.writeWord(0x000b7470, 0x800e094c)
+    data.writeWord(0x000b7498, 0x800e0940)
+    data.writeWord(0x000b74c0, 0x800e0940)
+    data.writeWord(0x000b7510, 0x800e0934)
+    data.writeWord(0x000b7538, 0x800e0934)
+    data.writeWord(0x000b75b0, 0x800e0928)
+    data.writeWord(0x000b7600, 0x800e091c)
+    data.writeWord(0x000b7650, 0x800e0910)
+    data.writeWord(0x000b76c8, 0x800e0910)
+    data.writeWord(0x000b7740, 0x800e0904)
+    data.writeWord(0x000b77b8, 0x800e08f8)
+    data.writeWord(0x000b7808, 0x800e08e8)
+    data.writeWord(0x000b7858, 0x800e08dc)
+    data.writeWord(0x000b7880, 0x800e0b40)
+    data.writeWord(0x000b78d0, 0x800e08cc)
+    data.writeWord(0x000b78f8, 0x800e08bc)
+    data.writeWord(0x000b7948, 0x800e08ac)
+    data.writeWord(0x000b7998, 0x800e089c)
+    data.writeWord(0x000b7a10, 0x800e088c)
+    data.writeWord(0x000b7a60, 0x800e0878)
+    data.writeWord(0x000b7ad8, 0x800e086c)
+    data.writeWord(0x000b7c30, 0x800e086c)
+    data.writeWord(0x000b7cd0, 0x800e086c)
+    data.writeWord(0x000b7d48, 0x800e0860)
+    data.writeWord(0x000b7e10, 0x800e0850)
+    data.writeWord(0x000b7e88, 0x800e0844)
+    data.writeWord(0x000b7ed8, 0x800e0834)
+    data.writeWord(0x000b7f00, 0x800e0824)
+    data.writeWord(0x000b7fa0, 0x800e0818)
+    data.writeWord(0x000b8018, 0x800e080c)
+    data.writeWord(0x000b8040, 0x800e0800)
+    data.writeWord(0x000b8090, 0x800e07f4)
+    data.writeWord(0x000b80b8, 0x800e07e8)
+    data.writeWord(0x000b80e0, 0x800e07e0)
+    data.writeWord(0x000b8180, 0x800e07d8)
+    data.writeWord(0x000b81f8, 0x800e07d0)
+    data.writeWord(0x000b8270, 0x800e07c8)
+    data.writeWord(0x000b8310, 0x800e07c0)
+    data.writeWord(0x000b8388, 0x800e0d2c)
+    data.writeWord(0x000b83b0, 0x800e07b4)
+    data.writeWord(0x000b8400, 0x800e07a0)
+    data.writeWord(0x000b8580, 0x800e07a0)
+    data.writeWord(0x000b85d0, 0x800e078c)
+    data.writeWord(0x000b85f8, 0x800e0784)
+    data.writeWord(0x000b8710, 0x800e0774)
+    data.writeWord(0x000b8738, 0x800e076c)
+    data.writeWord(0x000b8788, 0x800e0760)
+    data.writeWord(0x000b8800, 0x800e0758)
+    data.writeWord(0x000b88a0, 0x800e0748)
+    data.writeWord(0x000b88f0, 0x800e073c)
+    data.writeWord(0x000b8990, 0x800e0730)
+    data.writeWord(0x000b8a08, 0x800e0724)
+    data.writeWord(0x000b8aa8, 0x800e071c)
+    data.writeWord(0x000b8ad0, 0x800e0710)
+    data.writeWord(0x000b8b20, 0x800e0708)
+    data.writeWord(0x000b8c38, 0x800e06f8)
+    data.writeWord(0x000b8c60, 0x800e06f0)
+    data.writeWord(0x000b8c88, 0x800e06f0)
+    data.writeWord(0x000b8d28, 0x800e06e4)
+    data.writeWord(0x000b8ed0, 0x800e06d4)
+    data.writeWord(0x000b8ef8, 0x800e06d4)
+    data.writeWord(0x000b8f20, 0x800e06cc)
+    data.writeWord(0x000b8f70, 0x800e06b8)
+    data.writeWord(0x000b91c8, 0x800e06ac)
+    data.writeWord(0x000b91f0, 0x800e06a4)
+    data.writeWord(0x000b9218, 0x800e0698)
+    data.writeWord(0x000b92b8, 0x800e068c)
+    data.writeWord(0x000b93a8, 0x800e0680)
+    data.writeWord(0x000b9420, 0x800e0674)
+    data.writeWord(0x000b94e8, 0x800e0668)
+    data.writeWord(0x000b9628, 0x800e0658)
+    data.writeWord(0x000b9650, 0x800e0650)
+    data.writeWord(0x000b9848, 0x800e0648)
+    data.writeWord(0x000b9910, 0x800e0648)
+    data.writeWord(0x000b9960, 0x800e063c)
+    data.writeWord(0x000b99d8, 0x800e0634)
+    data.writeWord(0x000b9a78, 0x800e0624)
+    data.writeWord(0x000b9ac8, 0x800e0610)
+    data.writeWord(0x000b9be0, 0x800e0910)
+    data.writeWord(0x000b9ca8, 0x800e0604)
+    data.writeWord(0x000b9cf8, 0x800e05f8)
+    data.writeWord(0x000b9d70, 0x800e0860)
+    data.writeWord(0x000b9de8, 0x800e05e8)
+    data.writeWord(0x000b9e10, 0x800e05e8)
+    data.writeWord(0x000b9e88, 0x800e05d8)
+
     return data
   }
 
@@ -9924,7 +12337,9 @@
       [0x8c02, 0x9c04, 0xac88, 0xbd0a, 0xcdad, 0xc655, 0xcf18], // Royal Purple
       [0x9024, 0x9867, 0xa8ac, 0xbd31, 0xcdf5, 0xeabb, 0xfb1d], // Pink Passion
       [0x8841, 0x9482, 0x9502, 0x9964, 0x9e07, 0xcef5, 0xf7bd], // Mint
-      [0x8000, 0x8c42, 0x98a5, 0xa0e9, 0xa96d, 0xb9f1, 0xc655]  // Shadow Prince
+      [0x8000, 0x8c42, 0x98a5, 0xa0e9, 0xa96d, 0xb9f1, 0xc655], // Shadow Prince
+      [0x8024, 0x8488, 0x84ad, 0xa5d3, 0xb634, 0xcb38, 0xf7bd], // Fire
+      [0x9061, 0xa082, 0xb925, 0xc5e8, 0xce6c, 0xced7, 0xf7bd]  // Ice
     ]
     const palettesWolfCloth = [
       [0x8005, 0x802a, 0x8cad, 0xa4f6, 0x810d, 0xbdf8, 0x81f9,
@@ -9942,7 +12357,11 @@
       [0x8c61, 0x9502, 0xa183, 0xae4a, 0xa427, 0xbed6, 0xc80a,
        0xcc8c, 0xec16, 0x8841, 0x8841, 0x90a2, 0x98e4, 0x9d65],
       [0x8822, 0x8c43, 0x98a5, 0xa0e9, 0x808d, 0xa96d, 0x80f9,
-       0x8d9e, 0x813f, 0x8421, 0x8822, 0x8822, 0x9063, 0x9484]
+       0x8d9e, 0x813f, 0x8421, 0x8822, 0x8822, 0x9063, 0x9484],
+      [0x8046, 0x80ab, 0x88cf, 0x99b6, 0xb231, 0xba79, 0xd2d7,
+       0xf397, 0xffff, 0x8003, 0x8023, 0x8447, 0x90eb, 0xa192], // Fire
+      [0xace5, 0xc525, 0xd168, 0xe68b, 0xb401, 0xff35, 0xe402,
+       0xe125, 0xf509, 0xa082, 0x9c83, 0xb0e4, 0xc1a9, 0xc5e8]  // Ice
     ]
     switch (alColP){
     case 'r':
@@ -9968,6 +12387,12 @@
       break
     case 's':
       colorAlucardSet = 7
+      break
+    case 'f': 
+      colorAlucardSet = 8
+      break
+    case 'i':
+      colorAlucardSet = 9
       break
     default:
       return data
@@ -10009,7 +12434,9 @@
       [0x8465, 0x88a8, 0x88ec, 0x9151], // Bronze Trim
       [0x94a6, 0xa54a, 0xb9ef, 0xc693], // Silver Trim
       [0x8c43, 0x98a5, 0x9cc8, 0xa54c], // Onyx Trim
-      [0xa8ac, 0xad0f, 0xadb3, 0xbe16]  // Coral Trim
+      [0xa8ac, 0xad0f, 0xadb3, 0xbe16], // Coral Trim
+      [0xa8e6, 0xb927, 0xc9eb, 0xd22d], // Slate
+      [0x9905, 0xa94a, 0xb60b, 0xc28f]  // Jade
     ]
     const palettesWolfSkin = [
       [0x9db5, 0xbebd, 0xff9a, 0x8888, 0x98f0,
@@ -10021,7 +12448,11 @@
       [0xa52c, 0xa98a, 0x9cc7, 0x8c44, 0x98a8,
        0x9486, 0x9ce7, 0xa509, 0x8001, 0x8c44],
       [0xbdf9, 0xce7d, 0xdf7c, 0x948a, 0xb553,
-       0xa10f, 0xbdd3, 0xbdf8, 0x8403, 0x904b]
+       0xa10f, 0xbdd3, 0xbdf8, 0x8403, 0x904b],
+      [0xc5ca, 0xe6d2, 0xef9d, 0x9863, 0xb528,
+       0xa905, 0xb96b, 0xce0c, 0x8820, 0x9863], // Slate
+      [0xae0a, 0xcf12, 0xef9d, 0x90a3, 0xa588,
+       0x9906, 0xadaa, 0xb62c, 0x8820, 0x90a3]  // Jade
     ]
     
     switch(alColL){
@@ -10040,8 +12471,14 @@
     case 'v':
       colorAlucardLiner = [4]
       break
+    case 's':
+      colorAlucardLiner = [5]
+      break
+    case 'j':
+      colorAlucardLiner = [6]
+      break
     }
-    if (colorAlucardLiner > 4) {
+    if (colorAlucardLiner > 6) {
       colorAlucardLiner = 0
     }
     offset = 0xef940
@@ -10211,28 +12648,28 @@
           if (value === 'random') {
             value = Math.floor(rng() * 0x100)
           } else if (value === 'random1') {
-            // randomizes between 0 and 1 - eldri7ch
+            // randomizes between 0 and 1
             let randomInt
             randomInt = Math.floor(rng() * 1)
             value = '0x0' + randomInt
           } else if (value === 'random3') {
-            // randomizes between 0 and 3 - eldri7ch
+            // randomizes between 0 and 3
             let randomInt
             randomInt = Math.floor(rng() * 3)
             value = '0x0' + randomInt
           } else if (value === 'random10') {
-            // randomizes between 1 and 10 - eldri7ch
+            // randomizes between 1 and 10
             let randomInt
             randomInt = Math.floor(rng() * 9) + 1
             value = numToHex(randomInt)
           } else if (value === 'random99') {
-            // randomizes between 1 and 99 - eldri7ch
+            // randomizes between 1 and 99
             let randomInt
             randomInt = Math.floor(rng() * 98) + 1
             value = numToHex(randomInt)
           } else if (valueCheck.includes('randomHexChar')) {
             // randomizes a shuffled array of digits between two hex values
-            // - eldri7ch
+            //
             // Check if the list has been shuffled already
             if (hexArrayShuffFlag == 0) {
               // establish the characters required for this to be
@@ -10267,7 +12704,7 @@
             value = Math.floor(rng() * 0x10000)
           } else if (value === 'randomRelic') {
             // '2690808163' translates to the address before the
-            // relic hex is added - eldri7ch
+            // relic hex is added
             // let relicHex
             // relicHex = Math.floor(rng() * 29) + 2690808164
             value = relicShuffleArray.pop()
@@ -10640,6 +13077,11 @@
     applyResistToImmunePotionsPatches: applyResistToImmunePotionsPatches,
     applyLibraryShortcutPatches: applyLibraryShortcutPatches,
     applySingleHitGearPatches: applySingleHitGearPatches,
+    applyReverseCastleTeleporterRandoPatches: applyReverseCastleTeleporterRandoPatches,
+    applyZeroDollarRelicPatches: applyZeroDollarRelicPatches,
+    applyOpenClockStatuepatches: applyOpenClockStatuepatches,
+    applySpikeRoomRandoPatches: applySpikeRoomRandoPatches,
+    applyLycanModePatches: applyLycanModePatches,
     applySwordBuffPatches: applySwordBuffPatches,
     applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,
@@ -10648,6 +13090,7 @@
     applyNewGoals: applyNewGoals,
     applyAlucardPalette: applyAlucardPalette,
     applySplashText: applySplashText,
+    applyListOfNames: applyListOfNames,
     applyAlucardLiner: applyAlucardLiner,
     randomizeRelics: randomizeRelics,
     randomizeItems: randomizeItems,

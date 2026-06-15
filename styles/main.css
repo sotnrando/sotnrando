@@ -15,11 +15,18 @@ body {
     line-height: 1.5;
     margin: auto;
     border: 2px solid white;
-    background-image: linear-gradient(180deg,
-            rgba(2, 0, 36, 1) 0%,
-            rgba(0, 0, 32, 1) 11%,
-            rgba(65, 65, 150, 1) 100%);
+    background-image: linear-gradient(
+        180deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(0, 0, 32, 1) 11%,
+        rgba(65, 65, 150, 1) 100%
+    );
     background-attachment: fixed;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
 }
 
 h1,
@@ -46,194 +53,85 @@ header {
 
 .right {
     text-align: right;
-
-}
-
-main {
-    display: flex;
-    flex-direction: column;
 }
 
 section {
     width: 100%;
     margin: 1em;
-
-    h1 {
-        color: white;
-    }
-
-    h3 {
-        color: white;
-        text-align: center;
-    }
-
-    p {
-        padding-right: 2em;
-        font-size: 105%;
-        color: white;
-    }
-
-    ;
-
-    h2 {
-        color: white;
-        font-size: 130%;
-        font-style: oblique;
-
-        gold {
-            color: goldenrod;
-        }
-    }
-
-    h3 {
-        margin-right: 1em;
-    }
-
-    h4 {
-        color: white;
-        font-size: 140%;
-        margin-right: 1em;
-    }
-
-    & ul {
-        padding: 1em;
-        list-style-type: none;
-    }
-
-    a,
-    a:visited {
-        color: yellow;
-    }
-
-    a:hover {
-        color: maroon;
-    }
-
-    .iframe-container {
-        position: relative;
-        margin-top: 1em;
-        width: 95%;
-        padding-bottom: 56.25%;
-        height: 0;
-    }
-
-    .iframe-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
 }
 
-.faq {
-    h3 {
-        text-align: left;
-    }
+section h1 {
+    color: white;
+}
 
-    p {
-        margin: 1em;
-    }
+section h3 {
+    color: white;
+    text-align: center;
+    margin-right: 1em;
+}
 
+section p {
+    padding-right: 2em;
+    font-size: 105%;
+    color: white;
+}
+
+section h2 {
+    color: white;
+    font-size: 130%;
+    font-style: oblique;
+}
+
+section h4 {
+    color: white;
+    font-size: 140%;
+    margin-right: 1em;
+}
+
+section ul {
+    padding: 1em;
+    list-style-type: none;
+}
+
+section a,
+section a:visited {
+    color: yellow;
+}
+
+section a:hover {
+    color: maroon;
+}
+
+.iframe-container {
+    position: relative;
+    margin-top: 1em;
+    width: 95%;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+li {
+    color: white;
+}
+
+.faq h3 {
+    text-align: left;
+}
+
+.faq p {
+    margin: 1em;
 }
 
 .comunity {
     flex-direction: row;
-}
-
-.menu {
-    display: none;
-    position: absolute;
-    left: 20;
-    width: 40%;
-    background-color: rgb(0, 0, 61);
-    border: 2px solid white;
-}
-
-.menu-btn {
-    display: block;
-    padding: 1em;
-    color: white;
-}
-
-.menu-btn::after {
-    content: "\2630";
-}
-
-#checkbox-toggle {
-    display: none;
-}
-
-#checkbox-toggle:checked~.menu {
-    display: block;
-}
-
-#checkbox-toggle:checked~.menu-btn {
-    content: "\2716";
-}
-
-.navbar {
-    border-bottom: 2px solid white;
-
-    & a {
-        display: block;
-        padding: .25em 1em;
-        text-decoration: none;
-        color: white;
-    }
-
-    & ul {
-        padding: 1em;
-        list-style-type: none;
-    }
-
-    & a:hover,
-    a:focus {
-        text-decoration: underline;
-    }
-
-    & a.current {
-        border: 2px solid;
-        border-radius: 10px;
-        width: fit-content;
-    }
-}
-
-.menu li:has(.submenu) {
-    position: relative;
-
-    & small::after {
-        content: "\25b6"
-    }
-
-    & small {
-        margin-left: 1em;
-    }
-
-    &:hover>.submenu {
-        display: block;
-    }
-}
-
-.submenu {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    background-color: rgb(0, 0, 61);
-    border: 2px solid;
-    border-radius: 10px;
-    color: white;
-    display: none;
-    width: 110%;
-    z-index: 10;
-
-    &>li a {
-        margin: 2px;
-    }
-}
-
-.menu li:has(.submenu) small::after {
-    content: "\25b6";
 }
 
 .responsive-two-column-grid {
@@ -244,64 +142,64 @@ section {
 
 .mapCompare {
     text-align: center;
+}
 
-    h2 {
-        color: white;
-        font-size: 1.2em;
-        margin-bottom: 0.5em;
-        text-align: center;
+.mapCompare h2 {
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+.mapCompare .controls {
+    color: white;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1em;
+}
+
+.mapCompare label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9em;
+}
+
+.mapCompare select,
+.mapCompare input[type="file"],
+.mapCompare input[type="range"],
+.mapCompare button {
+    color: white;
+    background: #180181;
+    border: 1px solid var(--border);
+    padding: 0.5em;
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.mapCompare canvas {
+    border: 1px solid #444;
+    touch-action: none;
+    image-rendering: pixelated;
+    background: #11005a;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+}
+
+@media (min-width: 600px) {
+    .mapCompare .controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .controls {
-        color: white;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75em;
-        width: 100%;
-        max-width: 400px;
-        margin-bottom: 1em;
-    }
-
-    label {
-        display: flex;
-        flex-direction: column;
-        font-size: 0.9em;
-    }
-
-    select,
-    input[type="file"],
-    input[type="range"],
-    button {
-        color: white;
-        background: #180181;
-        border: 1px solid var(--border);
-        padding: 0.5em;
-        font-size: 1em;
-        border-radius: 4px;
-    }
-
-    canvas {
-        border: 1px solid #444;
-        touch-action: none;
-        image-rendering: pixelated;
-        background: #11005a;
-        width: 100%;
-        max-width: 800px;
-        height: auto;
-        aspect-ratio: 4 / 3;
-    }
-
-    @media (min-width: 600px) {
-        .controls {
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        label {
-            width: 180px;
-        }
+    .mapCompare label {
+        width: 180px;
     }
 }
 
@@ -311,39 +209,28 @@ section {
     }
 
     main {
-        flex-direction: row;
+        flex-direction: column;
     }
+}
 
-    .menu {
-        position: relative;
-        left: 0;
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
+#changelog-select {
+    width: 50%;
+    font-size: 1.1em;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+}
 
-    }
-
-    .navbar {
-        & a.current {
-            width: fit-content;
-        }
-    }
-
-    .menu-btn {
-        display: none;
-    }
-
-    #checkbox-toggle:checked~.menu {
-        display: flex;
-    }
-
-    .menu li:has(.submenu) small::after {
-        content: "\25bc";
-    }
-
-    .submenu {
-        top: auto;
-        left: 0;
-        width: 160%
-    }
+pre {
+    color: white;
+    padding: 1em;
+}
+gold {
+    color: goldenrod;
+    font-weight: bold;
+}
+#disclaimer {
+    font-size: 0.8em;
+    font-style: italic;
+    margin-top: 1em;
 }

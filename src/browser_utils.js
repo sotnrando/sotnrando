@@ -97,15 +97,46 @@ BrowserUtils.toKebabCase = function toKebabCase(str) {
 
 BrowserUtils.getCurrentOptions = function getCurrentOptions() {
     const keys = [
-        'tournamentMode', 'colorrandoMode', 'magicmaxMode', 'antiFreezeMode',
-        'mypurseMode', 'iwsMode', 'fastwarpMode', 'itemNameRandoMode',
-        'noprologueMode', 'unlockedMode', 'surpriseMode', 'enemyStatRandoMode',
-        'shopPriceRandoMode', 'startRoomRandoMode', 'startRoomRando2ndMode',
-        'dominoMode', 'rlbcMode', 'immunityPotionMode', 'godspeedMode',
-        'libraryShortcut', 'elemChaosMode', 'easyMode', 'devStashMode',
-        'seasonalPhrasesMode', 'music', 'bossMusicSeparation', 'singleHitGearMode', 
-        'music', 'appendSeed', 'excludeSongsOption', 'itemLocations', 'stats', 
-        'prologueRewards', 'startingEquipment', 'accessibilityPatches'
+        'tournamentMode', 
+        'colorrandoMode', 
+        'magicmaxMode', 
+        'antiFreezeMode',
+        'mypurseMode', 
+        'iwsMode', 
+        'fastwarpMode', 
+        'itemNameRandoMode',
+        'noprologueMode', 
+        'unlockedMode', 
+        'surpriseMode', 
+        'enemyStatRandoMode',
+        'shopPriceRandoMode', 
+        'startRoomRandoMode', 
+        'startRoomRando2ndMode',
+        'dominoMode', 
+        'rlbcMode', 
+        'immunityPotionMode', 
+        'godspeedMode',
+        'libraryShortcut', 
+        'elemChaosMode', 
+        'singleHitGearMode', 
+        'revCastleTeleportRando', 
+        'zeroDollarRelicMode',
+        'openClockStatueMode', 
+        'spikeRoomRando', 
+        'lycanMode',
+        'easyMode', 
+        'devStashMode',
+        'seasonalPhrasesMode', 
+        'music', 
+        'bossMusicSeparation', 
+        'music', 
+        'appendSeed', 
+        'excludeSongsOption', 
+        'itemLocations', 
+        'stats', 
+        'prologueRewards', 
+        'startingEquipment', 
+        'accessibilityPatches'
     ]
 
     const options = {}
@@ -261,6 +292,8 @@ BrowserUtils.ChangeHandlers = {
             elems.showSolutions.disabled = true
             elems.easyMode.checked = false
             elems.easyMode.disabled = true
+            elems.zeroDollarRelicMode.checked = true
+            elems.openClockStatueMode.checked = true 
         } else {
             elems.showRelics.disabled = false
             elems.easyMode.disabled = false

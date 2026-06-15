@@ -28,6 +28,8 @@
   "shopPriceRandoMode": true,
   "rlbcMode": true,
   "startRoomRandoMode": true,
+  "zeroDollarRelicMode": true,
+  "openClockStatueMode": true,
 
   "complexityGoal": {
     "min": 6,

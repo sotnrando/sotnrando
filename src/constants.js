@@ -1210,6 +1210,218 @@
     }
   ]
 
+  const reverseTeleporterData = [
+	{
+	  title: "R. Keep",		// Location Title
+	  stage: 0x2B,			// Stage Id
+	  room: 0,				// Room Number
+	  xPos: 0,				// X Position Alucard to Trigger Warp
+	  yPos: 0,				// Y Position Alucard to Trigger Warp
+	  yPosSpecial: 0,		// Y Position Fix for Rooms taller than 1 Screen
+	  xPosWarp: 0,			// X Position for Destination, Reverse Castle flips these around
+	  yPosWarp: 0,			// Y Position for Destination, Reverse Castle flips these around
+	  tileofs: 0,			// BIN Address of Tile to Change to mark the teleporter pad
+	  tileval: 0,			// the Value to Write, if greater than 0xFFFF it will write two tiles
+	  mapaddr: 0,			// RAM Address of map cell
+	  mapmask: 0			// Bitmask to apply
+	}, {
+	  title: "R. Outer Wall Bottom",
+	  stage: 0x21,
+	  room: 1,
+	  xPos: 0x27e,
+	  yPos: 0x32A7,
+	  yPosSpecial: 0,
+	  xPosWarp: 0x80,
+	  yPosWarp: 0x80,
+	  tileofs: 0x505E786,
+	  tileval: 0x006500A3,
+	  mapaddr: 0x8006C294,
+	  mapmask: 0x04
+	}, {
+	  title: "R. Marble Gallery Olrox Door",
+	  stage: 0x20,
+	  room: 0xD,
+	  xPos: 0x2080,
+	  yPos: 0x26A7,
+	  yPosSpecial: 0,
+	  xPosWarp: 0x80,
+	  yPosWarp: 0x59,
+	  tileofs: 0x4FAAD16,
+	  tileval: 0x042C042C,
+	  mapaddr: 0x8006C1DC,
+	  mapmask: 0x40
+	}, {
+	  title: "R. Catacombs Behind Galamoth",
+	  stage: 0x23,
+	  room: 0x1,
+	  xPos: 0x2E76,
+	  yPos: 0xDB7,
+	  yPosSpecial: 0,
+	  xPosWarp: 0x8A,
+	  yPosWarp: 0x49,
+	  tileofs: 0x4D1072A,
+	  tileval: 0x00C9,
+	  mapaddr: 0x8006C04F,
+	  mapmask: 0x04
+	}, {
+	  title: "R. Mines Near Alucard Sword",
+	  stage: 0x25,
+	  room: 0xB,
+	  xPos: 0x2260,
+	  yPos: 0x13C7,
+	  yPosSpecial: 0,
+	  xPosWarp: 0xA0,
+	  yPosWarp: 0x39,
+	  tileofs: 0x4DB2A2E,
+	  tileval: 0x01350135,
+	  mapaddr: 0x8006C0AC,
+	  mapmask: 0x04
+	}, {
+      title: "Antichapel Bottom of Stairs",
+      stage: 0x26,
+      room: 12,
+      xPos: 0x3c80,
+      yPos: 0x2367,
+	  yPosSpecial: 0,
+      xPosWarp: 0x80,
+      yPosWarp: 0x99,
+      tileofs: 0x04e50236,
+      tileval: 0x0336034c,
+      mapaddr: 0x8006c1B3,
+      mapmask: 0x40
+    }, {
+      title: "Reverse Caverns Alucard Shield",
+      stage: 0x29,
+      room: 17,
+      xPos: 0x2980,
+      yPos: 0x1a87,
+	  yPosSpecial: 0,
+      xPosWarp: 0x80,
+      yPosWarp: 0x79,
+      tileofs: 0x05289dda,
+      tileval: 0x03220333,
+      mapaddr: 0x8006c11e,
+      mapmask: 0x10
+    }, {
+      title: "Necromancy Lab ring of Arcana",
+      stage: 0x2c,
+      room: 0,
+      xPos: 0x3280,
+      yPos: 0x24a7,
+	  yPosSpecial: 0,
+      xPosWarp: 0x80,
+      yPosWarp: 0x59,
+      tileofs: 0x05919892,
+      tileval: 0x001e001f,
+      mapaddr: 0x8006c1c0,
+      mapmask: 0x04
+    }, {
+      title: "Reverse Entrance Spare Room 1",
+      stage: 0x27,
+      room: 14,
+      xPos: 0x2c80,
+      yPos: 0x18b7,
+	  yPosSpecial: 0,
+      xPosWarp: 0x80,
+      yPosWarp: 0x49,
+      tileofs: 0x051c9ffe,
+      tileval: 0x05e405c7,
+      mapaddr: 0x8006c0ff,
+      mapmask: 0x40
+    }, {
+      title: "R. Olrox Gem Room",
+      stage: 0x24,
+      room: 10,
+      xPos: 0x1E80,
+      yPos: 0x2DB7,
+	  yPosSpecial: 0,
+      xPosWarp: 0x80,
+      yPosWarp: 0x49,
+      tileofs: 0x511B052,
+      tileval: 0x000E000D,
+      mapaddr: 0x8006C24B,
+      mapmask: 0x04
+    }, {
+      title: "R. Colosseum Fountain",
+      stage: 0x2A,
+      room: 9,
+      xPos: 0x2C72,
+      yPos: 0x27A7,
+	  yPosSpecial: 0,
+      xPosWarp: 0x8E,
+      yPosWarp: 0x59,
+      tileofs: 0x576A958,
+      tileval: 0x04BE04BF,
+      mapaddr: 0x8006C1EF,
+      mapmask: 0x40
+    }, {
+      title: "R. Clock Tower Main Room",
+      stage: 0x2d,
+      room: 10,
+      xPos: 0x07f0,
+      yPos: 0x3157,
+	  yPosSpecial: 0x54,
+      xPosWarp: 0x0310,
+      yPosWarp: 0x03a9,
+      tileofs: 0x059d97e8,
+      tileval: 0x005e0065,
+      mapaddr: 0x8006c285,
+      mapmask: 0x01
+    }, {
+      title: "Anti-Chapel near Deathwings",
+      stage: 0x26,
+      room: 6,
+      xPos: 0x2f80,
+      yPos: 0x2c97,
+	  yPosSpecial: 0,
+      xPosWarp: 0x81,
+      yPosWarp: 0x69,
+      tileofs: 0x04e42fe6,
+      tileval: 0x01010101,
+      mapaddr: 0x8006c23f,
+      mapmask: 0x01
+    }, {
+      title: "Black Marble Gallery - Forbidden Route",
+      stage: 0x20,
+      room: 0,
+      xPos: 0x27e0,
+      yPos: 0x1c87,
+	  yPosSpecial: 0x88,
+      xPosWarp: 0x0320,
+      yPosWarp: 0x0179,
+      tileofs: 0x04f9a2f2,
+      tileval: 0x00400068,
+      mapaddr: 0x8006c13d,
+      mapmask: 0x01
+    }, {
+      title: "Forbidden Library",
+      stage: 0x22,
+      room: 4,
+      xPos: 0x0ed8,
+      yPos: 0x2bb7,
+	  yPosSpecial: 0xb4,
+      xPosWarp: 0x28,
+      yPosWarp: 0x49,
+      tileofs: 0x04ef280a,
+      tileval: 0x0313,
+      mapaddr: 0x8006c227,
+      mapmask: 0x04
+    }, {
+      title: "R. Caverns - Peanuts",
+      stage: 0x29,
+      room: 7,
+      xPos: 0x1380,
+      yPos: 0x1fb7,
+	  yPosSpecial: 0xa8,
+      xPosWarp: 0x80,
+      yPosWarp: 0x49,
+      tileofs: 0x052859ea,
+      tileval: 0x03220333,
+      mapaddr: 0x8006c168,
+      mapmask: 0x01
+    }
+  ]
+  
   // #region Start Room Rando
   // This data is provided for the starting room randomizer. Writes are used
   // for writing where Alucard goes. The stage is used for detecting when we
@@ -1983,6 +2195,17 @@
   // point. Most other characters besides letters, numbers, and basic 
   // punctuation do not render on screen.
   const splashPhrases = [
+    "2020 Tournament Champion Dr4gonBlitz!",
+    "Spring Tournament 2022 Champion JupiterClimb!",
+    "Spring Tournament 2023 Champion Dr4gonBlitz!",
+    "Spring Tournament 2024 Champion the__swarm!",
+    "Spring Tournament 2025 Champion DerDrach!",
+    "Spring Tournament 2026 Champion ClassicAdvent!",
+    "Fall Tournament 2021 Champion asdheyb!",
+    "Fall Tournament 2022 Champion JupiterClimb!",
+    "Fall Tournament 2023 Champion the__swarm!",
+    "Fall Tournament 2024 Champion DerDrach!",
+    "Fall Tournament 2025 Champion Renantrl1!",
     "Moving like Dracula, we get it back in blood!",
     "Diagon strats!",
     "Razzio routing!",
@@ -2066,16 +2289,6 @@
     "For Shakey!",
     "Barley Teas!",
     "But DerDrach has full-cleared second castle!",
-    "2020 Tournament Champion Dr4gonBlitz!",
-    "Spring Tournament 2022 Champion JupiterClimb!",
-    "Spring Tournament 2023 Champion Dr4gonBlitz!",
-    "Spring Tournament 2024 Champion the__swarm!",
-    "Spring Tournament 2025 Champion DerDrach!",
-    "Fall Tournament 2021 Champion asdheyb!",
-    "Fall Tournament 2022 Champion JupiterClimb!",
-    "Fall Tournament 2023 Champion the__swarm!",
-    "Fall Tournament 2024 Champion DerDrach!",
-    "Fall Tournament 2025 Champion Renantrl1!",
     "Inverse Holo Ultra Chrome Foil!",
     "More faithful to the original than D2R!",
     "Made of 28 percent spaghetti!",
@@ -2087,7 +2300,9 @@
     "It just works!",
     "Do the math!",
     "Definitely a real randomizer!",
-    "BUFFER DO NOT DELETE!"
+    "BUFFER DO NOT DELETE!",
+    "Em memoria de Roberto!",
+    "Try Twisted Metal V!"
   ]
 
   // Prides splash phrases are considered part of the "Seasonal Phrases" for 
@@ -3011,6 +3226,7 @@
     faerieScrollForceAddresses: faerieScrollForceAddresses,
     characterMap: characterMap,
     shopItemsData: shopItemsData,
+	reverseTeleporterData: reverseTeleporterData,
     startRoomData: startRoomData,
     splashPhrases: splashPhrases,
     prideSplashPhrases: prideSplashPhrases,

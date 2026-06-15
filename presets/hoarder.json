@@ -1,29 +1,28 @@
 {
   "metadata": {
-    "id": "recycler",
-    "name": "Recycler",
-    "description": "A high-complexity preset where duplicate relics appear for the main progression relics and there are eight Vlad relics. Start in second castle with stat-boosting potions. Six vlads open the doors to Dracula. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
+    "id": "hoarder",
+    "name": "Hoarder",
+    "description": "Collector Variant. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
     "author": [
       "eldri7ch",
       "MottZilla"
     ],
-    "weight": -2187,
+    "weight": -5000,
     "knowledgeCheck": "None",
     "metaExtension": "Guarded",
-    "metaComplexity": "6",
+    "metaComplexity": "1",
     "itemStats": "Normal",
     "timeFrame": "Normal",
     "moddedLevel": "None",
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Six out of Eight Vlads"
+    "winCondition": "20 or 25 Relics"
   },
 
   "stats": false,
   "antiFreezeMode": true,
   "fastwarpMode": true,
-  "startRoomRando2ndMode": true,
   "immunityPotionMode": true,
 
   "alias": [{
@@ -61,7 +60,7 @@
   }],
   
   "complexityGoal": {
-    "min": 6,
+    "min": 1,
     "goals": [
       "Holy glasses"
   ]},
@@ -1456,236 +1455,7 @@
     ]
   }],
 
-  "writes":[{
-    "comment": "Jump to injected code",
-    "address": "0x000fa97c",
-    "type": "word",
-    "value": "0x0c04db00"
-  }, {
-    "address": "0x00158c98",
-    "comment": "Save Return Address for rA (func call)",
-    "type": "word",
-    "value": "0x37F70000"
-  },
-
-  {
-    "comment": "give STR. Potion, Lck Potion, ATK potion, Smart Potion, Shield Potion; assign 94h to r9",
-    "type": "word",
-    "value": "0x34090094"
-  },{
-    "comment": "assign 99h to r8",
-    "type": "word",
-    "value": "0x34080099"
-  },{
-    "comment": "assign 0 to r5",
-    "type": "word",
-    "value": "0x34050000"
-  },{
-    "comment": "assign r9 to r4",
-    "type": "word",
-    "value": "0x35240000"
-  },{
-    "comment": "call give item",
-    "type": "word",
-    "value": "0x0C03F61D"
-  },{
-    "comment": "add 1 to r9",
-    "type": "word",
-    "value": "0x25290001"
-  },{
-    "comment": "if r8 <> r9 then jump back to ",
-    "type": "word",
-    "value": "0x1509fffb"
-  },{
-    "type": "word",
-    "value": "0x00000000"
-  },
-  
-  {
-    "comment": "Recall Return Address for rA (func call)",
-    "type": "word",
-    "value": "0x36FF0000"
-  }, {
-    "type": "word",
-    "value": "0x03E00008",
-    "comment": "nop"
-  }, {
-    "type": "word",
-    "value": "0x00000000",
-    "comment": "nop"
-  }, 
-  
-  {
-    "comment": "Six of Eight Vlads Hook",
-    "type": "word",
-    "address": "0x4FCF814",
-    "value": "0x08074fbc"
-  }, {
-    "comment": "Six of Eight Vlads",
-    "type": "word",
-    "address": "0x4FE4F68",
-    "value": "0x27BDFFE0"
-  }, {
-    "type": "word",
-    "value": "0xAFBF0010"
-  }, {
-    "type": "word",
-    "value": "0xAFB00004"
-  }, {
-    "type": "word",
-    "value": "0xAFB10008"
-  }, {
-    "type": "word",
-    "value": "0xAFB2000C"
-  }, {
-    "type": "word",
-    "value": "0x3C108009"
-  }, {
-    "type": "word",
-    "value": "0x36107967"
-  }, {
-    "type": "word",
-    "value": "0x3C118009"
-  }, {
-    "type": "word",
-    "value": "0x3631796F"
-  }, {
-    "type": "word",
-    "value": "0x92120000"
-  }, {
-    "type": "word",
-    "value": "0x34080000"
-  }, {
-    "type": "word",
-    "value": "0x12400002"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x25080001"
-  }, {
-    "type": "word",
-    "value": "0x92320000"
-  }, {
-    "type": "word",
-    "value": "0x3C108009"
-  }, {
-    "type": "word",
-    "value": "0x36107973"
-  }, {
-    "type": "word",
-    "value": "0x3C118009"
-  }, {
-    "type": "word",
-    "value": "0x36317982"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x12400002"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x25080001"
-  }, {
-    "type": "word",
-    "value": "0x92120000"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x3C108009"
-  }, {
-    "type": "word",
-    "value": "0x3610797D"
-  }, {
-    "type": "word",
-    "value": "0x12400002"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x25080001"
-  }, {
-    "type": "word",
-    "value": "0x92120000"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x12400002"
-  }, {
-    "type": "word",
-    "value": "0x26100001"
-  }, {
-    "type": "word",
-    "value": "0x25080001"
-  }, {
-    "type": "word",
-    "value": "0x1611FFFA"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x2508FFFA"
-  }, {
-    "type": "word",
-    "value": "0x05000008"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x8FB00004"
-  }, {
-    "type": "word",
-    "value": "0x8FB10008"
-  }, {
-    "type": "word",
-    "value": "0x8FB2000C"
-  }, {
-    "type": "word",
-    "value": "0x8FBF0010"
-  }, {
-    "type": "word",
-    "value": "0x27BD0020"
-  }, {
-    "type": "word",
-    "value": "0x080704E4"
-  }, {
-    "type": "word",
-    "value": "0x00000000"
-  }, {
-    "type": "word",
-    "value": "0x8FB00004"
-  }, {
-    "type": "word",
-    "value": "0x8FB10008"
-  }, {
-    "type": "word",
-    "value": "0x8FB2000C"
-  }, {
-    "type": "word",
-    "value": "0x8FBF0010"
-  }, {
-    "type": "word",
-    "value": "0x27BD0020"
-  }, {
-    "type": "word",
-    "value": "0x080705E4"
-  }, {
-    "comment": "End Six of Eight",
-    "type": "word",
-    "value": "0x00000000"
-  }, 
+  "writes":[
   
   {
     "comment": "Soul of Bat Duplicate",
@@ -1822,11 +1592,12 @@
     "type": "word",
     "value": "0x00000000"
 },
+
 {
     "comment": "EX0",
     "type": "word",
     "address": "0x370F5A8",
-    "value": "0x08003004"
+    "value": "0x0800300D"
 },
 {
     "type": "word",
@@ -1834,11 +1605,47 @@
 },
 {
     "type": "word",
-    "value": "0x080031AF"
+    "value": "0x00000196"
+},
+{
+    "type": "word",
+    "value": "0x00000014"
+},
+{
+    "type": "word",
+    "value": "0x080031BE"
 },
 {
     "type": "word",
     "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x20202020"
+},
+{
+    "type": "word",
+    "value": "0x54544F4D"
+},
+{
+    "type": "word",
+    "value": "0x4C4C495A"
+},
+{
+    "type": "word",
+    "value": "0x20202041"
 },
 {
     "type": "word",
@@ -1850,7 +1657,7 @@
 },
 {
     "type": "word",
-    "value": "0x0C003084"
+    "value": "0x0C0031DF"
 },
 {
     "type": "word",
@@ -1858,7 +1665,7 @@
 },
 {
     "type": "word",
-    "value": "0x0C003095"
+    "value": "0x0C0031EB"
 },
 {
     "type": "word",
@@ -1866,7 +1673,7 @@
 },
 {
     "type": "word",
-    "value": "0x0C0030A6"
+    "value": "0x0C003091"
 },
 {
     "type": "word",
@@ -1874,7 +1681,7 @@
 },
 {
     "type": "word",
-    "value": "0x0C0030C4"
+    "value": "0x0C0030A2"
 },
 {
     "type": "word",
@@ -1882,7 +1689,7 @@
 },
 {
     "type": "word",
-    "value": "0x0C0030E6"
+    "value": "0x0C0030B3"
 },
 {
     "type": "word",
@@ -1890,7 +1697,7 @@
 },
 {
     "type": "word",
-    "value": "0x0C00311B"
+    "value": "0x0C0030D1"
 },
 {
     "type": "word",
@@ -1898,7 +1705,7 @@
 },
 {
     "type": "word",
-    "value": "0x0C0031A1"
+    "value": "0x0C0030F3"
 },
 {
     "type": "word",
@@ -1906,7 +1713,7 @@
 },
 {
     "type": "word",
-    "value": "0x0C00317B"
+    "value": "0x0C00312A"
 },
 {
     "type": "word",
@@ -1914,7 +1721,7 @@
 },
 {
     "type": "word",
-    "value": "0x0C00305F"
+    "value": "0x0C0031B0"
 },
 {
     "type": "word",
@@ -1922,7 +1729,23 @@
 },
 {
     "type": "word",
-    "value": "0x0C003020"
+    "value": "0x0C00318A"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x0C00306C"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x0C00302D"
 },
 {
     "type": "word",
@@ -2758,19 +2581,23 @@
 },
 {
     "type": "word",
+    "value": "0x30A50002"
+},
+{
+    "type": "word",
+    "value": "0x30C60002"
+},
+{
+    "type": "word",
+    "value": "0x10A0002F"
+},
+{
+    "type": "word",
     "value": "0x00000000"
 },
 {
     "type": "word",
-    "value": "0x10A0002E"
-},
-{
-    "type": "word",
-    "value": "0x00000000"
-},
-{
-    "type": "word",
-    "value": "0x10C0002C"
+    "value": "0x10C0002D"
 },
 {
     "type": "word",
@@ -2786,7 +2613,11 @@
 },
 {
     "type": "word",
-    "value": "0x00000000"
+    "value": "0x30A50002"
+},
+{
+    "type": "word",
+    "value": "0x30C60002"
 },
 {
     "type": "word",
@@ -2834,7 +2665,7 @@
 },
 {
     "type": "word",
-    "value": "0x3484C394"
+    "value": "0x3484C3C8"
 },
 {
     "type": "word",
@@ -2858,7 +2689,7 @@
 },
 {
     "type": "word",
-    "value": "0x34C6C394"
+    "value": "0x34C6C3C8"
 },
 {
     "type": "word",
@@ -2930,7 +2761,7 @@
 },
 {
     "type": "word",
-    "value": "0x34C6C394"
+    "value": "0x34C6C3C8"
 },
 {
     "type": "word",
@@ -3346,7 +3177,7 @@
 },
 {
     "type": "word",
-    "value": "0x34E7C5A0"
+    "value": "0x34E7C5DC"
 },
 {
     "type": "word",
@@ -3390,7 +3221,7 @@
 },
 {
     "type": "word",
-    "value": "0x34E7C554"
+    "value": "0x34E7C590"
 },
 {
     "type": "word",
@@ -3498,7 +3329,7 @@
 },
 {
     "type": "word",
-    "value": "0x34E7C648"
+    "value": "0x34E7C684"
 },
 {
     "type": "word",
@@ -3681,10 +3512,1007 @@
     "value": "0x0002102B"
 },
 {
+    "type": "word",
+    "value": "0x3C048009"
+},
+{
+    "type": "word",
+    "value": "0x90847B97"
+},
+{
+    "type": "word",
+    "value": "0x34020026"
+},
+{
+    "type": "word",
+    "value": "0x34050014"
+},
+{
+    "type": "word",
+    "value": "0x14820002"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34050019"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C00C"
+},
+{
+    "type": "word",
+    "value": "0xA0850000"
+},
+{
+    "type": "word",
+    "value": "0x03E00008"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x27BDFFE0"
+},
+{
+    "type": "word",
+    "value": "0xAFBF0010"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C018"
+},
+{
+    "type": "word",
+    "value": "0x8C850000"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x14A00015"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34040006"
+},
+{
+    "type": "word",
+    "value": "0x34050001"
+},
+{
+    "type": "word",
+    "value": "0x0C03B720"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x04400069"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C018"
+},
+{
+    "type": "word",
+    "value": "0xAC820000"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34040006"
+},
+{
+    "type": "word",
+    "value": "0x34050001"
+},
+{
+    "type": "word",
+    "value": "0x0C03B720"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x0440005F"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C01C"
+},
+{
+    "type": "word",
+    "value": "0xAC820000"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x0C0032C2"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x0C00327D"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34440000"
+},
+{
+    "type": "word",
+    "value": "0x0C003272"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C018"
+},
+{
+    "type": "word",
+    "value": "0x0C003265"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x90440007"
+},
+{
+    "type": "word",
+    "value": "0x34060006"
+},
+{
+    "type": "word",
+    "value": "0x14860049"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C008"
+},
+{
+    "type": "word",
+    "value": "0x94840000"
+},
+{
+    "type": "word",
+    "value": "0x3405001F"
+},
+{
+    "type": "word",
+    "value": "0xA444000E"
+},
+{
+    "type": "word",
+    "value": "0xA445001A"
+},
+{
+    "type": "word",
+    "value": "0x340401F0"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0xA4440026"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34040025"
+},
+{
+    "type": "word",
+    "value": "0x34050022"
+},
+{
+    "type": "word",
+    "value": "0xA4440008"
+},
+{
+    "type": "word",
+    "value": "0xA445000A"
+},
+{
+    "type": "word",
+    "value": "0x34040008"
+},
+{
+    "type": "word",
+    "value": "0xA0440018"
+},
+{
+    "type": "word",
+    "value": "0xA0440019"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34040020"
+},
+{
+    "type": "word",
+    "value": "0x3C058000"
+},
+{
+    "type": "word",
+    "value": "0x34A5C020"
+},
+{
+    "type": "word",
+    "value": "0x90A50000"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x000528C0"
+},
+{
+    "type": "word",
+    "value": "0x00852021"
+},
+{
+    "type": "word",
+    "value": "0x34050018"
+},
+{
+    "type": "word",
+    "value": "0xA044000C"
+},
+{
+    "type": "word",
+    "value": "0xA045000D"
+},
+{
+    "type": "word",
+    "value": "0x34040001"
+},
+{
+    "type": "word",
+    "value": "0xA4440032"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C01C"
+},
+{
+    "type": "word",
+    "value": "0x0C003265"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x90440007"
+},
+{
+    "type": "word",
+    "value": "0x34060006"
+},
+{
+    "type": "word",
+    "value": "0x14860022"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C008"
+},
+{
+    "type": "word",
+    "value": "0x94840000"
+},
+{
+    "type": "word",
+    "value": "0x3405001F"
+},
+{
+    "type": "word",
+    "value": "0xA444000E"
+},
+{
+    "type": "word",
+    "value": "0xA445001A"
+},
+{
+    "type": "word",
+    "value": "0x340401F0"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0xA4440026"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34040029"
+},
+{
+    "type": "word",
+    "value": "0x34050022"
+},
+{
+    "type": "word",
+    "value": "0xA4440008"
+},
+{
+    "type": "word",
+    "value": "0xA445000A"
+},
+{
+    "type": "word",
+    "value": "0x34040008"
+},
+{
+    "type": "word",
+    "value": "0xA0440018"
+},
+{
+    "type": "word",
+    "value": "0xA0440019"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34040020"
+},
+{
+    "type": "word",
+    "value": "0x3C058000"
+},
+{
+    "type": "word",
+    "value": "0x34A5C020"
+},
+{
+    "type": "word",
+    "value": "0x90A50001"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x000528C0"
+},
+{
+    "type": "word",
+    "value": "0x00852021"
+},
+{
+    "type": "word",
+    "value": "0x34050018"
+},
+{
+    "type": "word",
+    "value": "0xA044000C"
+},
+{
+    "type": "word",
+    "value": "0xA045000D"
+},
+{
+    "type": "word",
+    "value": "0x34040001"
+},
+{
+    "type": "word",
+    "value": "0xA4440032"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x08003261"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C018"
+},
+{
+    "type": "word",
+    "value": "0xAC800000"
+},
+{
+    "type": "word",
+    "value": "0x8FBF0010"
+},
+{
+    "type": "word",
+    "value": "0x27BD0020"
+},
+{
+    "type": "word",
+    "value": "0x03E00008"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x8C850000"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x10A00008"
+},
+{
+    "type": "word",
+    "value": "0x34020000"
+},
+{
+    "type": "word",
+    "value": "0x3C068008"
+},
+{
+    "type": "word",
+    "value": "0x34C66FEC"
+},
+{
+    "type": "word",
+    "value": "0x24C60034"
+},
+{
+    "type": "word",
+    "value": "0x24A5FFFF"
+},
+{
+    "type": "word",
+    "value": "0x14A0FFFD"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34C20000"
+},
+{
+    "type": "word",
+    "value": "0x03E00008"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3405000A"
+},
+{
+    "type": "word",
+    "value": "0x0085001B"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x00003012"
+},
+{
+    "type": "word",
+    "value": "0x00002810"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C020"
+},
+{
+    "type": "word",
+    "value": "0xA0860000"
+},
+{
+    "type": "word",
+    "value": "0xA0850001"
+},
+{
+    "type": "word",
+    "value": "0x03E00008"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048009"
+},
+{
+    "type": "word",
+    "value": "0x34847964"
+},
+{
+    "type": "word",
+    "value": "0x34050000"
+},
+{
+    "type": "word",
+    "value": "0x3406001E"
+},
+{
+    "type": "word",
+    "value": "0x90870000"
+},
+{
+    "type": "word",
+    "value": "0x24C6FFFF"
+},
+{
+    "type": "word",
+    "value": "0x10E00002"
+},
+{
+    "type": "word",
+    "value": "0x24840001"
+},
+{
+    "type": "word",
+    "value": "0x24A50001"
+},
+{
+    "type": "word",
+    "value": "0x14C0FFFA"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048009"
+},
+{
+    "type": "word",
+    "value": "0x34847A00"
+},
+{
+    "type": "word",
+    "value": "0x90860041"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x14C00007"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C078009"
+},
+{
+    "type": "word",
+    "value": "0x34E77C0C"
+},
+{
+    "type": "word",
+    "value": "0x90E70000"
+},
+{
+    "type": "word",
+    "value": "0x3406000E"
+},
+{
+    "type": "word",
+    "value": "0x14C70002"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x24A50001"
+},
+{
+    "type": "word",
+    "value": "0x3C048009"
+},
+{
+    "type": "word",
+    "value": "0x34847A00"
+},
+{
+    "type": "word",
+    "value": "0x90860055"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x14C00007"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C078009"
+},
+{
+    "type": "word",
+    "value": "0x34E77C08"
+},
+{
+    "type": "word",
+    "value": "0x90E70000"
+},
+{
+    "type": "word",
+    "value": "0x34060022"
+},
+{
+    "type": "word",
+    "value": "0x14C70002"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x24A50001"
+},
+{
+    "type": "word",
+    "value": "0x3C048009"
+},
+{
+    "type": "word",
+    "value": "0x90887A7B"
+},
+{
+    "type": "word",
+    "value": "0x90867C14"
+},
+{
+    "type": "word",
+    "value": "0x90877C18"
+},
+{
+    "type": "word",
+    "value": "0x34090048"
+},
+{
+    "type": "word",
+    "value": "0x15000007"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x10C90005"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x10E90003"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x18000002"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x24A50001"
+},
+{
+    "type": "word",
+    "value": "0x3C048009"
+},
+{
+    "type": "word",
+    "value": "0x90887A7C"
+},
+{
+    "type": "word",
+    "value": "0x90867C14"
+},
+{
+    "type": "word",
+    "value": "0x90877C18"
+},
+{
+    "type": "word",
+    "value": "0x34090049"
+},
+{
+    "type": "word",
+    "value": "0x15000007"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x10C90005"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x10E90003"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x18000002"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x24A50001"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34A20000"
+},
+{
+    "type": "word",
+    "value": "0x03E00008"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x27BDFFE0"
+},
+{
+    "type": "word",
+    "value": "0xAFBF0004"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x0C00327D"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C00C"
+},
+{
+    "type": "word",
+    "value": "0x90840000"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x00441023"
+},
+{
+    "type": "word",
+    "value": "0x04400004"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34050193"
+},
+{
+    "type": "word",
+    "value": "0x18000002"
+},
+{
+    "type": "word",
+    "value": "0x00000000"
+},
+{
+    "type": "word",
+    "value": "0x34050196"
+},
+{
+    "type": "word",
+    "value": "0x3C048000"
+},
+{
+    "type": "word",
+    "value": "0x3484C008"
+},
+{
+    "type": "word",
+    "value": "0xA4850000"
+},
+{
+    "type": "word",
+    "value": "0x8FBF0004"
+},
+{
+    "type": "word",
+    "value": "0x27BD0020"
+},
+{
+    "type": "word",
+    "value": "0x03E00008"
+},
+{
     "comment": "End of EX0",
     "type": "word",
     "value": "0x00000000"
 },
+
 
   {
     "comment": "SectLd",
@@ -3773,10 +4601,10 @@
     "address": "0xFA244",
     "value": "0x0C03A07F"
   }, {
-    "comment": "RelicCheckAltHook",
+    "comment": "RelicCheckAltHook (verify)",
     "type": "word",
     "address": "0x117E10",
-    "value": "0x08003001"
+    "value": "0x08003004"
   },
 
   {
@@ -4168,7 +4996,7 @@
   }, 
   
   {
-    "comment": "New Vlad Descriptions",
+    "comment": "New Vlad Descriptions (was 0x37135F8)",
     "type": "word",
     "address": "0x37135F9",
     "value": "0x6F205082"
@@ -4271,7 +5099,7 @@
   }, 
   
   {
-    "comment": "New Tongue Description Pointer",
+    "comment": "New Tongue Description Pointer (was 0x8009a0b0)",
     "type": "word",
     "address": "0xB576C",
     "value": "0x8009a0b1"
@@ -4327,5 +5155,88 @@
   }, {
     "type": "word",
     "value": "0x57822066"
-  }]
+  },
+  
+  {
+    "type": "short",
+    "address": "0x49526E8",
+    "value": "0x0001",
+    "comment": "Fast Open HG p1"
+  }, {
+    "type": "short",
+    "address": "0x49526FC",
+    "value": "0x0001",
+    "comment": "Fast Open HG p2"
+  }, {
+    "type": "word",
+    "address": "0x4951CA8",
+    "value": "0x00000000",
+    "comment": "Fast Open HG p3"
+  }, {
+    "type": "word",
+    "address": "0x4C83374",
+    "value": "0x3C028009",
+    "comment": "Fast Open HolySymbol"
+  }, {
+    "type": "word",
+    "value": "0x90427975",
+    "comment": "Fast Open HolySymbol"
+  },
+  
+	{
+		"comment": "Dracula Door Hook",
+		"address": "0x4FCF814",
+		"type": "word",
+		"value": "0x08074FC0"
+	},{
+		"comment": "Dracula Door",
+		"address": "0x4FE4F68",
+		"type": "word",
+		"value": "0x080704E4"
+	},
+	{
+		"type": "word",
+		"value": "0x00000000"
+	},
+	{
+		"type": "word",
+		"value": "0x080705E4"
+	},
+	{
+		"type": "word",
+		"value": "0x00000000"
+	},
+	{
+		"type": "word",
+		"value": "0x3C048000"
+	},
+	{
+		"type": "word",
+		"value": "0x3484C008"
+	},
+	{
+		"type": "word",
+		"value": "0x94840000"
+	},
+	{
+		"type": "word",
+		"value": "0x34020193"
+	},
+	{
+		"type": "word",
+		"value": "0x1444FFF9"
+	},
+	{
+		"type": "word",
+		"value": "0x00000000"
+	},
+	{
+		"type": "word",
+		"value": "0x1800FFF5"
+	},
+	{
+		"comment": "End of Drac Door",
+		"type": "word",
+		"value": "0x00000000"
+	}]
 }

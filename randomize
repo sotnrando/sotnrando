@@ -565,6 +565,7 @@ const yargs = require('yargs')
     describe: 'Enable tournament mode (`--help tournament`)',
     type: 'boolean',
   })
+  // #region Preset boolean .option
   .option('colorrando', {
     alias: 'l',
     describe: 'Enable color palette randomizing for various things',
@@ -670,6 +671,32 @@ const yargs = require('yargs')
     describe: 'Makes all gear puzzles only require a single hit on one gear to open the respective door.',
     type: 'boolean',
   })
+  .option('revCastleTeleport', {
+    alias: 'c2r',
+    describe: 'Randomizes where the teleporter after Richter takes the player.',
+    type: 'boolean',
+  })
+  .option('zeroDollarRelic', {
+    alias: 'zr',
+    describe: 'Makes the shop Relic cost 0.00.',
+    type: 'boolean',
+  })
+  .option('openClockStatue', {
+    alias: 'os',
+    describe: 'Opens the statue to Olroxs Quarters.',
+    type: 'boolean',
+  })
+  .option('spikeRoom', {
+    alias: 'srr',
+    describe: 'Randomizes the Spike Room before Spike Breaker.',
+    type: 'boolean',
+  })
+  .option('lycan', {
+    alias: 'ly',
+    describe: 'Allows the player to use full wolf at reduced cost.',
+    type: 'boolean',
+  })
+  // #region Non-preset boolean .option
   .option('easy', {
     alias: 'ez',
     describe: 'Simplifies inputs so spells no longer need complex sequences to execute and extends invincibility when hit.',
@@ -1106,6 +1133,7 @@ if ('debug' in argv) {console.log('randomize | Set tournament mode')}
 if (argv.tournament) {
   options.tournamentMode = true
 }
+// #region Preset boolean argv
 if ('debug' in argv) {console.log('randomize | Set color rando')}
 // Enable color rando mode if specified. - MottZilla
 if (argv.colorrando) { // Enable Color Randomizations
@@ -1113,27 +1141,27 @@ if (argv.colorrando) { // Enable Color Randomizations
 }
 if ('debug' in argv) {console.log('randomize | Set magic max')}
 // Enable magic max mode if specified. - MottZilla
-if (argv.magicmax) { // Adds MP Vessel to replace Heart Vessel - eldrich
+if (argv.magicmax) { // Adds MP Vessel to replace Heart Vessel
   options.magicmaxMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set anti-freeze')}
-// Enable anti-freeze mode if specified. - eldri7ch
-if (argv.antifreeze) { // Removes screen freezes from level-up and acquisitions - eldrich
+// Enable anti-freeze mode if specified.
+if (argv.antifreeze) { // Removes screen freezes from level-up and acquisitions
   options.antiFreezeMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set my purse')}
-// Enable my purse mode if specified. - eldri7ch
-if (argv.mypurse) { // Adds MP Vessel to replace Heart Vessel - eldrich
+// Enable my purse mode if specified.
+if (argv.mypurse) { // Adds MP Vessel to replace Heart Vessel
   options.mypurseMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set infinite wing smash')}
-// Enable infinite wing smash mode if specified. - eldri7ch
-if (argv.iws) { // Makes wing smashes essentially infinite - eldrich
+// Enable infinite wing smash mode if specified.
+if (argv.iws) { // Makes wing smashes essentially infinite
   options.iwsMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set fast warp')}
-// Enable fast warp mode if specified. - eldri7ch
-if (argv.fastwarp) { // quickens teleporter warp animation - eldrich
+// Enable fast warp mode if specified.
+if (argv.fastwarp) { // quickens teleporter warp animation
   options.fastwarpMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set Item Name Rando')}
@@ -1142,97 +1170,123 @@ if (argv.itemnamerando) { // Randomize Item names if randomizing item stats - Mo
   options.itemNameRandoMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set no prologue')}
-// Enable no prologue mode if specified. - eldri7ch
-if (argv.noprologue) { // Removes prologue - eldrich
+// Enable no prologue mode if specified.
+if (argv.noprologue) { // Removes prologue
   options.noprologueMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set unlocked')}
-// Enable unlocked mode if specified. - eldri7ch
-if (argv.unlocked) { // opens shortcuts - eldrich
+// Enable unlocked mode if specified.
+if (argv.unlocked) { // opens shortcuts
   options.unlockedMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set surprise')}
-// Enable surprise mode if specified. - eldri7ch
-if (argv.surprise) { // opens shortcuts - eldrich
+// Enable surprise mode if specified.
+if (argv.surprise) { // opens shortcuts
   options.surpriseMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set enemyStatRando')}
-// Enable Enemy Stat Rando mode if specified. - eldri7ch
-if (argv.enemyStatRando) { // randomizes enemy stats - eldrich
+// Enable Enemy Stat Rando mode if specified.
+if (argv.enemyStatRando) { // randomizes enemy stats
   options.enemyStatRandoMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set shopPriceRando')}
-// Enable Shop Price Rando mode if specified. - eldri7ch
-if (argv.shopPriceRando) { // randomizes shop prices - eldrich
+// Enable Shop Price Rando mode if specified.
+if (argv.shopPriceRando) { // randomizes shop prices
   options.shopPriceRandoMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set startRoomRando')}
-// Enable Starting Room Rando mode if specified. - eldri7ch
-if (argv.startRoomRando) { // randomizes starting room - eldrich
+// Enable Starting Room Rando mode if specified.
+if (argv.startRoomRando) { // randomizes starting room
   options.startRoomRandoMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set startRoomRando2nd')}
-// Enable Starting Room Rando 2nd Castle mode if specified. - eldri7ch
-if (argv.startRoomRando2nd) { // randomizes starting room - eldrich
+// Enable Starting Room Rando 2nd Castle mode if specified.
+if (argv.startRoomRando2nd) { // randomizes starting room
   options.startRoomRando2ndMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set domino')}
-// Enable guaranteed drops mode if specified. - eldri7ch
-if (argv.domino) { // guarantees drops - eldrich
+// Enable guaranteed drops mode if specified.
+if (argv.domino) { // guarantees drops
   options.dominoMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set rlbc')}
-// Enable reverse library card mode if specified. - eldri7ch
-if (argv.rlbc) { // reverse library cards - eldrich
+// Enable reverse library card mode if specified.
+if (argv.rlbc) { // reverse library cards
   options.rlbcMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set immunity potions')}
-// Enable immunity potion mode if specified. - eldri7ch
-if (argv.immunityPotion) { // immunity potions - eldrich
+// Enable immunity potion mode if specified.
+if (argv.immunityPotion) { // immunity potions
   options.immunityPotionMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set godspeed')}
-// Enable godspeed shoes mode if specified. - eldri7ch
+// Enable godspeed shoes mode if specified.
 if (argv.godspeed) {
   options.godspeedMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set libShort')}
-// Enable library shortcut if specified. - eldri7ch
+// Enable library shortcut if specified.
 if (argv.libShort) {
   options.libraryShortcut = true
 }
 if ('debug' in argv) {console.log('randomize | Set elemChaos')}
-// Enable elemental chaos if specified. - eldri7ch
+// Enable elemental chaos if specified.
 if (argv.elemChaos) {
   options.elemChaosMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set singleHitGear')}
-// Enable Single-Hit Gears if specified. - eldri7ch
+// Enable Single-Hit Gears if specified.
 if (argv.singleHitGear) {
   options.singleHitGearMode = true
 }
+if ('debug' in argv) {console.log('randomize | Set revCastleTeleport')}
+// Enable Reverse Castle Teleporter Randomizer if specified.
+if (argv.revCastleTeleport) {
+  options.revCastleTeleportRando = true
+}
+if ('debug' in argv) {console.log('randomize | Set zeroDollarRelic')}
+// Enable zero-dollar relic mode if specified.
+if (argv.zeroDollarRelic) {
+  options.zeroDollarRelicMode = true
+}
+if ('debug' in argv) {console.log('randomize | Set openClockStatue')}
+// Enable open clockroom statue mode if specified.
+if (argv.openClockStatue) {
+  options.openClockStatueMode = true
+}
+if ('debug' in argv) {console.log('randomize | Set spikeRoom')}
+// Enable open clockroom statue mode if specified.
+if (argv.spikeRoom) {
+  options.spikeRoomRando = true
+}
+if ('debug' in argv) {console.log('randomize | Set lycan')}
+// Enable open clockroom statue mode if specified.
+if (argv.lycan) {
+  options.lycanMode = true
+}
+// #region Non-preset boolean argv
 if ('debug' in argv) {console.log('randomize | Set easy')}
-// Enable easy mode if specified. - eldri7ch
+// Enable easy mode if specified.
 if (argv.easy) {
   options.easyMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set devStash')}
-// Enable Dev's Stash if specified. - eldri7ch
+// Enable Dev's Stash if specified.
 if (argv.devStash) {
   options.devStashMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set seasonalPhrases')}
-// Enable library shortcut if specified. - eldri7ch
+// Enable library shortcut if specified.
 if (argv.seasonalPhrases) {
   options.seasonalPhrasesMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set bossMusic')}
-// randomize Boss Music Separately. - eldri7ch
+// randomize Boss Music Separately.
 if (argv.bossMusic) {
   options.bossMusicSeparation = true
 }
 if ('debug' in argv) {console.log('randomize | Set map colors')}
-// Map Color Features if specified. - eldri7ch
+// Map Color Features if specified.
 if ('mapcolor' in argv && typeof(argv.mapcolor) !== 'undefined') {
   let termsAllowed = 'u,r,b,g,y,p,k,n,i'
   if (!(termsAllowed.includes(argv.mapcolor))) {
@@ -1244,7 +1298,7 @@ if ('mapcolor' in argv && typeof(argv.mapcolor) !== 'undefined') {
   }
 }
 if ('debug' in argv) {console.log('randomize | Choose new goals')}
-// Map Color Features if specified. - eldri7ch
+// Map Color Features if specified.
 if ('newGoals' in argv && typeof(argv.newGoals) !== 'undefined') {
   let termsAllowed = 'd,b,r,a,v,h,t,w,x'
   if (!(termsAllowed.includes(argv.newGoals))) {
@@ -1256,7 +1310,7 @@ if ('newGoals' in argv && typeof(argv.newGoals) !== 'undefined') {
   }
 }
 if ('debug' in argv) {console.log('randomize | Set startStatRando')}
-// Enable Starting Stat Randomizer if specified. - eldri7ch
+// Enable Starting Stat Randomizer if specified.
 if ('startStatRando' in argv) {
   if (typeof(argv.startStatRando) === 'undefined') {
     options.startStatRandoMode = 98
@@ -1298,8 +1352,8 @@ if ('excludesongs' in argv && typeof(argv.excludesongs) !== 'undefined') {
   options.excludesongs = songsToExclude
 }
 if ('debug' in argv) {console.log('randomize | Set debug')}
-// Enable debug mode if specified. - eldri7ch
-if (argv.debug) { // Enables debug - eldrich
+// Enable debug mode if specified.
+if (argv.debug) { // Enables debug
   options.debugMode = true
 }
 if ('debug' in argv) {console.log('randomize | Set verbosity')}

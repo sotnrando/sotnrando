@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speedrunning</title>
+    <title>General Rando</title>
     <link rel="icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
 </head>
 <body>
     <header>
         <h1>Castlevania: Symphony of the Night</h1>
-        <h3>Preset Specific Tricks</h3>
     </header>
     <div id="navbar-container"></div>
     <script src="/src/navbar.js"></script>
@@ -32,11 +32,14 @@
 
         </section>
     </main>
-    <script>
-        fetch("presetTricks.json")
+
+   <script>
+        fetch("generalTricks.json")
             .then(r => r.json())
             .then(data => initializeTrickPage(data));
     </script>
-    <script src="tricks.js"></script>
+
+
+<script src="tricks.js"></script>
 </body>
 </html>

@@ -1333,5 +1333,42 @@
     "metaExtension": "Scenic",
     "metaComplexity": "7",
     "itemStats": "Normal"
+  },
+  {
+    "name": "Collector",
+    "id": "collector",
+    "description": "Collect 20* Relics to win. Put & symbol at end of file name to do 25 relics. Test build May21st2026",
+    "author": [
+      "MottZilla"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Normal",
+    "moddedLevel": "None",
+    "castleType": "Normal",
+    "transformEarly": "No",
+    "transformFocus": "None",
+    "winCondition": "Normal",
+    "metaExtension": "Guarded",
+    "metaComplexity": "1",
+    "itemStats": "Normal"
+  },
+  {
+    "name": "Hoarder",
+    "id": "hoarder",
+    "description": "Collector Variant. Duplicate relics can be acquired to enhance the players abilities and the three new vlads have unique powers.",
+    "author": [
+      "eldri7ch",
+      "MottZilla"
+    ],
+    "knowledgeCheck": "None",
+    "timeFrame": "Normal",
+    "moddedLevel": "None",
+    "castleType": "Normal",
+    "transformEarly": "No",
+    "transformFocus": "None",
+    "winCondition": "20 or 25 Relics",
+    "metaExtension": "Guarded",
+    "metaComplexity": "1",
+    "itemStats": "Normal"
   }
 ]

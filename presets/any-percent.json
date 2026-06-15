@@ -23,6 +23,7 @@
   
   "stats": false,
   "thrustSwordAbility": true,
+  "openClockStatueMode": true,
 
   "alias": [{
     "comment": "Alias Holy Glasses as Duplicator",
@@ -2504,15 +2505,6 @@
   }],
   
   "writes": [{
-    "comment": "Never get Clock Blocked",
-    "type": "word",
-    "address": "0x4951D4C",
-    "value": "0x3C020002"
-  }, {
-    "type": "word",
-    "address": "0x4FCF264",
-    "value": "0x3C020002"
-  }, {
     "comment": "Force Egregious Price on Relic",
     "type": "word",
     "address": "0x47A3098",

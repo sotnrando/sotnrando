@@ -366,74 +366,74 @@ async function randomize(
       }
       debugMessage(debugEnabled, 'Tournament Mode | ' + optFlag)
       optFlag = false
-      // Adds MP Vessel to replace Heart Vessel - eldrich
+      // Adds MP Vessel to replace Heart Vessel
       if (options.magicmaxMode || applied.magicmaxMode) {
-        // Apply magic max mode patches. - MottZilla
+        // Apply magic max mode patches.
         optFlag = true
         check.apply(util.applyMagicMaxPatches())
       }
       debugMessage(debugEnabled, 'Magicmax Mode | ' + optFlag)
       optFlag = false
       // Removes screen freezes on relic / vessel collection and
-      // level-up - eldrich
+      // level-up
       if (options.antiFreezeMode || applied.antiFreezeMode) {
-        // Apply anti-freeze mode patches. - eldri7ch
+        // Apply anti-freeze mode patches.
         optFlag = true
         check.apply(util.applyAntiFreezePatches())
       }
       debugMessage(debugEnabled, 'Anti-Freeze Mode | ' + optFlag)
       optFlag = false
-      // Removes Death from Entrance - eldrich
+      // Removes Death from Entrance
       if (options.mypurseMode || applied.mypurseMode) {
-        // Apply Death repellant patches. - eldri7ch
+        // Apply Death repellant patches.
         optFlag = true
         check.apply(util.applyMyPursePatches())
       }
       debugMessage(debugEnabled, 'That\'s my purse! Mode | ' + optFlag)
       optFlag = false
-      // Makes wing smash essentially infinite - eldrich
+      // Makes wing smash essentially infinite
       if (options.iwsMode || applied.iwsMode) {
-        // Apply infinite wing smashe mode patches. - eldri7ch
+        // Apply infinite wing smashe mode patches.
         optFlag = true
         check.apply(util.applyiwsPatches())
       }
       debugMessage(debugEnabled, 'Infinite Wing Smash Mode | ' + optFlag)
       optFlag = false
-      // Quickens teleporter warp animations - eldrich
+      // Quickens teleporter warp animations
       if (options.fastwarpMode || applied.fastwarpMode) {
-        // Apply fast warp mode patches. - eldri7ch
+        // Apply fast warp mode patches.
         optFlag = true
         check.apply(util.applyfastwarpPatches())
       }
       debugMessage(debugEnabled, 'Fast Warps Mode | ' + optFlag)
       optFlag = false
-      // Removes prologue - eldrich
+      // Removes prologue
       if (options.noprologueMode || applied.noprologueMode) {
-        // Apply no prologue mode patches. - eldri7ch
+        // Apply no prologue mode patches.
         optFlag = false
         check.apply(util.applynoprologuePatches())
       }
       debugMessage(debugEnabled, 'No Prologue Mode | ' + optFlag)
       optFlag = false
-      // Unlocks shortcuts - eldrich
+      // Unlocks shortcuts
       if (options.unlockedMode || applied.unlockedMode) {
-        // Apply unlocked mode patches. - eldri7ch
+        // Apply unlocked mode patches.
         optFlag = true
         check.apply(util.applyunlockedPatches())
       }
       debugMessage(debugEnabled, 'Unlocked Mode | ' + optFlag)
       optFlag = false
-      // Hides relics behind the same sprite - eldrich
+      // Hides relics behind the same sprite
       if (options.surpriseMode || applied.surpriseMode) {
-        // Apply surprise mode patches. - eldri7ch
+        // Apply surprise mode patches.
         optFlag = true
         check.apply(util.applysurprisePatches())
       }
       debugMessage(debugEnabled, 'Surprise Mode | ' + optFlag)
       optFlag = false
-      // Randomizes enemy stats - eldrich
+      // Randomizes enemy stats
       if (options.enemyStatRandoMode || applied.enemyStatRandoMode) {
-        // Apply Enemy Stat Rando mode patches. - eldri7ch
+        // Apply Enemy Stat Rando mode patches.
         optFlag = true
         rng = getRNG(options, seed)
         let chaosFlag = false
@@ -444,21 +444,21 @@ async function randomize(
       }
       debugMessage(debugEnabled, 'Enemy Stat Randomizer Mode | ' + optFlag)
       optFlag = false
-      // Randomizes shop prices - eldrich
+      // Randomizes shop prices
       if (options.shopPriceRandoMode || applied.shopPriceRandoMode) {
-        // Apply shop price Rando mode patches. - eldri7ch
+        // Apply shop price Rando mode patches.
         optFlag = true
         rng = getRNG(options, seed)
         check.apply(util.applyShopPriceRandoPatches(rng))
       }
       debugMessage(debugEnabled, 'Shop Price Randomizer Mode | ' + optFlag)
       optFlag = false
-      // Randomizes starting room - eldrich & MottZilla
+      // Randomizes starting room & MottZilla
       if (options.startRoomRandoMode
           || applied.startRoomRandoMode
           || options.startRoomRando2ndMode
           || applied.startRoomRando2ndMode) {
-        // Apply starting room Rando mode patches. - eldri7ch
+        // Apply starting room Rando mode patches.
         optFlag = true
         rng = getRNG(options, seed)
         let castleFlag = 0x00
@@ -472,23 +472,23 @@ async function randomize(
       }
       debugMessage(debugEnabled, 'Starting Room Randomizer Mode | ' + optFlag)
       optFlag = false
-      // Guarantees drops - eldrich
+      // Guarantees drops
       if (options.dominoMode || applied.dominoMode) {
-        // Apply guaranteed drops patches. - eldri7ch
+        // Apply guaranteed drops patches.
         optFlag = true
         check.apply(util.applyDominoPatches())
       }
       debugMessage(debugEnabled, 'Guaranteed Drops Mode | ' + optFlag)
       optFlag = false
-      // Reverse library cards - eldrich
+      // Reverse library cards
       if (options.rlbcMode || applied.rlbcMode) {
-        // Apply reverse library card patches. - eldri7ch
+        // Apply reverse library card patches.
         optFlag = true
         check.apply(util.applyRLBCPatches())
       }
       debugMessage(debugEnabled, 'Reverse Library Card Mode | ' + optFlag)
       optFlag = false
-      // Apply resist to immune potion patches. - MottZilla
+      // Apply resist to immune potion patches.
       if (options.immunityPotionMode || applied.immunityPotionMode) {
         // todo: Change this to Resist to Immune Potions 'mode' or option.
         optFlag = true
@@ -496,20 +496,20 @@ async function randomize(
       }
       debugMessage(debugEnabled, 'Immunity Potions Mode | ' + optFlag)
       optFlag = false
-      // Godspeed shoes - eldrich
+      // Godspeed shoes
       if (options.godspeedMode || applied.godspeedMode) {
         optFlag = true
       }
       debugMessage(debugEnabled, 'Godspeed Mode | ' + optFlag)
       optFlag = false
-      // Library shortcut - eldrich
+      // Library shortcut
       if (options.libraryShortcut || applied.libraryShortcut) {
         optFlag = true
         check.apply(util.applyLibraryShortcutPatches())
       }
       debugMessage(debugEnabled, 'Library Shortcut | ' + optFlag)
       optFlag = false
-      // Elemental chaos - eldrich
+      // Elemental chaos
       if (options.elemChaosMode || applied.elemChaosMode) {
         optFlag = true
         rng = getRNG(options, seed)
@@ -517,15 +517,50 @@ async function randomize(
       }
       debugMessage(debugEnabled, 'Elemental Chaos | ' + optFlag)
       optFlag = false
-      // Single-Hit Gears - eldrich
+      // Single-Hit Gears
       if (options.singleHitGearMode || applied.singleHitGearMode) {
         optFlag = true
         check.apply(util.applySingleHitGearPatches())
       }
       debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
       optFlag = false
+      // Reverse Castle Teleporter Randomizer
+      if (options.revCastleTeleportRando || applied.revCastleTeleportRando) {
+        optFlag = true
+        check.apply(util.applyReverseCastleTeleporterRandoPatches(rng))
+      }
+      debugMessage(debugEnabled, '| Reverse Castle Teleporter Randomizer | ' + optFlag)
+      optFlag = false
+      // Make Relics Free
+      if (options.zeroDollarRelicMode || applied.zeroDollarRelicMode) {
+        optFlag = true
+        check.apply(util.applyZeroDollarRelicPatches())
+      }
+      debugMessage(debugEnabled, '| Zero-Dollar Relic Mode | ' + optFlag)
+      optFlag = false
+      // Open Clock Room Statue
+      if (options.openClockStatueMode || applied.openClockStatueMode) {
+        optFlag = true
+        check.apply(util.applyOpenClockStatuepatches())
+      }
+      debugMessage(debugEnabled, '| Clock Room Statue Open Mode | ' + optFlag)
+      optFlag = false
+      // Randomize Spike Room
+      if (options.spikeRoomRando || applied.spikeRoomRando) {
+        optFlag = true
+        check.apply(util.applySpikeRoomRandoPatches(rng))
+      }
+      debugMessage(debugEnabled, '| Spike Room Randomizer | ' + optFlag)
+      optFlag = false
+      // Allow Full Wolf Use
+      if (options.lycanMode || applied.lycanMode) {
+        optFlag = true
+        check.apply(util.applyLycanModePatches())
+      }
+      debugMessage(debugEnabled, '| Lycanthrope Mode | ' + optFlag)
+      optFlag = false
+      // Starting Stat Randomizer
       let ssOpt = 0
-      // Starting Stat Randomizer - eldrich
       if (options.startStatRandoMode || applied.startStatRandoMode) {
         optFlag = true
         rng = getRNG(options, seed)
@@ -551,42 +586,43 @@ async function randomize(
         '| Starting Stat Randomizer | ' + optFlag + ' | ' + ssOpt
       )
       optFlag = false
-      // Simplifies spell inputs and extends i-frames - eldrich
+      // Simplifies spell inputs and extends i-frames
       if (options.easyMode || applied.easyMode) {
-        // Apply easy mode patches. - eldri7ch
+        // Apply easy mode patches.
         optFlag = true
         check.apply(util.applyEasyModePatches())
       }
       debugMessage(debugEnabled, 'Easy Mode | ' + optFlag)
       optFlag = false
-      // Dev's stash - eldrich
+      // Dev's stash
       if (options.devStashMode || applied.devStashMode) {
         optFlag = true
         check.apply(util.applyDevsStashPatches())
+        check.apply(util.applyListOfNames())
       }
       debugMessage(debugEnabled, '| Dev\'s Stash | ' + optFlag)
       optFlag = false
-      // Seasonal Phrases - eldrich
+      // Seasonal Phrases
       if (options.seasonalPhrasesMode || applied.seasonalPhrasesMode) {
         optFlag = true
       }
       debugMessage(debugEnabled, 'Seasonal Phrases Mode | ' + optFlag)
       optFlag = false
-      // Separate boss music - eldrich
+      // Separate boss music
       if (options.bossMusicSeparation || applied.bossMusicSeparation) {
-        // verify boss music separate. - eldri7ch
+        // verify boss music separate.
         optFlag = true
       }
       debugMessage(debugEnabled, 'Boss Music Separator | ' + optFlag)
-      // Colors the map - eldrich
+      // Colors the map
       if (mapColor && mapColor !== 'default') {
-        // Apply map color patches. - eldri7ch
+        // Apply map color patches.
         check.apply(util.applyMapColor(mapColor))
       }
       debugMessage(debugEnabled, 'Map colors')
-      // Changes the goals - eldrich
+      // Changes the goals
       if (options.newGoalsSet || applied.newGoalsSet) {
-        // Apply new goal patches. - eldri7ch
+        // Apply new goal patches.
         if (options.newGoalsSet !== undefined){
           nGoal = options.newGoalsSet
         } else {
@@ -608,12 +644,12 @@ async function randomize(
       }
       debugMessage(debugEnabled, 'New Goals')
       if (alucardPalette) { // Changes Alucard's Palette. -Crazy4blades
-        // Apply new goal patches. - eldri7ch
+        // Apply new goal patches.
         check.apply(util.applyAlucardPalette(alucardPalette))
       }
       debugMessage(debugEnabled, 'Alucard Palette')
       if (alucardLiner) { // Changes Alucard's Palette. -Crazy4blades
-        // Apply new goal patches. - eldri7ch
+        // Apply new goal patches.
         check.apply(util.applyAlucardLiner(alucardLiner))
       }
       debugMessage(debugEnabled, 'Alucard Liner')

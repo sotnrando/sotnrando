@@ -1,0 +1,1290 @@
+{
+    "changelog": [
+        {
+            "date": "June 15, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Added Collector preset.",
+                    "Added Hoarder preset.",
+                    "Fixed a bug which caused Target Confirmed relics to drop before cards were obtained.",
+                    "˙ɔᴉƃol ɥɔʇᴉlפ pǝxᴉℲ"
+                ],
+                "Option Updates": [
+                    "Added Reverse Teleporter Randomizer.",
+                    "Added Spike Room Randomizer.",
+                    "Added Lycanthrope Mode.",
+                    "Added Fire Lord and Ice Lord Palettes to change Alucard's appearance.",
+                    "Added Jade Lining and Slate Lining to change Alucard's appearance.",
+                    "Separated out the Quality of Life functions from Tournament Mode and added a new security feature to the same.",
+                    "The new homes for the Quality of Life features are Zero-Dollar Relic Mode and Open Clock Statue Mode.",
+                    "Dev's Stash now may house upcoming changes that have yet to find a home despit being 'complete'."
+                ],
+                "Website Updates": [
+                    "Fixed a bug causing presets minimum complexity to override player-selected somplexity.",
+                    "Added 'Development' Section under FAQ's.",
+                    "Separated older Change Log entries into a new section under 'Randomizer' in the hotbar.",
+                    "Added 'Relic Locations' under 'Player Guides' in the hotbar.",
+                    "Added an external link to a dynamic relic locations map in the hotbar."
+                ],
+                "Program Updates": [
+                    "Fixed an issue where renamed relics were incorrectly displayed in the Long Library shop menu.",
+                    "Yasutsuna hitbox now follows Alucard like Masamune et al. It's still spammable."
+                ],
+                "Rando Tools Updates": [
+                    "Updated Co-Op to work through websocket connection, dramatically simplifying how users activate the mode."
+                ]
+            }
+        },
+        {
+            "date": "May 11, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "That's a cold Glitch - eldri7ch 2026."
+                ],
+                "Option Updates": [
+                    "Added additional route options by opening Colosseum shortcut and Alchemy Jewel of open door if the player starts in Royal Chapel with Starting Room Randomizer.",
+                    "Fixed a bug where Bloody Tears was overriding default palettes on Alucard."
+                ],
+                "Program Updates": [
+                    "Corrected a bug in the Accessibility Patches that prevented the Forbidden Route scroll lock entity from being fixed.",
+                    "Added a crash handler to the game. Now crashes will display what, why, and how for devs to research what went wrong.",
+                    "Minor Constants updates, maybe some of the splash phrases will appear correctly, now."
+                ],
+                "Team Updates": [
+                    "Congratulations to our new co-owner: CRAZY4BLADES!"
+                ]
+            }
+        },
+        {
+            "date": "April 13, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Glitches be trippin' eldri7ch."
+                ],
+                "Website Updates": [
+                    "Removed a bug where certain other options weren't properly toggled by the switches."
+                ],
+                "Program Updates": [
+                    "Established coding style guidelines.",
+                    "Code cleanup on utils and some constants assignments.",
+                    "Updated help info to be more accurate and more helpful."
+                ],
+                "Team Updates": [
+                    "3snow_p7im requested to be removed from the front page. We thank him for the foundation he built for us."
+                ]
+            }
+        },
+        {
+            "date": "April 2, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Added the Gourmet Race Preset.",
+                    "What is \"Glitch\"? How do you define \"Glitch\"? If \"Glitch\" is what eldri7ch can see, taste, and touch...."
+                ],
+                "Website Updates": [
+                    "(Hotfix) Corrected an issue where Tournament presets were producing incorrect equipment.",
+                    "Removed a bug where certain options weren't properly toggled by the switches."
+                ],
+                "Launcher Updates": [
+                    "Removed a bug where certain options weren't properly toggled by the switches."
+                ]
+            }
+        },
+        {
+            "date": "March 9, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Removed a logic issue where Bat was required for the Jewel sword and Beryl Circlet checks in Big Toss.",
+                    "I swear to God, eldri7ch'll pistol whip the next guy that says \"Glitch\"."
+                ],
+                "Options Updates": [
+                    "Added the starting Stat Randomizer option.",
+                    "Familiar cards now have a 1/69 chance to become Foil when the Color Randomizer is enabled.",
+                    "Familiar cards now have a 1/420 chance to become Inverse Foil when the Color Randomizer is enabled.",
+                    "Foiled Familiar Cards will now produce alternate-color familiars."
+                ],
+                "Program Updates": [
+                    "Added support for forcing one or more items to spawn in a preset’s relic locations using the goalItem flag.",
+                    "Fixed a command-line bug where disabling music randomization prevented the preset name from being passed to the game menu screen.",
+                    "Added buffs for the Badelaire and Jewel Sword. Badelaire now scales with minutes instead of hours, and the Jewel Sword now receives its Saturn-version buffs."
+                ]
+            }
+        },
+        {
+            "date": "February 9, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Added Lycanthrope Spring 2026 Tournament Edition preset.",
+                    "Added Nimble Lite Spring 2026 Tournament Edition preset.",
+                    "Added Warlock Spring 2026 Tournament Edition preset.",
+                    "Fixed an error where Bounty Hunter variants could not generate their Cards / place Vlad relics.",
+                    "Adjusted Rat Race shop price and sell price to trivialize random cash bags found in the preset.",
+                    "Glitch is life, Glitch is eternal. Glitch will forever remain [TBD]."
+                ],
+                "Option Updates": [
+                    "Incorporated a new Easy Mode where we combined an invincibility frame extension with simplified inputs.",
+                    "Added Single-Hit Gears to make Clock Tower and Reverse Clock Tower less frustrating.",
+                    "Removed potential softlock when starting above Richter in Castle Keep using Starting Room Randomizer."
+                ],
+                "Website Updates": [
+                    "Fixed an error that caused music not to randomize from the website.",
+                    "Fixed an error which caused certain presets not to trigger the Goals changes."
+                ],
+                "Program Updates": [
+                    "Added new function and supporting code to convey to the Rando Tools the actual Complexity and Relic Location Extension used.",
+                    "Patched an issue where killing Ctulhu in the Marble Gallery would prevent a scroll lock entity from spawning."
+                ]
+            }
+        },
+        {
+            "date": "January 12, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "\"All glory to the hypno-Glitch.\" - eldri7ch"
+                ],
+                "Website Updates": [
+                    "Removed a major bug that would cause presets to generate with / without randomizations counter to what was indicated by website selections."
+                ],
+                "Project Updates": [
+                    "Incorporated the SOTN Rando Tools into the main repo library and Crazy4Blades took over leading production on those.",
+                    "Keep an eye on the new repo to make sure you have the most updated tools in case those aren't automatically upgraded for you."
+                ],
+                "Rando Tools Updates": [
+                    "Added Library Card tracking option.",
+                    "Added complexity and Relic Extension disclosures to the tracker.",
+                    "Corrected a lot of errors regarding how relics and relic locations are tracked and displayed."
+                ]
+            }
+        },
+        {
+            "date": "December 18, 2025",
+            "sections": {
+                "Program Updates": [
+                    "Removed a bug that would cause map reveal in reverse outer wall.",
+                    "Corrected an error that caused the tracker to show both castle's checks in one castle."
+                ]
+            }
+        },
+        {
+            "date": "November 10, 2025",
+            "sections": {
+                "Preset Changes": [
+                    "Temporarily added several tournament presets.",
+                    "Removed nerf to all thrust swords and only nerfed the thrust damage of Obsidian Sword in Boss Rush.",
+                    "Fixed an issue where Gravity Boots didn't turn off second Leap Stone additional jumps in Recycler.",
+                    "Removed menu lock when attempting to save in Gear Rush.",
+                    "Removed Succubus fight in Gear Rush since player could not enter Nightmare. Relic now spawns by default.",
+                    "eldri7ch fell into a Glitch."
+                ],
+                "Options Changes": [
+                    "No Prologue Mode removes the grand entrance of Alucard to allow the SOTN Rando Tools to start / stop LiveSplit."
+                ],
+                "Program Updates": [
+                    "Increased character limit for preset data on main menu screen from 30 characters to 50.",
+                    "Updated color coding to RGBA32 for ease of programming.",
+                    "Moved all randomization into a single core randomization module to maintain parity in generation and to streamline future coding."
+                ]
+            }
+        },
+        {
+            "date": "September 15, 2025",
+            "sections": {
+                "Preset Changes": [
+                    "Added the new Anguish preset.",
+                    "Added the new Gear Rush preset.",
+                    "Name Code: APERTURE gives the player Gold and Silver ring to access Dracula early by visiting Maria at the Holy glasses location.",
+                    "Name Code: SLOWPOKE increases the amount of time given to the player to 25 minutes and also gives the rings to access Dracula early.",
+                    "Name Code: IAMSPEED decreases the amount of time the player has to 7 minutes. (No rings given)",
+                    "Name Code: GTI-CLUB gives the player $250,000 in game, just like the Sega Saturn version.",
+                    "Made the new Vlad relic effects take effect based on whether the relic is on or off in Recycler.",
+                    "Added additional jumps to having two Leap Stone turned on in Recycler.",
+                    "The Glitch logic issues aren't real; they can't hurt you."
+                ],
+                "Options Changes": [
+                    "Fixed a bug where the relic at Power of Wolf wouldn't appear when Starting Room Rando was enabled.",
+                    "Added a new mystery feature to Dev's Stash.",
+                    "Fixed an issue where Reverse Library Cards wouldn't function on presets that had the map pre-purchased by the preset. (Hotfix)",
+                    "Fixed an issue where Second Castle Random Start movement wouldn't function on presets that had the map pre-purchased by the preset. (Hotfix)"
+                ],
+                "Website Changes": [
+                    "Added the Map Tool to compare maps for 200.6% runs."
+                ]
+            }
+        },
+        {
+            "date": "August 11, 2025",
+            "sections": {
+                "Preset Changes": [
+                    "Added Elemental Chaos to Max Rando.",
+                    "Fixed an issue with Bounty Hunter, Battle Mage, Hitman, Target Confirmed, and Rampage needing Demon Card in alternate extensions.",
+                    "The time of the eldri7ch is over, the age of the Glitch has come.",
+                    "Color Randomizer removed from all presets as a default option.",
+                    "Removed outer wall teleporter for Mirror Breaker."
+                ],
+                "Option Changes": [
+                    "Added Elemental Chaos Mode.",
+                    "Added new Simplified Input option.",
+                    "Re-worked many enemies in Enemy Stat Randomizer.",
+                    "Added enemy projectiles to Enemy Stat Randomizer.",
+                    "Randomized certain bosses' attack elements in Enemy Stat Randomizer.",
+                    "Corrected a lot of name card issues in Enemy Stat Randomizer.",
+                    "Removed ability for enemy weakness to also be their resist, immunity, or absorb.",
+                    "Patched a bug where new immunities would not remove absorbs and vice versa."
+                ],
+                "Website Changes": [
+                    "Options enabled by the presets will no longer be able to be turned off (temporary solution)."
+                ]
+            }
+        },
+        {
+            "date": "July 14, 2025",
+            "sections": {
+                "Preset Changes": [
+                    "Removed $700 and $5000 drops from Rat Race.",
+                    "Guaranteed drops for Hitman, Target Confirmed, and Rampage.",
+                    "Has anyone really been far even as decided to use even go fix to do Glitch more like?"
+                ],
+                "Option Changes": [
+                    "Removed game freeze in Colosseum room with Valhalla Knights."
+                ]
+            }
+        },
+        {
+            "date": "June 9, 2025",
+            "sections": {
+                "Notes": [
+                    "Beginning of a new initiative to audit and quality-control presets.",
+                    "Deprecated presets removed from the website but still available offline.",
+                    "Preset JSON files reorganized for clarity and developer readability."
+                ],
+                "Preset Changes": [
+                    "Added Seeker preset.",
+                    "Added Oracle preset.",
+                    "Added Mirror Breaker preset.",
+                    "Added All Bosses preset.",
+                    "Added Nimble-Lite preset.",
+                    "Added Rampage preset.",
+                    "Added Cornivus preset.",
+                    "Added Max Rando preset.",
+                    "Added Recycler preset.",
+                    "Bounty Hunter, Hitman, Target Confirmed, Chaos Lite, and Rampage no longer require the Bounty Hunter Tool.",
+                    "Added Item Stat and Item Name Randomizer to Chaos-Lite.",
+                    "Lookingglass is now Deprecated.",
+                    "Crash Coarse is now Deprecated.",
+                    "Skinwalker is now Deprecated.",
+                    "Re-added Glitch Legacy as Deprecated.",
+                    "Re-named Bounty Hunter: TC to Target Confirmed.",
+                    "Fixed a bug created at the end of Boss Rush because of the splash phrases.",
+                    "Fixed a bug that caused a game crash if the player left the CD room at the start of a second-castle start seed to the left.",
+                    "Preset audit successful — nearly every preset re-weighted and keys sorted.",
+                    "How do I fixed Glitch?"
+                ],
+                "Program Updates": [
+                    "Incorporated Bounty Hunter tool function into the Randomizer.",
+                    "Removed bug that wouldn't allow Vanilla or Agonize 2020 to generate."
+                ],
+                "Options Changes": [
+                    "Added new Separate Boss Music Randomizer mode.",
+                    "Added Song Exclusion to the website.",
+                    "Removed Nocturne from the songs to be randomized.",
+                    "Added Immunity Potions option.",
+                    "Added Godspeed Shoes option.",
+                    "Added Library Shortcut option.",
+                    "Added an option to enable seasonal splash phrases on the start screen."
+                ]
+            }
+        },
+        {
+            "date": "May 12, 2025",
+            "sections": {
+                "Preset Changes": [
+                    "Added Second Castle Starting Room Randomizer to Chaos-Lite.",
+                    "Familiar cards are no longer given to the player active in Timeline.",
+                    "Timeline's timer no longer pauses in the menu.",
+                    "Added code to give the player a Toadstool at the beginning of Big Toss.",
+                    "Come to me, Glitch, son of romscout! Kneel before Eld!"
+                ],
+                "Options Changes": [
+                    "Removed preset tickbox because all features locked behind it are now available.",
+                    "Removed extensions options for presets which can't use them.",
+                    "Added palettes for Wolf form to match Alucard palettes.",
+                    "Corrected an error where a variable was not set when generating through the website for Random Starting Room.",
+                    "Added an additional goal to update the game to: All Bosses and all Vlads.",
+                    "Removed potential softlock from starting in Castle Keep attic in Starting Room Randomizer.",
+                    "Updated Color Randomizer to use hue-shifting for capes proposed by Wecoc.",
+                    "Added Menu Color to Color Randomizer.",
+                    "Corrected an error in Starting Equipment spoilers when Item Name Randomizer Mode was not being used.",
+                    "Corrected an error with New Goals that allowed players to open the Dracula door in second castle without Eye of Vlad."
+                ],
+                "Program Updates": [
+                    "Added randomized splash phrases to the game title screen.",
+                    "Added a feature where updated goals can be added to preset files using letter codes."
+                ],
+                "Website Updates": [
+                    "Allowed players to generate custom relic extensions and complexity levels with all presets.",
+                    "Fixed a bug where the complexity inner text didn't update.",
+                    "Added the SOTNRando icon to the navigation bar.",
+                    "Added the SOTNRando header image courtesy of DarkFalzJoker.",
+                    "Added a new section to help players preview sprite customizations.",
+                    "Removed all links section and moved them to the navigation bar.",
+                    "Added visual effects to the navigation bar."
+                ],
+                "Tools Updates": [
+                    "Upgraded Map View to give more detailed information about entities and properly name more of them."
+                ]
+            }
+        },
+        {
+            "date": "April 14, 2025",
+            "sections": {
+                "Options Changes": [
+                    "Added Alucard Palette Selector.",
+                    "Almost every randomized palette for Richter, Maria, Dracula, and Alucard was reworked.",
+                    "Removed Guaranteed Drops mode for Bounty Hunter variants.",
+                    "Removed Reverse Library Card for Beyond preset."
+                ],
+                "Website Updates": [
+                    "Added Known Bugs section for transparency."
+                ]
+            }
+        },
+        {
+            "date": "April 3, 2025",
+            "sections": {
+                "Hotfix": [
+                    "Fixed Starting Room Randomizer execution from Preset Files."
+                ]
+            }
+        },
+        {
+            "date": "April 2, 2025",
+            "sections": {
+                "Preset Changes": [
+                    "Added Vanilla preset.",
+                    "Datedupay Litchgay Ogiclay."
+                ],
+                "Options Changes": [
+                    "Added new option to change seed goals.",
+                    "All Bosses changes the goal to defeat all bosses listed on the time attack table.",
+                    "All Relics changes the goal to collect all relics in the NA version.",
+                    "All Bosses and Relics combines both goals.",
+                    "Added Guaranteed Drops Option.",
+                    "Added Reverse Library Cards Option.",
+                    "Added Alucard Palette Randomizer Option.",
+                    "Added Richter Palette Randomizer to Color Randomizer."
+                ],
+                "Program Updates": [
+                    "Fixed an issue that prevented SOTN.io from generating seeds after a previous seed was downloaded.",
+                    "Added a way for the randomizer to start setting aside ISO memory and RAM to execute complex functions.",
+                    "Randomizer now loads 14 sectors from the ISO automatically."
+                ]
+            }
+        },
+        {
+            "date": "March 10, 2025",
+            "sections": {
+                "Preset Changes": [
+                    "Added Chimera preset.",
+                    "Added Battle Mage preset.",
+                    "Added Timeline preset.",
+                    "Added logic for Equipment and Scenic locations for Dog Life.",
+                    "Removed several soft-locks in Dog Life.",
+                    "Fixed movement bugs and added Out of Logic checks for Dog Life.",
+                    "Updated Big Toss preset to remove consumable status from Toadstool and High Potion.",
+                    "Removed Duplicator and added God's Garb as starting equipment in Big Toss.",
+                    "Added an additional Antivenom as replacement for Force of Echo in Big Toss.",
+                    "Glitch festers like a splinter in the side of bugfixing."
+                ],
+                "Options Changes": [
+                    "Blocked Castle 2 Start for First Castle preset."
+                ],
+                "Program Updates": [
+                    "Added new randomizer capability to generate a random hex byte between two values.",
+                    "Updated randomRelic writes option to use pool shuffling instead of pure RNG."
+                ]
+            }
+        },
+        {
+            "date": "February 10, 2025",
+            "sections": {
+                "Preset Changes": [
+                    "eldri7ch used Bugfix against Glitch! It's not very effective..."
+                ],
+                "Options Changes": [
+                    "Added Castle 2 Starting Area Randomizer.",
+                    "Separated out Item Name Randomization from Item Stat Randomizer.",
+                    "Disabled certain options for various presets to avoid breaking them.",
+                    "Corrected issues with wing smash trail color randomizer.",
+                    "Added Map Color selector to website."
+                ],
+                "Accessibility / Quality of Life Changes": [
+                    "Removed game freeze if luck is negative and the game tries to calculate critical damage.",
+                    "Removed game freeze caused by using too many wing smashes through Rock Knights in Reverse Caverns."
+                ]
+            }
+        },
+        {
+            "date": "January 13, 2025",
+            "sections": {
+                "Preset Changes": [
+                    "Updated preset descriptions.",
+                    "Removed boss room limitations for Cursed Night preset.",
+                    "Added ability to use Heart Refresh for Cursed Night.",
+                    "Added new starting equipment for Cursed Night.",
+                    "Removed Coral Circlet from the Shop in Cursed Night.",
+                    "Added Starting Room Randomization to Chaos-Lite preset.",
+                    "Added Starting Room Randomization to Open preset.",
+                    "Added 7 random relics to starting pool for Lucky Sevens preset.",
+                    "Removed prologue for Lucky Sevens.",
+                    "Removed remaining Bat relics from Leg Day preset.",
+                    "Removed Karma Coin from the $400 candle in Rat Race and replaced with Heart.",
+                    "Removed Unlocked Mode from Lucky Sevens.",
+                    "Renamed Speedrun preset to Sequence Breaker.",
+                    "Renamed Forge preset to Any Percent.",
+                    "Corrected errors preventing Rat Race and Sequence Breaker from appearing on the website.",
+                    "Flight of wolf re-worked in Dog Life preset.",
+                    "Removed squeak from big toss in Dog Life.",
+                    "Removed multiple soft-locks in logic for Dog Life.",
+                    "Tile / terrain updates for Dog Life.",
+                    "Removed Enemy Stat Randomizer from Mobility preset.",
+                    "Updated Glitchmaster preset scrawl.",
+                    "Updated Glitch preset scrawl.",
+                    "Reticulated Glitch logic splines."
+                ],
+                "Extension Changes": [
+                    "Renamed Wanderer locations extension to Extended.",
+                    "Renamed Spread locations extension to GuardedPlus.",
+                    "Renamed Tourist locations extension to Scenic."
+                ],
+                "Options Changes": [
+                    "Added new Starting Zone randomizer.",
+                    "Corrected an error when trying to apply Shop Price Rando.",
+                    "Corrected an error when assigning randomization display for Death.",
+                    "Corrected an error when assigning randomization of attributes to Dracula.",
+                    "Corrected an error when improperly clearing time attack in No Prologue Mode."
+                ],
+                "Website Changes": [
+                    "Set groundwork for website redesign.",
+                    "Updated many option names to be more aesthetic or descriptive.",
+                    "Added Meta Data information for future categorization and filtration."
+                ]
+            }
+        },
+        {
+            "date": "December 9, 2024",
+            "sections": {
+                "Preset Changes": [
+                    "Added Dog Life Preset.",
+                    "Added Cursed Night Preset.",
+                    "Added Glitchmaster Preset.",
+                    "Added Sight-Seer Preset."
+                ]
+            }
+        },
+        {
+            "date": "December 9, 2024",
+            "sections": {
+                "Updates": [
+                    "Added Dog Life Preset.",
+                    "Added Cursed Night Preset.",
+                    "Added Glitchmaster Preset.",
+                    "Added Sight-Seer Preset.",
+                    "Added new Shop Price Randomizer option.",
+                    "Added four $700 bags and one $5000 chest to candle randomization.",
+                    "Incorporated Enemy Stat Randomizer into Chaos Lite.",
+                    "Incorporated Shop Price Randomizer into Chaos Lite.",
+                    "Removed guaranteed $400 drop from Rat Race.",
+                    "Fixed an error in relic placement in Forge.",
+                    "Fixed an error in logic in Speedrun.",
+                    "Fixed an error in logic in Adventure.",
+                    "Re-re-re-re fixed Glitch logic."
+                ]
+            }
+        },
+        {
+            "date": "October 14, 2024",
+            "sections": {
+                "Updates": [
+                    "Updated First Castle Preset with a new instant teleport to Dracula.",
+                    "Moved the former Black Marble Vats check in Wanderer and Tourist to Reverse Alucart Sword.",
+                    "Updated Open preset to actually be open by opening the Colosseum and Olrox's Quarters shortcuts.",
+                    "Updated Skinwalker preset file to actually use the Wanderer extension.",
+                    "Removed large version number from website.",
+                    "Glitch will be fixed one day."
+                ]
+            }
+        },
+        {
+            "date": "September 10, 2024",
+            "sections": {
+                "Updates": [
+                    "Added First Castle Preset.",
+                    "Added Lucky Sevens Preset.",
+                    "Added Surprise mode to hide relic's true identity until collected.",
+                    "Added Enemy Stat Randomizer mode.",
+                    "Updated preset descriptions.",
+                    "Updated website animations in and out of Menu Mode.",
+                    "Moved Starting Equipment, Enemy Drops, Item Location, Turkey Mode, Item Stats and Prologue Rewards to Options.",
+                    "Preset selection now checks boxes of options used in preset files.",
+                    "Certain presets disable incompatible options.",
+                    "Formatting updates.",
+                    "Fixed Glitch logic yet again."
+                ]
+            }
+        },
+        {
+            "date": "August 12, 2024",
+            "sections": {
+                "Updates": [
+                    "Updated logic to be more intuitive in equipment and tourist extensions.",
+                    "Added Unlocked Mode to open shortcuts.",
+                    "Restored dev mode for webpage when not on SOTN.io.",
+                    "Removed map color preset compatibility (CLI/Launcher only).",
+                    "Restored pink map color (CLI/Launcher only).",
+                    "Added Black and Invisible map colors (CLI/Launcher only).",
+                    "Added track exclusion for music randomizer (CLI/Launcher only).",
+                    "Removed error where Aperture map reveal allowed early reverse Library card.",
+                    "Corrected Skinwalker logic to force early transformations.",
+                    "Added Wing Smash trail color randomization.",
+                    "Removed zero-relic Faerie Card logic in Glitch.",
+                    "Removed softlock with Maria Silver Ring cutscene in Glitch.",
+                    "Fixed Glitch logic again."
+                ]
+            }
+        },
+        {
+            "date": "July 19, 2024",
+            "sections": {
+                "Updates": [
+                    "Added new seed naming scheme.",
+                    "Performance enhancement: presets now load on demand.",
+                    "Performance enhancement: added debug mode foundation to Command Line."
+                ]
+            }
+        },
+        {
+            "date": "July 16, 2024",
+            "sections": {
+                "Updates": [
+                    "Added Brawler preset.",
+                    "Added Infinite Wing Smash mode, Fast Warps mode, and No Prologue mode.",
+                    "Adjusted options layout to ease confusion.",
+                    "Added Wanderer and Tourist extensions as website options.",
+                    "Added check counts to extension descriptions.",
+                    "Added generation time output when using spoilers in Command Line.",
+                    "Added $5000 chest to items list.",
+                    "Changed how Maria First Meeting room spawns."
+                ]
+            }
+        },
+        {
+            "date": "July 10, 2024",
+            "sections": {
+                "Updates": [
+                    "Updated Glitch to remove guaranteed Duplicator.",
+                    "Made preset-associated items infinite.",
+                    "Made Heart Refresh animation faster."
+                ]
+            }
+        },
+        {
+            "date": "June 11, 2024",
+            "sections": {
+                "Updates": [
+                    "Added Bounty Hunter, Hitman, Chaos Lite, and Bounty Hunter - Target Confirmed.",
+                    "These require applying to BIN and patching enemy drops with MottZilla's Bounty Hunter Tool."
+                ]
+            }
+        },
+        {
+            "date": "June 10, 2024",
+            "sections": {
+                "Updates": [
+                    "Added Agonize 2020 preset.",
+                    "Added Season 2 Safe preset.",
+                    "Added Open preset.",
+                    "Replaced Glitch preset with Glitch Remastered.",
+                    "Glitch Legacy remains available as JSON."
+                ]
+            }
+        },
+        {
+            "date": "June 8, 2024",
+            "sections": {
+                "Updates": [
+                    "Added map color feature for CLI.",
+                    "Added 'That's my purse!' to stop Death from stealing items."
+                ]
+            }
+        },
+        {
+            "date": "June 5, 2024",
+            "sections": {
+                "Updates": [
+                    "Added Doppleganger's capes, Gravity Boots trails, and Hydrostorm color rando.",
+                    "Separated color rando from Turkey mode.",
+                    "Patch for Clear Game status without Clear File.",
+                    "Added Japan-only Sprite and Nosedevil Cards to menu.",
+                    "Added Magic Max Up option.",
+                    "Added Anti-Freeze option.",
+                    "Added Tourist and Wanderer location extensions.",
+                    "Added Magic Mirror, Leg Day, Boss Rush, Big Toss, Aperture presets.",
+                    "Patch Clock Room softlock.",
+                    "Removed Estoc from Thrust Sword pool.",
+                    "Backend improvements and new random options.",
+                    "Backend fixes for item aliasing.",
+                    "And more!"
+                ]
+            }
+        },
+        {
+            "date": "April 2, 2023",
+            "sections": {
+                "Updates": [
+                    "Add Rat Race preset."
+                ]
+            }
+        },
+        {
+            "date": "March 15, 2023",
+            "sections": {
+                "Updates": [
+                    "Updated tournament mode with free shop relic and open clock room statue.",
+                    "Updated accessibility mode to patch softlocks at Olrox, Scylla, Minotaur & Werewolf."
+                ]
+            }
+        },
+        {
+            "date": "October 5, 2022",
+            "sections": {
+                "Updates": [
+                    "Prevent Clock Tower puzzle softlock in Equipment extension."
+                ]
+            }
+        },
+        {
+            "date": "July 20, 2022",
+            "sections": {
+                "Updates": [
+                    "Add Warlock preset."
+                ]
+            }
+        },
+        {
+            "date": "July 9, 2022",
+            "sections": {
+                "Updates": [
+                    "Add Expedition preset.",
+                    "Add Lycanthrope preset."
+                ]
+            }
+        },
+        {
+            "date": "April 20, 2022",
+            "sections": {
+                "Updates": [
+                    "Add Nimble preset."
+                ]
+            }
+        },
+        {
+            "date": "April 2, 2022",
+            "sections": {
+                "Updates": [
+                    "Add Third Castle preset."
+                ]
+            }
+        },
+        {
+            "date": "February 24, 2022",
+            "sections": {
+                "Updates": [
+                    "Fix stat randomization for club weapons."
+                ]
+            }
+        },
+        {
+            "date": "January 11, 2022",
+            "sections": {
+                "Updates": [
+                    "Add Guarded O.G. preset."
+                ]
+            }
+        },
+        {
+            "date": "December 26, 2021",
+            "sections": {
+                "Updates": [
+                    "Add Spread relic locations extension.",
+                    "Add Bat Master preset."
+                ]
+            }
+        },
+        {
+            "date": "May 17, 2021",
+            "sections": {
+                "Updates": [
+                    "Use Guarded relic locations for Casual preset."
+                ]
+            }
+        },
+        {
+            "date": "April 27, 2021",
+            "sections": {
+                "Updates": [
+                    "Reject disc images that are not valid vanilla backups."
+                ]
+            }
+        },
+        {
+            "date": "April 2, 2021",
+            "sections": {
+                "Updates": [
+                    "Add Gem Farmer preset."
+                ]
+            }
+        },
+        {
+            "date": "March 12, 2021",
+            "sections": {
+                "Updates": [
+                    "Add O.G. preset."
+                ]
+            }
+        },
+        {
+            "date": "February 27, 2021",
+            "sections": {
+                "Updates": [
+                    "Add item stats randomization."
+                ]
+            }
+        },
+        {
+            "date": "February 15, 2021",
+            "sections": {
+                "Updates": [
+                    "Add PPF output option."
+                ]
+            }
+        },
+        {
+            "date": "February 7, 2021",
+            "sections": {
+                "Updates": [
+                    "Add Trio as a possible relic location in Guarded and Equipment extensions."
+                ]
+            }
+        },
+        {
+            "date": "January 18, 2021",
+            "sections": {
+                "Updates": [
+                    "Add Thrust Sword logic to Speedrun preset.",
+                    "Increase minimum complexities for Safe and Venture presets."
+                ]
+            }
+        },
+        {
+            "date": "September 19, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Tournament Mode."
+                ]
+            }
+        },
+        {
+            "date": "August 11, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Scavenger preset."
+                ]
+            }
+        },
+        {
+            "date": "August 7, 2020",
+            "sections": {
+                "Updates": [
+                    "Make Leap Stone a 0-relic check in Speedrun preset."
+                ]
+            }
+        },
+        {
+            "date": "July 27, 2020",
+            "sections": {
+                "Updates": [
+                    "Add music randomizer."
+                ]
+            }
+        },
+        {
+            "date": "July 10, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix escape requirements not being honored when a location is empty."
+                ]
+            }
+        },
+        {
+            "date": "June 22, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Jewel of Open + Soul of Wolf + Leap Stone as Gold Ring lock for Speedrun preset."
+                ]
+            }
+        },
+        {
+            "date": "June 3, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix duped progression item in Cave."
+                ]
+            }
+        },
+        {
+            "date": "May 26, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Forbidden Library Opal location to Venture preset."
+                ]
+            }
+        },
+        {
+            "date": "April 30, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Pixie singing Nocturne when sitting in a chair."
+                ]
+            }
+        },
+        {
+            "date": "April 25, 2020",
+            "sections": {
+                "Updates": [
+                    "Increase worker performance.",
+                    "Add FAQ."
+                ]
+            }
+        },
+        {
+            "date": "April 21, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Jewel of Open + Soul of Wolf + Skill of Wolf to Gold Ring locks in Speedrun preset.",
+                    "Fix missing cape color layer."
+                ]
+            }
+        },
+        {
+            "date": "April 17, 2020",
+            "sections": {
+                "Updates": [
+                    "Add solutions to spoiler log.",
+                    "Increase minimum complexities."
+                ]
+            }
+        },
+        {
+            "date": "April 12, 2020",
+            "sections": {
+                "Updates": [
+                    "Prevent generation of seeds that softlock at Holy Glasses.",
+                    "Show preset ID at file select menu.",
+                    "Increase minimum complexities."
+                ]
+            }
+        },
+        {
+            "date": "April 10, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Menu theme."
+                ]
+            }
+        },
+        {
+            "date": "April 8, 2020",
+            "sections": {
+                "Updates": [
+                    "Add multithreaded seed generation strategy."
+                ]
+            }
+        },
+        {
+            "date": "April 5, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Sprite and Nosedevil familiars in Guarded and Equipment extensions."
+                ]
+            }
+        },
+        {
+            "date": "April 3, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Speedrun preset.",
+                    "Randomize all cape colors.",
+                    "Fix erasing Ring of Vlad location."
+                ]
+            }
+        },
+        {
+            "date": "April 2, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Venture preset.",
+                    "Add Empty Hand preset.",
+                    "Add night mode."
+                ]
+            }
+        },
+        {
+            "date": "March 31, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix exception when replacing Holy Glasses with relic."
+                ]
+            }
+        },
+        {
+            "date": "March 30, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix gold ring duping."
+                ]
+            }
+        },
+        {
+            "date": "March 29, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix progression item duping at relic bosses.",
+                    "Fix missing progression item at Scylla."
+                ]
+            }
+        },
+        {
+            "date": "March 28, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix information leak of progression item randomization.",
+                    "Fix progression item randomization in Outer Wall."
+                ]
+            }
+        },
+        {
+            "date": "March 27, 2020",
+            "sections": {
+                "Updates": [
+                    "Add progression item randomization.",
+                    "Fix icons of equipment stolen by Death."
+                ]
+            }
+        },
+        {
+            "date": "March 27, 2020",
+            "sections": {
+                "Updates": [
+                    "Add progression item randomization.",
+                    "Fix icons of equipment stolen by Death."
+                ]
+            }
+        },
+        {
+            "date": "March 17, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix disappearing items."
+                ]
+            }
+        },
+        {
+            "date": "March 15, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix duping item that replaces Cube of Zoe."
+                ]
+            }
+        },
+        {
+            "date": "March 13, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix relic placement in miscellaneous presets.",
+                    "Fix missing replacement item at Soul of Bat.",
+                    "Add extra agony to agonize preset."
+                ]
+            }
+        },
+        {
+            "date": "March 12, 2020",
+            "sections": {
+                "Updates": [
+                    "Add relic locations extension with new Guarded option.",
+                    "Fix softlock in Lesser Demon fight."
+                ]
+            }
+        },
+        {
+            "date": "March 4, 2020",
+            "sections": {
+                "Updates": [
+                    "Add Joseph's Cloak color randomization to Turkey Mode."
+                ]
+            }
+        },
+        {
+            "date": "February 27, 2020",
+            "sections": {
+                "Updates": [
+                    "Fix relic duping when performing glitches."
+                ]
+            }
+        },
+        {
+            "date": "February 5, 2020",
+            "sections": {
+                "Updates": [
+                    "Update links section."
+                ]
+            }
+        },
+        {
+            "date": "October 26, 2019",
+            "sections": {
+                "Updates": [
+                    "\"The Manly Update\": Add Jewel + Power + Wolf to locks on Demon Card location.",
+                    "Add extra agony to agonize preset."
+                ]
+            }
+        },
+        {
+            "date": "October 1, 2019",
+            "sections": {
+                "Updates": [
+                    "Fix some candles not being randomized.",
+                    "Add extra agony to agonize preset."
+                ]
+            }
+        },
+        {
+            "date": "August 15, 2019",
+            "sections": {
+                "Updates": [
+                    "Fix crash related to transferring data to web worker."
+                ]
+            }
+        },
+        {
+            "date": "August 11, 2019",
+            "sections": {
+                "Updates": [
+                    "Fix uncurse being placed in random candles.",
+                    "Add support for custom enemy drops from enemies that have no vanilla drops."
+                ]
+            }
+        },
+        {
+            "date": "May 23, 2019",
+            "sections": {
+                "Updates": [
+                    "Add support for custom enemy drops, starting equipment, item locations, and prologue rewards.",
+                    "Deprecate relic logic selector in favor of presets."
+                ]
+            }
+        },
+        {
+            "date": "May 11, 2019",
+            "sections": {
+                "Updates": [
+                    "Add selector for built-in relic logic schemes."
+                ]
+            }
+        },
+        {
+            "date": "May 8, 2019",
+            "sections": {
+                "Updates": [
+                    "Add support for custom relic logic."
+                ]
+            }
+        },
+        {
+            "date": "May 3, 2019",
+            "sections": {
+                "Updates": [
+                    "Add file input as alternative to drag API."
+                ]
+            }
+        },
+        {
+            "date": "April 30, 2019",
+            "sections": {
+                "Updates": [
+                    "Use web worker."
+                ]
+            }
+        },
+        {
+            "date": "April 28, 2019",
+            "sections": {
+                "Updates": [
+                    "Add drop randomization."
+                ]
+            }
+        },
+        {
+            "date": "April 23, 2019",
+            "sections": {
+                "Updates": [
+                    "Add checksum verification."
+                ]
+            }
+        },
+        {
+            "date": "April 22, 2019",
+            "sections": {
+                "Updates": [
+                    "Add turkey mode."
+                ]
+            }
+        },
+        {
+            "date": "April 20, 2019",
+            "sections": {
+                "Updates": [
+                    "Add candle randomization.",
+                    "Add prologue reward item randomization.",
+                    "Add Axe Lord and Luck Mode starting equipment randomization.",
+                    "Add copy seed button."
+                ]
+            }
+        },
+        {
+            "date": "April 15, 2019",
+            "sections": {
+                "Updates": [
+                    "Display seed at file select menu.",
+                    "Distribute jewel types with same frequency as vanilla."
+                ]
+            }
+        },
+        {
+            "date": "April 14, 2019",
+            "sections": {
+                "Updates": [
+                    "Add option to show relic locations in spoilers."
+                ]
+            }
+        },
+        {
+            "date": "April 13, 2019",
+            "sections": {
+                "Updates": [
+                    "Fix Maria cutscene skip in Richter mode."
+                ]
+            }
+        },
+        {
+            "date": "April 11, 2019",
+            "sections": {
+                "Updates": [
+                    "Remove Maria cutscene in Marble Gallery to avoid confusion.",
+                    "Add spoilers option."
+                ]
+            }
+        },
+        {
+            "date": "April 8, 2019",
+            "sections": {
+                "Updates": [
+                    "Fix bug that allowed salable gems to be sold in shop menu.",
+                    "Items are now placed by type with same frequency as vanilla."
+                ]
+            }
+        },
+        {
+            "date": "April 7, 2019",
+            "sections": {
+                "Updates": [
+                    "Add item location randomization."
+                ]
+            }
+        },
+        {
+            "date": "April 5, 2019",
+            "sections": {
+                "Updates": [
+                    "Add relic distribution (thanks Soba).",
+                    "Fix relic duping in Medusa room.",
+                    "Fix shop relic name not being updated in shop menu.",
+                    "Produce more uniform relic distribution (thanks Soba)."
+                ]
+            }
+        },
+        {
+            "date": "April 4, 2019",
+            "sections": {
+                "Updates": [
+                    "Remove Maria cutscene in Alchemy Lab to avoid softlock.",
+                    "Fix 2nd castle relic locations (thanks Soba).",
+                    "Fix randomized equipment by same type."
+                ]
+            }
+        },
+        {
+            "date": "April 3, 2019",
+            "sections": {
+                "Updates": [
+                    "Fix random seed not being reproducible.",
+                    "Fix crash after Scylla fight.",
+                    "Fix faerie scroll duping.",
+                    "Fix same seed causing different randomizations."
+                ]
+            }
+        },
+        {
+            "date": "April 2, 2019",
+            "sections": {
+                "Updates": [
+                    "Fix equipment randomization.",
+                    "Fix bug allowing bat relic to be placed in 2nd castle without spike breaker armor.",
+                    "Download file name now contains seed value."
+                ]
+            }
+        },
+        {
+            "date": "April 1, 2019",
+            "sections": {
+                "Updates": [
+                    "Fix shop relic glitch.",
+                    "Fix relic duping in clock tower and outer wall."
+                ]
+            }
+        },
+        {
+            "date": "March 31, 2019",
+            "sections": {
+                "Updates": [
+                    "Add equipment location randomization."
+                ]
+            }
+        },
+        {
+            "date": "March 28, 2019",
+            "sections": {
+                "Updates": [
+                    "Add starting equipment randomization."
+                ]
+            }
+        },
+        {
+            "date": "March 27, 2019",
+            "sections": {
+                "Updates": [
+                    "Ported setz's relic randomizer to JavaScript."
+                ]
+            }
+        }
+    ]
+}
