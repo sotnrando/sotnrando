@@ -31,6 +31,8 @@
   "unlockedMode": true,
   "iwsMode": true,
   "shopPriceRandoMode": true,
+  "zeroDollarRelicMode": true,
+  "openClockStatueMode": true,
 
   "alias": [{
     "comment": "Alias Mirror as Mirror",
@@ -1429,24 +1431,6 @@
     "address": "0x54B4045",
     "type": "char",
     "value": "0x01"
-  }
-  
-  , {
-    "comment": "Never get Clock Blocked",
-    "type": "word",
-    "address": "0x4951D4C",
-    "value": "0x3C020002"
-  }, {
-    "type": "word",
-    "address": "0x4FCF264",
-    "value": "0x3C020002"
-  }
-  
-  , {
-    "comment": "Open means Free Relics",
-    "type": "word",
-    "address": "0x47A3098",
-    "value": "0x00000000"
   }
   
   , {

@@ -477,7 +477,8 @@
     ];
 
     const DISABLE_RULES = [
-      { ids: ["glitch", "glitchmaster", "any-percent"], elems: ["antiFreezeMode"] },
+      { ids: ["glitch", "glitchmaster", "any-percent"], elems: ["antiFreezeMode","zeroDollarRelicMode"] },
+      { ids: ["rat-race"], elems: ["zeroDollarRelicMode"] },
       { ids: ["dog-life", "magic-mirror", "mobility", "lookingglass", "boss-rush", "beyond", "first-castle", "vanilla"], elems: ["startRoomRando2ndMode"] },
       { ids: ["boss-rush", "first-castle", "seeker"], elems: ["relicLocations", "relicLocationsSet"] },
       { ids: ["boss-rush", "beyond", "vanilla"], elems: ["startRoomRandoMode"] },

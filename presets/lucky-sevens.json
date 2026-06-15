@@ -24,6 +24,8 @@
   "fastwarpMode": true,
   "magicmaxMode": true,
   "noprologueMode": true,
+  "zeroDollarRelicMode": true,
+  "openClockStatueMode": true,
 
   "complexityGoal": {
     "min": 7,
@@ -1122,24 +1124,6 @@
     "value": "0x34020000"
   }, {
     "type": "word",
-    "value": "0x00000000"
-  },
-  
-  {
-    "comment": "Never get Clock Blocked",
-    "type": "word",
-    "address": "0x4951D4C",
-    "value": "0x3C020002"
-  }, {
-    "type": "word",
-    "address": "0x4FCF264",
-    "value": "0x3C020002"
-  }, 
-  
-  {
-    "comment": "Open means Free Relics",
-    "type": "word",
-    "address": "0x47A3098",
     "value": "0x00000000"
   },
   

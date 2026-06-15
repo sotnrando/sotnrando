@@ -35,6 +35,7 @@
   "elemChaosMode": true,
   "revCastleTeleportRando": true,
   "startStatRandoMode": 99,
+  "spikeRoomRando": true,
 
   "complexityGoal": {
     "min": 1,

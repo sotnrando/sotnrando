@@ -292,6 +292,8 @@ BrowserUtils.ChangeHandlers = {
             elems.showSolutions.disabled = true
             elems.easyMode.checked = false
             elems.easyMode.disabled = true
+            elems.zeroDollarRelicMode.checked = true
+            elems.openClockStatueMode.checked = true 
         } else {
             elems.showRelics.disabled = false
             elems.easyMode.disabled = false

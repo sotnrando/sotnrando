@@ -25,6 +25,8 @@
   "fastwarpMode": true,
   "mypurseMode": true,
   "unlockedMode": true,
+  "zeroDollarRelicMode": true,
+  "openClockStatueMode": true,
 
   "complexityGoal": {
     "min": 5,
@@ -2623,20 +2625,6 @@
     "type": "word",
     "address": "0x4FCF7E8",
     "value": "0x3402000"
-  }, {
-    "comment": "Never get Clock Blocked",
-    "type": "word",
-    "address": "0x4951D4C",
-    "value": "0x3C020002"
-  }, {
-    "type": "word",
-    "address": "0x4FCF264",
-    "value": "0x3C020002"
-  }, {
-    "comment": "Open means Free Relics",
-    "type": "word",
-    "address": "0x47A3098",
-    "value": "0x00000000"
   }, {
     "comment": "Demon card open door A",
     "address": "0x4608B84",
