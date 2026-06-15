@@ -13,12 +13,18 @@
                     "Added Reverse Teleporter Randomizer.",
                     "Added Spike Room Randomizer.",
                     "Added Lycanthrope Mode.",
+                    "Added Fire Lord and Ice Lord Palettes to change Alucard's appearance.",
+                    "Added Jade Lining and Slate Lining to change Alucard's appearance.",
                     "Separated out the Quality of Life functions from Tournament Mode and added a new security feature to the same.",
                     "The new homes for the Quality of Life features are Zero-Dollar Relic Mode and Open Clock Statue Mode.",
                     "Dev's Stash now may house upcoming changes that have yet to find a home despit being 'complete'."
                 ],
                 "Website Updates": [
-                    "Fixed a bug causing presets minimum complexity to override player-selected somplexity."
+                    "Fixed a bug causing presets minimum complexity to override player-selected somplexity.",
+                    "Added 'Development' Section under FAQ's.",
+                    "Separated older Change Log entries into a new section under 'Randomizer' in the hotbar.",
+                    "Added 'Relic Locations' under 'Player Guides' in the hotbar.",
+                    "Added an external link to a dynamic relic locations map in the hotbar."
                 ],
                 "Program Updates": [
                     "Fixed an issue where renamed relics were incorrectly displayed in the Long Library shop menu.",
