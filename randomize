@@ -494,7 +494,7 @@ function presetMetaHelp(preset) {
 }
 
 let eccEdcCalc
-const yargs = require('yargs')
+let yargs = require('yargs')
   .strict()
   .usage('$0 [options] [url]')
   .option('in-bin', {
@@ -560,165 +560,7 @@ const yargs = require('yargs')
     describe: 'Shortcut to adjust seed complexity',
     type: 'number',
     requiresArg: true,
-  })
-  .option('tournament', {
-    alias: 't',
-    describe: 'Enable tournament mode (`--help tournament`)',
-    type: 'boolean',
-  })
-  // #region Preset boolean .option
-  .option('colorrando', {
-    alias: 'l',
-    describe: 'Enable color palette randomizing for various things',
-    type: 'boolean',
-  })
-  .option('magicmax', {
-    alias: 'x',
-    describe: 'Enable replace Heart Max with Magic Max Vessels',
-    type: 'boolean',
-  })
-  .option('antifreeze', {
-    alias: 'z',
-    describe: 'Enable Anti-Freeze Mode, removes screen freezes from level-up & more.',
-    type: 'boolean',
-  })
-  .option('mypurse', {
-    alias: 'y',
-    describe: 'Prevents Death from stealing your belongings.',
-    type: 'boolean',
-  })
-  .option('iws', {
-    alias: 'b',
-    describe: 'Makes wing smash essentially infinite.',
-    type: 'boolean',
-  })
-  .option('fastwarp', {
-    alias: '9',
-    describe: 'Quickens warp animation when using teleporters.',
-    type: 'boolean',
-  })
-  .option('itemnamerando', {
-    alias: 'in',
-    describe: 'Randomize item names when doing item stat rando.',
-    type: 'boolean',
-  })
-  .option('noprologue', {
-    alias: 'R',
-    describe: 'Removes the Prologue from being required to play.',
-    type: 'boolean',
-  })
-  .option('unlocked', {
-    alias: 'U',
-    describe: 'Unlocks all shortcuts.',
-    type: 'boolean',
-  })
-  .option('surprise', {
-    alias: 'S',
-    describe: 'Hides relics behind the same sprite and palette forcing the player to collect the relic to find out what it is.',
-    type: 'boolean',
-  })
-  .option('enemyStatRando', {
-    alias: 'E',
-    describe: 'Enemy stats are randomized ranging from 25% to 200% of their original value and their attack and defense types are randomized to include random elements.',
-    type: 'boolean',
-  })
-  .option('shopPriceRando', {
-    alias: 'sh',
-    describe: 'Shop prices are randomized ranging from 50% to 150% of their original value and they are shuffled between each other.',
-    type: 'boolean',
-  })
-  .option('startRoomRando', {
-    alias: 'ori',
-    describe: 'Start in the entrance as usual but after the first Warg, you are teleported to a random zone to start the rest of your run.',
-    type: 'boolean',
-  })
-  .option('startRoomRando2nd', {
-    alias: 'ori2',
-    describe: 'Start in the entrance as usual but after the first Warg, you are teleported to a random zone to start the rest of your run.',
-    type: 'boolean',
-  })
-  .option('domino', {
-    alias: 'gd',
-    describe: 'Guarantees drops from every enemy that has one. Ring of Arcana makes them drop their rare item instead of the uncommon.',
-    type: 'boolean',
-  })
-  .option('rlbc', {
-    alias: 'rl',
-    describe: 'Allows use of Library Cards to teleport to the Forbidden Library by holding Down while using them.',
-    type: 'boolean',
-  })
-  .option('immunityPotion', {
-    alias: 'ip',
-    describe: 'Converts Resist Fire, Resist Ice, etc. potions to grant Immunity to the element in question and allows them to grant invincibility frames.',
-    type: 'boolean',
-  })
-  .option('godspeed', {
-    alias: 'gss',
-    describe: 'Allows Alucard to run by double-pressing in the direction you intend to move in.',
-    type: 'boolean',
-  })
-  .option('libShort', {
-    alias: 'ls',
-    describe: 'Opens a shortcut to allow players to swiftly exit the Long Library.',
-    type: 'boolean',
-  })
-  .option('elemChaos', {
-    alias: 'ec',
-    describe: 'Randomizes almost every element in the game.',
-    type: 'boolean',
-  })
-  .option('singleHitGear', {
-    alias: 'gp',
-    describe: 'Makes all gear puzzles only require a single hit on one gear to open the respective door.',
-    type: 'boolean',
-  })
-  .option('revCastleTeleport', {
-    alias: 'c2r',
-    describe: 'Randomizes where the teleporter after Richter takes the player.',
-    type: 'boolean',
-  })
-  .option('zeroDollarRelic', {
-    alias: 'zr',
-    describe: 'Makes the shop Relic cost 0.00.',
-    type: 'boolean',
-  })
-  .option('openClockStatue', {
-    alias: 'os',
-    describe: 'Opens the statue to Olroxs Quarters.',
-    type: 'boolean',
-  })
-  .option('spikeRoom', {
-    alias: 'srr',
-    describe: 'Randomizes the Spike Room before Spike Breaker.',
-    type: 'boolean',
-  })
-  .option('lycan', {
-    alias: 'ly',
-    describe: 'Allows the player to use full wolf at reduced cost.',
-    type: 'boolean',
-  })
-  // #region Non-preset boolean .option
-  .option('easy', {
-    alias: 'ez',
-    describe: 'Simplifies inputs so spells no longer need complex sequences to execute and extends invincibility when hit.',
-    type: 'boolean',
-  })
-  .option('devStash', {
-    alias: 'dev',
-    describe: '???',
-    type: 'boolean',
-  })
-  .option('seasonalPhrases', {
-    alias: 'sp',
-    describe: 'Allow seasonal and holiday-based splash phrases on the "Press Start" screen.',
-    type: 'boolean',
-  })
-  .option('bossMusic', {
-    alias: 'bm',
-    describe: 'Randomizes Boss Music separately from other songs.',
-    type: 'boolean',
-  })
-  .option('debug', {
+  }).option('debug', {
     alias: 'D',
     describe: 'Debug mode.',
     type: 'boolean',
@@ -792,7 +634,19 @@ const yargs = require('yargs')
     describe: 'Show help',
     type: 'string',
   })
-  .demandCommand(0, 1)
+  // #region simplified options
+
+  options_array.forEach(function(indivOpt) {
+    if (indivOpt.argvFlag === "bool") {
+      yargs.option(indivOpt.shortId, {
+        alias: indivOpt.cliArg,
+        describe: indivOpt.shortDescript,
+        type: 'boolean'
+      })
+    }
+  })
+
+  yargs.demandCommand(0, 1)
 const argv = yargs.argv
 let options
 let seed
