@@ -1,23 +1,36 @@
 (function(self) {
 
   const optionsArray = [{
+	// Preset name.
 	name: "Tournament Mode", 
+	// The id used in preset files.
 	longId: "tournamentMode", 
-	shortId: "tournament", 
-	htmlElement: "tournament-mode", 
-	cliArg: "t", 
+	// The id used in argv.
+	shortId: "tournament",
+	// The html element ID. 
+	htmlElement: "tournament-mode",
+	// The yargs argument.
+	cliArg: "t",
+	// The description from the website and the help file. 
 	longDescript: "Prevents displaying the relic locations and solutions.", 
-	shortDescript: "Prevents spoilers.", 
+	// The description for internal use.
+	shortDescript: "Prevents spoilers.",
+	// Options which need to be turned off if this option is on.
 	incompatibleOptions: [
 	  "showSpoilers",
 	  "easyMode"
 	],
+	// Options which need to be on for this option to be on
 	requiredOptions: [
 	],
+	// Presets which should turn this option off and disable it's use.
 	incompatiblePresets: [
 	], 
-	functionCall: "applyTournamentModePatches", 
+	// The individual function this option directly or indirectly affects
+	functionCall: "applyTournamentModePatches",
+	// Whether the option needs rng to apply it's patches correctly 
 	rngNeeded: false, 
+	// If the option is simple enough to be applied as part of a batch option application loop
 	simple: true
   }, {
 	name: "Accessibility Patches", 
