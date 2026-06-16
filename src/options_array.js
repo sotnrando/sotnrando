@@ -1,0 +1,767 @@
+(function(self) {
+
+  const optionsArray = [{
+	name: "Tournament Mode", 
+	longId: "tournamentMode", 
+	shortId: "tournament", 
+	htmlElement: "tournament-mode", 
+	cliArg: "t", 
+	longDescript: "Prevents displaying the relic locations and solutions.", 
+	shortDescript: "Prevents spoilers.", 
+	incompatibleOptions: [
+	  "showSpoilers",
+	  "easyMode"
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyTournamentModePatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Accessibility Patches", 
+	longId: "enableAccessibilityPatches", 
+	shortId: "enableAccessibilityPatches", 
+	htmlElement: "accessibility-patches", 
+	cliArg: "a", 
+	longDescript: "Reduces screen flashing from use items, adjusts some relics for better visibility, and patches some soft locks.", 
+	shortDescript: "Enables accessibility patches and game bug fixes", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyAccessibilityPatches", 
+	rngNeeded: false, 
+	simple: false
+  }, {
+	name: "Easy Mode", 
+	longId: "easyMode", 
+	shortId: "easy", 
+	htmlElement: "easy-mode", 
+	cliArg: "ez", 
+	longDescript: "Simplifies inputs so spells no longer need complex sequences to execute. L2 for Gravity Boots. R3 and any of the following: Left / Right for Hellfire, Up for Soul Steal, and 2x Down for Tetra Spirit. An additional 4 frames of invincibility is added to all damage states, spell resolutions, and potions.", 
+	shortDescript: "Makes spells and damage recovery easier.", 
+	incompatibleOptions: [
+	  "tournamentMode"
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyEasyModePatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Show Spoilers", 
+	longId: "showSpoilers", 
+	shortId: "showSpoilers", 
+	htmlElement: "show-spoilers", 
+	cliArg: "vv", 
+	longDescript: "Show spoilers for the seed.", 
+	shortDescript: "Show spoilers for the seed.", 
+	incompatibleOptions: [
+	  "tournamentMode"
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "showSpoilers", 
+	rngNeeded: false, 
+	simple: false
+  }, {
+	name: "Show Relic Locations", 
+	longId: "showRelics", 
+	shortId: "showRelics", 
+	htmlElement: "show-relics", 
+	cliArg: "vvv", 
+	longDescript: "Show relic locations for the seed.", 
+	shortDescript: "Show relic locations for the seed.", 
+	incompatibleOptions: [
+	  "tournamentMode"
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "", 
+	rngNeeded: false, 
+	simple: false
+  }, {
+	name: "Show Solutions", 
+	longId: "showSolutions", 
+	shortId: "showSolutions", 
+	htmlElement: "show-solutions", 
+	cliArg: "vvvv", 
+	longDescript: "Show solutions for the seed.", 
+	shortDescript: "Show solutions for the seed.", 
+	incompatibleOptions: [
+	  "tournamentMode"
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "", 
+	rngNeeded: false, 
+	simple: false
+  }, {
+	name: "Enemy Drops", 
+	longId: "enemyDrops", 
+	shortId: "enemyDrops", 
+	htmlElement: "enemy-drops", 
+	cliArg: "opt d", 
+	longDescript: "Randomize items dropped by enemies.", 
+	shortDescript: "Randomize enemy drops.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "", 
+	rngNeeded: false, 
+	simple: false
+  }, {
+	name: "Item Stats", 
+	longId: "", 
+	shortId: "", 
+	htmlElement: "stats", 
+	cliArg: "opt s", 
+	longDescript: "Randomize the item stats like Atk, Def, sprite, but NOT name.", 
+	shortDescript: "Shuffle the items stats and the menu graphics.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "randomizeStats", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Item Names", 
+	longId: "itemNameRandoMode", 
+	shortId: "itemNameRandoMode", 
+	htmlElement: "itemnamerando-mode", 
+	cliArg: "in", 
+	longDescript: "Randomize item names when using Item Stat Rando.", 
+	shortDescript: "Shuffle item names.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	  "stats"
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "randomizeStats", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Turkey Mode", 
+	longId: "turkeyMode", 
+	shortId: "turkey", 
+	htmlElement: "turkey-mode", 
+	cliArg: "k", 
+	longDescript: "Replaces the subweapons in the glass vats at Alchemy Lab and Black Marble Gallery with useless turkeys.", 
+	shortDescript: "Replaces vat subweapons with turkeys.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "randomizeSubweaponTanks", 
+	rngNeeded: false, 
+	simple: false
+  }, {
+	name: "Item Locations", 
+	longId: "itemLocations", 
+	shortId: "itemLocations", 
+	htmlElement: "item-locations", 
+	cliArg: "", 
+	longDescript: "Randomize items found on the ground, in static entities, and in the shop.", 
+	shortDescript: "Randomize items not dropped by enemies.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Starting Equipment", 
+	longId: "startingEquipment", 
+	shortId: "startingEquipment", 
+	htmlElement: "starting-equipment", 
+	cliArg: "opt e", 
+	longDescript: "Randomize starting equipment for Alucard.", 
+	shortDescript: "Randomize starting equipment.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Prologue Rewards", 
+	longId: "prologueRewards", 
+	shortId: "prologueRewards", 
+	htmlElement: "prologue-rewards", 
+	cliArg: "opt b", 
+	longDescript: "Randomize rewards for completing the prologue in certain ways.", 
+	shortDescript: "Randomize rewards for completing the prologue.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Seasonal Splash Phrases", 
+	longId: "seasonalPhrasesMode", 
+	shortId: "seasonalPhrases", 
+	htmlElement: "seasonal-phrases", 
+	cliArg: "sp", 
+	longDescript: "Allow seasonal and holiday-based splash phrases on the 'Press Start' screen.", 
+	shortDescript: "Allow seasonal and holiday-based splash phrases on the 'Press Start' screen.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applySplashText", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Randomize Starting Stats", 
+	longId: "startStatRandoMode", 
+	shortId: "startStatRando", 
+	htmlElement: "startingStats", 
+	cliArg: "ss", 
+	longDescript: "Randomize Alucard's starting STR, INT, CON, and LCK.", 
+	shortDescript: "Randomize starting stats.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyStartStatRandoPatches", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Color Randomizer", 
+	longId: "colorrandoMode", 
+	shortId: "colorrando", 
+	htmlElement: "colorrando-mode", 
+	cliArg: "l", 
+	longDescript: "Randomize various color palettes. Ex: Cape colors, Gravity Boots trails, Hydro Storm.", 
+	shortDescript: "Randomize various color palettes.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Magic Vessels", 
+	longId: "magicmaxMode", 
+	shortId: "magicmax", 
+	htmlElement: "magicmax-mode", 
+	cliArg: "x", 
+	longDescript: "Replace Heart Max Up with Magic Max Up.", 
+	shortDescript: "Replace Heart Max Up with Magic Max Up.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyMagicMaxPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Anti-Freeze", 
+	longId: "antiFreezeMode", 
+	shortId: "antifreeze", 
+	htmlElement: "antifreeze-mode", 
+	cliArg: "z", 
+	longDescript: "Remove screen freezes on level-up, relic and vessel acquisition.", 
+	shortDescript: "Remove screen freezes on level-up, relic and vessel acquisition.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "glitch",
+	  "glitch-legacy",
+	  "glitchmaster",
+	  "any-percent"
+	], 
+	functionCall: "applyAntiFreezePatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "That's my purse!", 
+	longId: "mypurseMode", 
+	shortId: "mypurse", 
+	htmlElement: "mypurse-mode", 
+	cliArg: "y", 
+	longDescript: "Prevents Death from stealing your gear.", 
+	shortDescript: "Prevents Death from stealing your gear.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyMyPursePatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Infinite Wing Smash", 
+	longId: "iwsMode", 
+	shortId: "iws", 
+	htmlElement: "iws-mode", 
+	cliArg: "b", 
+	longDescript: "Enables infinite Wing Smash for one cast.", 
+	shortDescript: "Enables infinite Wing Smash for one cast.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyiwsPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Fast Warps", 
+	longId: "fastwarpMode", 
+	shortId: "fastwarp", 
+	htmlElement: "fastwarp-mode", 
+	cliArg: "9", 
+	longDescript: "Quickens warp animation when using teleporters by shortening the animation.", 
+	shortDescript: "Quickens warp animation when using teleporters.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyfastwarpPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Remove Prologue", 
+	longId: "noprologueMode", 
+	shortId: "noprologue", 
+	htmlElement: "noprologue-mode", 
+	cliArg: "R", 
+	longDescript: "Removes the Prologue from being required to play. (Will remove potential prologue rewards.)", 
+	shortDescript: "Removes the Prologue from being required to play.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "any-percent"
+	], 
+	functionCall: "applynoprologuePatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Unlocked Mode", 
+	longId: "unlockedMode", 
+	shortId: "unlocked", 
+	htmlElement: "unlocked-mode", 
+	cliArg: "U", 
+	longDescript: "Opens all five shortcuts in first castle and one in second castle. (Will break logic for most presets.)", 
+	shortDescript: "Opens all five shortcuts in first castle and one in second castle.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "boss-rush"
+	], 
+	functionCall: "applyunlockedPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Relic Surprise", 
+	longId: "surpriseMode", 
+	shortId: "surprise", 
+	htmlElement: "surprise-mode", 
+	cliArg: "S", 
+	longDescript: "All relics are hidden behind the same sprite and palette. The player cannot tell what the relic is until they collect it.", 
+	shortDescript: "All relics are hidden behind the same sprite and palette.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	], 
+	incompatiblePresets: [
+	], 
+	functionCall: "applysurprisePatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Enemy Stats", 
+	longId: "enemyStatRandoMode", 
+	shortId: "enemyStatRando", 
+	htmlElement: "enemyStatRando-mode", 
+	cliArg: "E", 
+	longDescript: "Enemy stats are randomized ranging from 25% to 200% of their original value and their attack and defense types are randomized to include random elements.", 
+	shortDescript: "Enemy Atk, Def, and Elements are randomized.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+      "big-toss"
+	], 
+	functionCall: "applyenemyStatRandoPatches", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Elemental Chaos", 
+	longId: "elemChaosMode", 
+	shortId: "elemChaos", 
+	htmlElement: "elem-chaos", 
+	cliArg: "ec", 
+	longDescript: "Randomizes almost every single element in the game.", 
+	shortDescript: "Randomizes almost every single element in the game.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	  "enemyStatRandoMode"
+	],
+	incompatiblePresets: [
+	  "big-toss"
+	], 
+	functionCall: "applyenemyStatRandoPatches", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Shop Prices", 
+	longId: "shopPriceRandoMode", 
+	shortId: "shopPriceRando", 
+	htmlElement: "shopPriceRando-mode", 
+	cliArg: "sh", 
+	longDescript: "Shop prices are randomized ranging from 50% to 150% of their original value and they are shuffled between each other.", 
+	shortDescript: "Shop prices are shuffled and randomized.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyShopPriceRandoPatches", 
+	rngNeeded: true, 
+	simple: true
+  }, {
+	name: "Starting Zone 1st Castle", 
+	longId: "startRoomRandoMode", 
+	shortId: "startRoomRando", 
+	htmlElement: "startRoomRando-mode", 
+	cliArg: "ori", 
+	longDescript: "Start in the entrance as usual but after the first Warg, you are teleported to a random zone to start the rest of your run. (Select both to have full-range starting rando)", 
+	shortDescript: "Start in the entrance as usual but after the first Warg, you are teleported to a random zone to start the rest of your run.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "boss-rush",
+	  "beyond",
+	  "vanilla"
+	], 
+	functionCall: "applyStartRoomRandoPatches", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Starting Zone 2nd Castle", 
+	longId: "startRoomRando2ndMode", 
+	shortId: "startRoomRando2nd", 
+	htmlElement: "startRoomRando2nd-mode", 
+	cliArg: "ori2", 
+	longDescript: "Start in the entrance as usual but after the first Warg, you are teleported to a random zone in second castle to start the rest of your run. (Select both to have full-range starting rando)", 
+	shortDescript: "Start in the entrance as usual but after the first Warg, you are teleported to a random zone in second castle to start the rest of your run.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "dog-life",
+	  "magic-mirror",
+	  "mobility",
+	  "lookingglass",
+	  "boss-rush",
+	  "beyond",
+	  "first-castle",
+	  "vanilla"
+	], 
+	functionCall: "applyStartRoomRandoPatches", 
+	rngNeeded: true, 
+	simple: false
+  }, {
+	name: "Guaranteed Drops", 
+	longId: "dominoMode", 
+	shortId: "domino", 
+	htmlElement: "domino-mode", 
+	cliArg: "gd", 
+	longDescript: "Guarantees drops from every enemy that has one. Which is dropped depends on kill count odd / even.", 
+	shortDescript: "Guarantees drops from every enemy that has one.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "bounty-hunter",
+	  "target-confirmed",
+	  "hitman",
+	  "chaos-lite",
+	  "rampage",
+	  "rampage-25te",
+	  "oracle"
+	], 
+	functionCall: "applyDominoPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Reverse Library Card", 
+	longId: "rlbcMode", 
+	shortId: "rlbc", 
+	htmlElement: "rlbc-mode", 
+	cliArg: "rl", 
+	longDescript: "Adds a new function to Library Cards. Hold Down while using them to take Alucard to the second castle Library after Richter is saved.", 
+	shortDescript: "Library cards can take the player to 2nd castle.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "boss-rush",
+	  "first-castle",
+	  "beyond",
+	  "seeker",
+	  "recycler"
+	], 
+	functionCall: "applyRLBCPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Immunity Potions", 
+	longId: "immunityPotionMode", 
+	shortId: "immunityPotion", 
+	htmlElement: "immunity-potion-mode", 
+	cliArg: "ip", 
+	longDescript: "Converts Resist Fire, Resist Ice, etc. potions to grant Immunity to the element in question and allows them to grant invincibility frames.", 
+	shortDescript: "Converts Resist Fire, Resist Ice, etc. potions to grant Immunity to the element in question.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyResistToImmunePotionsPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Godspeed Shoes", 
+	longId: "godspeedMode", 
+	shortId: "godspeed", 
+	htmlElement: "godspeed-mode", 
+	cliArg: "gss", 
+	longDescript: "Allows Alucard to run by double-pressing in the direction you intend to move in.", 
+	shortDescript: "Allows Alucard to run.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "battlemage"
+	], 
+	functionCall: "", 
+	rngNeeded: false, 
+	simple: false
+  }, {
+	name: "Library Shortcut", 
+	longId: "libraryShortcut", 
+	shortId: "libShort", 
+	htmlElement: "library-shortcut", 
+	cliArg: "ls", 
+	longDescript: "Opens a shortcut to allow players to swiftly exit the Long Library.", 
+	shortDescript: "Opens a shortcut to allow players to swiftly exit the Long Library.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyLibraryShortcutPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Single-Hit Gears", 
+	longId: "singleHitGearMode", 
+	shortId: "singleHitGear", 
+	htmlElement: "single-hit-gear", 
+	cliArg: "gp", 
+	longDescript: "Makes all gear puzzles only require a single hit on one gear to open the respective door.", 
+	shortDescript: "Makes all gear puzzles only require a single hit on one gear to open the respective door.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applySingleHitGearPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Reverse Teleporter", 
+	longId: "revCastleTeleportRando", 
+	shortId: "revCastleTeleport", 
+	htmlElement: "rev-castle-teleport-rando", 
+	cliArg: "c2r", 
+	longDescript: "Randomize where the teleporter pad in Reverse Castle is located.", 
+	shortDescript: "Randomize where the teleporter pad in Reverse Castle is located.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "boss-rush",
+	  "first-castle",
+	  "seeker"
+	], 
+	functionCall: "applyReverseCastleTeleporterRandoPatches", 
+	rngNeeded: true, 
+	simple: true
+  }, {
+	name: "Zero-Dollar Relic", 
+	longId: "zeroDollarRelicMode", 
+	shortId: "zeroDollarRelic", 
+	htmlElement: "zero-relic", 
+	cliArg: "zr", 
+	longDescript: "Library Shop Relic is free.", 
+	shortDescript: "Library Shop Relic is free.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "any-percent",
+	  "glitch",
+	  "glitchmaster",
+	  "rat-race"
+	], 
+	functionCall: "applyZeroDollarRelicPatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Open Clock Statue", 
+	longId: "openClockStatueMode", 
+	shortId: "openClockStatue", 
+	htmlElement: "open-statue", 
+	cliArg: "os", 
+	longDescript: "Statue in Clock Room is always open.", 
+	shortDescript: "Statue in Clock Room is always open.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyOpenClockStatuepatches", 
+	rngNeeded: false, 
+	simple: true
+  }, {
+	name: "Spike Room", 
+	longId: "spikeRoomRando", 
+	shortId: "spikeRoom", 
+	htmlElement: "spike-room", 
+	cliArg: "srr", 
+	longDescript: "Randomizes which Spike Room is used before Spike Breaker.", 
+	shortDescript: "Randomizes which Spike Room is used before Spike Breaker.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "magic-mirror"
+	], 
+	functionCall: "applySpikeRoomRandoPatches", 
+	rngNeeded: true, 
+	simple: true
+  }, {
+	name: "Lycanthrope Mode", 
+	longId: "lycanMode", 
+	shortId: "lycan", 
+	htmlElement: "lycan-mode", 
+	cliArg: "ly", 
+	longDescript: "Allows the player to use full wolf at reduced cost.", 
+	shortDescript: "Allows the player to use full wolf at reduced cost.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "dog-life",
+	  "lycanthrope",
+	  "big-toss",
+	  "bat-master",
+	  "leg-day"
+	], 
+	functionCall: "applyLycanModePatches", 
+	rngNeeded: false, 
+	simple: true
+  }
+  
+//   , {
+// 	name: "", 
+// 	longId: "", 
+// 	shortId: "", 
+// 	htmlElement: "", 
+// 	cliArg: "", 
+// 	longDescript: "", 
+// 	shortDescript: "", 
+// 	incompatibleOptions: [
+// 	],
+// 	requiredOptions: [
+// 	],
+// 	incompatiblePresets: [
+// 	], 
+// 	functionCall: "", 
+// 	rngNeeded: false, 
+// 	simple: true
+//   }
+  ]
+
+  const exports = optionsArray
+
+  if (self) {
+    self.sotnRando = Object.assign(self.sotnRando || {}, {
+      optionsArray: exports,
+    })
+  } else {
+    module.exports = exports
+  }
+})(typeof(self) !== 'undefined' ? self : null)
