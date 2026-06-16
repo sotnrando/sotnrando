@@ -31,7 +31,9 @@
 	// Whether the option needs rng to apply it's patches correctly 
 	rngNeeded: false, 
 	// If the option is simple enough to be applied as part of a batch option application loop
-	simple: true
+	simple: false,
+	// Can be enabled with a simple boolean flag
+	argvFlag: "bool"
   }, {
 	name: "Accessibility Patches", 
 	longId: "enableAccessibilityPatches", 
@@ -48,7 +50,9 @@
 	], 
 	functionCall: "applyAccessibilityPatches", 
 	rngNeeded: false, 
-	simple: false
+	simple: false,
+	// Technically is but not in the same way as most other options
+	argvFlag: "bool"
   }, {
 	name: "Easy Mode", 
 	longId: "easyMode", 
@@ -66,7 +70,8 @@
 	], 
 	functionCall: "applyEasyModePatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Show Spoilers", 
 	longId: "showSpoilers", 
@@ -84,7 +89,8 @@
 	], 
 	functionCall: "showSpoilers", 
 	rngNeeded: false, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Show Relic Locations", 
 	longId: "showRelics", 
@@ -102,7 +108,8 @@
 	], 
 	functionCall: "", 
 	rngNeeded: false, 
-	simple: false
+	simple: false,
+	argvFlag: "char"
   }, {
 	name: "Show Solutions", 
 	longId: "showSolutions", 
@@ -120,7 +127,8 @@
 	], 
 	functionCall: "", 
 	rngNeeded: false, 
-	simple: false
+	simple: false,
+	argvFlag: "char"
   }, {
 	name: "Enemy Drops", 
 	longId: "enemyDrops", 
@@ -137,7 +145,8 @@
 	], 
 	functionCall: "", 
 	rngNeeded: false, 
-	simple: false
+	simple: false,
+	argvFlag: "opt"
   }, {
 	name: "Item Stats", 
 	longId: "", 
@@ -154,7 +163,8 @@
 	], 
 	functionCall: "randomizeStats", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "opt"
   }, {
 	name: "Item Names", 
 	longId: "itemNameRandoMode", 
@@ -172,7 +182,8 @@
 	], 
 	functionCall: "randomizeStats", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Turkey Mode", 
 	longId: "turkeyMode", 
@@ -189,13 +200,14 @@
 	], 
 	functionCall: "randomizeSubweaponTanks", 
 	rngNeeded: false, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Item Locations", 
 	longId: "itemLocations", 
 	shortId: "itemLocations", 
 	htmlElement: "item-locations", 
-	cliArg: "", 
+	cliArg: "opt i", 
 	longDescript: "Randomize items found on the ground, in static entities, and in the shop.", 
 	shortDescript: "Randomize items not dropped by enemies.", 
 	incompatibleOptions: [
@@ -206,7 +218,8 @@
 	], 
 	functionCall: "", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "opt"
   }, {
 	name: "Starting Equipment", 
 	longId: "startingEquipment", 
@@ -223,7 +236,8 @@
 	], 
 	functionCall: "", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "opt"
   }, {
 	name: "Prologue Rewards", 
 	longId: "prologueRewards", 
@@ -240,7 +254,8 @@
 	], 
 	functionCall: "", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "opt"
   }, {
 	name: "Seasonal Splash Phrases", 
 	longId: "seasonalPhrasesMode", 
@@ -257,7 +272,8 @@
 	], 
 	functionCall: "applySplashText", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Randomize Starting Stats", 
 	longId: "startStatRandoMode", 
@@ -274,7 +290,8 @@
 	], 
 	functionCall: "applyStartStatRandoPatches", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "char"
   }, {
 	name: "Color Randomizer", 
 	longId: "colorrandoMode", 
@@ -291,7 +308,8 @@
 	], 
 	functionCall: "", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Magic Vessels", 
 	longId: "magicmaxMode", 
@@ -308,7 +326,8 @@
 	], 
 	functionCall: "applyMagicMaxPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Anti-Freeze", 
 	longId: "antiFreezeMode", 
@@ -329,7 +348,8 @@
 	], 
 	functionCall: "applyAntiFreezePatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "That's my purse!", 
 	longId: "mypurseMode", 
@@ -346,7 +366,8 @@
 	], 
 	functionCall: "applyMyPursePatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Infinite Wing Smash", 
 	longId: "iwsMode", 
@@ -363,7 +384,8 @@
 	], 
 	functionCall: "applyiwsPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Fast Warps", 
 	longId: "fastwarpMode", 
@@ -380,7 +402,8 @@
 	], 
 	functionCall: "applyfastwarpPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Remove Prologue", 
 	longId: "noprologueMode", 
@@ -398,7 +421,8 @@
 	], 
 	functionCall: "applynoprologuePatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Unlocked Mode", 
 	longId: "unlockedMode", 
@@ -416,7 +440,8 @@
 	], 
 	functionCall: "applyunlockedPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Relic Surprise", 
 	longId: "surpriseMode", 
@@ -433,7 +458,8 @@
 	], 
 	functionCall: "applysurprisePatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Enemy Stats", 
 	longId: "enemyStatRandoMode", 
@@ -451,7 +477,8 @@
 	], 
 	functionCall: "applyenemyStatRandoPatches", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Elemental Chaos", 
 	longId: "elemChaosMode", 
@@ -470,7 +497,8 @@
 	], 
 	functionCall: "applyenemyStatRandoPatches", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Shop Prices", 
 	longId: "shopPriceRandoMode", 
@@ -487,7 +515,8 @@
 	], 
 	functionCall: "applyShopPriceRandoPatches", 
 	rngNeeded: true, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Starting Zone 1st Castle", 
 	longId: "startRoomRandoMode", 
@@ -507,7 +536,8 @@
 	], 
 	functionCall: "applyStartRoomRandoPatches", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Starting Zone 2nd Castle", 
 	longId: "startRoomRando2ndMode", 
@@ -532,7 +562,8 @@
 	], 
 	functionCall: "applyStartRoomRandoPatches", 
 	rngNeeded: true, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Guaranteed Drops", 
 	longId: "dominoMode", 
@@ -556,7 +587,8 @@
 	], 
 	functionCall: "applyDominoPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Reverse Library Card", 
 	longId: "rlbcMode", 
@@ -578,7 +610,8 @@
 	], 
 	functionCall: "applyRLBCPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Immunity Potions", 
 	longId: "immunityPotionMode", 
@@ -595,7 +628,8 @@
 	], 
 	functionCall: "applyResistToImmunePotionsPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Godspeed Shoes", 
 	longId: "godspeedMode", 
@@ -613,7 +647,8 @@
 	], 
 	functionCall: "", 
 	rngNeeded: false, 
-	simple: false
+	simple: false,
+	argvFlag: "bool"
   }, {
 	name: "Library Shortcut", 
 	longId: "libraryShortcut", 
@@ -630,7 +665,8 @@
 	], 
 	functionCall: "applyLibraryShortcutPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Single-Hit Gears", 
 	longId: "singleHitGearMode", 
@@ -647,7 +683,8 @@
 	], 
 	functionCall: "applySingleHitGearPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Reverse Teleporter", 
 	longId: "revCastleTeleportRando", 
@@ -667,7 +704,8 @@
 	], 
 	functionCall: "applyReverseCastleTeleporterRandoPatches", 
 	rngNeeded: true, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Zero-Dollar Relic", 
 	longId: "zeroDollarRelicMode", 
@@ -688,7 +726,8 @@
 	], 
 	functionCall: "applyZeroDollarRelicPatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Open Clock Statue", 
 	longId: "openClockStatueMode", 
@@ -705,7 +744,8 @@
 	], 
 	functionCall: "applyOpenClockStatuepatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Spike Room", 
 	longId: "spikeRoomRando", 
@@ -723,7 +763,8 @@
 	], 
 	functionCall: "applySpikeRoomRandoPatches", 
 	rngNeeded: true, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
   }, {
 	name: "Lycanthrope Mode", 
 	longId: "lycanMode", 
@@ -745,9 +786,47 @@
 	], 
 	functionCall: "applyLycanModePatches", 
 	rngNeeded: false, 
-	simple: true
+	simple: true,
+	argvFlag: "bool"
+  }, {
+	name: "Dev's Stash", 
+	longId: "devStashMode", 
+	shortId: "devStash", 
+	htmlElement: "dev-stash", 
+	cliArg: "dev", 
+	longDescript: "Developer's Stash. Could be anything unincorporated, fun, or just weird.", 
+	shortDescript: "Developer's Stash.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "", 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool"
+  }, {
+	name: "Separate Boss Music", 
+	longId: "bossMusicSeparation", 
+	shortId: "bossMusic", 
+	htmlElement: "boss-music-separation", 
+	cliArg: "bm", 
+	longDescript: "Separates Boss music and Normal stage music randomization. Prevents hearing Enchanted Banquet for 10 minutes.", 
+	shortDescript: "Separates Boss music and Normal stage music randomization.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	  "music"
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "", 
+	rngNeeded: true, 
+	simple: false,
+    argvFlag: "bool"
   }
-  
+
 //   , {
 // 	name: "", 
 // 	longId: "", 
@@ -764,7 +843,8 @@
 // 	], 
 // 	functionCall: "", 
 // 	rngNeeded: false, 
-// 	simple: true
+// 	simple: true,
+//  argvFlag: "bool" "char" "opt"
 //   }
   ]
 
