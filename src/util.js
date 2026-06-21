@@ -12214,6 +12214,57 @@
     return data
   }
 
+  function applyLevelOneModePatches() {
+    // Increase experience to reach level 2 to 999,999
+    const data = new checked()
+    const expValue = 0x000f423f
+    let offset
+
+    offset = 0x000b9f30
+    data.writeWord(offset,expValue)
+
+    offset = 0x0436812c
+    data.writeWord(offset,expValue)
+
+    return data
+  }
+
+  function applyInstantDeathModePatches() {
+    // Forces every attack to be registered as fatal.
+    const data = new checked()
+
+    data.writeWord(0x0011892c,0x34030000)
+
+    return data
+  }
+
+  function applyWarlockModePatches() {
+    const data = new checked()
+
+    // Enable Mist at the start without relics.
+    data.writeWord(0x00118ac0,0x00000000)
+
+    // Mist Cost = 0
+    data.writeShort(0x00118b34,0x0000)
+    data.writeShort(0x00118ae8,0x0000)
+
+    // INT = 99
+    data.writeWord(0x00119b78,0x34020063)
+
+    // Summon Spirit cost 1 mana
+    data.writeChar(0x000b5260,0x01)
+    // Dark Metamorphosis cost 2 mana
+    data.writeChar(0x000b5244,0x02)
+    // Hellfire/Dark Inferno cost 2 mana
+    data.writeChar(0x000b527c,0x02)
+    // Tetra spirit cost 3 mana
+    data.writeChar(0x000b5298,0x03)
+    // Soul Steal cost 4 mana
+    data.writeChar(0x000b52d0,0x04)
+
+    return data
+  }
+
   // =========================================================================
   //  #region Website: Argument
   // =========================================================================

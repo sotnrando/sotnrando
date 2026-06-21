@@ -825,6 +825,60 @@
 	rngNeeded: true, 
 	simple: false,
     argvFlag: "bool"
+  }, {
+	name: "Level 1 Mode", 
+	longId: "levelOneMode", 
+	shortId: "levelOne", 
+	htmlElement: "level-one", 
+	cliArg: "l1", 
+	longDescript: "Forces Alucard to remain at level 1 the entire seed.", 
+	shortDescript: "Alucard remains level 1.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyLevelOneModePatches", 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool"
+  }, {
+	name: "Instant Death.", 
+	longId: "instantDeathMode", 
+	shortId: "instantDeath", 
+	htmlElement: "insta-death", 
+	cliArg: "oko", 
+	longDescript: "Alucard will die if he takes any damage.", 
+	shortDescript: "Alucard will die if he takes any damage.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyInstantDeathModePatches", 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool"
+  }, {
+	name: "Warlock Mode", 
+	longId: "warlockMode", 
+	shortId: "warlock", 
+	htmlElement: "warlock-mode", 
+	cliArg: "w", 
+	longDescript: "Enables Warlock Mode allowing the player to use Mist from the beginning for free and increasing INT to 99 while lower spell costs.", 
+	shortDescript: "INT is 99, spells are cheap, and Mist for free.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: "applyWarlockModePatches", 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool"
   }
 
 //   , {

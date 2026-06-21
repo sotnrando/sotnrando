@@ -6800,5 +6800,30 @@
   }, {
     "type": "word",
     "value": "0x00000000"
+  }, {
+    "comment": "Richter Fix for Nightmare",
+    "address": "0x05b0a874",
+    "type": "char",
+    "value": "0x00"
+  }, {
+    "address": "0x05b0a950",
+    "type": "char",
+    "value": "0x00"
+  }, {
+    "address": "0x05b071ea",
+    "type": "short",
+    "value": "0x1800"
+  }, {
+    "address": "0x05b0a862",
+    "type": "short",
+    "value": "0x1800"
+  }, {
+    "address": "0x05b1782e",
+    "type": "short",
+    "value": "0x1800"
+  }, {
+    "address": "0x05b0a93e",
+    "type": "short",
+    "value": "0x1800"
   }]
 }
