@@ -1,4 +1,5 @@
 (function(self) {
+  const util = require('./util')
 
   const optionsArray = [{
 	// Preset name.
@@ -27,7 +28,7 @@
 	incompatiblePresets: [
 	], 
 	// The individual function this option directly or indirectly affects
-	functionCall: "applyTournamentModePatches",
+	functionCall: util.applyTournamentModePatches,
 	// Whether the option needs rng to apply it's patches correctly 
 	rngNeeded: false, 
 	// If the option is simple enough to be applied as part of a batch option application loop
@@ -48,7 +49,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyAccessibilityPatches()", 
+	functionCall: util.applyAccessibilityPatches, 
 	rngNeeded: false, 
 	simple: false,
 	// Technically is but not in the same way as most other options
@@ -68,7 +69,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyEasyModePatches()", 
+	functionCall: util.applyEasyModePatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -87,7 +88,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "showSpoilers()", 
+	functionCall: util.showSpoilers, 
 	rngNeeded: false, 
 	simple: false,
 	argvFlag: "bool"
@@ -106,7 +107,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: false, 
 	simple: false,
 	argvFlag: "char"
@@ -125,7 +126,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: false, 
 	simple: false,
 	argvFlag: "char"
@@ -143,7 +144,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: false, 
 	simple: false,
 	argvFlag: "opt"
@@ -161,7 +162,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "randomizeStats(rng, applied)", 
+	functionCall: util.randomizeStats, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "opt"
@@ -180,7 +181,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "randomizeStats(rng, applied)", 
+	functionCall: util.randomizeStats, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "bool"
@@ -198,7 +199,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "randomizeSubweaponTanks()", 
+	functionCall: util.randomizeSubweaponTanks, 
 	rngNeeded: false, 
 	simple: false,
 	argvFlag: "bool"
@@ -216,7 +217,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "opt"
@@ -234,7 +235,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "opt"
@@ -252,7 +253,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "opt"
@@ -270,7 +271,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applySplashText(rng,seasonAllowed)", 
+	functionCall: util.applySplashText, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "bool"
@@ -288,7 +289,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyStartStatRandoPatches(rng)", 
+	functionCall: util.applyStartStatRandoPatches, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "char"
@@ -306,7 +307,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "bool"
@@ -324,7 +325,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyMagicMaxPatches()", 
+	functionCall: util.applyMagicMaxPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -346,7 +347,7 @@
 	  "glitchmaster",
 	  "any-percent"
 	], 
-	functionCall: "applyAntiFreezePatches()", 
+	functionCall: util.applyAntiFreezePatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -364,7 +365,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyMyPursePatches()", 
+	functionCall: util.applyMyPursePatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -382,7 +383,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyiwsPatches()", 
+	functionCall: util.applyiwsPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -400,7 +401,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyfastwarpPatches()", 
+	functionCall: util.applyfastwarpPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -419,7 +420,7 @@
 	incompatiblePresets: [
 	  "any-percent"
 	], 
-	functionCall: "applynoprologuePatches()", 
+	functionCall: util.applynoprologuePatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -438,7 +439,7 @@
 	incompatiblePresets: [
 	  "boss-rush"
 	], 
-	functionCall: "applyunlockedPatches()", 
+	functionCall: util.applyunlockedPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -456,7 +457,7 @@
 	], 
 	incompatiblePresets: [
 	], 
-	functionCall: "applysurprisePatches()", 
+	functionCall: util.applysurprisePatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -475,7 +476,7 @@
 	incompatiblePresets: [
       "big-toss"
 	], 
-	functionCall: "applyenemyStatRandoPatches(rng)", 
+	functionCall: util.applyenemyStatRandoPatches, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "bool"
@@ -495,7 +496,7 @@
 	incompatiblePresets: [
 	  "big-toss"
 	], 
-	functionCall: "applyElemChaosPatches(rng)", 
+	functionCall: util.applyElemChaosPatches, 
 	rngNeeded: true, 
 	simple: true,
 	argvFlag: "bool"
@@ -513,7 +514,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyShopPriceRandoPatches(rng)", 
+	functionCall: util.applyShopPriceRandoPatches, 
 	rngNeeded: true, 
 	simple: true,
 	argvFlag: "bool"
@@ -534,7 +535,7 @@
 	  "beyond",
 	  "vanilla"
 	], 
-	functionCall: "applyStartRoomRandoPatches(rng,castleFlag)", 
+	functionCall: util.applyStartRoomRandoPatches, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "bool"
@@ -560,7 +561,7 @@
 	  "first-castle",
 	  "vanilla"
 	], 
-	functionCall: "applyStartRoomRandoPatches(rng,castleFlag)", 
+	functionCall: util.applyStartRoomRandoPatches, 
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "bool"
@@ -585,7 +586,7 @@
 	  "rampage-25te",
 	  "oracle"
 	], 
-	functionCall: "applyDominoPatches()", 
+	functionCall: util.applyDominoPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -608,7 +609,7 @@
 	  "seeker",
 	  "recycler"
 	], 
-	functionCall: "applyRLBCPatches()", 
+	functionCall: util.applyRLBCPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -626,7 +627,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyResistToImmunePotionsPatches()", 
+	functionCall: util.applyResistToImmunePotionsPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -645,7 +646,7 @@
 	incompatiblePresets: [
 	  "battlemage"
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: false, 
 	simple: false,
 	argvFlag: "bool"
@@ -663,7 +664,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyLibraryShortcutPatches()", 
+	functionCall: util.applyLibraryShortcutPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -681,7 +682,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applySingleHitGearPatches()", 
+	functionCall: util.applySingleHitGearPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -702,7 +703,7 @@
 	  "first-castle",
 	  "seeker"
 	], 
-	functionCall: "applyReverseCastleTeleporterRandoPatches(rng)", 
+	functionCall: util.applyReverseCastleTeleporterRandoPatches, 
 	rngNeeded: true, 
 	simple: true,
 	argvFlag: "bool"
@@ -724,7 +725,7 @@
 	  "glitchmaster",
 	  "rat-race"
 	], 
-	functionCall: "applyZeroDollarRelicPatches()", 
+	functionCall: util.applyZeroDollarRelicPatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -742,7 +743,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyOpenClockStatuepatches()", 
+	functionCall: util.applyOpenClockStatuepatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -761,7 +762,7 @@
 	incompatiblePresets: [
 	  "magic-mirror"
 	], 
-	functionCall: "applySpikeRoomRandoPatches(rng)", 
+	functionCall: util.applySpikeRoomRandoPatches, 
 	rngNeeded: true, 
 	simple: true,
 	argvFlag: "bool"
@@ -784,7 +785,7 @@
 	  "bat-master",
 	  "leg-day"
 	], 
-	functionCall: "applyLycanModePatches()", 
+	functionCall: util.applyLycanModePatches, 
 	rngNeeded: false, 
 	simple: true,
 	argvFlag: "bool"
@@ -802,7 +803,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: false, 
 	simple: true,
  	argvFlag: "bool"
@@ -821,7 +822,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "", 
+	functionCall: null, 
 	rngNeeded: true, 
 	simple: false,
     argvFlag: "bool"
@@ -839,7 +840,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyLevelOneModePatches", 
+	functionCall: util.applyLevelOneModePatches, 
 	rngNeeded: false, 
 	simple: true,
  	argvFlag: "bool"
@@ -857,7 +858,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyInstantDeathModePatches", 
+	functionCall: util.applyInstantDeathModePatches, 
 	rngNeeded: false, 
 	simple: true,
  	argvFlag: "bool"
@@ -875,7 +876,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: "applyWarlockModePatches", 
+	functionCall: util.applyWarlockModePatches, 
 	rngNeeded: false, 
 	simple: true,
  	argvFlag: "bool"
@@ -895,7 +896,7 @@
 // 	],
 // 	incompatiblePresets: [
 // 	], 
-// 	functionCall: "", 
+// 	functionCall: null, 
 // 	rngNeeded: false, 
 // 	simple: true,
 //  argvFlag: "bool" "char" "opt"

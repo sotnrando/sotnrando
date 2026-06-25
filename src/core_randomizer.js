@@ -371,23 +371,26 @@ async function randomize(
             // Set the flag to show in debug mode whether the option was enabled
             optFlag = true
             // Check if RNG is needed for the option function
+            // Apply the function as described in the array
             if (indivOpt.rngNeeded === true) {
               // If the function needs RNG, roll it.
               rng = getRNG(options, seed)
+              check.apply(indivOpt['functionCall'](rng))
+            } else {
+              check.apply(indivOpt['functionCall']())
             }
-            // Apply the function as described in the array
-            check.apply(util[indivOpt.functionCall])
+            
           // If the option isn't simple enough to be applied en masse but it's
           // still in the array, run it through this cswitch to make sure it's
           // applied correctly.
           } else {
             switch (indivOpt.longId) {
-              case tournamentMode:
+              case "tournamentMode":
                 // Apply tournament mode patches.
                 optFlag = true
                 check.apply(util.applyTournamentModePatches())
                 break
-              case enemyStatRandoMode:
+              case "enemyStatRandoMode":
                 // Apply Enemy Stat Rando mode patches.
                 optFlag = true
                 rng = getRNG(options, seed)
@@ -397,8 +400,8 @@ async function randomize(
                 }
                 check.apply(util.applyenemyStatRandoPatches(rng,chaosFlag))
                 break
-              case startRoomRandoMode:
-              case startRoomRando2ndMode:
+              case "startRoomRandoMode":
+              case "startRoomRando2ndMode":
                 // Randomizes starting room by eldri7ch & MottZilla
                 // Apply starting room Rando mode patches.
                 optFlag = true
@@ -413,11 +416,11 @@ async function randomize(
                 }
                 check.apply(util.applyStartRoomRandoPatches(rng,castleFlag))
                 break
-              case godspeedMode:
+              case "godspeedMode":
                 // Only shows that it was enabled; this is handled elsewhere
                 optFlag = true
                 break
-              case startStatRandoMode:
+              case "startStatRandoMode":
                 // Apply the Starting Stats randomizer. 
                 optFlag = true
                 rng = getRNG(options, seed)
@@ -438,11 +441,11 @@ async function randomize(
                 }
                 check.apply(util.applyStartStatRandoPatches(rng,ssOpt))
                 break
-              case seasonalPhrasesMode:
+              case "seasonalPhrasesMode":
                 // Only shows that it was enabled; this is handled elsewhere
                 optFlag = true
                 break
-              case bossMusicSeparation:
+              case "bossMusicSeparation":
                 // Only shows that it was enabled; this is handled elsewhere
                 optFlag = true
                 break
