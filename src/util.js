@@ -8856,7 +8856,7 @@
     return data
   }
   
-  // prototyping randomizing reverse castle teleporter by MottZilla
+  // Randomize reverse castle teleporter by MottZilla
   function applyReverseCastleTeleporterRandoPatches(rng) {
     const reverseTeleporterData = constants.reverseTeleporterData
     const data = new checked()
@@ -8864,25 +8864,25 @@
     let offset
 	
     // debug
-    console.log("applyReverseCastleTeleporterRandoPatches executing")
+    // console.log("applyReverseCastleTeleporterRandoPatches executing")
 	
     // Select random Tp Location
     randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
 	
-	// For forcing a selection for testing
-	// randTp = 14
-	while(randTp == 0)
-	{
-		randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
-	}
-	
-	console.log("Selected: " + reverseTeleporterData[randTp].title)
+    // For forcing a selection for testing
+    // randTp = 14
+    while(randTp == 0)
+    {
+      randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
+    }
+    
+    console.log("Selected: " + reverseTeleporterData[randTp].title)
 	
     // If Vanilla then we don't write anything.
     if(reverseTeleporterData[randTp].stage == 0x2B)
     {
 		  return data
-	}
+	  }
 
     // Do writes for updating activation and updating destination
     data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
@@ -8896,21 +8896,21 @@
     
     data.writeShort(0xFAC7C, reverseTeleporterData[randTp].stage)	// StageId for RTOP teleport load
 
-	// MapCell reveal
-	data.writeShort(0x3711a6c, reverseTeleporterData[randTp].mapaddr)
-	data.writeShort(0x3711a6e, reverseTeleporterData[randTp].mapmask)
-	  
-	// Adjust RC Teleport in Y-Position
-	if( reverseTeleporterData[randTp].yPosSpecial > 0)
-	{
-		// Special for rooms that are taller than 1 Screen
-		data.writeShort(0x1091CC, reverseTeleporterData[randTp].yPosSpecial)
-	}
-	else
-	{
-		// Standard for 1 Screen tall rooms uses yPos lower 8-bits.
-		data.writeChar(0x1091CC, reverseTeleporterData[randTp].yPos)
-	}
+    // MapCell reveal
+    data.writeShort(0x3711a6c, reverseTeleporterData[randTp].mapaddr)
+    data.writeShort(0x3711a6e, reverseTeleporterData[randTp].mapmask)
+      
+    // Adjust RC Teleport in Y-Position
+    if( reverseTeleporterData[randTp].yPosSpecial > 0)
+    {
+      // Special for rooms that are taller than 1 Screen
+      data.writeShort(0x1091CC, reverseTeleporterData[randTp].yPosSpecial)
+    }
+    else
+    {
+      // Standard for 1 Screen tall rooms uses yPos lower 8-bits.
+      data.writeChar(0x1091CC, reverseTeleporterData[randTp].yPos)
+    }
 	  
     // Optional Tile update to mark the location visually
     if(reverseTeleporterData[randTp].tileofs > 0)
@@ -8967,11 +8967,11 @@
     // These are simply the writes for each outcome. 
     switch (roomPattern) {
       case 0:
-        console.log("Spike Room Debug: Default Layout Chosen")
+        // console.log("Spike Room Debug: Default Layout Chosen")
         // Nothing because vanilla was also a good arrangement
         break
       case 1:
-        console.log("Spike Room Debug: MM Layout Chosen")
+        // console.log("Spike Room Debug: MM Layout Chosen")
         // The Magic mirror Layout
         offset = 0x44b7c9e
         offset = data.writeWord(offset, 0x071a073b)
@@ -9069,7 +9069,7 @@
 
         break
       case 2: 
-        console.log("Spike Room Debug: New Layout 1 Chosen")
+        // console.log("Spike Room Debug: New Layout 1 Chosen")
         // The new, evil spike room.
         offset = 0x044b7ac8
         offset = data.writeWord(offset, 0x0750074f)
@@ -9388,7 +9388,7 @@
 
         break  
       case 3: 
-        console.log("Spike Room Debug: New Layout 2 Chosen")
+        // console.log("Spike Room Debug: New Layout 2 Chosen")
         // The new, eviler spike room.
         offset = 0x044b7aa4
         offset = data.writeWord(offset, 0x07520752)
@@ -9669,7 +9669,7 @@
 
         break
       case "x":
-        console.log("Spike Room Debug: Mercy Layout Chosen")
+        // console.log("Spike Room Debug: Mercy Layout Chosen")
         // The "simply walk through" option
         offset = 0x044b7aa0
         offset = data.writeWord(offset, 0x07220721)

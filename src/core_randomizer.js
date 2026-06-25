@@ -368,23 +368,27 @@ async function randomize(
         if (options[indivOpt.longId] || applied[indivOpt.longId]) {
           // Check if the option is simple enough to be implemented en masse
           if (indivOpt.simple === true) {
-            // Set the flag to show in debug mode whether the option was enabled
-            optFlag = true
-            // Check if RNG is needed for the option function
-            // Apply the function as described in the array
-            if (indivOpt.rngNeeded === true) {
-              // If the function needs RNG, roll it.
-              rng = getRNG(options, seed)
-              check.apply(indivOpt['functionCall'](rng))
-            } else {
-              // If you were sent here by an error, that means that the option 
-              // is not corectly handled by the options array. Check to make 
-              // sure that all of the parameters are correctly declared and if
-              // the option is actually simple. 
-              // (Simple options don't require additional parameters, don't 
-              // need to detect other option status, etc. Just "true" to turn 
-              // on, maybe need RNG at most.)
-              check.apply(indivOpt['functionCall']())
+            try {
+              // Set the flag to show in debug mode whether the option was enabled
+              optFlag = true
+              // Check if RNG is needed for the option function
+              // Apply the function as described in the array
+              if (indivOpt.rngNeeded === true) {
+                // If the function needs RNG, roll it.
+                rng = getRNG(options, seed)
+                check.apply(indivOpt['functionCall'](rng))
+              } else {
+                // If you were sent here by an error, that means that the option 
+                // is not corectly handled by the options array. Check to make 
+                // sure that all of the parameters are correctly declared and if
+                // the option is actually simple. 
+                // (Simple options don't require additional parameters, don't 
+                // need to detect other option status, etc. Just "true" to turn 
+                // on, maybe need RNG at most.)
+                check.apply(indivOpt['functionCall']())
+              }
+            } catch (err) {
+              console.error('Option function call incorrect for: ' + indivOpt.longId)
             }
           // If the option isn't simple enough to be applied en masse but it's
           // still in the array, run it through this cswitch to make sure it's
@@ -449,9 +453,12 @@ async function randomize(
                 // Only shows that it was enabled; this is handled elsewhere
                 optFlag = true
                 break
+              default:
+                console.log('Option function call incorrect for: ' + indivOpt.longId)
             }
           }
         }
+      }
 
         debugMessage(debugEnabled, indivOpt.name + ' | ' + optFlag)
         optFlag = false
