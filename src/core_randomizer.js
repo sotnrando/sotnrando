@@ -375,9 +375,9 @@ async function randomize(
             if (indivOpt.rngNeeded === true) {
               // If the function needs RNG, roll it.
               rng = getRNG(options, seed)
-              check.apply(indivOpt['functionCall'](rng))
+              check.apply(indivOpt.functionCall(rng))
             } else {
-              check.apply(indivOpt['functionCall'])
+              check.apply(indivOpt.functionCall())
             }
           // If the option isn't simple enough to be applied en masse but it's
           // still in the array, run it through this cswitch to make sure it's
@@ -415,10 +415,6 @@ async function randomize(
                 }
                 check.apply(util.applyStartRoomRandoPatches(rng,castleFlag))
                 break
-              case "godspeedMode":
-                // Only shows that it was enabled; this is handled elsewhere
-                optFlag = true
-                break
               case "startStatRandoMode":
                 // Apply the Starting Stats randomizer. 
                 optFlag = true
@@ -441,9 +437,7 @@ async function randomize(
                 check.apply(util.applyStartStatRandoPatches(rng,ssOpt))
                 break
               case "seasonalPhrasesMode":
-                // Only shows that it was enabled; this is handled elsewhere
-                optFlag = true
-                break
+              case "godspeedMode":
               case "bossMusicSeparation":
                 // Only shows that it was enabled; this is handled elsewhere
                 optFlag = true
