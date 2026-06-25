@@ -377,6 +377,13 @@ async function randomize(
               rng = getRNG(options, seed)
               check.apply(indivOpt['functionCall'](rng))
             } else {
+              // If you were sent here by an error, that means that the option 
+              // is not corectly handled by the options array. Check to make 
+              // sure that all of the parameters are correctly declared and if
+              // the option is actually simple. 
+              // (Simple options don't require additional parameters, don't 
+              // need to detect other option status, etc. Just "true" to turn 
+              // on, maybe need RNG at most.)
               check.apply(indivOpt['functionCall']())
             }
           // If the option isn't simple enough to be applied en masse but it's
