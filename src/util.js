@@ -1841,162 +1841,19 @@
     while (Object.getOwnPropertyNames(options).length) {
       // stunts spoilers, changes seed randomization,
       // opens statue in clock room and $0 relic in shop
-      if ('tournamentMode' in options) {
-        if (options.tournamentMode) {
-          randomize.push('t')
+
+      // Cycle through iterative options and push the argv if we can.
+      options_array.forEach(function(indivOpt) {
+        if (indivOpt.argvFlag === "bool" && indivOpt.shortId in options) {
+          if (options[indivOpt.shortId]) {
+            randomize.push(indivOpt.cliArg)
+          }
+          delete options[indivOpt.shortId]
         }
-        delete options.tournamentMode
-      } else  if ('colorrandoMode' in options) {
-        // randomizes cape, grav boots, and hydro storm colors
-        if (options.colorrandoMode) {
-          randomize.push('l')
-        }
-        delete options.colorrandoMode
-      } else if ('magicmaxMode' in options) {
-        // replaces Heart Vessel with Magic Vessel
-        if (options.magicmaxMode) {
-          randomize.push('x')
-        }
-        delete options.magicmaxMode
-      } else if ('antiFreezeMode' in options) {
-        // Removes screen freezes from level-up and acquisitions
-        if (options.antiFreezeMode) {
-          randomize.push('z')
-        }
-        delete options.antiFreezeMode
-      } else if ('mypurseMode' in options) {
-        // Removes Death from entrance
-        if (options.mypurseMode) {
-          randomize.push('y')
-        }
-        delete options.mypurseMode
-      } else if ('iwsMode' in options) {
-        // Allows for infinite wing smash on first input
-        if (options.iwsMode) {
-          randomize.push('b')
-        }
-        delete options.iwsMode
-      } else if ('fastwarpMode' in options) {
-        // quickensd the teleporter warp animations
-        if (options.fastwarpMode) {
-          randomize.push('9')
-        }
-        delete options.fastwarpMode
-      } else if ('noprologueMode' in options) {
-        // Removes prologue
-        if (options.noprologueMode) {
-          randomize.push('R')
-        }
-        delete options.noprologueMode
-      } else if ('unlockedMode' in options) {
-        // Opens shortcuts
-        if (options.unlockedMode) {
-          randomize.push('U')
-        }
-        delete options.unlockedMode
-      } else if ('surpriseMode' in options) {
-        // Hides relics behind the same sprite
-        if (options.surpriseMode) {
-          randomize.push('S')
-        }
-        delete options.surpriseMode
-      } else if ('enemyStatRandoMode' in options) {
-        // randomize enemy stats
-        if (options.enemyStatRandoMode) {
-          randomize.push('E')
-        }
-        delete options.enemyStatRandoMode
-      } else if ('elemChaosMode' in options) {
-        // elemental chaos
-        if (options.elemChaosMode) {
-          randomize.push('ec')
-        }
-        delete options.elemChaosMode
-      } else if ('shopPriceRandoMode' in options) {
-        // randomize shop prices
-        if (options.shopPriceRandoMode) {
-          randomize.push('sh')
-        }
-        delete options.shopPriceRandoMode
-      } else if ('startRoomRandoMode' in options) {
-        // randomize starting room
-        if (options.startRoomRandoMode) {
-          randomize.push('ori')
-        }
-        delete options.startRoomRandoMode
-      } else if ('startRoomRando2ndMode' in options) {
-        // randomize starting room 2nd castle - MottZilla
-        if (options.startRoomRando2ndMode) {
-          randomize.push('ori2')
-        }
-        delete options.startRoomRando2ndMode
-      } else if ('dominoMode' in options) {
-        // guaranteed drops
-        if (options.dominoMode) {
-          randomize.push('gd')
-        }
-        delete options.dominoMode
-      } else if ('rlbcMode' in options) {
-        // reverse library cards
-        if (options.rlbcMode) {
-          randomize.push('rl')
-        }
-        delete options.rlbcMode
-      } else if ('immunityPotionMode' in options) {
-        // immuntiy potions
-        if (options.immunityPotionMode) {
-          randomize.push('ip')
-        }
-        delete options.immunityPotionMode
-      } else if ('godspeedMode' in options) {
-        // godspeed shoes
-        if (options.godspeedMode) {
-          randomize.push('gss')
-        }
-        delete options.godspeedMode
-      } else if ('libraryShortcut' in options) {
-        // library shortcut
-        if (options.libraryShortcut) {
-          randomize.push('ls')
-        }
-        delete options.libraryShortcut
-      } else if ('singleHitGearMode' in options) {
-        // Single-Hit Gears
-        if (options.singleHitGearMode) {
-          randomize.push('gp')
-        }
-        delete options.singleHitGearMode
-      } else if ('revCastleTeleportRando' in options) {
-        // Reverse Castle Teleporter Randomizer
-        if (options.revCastleTeleportRando) {
-          randomize.push('c2r')
-        }
-        delete options.revCastleTeleportRando
-      } else if ('zeroDollarRelicMode' in options) {
-        // Makes the shop Relic cost 0.00
-        if (options.zeroDollarRelicMode) {
-          randomize.push('zr')
-        }
-        delete options.zeroDollarRelicMode
-      } else if ('openClockStatueMode' in options) {
-        // Opens the statue to Olrox's Quarters
-        if (options.openClockStatueMode) {
-          randomize.push('os')
-        }
-        delete options.openClockStatueMode
-      } else if ('spikeRoomRando' in options) {
-        // Randomize Spike Room
-        if (options.spikeRoomRando) {
-          randomize.push('srr')
-        }
-        delete options.spikeRoomRando
-      } else if ('lycanMode' in options) {
-        // Allow Full Wolf Use
-        if (options.lycanMode) {
-          randomize.push('ly')
-        }
-        delete options.lycanMode
-      } else if ('newGoalsSet' in options) { 
+      })
+      
+      // Everything else that doesn't have a boolean activation is here.
+      if ('newGoalsSet' in options) { 
         // Change the goals
         randomize.push('g:' + options.newGoalsSet)
         delete options.newGoalsSet
@@ -2004,34 +1861,10 @@
         // Starting Stat Randomizer
         randomize.push('ss:' + options.startStatRandoMode)
         delete options.startStatRandoMode
-      } else if ('easyMode' in options) {
-        // simple input
-        if (options.easyMode) {
-          randomize.push('ez')
-        }
-        delete options.easyMode
-      } else if ('devStashMode' in options) {
-        // dev's stash
-        if (options.devStashMode) {
-          randomize.push('dev')
-        }
-        delete options.devStashMode
-      } else if ('seasonalPhrasesMode' in options) {
-        // seasonal phrases
-        if (options.seasonalPhrasesMode) {
-          randomize.push('sp')
-        }
-        delete options.seasonalPhrasesMode
       } else if ('mapcolorTheme' in options) {
         // switch map color
         randomize.push('m:' + options.mapcolorTheme)
         delete options.mapcolorTheme
-      } else if ('bossMusicSeparation' in options) {
-        // boss Music Separation- eldri7ch
-        if (options.bossMusicSeparation) {
-          randomize.push('bm')
-        }
-        delete options.bossMusicSeparation
       } else if ('alucardPaletteSet' in options) {
         // alucard's palette - crazy4blades
         randomize.push('ap:' + options.alucardPaletteSet)
@@ -2448,22 +2281,11 @@
           randomize.push('s')
         }
         delete options.stats
-      } else if ('itemNameRandoMode' in options) {
-        // randomize item names with item stat rando - MottZilla
-        if (options.itemNameRandoMode) {
-          randomize.push('in')
-        }
-        delete options.itemNameRandoMode
       } else if ('music' in options) {
         if (options.music) {
           randomize.push('m')
         }
         delete options.music
-      } else if ('turkeyMode' in options) {
-        if (options.turkeyMode) {
-          randomize.push('k')
-        }
-        delete options.turkeyMode
       } else if ('writes' in options) {
         if (options.writes) {
           let opt = 'w'

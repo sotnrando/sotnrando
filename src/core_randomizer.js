@@ -450,6 +450,13 @@ async function randomize(
               case "seasonalPhrasesMode":
               case "godspeedMode":
               case "bossMusicSeparation":
+              case "enemyDrops":
+              case "turkeyMode":
+              case "itemLocations":
+              case "startingEquipment":
+              case "prologueRewards":
+              case "colorrandoMode":
+              case "itemNameRandoMode":
                 // Only shows that it was enabled; this is handled elsewhere
                 optFlag = true
                 break
@@ -458,8 +465,6 @@ async function randomize(
             }
           }
         }
-      }
-
         debugMessage(debugEnabled, indivOpt.name + ' | ' + optFlag)
         optFlag = false
       })
