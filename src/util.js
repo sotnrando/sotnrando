@@ -12249,7 +12249,8 @@
     data.writeShort(0x00118ae8,0x0000)
 
     // INT = 99
-    data.writeWord(0x00119b78,0x34020063)
+    data.writeWord(0x00119b80,0x34020063)   
+    data.writeWord(0x00119b88,0x34020006)
 
     // Summon Spirit cost 1 mana
     data.writeChar(0x000b5260,0x01)

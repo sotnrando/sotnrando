@@ -375,9 +375,9 @@ async function randomize(
             if (indivOpt.rngNeeded === true) {
               // If the function needs RNG, roll it.
               rng = getRNG(options, seed)
-              check.apply(indivOpt.functionCall(rng))
+              check.apply(indivOpt['functionCall'](rng))
             } else {
-              check.apply(indivOpt.functionCall())
+              check.apply(indivOpt['functionCall']())
             }
           // If the option isn't simple enough to be applied en masse but it's
           // still in the array, run it through this cswitch to make sure it's
