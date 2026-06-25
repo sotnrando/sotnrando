@@ -803,7 +803,7 @@
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: null, 
+	functionCall: util.applyDevsStashPatches, 
 	rngNeeded: false, 
 	simple: true,
  	argvFlag: "bool"
