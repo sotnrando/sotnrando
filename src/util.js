@@ -3128,13 +3128,11 @@
     openClockStatueMode,
     spikeRoomRando,
     lycanMode,
+    warlockMode,
+    levelOneMode,
+    instantDeathMode,
     newGoalsSet,
     startStatRandoMode,
-    // easyMode,
-    // devStashMode,
-    // seasonalPhrasesMode,
-    // bossMusicSeparation,
-    // debugMode,
     writes,
   ) {
     this.id = id
@@ -3188,13 +3186,11 @@
     this.openClockStatueMode = openClockStatueMode
     this.spikeRoomRando = spikeRoomRando
     this.lycanMode = lycanMode
+    this.warlockMode = warlockMode
+    this.levelOneMode = levelOneMode
+    this.instantDeathMode = instantDeathMode
     this.newGoalsSet = newGoalsSet
     this.startStatRandoMode = startStatRandoMode
-    // this.easyMode = easyMode
-    // this.devStashMode = devStashMode
-    // this.seasonalPhrasesMode = seasonalPhrasesMode
-    // this.bossMusicSeparation = bossMusicSeparation
-    // this.debugMode = debugMode
     if (writes) {
       this.writes = writes
     }
@@ -3398,20 +3394,16 @@
     this.spikeRoom = false
     // Allow Full Wolf Use
     this.lycan = false
+    // Warlock mode (reduced spell mp, free mist)
+    this.warlock = false
+    // Alucard is always level 1
+    this.levelone = false
+    // Alucard dies in one hit
+    this.instantDeath = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
     this.startStatRando = undefined
-    // // simple input.
-    // this.easy = false
-    // // dev's stash mode.
-    // this.devStash = false
-    // // seasonal phrases mode.
-    // this.seasonalPhrases = false
-    // // boss music separation
-    // this.bossMusic = true
-    // // Debug mode.
-    // this.debug = false
     // Arbitrary writes.
     this.writes = undefined
   }
@@ -3779,6 +3771,15 @@
     }
     if ('lycanMode' in json) {
       builder.lycanMode(json.lycanMode)
+    }
+    if ('warlockMode' in json) {
+      builder.warlockMode(json.warlockMode)
+    }
+    if ('levelOneMode' in json) {
+      builder.levelOneMode(json.levelOneMode)
+    }
+    if ('instantDeathMode' in json) {
+      builder.instantDeathMode(json.instantDeathMode)
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in json) {
@@ -4173,6 +4174,15 @@
     }
     if ('lycanMode' in preset) {
       this.lycan = preset.lycanMode
+    }
+    if ('warlockMode' in preset) {
+      this.warlock = preset.warlockMode
+    }
+    if ('levelOneMode' in preset) {
+      this.levelOne = preset.levelOneMode
+    }
+    if ('instantDeathMode' in preset) {
+      this.instantDeath = preset.instantDeathMode
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
@@ -5013,6 +5023,21 @@
       this.lycan = enabled
     }
   
+  PresetBuilder.prototype.warlockMode =
+    function warlockMode(enabled) {
+      this.warlock = enabled
+    }
+  
+  PresetBuilder.prototype.levelOneMode =
+    function levelOneMode(enabled) {
+      this.levelOne = enabled
+    }
+  
+  PresetBuilder.prototype.instantDeathMode =
+    function instantDeathMode(enabled) {
+      this.instantDeath = enabled
+    }
+  
   // ============================== Preset: Argument ==========================
   
   // Assign New Goals
@@ -5395,13 +5420,11 @@
     const openClockStatue = self.openClockStatue
     const spikeRoom = self.spikeRoom
     const lycan = self.lycan
+    const warlock = self.warlock
+    const levelOne = self.levelOne
+    const instantDeath = self.instantDeath
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
-    // const easy = false
-    // const devStash = false
-    // const seasonalPhrases = true
-    // const bossMusic = false
-    // const debug = false
     const writes = self.writes
     return new Preset(
       self.metadata.id,
@@ -5455,13 +5478,11 @@
       openClockStatue,
       spikeRoom,
       lycan,
+      warlock,
+      levelOne,
+      instantDeath,
       newGoals,
       startStatRando,
-      // easy,
-      // devStash,
-      // seasonalPhrases,
-      // bossMusic,
-      // debug,
       writes,
     )
   }
@@ -12070,9 +12091,11 @@
     data.writeShort(0x00118b34,0x0000)
     data.writeShort(0x00118ae8,0x0000)
 
-    // INT = 99
+    // INT = 99, the rest = 1
+    data.writeWord(0x00119b70,0x34020001)   
+    data.writeWord(0x00119b78,0x34020001)
     data.writeWord(0x00119b80,0x34020063)   
-    data.writeWord(0x00119b88,0x34020006)
+    data.writeWord(0x00119b88,0x34020001)
 
     // Summon Spirit cost 1 mana
     data.writeChar(0x000b5260,0x01)
