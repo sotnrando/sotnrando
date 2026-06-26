@@ -1,6 +1,28 @@
 {
     "changelog": [
         {
+            "date": "July 13, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Fixed some issues with Richter being playable in Boss Rush.",
+                    "Entirely refactored Boss Rush code.",
+                    "'U MAD BRO' - Glitch Logic; 'Mah jimmies' - eldri7ch"
+                ],
+                "Option Updates": [
+                    "Added Warlock Mode.",
+                    "Added Level 1 Mode.",
+                    "Added Instant Death Mode.",
+                    "Options has gone through a massive refactor this month. Implementing new features will be mucxh easier and faster from now on."
+                ],
+                "Website Updates": [
+                    "???"
+                ],
+                "Program Updates": [
+                    "Options and Presets are now listed in massive array files where they can be refrenced much easier than before. This will allow for more flexibility and consistency as well as enable future updates to the web interface."
+                ]
+            }
+        },
+        {
             "date": "June 15, 2026",
             "sections": {
                 "Preset Updates": [

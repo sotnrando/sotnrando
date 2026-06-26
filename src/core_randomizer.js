@@ -456,6 +456,7 @@ async function randomize(
               case "startingEquipment":
               case "prologueRewards":
               case "colorrandoMode":
+              case "stats":
               case "itemNameRandoMode":
                 // Only shows that it was enabled; this is handled elsewhere
                 optFlag = true
