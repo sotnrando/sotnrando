@@ -34,7 +34,9 @@
 	// If the option is simple enough to be applied as part of a batch option application loop
 	simple: false,
 	// Can be enabled with a simple boolean flag
-	argvFlag: "bool"
+	argvFlag: "bool",
+	// Should be handled iteratively instead of manually by the preset builder un util
+	autoBuild: false
   }, {
 	name: "Accessibility Patches", 
 	longId: "enableAccessibilityPatches", 
@@ -53,7 +55,8 @@
 	rngNeeded: false, 
 	simple: false,
 	// Technically is but not in the same way as most other options
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: false
   }, {
 	name: "Easy Mode", 
 	longId: "easyMode", 
@@ -72,7 +75,8 @@
 	functionCall: util.applyEasyModePatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: false
   }, {
 	name: "Show Spoilers", 
 	longId: "showSpoilers", 
@@ -91,7 +95,8 @@
 	functionCall: util.showSpoilers, 
 	rngNeeded: false, 
 	simple: false,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: false
   }, {
 	name: "Show Relic Locations", 
 	longId: "showRelics", 
@@ -110,7 +115,8 @@
 	functionCall: null, 
 	rngNeeded: false, 
 	simple: false,
-	argvFlag: "char"
+	argvFlag: "char",
+	autoBuild: false
   }, {
 	name: "Show Solutions", 
 	longId: "showSolutions", 
@@ -129,7 +135,46 @@
 	functionCall: null, 
 	rngNeeded: false, 
 	simple: false,
-	argvFlag: "char"
+	argvFlag: "char",
+	autoBuild: false
+  }, {
+	name: "Seasonal Splash Phrases", 
+	longId: "seasonalPhrasesMode", 
+	shortId: "seasonalPhrases", 
+	htmlElement: "seasonal-phrases", 
+	cliArg: "sp", 
+	longDescript: "Allow seasonal and holiday-based splash phrases on the 'Press Start' screen.", 
+	shortDescript: "Allow seasonal and holiday-based splash phrases on the 'Press Start' screen.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applySplashText, 
+	rngNeeded: true, 
+	simple: false,
+	argvFlag: "bool",
+	autoBuild: false
+  }, {
+	name: "Randomize Starting Stats", 
+	longId: "startStatRandoMode", 
+	shortId: "startStatRando", 
+	htmlElement: "startingStats", 
+	cliArg: "ss", 
+	longDescript: "Randomize Alucard's starting STR, INT, CON, and LCK.", 
+	shortDescript: "Randomize starting stats.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applyStartStatRandoPatches, 
+	rngNeeded: true, 
+	simple: false,
+	argvFlag: "char",
+	autoBuild: false
   }, {
 	name: "Enemy Drops", 
 	longId: "enemyDrops", 
@@ -147,11 +192,69 @@
 	functionCall: null, 
 	rngNeeded: false, 
 	simple: false,
-	argvFlag: "opt"
+	argvFlag: "opt",
+	autoBuild: false
+  }, {
+	name: "Starting Equipment", 
+	longId: "startingEquipment", 
+	shortId: "startingEquipment", 
+	htmlElement: "starting-equipment", 
+	cliArg: "opt e", 
+	longDescript: "Randomize starting equipment for Alucard.", 
+	shortDescript: "Randomize starting equipment.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: null, 
+	rngNeeded: true, 
+	simple: false,
+	argvFlag: "opt",
+	autoBuild: false
+  }, {
+	name: "Item Locations", 
+	longId: "itemLocations", 
+	shortId: "itemLocations", 
+	htmlElement: "item-locations", 
+	cliArg: "opt i", 
+	longDescript: "Randomize items found on the ground, in static entities, and in the shop.", 
+	shortDescript: "Randomize items not dropped by enemies.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: null, 
+	rngNeeded: true, 
+	simple: false,
+	argvFlag: "opt",
+	autoBuild: false
+  }, {
+	name: "Prologue Rewards", 
+	longId: "prologueRewards", 
+	shortId: "prologueRewards", 
+	htmlElement: "prologue-rewards", 
+	cliArg: "opt b", 
+	longDescript: "Randomize rewards for completing the prologue in certain ways.", 
+	shortDescript: "Randomize rewards for completing the prologue.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: null, 
+	rngNeeded: true, 
+	simple: false,
+	argvFlag: "opt",
+	autoBuild: false
   }, {
 	name: "Item Stats", 
-	longId: "", 
-	shortId: "", 
+	longId: "stats", 
+	shortId: "stats", 
 	htmlElement: "stats", 
 	cliArg: "opt s", 
 	longDescript: "Randomize the item stats like Atk, Def, sprite, but NOT name.", 
@@ -165,7 +268,8 @@
 	functionCall: util.randomizeStats, 
 	rngNeeded: true, 
 	simple: false,
-	argvFlag: "opt"
+	argvFlag: "opt",
+	autoBuild: true
   }, {
 	name: "Item Names", 
 	longId: "itemNameRandoMode", 
@@ -184,7 +288,8 @@
 	functionCall: util.randomizeStats, 
 	rngNeeded: true, 
 	simple: false,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Turkey Mode", 
 	longId: "turkeyMode", 
@@ -202,97 +307,8 @@
 	functionCall: util.randomizeSubweaponTanks, 
 	rngNeeded: false, 
 	simple: false,
-	argvFlag: "bool"
-  }, {
-	name: "Item Locations", 
-	longId: "itemLocations", 
-	shortId: "itemLocations", 
-	htmlElement: "item-locations", 
-	cliArg: "opt i", 
-	longDescript: "Randomize items found on the ground, in static entities, and in the shop.", 
-	shortDescript: "Randomize items not dropped by enemies.", 
-	incompatibleOptions: [
-	],
-	requiredOptions: [
-	],
-	incompatiblePresets: [
-	], 
-	functionCall: null, 
-	rngNeeded: true, 
-	simple: false,
-	argvFlag: "opt"
-  }, {
-	name: "Starting Equipment", 
-	longId: "startingEquipment", 
-	shortId: "startingEquipment", 
-	htmlElement: "starting-equipment", 
-	cliArg: "opt e", 
-	longDescript: "Randomize starting equipment for Alucard.", 
-	shortDescript: "Randomize starting equipment.", 
-	incompatibleOptions: [
-	],
-	requiredOptions: [
-	],
-	incompatiblePresets: [
-	], 
-	functionCall: null, 
-	rngNeeded: true, 
-	simple: false,
-	argvFlag: "opt"
-  }, {
-	name: "Prologue Rewards", 
-	longId: "prologueRewards", 
-	shortId: "prologueRewards", 
-	htmlElement: "prologue-rewards", 
-	cliArg: "opt b", 
-	longDescript: "Randomize rewards for completing the prologue in certain ways.", 
-	shortDescript: "Randomize rewards for completing the prologue.", 
-	incompatibleOptions: [
-	],
-	requiredOptions: [
-	],
-	incompatiblePresets: [
-	], 
-	functionCall: null, 
-	rngNeeded: true, 
-	simple: false,
-	argvFlag: "opt"
-  }, {
-	name: "Seasonal Splash Phrases", 
-	longId: "seasonalPhrasesMode", 
-	shortId: "seasonalPhrases", 
-	htmlElement: "seasonal-phrases", 
-	cliArg: "sp", 
-	longDescript: "Allow seasonal and holiday-based splash phrases on the 'Press Start' screen.", 
-	shortDescript: "Allow seasonal and holiday-based splash phrases on the 'Press Start' screen.", 
-	incompatibleOptions: [
-	],
-	requiredOptions: [
-	],
-	incompatiblePresets: [
-	], 
-	functionCall: util.applySplashText, 
-	rngNeeded: true, 
-	simple: false,
-	argvFlag: "bool"
-  }, {
-	name: "Randomize Starting Stats", 
-	longId: "startStatRandoMode", 
-	shortId: "startStatRando", 
-	htmlElement: "startingStats", 
-	cliArg: "ss", 
-	longDescript: "Randomize Alucard's starting STR, INT, CON, and LCK.", 
-	shortDescript: "Randomize starting stats.", 
-	incompatibleOptions: [
-	],
-	requiredOptions: [
-	],
-	incompatiblePresets: [
-	], 
-	functionCall: util.applyStartStatRandoPatches, 
-	rngNeeded: true, 
-	simple: false,
-	argvFlag: "char"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Color Randomizer", 
 	longId: "colorrandoMode", 
@@ -310,7 +326,8 @@
 	functionCall: null, 
 	rngNeeded: true, 
 	simple: false,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Magic Vessels", 
 	longId: "magicmaxMode", 
@@ -328,7 +345,8 @@
 	functionCall: util.applyMagicMaxPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Anti-Freeze", 
 	longId: "antiFreezeMode", 
@@ -350,7 +368,8 @@
 	functionCall: util.applyAntiFreezePatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "That's my purse!", 
 	longId: "mypurseMode", 
@@ -368,7 +387,8 @@
 	functionCall: util.applyMyPursePatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Infinite Wing Smash", 
 	longId: "iwsMode", 
@@ -386,7 +406,8 @@
 	functionCall: util.applyiwsPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Fast Warps", 
 	longId: "fastwarpMode", 
@@ -404,7 +425,8 @@
 	functionCall: util.applyfastwarpPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Remove Prologue", 
 	longId: "noprologueMode", 
@@ -423,7 +445,8 @@
 	functionCall: util.applynoprologuePatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Unlocked Mode", 
 	longId: "unlockedMode", 
@@ -442,7 +465,8 @@
 	functionCall: util.applyunlockedPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Relic Surprise", 
 	longId: "surpriseMode", 
@@ -460,7 +484,8 @@
 	functionCall: util.applysurprisePatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Enemy Stats", 
 	longId: "enemyStatRandoMode", 
@@ -479,7 +504,8 @@
 	functionCall: util.applyenemyStatRandoPatches, 
 	rngNeeded: true, 
 	simple: false,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Elemental Chaos", 
 	longId: "elemChaosMode", 
@@ -499,7 +525,8 @@
 	functionCall: util.applyElemChaosPatches, 
 	rngNeeded: true, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Shop Prices", 
 	longId: "shopPriceRandoMode", 
@@ -517,7 +544,8 @@
 	functionCall: util.applyShopPriceRandoPatches, 
 	rngNeeded: true, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Starting Zone 1st Castle", 
 	longId: "startRoomRandoMode", 
@@ -538,7 +566,8 @@
 	functionCall: util.applyStartRoomRandoPatches, 
 	rngNeeded: true, 
 	simple: false,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Starting Zone 2nd Castle", 
 	longId: "startRoomRando2ndMode", 
@@ -564,7 +593,8 @@
 	functionCall: util.applyStartRoomRandoPatches, 
 	rngNeeded: true, 
 	simple: false,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Guaranteed Drops", 
 	longId: "dominoMode", 
@@ -589,7 +619,8 @@
 	functionCall: util.applyDominoPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Reverse Library Card", 
 	longId: "rlbcMode", 
@@ -612,7 +643,8 @@
 	functionCall: util.applyRLBCPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Immunity Potions", 
 	longId: "immunityPotionMode", 
@@ -630,7 +662,8 @@
 	functionCall: util.applyResistToImmunePotionsPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Godspeed Shoes", 
 	longId: "godspeedMode", 
@@ -649,7 +682,8 @@
 	functionCall: null, 
 	rngNeeded: false, 
 	simple: false,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Library Shortcut", 
 	longId: "libraryShortcut", 
@@ -667,7 +701,8 @@
 	functionCall: util.applyLibraryShortcutPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Single-Hit Gears", 
 	longId: "singleHitGearMode", 
@@ -685,7 +720,8 @@
 	functionCall: util.applySingleHitGearPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Reverse Teleporter", 
 	longId: "revCastleTeleportRando", 
@@ -706,7 +742,8 @@
 	functionCall: util.applyReverseCastleTeleporterRandoPatches, 
 	rngNeeded: true, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Zero-Dollar Relic", 
 	longId: "zeroDollarRelicMode", 
@@ -728,7 +765,8 @@
 	functionCall: util.applyZeroDollarRelicPatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Open Clock Statue", 
 	longId: "openClockStatueMode", 
@@ -746,7 +784,8 @@
 	functionCall: util.applyOpenClockStatuepatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Spike Room", 
 	longId: "spikeRoomRando", 
@@ -765,7 +804,8 @@
 	functionCall: util.applySpikeRoomRandoPatches, 
 	rngNeeded: true, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Lycanthrope Mode", 
 	longId: "lycanMode", 
@@ -788,25 +828,65 @@
 	functionCall: util.applyLycanModePatches, 
 	rngNeeded: false, 
 	simple: true,
-	argvFlag: "bool"
+	argvFlag: "bool",
+	autoBuild: true
   }, {
-	name: "Dev's Stash", 
-	longId: "devStashMode", 
-	shortId: "devStash", 
-	htmlElement: "dev-stash", 
-	cliArg: "dev", 
-	longDescript: "Developer's Stash. Could be anything unincorporated, fun, or just weird.", 
-	shortDescript: "Developer's Stash.", 
+	name: "Warlock Mode", 
+	longId: "warlockMode", 
+	shortId: "warlock", 
+	htmlElement: "warlock-mode", 
+	cliArg: "w", 
+	longDescript: "Enables Warlock Mode allowing the player to use Mist from the beginning for free and increasing INT to 99 while lower spell costs.", 
+	shortDescript: "INT is 99, spells are cheap, and Mist for free.", 
 	incompatibleOptions: [
 	],
 	requiredOptions: [
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: util.applyDevsStashPatches, 
+	functionCall: util.applyWarlockModePatches, 
 	rngNeeded: false, 
 	simple: true,
- 	argvFlag: "bool"
+ 	argvFlag: "bool",
+	autoBuild: true
+  }, {
+	name: "Level 1 Mode", 
+	longId: "levelOneMode", 
+	shortId: "levelOne", 
+	htmlElement: "level-one", 
+	cliArg: "l1", 
+	longDescript: "Forces Alucard to remain at level 1 the entire seed.", 
+	shortDescript: "Alucard remains level 1.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applyLevelOneModePatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: true
+  }, {
+	name: "Instant Death.", 
+	longId: "instantDeathMode", 
+	shortId: "instantDeath", 
+	htmlElement: "insta-death", 
+	cliArg: "oko", 
+	longDescript: "Alucard will die if he takes any damage.", 
+	shortDescript: "Alucard will die if he takes any damage.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applyInstantDeathModePatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: true
   }, {
 	name: "Separate Boss Music", 
 	longId: "bossMusicSeparation", 
@@ -825,61 +905,27 @@
 	functionCall: null, 
 	rngNeeded: true, 
 	simple: false,
-    argvFlag: "bool"
+    argvFlag: "bool",
+	autoBuild: false
   }, {
-	name: "Level 1 Mode", 
-	longId: "levelOneMode", 
-	shortId: "levelOne", 
-	htmlElement: "level-one", 
-	cliArg: "l1", 
-	longDescript: "Forces Alucard to remain at level 1 the entire seed.", 
-	shortDescript: "Alucard remains level 1.", 
+	name: "Dev's Stash", 
+	longId: "devStashMode", 
+	shortId: "devStash", 
+	htmlElement: "dev-stash", 
+	cliArg: "dev", 
+	longDescript: "Developer's Stash. Could be anything unincorporated, fun, or just weird.", 
+	shortDescript: "Developer's Stash.", 
 	incompatibleOptions: [
 	],
 	requiredOptions: [
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: util.applyLevelOneModePatches, 
+	functionCall: util.applyDevsStashPatches, 
 	rngNeeded: false, 
 	simple: true,
- 	argvFlag: "bool"
-  }, {
-	name: "Instant Death.", 
-	longId: "instantDeathMode", 
-	shortId: "instantDeath", 
-	htmlElement: "insta-death", 
-	cliArg: "oko", 
-	longDescript: "Alucard will die if he takes any damage.", 
-	shortDescript: "Alucard will die if he takes any damage.", 
-	incompatibleOptions: [
-	],
-	requiredOptions: [
-	],
-	incompatiblePresets: [
-	], 
-	functionCall: util.applyInstantDeathModePatches, 
-	rngNeeded: false, 
-	simple: true,
- 	argvFlag: "bool"
-  }, {
-	name: "Warlock Mode", 
-	longId: "warlockMode", 
-	shortId: "warlock", 
-	htmlElement: "warlock-mode", 
-	cliArg: "w", 
-	longDescript: "Enables Warlock Mode allowing the player to use Mist from the beginning for free and increasing INT to 99 while lower spell costs.", 
-	shortDescript: "INT is 99, spells are cheap, and Mist for free.", 
-	incompatibleOptions: [
-	],
-	requiredOptions: [
-	],
-	incompatiblePresets: [
-	], 
-	functionCall: util.applyWarlockModePatches, 
-	rngNeeded: false, 
-	simple: true,
- 	argvFlag: "bool"
+ 	argvFlag: "bool",
+	autoBuild: false
   }
 
 //   , {
