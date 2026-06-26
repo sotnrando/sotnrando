@@ -269,7 +269,7 @@
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "opt",
-	autoBuild: true
+	autoBuild: false
   }, {
 	name: "Item Names", 
 	longId: "itemNameRandoMode", 
@@ -289,7 +289,7 @@
 	rngNeeded: true, 
 	simple: false,
 	argvFlag: "bool",
-	autoBuild: true
+	autoBuild: false
   }, {
 	name: "Turkey Mode", 
 	longId: "turkeyMode", 
