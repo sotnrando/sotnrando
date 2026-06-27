@@ -888,6 +888,25 @@
  	argvFlag: "bool",
 	autoBuild: true
   }, {
+	name: "Chaos Drops", 
+	longId: "cornucopiaMode", 
+	shortId: "cornucopia", 
+	htmlElement: "cornucopia", 
+	cliArg: "cd", 
+	longDescript: "Enemies can drop any item in the game.", 
+	shortDescript: "Enemies can drop any item in the game.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applyCornucopiaModePatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: true
+  }, {
 	name: "Separate Boss Music", 
 	longId: "bossMusicSeparation", 
 	shortId: "bossMusic", 

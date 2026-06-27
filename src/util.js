@@ -3131,6 +3131,7 @@
     warlockMode,
     levelOneMode,
     instantDeathMode,
+    cornucopiaMode,
     newGoalsSet,
     startStatRandoMode,
     writes,
@@ -3189,6 +3190,7 @@
     this.warlockMode = warlockMode
     this.levelOneMode = levelOneMode
     this.instantDeathMode = instantDeathMode
+    this.cornucopiaMode = cornucopiaMode
     this.newGoalsSet = newGoalsSet
     this.startStatRandoMode = startStatRandoMode
     if (writes) {
@@ -3400,6 +3402,8 @@
     this.levelone = false
     // Alucard dies in one hit
     this.instantDeath = false
+    // enemies can drop any item
+    this.cornucopia = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
@@ -3780,6 +3784,9 @@
     }
     if ('instantDeathMode' in json) {
       builder.instantDeathMode(json.instantDeathMode)
+    }
+    if ('cornucopiaMode' in json) {
+      builder.cornucopiaMode(json.cornucopiaMode)
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in json) {
@@ -4183,6 +4190,9 @@
     }
     if ('instantDeathMode' in preset) {
       this.instantDeath = preset.instantDeathMode
+    }
+    if ('cornucopiaMode' in preset) {
+      this.cornucopia = preset.cornucopiaMode
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
@@ -5038,6 +5048,11 @@
       this.instantDeath = enabled
     }
   
+  PresetBuilder.prototype.cornucopiaMode =
+    function cornucopiaMode(enabled) {
+      this.cornucopia = enabled
+    }
+  
   // ============================== Preset: Argument ==========================
   
   // Assign New Goals
@@ -5423,6 +5438,7 @@
     const warlock = self.warlock
     const levelOne = self.levelOne
     const instantDeath = self.instantDeath
+    const cornucopia = self.cornucopia
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
     const writes = self.writes
@@ -5481,6 +5497,7 @@
       warlock,
       levelOne,
       instantDeath,
+      cornucopia,
       newGoals,
       startStatRando,
       writes,
@@ -9793,6 +9810,176 @@
     return data
   }
 
+  function applyWarlockModePatches() {
+    const data = new checked()
+
+    // Enable Mist at the start without relics.
+    data.writeWord(0x00118ac0,0x00000000)
+
+    // Mist Cost = 0
+    data.writeShort(0x00118b34,0x0000)
+    data.writeShort(0x00118ae8,0x0000)
+
+    // INT = 99, the rest = 1
+    data.writeWord(0x00119b70,0x34020001)   
+    data.writeWord(0x00119b78,0x34020001)
+    data.writeWord(0x00119b80,0x34020063)   
+    data.writeWord(0x00119b88,0x34020001)
+
+    // Summon Spirit cost 1 mana
+    data.writeChar(0x000b5260,0x01)
+    // Dark Metamorphosis cost 2 mana
+    data.writeChar(0x000b5244,0x02)
+    // Hellfire/Dark Inferno cost 2 mana
+    data.writeChar(0x000b527c,0x02)
+    // Tetra spirit cost 3 mana
+    data.writeChar(0x000b5298,0x03)
+    // Soul Steal cost 4 mana
+    data.writeChar(0x000b52d0,0x04)
+
+    return data
+  }
+
+  function applyLevelOneModePatches() {
+    // Increase experience to reach level 2 to 999,999
+    const data = new checked()
+    const expValue = 0x000f423f
+    let offset
+
+    offset = 0x000b9f30
+    data.writeWord(offset,expValue)
+
+    offset = 0x0436812c
+    data.writeWord(offset,expValue)
+
+    return data
+  }
+
+  function applyInstantDeathModePatches() {
+    // Forces every attack to be registered as fatal.
+    const data = new checked()
+
+    data.writeWord(0x0011892c,0x34030000)
+
+    return data
+  }
+
+  function applyCornucopiaModePatches() {
+    // makes every enemy drop any item in the game*
+    // *Not Alucart mail or Secret boots
+    const data = new checked()
+    let startArray = [
+      0x044041B8,
+      0x044D51C8,
+      0x04570B40,
+      0x0460C538,
+      0x046C796C,
+      0x047EB654,
+      0x049486AC,
+      0x04A1E2D4,
+      0x04AE2618,
+      0x04BB2E60,
+      0x04C87364,
+      0x04D37024,
+      0x04DC48E8,
+      0x04E6EBD0,
+      0x04F0B404,
+      0x04FC5488,
+      0x05080920,
+      0x05137C44,
+      0x051E9624,
+      0x052C0EA8,
+      0x054373C0,
+      0x054F3D58,
+      0x055A69E4,
+      0x05643E94,
+      0x056E3EF0,
+      0x0577E534,
+      0x058083E8,
+      0x058083E8,
+      0x05936CC8,
+      0x059EFEF4,
+      0x05A7B11C,
+      0x05B0DF44,
+      0x05FF01C0,
+      0x06099CD4,
+      0x0612B344,
+      0x061D37C8,
+      0x06286D00,
+      0x06332A08,
+      0x063DB6C8,
+      0x0648F8B8,
+      0x06518B94,
+      0x065AA1D8,
+      0x06648AD4,
+      0x066CE34C,
+      0x067595FC,
+      0x067EDE00,
+      0x068A0104,
+      0x069577A0,
+      0x069EBD48,
+      0x06A7E1AC
+    ]
+    let offset
+    i = startArray.length
+    
+    offset = 0x119128
+    offset = data.writeWord(offset, 0x34020100) // mov r2,100h
+    offset = data.writeWord(offset, 0x03e00008) // ret
+    offset = data.writeWord(offset, 0x00000000) // nop
+
+    while (i > 0) {
+      offset = startArray.pop()
+
+      // debug only
+      // console.log(offset)
+      
+      try {
+        offset = data.writeWord(offset,0x0c005839) // call 800160e4
+        offset = data.writeWord(offset,0x00000000) // nop
+        offset = data.writeWord(offset,0x304200ff) // and r2,0ffh
+        offset = data.writeWord(offset,0x24420001) // add r2,1
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff57) // sub r3,0a9h
+        offset = data.writeWord(offset,0x1060fff9) // jz -7
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff49) // sub r3,0b7h
+        offset = data.writeWord(offset,0x14600002) // jnz +2
+        offset = data.writeWord(offset,0x00000000) // nop
+        offset = data.writeWord(offset,0x34020102) // mov r2,102h
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff3d) // sub r3,0c3h
+        offset = data.writeWord(offset,0x1060fff1) // jz -15
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff35) // sub r3,0cbh
+        offset = data.writeWord(offset,0x1060ffee) // jz -18
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff27) // sub r3,0d9h
+        offset = data.writeWord(offset,0x1060ffeb) // jz -21
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff1e) // sub r3,0e2h
+        offset = data.writeWord(offset,0x1060ffe8) // jz -24
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff0f) // sub r3,0f1h
+        offset = data.writeWord(offset,0x10600004) // jz +4
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff0e) // sub r3,0f2h
+        offset = data.writeWord(offset,0x14600002) // jnz +2
+        offset = data.writeWord(offset,0x00000000) // nop
+        offset = data.writeWord(offset,0x34020101) // mov r2,101h
+        offset = data.writeWord(offset,0x34520000) // mov r18,r2
+        offset = data.writeWord(offset,0x18000008) // jrel 8
+        data.writeWord(offset,0x00000000)          // nop
+      } catch (err) {
+        console.error(err)
+      }
+
+      i--
+    }
+
+    return data
+  }
+
   // =========================================================================
   //  #region Preset: Argument 
   // =========================================================================
@@ -12057,60 +12244,6 @@
     return data
   }
 
-  function applyLevelOneModePatches() {
-    // Increase experience to reach level 2 to 999,999
-    const data = new checked()
-    const expValue = 0x000f423f
-    let offset
-
-    offset = 0x000b9f30
-    data.writeWord(offset,expValue)
-
-    offset = 0x0436812c
-    data.writeWord(offset,expValue)
-
-    return data
-  }
-
-  function applyInstantDeathModePatches() {
-    // Forces every attack to be registered as fatal.
-    const data = new checked()
-
-    data.writeWord(0x0011892c,0x34030000)
-
-    return data
-  }
-
-  function applyWarlockModePatches() {
-    const data = new checked()
-
-    // Enable Mist at the start without relics.
-    data.writeWord(0x00118ac0,0x00000000)
-
-    // Mist Cost = 0
-    data.writeShort(0x00118b34,0x0000)
-    data.writeShort(0x00118ae8,0x0000)
-
-    // INT = 99, the rest = 1
-    data.writeWord(0x00119b70,0x34020001)   
-    data.writeWord(0x00119b78,0x34020001)
-    data.writeWord(0x00119b80,0x34020063)   
-    data.writeWord(0x00119b88,0x34020001)
-
-    // Summon Spirit cost 1 mana
-    data.writeChar(0x000b5260,0x01)
-    // Dark Metamorphosis cost 2 mana
-    data.writeChar(0x000b5244,0x02)
-    // Hellfire/Dark Inferno cost 2 mana
-    data.writeChar(0x000b527c,0x02)
-    // Tetra spirit cost 3 mana
-    data.writeChar(0x000b5298,0x03)
-    // Soul Steal cost 4 mana
-    data.writeChar(0x000b52d0,0x04)
-
-    return data
-  }
-
   // =========================================================================
   //  #region Website: Argument
   // =========================================================================
@@ -12991,6 +13124,7 @@
     applyLevelOneModePatches: applyLevelOneModePatches,
     applyInstantDeathModePatches: applyInstantDeathModePatches,
     applyWarlockModePatches: applyWarlockModePatches,
+    applyCornucopiaModePatches: applyCornucopiaModePatches,
     applyAlucardLiner: applyAlucardLiner,
     randomizeRelics: randomizeRelics,
     randomizeItems: randomizeItems,

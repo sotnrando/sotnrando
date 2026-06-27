@@ -394,6 +394,7 @@ async function randomize(
           // still in the array, run it through this cswitch to make sure it's
           // applied correctly.
           } else {
+            console.log('option not simple')
             switch (indivOpt.longId) {
               case "tournamentMode":
                 // Apply tournament mode patches.
