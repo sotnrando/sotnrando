@@ -9922,11 +9922,6 @@
     ]
     let offset
     i = startArray.length
-    
-    offset = 0x119128
-    offset = data.writeWord(offset, 0x34020100) // mov r2,100h
-    offset = data.writeWord(offset, 0x03e00008) // ret
-    offset = data.writeWord(offset, 0x00000000) // nop
 
     while (i > 0) {
       offset = startArray.pop()
