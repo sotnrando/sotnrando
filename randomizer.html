@@ -79,195 +79,203 @@
             </div>
           </fieldset>
           <div id="content"></div>
-          <div id="randomization-options" class="responsive-three-column-grid">
-            <fieldset class="input-box">
-              <legend>Randomizations</legend>
-              <div id="seed-container">
-                <label for="seed">Seed:</label>
-                <input id="seed" type="text" placeholder="Optional">
-              </div>
-              <div id="preset-container">
-                <div id="preset-dropdown">
-                  <label>Preset:</label>
-                  <div id="preset-select">
-                    <select id="preset-id"></select>
-                  </div>
+          <div id="randomization-options">
+            <div class="tabs-nav">
+              <button type="button" class="tab-btn active" onclick="openTab('tab-randomizations')">Randomizations<new></new></button>
+              <button type="button" class="tab-btn" onclick="openTab('tab-options')">Options<new></new></button>
+              <button type="button" class="tab-btn" onclick="openTab('tab-customizations')">Customizations<new></new></button>
+            </div>
+            <div id="tab-randomizations" class="tab-content active">
+              <fieldset class="input-box">
+                <legend>Randomizations</legend>
+                <div id="seed-container">
+                  <label for="seed">Seed:</label>
+                  <input id="seed" type="text" placeholder="Optional">
                 </div>
-                <section id="preset-details">
-                  <h4>Preset description:</h4>
-                  <p id="preset-description"></p>
-                  <h4>Preset author(s):</h4>
-                  <p id="preset-author"></p>
-                  <fieldset id="meta-data-group">
-                    <legend>Meta Data</legend>
-                    <div class="meta-data">
-                      <h4>Knowledge Required:</h4>
-                      <p id="preset-knowledgeCheck"></p>
-                    </div>
-                    <div class="meta-data">
-                      <h4>Modification Level:</h4>
-                      <p id="preset-moddedLevel"></p>
-                    </div>
-                    <div class="meta-data">
-                      <h4>Relic Extension:</h4>
-                      <p id="preset-metaExtension"></p>
-                    </div>
-                    <div class="meta-data">
-                      <h4>Castle Type:</h4>
-                      <p id="preset-castleType"></p>
-                    </div>
-                    <div class="meta-data">
-                      <h4>Minimum Complexity:</h4>
-                      <p id="preset-metaComplexity"></p>
-                    </div>
-                    <div class="meta-data">
-                      <h4>Early Transformation:</h4>
-                      <p id="preset-transformEarly"></p>
-                    </div>
-                    <div class="meta-data">
-                      <h4>Item Stats Randomized:</h4>
-                      <p id="preset-itemStats"></p>
-                    </div>
-                    <div class="meta-data">
-                      <h4>Transformation Focus:</h4>
-                      <p id="preset-transformFocus"></p>
-                    </div>
-                    <div class="meta-data">
-                      <h4>Expected Completion Pace:</h4>
-                      <p id="preset-timeFrame"></p>
-                    </div>
-                    <div class="meta-data">
-                      <h4>Win Condition:</h4>
-                      <p id="preset-winCondition"></p>
-                    </div>
-                  </fieldset>
-                </section>
-                <fieldset id="options">
-                  <small>&#10071; Lower complexities generate faster but may also be faster to beat.</small>
-                  <div id="complexity-slider">
-                    <label for="complexity">Complexity</label>
-                    <div id="complexity-slider-details">
-                      <span id="complexityMinValue">1</span>
-                      <input id="complexity" type="range" min="1" list="complexityValues">
-                      <span id="complexityMaxValue"></span>
-                      <span id="complexityCurrentValue"></span>
-                      <datalist id="complexityValues">
-                        <option value="1" label="1"></option>
-                      </datalist>
+                <div id="preset-container">
+                  <div id="preset-dropdown">
+                    <label>Preset:</label>
+                    <div id="preset-select">
+                      <select id="preset-id"></select>
                     </div>
                   </div>
-                  <fieldset id="relic-locations-set">
-                    <legend>
-                      <input id="relic-locations" type="checkbox" data-store-checkbox="true"
-                        data-custom-change="relicLocationsChange">
-                      <label for="relic-locations">Relic locations</label>
-                    </legend>
-                    <div class="relic-location">
-                      <input id="extension-guarded" name="extension" type="radio" value="guarded">
-                      <label for="extension-guarded">
-                        Guarded
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items may appear in
-                              rooms guarded by bosses. 37 Check locations.
+                  <section id="preset-details">
+                    <h4>Preset description:</h4>
+                    <p id="preset-description"></p>
+                    <h4>Preset author(s):</h4>
+                    <p id="preset-author"></p>
+                    <fieldset id="meta-data-group">
+                      <legend>Meta Data</legend>
+                      <div class="meta-data">
+                        <h4>Knowledge Required:</h4>
+                        <p id="preset-knowledgeCheck"></p>
+                      </div>
+                      <div class="meta-data">
+                        <h4>Modification Level:</h4>
+                        <p id="preset-moddedLevel"></p>
+                      </div>
+                      <div class="meta-data">
+                        <h4>Relic Extension:</h4>
+                        <p id="preset-metaExtension"></p>
+                      </div>
+                      <div class="meta-data">
+                        <h4>Castle Type:</h4>
+                        <p id="preset-castleType"></p>
+                      </div>
+                      <div class="meta-data">
+                        <h4>Minimum Complexity:</h4>
+                        <p id="preset-metaComplexity"></p>
+                      </div>
+                      <div class="meta-data">
+                        <h4>Early Transformation:</h4>
+                        <p id="preset-transformEarly"></p>
+                      </div>
+                      <div class="meta-data">
+                        <h4>Item Stats Randomized:</h4>
+                        <p id="preset-itemStats"></p>
+                      </div>
+                      <div class="meta-data">
+                        <h4>Transformation Focus:</h4>
+                        <p id="preset-transformFocus"></p>
+                      </div>
+                      <div class="meta-data">
+                        <h4>Expected Completion Pace:</h4>
+                        <p id="preset-timeFrame"></p>
+                      </div>
+                      <div class="meta-data">
+                        <h4>Win Condition:</h4>
+                        <p id="preset-winCondition"></p>
+                      </div>
+                    </fieldset>
+                  </section>
+                  <fieldset id="options">
+                    <small>&#10071; Lower complexities generate faster but may also be faster to beat.</small>
+                    <div id="complexity-slider">
+                      <label for="complexity">Complexity</label>
+                      <div id="complexity-slider-details">
+                        <span id="complexityMinValue">1</span>
+                        <input id="complexity" type="range" min="1" list="complexityValues">
+                        <span id="complexityMaxValue"></span>
+                        <span id="complexityCurrentValue"></span>
+                        <datalist id="complexityValues">
+                          <option value="1" label="1"></option>
+                        </datalist>
+                      </div>
+                    </div>
+                    <fieldset id="relic-locations-set">
+                      <legend>
+                        <input id="relic-locations" type="checkbox" data-store-checkbox="true"
+                          data-custom-change="relicLocationsChange">
+                        <label for="relic-locations">Relic locations</label>
+                      </legend>
+                      <div class="relic-location">
+                        <input id="extension-guarded" name="extension" type="radio" value="guarded">
+                        <label for="extension-guarded">
+                          Guarded
+                          <span class="tooltip-wrapper">
+                            <span class="tooltip-indicator">?</span>
+                            <span class="tooltip hidden">
+                              <span>
+                                Relics and progression items may appear in
+                                rooms guarded by bosses. 37 Check locations.
+                              </span>
                             </span>
                           </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-guardedplus" name="extension" type="radio" value="guardedplus">
-                      <label for="extension-guardedplus">
-                        Guarded<i>Plus</i>
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Add to guarded locations with more checks on
-                              left side of second castle. 39 Check locations.
+                        </label>
+                      </div>
+                      <div class="relic-location">
+                        <input id="extension-guardedplus" name="extension" type="radio" value="guardedplus">
+                        <label for="extension-guardedplus">
+                          Guarded<i>Plus</i>
+                          <span class="tooltip-wrapper">
+                            <span class="tooltip-indicator">?</span>
+                            <span class="tooltip hidden">
+                              <span>
+                                Add to guarded locations with more checks on
+                                left side of second castle. 39 Check locations.
+                              </span>
                             </span>
                           </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-equipment" name="extension" type="radio" value="equipment">
-                      <label for="extension-equipment">
-                        Equipment
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items may appear in
-                              place of equipment tiles. 105 Check locations.
+                        </label>
+                      </div>
+                      <div class="relic-location">
+                        <input id="extension-equipment" name="extension" type="radio" value="equipment">
+                        <label for="extension-equipment">
+                          Equipment
+                          <span class="tooltip-wrapper">
+                            <span class="tooltip-indicator">?</span>
+                            <span class="tooltip hidden">
+                              <span>
+                                Relics and progression items may appear in
+                                place of equipment tiles. 105 Check locations.
+                              </span>
                             </span>
                           </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-scenic" name="extension" type="radio" value="scenic">
-                      <label for="extension-scenic">
-                        Scenic
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items may appear in
-                              place of equipment tiles or in unique
-                              locations in either castle. 118 Check locations.
+                        </label>
+                      </div>
+                      <div class="relic-location">
+                        <input id="extension-scenic" name="extension" type="radio" value="scenic">
+                        <label for="extension-scenic">
+                          Scenic
+                          <span class="tooltip-wrapper">
+                            <span class="tooltip-indicator">?</span>
+                            <span class="tooltip hidden">
+                              <span>
+                                Relics and progression items may appear in
+                                place of equipment tiles or in unique
+                                locations in either castle. 118 Check locations.
+                              </span>
                             </span>
                           </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-extended" name="extension" type="radio" value="wanderer">
-                      <label for="extension-extended">
-                        Extended
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items may appear in
-                              place of <i>limited</i> equipment tiles or
-                              in unique locations in either castle. 70
-                              Check locations.
+                        </label>
+                      </div>
+                      <div class="relic-location">
+                        <input id="extension-extended" name="extension" type="radio" value="wanderer">
+                        <label for="extension-extended">
+                          Extended
+                          <span class="tooltip-wrapper">
+                            <span class="tooltip-indicator">?</span>
+                            <span class="tooltip hidden">
+                              <span>
+                                Relics and progression items may appear in
+                                place of <i>limited</i> equipment tiles or
+                                in unique locations in either castle. 70
+                                Check locations.
+                              </span>
                             </span>
                           </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-classic" name="extension" type="radio" value="classic">
-                      <label for="extension-classic">
-                        Classic
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items will only be
-                              randomized among the game's original relic
-                              and progression item locations. 28 Check locations.
+                        </label>
+                      </div>
+                      <div class="relic-location">
+                        <input id="extension-classic" name="extension" type="radio" value="classic">
+                        <label for="extension-classic">
+                          Classic
+                          <span class="tooltip-wrapper">
+                            <span class="tooltip-indicator">?</span>
+                            <span class="tooltip hidden">
+                              <span>
+                                Relics and progression items will only be
+                                randomized among the game's original relic
+                                and progression item locations. 28 Check locations.
+                              </span>
                             </span>
                           </span>
-                        </span>
-                      </label>
-                    </div>
+                        </label>
+                      </div>
+                    </fieldset>
+                    <input id="enemy-drops-arg" type="text" disabled="disabled" style="display: none">
+                    <input id="starting-equipment-arg" type="text" disabled="disabled" style="display: none">
+                    <input id="item-locations-arg" type="text" disabled="disabled" style="display: none">
+                    <input id="prologue-rewards-arg" type="text" disabled="disabled" style="display: none">
+                    <input id="relic-locations-arg" type="text" disabled="disabled" style="display: none">
+                    <input id="writes" type="text" disabled="disabled" style="display: none">
                   </fieldset>
-                  <input id="enemy-drops-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="starting-equipment-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="item-locations-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="prologue-rewards-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="relic-locations-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="writes" type="text" disabled="disabled" style="display: none">
-                </fieldset>
-                <div class="pure-u-1"> <input id="clear" type="submit" class="pure-button hidden" value="Clear">
+                  <div class="pure-u-1"> <input id="clear" type="submit" class="pure-button hidden" value="Clear">
+                  </div>
                 </div>
-              </div>
-            </fieldset>
+              </fieldset>
+            </div>
+            <div id="tab-options" class="tab-content">
             <fieldset class="input-box">
               <legend>Options</legend>
               <div class="checkboxes">
@@ -958,6 +966,8 @@
                 </div>
               </div>
             </fieldset>
+          </div>
+          <div id="tab-customizations" class="tab-content">
             <fieldset class="input-box">
               <legend>Customizations</legend>
               <div class="customizations">
@@ -1076,7 +1086,7 @@
                 </div>
               </div>
             </fieldset>
-
+            </div>
           </div>
           <div>
             <div id="spoilers-container" class="hide" style="display: none">
@@ -1217,6 +1227,27 @@
   <script src="src/browser_utils.js"></script>
   <script src="src/browser_constants.js"></script>
   <script src="src/browser.js"></script>
+  <script>
+    function openTab(tabId) {
+      // Hide all system view tabs 
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      // Strip selection highlights from navigators
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Target open selected panel container
+      document.getElementById(tabId).classList.add('active');
+
+      // Highlight currently triggered target button safely
+      if (window.event && window.event.currentTarget) {
+        window.event.currentTarget.classList.add('active');
+      }
+    }
+  </script>
 </body>
 
 </html>
