@@ -9,6 +9,7 @@ let errors
 let applyAccessibilityPatches
 let randomizeRelics
 let version
+let optionsArray
 
 function isBrowser(){
   return typeof window !== 'undefined' && typeof window.document !== 'undefined'
@@ -24,7 +25,7 @@ function loadRequirements(preset) {
     applyAccessibilityPatches = window.sotnRando.applyAccessibilityPatches
     randomizeRelics = window.sotnRando.randomizeRelics
     constants = window.sotnRando.constants
-    options_array = window.sotnrando.options_array
+    optionsArray = window.sotnRando.options_array
   } else {
     util = require('./util')
     presets = require('../build/presets').loadInheritancePresets(preset)
@@ -36,7 +37,7 @@ function loadRequirements(preset) {
     randomizeRelics = require('./randomize_relics')
     NodeWorker = require('worker_threads').Worker
     constants = require('./constants')
-    options_array = require('./options_array')
+    optionsArray = require('./options_array')
   }
 }
 

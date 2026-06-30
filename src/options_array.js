@@ -1,5 +1,9 @@
 (function(self) {
-  const util = require('./util')
+  if(self) {
+    util = self.sotnRando.util
+  } else {
+    util = require('./util')
+  }
 
   const optionsArray = [{
 	// Preset name.
