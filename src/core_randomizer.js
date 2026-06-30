@@ -25,7 +25,7 @@ function loadRequirements(preset) {
     applyAccessibilityPatches = window.sotnRando.applyAccessibilityPatches
     randomizeRelics = window.sotnRando.randomizeRelics
     constants = window.sotnRando.constants
-    optionsArray = window.sotnRando.options_array
+    optionsArray = window.sotnRando.optionsArray
   } else {
     util = require('./util')
     presets = require('../build/presets').loadInheritancePresets(preset)
@@ -364,7 +364,7 @@ async function randomize(
 
       // This does not encompass all options , even options listed in the array
       // it references. Anything not caught by this is completed elsewhere.
-      options_array.forEach(function(indivOpt) {
+      optionsArray.forEach(function(indivOpt) {
         // Check if the option is being used
         if (options[indivOpt.longId] || applied[indivOpt.longId]) {
           // Check if the option is simple enough to be implemented en masse
