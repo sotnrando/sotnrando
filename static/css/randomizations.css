@@ -59,7 +59,7 @@
 #preset-description,
 #preset-author {
   text-indent: 1rem;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 #preset-description,
@@ -110,5 +110,5 @@
 
 .meta-data p {
   border-bottom: 1px solid;
-  font-size: 14px;
+  font-size: 18px;
 }
