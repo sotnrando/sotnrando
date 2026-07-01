@@ -19,7 +19,10 @@
     "castleType": "Modded",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "All Bosses"
+    "winCondition": "All Bosses",
+    "listSortFlag": [
+      "Normal"
+    ]
   },
   
   "relicLocationsExtension": "guardedplus",

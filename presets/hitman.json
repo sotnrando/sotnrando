@@ -17,7 +17,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Enemies Drop Vlads"
+    "winCondition": "Enemies Drop Vlads",
+    "listSortFlag": [
+      "BountyHunter"
+    ]
   },
 
   "inherits": "casual",

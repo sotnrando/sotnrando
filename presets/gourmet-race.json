@@ -18,7 +18,10 @@
     "castleType": "Normal",
     "transformEarly": "Yes",
     "transformFocus": "Bat",
-    "winCondition": "Collect Food"
+    "winCondition": "Collect Food",
+    "listSortFlag": [
+      "Normal"
+    ]
   },
   
   "inherits": "nimble-lite",

@@ -19,7 +19,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Normal"
+    "winCondition": "Normal",
+    "listSortFlag": [
+      "BountyHunter"
+    ]
   },
   
   "stats": false,

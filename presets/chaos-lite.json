@@ -18,7 +18,10 @@
     "castleType": "Modded",
     "transformEarly": "Yes",
     "transformFocus": "Bat",
-    "winCondition": "April Fools"
+    "winCondition": "April Fools",
+    "listSortFlag": [
+      "BountyHunter"
+    ]
   },
 
   "stats": true,

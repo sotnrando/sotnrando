@@ -19,7 +19,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "All Bosses"
+    "winCondition": "All Bosses",
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "relicLocationsExtension": "guarded",

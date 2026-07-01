@@ -18,7 +18,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "Mist",
-    "winCondition": "Normal"
+    "winCondition": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "stats": false,

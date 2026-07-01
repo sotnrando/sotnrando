@@ -16,7 +16,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "April Fools"
+    "winCondition": "April Fools",
+    "listSortFlag": [
+      "Deprecated"
+    ]
   },
 
   "relicLocations": false,

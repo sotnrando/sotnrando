@@ -17,7 +17,10 @@
     "castleType": "Modded",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Mirror For 2nd Castle"
+    "winCondition": "Mirror For 2nd Castle",
+    "listSortFlag": [
+      "Deprecated"
+    ]
   },
   
   "relicLocationsExtension": "extended",

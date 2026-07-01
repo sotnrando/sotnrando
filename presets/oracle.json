@@ -16,7 +16,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Gold Key"
+    "winCondition": "Gold Key",
+    "listSortFlag": [
+      "Normal"
+    ]
   },
 
   "inherits": "safe",

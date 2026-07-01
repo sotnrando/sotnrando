@@ -18,7 +18,10 @@
     "castleType": "Modded",
     "transformEarly": "Yes",
     "transformFocus": "Wolf",
-    "winCondition": "Normal"
+    "winCondition": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "inherits": "safe",

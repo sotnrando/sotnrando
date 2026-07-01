@@ -20,7 +20,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Vlads and Portal Spell"
+    "winCondition": "Vlads and Portal Spell",
+    "listSortFlag": [
+      "Normal"
+    ]
   },
 
   "stats": false,

@@ -17,7 +17,10 @@
     "castleType": "Normal",
     "transformEarly": "Yes",
     "transformFocus": "Bat",
-    "winCondition": "Normal"
+    "winCondition": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "inherits": "nimble",

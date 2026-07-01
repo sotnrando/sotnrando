@@ -16,7 +16,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "No",
-    "winCondition": "Normal"
+    "winCondition": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ]
   },
 
   "inherits": "casual",

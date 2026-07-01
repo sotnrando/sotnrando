@@ -17,7 +17,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Six out of Eight Vlads"
+    "winCondition": "Six out of Eight Vlads",
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "stats": false,

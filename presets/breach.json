@@ -18,7 +18,10 @@
     "castleType": "Modded",
     "transformEarly": "Yes",
     "transformFocus": "Bat",
-    "winCondition": "Portal Spell"
+    "winCondition": "Portal Spell",
+    "listSortFlag": [
+      "Deprecated"
+    ]
   },
 
   "stats": false,

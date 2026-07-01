@@ -16,7 +16,10 @@
     "castleType": "",
     "transformEarly": "",
     "transformFocus": "",
-    "winCondition": ""
+    "winCondition": "",
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "comment": "Build off the Safe preset",

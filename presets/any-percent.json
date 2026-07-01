@@ -18,7 +18,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "Wolf and Bat",
-    "winCondition": "Relic Skip"
+    "winCondition": "Relic Skip",
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
   
   "stats": false,

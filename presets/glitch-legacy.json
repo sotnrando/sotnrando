@@ -16,7 +16,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Relic Skip"
+    "winCondition": "Relic Skip",
+    "listSortFlag": [
+      "Deprecated"
+    ]
   },
   "inherits": "casual",
   "relicLocationsExtension": "equipment",

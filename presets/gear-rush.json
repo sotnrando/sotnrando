@@ -18,7 +18,10 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Timed"
+    "winCondition": "Timed",
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "preventLeaks": false,
