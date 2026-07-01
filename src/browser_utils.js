@@ -97,45 +97,45 @@ BrowserUtils.toKebabCase = function toKebabCase(str) {
 
 BrowserUtils.getCurrentOptions = function getCurrentOptions() {
     const keys = [
-        'tournamentMode', 
-        'colorrandoMode', 
-        'magicmaxMode', 
+        'tournamentMode',
+        'colorrandoMode',
+        'magicmaxMode',
         'antiFreezeMode',
-        'mypurseMode', 
-        'iwsMode', 
-        'fastwarpMode', 
+        'mypurseMode',
+        'iwsMode',
+        'fastwarpMode',
         'itemNameRandoMode',
-        'noprologueMode', 
-        'unlockedMode', 
-        'surpriseMode', 
+        'noprologueMode',
+        'unlockedMode',
+        'surpriseMode',
         'enemyStatRandoMode',
-        'shopPriceRandoMode', 
-        'startRoomRandoMode', 
+        'shopPriceRandoMode',
+        'startRoomRandoMode',
         'startRoomRando2ndMode',
-        'dominoMode', 
-        'rlbcMode', 
-        'immunityPotionMode', 
+        'dominoMode',
+        'rlbcMode',
+        'immunityPotionMode',
         'godspeedMode',
-        'libraryShortcut', 
-        'elemChaosMode', 
-        'singleHitGearMode', 
-        'revCastleTeleportRando', 
+        'libraryShortcut',
+        'elemChaosMode',
+        'singleHitGearMode',
+        'revCastleTeleportRando',
         'zeroDollarRelicMode',
-        'openClockStatueMode', 
-        'spikeRoomRando', 
+        'openClockStatueMode',
+        'spikeRoomRando',
         'lycanMode',
-        'easyMode', 
+        'easyMode',
         'devStashMode',
-        'seasonalPhrasesMode', 
-        'music', 
-        'bossMusicSeparation', 
-        'music', 
-        'appendSeed', 
-        'excludeSongsOption', 
-        'itemLocations', 
-        'stats', 
-        'prologueRewards', 
-        'startingEquipment', 
+        'seasonalPhrasesMode',
+        'music',
+        'bossMusicSeparation',
+        'music',
+        'appendSeed',
+        'excludeSongsOption',
+        'itemLocations',
+        'stats',
+        'prologueRewards',
+        'startingEquipment',
         'accessibilityPatches'
     ]
 
@@ -160,7 +160,7 @@ BrowserUtils.formatOptionsLog = function formatOptionsLog(options) {
 
     Object.entries(options).forEach(([key, val]) => {
         if (['preset', 'complexity', 'extension', 'goal'].includes(key)) return
-        ;(val ? enabled : disabled).push(key)
+            ; (val ? enabled : disabled).push(key)
     })
 
     return [
@@ -241,10 +241,7 @@ BrowserUtils.loadPresets = function loadPresets() {
     const presets = sotnRando.presets;
 
     // --- Define your three groups ---
-    const NEW_PRESETS = new Set([
-        "collector",
-        "hoarder"
-    ]);
+    const NEW_PRESETS = new Set(["collector", "hoarder"]);
 
     function isTournamentPreset(id) {
         return (
@@ -282,17 +279,16 @@ BrowserUtils.loadPresets = function loadPresets() {
         ...otherPresets
     ];
 
+    //Overwrite global array so index positions map 1:1
+    sotnRando.presets = sortedPresets;
+
     // --- Populate dropdown ---
     sortedPresets.forEach(preset => {
         if (!preset.hidden) {
             if (preset.id === "april-fools" && !isAprilFools) return;
-
             const option = document.createElement("option");
             option.value = preset.id;
-            option.innerText = preset.id === "april-fools"
-                ? "April Fools"
-                : preset.name;
-
+            option.innerText = preset.id === "april-fools" ? "April Fools" : preset.name;
             elems.presetId.appendChild(option);
         }
     });
@@ -320,7 +316,7 @@ BrowserUtils.ChangeHandlers = {
             elems.easyMode.checked = false
             elems.easyMode.disabled = true
             elems.zeroDollarRelicMode.checked = true
-            elems.openClockStatueMode.checked = true 
+            elems.openClockStatueMode.checked = true
         } else {
             elems.showRelics.disabled = false
             elems.easyMode.disabled = false

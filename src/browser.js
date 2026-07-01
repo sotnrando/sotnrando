@@ -18,6 +18,13 @@
   let seed
   let applied
   let override
+  let presetDataJson = [];
+
+  async function loadPresetData() {
+    const res = await fetch('./preset-data.json');
+    presetDataJson = await res.json();
+  }
+
 
   //#endregion
 
@@ -322,16 +329,18 @@
   }
 
   function presetIdChange() {
-    const optionsMeta = sotnRando.optionsArray;
 
-    // 1. Resolve selected preset 
+    // 1. Resolve selected preset from the ACTIVE dropdown elements, NOT the raw array
+    const optionsMeta = sotnRando.optionsArray;
     let idx = elems.presetId.selectedIndex;
     if (idx < 0) idx = 0;
 
+    // Always fallback to reading the actual string .value attribute of the sorted list option
     const id = elems.presetId.options
       ? elems.presetId.options[idx].value
-      : elems.presetId.childNodes[idx].value;
+      : (elems.presetId.childNodes[idx] ? elems.presetId.childNodes[idx].value : "casual");
 
+    // Dynamically find the matching data structure via its unique ID tag
     const preset = sotnRando.presets.find(p => p.id === id) || sotnRando.presets[0];
 
     // 2. Update preset metadata UI 
@@ -360,89 +369,23 @@
     elems.complexity.value = complexity;
     elems.complexityCurrentValue.innerText = `(${complexity})`;
 
-    // 4. GOAL LOGIC (BH + Boss + Relic)
-    const BH_COMPAT = new Set([
-      "bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "rampage-25te"
-    ]);
+    // 4. GOAL LOGIC (data-driven from preset-data.json)
+    const presetData = presetDataJson.find(p => p.id === preset.id);
+    if (presetData) {
+      const { defaultGoal, compatibleGoals } = presetData;
 
-    const BOSS_COMPAT = new Set([
-      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-      "expedition", "bat-master", "glitch", "scavenger", "empty-hand", "third-castle", "magic-mirror", "leg-day",
-      "big-toss", "grand-tour", "crash-course", "any-percent", "lookingglass", "skinwalker", "summoner", "safe-stwo",
-      "open", "brawler", "lucky-sevens", "sight-seer", "cursed-night", "spellbound", "mobility", "glitchmaster",
-      "dog-life", "battle-mage", "timeline", "chimera", "vanilla", "all-bosses", "rampage", "nimble-lite", "oracle",
-      "boss-reflector", "cornivus", "mirror-breaker"
-    ]);
+      // Set default goal
+      elems.newGoals.value = defaultGoal || "default";
+      localStorage.setItem("newGoals", elems.newGoals.value);
+      newGoalsLock = elems.newGoals.value;
 
-    const RELIC_COMPAT = new Set([
-      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-      "expedition", "bat-master", "scavenger", "empty-hand", "gem-farmer", "third-castle", "rat-race", "magic-mirror",
-      "bounty-hunter", "target-confirmed", "hitman", "beyond", "grand-tour", "crash-course", "lookingglass", "skinwalker",
-      "summoner", "agonize-twtw", "safe-stwo", "open", "lucky-sevens", "sight-seer", "cursed-night", "spellbound",
-      "mobility", "timeline", "chimera", "vanilla", "nimble-lite", "all-bosses", "cornivus", "mirror-breaker"
-    ]);
-
-    const BH_GOAL_PRESETS = {
-      h: new Set(["bounty-hunter", "chaos-lite"]),
-      t: new Set(["target-confirmed"]),
-      w: new Set(["hitman"]),
-      x: new Set(["rampage", "rampage-25te"])
-    };
-
-    const GOAL_PRESETS = {
-      b: new Set(["all-bosses", "mirror-breaker"]),
-      v: new Set(["boss-reflector", "cornivus", "nimble-lite-te"])
-    };
-
-    function computeGoal(presetId) {
-      for (const [goal, set] of Object.entries(BH_GOAL_PRESETS)) {
-        if (set.has(presetId)) return goal;
-      }
-      for (const [goal, set] of Object.entries(GOAL_PRESETS)) {
-        if (set.has(presetId)) return goal;
-      }
-      return "default";
-    }
-
-    function validateGoal(presetId, goal) {
-      const isBossGoal = goal === "b" || goal === "a" || goal === "v";
-      const isRelicGoal = goal === "r" || goal === "a";
-      const isBhGoal = goal === "h" || goal === "t" || goal === "w" || goal === "x";
-
-      if (isBossGoal && !BOSS_COMPAT.has(presetId)) return "default";
-      if (isRelicGoal && !RELIC_COMPAT.has(presetId)) return "default";
-      if (isBhGoal && !BH_COMPAT.has(presetId)) return "default";
-
-      return goal;
-    }
-
-    function enforceGoalCompatibility(presetId) {
+      // Enable only compatible goals
       const goalOptions = elems.newGoals.options;
       for (let i = 0; i < goalOptions.length; i++) {
         const opt = goalOptions[i];
-        const val = opt.value;
-
-        const isBossGoal = val === "b" || val === "a" || val === "v";
-        const isRelicGoal = val === "r" || val === "a";
-        const isBhGoal = val === "h" || val === "t" || val === "w" || val === "x" || "val" === "y";
-
-        const incompatible =
-          (isBossGoal && !BOSS_COMPAT.has(presetId)) ||
-          (isRelicGoal && !RELIC_COMPAT.has(presetId)) ||
-          (isBhGoal && !BH_COMPAT.has(presetId));
-
-        opt.disabled = incompatible;
+        opt.disabled = !compatibleGoals.includes(opt.value);
       }
     }
-
-    let goal = computeGoal(preset.id);
-    goal = validateGoal(preset.id, goal);
-    elems.newGoals.value = goal;
-
-    localStorage.setItem("newGoals", elems.newGoals.value);
-    newGoalsLock = elems.newGoals.value;
-
-    enforceGoalCompatibility(preset.id);
 
     // 5. Apply preset options (data-driven) 
     function applyOptions(options) {
@@ -452,19 +395,32 @@
 
         const presetValue = options[opt.longId];
 
-        if (typeof presetValue === "object") {
-          el.checked = true;
-          return;
+        // Only apply checkbox logic to checkboxes
+        if (el.type === "checkbox") {
+
+          const isStructured =
+            opt.longId === "startingEquipment" ||
+            opt.longId === "enemyDrops" ||
+            opt.longId === "itemLocations" ||
+            opt.longId === "prologueRewards";
+
+          if (isStructured && typeof presetValue === "object") {
+            el.checked = true;
+            return;
+          }
+
+          if (!(opt.longId in options)) {
+            el.checked = false;
+            return;
+          }
+
+          el.checked = !!presetValue;
         }
 
-        if (!(opt.longId in options)) {
-          el.checked = false;
-          return;
-        }
-
-        el.checked = !!presetValue;
+        // Sliders, selects, radios, etc. should NOT be auto-checked
       });
     }
+
 
     applyOptions(options);
     relicLocationsExtensionChange();
@@ -474,15 +430,17 @@
       optionsMeta.forEach(opt => {
         const el = elems[opt.longId];
         if (!el) return;
-
         const isOn = el.checked;
 
-        // Required options must be ON and locked
         opt.requiredOptions.forEach(req => {
           const reqEl = elems[req];
           if (!reqEl || reqEl._presetLocked) return;
 
           if (isOn) {
+            if (req === "startingStats" && !preset.options().startingStats) {
+              return;
+            }
+
             reqEl.checked = true;
             reqEl.disabled = true;
           } else {
@@ -490,7 +448,6 @@
           }
         });
 
-        // Incompatible options must be OFF
         opt.incompatibleOptions.forEach(bad => {
           const badEl = elems[bad];
           if (isOn && badEl && !badEl._presetLocked) badEl.checked = false;
@@ -528,7 +485,6 @@
         const el = elems[opt.longId];
         if (!el) return;
 
-        // Preset lock overrides everything
         if (el._presetLocked) return;
 
         let shouldDisable = false;
@@ -684,58 +640,20 @@
 
   function newGoalsChange() {
     const { presetId, newGoals } = elems;
-    const preset = presetId.value;
-    const goal = newGoals.value;
 
-    const bhCompatible = ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage"];
-    const bossCompatible = [
-      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-      "expedition", "bat-master", "glitch", "scavenger", "empty-hand", "third-castle", "magic-mirror", "leg-day",
-      "big-toss", "grand-tour", "crash-course", "any-percent", "lookingglass", "skinwalker", "summoner", "safe-stwo",
-      "open", "brawler", "lucky-sevens", "sight-seer", "cursed-night", "spellbound", "mobility", "glitchmaster",
-      "dog-life", "battle-mage", "timeline", "chimera", "vanilla", "all-bosses", "rampage", "nimble-lite", "oracle",
-      "boss-reflector", "cornivus", "mirror-breaker"
-    ];
-    const relicCompatible = [
-      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-      "expedition", "bat-master", "scavenger", "empty-hand", "gem-farmer", "third-castle", "rat-race", "magic-mirror",
-      "bountyhunter", "bountyhuntertc", "hitman", "beyond", "grand-tour", "crash-course", "lookingglass", "skinwalker",
-      "summoner", "agonize-twtw", "safe-stwo", "open", "lucky-sevens", "sight-seer", "cursed-night", "spellbound",
-      "mobility", "timeline", "chimera", "vanilla", "nimble-lite", "all-bosses", "cornivus", "mirror-breaker"
-    ];
+    // Get preset data from preset-data.json
+    const presetData = presetDataJson.find(p => p.id === presetId.value);
+    if (!presetData) return;
 
-    const isCompatible = {
-      abrsr: bossCompatible.includes(preset) && relicCompatible.includes(preset),
-      vladBoss: !["oracle", "glitch", "glitchmaster", "any-percent"].includes(preset),
-      allBoss: bossCompatible.includes(preset),
-      allRelic: relicCompatible.includes(preset),
-      bhNorm: bhCompatible.includes(preset),
-      bhAdvanced: ["target-confirmed"].includes(preset),
-      bhHitman: ["hitman"].includes(preset),
-      bhBoss: ["rampage"].includes(preset),
-      bhBossRelic: ["rampage"].includes(preset)
-    };
+    const { defaultGoal, compatibleGoals } = presetData;
 
-    if (goal in isCompatible && !isCompatible[goal]) {
-      newGoals.value = "default";
+    // If user selects a goal that is not compatible, revert to default
+    if (!compatibleGoals.includes(newGoals.value)) {
+      newGoals.value = defaultGoal || "default";
     }
 
-    const autoAssign = [
-      { goal: "bhNorm", presets: ["chaos-lite", "bounty-hunter"] },
-      { goal: "bhAdvanced", presets: ["target-confirmed"] },
-      { goal: "bhHitman", presets: ["hitman"] },
-      { goal: "bhBoss", presets: ["rampage"] },
-      { goal: "allBoss", presets: ["all-bosses", "mirror-breaker"], exclude: ["abrsr", "vladBoss"] },
-      { goal: "vladBoss", presets: ["boss-reflector", "cornivus"] }
-    ];
-
-    for (const { goal, presets, exclude = [] } of autoAssign) {
-      if (newGoals.value !== goal && presets.includes(preset) && !exclude.includes(newGoals.value)) {
-        newGoals.value = goal;
-      }
-    }
-
-    localStorage.setItem('newGoals', newGoals.value);
+    // Save
+    localStorage.setItem("newGoals", newGoals.value);
     newGoalsLock = newGoals.value;
   }
 
@@ -999,6 +917,11 @@
     ]
     clearFields.forEach(key => elems[key].disabled = false)
 
+    // FORCE UNCHECK START STAT RANDO
+    if (elems.startStatRandoMode) {
+      elems.startStatRandoMode.checked = false;
+    }
+
     // Special case
     elems.seasonalPhrasesMode.value = true
     elems.clear.classList.add('hidden')
@@ -1246,6 +1169,12 @@
     presetIdChange();
     statMaxSlider();
   }
+  loadPresetData().then(() => {
+    // Now safe to initialize everything
+    presetIdChange();
+    // any other startup logic
+  });
+
 
   initializeBrowser();
   //#endregion
