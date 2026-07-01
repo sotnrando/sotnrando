@@ -240,15 +240,15 @@ BrowserUtils.hideSpoilers = function hideSpoilers() {
 BrowserUtils.loadPresets = function loadPresets() {
     const presets = sotnRando.presets;
 
-    // --- Define your three groups ---
+    // --- Define our three groups ---
     const NEW_PRESETS = new Set(["collector", "hoarder"]);
 
     function isTournamentPreset(id) {
         return (
-            /-spr\d+te$/.test(id) ||
-            /-win\d+te$/.test(id) ||
-            /-aut\d+te$/.test(id) ||
-            /-sum\d+te$/.test(id)
+            /-spr26te$/.test(id)
+            // /-win\d+te$/.test(id)
+            // /-aut\d+te$/.test(id)
+            // /-sum\d+te$/.test(id)
         );
     }
 
