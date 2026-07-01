@@ -9987,6 +9987,8 @@
     // define address for functions (inside Black Marble Gallery Overlay)
     const funcAddress = 0x04fe4f68
     let offset
+    // Debug goal
+    // console.log('new goal: ' + nGoal)
     // Patch new goals
     switch (nGoal) {
     case 'b':
