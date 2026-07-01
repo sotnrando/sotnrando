@@ -775,72 +775,39 @@
   }
 
   function getFormOptions() {
+    const preset = sotnRando.presets[elems.presetId.selectedIndex];
     const options = {
-      preset: sotnRando.presets[elems.presetId.selectedIndex].id,
+      preset: preset.id,
       relicLocations: getFormRelicLocations()
-    }
+    };
 
-    const formOptions = [
-      'tournamentMode',
-      'colorrandoMode',
-      'magicmaxMode',
-      'antiFreezeMode',
-      'mypurseMode',
-      'iwsMode',
-      'fastwarpMode',
-      'itemNameRandoMode',
-      'noprologueMode',
-      'unlockedMode',
-      'surpriseMode',
-      'enemyStatRandoMode',
-      'shopPriceRandoMode',
-      'startRoomRandoMode',
-      'startRoomRando2ndMode',
-      'dominoMode',
-      'rlbcMode',
-      'immunityPotionMode',
-      'godspeedMode',
-      'libraryShortcut',
-      'elemChaosMode',
-      'easyMode',
-      'devStashMode',
-      'seasonalPhrasesMode',
-      'music',
-      'bossMusicSeparation',
-      'singleHitGearMode',
-      'revCastleTeleportRando',
-      'zeroDollarRelicMode',
-      'openClockStatueMode',
-      'spikeRoomRando',
-      'lycanMode',
-      'startStatRandoMode',
-      'turkeyMode',
-      'stats',
-      'accessibilityPatches',
-      'enemyDrops',
-      'itemLocations',
-      'newGoals',
-      'prologueRewards',
-      'startingEquipment'
-    ]
-
+    // Structured options that should preserve preset object data
     const STRUCTURED_KEYS = ["startingEquipment", "enemyDrops", "itemLocations", "prologueRewards"];
 
-    formOptions.forEach(key => {
-      const presetValue = sotnRando.presets[elems.presetId.selectedIndex].options()[key];
+    // Loop through every option defined in optionsArray
+    sotnRando.optionsArray.forEach(opt => {
+      const key = opt.longId;            // e.g. "enemyDrops", "easyMode", etc.
+      const html = opt.htmlElement;      // e.g. "enemy-drops"
+
+      // Skip options that have no UI element
+      if (!html) return;
+
+      const presetValue = preset.options()[key];
 
       // If preset defines structured data, DO NOT override it
       if (STRUCTURED_KEYS.includes(key) && typeof presetValue === "object") {
-        options[key] = presetValue;   // preserve preset data
+        options[key] = presetValue;
         return;
       }
 
-      // Otherwise use form checkbox
-      options[key] = !!elems[key]?.checked;
+      // Otherwise read from checkbox
+      const elem = elems[html];
+      options[key] = !!elem?.checked;
     });
 
-    return options
+    return options;
   }
+
 
   function deleteOriginalComplexity(options, newComplexity) {
     let relicLocations = options.relicLocations;
@@ -855,11 +822,11 @@
   }
 
   function clearHandler(event) {
-    event.preventDefault()
-    event.stopPropagation()
-    expectChecksum = undefined
+    event.preventDefault();
+    event.stopPropagation();
+    expectChecksum = undefined;
 
-    // Reset values
+    // Reset simple text fields
     const resetFields = [
       'seed',
       'enemyDropsArg',
@@ -869,65 +836,40 @@
       'relicLocationsArg',
       'writes',
       'newGoals'
-    ]
-    resetFields.forEach(key => elems[key].value = '')
+    ];
+    resetFields.forEach(key => elems[key].value = '');
 
-    // Enable toggles
-    const clearFields = [
-      'seed',
-      'presetId',
-      'enemyDrops',
-      'startingEquipment',
-      'itemLocations',
-      'prologueRewards',
-      'relicLocations',
-      'relicLocationsSet',
-      'turkeyMode',
-      'magicmaxMode',
-      'colorrandoMode',
-      'antiFreezeMode',
-      'mypurseMode',
-      'iwsMode',
-      'fastwarpMode',
-      'noprologueMode',
-      'unlockedMode',
-      'surpriseMode',
-      'enemyStatRandoMode',
-      'shopPriceRandoMode',
-      'startRoomRandoMode',
-      'startRoomRando2ndMode',
-      'dominoMode',
-      'rlbcMode',
-      'immunityPotionMode',
-      'godspeedMode',
-      'libraryShortcut',
-      'elemChaosMode',
-      'revCastleTeleportRando',
-      'zeroDollarRelicMode',
-      'openClockStatueMode',
-      'spikeRoomRando',
-      'lycanMode',
-      'easyMode',
-      'devStashMode',
-      'seasonalPhrasesMode',
-      'bossMusicSeparation',
-      'singleHitGearMode',
-      'startStatRandoMode',
-      'tournamentMode'
-    ]
-    clearFields.forEach(key => elems[key].disabled = false)
+    // Reset all "opt" fields from optionsArray (enemyDrops, itemLocations, etc.)
+    sotnRando.optionsArray.forEach(opt => {
+      if (opt.argvFlag === "opt" && opt.htmlElement) {
+        if (elems[opt.htmlElement]) {
+          elems[opt.htmlElement].value = "";
+        }
+      }
+    });
 
-    // FORCE UNCHECK START STAT RANDO
-    if (elems.startStatRandoMode) {
-      elems.startStatRandoMode.checked = false;
+    // Re-enable all UI toggles from optionsArray
+    sotnRando.optionsArray.forEach(opt => {
+      const html = opt.htmlElement;
+      if (!html) return; // skip options without UI elements
+
+      if (elems[html]) {
+        elems[html].disabled = false;
+      }
+    });
+
+    // Seasonal phrases special case
+    if (elems.seasonalPhrasesMode) {
+      elems.seasonalPhrasesMode.value = true;
     }
 
-    // Special case
-    elems.seasonalPhrasesMode.value = true
-    elems.clear.classList.add('hidden')
+    // Hide clear button
+    elems.clear.classList.add('hidden');
 
-    presetChange()
+    // Trigger preset refresh
+    presetChange();
   }
+
 
   function copyHandler(event) {
     event.preventDefault()
