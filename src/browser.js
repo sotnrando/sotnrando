@@ -158,135 +158,6 @@
     elems.esMoveToLeft.addEventListener("click", includeSong);
   }
 
-  // function loadOptionsFromUrl() {
-  //   const rs = sotnRando.util.optionsFromUrl(window.location.href);
-  //   options = rs.options;
-  //   const applied = sotnRando.util.Preset.options(options);
-
-  //   seed = rs.seed;
-  //   if (!Number.isNaN(rs.checksum)) expectChecksum = rs.checksum;
-
-  //   // --- Seed handling ---
-  //   if (typeof seed === "string") {
-  //     elems.seed.value = seed;
-  //     seedChange();
-  //     haveChecksum = true;
-  //   }
-  //   if (seed.length) elems.seed.disabled = true;
-
-  //   // --- Preset selection ---
-  //   if (options.preset) {
-  //     const index = sotnRando.presets.findIndex(p => p.id === options.preset);
-  //     elems.presetId.selectedIndex = index >= 0 ? index : 0;
-  //     presetIdChange();
-  //   } else {
-  //     elems.presetId.selectedIndex = 0;
-  //   }
-
-  //   presetChange();
-
-  //   // --- Tournament mode ---
-  //   elems.tournamentMode.checked = options.tournamentMode;
-  //   ChangeHandlers.tournamentModeChange();
-  //   elems.tournamentMode.disabled = true;
-
-  //   // --- Complexity from relicLocations ---
-  //   const relicLoc = typeof applied.relicLocations === "object"
-  //     ? applied.relicLocations
-  //     : safe.options().relicLocations;
-
-  //   Object.keys(relicLoc).forEach(key => {
-  //     if (/^[0-9]+(-[0-9]+)?$/.test(key)) {
-  //       elems.complexity.value = key.split("-")[0];
-  //     }
-  //   });
-
-  //   // --- Helper: assign checkbox + argument field ---
-  //   const assignOption = (name) => {
-  //     elems[name].checked = applied[name];
-
-  //     let arg = "";
-  //     if (typeof options[name] === "object") {
-  //       arg = sotnRando.util.optionsToString({ [name]: options[name] });
-  //     }
-  //     elems[name + "Arg"].value = arg;
-  //   };
-
-  //   assignOption("enemyDrops");
-  //   assignOption("startingEquipment");
-  //   assignOption("itemLocations");
-  //   assignOption("prologueRewards");
-
-  //   // --- Relic locations ---
-  //   elems.relicLocations.checked = !!applied.relicLocations;
-
-  //   let relicLocationsArg = "";
-  //   if (typeof options.relicLocations === "object") {
-  //     const serialized = sotnRando.util.optionsToString({
-  //       relicLocations: {
-  //         ...applied.relicLocations,
-  //         extension: sotnRando.constants.EXTENSION.SCENIC
-  //       }
-  //     });
-
-  //     const scenicStr = sotnRando.util.optionsToString({
-  //       relicLocations: { extension: sotnRando.constants.EXTENSION.SCENIC }
-  //     }).slice(2);
-
-  //     const relicOptions = sotnRando.util.optionsFromString(
-  //       serialized.replace(new RegExp(":?" + scenicStr), "")
-  //     );
-
-  //     if ("extension" in options.relicLocations) {
-  //       relicOptions.relicLocations.extension = options.relicLocations.extension;
-  //     }
-
-  //     relicLocationsArg = sotnRando.util.optionsToString(relicOptions);
-  //   }
-
-  //   elems.relicLocationsArg.value = relicLocationsArg;
-
-  //   // --- Relic extension radios ---
-  //   const ext = applied.relicLocations?.extension;
-  //   const EXT = sotnRando.constants.EXTENSION;
-
-  //   elems.relicLocationsExtension.extended.checked = ext === EXT.EXTENDED;
-  //   elems.relicLocationsExtension.scenic.checked = ext === EXT.SCENIC;
-  //   elems.relicLocationsExtension.guarded.checked = ext === EXT.GUARDED;
-  //   elems.relicLocationsExtension.guardedplus.checked = ext === EXT.GUARDEDPLUS;
-  //   elems.relicLocationsExtension.equipment.checked = ext === EXT.EQUIPMENT;
-  //   elems.relicLocationsExtension.classic.checked = !ext;
-
-  //   relicLocationsExtensionChange();
-
-  //   // --- Writes ---
-  //   elems.writes.value = options.writes
-  //     ? sotnRando.util.optionsToString({ writes: options.writes })
-  //     : "";
-
-  //   // --- Stats, music, turkey ---
-  //   elems.stats.checked = applied.stats;
-  //   ChangeHandlers.statsChange();
-
-  //   elems.music.checked = applied.music;
-  //   elems.turkeyMode.checked = applied.turkeyMode;
-
-  //   // --- Disable UI for seed replay mode ---
-  //   [
-  //     "presetId", "complexity", "enemyDrops", "startingEquipment",
-  //     "itemLocations", "prologueRewards", "stats", "music", "turkeyMode"
-  //   ].forEach(key => elems[key].disabled = true);
-
-  //   elems.relicLocations.disabled = false;
-  //   elems.relicLocationsSet.disabled = false;
-
-  //   elems.clear.classList.remove("hidden");
-
-  //   // --- Clean URL ---
-  //   const baseUrl = url.origin + url.pathname;
-  //   window.history.replaceState({}, document.title, baseUrl);
-  // }
-
   function loadPastOptions() {
     // --- Complexity ---
     loadOption("complexity", complexityChange, 7);
@@ -553,7 +424,7 @@
 
         const isBossGoal = val === "b" || val === "a" || val === "v";
         const isRelicGoal = val === "r" || val === "a";
-        const isBhGoal = val === "h" || val === "t" || val === "w" || val === "x";
+        const isBhGoal = val === "h" || val === "t" || val === "w" || val === "x" || "val" === "y";
 
         const incompatible =
           (isBossGoal && !BOSS_COMPAT.has(presetId)) ||
@@ -841,8 +712,8 @@
       bhNorm: bhCompatible.includes(preset),
       bhAdvanced: ["target-confirmed"].includes(preset),
       bhHitman: ["hitman"].includes(preset),
-      bhBoss: ["rampage"].includes(preset)
-
+      bhBoss: ["rampage"].includes(preset),
+      bhBossRelic: ["rampage"].includes(preset)
     };
 
     if (goal in isCompatible && !isCompatible[goal]) {

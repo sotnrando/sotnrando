@@ -10046,6 +10046,7 @@
       offset = data.writeWord(offset, 0x00000000)
       break
     case 'a':
+    case 'y':
       // All Bosses & Relics (ABRSR)
       offset = jmpAddr
       data.writeWord(offset, 0x08074fbc)
@@ -10087,6 +10088,7 @@
       offset = data.writeWord(offset, 0x00000000)
       break
     case 'v':
+    case 'x':
       // All Bosses All Vlads
       offset = jmpAddr
       data.writeWord(offset, 0x08074fbc)

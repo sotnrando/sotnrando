@@ -1014,10 +1014,10 @@ if ('mapcolor' in argv && typeof(argv.mapcolor) !== 'undefined') {
 if ('debug' in argv) {console.log('randomize | Choose new goals')}
 // Map Color Features if specified.
 if ('newGoals' in argv && typeof(argv.newGoals) !== 'undefined') {
-  let termsAllowed = 'd,b,r,a,v,h,t,w,x'
+  let termsAllowed = 'd,b,r,a,v,h,t,w,x,y'
   if (!(termsAllowed.includes(argv.newGoals))) {
     yargs.showHelp()
-    console.error('\nMust contain a letter \'d\'(Preset Default), \'b\'(All Bosses), \'r\'(All Relics), \'a\'(All Bosses and Relics), \'v\'(All Bosses and Vlad Relics), \'h\'(Bounty Hunter), \'t\'(Bounty Hunter Target Confirmed), \'x\'(Bounty Hunter and All Bosses)')
+    console.error('\nMust contain a letter \'d\'(Preset Default), \'b\'(All Bosses), \'r\'(All Relics), \'a\'(All Bosses and Relics), \'v\'(All Bosses and Vlad Relics), \'h\'(Bounty Hunter), \'t\'(Bounty Hunter Target Confirmed), \'x\'(Bounty Hunter and All Bosses), \'y\'(Bounty Hunter and All Bosses and Relics)')
     process.exit(1)
   } else {
     options.newGoalsSet = argv.newGoals.toString()

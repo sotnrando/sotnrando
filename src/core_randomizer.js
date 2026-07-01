@@ -342,6 +342,8 @@ async function randomize(
         case 'v':
         // All bosses and bounties flag
         case 'x':
+        // All bosses, relics and bounties flag
+        case 'y':
           optWrite = optWrite + 0x05
           break
         default:
@@ -500,6 +502,9 @@ async function randomize(
         } else if (nGoal === 'w') {
           check.apply(util.applyBountyHunterTargets(rng, BH.HITMAN))
         }else if (nGoal === 'x') {
+          check.apply(util.applyNewGoals(nGoal))
+          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
+        }else if (nGoal === 'y') {
           check.apply(util.applyNewGoals(nGoal))
           check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
         } else {
