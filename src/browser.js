@@ -451,10 +451,49 @@
   }
 
   function presetIdChange() {
-    // Refactored for ease of alteration and maintainability -crazy4blades
+    const optionsMeta = sotnRando.optionsArray;
+
+    // 1. Resolve selected preset 
+    let idx = elems.presetId.selectedIndex;
+    if (idx < 0) idx = 0;
+
+    const id = elems.presetId.options
+      ? elems.presetId.options[idx].value
+      : elems.presetId.childNodes[idx].value;
+
+    const preset = sotnRando.presets.find(p => p.id === id) || sotnRando.presets[0];
+
+    // 2. Update preset metadata UI 
+    elems.presetDescription.innerText = preset.description;
+    elems.presetAuthor.innerText = preset.author;
+    elems.presetKnowledgeCheck.innerText = preset.knowledgeCheck;
+    elems.presetExtension.innerText = preset.metaExtension;
+    elems.presetComplexity.innerText = preset.metaComplexity;
+    elems.presetItemStats.innerText = preset.itemStats;
+    elems.presetTimeFrame.innerText = preset.timeFrame;
+    elems.presetModdedLevel.innerText = preset.moddedLevel;
+    elems.presetCastleType.innerText = preset.castleType;
+    elems.presetTransformEarly.innerText = preset.transformEarly;
+    elems.presetTransformFocus.innerText = preset.transformFocus;
+    elems.presetWinCondition.innerText = preset.winCondition;
+
+    localStorage.setItem("presetId", preset.id);
+
+    // 3. Compute complexity 
+    const options = preset.options();
+    let complexity = Object.keys(options.relicLocations || {}).reduce((acc, key) => {
+      return /^[0-9]+(-[0-9]+)?/.test(key) ? key.split("-").shift() : acc;
+    }, 1);
+
+    adjustMaxComplexity();
+    elems.complexity.value = complexity;
+    elems.complexityCurrentValue.innerText = `(${complexity})`;
+
+    // 4. GOAL LOGIC (BH + Boss + Relic)
     const BH_COMPAT = new Set([
       "bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "rampage-25te"
     ]);
+
     const BOSS_COMPAT = new Set([
       "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
       "expedition", "bat-master", "glitch", "scavenger", "empty-hand", "third-castle", "magic-mirror", "leg-day",
@@ -463,6 +502,7 @@
       "dog-life", "battle-mage", "timeline", "chimera", "vanilla", "all-bosses", "rampage", "nimble-lite", "oracle",
       "boss-reflector", "cornivus", "mirror-breaker"
     ]);
+
     const RELIC_COMPAT = new Set([
       "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
       "expedition", "bat-master", "scavenger", "empty-hand", "gem-farmer", "third-castle", "rat-race", "magic-mirror",
@@ -471,44 +511,19 @@
       "mobility", "timeline", "chimera", "vanilla", "nimble-lite", "all-bosses", "cornivus", "mirror-breaker"
     ]);
 
-    const ALL_TOGGLES = [
-      "antiFreezeMode", "startRoomRando2ndMode", "relicLocations", "relicLocationsSet", "startRoomRandoMode",
-      "unlockedMode", "enemyStatRandoMode", "elemChaosMode", "rlbcMode", "godspeedMode", "dominoMode"
-    ];
-
-    const DISABLE_RULES = [
-      { ids: ["glitch", "glitchmaster", "any-percent"], elems: ["antiFreezeMode","zeroDollarRelicMode"] },
-      { ids: ["rat-race"], elems: ["zeroDollarRelicMode"] },
-      { ids: ["dog-life", "magic-mirror", "mobility", "lookingglass", "boss-rush", "beyond", "first-castle", "vanilla"], elems: ["startRoomRando2ndMode"] },
-      { ids: ["boss-rush", "first-castle", "seeker"], elems: ["relicLocations", "relicLocationsSet"] },
-      { ids: ["boss-rush", "beyond", "vanilla"], elems: ["startRoomRandoMode"] },
-      { ids: ["boss-rush"], elems: ["unlockedMode"] },
-      { ids: ["big-toss"], elems: ["enemyStatRandoMode", "elemChaosMode"] },
-      { ids: ["boss-rush", "first-castle", "beyond", "seeker", "recycler"], elems: ["rlbcMode"] },
-      { ids: ["battle-mage"], elems: ["godspeedMode"] },
-      { ids: ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "rampage-25te", "oracle"], elems: ["dominoMode"] }
-    ];
-
     const BH_GOAL_PRESETS = {
       h: new Set(["bounty-hunter", "chaos-lite"]),
       t: new Set(["target-confirmed"]),
       w: new Set(["hitman"]),
       x: new Set(["rampage", "rampage-25te"])
     };
+
     const GOAL_PRESETS = {
       b: new Set(["all-bosses", "mirror-breaker"]),
       v: new Set(["boss-reflector", "cornivus", "nimble-lite-te"])
     };
 
-    const enableAll = () => {
-      for (const key of ALL_TOGGLES) {
-        const el = elems[key];
-        if (!el) continue;
-        el.disabled = false;
-      }
-    };
-
-    const computeGoal = (presetId) => {
+    function computeGoal(presetId) {
       for (const [goal, set] of Object.entries(BH_GOAL_PRESETS)) {
         if (set.has(presetId)) return goal;
       }
@@ -516,9 +531,9 @@
         if (set.has(presetId)) return goal;
       }
       return "default";
-    };
+    }
 
-    const validateGoal = (presetId, goal) => {
+    function validateGoal(presetId, goal) {
       const isBossGoal = goal === "b" || goal === "a" || goal === "v";
       const isRelicGoal = goal === "r" || goal === "a";
       const isBhGoal = goal === "h" || goal === "t" || goal === "w" || goal === "x";
@@ -526,10 +541,11 @@
       if (isBossGoal && !BOSS_COMPAT.has(presetId)) return "default";
       if (isRelicGoal && !RELIC_COMPAT.has(presetId)) return "default";
       if (isBhGoal && !BH_COMPAT.has(presetId)) return "default";
-      return goal;
-    };
 
-    const enforceGoalCompatibility = (presetId) => {
+      return goal;
+    }
+
+    function enforceGoalCompatibility(presetId) {
       const goalOptions = elems.newGoals.options;
       for (let i = 0; i < goalOptions.length; i++) {
         const opt = goalOptions[i];
@@ -546,34 +562,7 @@
 
         opt.disabled = incompatible;
       }
-    };
-
-    let idx = elems.presetId.selectedIndex;
-    if (idx < 0) idx = 0;
-
-    const id = elems.presetId.options
-      ? elems.presetId.options[idx].value
-      : elems.presetId.childNodes[idx].value;
-
-    const preset = sotnRando.presets.find(p => p.id === id) || sotnRando.presets[0];
-
-    // Metadata
-    elems.presetDescription.innerText = preset.description;
-    elems.presetAuthor.innerText = preset.author;
-    elems.presetKnowledgeCheck.innerText = preset.knowledgeCheck;
-    elems.presetExtension.innerText = preset.metaExtension;
-    elems.presetComplexity.innerText = preset.metaComplexity;
-    elems.presetItemStats.innerText = preset.itemStats;
-    elems.presetTimeFrame.innerText = preset.timeFrame;
-    elems.presetModdedLevel.innerText = preset.moddedLevel;
-    elems.presetCastleType.innerText = preset.castleType;
-    elems.presetTransformEarly.innerText = preset.transformEarly;
-    elems.presetTransformFocus.innerText = preset.transformFocus;
-    elems.presetWinCondition.innerText = preset.winCondition;
-
-    localStorage.setItem("presetId", preset.id);
-
-    enableAll();
+    }
 
     let goal = computeGoal(preset.id);
     goal = validateGoal(preset.id, goal);
@@ -582,169 +571,114 @@
     localStorage.setItem("newGoals", elems.newGoals.value);
     newGoalsLock = elems.newGoals.value;
 
-    const options = preset.options();
-    let complexity = Object.keys(options.relicLocations || {}).reduce((acc, key) => {
-      return /^[0-9]+(-[0-9]+)?/.test(key) ? key.split("-").shift() : acc;
-    }, 1);
+    enforceGoalCompatibility(preset.id);
 
-    adjustMaxComplexity();
-
-    // Unified logic with corrected disabling behavior
-    function applyOptions(options = {}, presetId) {
-      const STRUCTURED_KEYS = ["startingEquipment", "enemyDrops", "itemLocations"];
-
-      // Set complexity
-      elems.complexity.value = complexity;
-      elems.complexityCurrentValue.innerText = `(${complexity})`;
-
-      const setCheckDisable = (key, condition) => {
-        const el = elems[key];
-        if (!el) return;
-        el.checked = !!condition;
-        el.disabled = false; // presets never disable these
-      };
-
-      // Basic boolean options
-      setCheckDisable("enemyDrops", options.enemyDrops);
-      setCheckDisable("startingEquipment", options.startingEquipment);
-      setCheckDisable("itemLocations", options.itemLocations);
-      setCheckDisable("prologueRewards", options.prologueRewards);
-
-      // Relic locations
-      elems.relicLocations.checked = !!options.relicLocations;
-
-      const ext = options.relicLocations?.extension;
-      const extSet = elems.relicLocationsExtension;
-      if (extSet) {
-        extSet.guarded.checked = ext === sotnRando.constants.EXTENSION.GUARDED;
-        extSet.guardedplus.checked = ext === sotnRando.constants.EXTENSION.GUARDEDPLUS;
-        extSet.equipment.checked = ext === sotnRando.constants.EXTENSION.EQUIPMENT;
-        extSet.scenic.checked = ext === sotnRando.constants.EXTENSION.SCENIC;
-        extSet.extended.checked = ext === sotnRando.constants.EXTENSION.EXTENDED;
-        extSet.classic.checked = !ext;
-      }
-
-      // All toggleable keys
-      const allKeys = [
-        "stats",
-        "music",
-        "turkeyMode",
-        "magicmaxMode",
-        "colorrandoMode",
-        "antiFreezeMode",
-        "mypurseMode",
-        "iwsMode",
-        "fastwarpMode",
-        "itemNameRandoMode",
-        "noprologueMode",
-        "unlockedMode",
-        "surpriseMode",
-        "enemyStatRandoMode",
-        "shopPriceRandoMode",
-        "startRoomRandoMode",
-        "startRoomRando2ndMode",
-        "dominoMode",
-        "rlbcMode",
-        "immunityPotionMode",
-        "godspeedMode",
-        "libraryShortcut",
-        "elemChaosMode",
-        "singleHitGearMode",
-        "revCastleTeleportRando",
-        "zeroDollarRelicMode",
-        "openClockStatueMode",
-        "spikeRoomRando",
-        "lycanMode",
-        "easyMode",
-        "devStashMode",
-        "bossMusicSeparation",
-        "startStatRandoMode"
-      ];
-
-      const keysToRemove = ["music", "bossMusicSeparation"];
-      const filteredKeys = allKeys.filter(key => !keysToRemove.includes(key));
-
-      filteredKeys.forEach(key => {
-        const el = elems[key];
+    // 5. Apply preset options (data-driven) 
+    function applyOptions(options) {
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
         if (!el) return;
 
-        const presetValue = options[key];
+        const presetValue = options[opt.longId];
 
-        // If preset defines structured data, preserve it and lock checkbox ON
-        if (STRUCTURED_KEYS.includes(key) && typeof presetValue === "object") {
+        if (typeof presetValue === "object") {
           el.checked = true;
           return;
         }
 
-        // If preset does NOT define this key at all, reset it to false
-        if (!(key in options)) {
+        if (!(opt.longId in options)) {
           el.checked = false;
           return;
         }
 
-        // Normal boolean behavior
         el.checked = !!presetValue;
       });
     }
 
-    enforceGoalCompatibility(preset.id);
-    applyOptions(options, preset.id);
+    applyOptions(options);
     relicLocationsExtensionChange();
 
-    const TOURNAMENT_LOCKED = [
-      "accessibilityPatches",
-      "antiFreezeMode",
-      "bossMusicSeparation",
-      "colorrandoMode",
-      "devStashMode",
-      "dominoMode",
-      "easyMode",
-      "elemChaosMode",
-      "enemyDrops",
-      "enemyStatRandoMode",
-      "fastwarpMode",
-      "godspeedMode",
-      "immunityPotionMode",
-      "iwsMode",
-      "itemLocations",
-      "itemNameRandoMode",
-      "itemNames",
-      "itemStats",
-      "libraryShortcut",
-      "lycanMode",
-      "magicmaxMode",
-      "music",
-      "mypurseMode",
-      "newGoals",
-      "noprologueMode",
-      "openClockStatueMode",
-      "prologueRewards",
-      "relicLocations",
-      "relicLocationsSet",
-      "revCastleTeleportRando",
-      "rlbcMode",
-      "shopPriceRandoMode",
-      "showRelicLocations",
-      "showSolutions",
-      "showSpoilers",
-      "showRelics",
-      "showSolutions",
-      "spikeRoomRando",
-      "startingEquipment",
-      "singleHitGearMode",
-      "startStatRandoMode",
-      "startRoomRando2ndMode",
-      "startRoomRandoMode",
-      "stats",
-      "surpriseMode",
-      "tournamentMode",
-      "turkeyMode",
-      "unlockedMode",
-      "zeroDollarRelicMode"
-    ];
+    // 6. Enforce required/incompatible options 
+    function enforceDependencies() {
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el) return;
 
-    // TE presets end in -sprXXte, -winXXte, etc.
-    // These enforce tournament-legal settings and lock most UI controls.
+        const isOn = el.checked;
+
+        // Required options must be ON and locked
+        opt.requiredOptions.forEach(req => {
+          const reqEl = elems[req];
+          if (!reqEl || reqEl._presetLocked) return;
+
+          if (isOn) {
+            reqEl.checked = true;
+            reqEl.disabled = true;
+          } else {
+            reqEl.disabled = false;
+          }
+        });
+
+        // Incompatible options must be OFF
+        opt.incompatibleOptions.forEach(bad => {
+          const badEl = elems[bad];
+          if (isOn && badEl && !badEl._presetLocked) badEl.checked = false;
+        });
+      });
+    }
+
+    enforceDependencies();
+
+    // 7. Disable AND uncheck options based on preset incompatibilities 
+    function applyPresetLocks() {
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el) return;
+
+        const incompatible = opt.incompatiblePresets.includes(preset.id);
+
+        if (incompatible) {
+          el.checked = false;
+          el.disabled = true;
+          el._presetLocked = true;
+        } else {
+          el._presetLocked = false;
+        }
+      });
+    }
+
+    applyPresetLocks();
+
+    // 8. Disable options incompatible with preset's enabled options
+    function applyOptionLocks() {
+      const presetOptions = preset.options();
+
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el) return;
+
+        // Preset lock overrides everything
+        if (el._presetLocked) return;
+
+        let shouldDisable = false;
+
+        for (const enabledOptId of Object.keys(presetOptions)) {
+          const enabledMeta = optionsMeta.find(o => o.longId === enabledOptId);
+          if (!enabledMeta) continue;
+
+          if (enabledMeta.incompatibleOptions.includes(opt.longId)) {
+            shouldDisable = true;
+            break;
+          }
+        }
+
+        el.disabled = shouldDisable;
+      });
+    }
+
+    applyOptionLocks();
+
+    // 9. Tournament Mode auto-lock 
     const isTeLocked =
       /-spr[0-9]{2}te$/.test(preset.id) ||
       /-win[0-9]{2}te$/.test(preset.id) ||
@@ -753,39 +687,25 @@
 
     if (isTeLocked) {
       elems.tournamentMode.checked = true;
-      // TE: disable all locked keys
-      TOURNAMENT_LOCKED.forEach(key => {
-        const el = elems[key];
-        if (el) el.disabled = true;
+
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el || el._presetLocked) return;
+        el.disabled = true;
       });
 
-      const allRadios = document.querySelectorAll("input[type='radio']");
-      allRadios.forEach(r => r.disabled = true);
+      document.querySelectorAll("input[type='radio']").forEach(r => r.disabled = true);
     } else {
-      // Non‑TE: re‑enable everything this system controls
-      TOURNAMENT_LOCKED.forEach(key => {
-        const el = elems[key];
-        if (el) el.disabled = false;
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el || el._presetLocked) return;
+        el.disabled = false;
       });
 
-      const allRadios = document.querySelectorAll("input[type='radio']");
-      allRadios.forEach(r => r.disabled = false);
+      document.querySelectorAll("input[type='radio']").forEach(r => r.disabled = false);
     }
-    ChangeHandlers.tournamentModeChange();
-    // Preset-specific UI disable rules.
-    // If a preset appears in `ids`, the listed UI elements in `elems` are disabled.
-    DISABLE_RULES.forEach(rule => {
-      if (rule.ids.includes(preset.id)) {
-        rule.elems.forEach(key => {
-          const el = elems[key];
-          if (!el) return;
 
-          const wasChecked = el.checked;
-          el.disabled = true;
-          el.checked = wasChecked;
-        });
-      }
-    });
+    ChangeHandlers.tournamentModeChange();
   }
 
   function complexityChange() {
