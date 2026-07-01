@@ -238,38 +238,65 @@ BrowserUtils.hideSpoilers = function hideSpoilers() {
 }
 
 BrowserUtils.loadPresets = function loadPresets() {
-    let sortedPresets = sotnRando.presets
-    sortedPresets.sort(function (a, b) {
-        if (!('weight' in a && 'id' in a)) {
-            if (!('weight' in b && 'id' in b)) {
-                return 0
-            }
-            return 1
-        } else if (!('weight' in b && 'id' in b)) {
-            return -1
+    const presets = sotnRando.presets;
+
+    // --- Define your three groups ---
+    const NEW_PRESETS = new Set([
+        "collector",
+        "hoarder"
+    ]);
+
+    function isTournamentPreset(id) {
+        return (
+            /-spr\d+te$/.test(id) ||
+            /-win\d+te$/.test(id) ||
+            /-aut\d+te$/.test(id) ||
+            /-sum\d+te$/.test(id)
+        );
+    }
+
+    // --- Bucket the presets ---
+    const newPresets = [];
+    const tournamentPresets = [];
+    const otherPresets = [];
+
+    presets.forEach(preset => {
+        if (NEW_PRESETS.has(preset.id)) {
+            newPresets.push(preset);
+        } else if (isTournamentPreset(preset.id)) {
+            tournamentPresets.push(preset);
+        } else {
+            otherPresets.push(preset);
         }
-        const weight = a.weight - b.weight
-        if (weight === 0) {
-            if (a.id < b.id) {
-                return -1
-            } else if (a.id > b.id) {
-                return 1
-            }
-        }
-        return weight
     });
 
-    sortedPresets.forEach(function (preset) {
+    // --- Sort alphabetically inside each section ---
+    newPresets.sort((a, b) => a.id.localeCompare(b.id));
+    tournamentPresets.sort((a, b) => a.id.localeCompare(b.id));
+    otherPresets.sort((a, b) => a.id.localeCompare(b.id));
+
+    // --- Combine in the desired order ---
+    const sortedPresets = [
+        ...newPresets,
+        ...tournamentPresets,
+        ...otherPresets
+    ];
+
+    // --- Populate dropdown ---
+    sortedPresets.forEach(preset => {
         if (!preset.hidden) {
             if (preset.id === "april-fools" && !isAprilFools) return;
-            const option = document.createElement('option')
-            option.value = preset.id
-            option.innerText = preset.name
-            if (preset.id === "april-fools") option.innerText = "April Fools";
-            elems.presetId.appendChild(option)
+
+            const option = document.createElement("option");
+            option.value = preset.id;
+            option.innerText = preset.id === "april-fools"
+                ? "April Fools"
+                : preset.name;
+
+            elems.presetId.appendChild(option);
         }
-    })
-}
+    });
+};
 
 BrowserUtils.cloneItems = function cloneItems(items) {                     //Saves previous selections
     return items.map(function (item) {
