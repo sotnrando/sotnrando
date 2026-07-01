@@ -42,11 +42,11 @@ function getPresetIsParent(presetId){
 
 presetsFullInformation.forEach(function(preset) {
   // Extract required fields from metadata
-  const { id, name: presetName, description, author, knowledgeCheck, extension, complexity, timeFrame, moddedLevel, castleType, transformEarly, transformFocus, winCondition, metaExtension, metaComplexity, itemStats} = preset.metadata;
+  const { id, name: presetName, description, author, knowledgeCheck, extension, complexity, timeFrame, moddedLevel, castleType, transformEarly, transformFocus, winCondition, metaExtension, metaComplexity, itemStats, listSortFlag} = preset.metadata;
   let incompatibleOptions = getIncompatibleOptions(id);
   let presetJs = `./build/presets/${id}.js`;
   let parent = getPresetIsParent(id);
-  presetData.push({ name: presetName, id, description, author, knowledgeCheck, extension, complexity, timeFrame, moddedLevel, castleType, transformEarly, transformFocus, winCondition, metaExtension, metaComplexity, itemStats, incompatibleOptions, presetJs, parent });
+  presetData.push({ name: presetName, id, description, author, knowledgeCheck, extension, complexity, timeFrame, moddedLevel, castleType, transformEarly, transformFocus, winCondition, metaExtension, metaComplexity, itemStats, listSortFlag, incompatibleOptions, presetJs, parent });
 
   runner(['preset', 'new', '--name', id], {
     templates: path.join(__dirname, '../templates'),
