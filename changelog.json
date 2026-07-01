@@ -15,7 +15,11 @@
                     "Options has gone through a massive refactor this month. Implementing new features will be mucxh easier and faster from now on."
                 ],
                 "Website Updates": [
-                    "???"
+                    "Randomizer restructure creating a tabular format for options and presets to be displayed in.",
+                    "The tabular format will allow for more flexibility and consistency as well as enable future updates to the web interface.",
+                    "Tabs include 'Goals', 'Randomization', 'Quality of Life', 'Transform Modes'*more to come*, and 'Cosmetics'.",
+                    "These changes to the page should allow for more intuitive navigation and a better user experience.",
+                    "If you want to see what options you have enabled and disabled, there is a Generate Options log Button below the randomize button to inform you of the what is enabled and disabled in your current configuration."
                 ],
                 "Program Updates": [
                     "Options and Presets are now listed in massive array files where they can be refrenced much easier than before. This will allow for more flexibility and consistency as well as enable future updates to the web interface."
