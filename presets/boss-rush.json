@@ -21,7 +21,8 @@
   },
   
   "comment": "Build off the Adventure preset for relic location data",
-  "inherits": "adventure",
+  "inherits": "casual",
+  "relicLocationsExtension": "equipment",
   "preventLeaks": false,
   "stats": false,
   "music": false,

@@ -18,7 +18,8 @@
     "transformFocus": "None",
     "winCondition": "Relic Skip"
   },
-  "inherits": "adventure",
+  "inherits": "casual",
+  "relicLocationsExtension": "equipment",
   "stats": false,
   "prologueRewards": [{
     "item": "Heart Refresh",
