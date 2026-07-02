@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="static/css/randomizations.css">
   <link rel="stylesheet" href="styles/navbar.css">
 </head>
+
 <body>
   <main>
     <header>
@@ -124,7 +125,7 @@
                   <h4>Preset author(s):</h4>
                   <p id="preset-author"></p>
 
-                  <fieldset id="meta-data-group">
+                  <fieldset id="meta-data-group" style="margin: 0 2em;">
                     <legend>Meta Data</legend>
 
                     <div class="meta-data">
@@ -180,110 +181,115 @@
                 </section>
               </div>
 
-              <div style="margin: 1em;">
-
-                <div class="toggle-container">
-                  <label class="toggle-switch">
-                    <input id="append-seed" type="checkbox" data-store-checkbox="true">
-                    <span class="slider"></span>
-                  </label>
-                  <label for="append-seed" class="toggle-label">
-                    Append Seed to Filename
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Appends the seed to the filename of the randomized bin.<br>
-                          You will need to modify your cue file track listing to reference the new filename.
+              <div class="option-grid" style="margin: 1em;">
+                <div>
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="append-seed" type="checkbox" data-store-checkbox="true">
+                      <span class="slider"></span>
+                    </label>
+                    <label for="append-seed" class="toggle-label">
+                      Append Seed to Filename
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Appends the seed to the filename of the randomized bin.<br>
+                            You will need to modify your cue file track listing to reference the new filename.
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </label>
-                </div>
+                    </label>
+                  </div>
 
-                <div class="toggle-container">
-                  <label class="toggle-switch">
-                    <input id="tournament-mode" type="checkbox" data-store-checkbox="true"
-                      data-custom-change="tournamentModeChange">
-                    <span class="slider"></span>
-                  </label>
-                  <label for="tournament-mode" class="toggle-label">
-                    Tournament Mode
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>Prevents displaying the relic locations and solutions.</span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-
-                <div class="toggle-container">
-                  <label class="toggle-switch">
-                    <input id="accessibility-patches" type="checkbox" data-store-checkbox="true">
-                    <span class="slider"></span>
-                  </label>
-                  <label for="accessibility-patches" class="toggle-label">
-                    Accessibility Patches
-                    <span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Reduces screen flashing from use items, adjusts some relics for better visibility,
-                          and patches some softlocks.
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="accessibility-patches" type="checkbox" data-store-checkbox="true">
+                      <span class="slider"></span>
+                    </label>
+                    <label for="accessibility-patches" class="toggle-label">
+                      Accessibility Patches
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Reduces screen flashing from use items, adjusts some relics for better visibility,
+                            and patches some softlocks.
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </label>
+                    </label>
+                  </div>
                 </div>
 
-                <div class="toggle-container">
-                  <label class="toggle-switch">
-                    <input id="show-spoilers" type="checkbox" data-store-checkbox="true"
-                      data-custom-change="spoilersChange">
-                    <span class="slider"></span>
-                  </label>
-                  <label for="show-spoilers" class="toggle-label">Show Spoilers</label>
+                <div>
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="tournament-mode" type="checkbox" data-store-checkbox="true"
+                        data-custom-change="tournamentModeChange">
+                      <span class="slider"></span>
+                    </label>
+                    <label for="tournament-mode" class="toggle-label">
+                      Tournament Mode
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>Prevents displaying the relic locations and solutions.</span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="zero-relic" type="checkbox" data-store-checkbox="false">
+                      <span class="slider"></span>
+                    </label>
+                    <new></new>
+                    <label for="zero-relic" class="toggle-label">
+                      Zero-Dollar Relic
+                    </label>
+                  </div>
+
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="open-statue" type="checkbox" data-store-checkbox="false">
+                      <span class="slider"></span>
+                    </label>
+                    <new></new>
+                    <label for="open-statue" class="toggle-label">
+                      Open Clock Statue
+                    </label>
+                  </div>
                 </div>
 
-                <div class="toggle-container">
-                  <label class="toggle-switch">
-                    <input id="show-relics" type="checkbox" data-store-checkbox="false"
-                      data-custom-change="showRelicsChange">
-                    <span class="slider"></span>
-                  </label>
-                  <label for="show-relics" class="toggle-label">Show Relic Locations</label>
-                </div>
+                <div>
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="show-spoilers" type="checkbox" data-store-checkbox="true"
+                        data-custom-change="spoilersChange">
+                      <span class="slider"></span>
+                    </label>
+                    <label for="show-spoilers" class="toggle-label">Show Spoilers</label>
+                  </div>
 
-                <div class="toggle-container">
-                  <label class="toggle-switch">
-                    <input id="show-solutions" type="checkbox" data-store-checkbox="false"
-                      data-custom-change="showSolutionsChange">
-                    <span class="slider"></span>
-                  </label>
-                  <label for="show-solutions" class="toggle-label">Show Solutions</label>
-                </div>
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="show-relics" type="checkbox" data-store-checkbox="false"
+                        data-custom-change="showRelicsChange">
+                      <span class="slider"></span>
+                    </label>
+                    <label for="show-relics" class="toggle-label">Show Relic Locations</label>
+                  </div>
 
-                <div class="toggle-container">
-                  <label class="toggle-switch">
-                    <input id="zero-relic" type="checkbox" data-store-checkbox="false">
-                    <span class="slider"></span>
-                  </label>
-                  <new></new>
-                  <label for="zero-relic" class="toggle-label">
-                    Zero-Dollar Relic
-                  </label>
-                </div>
-
-                <div class="toggle-container">
-                  <label class="toggle-switch">
-                    <input id="open-statue" type="checkbox" data-store-checkbox="false">
-                    <span class="slider"></span>
-                  </label>
-                  <new></new>
-                  <label for="open-statue" class="toggle-label">
-                    Open Clock Statue
-                  </label>
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="show-solutions" type="checkbox" data-store-checkbox="false"
+                        data-custom-change="showSolutionsChange">
+                      <span class="slider"></span>
+                    </label>
+                    <label for="show-solutions" class="toggle-label">Show Solutions</label>
+                  </div>
                 </div>
 
               </div>
@@ -308,7 +314,7 @@
               <button type="button" class="tab-btn" onclick="openTab('tab-cosmetics')">
                 Cosmetics <new></new>
               </button>
-              
+
             </div>
 
             <div id="tab-goals" class="tab-content active">
