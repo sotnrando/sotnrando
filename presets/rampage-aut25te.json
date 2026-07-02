@@ -21,6 +21,10 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Normal",
+    "defaultGoal": "x",
+    "compatibleGoals": [
+      "x","y"
+    ],
     "listSortFlag": [
       "BountyHunter"
     ]

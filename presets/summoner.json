@@ -18,6 +18,11 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Normal",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","v"
+    ],
     "listSortFlag": [
       "Deprecated"
     ]

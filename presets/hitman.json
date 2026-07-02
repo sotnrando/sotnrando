@@ -18,6 +18,10 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Enemies Drop Vlads",
+    "defaultGoal": "w",
+    "compatibleGoals": [
+      "w","x","y"
+    ],
     "listSortFlag": [
       "BountyHunter"
     ]

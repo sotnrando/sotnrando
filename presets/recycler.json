@@ -18,6 +18,11 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Six out of Eight Vlads",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
     "listSortFlag": [
       "Evergreen"
     ]

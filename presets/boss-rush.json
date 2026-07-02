@@ -18,6 +18,10 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Complete Boss Rush",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "listSortFlag": [
       "Evergreen"
     ]

@@ -17,6 +17,11 @@
     "transformEarly": "",
     "transformFocus": "",
     "winCondition": "",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
     "listSortFlag": [
       "Evergreen"
     ]

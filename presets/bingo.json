@@ -18,6 +18,10 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Meet Bingo Conditions",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "listSortFlag": [
       "Normal"
     ]

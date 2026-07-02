@@ -19,6 +19,10 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Timed",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "listSortFlag": [
       "Evergreen"
     ]

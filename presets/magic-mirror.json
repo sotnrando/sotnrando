@@ -18,6 +18,11 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Mirror For 2nd Castle",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
     "listSortFlag": [
       "Evergreen"
     ]

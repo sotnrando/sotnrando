@@ -19,6 +19,10 @@
     "transformEarly": "Yes",
     "transformFocus": "Bat",
     "winCondition": "Collect Food",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "listSortFlag": [
       "Normal"
     ]

@@ -17,6 +17,10 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Gold Key",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "listSortFlag": [
       "Normal"
     ]

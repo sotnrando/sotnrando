@@ -19,6 +19,11 @@
     "transformEarly": "Yes",
     "transformFocus": "None",
     "winCondition": "Portal Spell",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
     "listSortFlag": [
       "Evergreen"
     ]

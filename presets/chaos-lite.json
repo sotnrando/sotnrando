@@ -19,6 +19,10 @@
     "transformEarly": "Yes",
     "transformFocus": "Bat",
     "winCondition": "April Fools",
+    "defaultGoal": "h",
+    "compatibleGoals": [
+      "h","t","w","x","y"
+    ],
     "listSortFlag": [
       "BountyHunter"
     ]

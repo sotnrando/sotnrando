@@ -18,6 +18,10 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "20 or 25 Relics",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "listSortFlag": [
       "Normal",
       "New"

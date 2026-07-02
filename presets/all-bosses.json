@@ -20,6 +20,11 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "All Bosses",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","a","v"
+    ],
     "listSortFlag": [
       "Evergreen"
     ]

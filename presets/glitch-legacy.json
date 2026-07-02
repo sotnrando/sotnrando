@@ -17,6 +17,10 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Relic Skip",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "listSortFlag": [
       "Deprecated"
     ]

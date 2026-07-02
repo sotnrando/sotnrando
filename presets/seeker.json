@@ -21,6 +21,10 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "Portal Spell",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "listSortFlag": [
       "Normal"
     ]

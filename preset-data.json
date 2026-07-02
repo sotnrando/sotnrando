@@ -18,13 +18,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/casual.js",
@@ -49,13 +52,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "9",
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/safe.js",
@@ -78,13 +84,16 @@
     "metaExtension": "Equipment",
     "metaComplexity": 9,
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/adventure.js",
@@ -107,13 +116,16 @@
     "metaExtension": "Classic",
     "metaComplexity": "1",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/og.js",
@@ -136,13 +148,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/guarded-og.js",
@@ -165,13 +180,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/sequence-breaker.js",
@@ -194,13 +212,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [
       "lycanMode"
@@ -225,13 +246,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/warlock.js",
@@ -254,13 +278,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/nimble.js",
@@ -284,13 +311,16 @@
     "metaExtension": "Equipment",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/expedition.js",
@@ -314,13 +344,16 @@
     "metaExtension": "GuardedPlus",
     "metaComplexity": "1",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [
       "lycanMode"
@@ -348,13 +381,12 @@
     "metaExtension": "Scenic",
     "metaComplexity": "5",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [
       "antiFreezeMode",
@@ -380,13 +412,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "9",
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/scavenger.js",
@@ -409,13 +444,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "9",
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/empty-hand.js",
@@ -438,13 +476,15 @@
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Deprecated"
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/gem-farmer.js",
@@ -467,13 +507,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "9",
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Deprecated"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Deprecated"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/third-castle.js",
@@ -496,13 +539,15 @@
     "metaExtension": "Guarded",
     "metaComplexity": "9",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Deprecated"
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [
       "zeroDollarRelicMode"
@@ -528,13 +573,16 @@
     "metaExtension": "GuardedPlus",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [
       "startRoomRando2ndMode",
@@ -561,13 +609,14 @@
     "metaExtension": "Guarded",
     "metaComplexity": "7",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "v"
     ],
     "incompatibleOptions": [
       "lycanMode"
@@ -593,12 +642,12 @@
     "metaExtension": "None",
     "metaComplexity": "1",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default"
-    ],
-    "listSortFlag": [
-      "Evergreen"
     ],
     "incompatibleOptions": [
       "unlockedMode",
@@ -629,13 +678,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/aperture.js",
@@ -660,13 +712,14 @@
     "metaExtension": "Guarded",
     "metaComplexity": "5",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "v"
     ],
     "incompatibleOptions": [
       "enemyStatRandoMode",
@@ -694,13 +747,17 @@
     "metaExtension": "Guarded",
     "metaComplexity": "5",
     "itemStats": "Normal",
-    "defaultGoal": "h",
-    "compatibleGoals": [
-      "h","t","w","x","y"
-    ],
     "listSortFlag": [
       "Evergreen",
       "BountyHunter"
+    ],
+    "defaultGoal": "h",
+    "compatibleGoals": [
+      "h",
+      "t",
+      "w",
+      "x",
+      "y"
     ],
     "incompatibleOptions": [
       "dominoMode"
@@ -726,13 +783,15 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
-    "defaultGoal": "t",
-    "compatibleGoals": [
-      "h","t","w","x","y"
-    ],
     "listSortFlag": [
       "Evergreen",
       "BountyHunter"
+    ],
+    "defaultGoal": "t",
+    "compatibleGoals": [
+      "t",
+      "x",
+      "y"
     ],
     "incompatibleOptions": [
       "dominoMode"
@@ -758,12 +817,14 @@
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Normal",
-    "defaultGoal": "w",
-    "compatibleGoals": [
-      "h","t","w","x","y"
-    ],
     "listSortFlag": [
       "BountyHunter"
+    ],
+    "defaultGoal": "w",
+    "compatibleGoals": [
+      "w",
+      "x",
+      "y"
     ],
     "incompatibleOptions": [
       "dominoMode"
@@ -790,12 +851,16 @@
     "metaExtension": "Scenic",
     "metaComplexity": "1",
     "itemStats": "Randomized",
-    "defaultGoal": "h",
-    "compatibleGoals": [
-      "h","t","w","x","y"
-    ],
     "listSortFlag": [
       "BountyHunter"
+    ],
+    "defaultGoal": "h",
+    "compatibleGoals": [
+      "h",
+      "t",
+      "w",
+      "x",
+      "y"
     ],
     "incompatibleOptions": [
       "dominoMode"
@@ -822,13 +887,16 @@
     "metaExtension": "GuardedPlus",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [
       "startRoomRandoMode",
@@ -857,13 +925,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "5",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Deprecated"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/breach.js",
@@ -887,14 +958,17 @@
     "metaExtension": "Scenic",
     "metaComplexity": "8",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Evergreen",
       "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/grand-tour.js",
@@ -918,13 +992,16 @@
     "metaExtension": "Scenic",
     "metaComplexity": "7",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Deprecated"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/crash-course.js",
@@ -949,13 +1026,12 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [
       "antiFreezeMode",
@@ -983,13 +1059,16 @@
     "metaExtension": "Extended",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Deprecated"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [
       "startRoomRando2ndMode"
@@ -1017,13 +1096,16 @@
     "metaExtension": "Extended",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Deprecated"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/skinwalker.js",
@@ -1047,13 +1129,14 @@
     "metaExtension": "Guarded",
     "metaComplexity": "7",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Deprecated"
+      "b",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/summoner.js",
@@ -1078,13 +1161,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/agonize-twtw.js",
@@ -1109,13 +1195,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/safe-stwo.js",
@@ -1141,13 +1230,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/open.js",
@@ -1171,13 +1263,14 @@
     "metaExtension": "Guarded",
     "metaComplexity": "7",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/brawler.js",
@@ -1201,12 +1294,12 @@
     "metaExtension": "Guarded",
     "metaComplexity": "5",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default"
-    ],
-    "listSortFlag": [
-      "Evergreen"
     ],
     "incompatibleOptions": [
       "startRoomRando2ndMode",
@@ -1233,13 +1326,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "7",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/lucky-sevens.js",
@@ -1263,13 +1359,12 @@
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/bingo.js",
@@ -1293,13 +1388,16 @@
     "metaExtension": "Extended",
     "metaComplexity": "7",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/sight-seer.js",
@@ -1323,13 +1421,14 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/cursed-night.js",
@@ -1353,13 +1452,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "9",
     "itemStats": "Randomized",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/spellbound.js",
@@ -1385,13 +1487,16 @@
     "metaExtension": "Extended",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [
       "startRoomRando2ndMode"
@@ -1420,13 +1525,12 @@
     "metaExtension": "Extended",
     "metaComplexity": "1",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [
       "antiFreezeMode",
@@ -1454,13 +1558,14 @@
     "metaExtension": "Guarded",
     "metaComplexity": 9,
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "v"
     ],
     "incompatibleOptions": [
       "startRoomRando2ndMode",
@@ -1487,13 +1592,14 @@
     "metaExtension": "GuardedPlus",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/battle-mage.js",
@@ -1516,13 +1622,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/timeline.js",
@@ -1545,13 +1654,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/chimera.js",
@@ -1574,13 +1686,16 @@
     "metaExtension": "Classic",
     "metaComplexity": "9",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [
       "startRoomRandoMode",
@@ -1606,13 +1721,12 @@
     "metaExtension": "Equipment",
     "metaComplexity": "4",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [
       "antiFreezeMode"
@@ -1637,13 +1751,12 @@
     "metaExtension": "Guarded",
     "metaComplexity": "9",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [
       "dominoMode"
@@ -1672,13 +1785,12 @@
     "metaExtension": "Guarded",
     "metaComplexity": "7",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [
       "rlbcMode",
@@ -1707,13 +1819,15 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
-    "defaultGoal": "v",
-    "compatibleGoals": [
-      "a",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/all-bosses.js",
@@ -1738,13 +1852,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/nimble-lite.js",
@@ -1770,12 +1887,13 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
-    "defaultGoal": "t",
-    "compatibleGoals": [
-      "h","t","w","x","y"
-    ],
     "listSortFlag": [
       "BountyHunter"
+    ],
+    "defaultGoal": "x",
+    "compatibleGoals": [
+      "x",
+      "y"
     ],
     "incompatibleOptions": [
       "dominoMode"
@@ -1802,13 +1920,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/cornivus.js",
@@ -1833,13 +1954,16 @@
     "metaExtension": "Scenic",
     "metaComplexity": "1",
     "itemStats": "Randomized",
-    "defaultGoal": "v",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/max-rando.js",
@@ -1865,13 +1989,15 @@
     "metaExtension": "GuardedPlus",
     "metaComplexity": "3",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Normal"
+    ],
+    "defaultGoal": "b",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/mirror-breaker.js",
@@ -1895,13 +2021,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Evergreen"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [
       "rlbcMode"
@@ -1930,13 +2059,16 @@
     "metaExtension": "Scenic",
     "metaComplexity": "14",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Normal"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/anguish.js",
@@ -1961,13 +2093,12 @@
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/gear-rush.js",
@@ -1994,12 +2125,13 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
-    "defaultGoal": "t",
-    "compatibleGoals": [
-      "h","t","w","x","y"
-    ],
     "listSortFlag": [
       "BountyHunter"
+    ],
+    "defaultGoal": "x",
+    "compatibleGoals": [
+      "x",
+      "y"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/rampage-aut25te.js",
@@ -2022,13 +2154,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Tournament"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Tournament"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/lycanthrope-spr26te.js",
@@ -2053,13 +2188,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Tournament"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Tournament"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/nimble-lite-spr26te.js",
@@ -2082,13 +2220,16 @@
     "metaExtension": "Guarded",
     "metaComplexity": "6",
     "itemStats": "Normal",
+    "listSortFlag": [
+      "Tournament"
+    ],
     "defaultGoal": "default",
     "compatibleGoals": [
       "default",
-      "b","r","a","v"
-    ],
-    "listSortFlag": [
-      "Tournament"
+      "b",
+      "r",
+      "a",
+      "v"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/warlock-spr26te.js",
@@ -2113,13 +2254,12 @@
     "metaExtension": "Scenic",
     "metaComplexity": "7",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "April Fools"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/april-fools.js",
@@ -2144,13 +2284,12 @@
     "metaExtension": "Scenic",
     "metaComplexity": "7",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/gourmet-race.js",
@@ -2173,14 +2312,13 @@
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Normal",
       "New"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/collector.js",
@@ -2204,14 +2342,13 @@
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Normal",
-    "defaultGoal": "default",
-    "compatibleGoals": [
-      "default",
-      "b","r","a","v"
-    ],
     "listSortFlag": [
       "Normal",
       "New"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
     "incompatibleOptions": [],
     "presetJs": "./build/presets/hoarder.js",

@@ -17,6 +17,11 @@
     "transformEarly": "No",
     "transformFocus": "None",
     "winCondition": "April Fools",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
     "listSortFlag": [
       "Evergreen"
     ]

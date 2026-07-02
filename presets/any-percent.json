@@ -19,6 +19,10 @@
     "transformEarly": "No",
     "transformFocus": "Wolf and Bat",
     "winCondition": "Relic Skip",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "listSortFlag": [
       "Evergreen"
     ]
