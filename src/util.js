@@ -1841,162 +1841,19 @@
     while (Object.getOwnPropertyNames(options).length) {
       // stunts spoilers, changes seed randomization,
       // opens statue in clock room and $0 relic in shop
-      if ('tournamentMode' in options) {
-        if (options.tournamentMode) {
-          randomize.push('t')
+
+      // Cycle through iterative options and push the argv if we can.
+      options_array.forEach(function(indivOpt) {
+        if (indivOpt.argvFlag === "bool" && indivOpt.shortId in options) {
+          if (options[indivOpt.shortId]) {
+            randomize.push(indivOpt.cliArg)
+          }
+          delete options[indivOpt.shortId]
         }
-        delete options.tournamentMode
-      } else  if ('colorrandoMode' in options) {
-        // randomizes cape, grav boots, and hydro storm colors
-        if (options.colorrandoMode) {
-          randomize.push('l')
-        }
-        delete options.colorrandoMode
-      } else if ('magicmaxMode' in options) {
-        // replaces Heart Vessel with Magic Vessel
-        if (options.magicmaxMode) {
-          randomize.push('x')
-        }
-        delete options.magicmaxMode
-      } else if ('antiFreezeMode' in options) {
-        // Removes screen freezes from level-up and acquisitions
-        if (options.antiFreezeMode) {
-          randomize.push('z')
-        }
-        delete options.antiFreezeMode
-      } else if ('mypurseMode' in options) {
-        // Removes Death from entrance
-        if (options.mypurseMode) {
-          randomize.push('y')
-        }
-        delete options.mypurseMode
-      } else if ('iwsMode' in options) {
-        // Allows for infinite wing smash on first input
-        if (options.iwsMode) {
-          randomize.push('b')
-        }
-        delete options.iwsMode
-      } else if ('fastwarpMode' in options) {
-        // quickensd the teleporter warp animations
-        if (options.fastwarpMode) {
-          randomize.push('9')
-        }
-        delete options.fastwarpMode
-      } else if ('noprologueMode' in options) {
-        // Removes prologue
-        if (options.noprologueMode) {
-          randomize.push('R')
-        }
-        delete options.noprologueMode
-      } else if ('unlockedMode' in options) {
-        // Opens shortcuts
-        if (options.unlockedMode) {
-          randomize.push('U')
-        }
-        delete options.unlockedMode
-      } else if ('surpriseMode' in options) {
-        // Hides relics behind the same sprite
-        if (options.surpriseMode) {
-          randomize.push('S')
-        }
-        delete options.surpriseMode
-      } else if ('enemyStatRandoMode' in options) {
-        // randomize enemy stats
-        if (options.enemyStatRandoMode) {
-          randomize.push('E')
-        }
-        delete options.enemyStatRandoMode
-      } else if ('elemChaosMode' in options) {
-        // elemental chaos
-        if (options.elemChaosMode) {
-          randomize.push('ec')
-        }
-        delete options.elemChaosMode
-      } else if ('shopPriceRandoMode' in options) {
-        // randomize shop prices
-        if (options.shopPriceRandoMode) {
-          randomize.push('sh')
-        }
-        delete options.shopPriceRandoMode
-      } else if ('startRoomRandoMode' in options) {
-        // randomize starting room
-        if (options.startRoomRandoMode) {
-          randomize.push('ori')
-        }
-        delete options.startRoomRandoMode
-      } else if ('startRoomRando2ndMode' in options) {
-        // randomize starting room 2nd castle - MottZilla
-        if (options.startRoomRando2ndMode) {
-          randomize.push('ori2')
-        }
-        delete options.startRoomRando2ndMode
-      } else if ('dominoMode' in options) {
-        // guaranteed drops
-        if (options.dominoMode) {
-          randomize.push('gd')
-        }
-        delete options.dominoMode
-      } else if ('rlbcMode' in options) {
-        // reverse library cards
-        if (options.rlbcMode) {
-          randomize.push('rl')
-        }
-        delete options.rlbcMode
-      } else if ('immunityPotionMode' in options) {
-        // immuntiy potions
-        if (options.immunityPotionMode) {
-          randomize.push('ip')
-        }
-        delete options.immunityPotionMode
-      } else if ('godspeedMode' in options) {
-        // godspeed shoes
-        if (options.godspeedMode) {
-          randomize.push('gss')
-        }
-        delete options.godspeedMode
-      } else if ('libraryShortcut' in options) {
-        // library shortcut
-        if (options.libraryShortcut) {
-          randomize.push('ls')
-        }
-        delete options.libraryShortcut
-      } else if ('singleHitGearMode' in options) {
-        // Single-Hit Gears
-        if (options.singleHitGearMode) {
-          randomize.push('gp')
-        }
-        delete options.singleHitGearMode
-      } else if ('revCastleTeleportRando' in options) {
-        // Reverse Castle Teleporter Randomizer
-        if (options.revCastleTeleportRando) {
-          randomize.push('c2r')
-        }
-        delete options.revCastleTeleportRando
-      } else if ('zeroDollarRelicMode' in options) {
-        // Makes the shop Relic cost 0.00
-        if (options.zeroDollarRelicMode) {
-          randomize.push('zr')
-        }
-        delete options.zeroDollarRelicMode
-      } else if ('openClockStatueMode' in options) {
-        // Opens the statue to Olrox's Quarters
-        if (options.openClockStatueMode) {
-          randomize.push('os')
-        }
-        delete options.openClockStatueMode
-      } else if ('spikeRoomRando' in options) {
-        // Randomize Spike Room
-        if (options.spikeRoomRando) {
-          randomize.push('srr')
-        }
-        delete options.spikeRoomRando
-      } else if ('lycanMode' in options) {
-        // Allow Full Wolf Use
-        if (options.lycanMode) {
-          randomize.push('ly')
-        }
-        delete options.lycanMode
-      } else if ('newGoalsSet' in options) { 
+      })
+      
+      // Everything else that doesn't have a boolean activation is here.
+      if ('newGoalsSet' in options) { 
         // Change the goals
         randomize.push('g:' + options.newGoalsSet)
         delete options.newGoalsSet
@@ -2004,34 +1861,10 @@
         // Starting Stat Randomizer
         randomize.push('ss:' + options.startStatRandoMode)
         delete options.startStatRandoMode
-      } else if ('easyMode' in options) {
-        // simple input
-        if (options.easyMode) {
-          randomize.push('ez')
-        }
-        delete options.easyMode
-      } else if ('devStashMode' in options) {
-        // dev's stash
-        if (options.devStashMode) {
-          randomize.push('dev')
-        }
-        delete options.devStashMode
-      } else if ('seasonalPhrasesMode' in options) {
-        // seasonal phrases
-        if (options.seasonalPhrasesMode) {
-          randomize.push('sp')
-        }
-        delete options.seasonalPhrasesMode
       } else if ('mapcolorTheme' in options) {
         // switch map color
         randomize.push('m:' + options.mapcolorTheme)
         delete options.mapcolorTheme
-      } else if ('bossMusicSeparation' in options) {
-        // boss Music Separation- eldri7ch
-        if (options.bossMusicSeparation) {
-          randomize.push('bm')
-        }
-        delete options.bossMusicSeparation
       } else if ('alucardPaletteSet' in options) {
         // alucard's palette - crazy4blades
         randomize.push('ap:' + options.alucardPaletteSet)
@@ -2448,22 +2281,11 @@
           randomize.push('s')
         }
         delete options.stats
-      } else if ('itemNameRandoMode' in options) {
-        // randomize item names with item stat rando - MottZilla
-        if (options.itemNameRandoMode) {
-          randomize.push('in')
-        }
-        delete options.itemNameRandoMode
       } else if ('music' in options) {
         if (options.music) {
           randomize.push('m')
         }
         delete options.music
-      } else if ('turkeyMode' in options) {
-        if (options.turkeyMode) {
-          randomize.push('k')
-        }
-        delete options.turkeyMode
       } else if ('writes' in options) {
         if (options.writes) {
           let opt = 'w'
@@ -3306,13 +3128,12 @@
     openClockStatueMode,
     spikeRoomRando,
     lycanMode,
+    warlockMode,
+    levelOneMode,
+    instantDeathMode,
+    cornucopiaMode,
     newGoalsSet,
     startStatRandoMode,
-    // easyMode,
-    // devStashMode,
-    // seasonalPhrasesMode,
-    // bossMusicSeparation,
-    // debugMode,
     writes,
   ) {
     this.id = id
@@ -3366,13 +3187,12 @@
     this.openClockStatueMode = openClockStatueMode
     this.spikeRoomRando = spikeRoomRando
     this.lycanMode = lycanMode
+    this.warlockMode = warlockMode
+    this.levelOneMode = levelOneMode
+    this.instantDeathMode = instantDeathMode
+    this.cornucopiaMode = cornucopiaMode
     this.newGoalsSet = newGoalsSet
     this.startStatRandoMode = startStatRandoMode
-    // this.easyMode = easyMode
-    // this.devStashMode = devStashMode
-    // this.seasonalPhrasesMode = seasonalPhrasesMode
-    // this.bossMusicSeparation = bossMusicSeparation
-    // this.debugMode = debugMode
     if (writes) {
       this.writes = writes
     }
@@ -3576,20 +3396,18 @@
     this.spikeRoom = false
     // Allow Full Wolf Use
     this.lycan = false
+    // Warlock mode (reduced spell mp, free mist)
+    this.warlock = false
+    // Alucard is always level 1
+    this.levelone = false
+    // Alucard dies in one hit
+    this.instantDeath = false
+    // enemies can drop any item
+    this.cornucopia = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
     this.startStatRando = undefined
-    // // simple input.
-    // this.easy = false
-    // // dev's stash mode.
-    // this.devStash = false
-    // // seasonal phrases mode.
-    // this.seasonalPhrases = false
-    // // boss music separation
-    // this.bossMusic = true
-    // // Debug mode.
-    // this.debug = false
     // Arbitrary writes.
     this.writes = undefined
   }
@@ -3957,6 +3775,18 @@
     }
     if ('lycanMode' in json) {
       builder.lycanMode(json.lycanMode)
+    }
+    if ('warlockMode' in json) {
+      builder.warlockMode(json.warlockMode)
+    }
+    if ('levelOneMode' in json) {
+      builder.levelOneMode(json.levelOneMode)
+    }
+    if ('instantDeathMode' in json) {
+      builder.instantDeathMode(json.instantDeathMode)
+    }
+    if ('cornucopiaMode' in json) {
+      builder.cornucopiaMode(json.cornucopiaMode)
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in json) {
@@ -4351,6 +4181,18 @@
     }
     if ('lycanMode' in preset) {
       this.lycan = preset.lycanMode
+    }
+    if ('warlockMode' in preset) {
+      this.warlock = preset.warlockMode
+    }
+    if ('levelOneMode' in preset) {
+      this.levelOne = preset.levelOneMode
+    }
+    if ('instantDeathMode' in preset) {
+      this.instantDeath = preset.instantDeathMode
+    }
+    if ('cornucopiaMode' in preset) {
+      this.cornucopia = preset.cornucopiaMode
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
@@ -5191,6 +5033,26 @@
       this.lycan = enabled
     }
   
+  PresetBuilder.prototype.warlockMode =
+    function warlockMode(enabled) {
+      this.warlock = enabled
+    }
+  
+  PresetBuilder.prototype.levelOneMode =
+    function levelOneMode(enabled) {
+      this.levelOne = enabled
+    }
+  
+  PresetBuilder.prototype.instantDeathMode =
+    function instantDeathMode(enabled) {
+      this.instantDeath = enabled
+    }
+  
+  PresetBuilder.prototype.cornucopiaMode =
+    function cornucopiaMode(enabled) {
+      this.cornucopia = enabled
+    }
+  
   // ============================== Preset: Argument ==========================
   
   // Assign New Goals
@@ -5573,13 +5435,12 @@
     const openClockStatue = self.openClockStatue
     const spikeRoom = self.spikeRoom
     const lycan = self.lycan
+    const warlock = self.warlock
+    const levelOne = self.levelOne
+    const instantDeath = self.instantDeath
+    const cornucopia = self.cornucopia
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
-    // const easy = false
-    // const devStash = false
-    // const seasonalPhrases = true
-    // const bossMusic = false
-    // const debug = false
     const writes = self.writes
     return new Preset(
       self.metadata.id,
@@ -5633,13 +5494,12 @@
       openClockStatue,
       spikeRoom,
       lycan,
+      warlock,
+      levelOne,
+      instantDeath,
+      cornucopia,
       newGoals,
       startStatRando,
-      // easy,
-      // devStash,
-      // seasonalPhrases,
-      // bossMusic,
-      // debug,
       writes,
     )
   }
@@ -8856,7 +8716,7 @@
     return data
   }
   
-  // prototyping randomizing reverse castle teleporter by MottZilla
+  // Randomize reverse castle teleporter by MottZilla
   function applyReverseCastleTeleporterRandoPatches(rng) {
     const reverseTeleporterData = constants.reverseTeleporterData
     const data = new checked()
@@ -8864,25 +8724,25 @@
     let offset
 	
     // debug
-    console.log("applyReverseCastleTeleporterRandoPatches executing")
+    // console.log("applyReverseCastleTeleporterRandoPatches executing")
 	
     // Select random Tp Location
     randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
 	
-	// For forcing a selection for testing
-	// randTp = 14
-	while(randTp == 0)
-	{
-		randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
-	}
-	
-	console.log("Selected: " + reverseTeleporterData[randTp].title)
+    // For forcing a selection for testing
+    // randTp = 14
+    while(randTp == 0)
+    {
+      randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
+    }
+    
+    console.log("Selected: " + reverseTeleporterData[randTp].title)
 	
     // If Vanilla then we don't write anything.
     if(reverseTeleporterData[randTp].stage == 0x2B)
     {
 		  return data
-	}
+	  }
 
     // Do writes for updating activation and updating destination
     data.writeShort(0x125C2C, reverseTeleporterData[randTp].stage)	// stage Trigger
@@ -8896,21 +8756,21 @@
     
     data.writeShort(0xFAC7C, reverseTeleporterData[randTp].stage)	// StageId for RTOP teleport load
 
-	// MapCell reveal
-	data.writeShort(0x3711a6c, reverseTeleporterData[randTp].mapaddr)
-	data.writeShort(0x3711a6e, reverseTeleporterData[randTp].mapmask)
-	  
-	// Adjust RC Teleport in Y-Position
-	if( reverseTeleporterData[randTp].yPosSpecial > 0)
-	{
-		// Special for rooms that are taller than 1 Screen
-		data.writeShort(0x1091CC, reverseTeleporterData[randTp].yPosSpecial)
-	}
-	else
-	{
-		// Standard for 1 Screen tall rooms uses yPos lower 8-bits.
-		data.writeChar(0x1091CC, reverseTeleporterData[randTp].yPos)
-	}
+    // MapCell reveal
+    data.writeShort(0x3711a6c, reverseTeleporterData[randTp].mapaddr)
+    data.writeShort(0x3711a6e, reverseTeleporterData[randTp].mapmask)
+      
+    // Adjust RC Teleport in Y-Position
+    if( reverseTeleporterData[randTp].yPosSpecial > 0)
+    {
+      // Special for rooms that are taller than 1 Screen
+      data.writeShort(0x1091CC, reverseTeleporterData[randTp].yPosSpecial)
+    }
+    else
+    {
+      // Standard for 1 Screen tall rooms uses yPos lower 8-bits.
+      data.writeChar(0x1091CC, reverseTeleporterData[randTp].yPos)
+    }
 	  
     // Optional Tile update to mark the location visually
     if(reverseTeleporterData[randTp].tileofs > 0)
@@ -8967,11 +8827,11 @@
     // These are simply the writes for each outcome. 
     switch (roomPattern) {
       case 0:
-        console.log("Spike Room Debug: Default Layout Chosen")
+        // console.log("Spike Room Debug: Default Layout Chosen")
         // Nothing because vanilla was also a good arrangement
         break
       case 1:
-        console.log("Spike Room Debug: MM Layout Chosen")
+        // console.log("Spike Room Debug: MM Layout Chosen")
         // The Magic mirror Layout
         offset = 0x44b7c9e
         offset = data.writeWord(offset, 0x071a073b)
@@ -9069,7 +8929,7 @@
 
         break
       case 2: 
-        console.log("Spike Room Debug: New Layout 1 Chosen")
+        // console.log("Spike Room Debug: New Layout 1 Chosen")
         // The new, evil spike room.
         offset = 0x044b7ac8
         offset = data.writeWord(offset, 0x0750074f)
@@ -9388,7 +9248,7 @@
 
         break  
       case 3: 
-        console.log("Spike Room Debug: New Layout 2 Chosen")
+        // console.log("Spike Room Debug: New Layout 2 Chosen")
         // The new, eviler spike room.
         offset = 0x044b7aa4
         offset = data.writeWord(offset, 0x07520752)
@@ -9669,7 +9529,7 @@
 
         break
       case "x":
-        console.log("Spike Room Debug: Mercy Layout Chosen")
+        // console.log("Spike Room Debug: Mercy Layout Chosen")
         // The "simply walk through" option
         offset = 0x044b7aa0
         offset = data.writeWord(offset, 0x07220721)
@@ -9950,6 +9810,171 @@
     return data
   }
 
+  function applyWarlockModePatches() {
+    const data = new checked()
+
+    // Enable Mist at the start without relics.
+    data.writeWord(0x00118ac0,0x00000000)
+
+    // Mist Cost = 0
+    data.writeShort(0x00118b34,0x0000)
+    data.writeShort(0x00118ae8,0x0000)
+
+    // INT = 99, the rest = 1
+    data.writeWord(0x00119b70,0x34020001)   
+    data.writeWord(0x00119b78,0x34020001)
+    data.writeWord(0x00119b80,0x34020063)   
+    data.writeWord(0x00119b88,0x34020001)
+
+    // Summon Spirit cost 1 mana
+    data.writeChar(0x000b5260,0x01)
+    // Dark Metamorphosis cost 2 mana
+    data.writeChar(0x000b5244,0x02)
+    // Hellfire/Dark Inferno cost 2 mana
+    data.writeChar(0x000b527c,0x02)
+    // Tetra spirit cost 3 mana
+    data.writeChar(0x000b5298,0x03)
+    // Soul Steal cost 4 mana
+    data.writeChar(0x000b52d0,0x04)
+
+    return data
+  }
+
+  function applyLevelOneModePatches() {
+    // Increase experience to reach level 2 to 999,999
+    const data = new checked()
+    const expValue = 0x000f423f
+    let offset
+
+    offset = 0x000b9f30
+    data.writeWord(offset,expValue)
+
+    offset = 0x0436812c
+    data.writeWord(offset,expValue)
+
+    return data
+  }
+
+  function applyInstantDeathModePatches() {
+    // Forces every attack to be registered as fatal.
+    const data = new checked()
+
+    data.writeWord(0x0011892c,0x34030000)
+
+    return data
+  }
+
+  function applyCornucopiaModePatches() {
+    // makes every enemy drop any item in the game*
+    // *Not Alucart mail or Secret boots
+    const data = new checked()
+    let startArray = [
+      0x044041B8,
+      0x044D51C8,
+      0x04570B40,
+      0x0460C538,
+      0x046C796C,
+      0x047EB654,
+      0x049486AC,
+      0x04A1E2D4,
+      0x04AE2618,
+      0x04BB2E60,
+      0x04C87364,
+      0x04D37024,
+      0x04DC48E8,
+      0x04E6EBD0,
+      0x04F0B404,
+      0x04FC5488,
+      0x05080920,
+      0x05137C44,
+      0x051E9624,
+      0x052C0EA8,
+      0x054373C0,
+      0x054F3D58,
+      0x055A69E4,
+      0x05643E94,
+      0x056E3EF0,
+      0x0577E534,
+      0x058083E8,
+      0x058083E8,
+      0x05936CC8,
+      0x059EFEF4,
+      0x05A7B11C,
+      0x05B0DF44,
+      0x05FF01C0,
+      0x06099CD4,
+      0x0612B344,
+      0x061D37C8,
+      0x06286D00,
+      0x06332A08,
+      0x063DB6C8,
+      0x0648F8B8,
+      0x06518B94,
+      0x065AA1D8,
+      0x06648AD4,
+      0x066CE34C,
+      0x067595FC,
+      0x067EDE00,
+      0x068A0104,
+      0x069577A0,
+      0x069EBD48,
+      0x06A7E1AC
+    ]
+    let offset
+    i = startArray.length
+
+    while (i > 0) {
+      offset = startArray.pop()
+
+      // debug only
+      // console.log(offset)
+      
+      try {
+        offset = data.writeWord(offset,0x0c005839) // call 800160e4
+        offset = data.writeWord(offset,0x00000000) // nop
+        offset = data.writeWord(offset,0x304200ff) // and r2,0ffh
+        offset = data.writeWord(offset,0x24420001) // add r2,1
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff57) // sub r3,0a9h
+        offset = data.writeWord(offset,0x1060fff9) // jz -7
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff49) // sub r3,0b7h
+        offset = data.writeWord(offset,0x14600002) // jnz +2
+        offset = data.writeWord(offset,0x00000000) // nop
+        offset = data.writeWord(offset,0x34020102) // mov r2,102h
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff3d) // sub r3,0c3h
+        offset = data.writeWord(offset,0x1060fff1) // jz -15
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff35) // sub r3,0cbh
+        offset = data.writeWord(offset,0x1060ffee) // jz -18
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff27) // sub r3,0d9h
+        offset = data.writeWord(offset,0x1060ffeb) // jz -21
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff1e) // sub r3,0e2h
+        offset = data.writeWord(offset,0x1060ffe8) // jz -24
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff0f) // sub r3,0f1h
+        offset = data.writeWord(offset,0x10600004) // jz +4
+        offset = data.writeWord(offset,0x34430000) // mov r3,r2
+        offset = data.writeWord(offset,0x2463ff0e) // sub r3,0f2h
+        offset = data.writeWord(offset,0x14600002) // jnz +2
+        offset = data.writeWord(offset,0x00000000) // nop
+        offset = data.writeWord(offset,0x34020101) // mov r2,101h
+        offset = data.writeWord(offset,0x34520000) // mov r18,r2
+        offset = data.writeWord(offset,0x18000008) // jrel 8
+        data.writeWord(offset,0x00000000)          // nop
+      } catch (err) {
+        console.error(err)
+      }
+
+      i--
+    }
+
+    return data
+  }
+
   // =========================================================================
   //  #region Preset: Argument 
   // =========================================================================
@@ -9962,6 +9987,8 @@
     // define address for functions (inside Black Marble Gallery Overlay)
     const funcAddress = 0x04fe4f68
     let offset
+    // Debug goal
+    // console.log('new goal: ' + nGoal)
     // Patch new goals
     switch (nGoal) {
     case 'b':
@@ -10021,6 +10048,7 @@
       offset = data.writeWord(offset, 0x00000000)
       break
     case 'a':
+    case 'y':
       // All Bosses & Relics (ABRSR)
       offset = jmpAddr
       data.writeWord(offset, 0x08074fbc)
@@ -10062,6 +10090,7 @@
       offset = data.writeWord(offset, 0x00000000)
       break
     case 'v':
+    case 'x':
       // All Bosses All Vlads
       offset = jmpAddr
       data.writeWord(offset, 0x08074fbc)
@@ -13091,6 +13120,10 @@
     applyAlucardPalette: applyAlucardPalette,
     applySplashText: applySplashText,
     applyListOfNames: applyListOfNames,
+    applyLevelOneModePatches: applyLevelOneModePatches,
+    applyInstantDeathModePatches: applyInstantDeathModePatches,
+    applyWarlockModePatches: applyWarlockModePatches,
+    applyCornucopiaModePatches: applyCornucopiaModePatches,
     applyAlucardLiner: applyAlucardLiner,
     randomizeRelics: randomizeRelics,
     randomizeItems: randomizeItems,

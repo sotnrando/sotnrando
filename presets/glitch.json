@@ -19,7 +19,14 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Relic Skip"
+    "winCondition": "Relic Skip",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
   
   "relicLocationsExtension": "scenic",

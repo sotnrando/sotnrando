@@ -8,6 +8,7 @@ const extension = require('./src/extension')
 const relics = require('./src/relics')
 const util = require('./src/util')
 const core_randomizer = require('./src/core_randomizer')
+const options_array = require('./src/options_array')
 let version = require('./package.json').version
 
 // Suppress all deprecation warnings
@@ -493,7 +494,7 @@ function presetMetaHelp(preset) {
 }
 
 let eccEdcCalc
-const yargs = require('yargs')
+let yargs = require('yargs')
   .strict()
   .usage('$0 [options] [url]')
   .option('in-bin', {
@@ -559,165 +560,7 @@ const yargs = require('yargs')
     describe: 'Shortcut to adjust seed complexity',
     type: 'number',
     requiresArg: true,
-  })
-  .option('tournament', {
-    alias: 't',
-    describe: 'Enable tournament mode (`--help tournament`)',
-    type: 'boolean',
-  })
-  // #region Preset boolean .option
-  .option('colorrando', {
-    alias: 'l',
-    describe: 'Enable color palette randomizing for various things',
-    type: 'boolean',
-  })
-  .option('magicmax', {
-    alias: 'x',
-    describe: 'Enable replace Heart Max with Magic Max Vessels',
-    type: 'boolean',
-  })
-  .option('antifreeze', {
-    alias: 'z',
-    describe: 'Enable Anti-Freeze Mode, removes screen freezes from level-up & more.',
-    type: 'boolean',
-  })
-  .option('mypurse', {
-    alias: 'y',
-    describe: 'Prevents Death from stealing your belongings.',
-    type: 'boolean',
-  })
-  .option('iws', {
-    alias: 'b',
-    describe: 'Makes wing smash essentially infinite.',
-    type: 'boolean',
-  })
-  .option('fastwarp', {
-    alias: '9',
-    describe: 'Quickens warp animation when using teleporters.',
-    type: 'boolean',
-  })
-  .option('itemnamerando', {
-    alias: 'in',
-    describe: 'Randomize item names when doing item stat rando.',
-    type: 'boolean',
-  })
-  .option('noprologue', {
-    alias: 'R',
-    describe: 'Removes the Prologue from being required to play.',
-    type: 'boolean',
-  })
-  .option('unlocked', {
-    alias: 'U',
-    describe: 'Unlocks all shortcuts.',
-    type: 'boolean',
-  })
-  .option('surprise', {
-    alias: 'S',
-    describe: 'Hides relics behind the same sprite and palette forcing the player to collect the relic to find out what it is.',
-    type: 'boolean',
-  })
-  .option('enemyStatRando', {
-    alias: 'E',
-    describe: 'Enemy stats are randomized ranging from 25% to 200% of their original value and their attack and defense types are randomized to include random elements.',
-    type: 'boolean',
-  })
-  .option('shopPriceRando', {
-    alias: 'sh',
-    describe: 'Shop prices are randomized ranging from 50% to 150% of their original value and they are shuffled between each other.',
-    type: 'boolean',
-  })
-  .option('startRoomRando', {
-    alias: 'ori',
-    describe: 'Start in the entrance as usual but after the first Warg, you are teleported to a random zone to start the rest of your run.',
-    type: 'boolean',
-  })
-  .option('startRoomRando2nd', {
-    alias: 'ori2',
-    describe: 'Start in the entrance as usual but after the first Warg, you are teleported to a random zone to start the rest of your run.',
-    type: 'boolean',
-  })
-  .option('domino', {
-    alias: 'gd',
-    describe: 'Guarantees drops from every enemy that has one. Ring of Arcana makes them drop their rare item instead of the uncommon.',
-    type: 'boolean',
-  })
-  .option('rlbc', {
-    alias: 'rl',
-    describe: 'Allows use of Library Cards to teleport to the Forbidden Library by holding Down while using them.',
-    type: 'boolean',
-  })
-  .option('immunityPotion', {
-    alias: 'ip',
-    describe: 'Converts Resist Fire, Resist Ice, etc. potions to grant Immunity to the element in question and allows them to grant invincibility frames.',
-    type: 'boolean',
-  })
-  .option('godspeed', {
-    alias: 'gss',
-    describe: 'Allows Alucard to run by double-pressing in the direction you intend to move in.',
-    type: 'boolean',
-  })
-  .option('libShort', {
-    alias: 'ls',
-    describe: 'Opens a shortcut to allow players to swiftly exit the Long Library.',
-    type: 'boolean',
-  })
-  .option('elemChaos', {
-    alias: 'ec',
-    describe: 'Randomizes almost every element in the game.',
-    type: 'boolean',
-  })
-  .option('singleHitGear', {
-    alias: 'gp',
-    describe: 'Makes all gear puzzles only require a single hit on one gear to open the respective door.',
-    type: 'boolean',
-  })
-  .option('revCastleTeleport', {
-    alias: 'c2r',
-    describe: 'Randomizes where the teleporter after Richter takes the player.',
-    type: 'boolean',
-  })
-  .option('zeroDollarRelic', {
-    alias: 'zr',
-    describe: 'Makes the shop Relic cost 0.00.',
-    type: 'boolean',
-  })
-  .option('openClockStatue', {
-    alias: 'os',
-    describe: 'Opens the statue to Olroxs Quarters.',
-    type: 'boolean',
-  })
-  .option('spikeRoom', {
-    alias: 'srr',
-    describe: 'Randomizes the Spike Room before Spike Breaker.',
-    type: 'boolean',
-  })
-  .option('lycan', {
-    alias: 'ly',
-    describe: 'Allows the player to use full wolf at reduced cost.',
-    type: 'boolean',
-  })
-  // #region Non-preset boolean .option
-  .option('easy', {
-    alias: 'ez',
-    describe: 'Simplifies inputs so spells no longer need complex sequences to execute and extends invincibility when hit.',
-    type: 'boolean',
-  })
-  .option('devStash', {
-    alias: 'dev',
-    describe: '???',
-    type: 'boolean',
-  })
-  .option('seasonalPhrases', {
-    alias: 'sp',
-    describe: 'Allow seasonal and holiday-based splash phrases on the "Press Start" screen.',
-    type: 'boolean',
-  })
-  .option('bossMusic', {
-    alias: 'bm',
-    describe: 'Randomizes Boss Music separately from other songs.',
-    type: 'boolean',
-  })
-  .option('debug', {
+  }).option('debug', {
     alias: 'D',
     describe: 'Debug mode.',
     type: 'boolean',
@@ -791,7 +634,19 @@ const yargs = require('yargs')
     describe: 'Show help',
     type: 'string',
   })
-  .demandCommand(0, 1)
+  // #region simplified options
+
+  options_array.forEach(function(indivOpt) {
+    if (indivOpt.argvFlag === "bool") {
+      yargs.option(indivOpt.shortId, {
+        alias: indivOpt.cliArg,
+        describe: indivOpt.shortDescript,
+        type: 'boolean'
+      })
+    }
+  })
+
+  yargs.demandCommand(0, 1)
 const argv = yargs.argv
 let options
 let seed
@@ -1134,157 +989,16 @@ if (argv.tournament) {
   options.tournamentMode = true
 }
 // #region Preset boolean argv
-if ('debug' in argv) {console.log('randomize | Set color rando')}
-// Enable color rando mode if specified. - MottZilla
-if (argv.colorrando) { // Enable Color Randomizations
-  options.colorrandoMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set magic max')}
-// Enable magic max mode if specified. - MottZilla
-if (argv.magicmax) { // Adds MP Vessel to replace Heart Vessel
-  options.magicmaxMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set anti-freeze')}
-// Enable anti-freeze mode if specified.
-if (argv.antifreeze) { // Removes screen freezes from level-up and acquisitions
-  options.antiFreezeMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set my purse')}
-// Enable my purse mode if specified.
-if (argv.mypurse) { // Adds MP Vessel to replace Heart Vessel
-  options.mypurseMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set infinite wing smash')}
-// Enable infinite wing smash mode if specified.
-if (argv.iws) { // Makes wing smashes essentially infinite
-  options.iwsMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set fast warp')}
-// Enable fast warp mode if specified.
-if (argv.fastwarp) { // quickens teleporter warp animation
-  options.fastwarpMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set Item Name Rando')}
-// Enable itemname rando mode if specified. - MottZilla
-if (argv.itemnamerando) { // Randomize Item names if randomizing item stats - MottZilla
-  options.itemNameRandoMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set no prologue')}
-// Enable no prologue mode if specified.
-if (argv.noprologue) { // Removes prologue
-  options.noprologueMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set unlocked')}
-// Enable unlocked mode if specified.
-if (argv.unlocked) { // opens shortcuts
-  options.unlockedMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set surprise')}
-// Enable surprise mode if specified.
-if (argv.surprise) { // opens shortcuts
-  options.surpriseMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set enemyStatRando')}
-// Enable Enemy Stat Rando mode if specified.
-if (argv.enemyStatRando) { // randomizes enemy stats
-  options.enemyStatRandoMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set shopPriceRando')}
-// Enable Shop Price Rando mode if specified.
-if (argv.shopPriceRando) { // randomizes shop prices
-  options.shopPriceRandoMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set startRoomRando')}
-// Enable Starting Room Rando mode if specified.
-if (argv.startRoomRando) { // randomizes starting room
-  options.startRoomRandoMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set startRoomRando2nd')}
-// Enable Starting Room Rando 2nd Castle mode if specified.
-if (argv.startRoomRando2nd) { // randomizes starting room
-  options.startRoomRando2ndMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set domino')}
-// Enable guaranteed drops mode if specified.
-if (argv.domino) { // guarantees drops
-  options.dominoMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set rlbc')}
-// Enable reverse library card mode if specified.
-if (argv.rlbc) { // reverse library cards
-  options.rlbcMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set immunity potions')}
-// Enable immunity potion mode if specified.
-if (argv.immunityPotion) { // immunity potions
-  options.immunityPotionMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set godspeed')}
-// Enable godspeed shoes mode if specified.
-if (argv.godspeed) {
-  options.godspeedMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set libShort')}
-// Enable library shortcut if specified.
-if (argv.libShort) {
-  options.libraryShortcut = true
-}
-if ('debug' in argv) {console.log('randomize | Set elemChaos')}
-// Enable elemental chaos if specified.
-if (argv.elemChaos) {
-  options.elemChaosMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set singleHitGear')}
-// Enable Single-Hit Gears if specified.
-if (argv.singleHitGear) {
-  options.singleHitGearMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set revCastleTeleport')}
-// Enable Reverse Castle Teleporter Randomizer if specified.
-if (argv.revCastleTeleport) {
-  options.revCastleTeleportRando = true
-}
-if ('debug' in argv) {console.log('randomize | Set zeroDollarRelic')}
-// Enable zero-dollar relic mode if specified.
-if (argv.zeroDollarRelic) {
-  options.zeroDollarRelicMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set openClockStatue')}
-// Enable open clockroom statue mode if specified.
-if (argv.openClockStatue) {
-  options.openClockStatueMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set spikeRoom')}
-// Enable open clockroom statue mode if specified.
-if (argv.spikeRoom) {
-  options.spikeRoomRando = true
-}
-if ('debug' in argv) {console.log('randomize | Set lycan')}
-// Enable open clockroom statue mode if specified.
-if (argv.lycan) {
-  options.lycanMode = true
-}
-// #region Non-preset boolean argv
-if ('debug' in argv) {console.log('randomize | Set easy')}
-// Enable easy mode if specified.
-if (argv.easy) {
-  options.easyMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set devStash')}
-// Enable Dev's Stash if specified.
-if (argv.devStash) {
-  options.devStashMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set seasonalPhrases')}
-// Enable library shortcut if specified.
-if (argv.seasonalPhrases) {
-  options.seasonalPhrasesMode = true
-}
-if ('debug' in argv) {console.log('randomize | Set bossMusic')}
-// randomize Boss Music Separately.
-if (argv.bossMusic) {
-  options.bossMusicSeparation = true
-}
+
+// Cycle through easy options to apply.
+options_array.forEach(function(indivOpt) {
+  if (indivOpt.argvFlag === "bool" && indivOpt.shortId in argv) {
+    if ('debug' in argv) {console.log('randomize | Set ' + indivOpt.name)}
+    options[indivOpt.longId] = argv[indivOpt.shortId]
+  }
+})
+
+// #region CLI char argv
 if ('debug' in argv) {console.log('randomize | Set map colors')}
 // Map Color Features if specified.
 if ('mapcolor' in argv && typeof(argv.mapcolor) !== 'undefined') {
@@ -1300,10 +1014,10 @@ if ('mapcolor' in argv && typeof(argv.mapcolor) !== 'undefined') {
 if ('debug' in argv) {console.log('randomize | Choose new goals')}
 // Map Color Features if specified.
 if ('newGoals' in argv && typeof(argv.newGoals) !== 'undefined') {
-  let termsAllowed = 'd,b,r,a,v,h,t,w,x'
+  let termsAllowed = 'd,b,r,a,v,h,t,w,x,y'
   if (!(termsAllowed.includes(argv.newGoals))) {
     yargs.showHelp()
-    console.error('\nMust contain a letter \'d\'(Preset Default), \'b\'(All Bosses), \'r\'(All Relics), \'a\'(All Bosses and Relics), \'v\'(All Bosses and Vlad Relics), \'h\'(Bounty Hunter), \'t\'(Bounty Hunter Target Confirmed), \'x\'(Bounty Hunter and All Bosses)')
+    console.error('\nMust contain a letter \'d\'(Preset Default), \'b\'(All Bosses), \'r\'(All Relics), \'a\'(All Bosses and Relics), \'v\'(All Bosses and Vlad Relics), \'h\'(Bounty Hunter), \'t\'(Bounty Hunter Target Confirmed), \'x\'(Bounty Hunter and All Bosses), \'y\'(Bounty Hunter and All Bosses and Relics)')
     process.exit(1)
   } else {
     options.newGoalsSet = argv.newGoals.toString()
@@ -1354,7 +1068,7 @@ if ('excludesongs' in argv && typeof(argv.excludesongs) !== 'undefined') {
 if ('debug' in argv) {console.log('randomize | Set debug')}
 // Enable debug mode if specified.
 if (argv.debug) { // Enables debug
-  options.debugMode = true
+  options.debugMode = argv.debug
 }
 if ('debug' in argv) {console.log('randomize | Set verbosity')}
 // Set misc options.

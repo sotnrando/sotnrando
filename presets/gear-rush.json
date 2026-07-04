@@ -18,7 +18,14 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Timed"
+    "winCondition": "Timed",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "preventLeaks": false,

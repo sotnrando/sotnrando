@@ -15,8 +15,10 @@
     <header>
       <p id="splashTextDisplay" class="splash-text"></p>
       <img src="images/logo.png" alt="RandomizerLogo" class="center" id="pageLogo">
+
       <div class="center-text">
         By eldri7ch
+
         <span class="tooltip-wrapper">
           <span class="tooltip-indicator">?</span>
           <span class="tooltip hidden">
@@ -26,66 +28,88 @@
             </span>
           </span>
         </span>
+
         <a class="contact" href="https://bsky.app/profile/eldri7ch.bsky.social">
           <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/bluesky.svg"
             alt="BlueSkyIcon">
         </a>
+
         <a class="contact" href="https://twitch.tv/eldri7ch">
           <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg"
-            alt="TwitchIcon"></a>
+            alt="TwitchIcon">
+        </a>
+
         , MottZilla
+
         <a class="contact" href="https://twitch.tv/MottZilla0">
           <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg"
-            alt="TwitchIcon"></a>
+            alt="TwitchIcon">
+        </a>
+
         , SacredLucy
+
         <a class="contact" href="https://twitch.tv/sacredlucyy">
           <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg"
-            alt="TwitchIcon"></a>
+            alt="TwitchIcon">
+        </a>
+
         , and CRAZY4BLADES
+
         <a class="contact" href="https://twitch.tv/crazy4bladestv">
           <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitch.svg"
-            alt="TwitchIcon"></a>
+            alt="TwitchIcon">
+        </a>
       </div>
+
       <div id="version"></div>
     </header>
+
     <div id="navbar-container"></div>
     <script src="/src/navbar.js"></script>
     <section>
       <fieldset class="body-pos">
         <form id="form">
+
           <fieldset>
             <legend>Output</legend>
+
             <div class="right-theme">
-              <label for="theme">&#127912;Theme </label>
+              <label for="theme">🎨 Theme</label>
               <select id="theme">
                 <option value="blue">Menu</option>
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
               </select>
             </div>
+
             <div id="bin-ppf">
               <div id="bin">
                 <input id="output-bin" name="output" type="radio" value="bin">
                 <label for="output-bin">.bin</label>
               </div>
+
               <div id="ppf">
                 <input id="output-ppf" name="output" type="radio" value="ppf">
                 <label for="output-ppf">.ppf</label>
               </div>
             </div>
+
             <div id="target" class="hidden">
               <label id="status" for="file"></label>
               <input id="file" type="file" accept=".bin,.iso">
             </div>
           </fieldset>
+
           <div id="content"></div>
-          <div id="randomization-options" class="responsive-three-column-grid">
+          <div id="randomization-options">
+
             <fieldset class="input-box">
-              <legend>Randomizations</legend>
+
               <div id="seed-container">
                 <label for="seed">Seed:</label>
                 <input id="seed" type="text" placeholder="Optional">
               </div>
+
               <div id="preset-container">
                 <div id="preset-dropdown">
                   <label>Preset:</label>
@@ -93,197 +117,72 @@
                     <select id="preset-id"></select>
                   </div>
                 </div>
+
                 <section id="preset-details">
                   <h4>Preset description:</h4>
                   <p id="preset-description"></p>
+
                   <h4>Preset author(s):</h4>
                   <p id="preset-author"></p>
-                  <fieldset id="meta-data-group">
+
+                  <fieldset id="meta-data-group" style="margin: 0 2em;">
                     <legend>Meta Data</legend>
+
                     <div class="meta-data">
                       <h4>Knowledge Required:</h4>
                       <p id="preset-knowledgeCheck"></p>
                     </div>
+
                     <div class="meta-data">
                       <h4>Modification Level:</h4>
                       <p id="preset-moddedLevel"></p>
                     </div>
+
                     <div class="meta-data">
                       <h4>Relic Extension:</h4>
                       <p id="preset-metaExtension"></p>
                     </div>
+
                     <div class="meta-data">
                       <h4>Castle Type:</h4>
                       <p id="preset-castleType"></p>
                     </div>
+
                     <div class="meta-data">
                       <h4>Minimum Complexity:</h4>
                       <p id="preset-metaComplexity"></p>
                     </div>
+
                     <div class="meta-data">
                       <h4>Early Transformation:</h4>
                       <p id="preset-transformEarly"></p>
                     </div>
+
                     <div class="meta-data">
                       <h4>Item Stats Randomized:</h4>
                       <p id="preset-itemStats"></p>
                     </div>
+
                     <div class="meta-data">
                       <h4>Transformation Focus:</h4>
                       <p id="preset-transformFocus"></p>
                     </div>
+
                     <div class="meta-data">
                       <h4>Expected Completion Pace:</h4>
                       <p id="preset-timeFrame"></p>
                     </div>
+
                     <div class="meta-data">
                       <h4>Win Condition:</h4>
                       <p id="preset-winCondition"></p>
                     </div>
                   </fieldset>
                 </section>
-                <fieldset id="options">
-                  <small>&#10071; Lower complexities generate faster but may also be faster to beat.</small>
-                  <div id="complexity-slider">
-                    <label for="complexity">Complexity</label>
-                    <div id="complexity-slider-details">
-                      <span id="complexityMinValue">1</span>
-                      <input id="complexity" type="range" min="1" list="complexityValues">
-                      <span id="complexityMaxValue"></span>
-                      <span id="complexityCurrentValue"></span>
-                      <datalist id="complexityValues">
-                        <option value="1" label="1"></option>
-                      </datalist>
-                    </div>
-                  </div>
-                  <fieldset id="relic-locations-set">
-                    <legend>
-                      <input id="relic-locations" type="checkbox" data-store-checkbox="true"
-                        data-custom-change="relicLocationsChange">
-                      <label for="relic-locations">Relic locations</label>
-                    </legend>
-                    <div class="relic-location">
-                      <input id="extension-guarded" name="extension" type="radio" value="guarded">
-                      <label for="extension-guarded">
-                        Guarded
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items may appear in
-                              rooms guarded by bosses. 37 Check locations.
-                            </span>
-                          </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-guardedplus" name="extension" type="radio" value="guardedplus">
-                      <label for="extension-guardedplus">
-                        Guarded<i>Plus</i>
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Add to guarded locations with more checks on
-                              left side of second castle. 39 Check locations.
-                            </span>
-                          </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-equipment" name="extension" type="radio" value="equipment">
-                      <label for="extension-equipment">
-                        Equipment
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items may appear in
-                              place of equipment tiles. 105 Check locations.
-                            </span>
-                          </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-scenic" name="extension" type="radio" value="scenic">
-                      <label for="extension-scenic">
-                        Scenic
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items may appear in
-                              place of equipment tiles or in unique
-                              locations in either castle. 118 Check locations.
-                            </span>
-                          </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-extended" name="extension" type="radio" value="wanderer">
-                      <label for="extension-extended">
-                        Extended
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items may appear in
-                              place of <i>limited</i> equipment tiles or
-                              in unique locations in either castle. 70
-                              Check locations.
-                            </span>
-                          </span>
-                        </span>
-                      </label>
-                    </div>
-                    <div class="relic-location">
-                      <input id="extension-classic" name="extension" type="radio" value="classic">
-                      <label for="extension-classic">
-                        Classic
-                        <span class="tooltip-wrapper">
-                          <span class="tooltip-indicator">?</span>
-                          <span class="tooltip hidden">
-                            <span>
-                              Relics and progression items will only be
-                              randomized among the game's original relic
-                              and progression item locations. 28 Check locations.
-                            </span>
-                          </span>
-                        </span>
-                      </label>
-                    </div>
-                  </fieldset>
-                  <input id="enemy-drops-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="starting-equipment-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="item-locations-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="prologue-rewards-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="relic-locations-arg" type="text" disabled="disabled" style="display: none">
-                  <input id="writes" type="text" disabled="disabled" style="display: none">
-                </fieldset>
-                <div class="pure-u-1"> <input id="clear" type="submit" class="pure-button hidden" value="Clear">
-                </div>
               </div>
-            </fieldset>
-            <fieldset class="input-box">
-              <legend>Options</legend>
-              <div class="checkboxes">
-                <div class="left-column-options">
-                  <div>
-                    <label for="newGoals">Change Goals</label><span class="tooltip-wrapper">
-                      <span class="tooltip-indicator">?</span>
-                      <span class="tooltip hidden">
-                        <span>
-                          Changes the goals of the seed but does not affect relic distribution.
-                          All Bosses requires all 20 bosses to be defeated and Richter to be saved.
-                          All Relics requires all 28 relics from the North American PSX version of the game.
-                        </span>
-                      </span>
-                    </span>
-                  </div>
+
+              <div class="option-grid" style="margin: 1em;">
+                <div>
                   <div class="toggle-container">
                     <label class="toggle-switch">
                       <input id="append-seed" type="checkbox" data-store-checkbox="true">
@@ -302,24 +201,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="tournament-mode" type="checkbox" data-store-checkbox="true"
-                        data-custom-change="tournamentModeChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="tournament-mode" class="toggle-label">
-                      Tournament Mode
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Prevents displaying the relic locations and solutions.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
+
                   <div class="toggle-container">
                     <label class="toggle-switch">
                       <input id="accessibility-patches" type="checkbox" data-store-checkbox="true">
@@ -331,9 +213,28 @@
                         <span class="tooltip-indicator">?</span>
                         <span class="tooltip hidden">
                           <span>
-                            Reduces screen flashing from use items, adjusts some relics for better visibility, and
-                            patches some softlocks.
+                            Reduces screen flashing from use items, adjusts some relics for better visibility,
+                            and patches some softlocks.
                           </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="tournament-mode" type="checkbox" data-store-checkbox="true"
+                        data-custom-change="tournamentModeChange">
+                      <span class="slider"></span>
+                    </label>
+                    <label for="tournament-mode" class="toggle-label">
+                      Tournament Mode
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>Prevents displaying the relic locations and solutions.</span>
                         </span>
                       </span>
                     </label>
@@ -341,25 +242,28 @@
 
                   <div class="toggle-container">
                     <label class="toggle-switch">
-                      <input id="easy-mode" type="checkbox" data-store-checkbox="false">
+                      <input id="zero-relic" type="checkbox" data-store-checkbox="false">
                       <span class="slider"></span>
                     </label>
-                    <label for="easy-mode" class="toggle-label">
-                      Easy Mode
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Simplifies inputs so spells no longer need complex sequences to execute. L2 for Gravity
-                            Boots. R3 and any of the following: Left / Right for Hellfire, Up for Soul Steal, and 2x
-                            Down for Tetra Spirit. An additional 4 frames of invincibility is added to all damage
-                            states, spell resolutions, and potions.
-                          </span>
-                        </span>
-                      </span>
+                    <new></new>
+                    <label for="zero-relic" class="toggle-label">
+                      Zero-Dollar Relic
                     </label>
                   </div>
 
+                  <div class="toggle-container">
+                    <label class="toggle-switch">
+                      <input id="open-statue" type="checkbox" data-store-checkbox="false">
+                      <span class="slider"></span>
+                    </label>
+                    <new></new>
+                    <label for="open-statue" class="toggle-label">
+                      Open Clock Statue
+                    </label>
+                  </div>
+                </div>
+
+                <div>
                   <div class="toggle-container">
                     <label class="toggle-switch">
                       <input id="show-spoilers" type="checkbox" data-store-checkbox="true"
@@ -386,720 +290,1042 @@
                     </label>
                     <label for="show-solutions" class="toggle-label">Show Solutions</label>
                   </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="enemy-drops" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="enemy-drops" class="toggle-label">Enemy Drops</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="stats" type="checkbox" data-store-checkbox="true" data-custom-change="statsChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="stats" class="toggle-label">Item Stats</label>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="itemnamerando-mode" type="checkbox" data-store-checkbox="false"
-                        data-custom-change="itemNameRandoModeChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="itemnamerando-mode" class="toggle-label">
-                      Item Names
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Randomize item names when using Item Stat Rando.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="turkey-mode" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="turkey-mode" class="toggle-label">
-                      Turkey Mode
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Replaces the subweapons in the glass vats at Alchemy Lab and Black Marble Gallery with
-                            useless turkeys.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="item-locations" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="item-locations" class="toggle-label">Item Locations</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="starting-equipment" type="checkbox" disabled data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="starting-equipment" class="toggle-label disabled">Starting Equipment</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="prologue-rewards" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="prologue-rewards" class="toggle-label">Prologue Rewards</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="seasonal-phrases" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="seasonal-phrases" class="toggle-label">
-                      Seasonal Splash Phrases
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Allow seasonal and holiday-based splash phrases on the "Press Start" screen.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="startingStats" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="startingStats" class="toggle-label">
-                      Randomize Starting Stats
-                    </label>
-                  </div>
-                  <div class="option-row" id="statMaxRow">
-                    <label for="statMax">MAX:</label>
-                    <input type="range" id="statMax" min="5" max="100" value="30" step="5">
-                    <span id="statMaxCurrentValue"></span>
-                    <datalist id="statMaxList"></datalist>
-                  </div>
                 </div>
-                <div class="right-column-options">
-                  <div>
-                    <select id="newGoals">
-                      <option value="default">Default</option>
-                      <option value="b">All Bosses</option>
-                      <option value="r">All Relics</option>
-                      <option value="a">All Bosses & Relics</option>
-                      <option value="v">All Bosses & Vlad Relics</option>
-                      <option value="h">Bounty Hunter</option>
-                      <option value="t">Target Confirmed</option>
-                      <option value="w">Hitman</option>
-                      <option value="x">All Bosses & Bounties</option>
-                    </select>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="colorrando-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="colorrando-mode" class="toggle-label">
-                      Color Randomizer
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Randomize various color palettes. Ex: Cape colors, gravity boots trails,
-                            hydrostorm.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
 
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="magicmax-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="magicmax-mode" class="toggle-label">
-                      Magic Vessels
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Replace Heart Max Up with Magic Max Up.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="antifreeze-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="antifreeze-mode" class="toggle-label">
-                      Anti-Freeze
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Remove screen freezes on level-up, relic and vessel acquisition.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="mypurse-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="mypurse-mode" class="toggle-label">
-                      That's my purse!
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Prevents Death from stealing your gear.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="iws-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="iws-mode" class="toggle-label">
-                      Infinite Wing Smash
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Enables infinite Wing Smash for one input.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="fastwarp-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="fastwarp-mode" class="toggle-label">
-                      Fast Warps
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Quickens warp animation when using teleporters.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="noprologue-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="noprologue-mode" class="toggle-label">
-                      Remove Prologue
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Removes the Prologue from being required to play.
-                            <span style="color: red;">(Will remove potential prologue rewards.)</span>
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="unlocked-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="unlocked-mode" class="toggle-label">
-                      Unlocked Mode
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Opens all five shortcuts in first castle and one in second castle.
-                            <span style="color: red;">(Will break logic for most presets.)</span>
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="surprise-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="surprise-mode" class="toggle-label">
-                      Relic Surprise!
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            All relics are hidden behind the same sprite and palette.
-                            The player cannot tell what the relic is until they collect it.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="enemyStatRando-mode" type="checkbox" data-store-checkbox="false"
-                        data-custom-change="enemyStatRandoModeChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="enemyStatRando-mode" class="toggle-label">
-                      Enemy Stats
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Enemy stats are randomized ranging from 25% to 200% of their original value and their attack
-                            and defense types are randomized to include random elements.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="elem-chaos" type="checkbox" data-custom-change="elemChaosModeChange">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="elem-chaos" class="toggle-label">
-                      Elemental Chaos
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>Randomizes almost every single element in the game.</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="shopPriceRando-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="shopPriceRando-mode" class="toggle-label">
-                      Shop Prices
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Shop prices are randomized ranging from 50% to 150% of their original value and they are
-                            shuffled between each other.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="startRoomRando-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="startRoomRando-mode" class="toggle-label">
-                      Starting Zone 1st Castle
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Start in the entrance as usual but after the first Warg, you are teleported to a random zone
-                            to start the rest of your run. (Select both to have full-range starting rando)
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="startRoomRando2nd-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="startRoomRando2nd-mode" class="toggle-label">
-                      Starting Zone 2nd Castle
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Start in the entrance as usual but after the first Warg, you are teleported to a random zone
-                            in second castle to start the rest of your run. (Select both to have full-range starting
-                            rando)
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="domino-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="domino-mode" class="toggle-label">
-                      Guaranteed Drops
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Guarantees drops from every enemy that has one. Which is dropped depends on kill count odd /
-                            even.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="rlbc-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="rlbc-mode" class="toggle-label">
-                      Reverse Library Card
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Adds a new function to Library Cards. Hold Down while using them to take Alucard to the
-                            second castle Library after Richter is saved.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="immunity-potion-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="immunity-potion-mode" class="toggle-label">
-                      Immunity Potions
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Converts Resist Fire, Resist Ice, etc. potions to grant Immunity to the element in question
-                            and allows them to grant invincibility frames.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="godspeed-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="godspeed-mode" class="toggle-label">
-                      Godspeed Shoes
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Allows Alucard to run by double-pressing in the direction you intend to move in.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="library-shortcut" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="library-shortcut" class="toggle-label">
-                      Library Shortcut
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Opens a shortcut to allow players to swiftly exit the Long Library.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="single-hit-gear" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="single-hit-gear" class="toggle-label">
-                      Single-Hit Gears
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Makes all gear puzzles only require a single hit on one gear to open the respective door.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="rev-castle-teleport-rando" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <new></new>
-                    <label for="rev-castle-teleport-rando" class="toggle-label">
-                      Reverse Teleporter
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Randomize where the teleporter pad in Reverse Castle is located.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="zero-relic" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <new></new>
-                    <label for="zero-relic" class="toggle-label">
-                      Zero-Dollar Relic
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Library Shop Relic is free.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="open-statue" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <new></new>
-                    <label for="open-statue" class="toggle-label">
-                      Open Clock Statue
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Statue in Clock Room is always open.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="spike-room" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <new></new>
-                    <label for="spike-room" class="toggle-label">
-                      Spike Room
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Randomizes which Spike Room is used before Spike Breaker.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="lycan-mode" type="checkbox" data-store-checkbox="false">
-                      <span class="slider"></span>
-                    </label>
-                    <new></new>
-                    <label for="lycan-mode" class="toggle-label">
-                      Lycanthrope Mode
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Allows the player to use full wolf at reduced cost.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-                </div>
               </div>
             </fieldset>
-            <fieldset class="input-box">
-              <legend>Customizations</legend>
-              <div class="customizations">
+            <div class="tabs-nav">
+              <button type="button" class="tab-btn active" onclick="openTab('tab-goals')">
+                Goals <new></new>
+              </button>
+
+              <button type="button" class="tab-btn" onclick="openTab('tab-randomizations')">
+                Randomizations <new></new>
+              </button>
+
+              <button type="button" class="tab-btn" onclick="openTab('tab-QoL')">
+                Quality of Life <new></new>
+              </button>
+
+              <button type="button" class="tab-btn" onclick="openTab('tab-xform')">
+                Transform Modes <new></new>
+              </button>
+
+              <button type="button" class="tab-btn" onclick="openTab('tab-challenge')">
+                Challenge Options <new></new>
+              </button>
+
+              <button type="button" class="tab-btn" onclick="openTab('tab-cosmetics')">
+                Cosmetics <new></new>
+              </button>
+
+            </div>
+
+            <div id="tab-goals" class="tab-content active">
+              <fieldset id="options" class="spacing">
+
                 <div>
-                  <div class="mapColor-dropdown">
-                    <label>Map Color:</label>
-                    <select id="mapColor">
-                      <option value="default">Normal</option>
-                      <option value="u">Dark Blue</option>
-                      <option value="r">Crimson</option>
-                      <option value="n">Brown</option>
-                      <option value="g">Hunter Green</option>
-                      <option value="y">Grey</option>
-                      <option value="p">Purple</option>
-                      <option value="k">Pink</option>
-                      <option value="b">Black</option>
-                    </select>
-                  </div>
-
-
-                  <div id="mapColorDisplay" class="map-color"
-                    style="background: url(https://i.servimg.com/u/f81/20/40/06/51/map_pa10.png);"></div>
-                  <div id="alucard-palette-container">
-                    <label>Alucard Palette:</label>
-                    <select id="alucardPalette">
-                      <option value="default">Default</option>
-                      <option value="r">Bloody Tears</option>
-                      <option value="f">Fire Lord *NEW*</option>
-                      <option value="g">Swamp Thing</option>
-                      <option value="m">Refreshing Mint</option>
-                      <option value="i">Ice Lord *NEW*</option>
-                      <option value="b">Blue Danube</option>
-                      <option value="l">Royal Purple</option>
-                      <option value="p">Pink Passion</option>
-                      <option value="w">White Knight</option>
-                      <option value="s">Shadow Prince</option>
-                    </select>
-                  </div>
-                  <div id="alucard-liner-container">
-                    <label>Alucard Liner:</label>
-                    <select id="alucardLiner">
-                      <option value="z">Gold Liner (default)</option>
-                      <option value="x">Bronze Liner</option>
-                      <option value="y">Silver Liner</option>
-                      <option value="w">Onyx Liner</option>
-                      <option value="v">Coral Liner</option>
-                      <option value="s">Slate Liner *NEW*</option>
-                      <option value="j">Jade Liner *NEW*</option>
-                    </select>
-                  </div>
-                  <div class="alucard-display">
-                    <div id="alucardLinerDisplay"
-                      style="margin: 0; position: absolute; width:96px; height:64px; background: url(https://i.postimg.cc/BnQZCDQb/alucard-palettes.png);">
-                    </div>
-
-                    <div id="alucardPaletteDisplay"
-                      style="width:96px; height:64px; background: url(https://i.postimg.cc/BnQZCDQb/alucard-palettes.png);">
-                    </div>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="music" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="music" class="toggle-label">Music Randomizer</label>
-                  </div>
-
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="boss-music-separation" type="checkbox" data-store-checkbox="true">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="boss-music-separation" class="toggle-label">
-                      Separate Boss Music
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            Separates Boss music and Normal stage music randomization.<br>
-                            Prevents hearing Enchanted Banquet for 10 minutes.
-                          </span>
-                        </span>
+                  <label for="newGoals">Change Goals</label>
+                  <span class="tooltip-wrapper">
+                    <span class="tooltip-indicator">?</span>
+                    <span class="tooltip hidden">
+                      <span>
+                        Changes the goals of the seed but does not affect relic distribution.
+                        All Bosses requires all 20 bosses to be defeated and Richter to be saved.
+                        All Relics requires all 28 relics from the North American PSX version of the game.
                       </span>
-                    </label>
-                  </div>
+                    </span>
+                  </span>
+                </div>
 
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input id="excludeSongsOption" type="checkbox">
-                      <span class="slider"></span>
-                    </label>
-                    <label for="excludeSongsOption" class="toggle-label">
-                      Exclude Songs
-                      <span class="tooltip-wrapper">
-                        <span class="tooltip-indicator">?</span>
-                        <span class="tooltip hidden">
-                          <span>
-                            If Music Randomizer is enabled, you can choose which songs to exclude from
-                            randomizations.<br>
-                            These songs will not appear during your playthrough.
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
+                <div>
+                  <select id="newGoals">
+                    <option value="default">Default</option>
+                    <option value="b">All Bosses</option>
+                    <option value="r">All Relics</option>
+                    <option value="a">All Bosses & Relics</option>
+                    <option value="v">All Bosses & Vlad Relics</option>
+                    <option value="h">Bounty Hunter</option>
+                    <option value="t">Target Confirmed</option>
+                    <option value="w">Hitman</option>
+                    <option value="x">All Bosses & Bounties</option>
+                    <option value="y">All Bosses, Relics & Bounties</option>
+                  </select>
+                </div>
 
-                  <div id="excludeSongsMenu" class="listbox-container" hidden>
-                    <select id="includeList" class="listbox" multiple></select>
-                    <div class="listbox-button-container">
-                      <button id="esMoveToRight" class="listbox-button" type="button">→</button>
-                      <button id="esMoveToLeft" class="listbox-button" type="button">←</button>
-                    </div>
-                    <select id="excludeList" class="listbox" multiple></select>
+                <small>❗ Lower complexities generate faster but may also be faster to beat.</small>
+
+                <div id="complexity-slider">
+                  <label for="complexity">Complexity</label>
+
+                  <div id="complexity-slider-details">
+                    <span id="complexityMinValue">1</span>
+                    <input id="complexity" type="range" min="1" list="complexityValues">
+                    <span id="complexityMaxValue"></span>
+                    <span id="complexityCurrentValue"></span>
+
+                    <datalist id="complexityValues">
+                      <option value="1" label="1"></option>
+                    </datalist>
                   </div>
                 </div>
-              </div>
-            </fieldset>
+                <fieldset id="relic-locations-set">
+                  <legend>
+                    <input id="relic-locations" type="checkbox" data-store-checkbox="true"
+                      data-custom-change="relicLocationsChange">
+                    <label for="relic-locations">Relic locations</label>
+                  </legend>
 
+                  <div class="relic-location">
+                    <input id="extension-guarded" name="extension" type="radio" value="guarded">
+                    <label for="extension-guarded">
+                      Guarded
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Relics and progression items may appear in rooms guarded by bosses.
+                            37 Check locations.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="relic-location">
+                    <input id="extension-guardedplus" name="extension" type="radio" value="guardedplus">
+                    <label for="extension-guardedplus">
+                      Guarded<i>Plus</i>
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Add to guarded locations with more checks on left side of second castle.
+                            39 Check locations.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="relic-location">
+                    <input id="extension-equipment" name="extension" type="radio" value="equipment">
+                    <label for="extension-equipment">
+                      Equipment
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Relics and progression items may appear in place of equipment tiles.
+                            105 Check locations.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="relic-location">
+                    <input id="extension-scenic" name="extension" type="radio" value="scenic">
+                    <label for="extension-scenic">
+                      Scenic
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Relics and progression items may appear in place of equipment tiles
+                            or in unique locations in either castle.
+                            118 Check locations.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="relic-location">
+                    <input id="extension-extended" name="extension" type="radio" value="wanderer">
+                    <label for="extension-extended">
+                      Extended
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Relics and progression items may appear in place of limited equipment tiles
+                            or in unique locations in either castle.
+                            70 Check locations.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="relic-location">
+                    <input id="extension-classic" name="extension" type="radio" value="classic">
+                    <label for="extension-classic">
+                      Classic
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>
+                            Relics and progression items will only be randomized among the game's
+                            original relic and progression item locations.
+                            28 Check locations.
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <input id="enemy-drops-arg" type="text" disabled="disabled" style="display: none">
+                <input id="starting-equipment-arg" type="text" disabled="disabled" style="display: none">
+                <input id="item-locations-arg" type="text" disabled="disabled" style="display: none">
+                <input id="prologue-rewards-arg" type="text" disabled="disabled" style="display: none">
+                <input id="relic-locations-arg" type="text" disabled="disabled" style="display: none">
+                <input id="writes" type="text" disabled="disabled" style="display: none">
+
+                <div class="pure-u-1">
+                  <input id="clear" type="submit" class="pure-button hidden" value="Clear">
+                </div>
+            </div> <!-- end of tab-goals -->
+
+            <div id="tab-randomizations" class="tab-content">
+              <fieldset class="spacing">
+
+                <div class="checkboxes">
+
+                  <div class="left-column-options">
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="enemyStatRando-mode" type="checkbox" data-store-checkbox="false"
+                          data-custom-change="enemyStatRandoModeChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="enemyStatRando-mode" class="toggle-label">
+                        Enemy Stats
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Enemy stats are randomized ranging from 25% to 200% of their original value
+                              and their attack and defense types are randomized to include random elements.
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="elem-chaos" type="checkbox" disabled data-custom-change="elemChaosModeChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="elem-chaos" class="toggle-label">
+                        Elemental Chaos
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomizes almost every single element in the game.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="shopPriceRando-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="shopPriceRando-mode" class="toggle-label">
+                        Shop Prices
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Shop prices are randomized ranging from 50% to 150% of their original value
+                              and they are shuffled between each other.
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="startRoomRando-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="startRoomRando-mode" class="toggle-label">
+                        Starting Zone 1st Castle
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Start in the entrance as usual but after the first Warg,
+                              you are teleported to a random zone to start the rest of your run.
+                              (Select both to have full-range starting rando)
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="startRoomRando2nd-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="startRoomRando2nd-mode" class="toggle-label">
+                        Starting Zone 2nd Castle
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Start in the entrance as usual but after the first Warg,
+                              you are teleported to a random zone in second castle to start the rest of your run.
+                              (Select both to have full-range starting rando)
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="enemy-drops" type="checkbox" data-store-checkbox="true">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="enemy-drops" class="toggle-label">Enemy Drops</label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="cornucopia-mode" type="checkbox" data-store-checkbox="false"
+                          data-custom-change="cornucopiaModeChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="cornucopia-mode" class="toggle-label">
+                        Chaos Drops
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomize all drop items. Enemies no longer have a set drop pattern.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="stats" type="checkbox" data-store-checkbox="true" data-custom-change="statsChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="stats" class="toggle-label">Item Stats</label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="itemnamerando-mode" type="checkbox" data-store-checkbox="false"
+                          data-custom-change="itemNameRandoModeChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="itemnamerando-mode" class="toggle-label">
+                        Item Names
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomize item names when using Item Stat Rando.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                  </div> <!-- end left-column-options -->
+                  <div id="right-column-options">
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="item-locations" type="checkbox" data-store-checkbox="true">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="item-locations" class="toggle-label">Item Locations</label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="starting-equipment" type="checkbox" disabled data-store-checkbox="true">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="starting-equipment" class="toggle-label disabled">Starting Equipment</label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="prologue-rewards" type="checkbox" data-store-checkbox="true">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="prologue-rewards" class="toggle-label">Prologue Rewards</label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="spike-room" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <new></new>
+                      <label for="spike-room" class="toggle-label">
+                        Spike Room
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomizes which Spike Room is used before Spike Breaker.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="rev-castle-teleport-rando" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <new></new>
+                      <label for="rev-castle-teleport-rando" class="toggle-label">
+                        Reverse Teleporter
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomize where the teleporter pad in Reverse Castle is located.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="startingStats" type="checkbox" data-store-checkbox="true">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="startingStats" class="toggle-label">Randomize Starting Stats</label>
+                    </div>
+
+                    <div class="option-row" id="statMaxRow">
+                      <label for="statMax">MAX:</label>
+                      <input type="range" id="statMax" min="5" max="100" value="30" step="5">
+                      <span id="statMaxCurrentValue"></span>
+                      <datalist id="statMaxList"></datalist>
+                    </div>
+
+                  </div> <!-- end right-column-options -->
+
+                </div> <!-- end checkboxes -->
+
+              </fieldset>
+            </div> <!-- end tab-randomizations -->
+            <div id="tab-QoL" class="tab-content">
+              <fieldset class="spacing">
+
+                <div class="checkboxes">
+
+                  <div class="left-column-options">
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="easy-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="easy-mode" class="toggle-label">
+                        Easy Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Simplifies inputs so spells no longer need complex sequences to execute.
+                              L2 for Gravity Boots. R3 and any of the following:
+                              Left / Right for Hellfire, Up for Soul Steal, and 2x Down for Tetra Spirit.
+                              An additional 4 frames of invincibility is added to all damage states,
+                              spell resolutions, and potions.
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="turkey-mode" type="checkbox" data-store-checkbox="true">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="turkey-mode" class="toggle-label">
+                        Turkey Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Replaces the subweapons in the glass vats at Alchemy Lab
+                              and Black Marble Gallery with useless turkeys.
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="magicmax-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="magicmax-mode" class="toggle-label">
+                        Magic Vessels
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Replace Heart Max Up with Magic Max Up.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="antifreeze-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="antifreeze-mode" class="toggle-label">
+                        Anti-Freeze
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Remove screen freezes on level-up, relic and vessel acquisition.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="mypurse-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="mypurse-mode" class="toggle-label">
+                        That's my purse!
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Prevents Death from stealing your gear.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="iws-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="iws-mode" class="toggle-label">
+                        Infinite Wing Smash
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Enables infinite Wing Smash for one input.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="fastwarp-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="fastwarp-mode" class="toggle-label">
+                        Fast Warps
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Quickens warp animation when using teleporters.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="noprologue-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="noprologue-mode" class="toggle-label">
+                        Remove Prologue
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Removes the Prologue from being required to play.
+                              <span style="color: red;">(Will remove potential prologue rewards.)</span>
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                  </div> <!-- end left-column-options -->
+                  <div class="right-column-options">
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="unlocked-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="unlocked-mode" class="toggle-label">
+                        Unlocked Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Opens all five shortcuts in first castle and one in second castle.
+                              <span style="color: red;">(Will break logic for most presets.)</span>
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="domino-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="domino-mode" class="toggle-label">
+                        Guaranteed Drops
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Guarantees drops from every enemy that has one.
+                              Which is dropped depends on kill count odd / even.
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="rlbc-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="rlbc-mode" class="toggle-label">
+                        Reverse Library Card
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Adds a new function to Library Cards.
+                              Hold Down while using them to take Alucard to the second castle Library
+                              after Richter is saved.
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="immunity-potion-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="immunity-potion-mode" class="toggle-label">
+                        Immunity Potions
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Converts Resist Fire, Resist Ice, etc. potions to grant Immunity
+                              to the element in question and allows them to grant invincibility frames.
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="godspeed-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="godspeed-mode" class="toggle-label">
+                        Godspeed Shoes
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Allows Alucard to run by double-pressing in the direction you intend to move
+                              in.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="library-shortcut" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="library-shortcut" class="toggle-label">
+                        Library Shortcut
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Opens a shortcut to allow players to swiftly exit the Long Library.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="single-hit-gear" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="single-hit-gear" class="toggle-label">
+                        Single-Hit Gears
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Makes all gear puzzles only require a single hit on one gear
+                              to open the respective door.
+                            </span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                  </div> <!-- end right-column-options -->
+
+                </div> <!-- end checkboxes -->
+
+              </fieldset>
+            </div> <!-- end tab-QoL -->
+            <div id="tab-xform" class="tab-content">
+              <fieldset class="spacing">
+
+                <div class="checkboxes">
+
+                  <div class="left-column-options">
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="lycan-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <new></new>
+                      <label for="lycan-mode" class="toggle-label">
+                        Lycanthrope Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Allows the player to use full wolf at reduced cost.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                  </div> <!-- end left-column-options -->
+
+                  <div class="right-column-options">
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="warlock-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <new></new>
+                      <label for="warlock-mode" class="toggle-label">
+                        Warlock Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Allows the player to use Form of Mist at 0 MP cost.
+                              Sets starting stats to 1 except INT which is 99.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+
+                </div> <!-- end checkboxes -->
+
+              </fieldset>
+            </div> <!-- end tab-xform -->
+
+            <div id="tab-challenge" class="tab-content">
+              <fieldset class="spacing">
+
+                <div class="checkboxes  ">
+
+                  <div class="left-column-options">
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="instant-death-mode" type="checkbox" data-store-checkbox="false"
+                          data-custom-change="instantDeathModeChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="instant-death-mode" class="toggle-label">
+                        Instant Death Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>All damage is fatal. No matter the source.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="level-one-mode" type="checkbox" data-store-checkbox="false"
+                          data-custom-change="levelOneModeChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="level-one-mode" class="toggle-label">
+                        Level One Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>All stats are set to 1. No matter the source.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                  </div> <!-- end left-column-options -->
+                  <div class="right-column-options">
+                    
+                  </div> <!-- end right-column-options -->
+                </div> <!-- end checkboxes -->
+              </fieldset>
+            </div>
+
+            <div id="tab-cosmetics" class="tab-content">
+              <fieldset class="spacing">
+
+                <!-- Seasonal Splash Phrases -->
+                <div class="toggle-container">
+                  <label class="toggle-switch">
+                    <input id="seasonal-phrases" type="checkbox" data-store-checkbox="true">
+                    <span class="slider"></span>
+                  </label>
+                  <label for="seasonal-phrases" class="toggle-label">
+                    Seasonal Splash Phrases
+                    <span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>Allow seasonal and holiday-based splash phrases on the "Press Start" screen.</span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Color Randomizer -->
+                <div class="toggle-container">
+                  <label class="toggle-switch">
+                    <input id="colorrando-mode" type="checkbox" data-store-checkbox="false">
+                    <span class="slider"></span>
+                  </label>
+                  <label for="colorrando-mode" class="toggle-label">
+                    Color Randomizer
+                    <span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>
+                          Randomize various color palettes.
+                          Ex: Cape colors, gravity boots trails, hydrostorm.
+                        </span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Relic Surprise -->
+                <div class="toggle-container">
+                  <label class="toggle-switch">
+                    <input id="surprise-mode" type="checkbox" data-store-checkbox="false">
+                    <span class="slider"></span>
+                  </label>
+                  <label for="surprise-mode" class="toggle-label">
+                    Relic Surprise!
+                    <span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>
+                          All relics are hidden behind the same sprite and palette.
+                          The player cannot tell what the relic is until they collect it.
+                        </span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Map Color -->
+                <div class="mapColor-dropdown">
+                  <label>Map Color:</label>
+                  <select id="mapColor">
+                    <option value="default">Normal</option>
+                    <option value="u">Dark Blue</option>
+                    <option value="r">Crimson</option>
+                    <option value="n">Brown</option>
+                    <option value="g">Hunter Green</option>
+                    <option value="y">Grey</option>
+                    <option value="p">Purple</option>
+                    <option value="k">Pink</option>
+                    <option value="b">Black</option>
+                  </select>
+                </div>
+
+                <div id="mapColorDisplay" class="map-color"
+                  style="background: url(https://i.servimg.com/u/f81/20/40/06/51/map_pa10.png);">
+                </div>
+
+                <!-- Alucard Palette -->
+                <div id="alucard-palette-container">
+                  <label>Alucard Palette:</label>
+                  <select id="alucardPalette">
+                    <option value="default">Default</option>
+                    <option value="r">Bloody Tears</option>
+                    <option value="f">Fire Lord *NEW*</option>
+                    <option value="g">Swamp Thing</option>
+                    <option value="m">Refreshing Mint</option>
+                    <option value="i">Ice Lord *NEW*</option>
+                    <option value="b">Blue Danube</option>
+                    <option value="l">Royal Purple</option>
+                    <option value="p">Pink Passion</option>
+                    <option value="w">White Knight</option>
+                    <option value="s">Shadow Prince</option>
+                  </select>
+                </div>
+
+                <!-- Alucard Liner -->
+                <div id="alucard-liner-container">
+                  <label>Alucard Liner:</label>
+                  <select id="alucardLiner">
+                    <option value="z">Gold Liner (default)</option>
+                    <option value="x">Bronze Liner</option>
+                    <option value="y">Silver Liner</option>
+                    <option value="w">Onyx Liner</option>
+                    <option value="v">Coral Liner</option>
+                    <option value="s">Slate Liner *NEW*</option>
+                    <option value="j">Jade Liner *NEW*</option>
+                  </select>
+                </div>
+
+                <!-- Alucard Display -->
+                <div class="alucard-display">
+                  <div id="alucardLinerDisplay" style="margin: 0; position: absolute; width:96px; height:64px;
+                        background: url(https://i.postimg.cc/BnQZCDQb/alucard-palettes.png);">
+                  </div>
+
+                  <div id="alucardPaletteDisplay" style="width:96px; height:64px;
+                        background: url(https://i.postimg.cc/BnQZCDQb/alucard-palettes.png);">
+                  </div>
+                </div>
+
+                <!-- Music Randomizer -->
+                <div class="toggle-container">
+                  <label class="toggle-switch">
+                    <input id="music" type="checkbox" data-store-checkbox="true">
+                    <span class="slider"></span>
+                  </label>
+                  <label for="music" class="toggle-label">Music Randomizer</label>
+                </div>
+
+                <!-- Separate Boss Music -->
+                <div class="toggle-container">
+                  <label class="toggle-switch">
+                    <input id="boss-music-separation" type="checkbox" data-store-checkbox="true">
+                    <span class="slider"></span>
+                  </label>
+                  <label for="boss-music-separation" class="toggle-label">
+                    Separate Boss Music
+                    <span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>
+                          Separates Boss music and Normal stage music randomization.<br>
+                          Prevents hearing Enchanted Banquet for 10 minutes.
+                        </span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Exclude Songs -->
+                <div class="toggle-container">
+                  <label class="toggle-switch">
+                    <input id="excludeSongsOption" type="checkbox">
+                    <span class="slider"></span>
+                  </label>
+                  <label for="excludeSongsOption" class="toggle-label">
+                    Exclude Songs
+                    <span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>
+                          If Music Randomizer is enabled, you can choose which songs to exclude from
+                          randomizations.<br>
+                          These songs will not appear during your playthrough.
+                        </span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+
+                <div id="excludeSongsMenu" class="listbox-container" hidden>
+                  <select id="includeList" class="listbox" multiple></select>
+
+                  <div class="listbox-button-container">
+                    <button id="esMoveToRight" class="listbox-button" type="button">→</button>
+                    <button id="esMoveToLeft" class="listbox-button" type="button">←</button>
+                  </div>
+
+                  <select id="excludeList" class="listbox" multiple></select>
+                </div>
+
+              </fieldset>
+            </div> <!-- end tab-cosmetics -->
           </div>
+          </div>
+
           <div>
             <div id="spoilers-container" class="hide" style="display: none">
               <textarea id="spoilers" rows="8" cols="32"></textarea>
             </div>
           </div>
+
           <p id="buttons">
             <input id="randomize" type="submit" class="primary" disabled="disabled" value="Randomize">
             <input id="copy" type="submit" disabled="disabled" value="Copy Spoilers">
           </p>
+
         </form>
+
         <div>
           <button style="color:black;" onclick="showOptionsLog()">Generate Options Log</button>
           <button style="color:black;" onclick="showPreviousSeed()">Previous Seed Options Log</button>
         </div>
+
         <a id="download" style="display:none"></a>
+
         <div id="loader"></div>
+
         <pre id="optionsLogOutput"></pre>
+
         <div id="notification">Copied to clipboard</div>
+
         <section id="latest-changelog">
           <h2>Latest Update</h2>
           <div id="latest-changelog-container">Loading latest changelog…</div>
         </section>
+
         <script>
           fetch("./changelog.json")
             .then(res => res.json())
@@ -1111,29 +1337,36 @@
           function renderLatest(entry) {
             const container = document.getElementById("latest-changelog-container");
             container.innerHTML = `
-                <h3>${entry.date}</h3>
-                ${Object.keys(entry.sections).map(sectionName => `
-                  <h4>${sectionName}</h4>
-                  <ul>
-                    ${entry.sections[sectionName].map(item => `<li>${item}</li>`).join("")}
-                  </ul>
-                `).join("")}
-              `;
+        <h3>${entry.date}</h3>
+        ${Object.keys(entry.sections).map(sectionName => `
+            <h4>${sectionName}</h4>
+            <ul>
+                ${entry.sections[sectionName].map(item => `<li>${item}</li>`).join("")}
+            </ul>
+        `).join("")}
+    `;
           }
         </script>
+
         <h2>Known Bugs</h2>
         <ul>
           <li>Removing Tournament Mode can make seeds take longer to generate.</li>
           <li>Incorrect default icons when starting with "null" equipment.</li>
         </ul>
+
       </fieldset>
     </section>
   </main>
   <div id="dev-border"></div>
-  <a id="fork" href="https://github.com/sotnrando/sotnrando"><img width="149" height="149"
+
+  <a id="fork" href="https://github.com/sotnrando/sotnrando">
+    <img width="149" height="149"
       src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149"
-      class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+      class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+  </a>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/seedrandom.min.js"></script>
+
   <script src="src/constants.js"></script>
   <script src="src/enemies.js"></script>
   <script src="src/errors.js"></script>
@@ -1145,11 +1378,14 @@
   <script src="src/relics.js"></script>
   <script src="src/stats.js"></script>
   <script src="src/util.js"></script>
+  <script src="src/options_array.js"></script>
   <script src="src/accessibility_patches.js"></script>
+
   <script src="src/randomize_stats.js"></script>
   <script src="src/randomize_relics.js"></script>
   <script src="src/randomize_items.js"></script>
   <script src="src/randomize_music.js"></script>
+
   <script src="build/presets/casual.js"></script>
   <script src="build/presets/safe.js"></script>
   <script src="build/presets/adventure.js"></script>
@@ -1212,11 +1448,31 @@
   <script src="build/presets/hoarder.js"></script>
   <script src="build/presets/collector.js"></script>
   <script src="build/presets/index.js"></script>
+
   <script src="src/worker.js"></script>
   <script src="src/core_randomizer.js"></script>
   <script src="src/browser_utils.js"></script>
   <script src="src/browser_constants.js"></script>
   <script src="src/browser.js"></script>
+
+  <script>
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      document.getElementById(tabId).classList.add('active');
+
+      if (window.event && window.event.currentTarget) {
+        window.event.currentTarget.classList.add('active');
+      }
+    }
+  </script>
+
 </body>
 
 </html>

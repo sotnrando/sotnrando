@@ -1,6 +1,39 @@
 {
     "changelog": [
         {
+            "date": "July 13, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Fixed some issues with Richter being playable in Boss Rush.",
+                    "Entirely refactored Boss Rush code.",
+                    "'U MAD BRO' - Glitch Logic; 'Mah jimmies' - eldri7ch"
+                ],
+                "Option Updates": [
+                    "Added Warlock Mode.",
+                    "Added Level 1 Mode.",
+                    "Added Instant Death Mode.",
+                    "Added Chaos Drops Mode. Any non-progression item can drop from any non-boss enemy.",
+                    "Added a new goal for the randomizer: All Bosses, Relics, Save Richter, and Bounties.",
+                    "Options has gone through a massive refactor this month. Implementing new features will be much easier and faster from now on."
+                ],
+                "Website Updates": [
+                    "Randomizer restructure creating a tabular format for options and presets to be displayed in.",
+                    "The tabular format will allow for more flexibility and consistency as well as enable future updates to the web interface.",
+                    "Tabs include 'Goals', 'Randomization', 'Quality of Life', 'Transform Modes'*more to come*, and 'Cosmetics'.",
+                    "These changes to the page should allow for more intuitive navigation and a better user experience.",
+                    "If you want to see what options you have enabled and disabled, there is a Generate Options log Button below the randomize button to inform you of the what is enabled and disabled in your current configuration.",
+                    "Preset dropdown now no longer uses a weight system. Dropdown is now sorted automatically by preset name.",
+                    "Preset dropdown has 3 sections, new, tournament, and then all other presets. This should make it easier to find the preset you are looking for.",
+                    "New Goals and goal compatablity are now taken from the presets rather than hardcoded into the website. This will allow for more flexibility and consistency as well as enable future updates to the web interface.",
+                    "Option compatability is now taken from the presets rather than hardcoded into the website. This will also allow for more flexibility and consistency as well as enable future updates to the web interface."
+                ],
+                "Program Updates": [
+                    "Options and Presets are now listed in massive array files where they can be refrenced much easier than before. This will allow for more flexibility and consistency as well as enable future updates to the web interface.",
+                    "'Die weight system, you dont belong in this randomizer!' -crazy4blades"
+                ]
+            }
+        },
+        {
             "date": "June 15, 2026",
             "sections": {
                 "Preset Updates": [

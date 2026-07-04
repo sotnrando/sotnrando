@@ -17,7 +17,15 @@
   "castleType": "Normal",
   "transformEarly": "No",
   "transformFocus": "None",
-  "winCondition": "Normal"
+  "winCondition": "Normal",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
+  "listSortFlag": [
+      "Normal"
+    ]
   },
 
   "inherits": "casual",

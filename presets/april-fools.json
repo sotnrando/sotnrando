@@ -18,7 +18,14 @@
     "castleType": "Normal",
     "transformEarly": "Yes",
     "transformFocus": "Bat",
-    "winCondition": "April Fools"
+    "winCondition": "April Fools",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "listSortFlag": [
+      "April Fools"
+    ]
   },
   
   "inherits": "nimble-lite",

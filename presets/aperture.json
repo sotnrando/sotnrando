@@ -18,7 +18,15 @@
     "castleType": "Modded",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Vlads and Portal Spell"
+    "winCondition": "Portal Spell",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
+    "listSortFlag": [
+      "Normal"
+    ]
   },
   
   "fastwarpMode": true,

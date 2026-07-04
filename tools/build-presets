@@ -16,17 +16,39 @@ if (process.argv.length > 2) {
   presets = require('../package').presets;
 }
 
-const presetData = [];
-
-presets.forEach(function(name) {
+let presetsFullInformation = [];
+presets.forEach((name) => {
   const presetPath = path.join(__dirname, '../presets', name + '.json');
   const preset = require(presetPath);
+  presetsFullInformation.push(preset);
+})
+const presetData = [];
+const optionsArray = require("../src/options_array")
 
+function getIncompatibleOptions(presetId) {
+  let incompatibleOptions = []
+  optionsArray.forEach((option) => {
+    if(option.incompatiblePresets.includes(presetId)){
+      incompatibleOptions.push(option.longId)
+    }
+  })
+  return incompatibleOptions
+}
+
+function getPresetIsParent(presetId){
+  const presetHasIdAsParent = (element) => element.inherits === presetId;
+  return presetsFullInformation.some(presetHasIdAsParent)
+}
+
+presetsFullInformation.forEach(function(preset) {
   // Extract required fields from metadata
-  const { id, name: presetName, description, author, knowledgeCheck, extension, complexity, timeFrame, moddedLevel, castleType, transformEarly, transformFocus, winCondition, metaExtension, metaComplexity, itemStats} = preset.metadata;
-  presetData.push({ name: presetName, id, description, author, knowledgeCheck, extension, complexity, timeFrame, moddedLevel, castleType, transformEarly, transformFocus, winCondition, metaExtension, metaComplexity, itemStats });
+  const { id, name: presetName, description, author, knowledgeCheck, extension, complexity, timeFrame, moddedLevel, castleType, transformEarly, transformFocus, winCondition, metaExtension, metaComplexity, itemStats, listSortFlag, defaultGoal, compatibleGoals} = preset.metadata;
+  let incompatibleOptions = getIncompatibleOptions(id);
+  let presetJs = `./build/presets/${id}.js`;
+  let parent = getPresetIsParent(id);
+  presetData.push({ name: presetName, id, description, author, knowledgeCheck, extension, complexity, timeFrame, moddedLevel, castleType, transformEarly, transformFocus, winCondition, metaExtension, metaComplexity, itemStats, listSortFlag, defaultGoal, compatibleGoals, incompatibleOptions, presetJs, parent });
 
-  runner(['preset', 'new', '--name', name], {
+  runner(['preset', 'new', '--name', id], {
     templates: path.join(__dirname, '../templates'),
     cwd: process.cwd(),
     logger: {

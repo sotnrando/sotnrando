@@ -21,10 +21,17 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/casual.js",
-    "parent": false
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/casual.js",
+    "parent": true
   },
   {
     "name": "Safe",
@@ -48,9 +55,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/safe.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/safe.js",
     "parent": true
   },
   {
@@ -73,9 +87,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/adventure.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/adventure.js",
     "parent": false
   },
   {
@@ -98,9 +119,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/og.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/og.js",
     "parent": false
   },
   {
@@ -123,9 +151,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/guarded-og.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/guarded-og.js",
     "parent": false
   },
   {
@@ -148,9 +183,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/sequence-breaker.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/sequence-breaker.js",
     "parent": false
   },
   {
@@ -173,9 +215,18 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/lycanthrope.js",
+    "incompatibleOptions": [
+      "lycanMode"
+    ],
+    "presetJs": "./build/presets/lycanthrope.js",
     "parent": false
   },
   {
@@ -198,9 +249,18 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/warlock.js",
+    "incompatibleOptions": [
+      "warlockMode"
+    ],
+    "presetJs": "./build/presets/warlock.js",
     "parent": false
   },
   {
@@ -223,9 +283,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/nimble.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/nimble.js",
     "parent": true
   },
   {
@@ -249,9 +316,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/expedition.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/expedition.js",
     "parent": false
   },
   {
@@ -275,9 +349,18 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/bat-master.js",
+    "incompatibleOptions": [
+      "lycanMode"
+    ],
+    "presetJs": "./build/presets/bat-master.js",
     "parent": false
   },
   {
@@ -303,11 +386,15 @@
     "listSortFlag": [
       "Evergreen"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "incompatibleOptions": [
       "antiFreezeMode",
       "zeroDollarRelicMode"
     ],
-    "presetJS": "./build/presets/glitch.js",
+    "presetJs": "./build/presets/glitch.js",
     "parent": false
   },
   {
@@ -330,9 +417,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/scavenger.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/scavenger.js",
     "parent": false
   },
   {
@@ -355,9 +449,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/empty-hand.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/empty-hand.js",
     "parent": false
   },
   {
@@ -380,9 +481,15 @@
     "listSortFlag": [
       "Deprecated"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/gem-farmer.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/gem-farmer.js",
     "parent": false
   },
   {
@@ -405,9 +512,16 @@
     "listSortFlag": [
       "Deprecated"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/third-castle.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/third-castle.js",
     "parent": false
   },
   {
@@ -430,10 +544,17 @@
     "listSortFlag": [
       "Deprecated"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "r",
+      "a",
+      "v"
+    ],
     "incompatibleOptions": [
       "zeroDollarRelicMode"
     ],
-    "presetJS": "./build/presets/rat-race.js",
+    "presetJs": "./build/presets/rat-race.js",
     "parent": false
   },
   {
@@ -457,10 +578,19 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
-      "startRoomRando2ndMode"
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/magic-mirror.js",
+    "incompatibleOptions": [
+      "startRoomRando2ndMode",
+      "spikeRoomRando"
+    ],
+    "presetJs": "./build/presets/magic-mirror.js",
     "parent": false
   },
   {
@@ -484,9 +614,17 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
     ],
-    "presetJS": "./build/presets/leg-day.js",
+    "incompatibleOptions": [
+      "lycanMode",
+      "warlockMode"
+    ],
+    "presetJs": "./build/presets/leg-day.js",
     "parent": false
   },
   {
@@ -510,16 +648,18 @@
     "listSortFlag": [
       "Evergreen"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "incompatibleOptions": [
-      "relicLocations",
-      "relicLocationsSet",
       "unlockedMode",
-      "rlbcMode",
       "startRoomRandoMode",
       "startRoomRando2ndMode",
+      "rlbcMode",
       "revCastleTeleportRando"
     ],
-    "presetJS": "./build/presets/boss-rush.js",
+    "presetJs": "./build/presets/boss-rush.js",
     "parent": false
   },
   {
@@ -537,16 +677,23 @@
     "castleType": "Modded",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Vlads and Portal Spell",
+    "winCondition": "Portal Spell",
     "metaExtension": "Guarded",
     "metaComplexity": "8",
     "itemStats": "Randomized",
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/aperture.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/aperture.js",
     "parent": false
   },
   {
@@ -571,11 +718,18 @@
     "listSortFlag": [
       "Evergreen"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
+    ],
     "incompatibleOptions": [
       "enemyStatRandoMode",
-      "elemChaosMode"
+      "elemChaosMode",
+      "lycanMode"
     ],
-    "presetJS": "./build/presets/big-toss.js",
+    "presetJs": "./build/presets/big-toss.js",
     "parent": false
   },
   {
@@ -600,10 +754,18 @@
       "Evergreen",
       "BountyHunter"
     ],
+    "defaultGoal": "h",
+    "compatibleGoals": [
+      "h",
+      "t",
+      "w",
+      "x",
+      "y"
+    ],
     "incompatibleOptions": [
       "dominoMode"
     ],
-    "presetJS": "./build/presets/bounty-hunter.js",
+    "presetJs": "./build/presets/bounty-hunter.js",
     "parent": false
   },
   {
@@ -628,10 +790,16 @@
       "Evergreen",
       "BountyHunter"
     ],
+    "defaultGoal": "t",
+    "compatibleGoals": [
+      "t",
+      "x",
+      "y"
+    ],
     "incompatibleOptions": [
       "dominoMode"
     ],
-    "presetJS": "./build/presets/target-confirmed.js",
+    "presetJs": "./build/presets/target-confirmed.js",
     "parent": false
   },
   {
@@ -655,10 +823,16 @@
     "listSortFlag": [
       "BountyHunter"
     ],
+    "defaultGoal": "w",
+    "compatibleGoals": [
+      "w",
+      "x",
+      "y"
+    ],
     "incompatibleOptions": [
       "dominoMode"
     ],
-    "presetJS": "./build/presets/hitman.js",
+    "presetJs": "./build/presets/hitman.js",
     "parent": false
   },
   {
@@ -683,10 +857,18 @@
     "listSortFlag": [
       "BountyHunter"
     ],
+    "defaultGoal": "h",
+    "compatibleGoals": [
+      "h",
+      "t",
+      "w",
+      "x",
+      "y"
+    ],
     "incompatibleOptions": [
       "dominoMode"
     ],
-    "presetJS": "./build/presets/chaos-lite.js",
+    "presetJs": "./build/presets/chaos-lite.js",
     "parent": false
   },
   {
@@ -711,11 +893,20 @@
     "listSortFlag": [
       "Evergreen"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
     "incompatibleOptions": [
       "startRoomRandoMode",
-      "startRoomRando2ndMode"
+      "startRoomRando2ndMode",
+      "rlbcMode"
     ],
-    "presetJS": "./build/presets/beyond.js",
+    "presetJs": "./build/presets/beyond.js",
     "parent": false
   },
   {
@@ -740,9 +931,16 @@
     "listSortFlag": [
       "Deprecated"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/breach.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/breach.js",
     "parent": false
   },
   {
@@ -767,9 +965,16 @@
       "Evergreen",
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/grand-tour.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/grand-tour.js",
     "parent": false
   },
   {
@@ -793,9 +998,16 @@
     "listSortFlag": [
       "Deprecated"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/crash-course.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/crash-course.js",
     "parent": false
   },
   {
@@ -820,11 +1032,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "incompatibleOptions": [
       "antiFreezeMode",
+      "noprologueMode",
       "zeroDollarRelicMode"
     ],
-    "presetJS": "./build/presets/any-percent.js",
+    "presetJs": "./build/presets/any-percent.js",
     "parent": false
   },
   {
@@ -848,10 +1065,18 @@
     "listSortFlag": [
       "Deprecated"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
     "incompatibleOptions": [
       "startRoomRando2ndMode"
     ],
-    "presetJS": "./build/presets/lookingglass.js",
+    "presetJs": "./build/presets/lookingglass.js",
     "parent": false
   },
   {
@@ -877,9 +1102,16 @@
     "listSortFlag": [
       "Deprecated"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/skinwalker.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/skinwalker.js",
     "parent": false
   },
   {
@@ -903,9 +1135,14 @@
     "listSortFlag": [
       "Deprecated"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
     ],
-    "presetJS": "./build/presets/summoner.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/summoner.js",
     "parent": false
   },
   {
@@ -930,9 +1167,16 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/agonize-twtw.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/agonize-twtw.js",
     "parent": false
   },
   {
@@ -957,9 +1201,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/safe-stwo.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/safe-stwo.js",
     "parent": false
   },
   {
@@ -985,9 +1236,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/open.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/open.js",
     "parent": true
   },
   {
@@ -1011,9 +1269,16 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
     ],
-    "presetJS": "./build/presets/brawler.js",
+    "incompatibleOptions": [
+      "warlockMode"
+    ],
+    "presetJs": "./build/presets/brawler.js",
     "parent": false
   },
   {
@@ -1037,14 +1302,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "incompatibleOptions": [
-      "relicLocations",
-      "relicLocationsSet",
-      "rlbcMode",
       "startRoomRando2ndMode",
+      "rlbcMode",
       "revCastleTeleportRando"
     ],
-    "presetJS": "./build/presets/first-castle.js",
+    "presetJs": "./build/presets/first-castle.js",
     "parent": false
   },
   {
@@ -1067,9 +1334,18 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/lucky-sevens.js",
+    "incompatibleOptions": [
+      "warlockMode"
+    ],
+    "presetJs": "./build/presets/lucky-sevens.js",
     "parent": false
   },
   {
@@ -1093,9 +1369,12 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
-    "presetJS": "./build/presets/bingo.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/bingo.js",
     "parent": false
   },
   {
@@ -1119,9 +1398,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/sight-seer.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/sight-seer.js",
     "parent": false
   },
   {
@@ -1145,9 +1431,14 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
     ],
-    "presetJS": "./build/presets/cursed-night.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/cursed-night.js",
     "parent": false
   },
   {
@@ -1171,9 +1462,16 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/spellbound.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/spellbound.js",
     "parent": false
   },
   {
@@ -1199,10 +1497,18 @@
     "listSortFlag": [
       "Normal"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
     "incompatibleOptions": [
       "startRoomRando2ndMode"
     ],
-    "presetJS": "./build/presets/mobility.js",
+    "presetJs": "./build/presets/mobility.js",
     "parent": false
   },
   {
@@ -1229,11 +1535,15 @@
     "listSortFlag": [
       "Evergreen"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "incompatibleOptions": [
       "antiFreezeMode",
       "zeroDollarRelicMode"
     ],
-    "presetJS": "./build/presets/glitchmaster.js",
+    "presetJs": "./build/presets/glitchmaster.js",
     "parent": false
   },
   {
@@ -1258,10 +1568,17 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
-      "startRoomRando2ndMode"
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
     ],
-    "presetJS": "./build/presets/dog-life.js",
+    "incompatibleOptions": [
+      "startRoomRando2ndMode",
+      "lycanMode"
+    ],
+    "presetJs": "./build/presets/dog-life.js",
     "parent": false
   },
   {
@@ -1285,10 +1602,14 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
-      "godspeedMode"
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
     ],
-    "presetJS": "./build/presets/battle-mage.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/battle-mage.js",
     "parent": false
   },
   {
@@ -1311,9 +1632,16 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/timeline.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/timeline.js",
     "parent": false
   },
   {
@@ -1336,9 +1664,16 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/chimera.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/chimera.js",
     "parent": false
   },
   {
@@ -1361,11 +1696,19 @@
     "listSortFlag": [
       "Evergreen"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
     "incompatibleOptions": [
       "startRoomRandoMode",
       "startRoomRando2ndMode"
     ],
-    "presetJS": "./build/presets/vanilla.js",
+    "presetJs": "./build/presets/vanilla.js",
     "parent": false
   },
   {
@@ -1388,9 +1731,14 @@
     "listSortFlag": [
       "Deprecated"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
-    "presetJS": "./build/presets/glitch-legacy.js",
+    "incompatibleOptions": [
+      "antiFreezeMode"
+    ],
+    "presetJs": "./build/presets/glitch-legacy.js",
     "parent": false
   },
   {
@@ -1413,10 +1761,14 @@
     "listSortFlag": [
       "Normal"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "incompatibleOptions": [
       "dominoMode"
     ],
-    "presetJS": "./build/presets/oracle.js",
+    "presetJs": "./build/presets/oracle.js",
     "parent": false
   },
   {
@@ -1436,21 +1788,22 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Vlads and Portal Spell",
+    "winCondition": "Portal Spell",
     "metaExtension": "Guarded",
     "metaComplexity": "7",
     "itemStats": "Normal",
     "listSortFlag": [
       "Normal"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
     "incompatibleOptions": [
-      "relicLocations",
-      "relicLocationsSet",
       "rlbcMode",
-      "startRoomRando2ndMode",
       "revCastleTeleportRando"
     ],
-    "presetJS": "./build/presets/seeker.js",
+    "presetJs": "./build/presets/seeker.js",
     "parent": false
   },
   {
@@ -1476,9 +1829,15 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/all-bosses.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/all-bosses.js",
     "parent": false
   },
   {
@@ -1503,9 +1862,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/nimble-lite.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/nimble-lite.js",
     "parent": true
   },
   {
@@ -1531,11 +1897,15 @@
     "listSortFlag": [
       "BountyHunter"
     ],
+    "defaultGoal": "x",
+    "compatibleGoals": [
+      "x",
+      "y"
+    ],
     "incompatibleOptions": [
-      "startRoomRando2ndMode",
       "dominoMode"
     ],
-    "presetJS": "./build/presets/rampage.js",
+    "presetJs": "./build/presets/rampage.js",
     "parent": false
   },
   {
@@ -1560,9 +1930,16 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/cornivus.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/cornivus.js",
     "parent": false
   },
   {
@@ -1587,9 +1964,16 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/max-rando.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/max-rando.js",
     "parent": false
   },
   {
@@ -1615,10 +1999,15 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
-      "startRoomRando2ndMode"
+    "defaultGoal": "b",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/mirror-breaker.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/mirror-breaker.js",
     "parent": false
   },
   {
@@ -1642,10 +2031,18 @@
     "listSortFlag": [
       "Evergreen"
     ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
     "incompatibleOptions": [
       "rlbcMode"
     ],
-    "presetJS": "./build/presets/recycler.js",
+    "presetJs": "./build/presets/recycler.js",
     "parent": false
   },
   {
@@ -1672,9 +2069,16 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/anguish.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/anguish.js",
     "parent": false
   },
   {
@@ -1699,10 +2103,12 @@
     "listSortFlag": [
       "Evergreen"
     ],
-    "incompatibleOptions": [
-      "startRoomRando2ndMode"
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
-    "presetJS": "./build/presets/gear-rush.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/gear-rush.js",
     "parent": false
   },
   {
@@ -1729,10 +2135,13 @@
     "listSortFlag": [
       "BountyHunter"
     ],
-    "incompatibleOptions": [
-      "dominoMode"
+    "defaultGoal": "x",
+    "compatibleGoals": [
+      "x",
+      "y"
     ],
-    "presetJS": "./build/presets/rampage-aut25te.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/rampage-aut25te.js",
     "parent": false
   },
   {
@@ -1755,9 +2164,16 @@
     "listSortFlag": [
       "Tournament"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/lycanthrope-spr26te.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/lycanthrope-spr26te.js",
     "parent": false
   },
   {
@@ -1782,9 +2198,16 @@
     "listSortFlag": [
       "Tournament"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/nimble-lite-spr26te.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/nimble-lite-spr26te.js",
     "parent": false
   },
   {
@@ -1807,9 +2230,16 @@
     "listSortFlag": [
       "Tournament"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
     ],
-    "presetJS": "./build/presets/warlock-spr26te.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/warlock-spr26te.js",
     "parent": false
   },
   {
@@ -1832,11 +2262,14 @@
     "metaComplexity": "7",
     "itemStats": "Normal",
     "listSortFlag": [
-      "Evergreen"
+      "April Fools"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
-    "presetJS": "./build/presets/april-fools.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/april-fools.js",
     "parent": false
   },
   {
@@ -1861,15 +2294,18 @@
     "listSortFlag": [
       "Normal"
     ],
-    "incompatibleOptions": [
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
-    "presetJS": "./build/presets/gourmet-race.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/gourmet-race.js",
     "parent": false
   },
   {
     "name": "Collector",
     "id": "collector",
-    "description": "Collect 20* Relics to win. Put & symbol at end of file name to do 25 relics. Test build May21st2026",
+    "description": "Collect 20* Relics to win. Put & symbol at end of file name to do 25 relics.",
     "author": [
       "MottZilla"
     ],
@@ -1879,7 +2315,7 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Normal",
+    "winCondition": "20 or 25 Relics",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
     "itemStats": "Normal",
@@ -1887,10 +2323,12 @@
       "Normal",
       "New"
     ],
-    "incompatibleOptions": [
-      "startRoomRando2ndMode"
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
-    "presetJS": "./build/presets/collector.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/collector.js",
     "parent": false
   },
   {
@@ -1915,10 +2353,12 @@
       "Normal",
       "New"
     ],
-    "incompatibleOptions": [
-      "startRoomRando2ndMode"
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
     ],
-    "presetJS": "./build/presets/hoarder.js",
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/hoarder.js",
     "parent": false
   }
 ]

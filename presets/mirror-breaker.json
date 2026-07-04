@@ -19,7 +19,15 @@
     "castleType": "Modded",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "All Bosses"
+    "winCondition": "All Bosses",
+    "defaultGoal": "b",
+    "compatibleGoals": [
+      "default",
+      "b","a","v"
+    ],
+    "listSortFlag": [
+      "Normal"
+    ]
   },
   
   "relicLocationsExtension": "guardedplus",

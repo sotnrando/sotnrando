@@ -16,9 +16,17 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Relic Skip"
+    "winCondition": "Relic Skip",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "listSortFlag": [
+      "Deprecated"
+    ]
   },
-  "inherits": "adventure",
+  "inherits": "casual",
+  "relicLocationsExtension": "equipment",
   "stats": false,
   "prologueRewards": [{
     "item": "Heart Refresh",
