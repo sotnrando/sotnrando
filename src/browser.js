@@ -533,6 +533,14 @@
     }
 
     ChangeHandlers.tournamentModeChange();
+    // FINAL ENFORCEMENT: Elemental Chaos only allowed if Enemy Stats is ON
+    if (!elems.enemyStatRandoMode.checked) {
+      elems.elemChaosMode.checked = false;
+      elems.elemChaosMode.disabled = true;
+    } else {
+      elems.elemChaosMode.disabled = false;
+    }
+
   }
 
   function complexityChange() {
@@ -776,37 +784,25 @@
 
   function getFormOptions() {
     const preset = sotnRando.presets[elems.presetId.selectedIndex];
+
     const options = {
       preset: preset.id,
       relicLocations: getFormRelicLocations()
     };
 
-    // Structured options that should preserve preset object data
-    const STRUCTURED_KEYS = ["startingEquipment", "enemyDrops", "itemLocations", "prologueRewards"];
+    // Read every checkbox directly from elems
+    for (const [key, elem] of Object.entries(elems)) {
+      if (!elem) continue;
 
-    // Loop through every option defined in optionsArray
-    sotnRando.optionsArray.forEach(opt => {
-      const key = opt.longId;            // e.g. "enemyDrops", "easyMode", etc.
-      const html = opt.htmlElement;      // e.g. "enemy-drops"
-
-      // Skip options that have no UI element
-      if (!html) return;
-
-      const presetValue = preset.options()[key];
-
-      // If preset defines structured data, DO NOT override it
-      if (STRUCTURED_KEYS.includes(key) && typeof presetValue === "object") {
-        options[key] = presetValue;
-        return;
+      // Only process checkboxes
+      if (elem instanceof HTMLInputElement && elem.type === "checkbox") {
+        options[key] = elem.checked;
       }
-
-      // Otherwise read from checkbox
-      const elem = elems[html];
-      options[key] = !!elem?.checked;
-    });
+    }
 
     return options;
   }
+
 
 
   function deleteOriginalComplexity(options, newComplexity) {

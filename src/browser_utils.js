@@ -124,6 +124,7 @@ BrowserUtils.getCurrentOptions = function getCurrentOptions() {
         'openClockStatueMode',
         'spikeRoomRando',
         'lycanMode',
+        'warlockMode',
         'easyMode',
         'devStashMode',
         'seasonalPhrasesMode',
@@ -328,18 +329,24 @@ BrowserUtils.ChangeHandlers = {
         }
     },
     enemyStatRandoModeChange: function enemyStatRandoModeChange() {
-        if (elems.enemyStatRandoMode.checked) {
-            elems.elemChaosMode.disabled = false
-        } else {
-            elems.elemChaosMode.checked = false
-            elems.elemChaosMode.disabled = true
-        }
-    },
-    elemChaosModeChange: function elemChaosModeChange() {
-        if (elems.elemChaosMode.checked === true) {
-            elems.enemyStatRandoMode.checked = true
-        }
-    },
+    if (elems.enemyStatRandoMode.checked) {
+        // Enemy Stats ON → allow Elemental Chaos
+        elems.elemChaosMode.disabled = false;
+    } else {
+        // Enemy Stats OFF → force Elemental Chaos OFF + disabled
+        elems.elemChaosMode.checked = false;
+        elems.elemChaosMode.disabled = true;
+    }
+},
+
+elemChaosModeChange: function elemChaosModeChange() {
+    if (elems.elemChaosMode.checked) {
+        // If user tries to turn on Elemental Chaos,
+        // make sure Enemy Stats is ON
+        elems.enemyStatRandoMode.checked = true;
+    }
+},
+
     spoilersChange: function spoilersChange() {
         if (elems.showSpoilers.checked && info) {
             BrowserUtils.showSpoilers()

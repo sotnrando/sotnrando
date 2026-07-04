@@ -513,7 +513,7 @@
 
                     <div class="toggle-container">
                       <label class="toggle-switch">
-                        <input id="elem-chaos" type="checkbox" data-custom-change="elemChaosModeChange">
+                        <input id="elem-chaos" type="checkbox" disabled data-custom-change="elemChaosModeChange">
                         <span class="slider"></span>
                       </label>
                       <label for="elem-chaos" class="toggle-label">
@@ -1013,8 +1013,25 @@
                   </div> <!-- end left-column-options -->
 
                   <div class="right-column-options">
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="warlock-mode" type="checkbox" data-store-checkbox="false">
+                        <span class="slider"></span>
+                      </label>
+                      <new></new>
+                      <label for="warlock-mode" class="toggle-label">
+                        Warlock Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Allows the player to use Form of Mist at 0 MP cost. 
+                              Sets starting stats to 1 except INT which is 99.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
                   </div>
-
+                    
                 </div> <!-- end checkboxes -->
 
               </fieldset>
