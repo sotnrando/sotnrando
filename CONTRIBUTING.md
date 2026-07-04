@@ -33,7 +33,7 @@ if(condition){   // No
 ```
 someFunctionCall(1, 2, 3) // Yes
 someFunctionCall(1,2,3)   // No
-
+```
 
 * Always use curly parens for conditions, even if block is only a single line:
 
