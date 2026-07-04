@@ -543,7 +543,8 @@
     } else {
       elems.elemChaosMode.disabled = false;
     }
-
+    elems.seasonalPhrasesMode.checked = true;
+    elems.bossMusicSeparation.checked = true;
   }
 
   function complexityChange() {
