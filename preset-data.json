@@ -257,7 +257,9 @@
       "a",
       "v"
     ],
-    "incompatibleOptions": [],
+    "incompatibleOptions": [
+      "warlockMode"
+    ],
     "presetJs": "./build/presets/warlock.js",
     "parent": false
   },
@@ -619,7 +621,8 @@
       "v"
     ],
     "incompatibleOptions": [
-      "lycanMode"
+      "lycanMode",
+      "warlockMode"
     ],
     "presetJs": "./build/presets/leg-day.js",
     "parent": false
@@ -1272,7 +1275,9 @@
       "b",
       "v"
     ],
-    "incompatibleOptions": [],
+    "incompatibleOptions": [
+      "warlockMode"
+    ],
     "presetJs": "./build/presets/brawler.js",
     "parent": false
   },

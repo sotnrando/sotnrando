@@ -847,6 +847,9 @@
 	requiredOptions: [
 	],
 	incompatiblePresets: [
+		"warlock",
+		"brawler",
+		"leg-day"
 	], 
 	functionCall: util.applyWarlockModePatches, 
 	rngNeeded: false, 
