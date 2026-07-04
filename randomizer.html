@@ -311,6 +311,10 @@
                 Transform Modes <new></new>
               </button>
 
+              <button type="button" class="tab-btn" onclick="openTab('tab-challenge')">
+                Challenge Options <new></new>
+              </button>
+
               <button type="button" class="tab-btn" onclick="openTab('tab-cosmetics')">
                 Cosmetics <new></new>
               </button>
@@ -594,6 +598,22 @@
                       <label for="enemy-drops" class="toggle-label">Enemy Drops</label>
                     </div>
 
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="cornucopia-mode" type="checkbox" data-store-checkbox="false"
+                          data-custom-change="cornucopiaModeChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="cornucopia-mode" class="toggle-label">
+                        Chaos Drops
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomize all drop items. Enemies no longer have a set drop pattern.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
                     <div class="toggle-container">
                       <label class="toggle-switch">
                         <input id="stats" type="checkbox" data-store-checkbox="true" data-custom-change="statsChange">
@@ -1024,18 +1044,68 @@
                         <span class="tooltip-wrapper">
                           <span class="tooltip-indicator">?</span>
                           <span class="tooltip hidden">
-                            <span>Allows the player to use Form of Mist at 0 MP cost. 
+                            <span>Allows the player to use Form of Mist at 0 MP cost.
                               Sets starting stats to 1 except INT which is 99.</span>
                           </span>
                         </span>
                       </label>
                     </div>
                   </div>
-                    
+
                 </div> <!-- end checkboxes -->
 
               </fieldset>
             </div> <!-- end tab-xform -->
+
+            <div id="tab-challenge" class="tab-content">
+              <fieldset class="spacing">
+
+                <div class="checkboxes  ">
+
+                  <div class="left-column-options">
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="instant-death-mode" type="checkbox" data-store-checkbox="false"
+                          data-custom-change="instantDeathModeChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="instant-death-mode" class="toggle-label">
+                        Instant Death Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>All damage is fatal. No matter the source.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                    <div class="toggle-container">
+                      <label class="toggle-switch">
+                        <input id="level-one-mode" type="checkbox" data-store-checkbox="false"
+                          data-custom-change="levelOneModeChange">
+                        <span class="slider"></span>
+                      </label>
+                      <label for="level-one-mode" class="toggle-label">
+                        Level One Mode
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>All stats are set to 1. No matter the source.</span>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+
+                  </div> <!-- end left-column-options -->
+                  <div class="right-column-options">
+                    
+                  </div> <!-- end right-column-options -->
+                </div> <!-- end checkboxes -->
+              </fieldset>
+            </div>
+
             <div id="tab-cosmetics" class="tab-content">
               <fieldset class="spacing">
 

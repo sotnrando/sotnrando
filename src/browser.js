@@ -238,17 +238,20 @@
   }
 
   function addCheckboxesHandlers() {
-    const checkboxesToStore = document.querySelectorAll('[data-store-checkbox="true"], [data-store-checkbox="false"]');
-    checkboxesToStore.forEach(el => {
-      el.addEventListener('change', saveOption);
-      loadCheckboxOption(el);
-      let customChangeFunction = el.getAttribute('data-custom-change');
-      if (customChangeFunction) {
-        el.addEventListener('change', ChangeHandlers[customChangeFunction]);
-        ChangeHandlers[customChangeFunction]();
-      }
-    });
-  }
+  const checkboxesToStore = document.querySelectorAll('[data-store-checkbox="true"], [data-store-checkbox="false"]');
+  checkboxesToStore.forEach(el => {
+    el.addEventListener('change', saveOption);
+    loadCheckboxOption(el);
+
+    const customChangeFunction = el.getAttribute('data-custom-change');
+    if (customChangeFunction && typeof ChangeHandlers[customChangeFunction] === 'function') {
+      el.addEventListener('change', ChangeHandlers[customChangeFunction]);
+      // Optional: only run once if you need initial state
+      ChangeHandlers[customChangeFunction]();
+    }
+  });
+}
+
 
   function loadMenuOptions() {
     loadOption('theme', themeChange, 'menu')
