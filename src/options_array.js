@@ -843,13 +843,15 @@
 	longDescript: "Enables Warlock Mode allowing the player to use Mist from the beginning for free and increasing INT to 99 while lower spell costs.", 
 	shortDescript: "INT is 99, spells are cheap, and Mist for free.", 
 	incompatibleOptions: [
+		"startStatRandoMode"
 	],
 	requiredOptions: [
 	],
 	incompatiblePresets: [
 		"warlock",
 		"brawler",
-		"leg-day"
+		"leg-day",
+		"lucky-sevens"
 	], 
 	functionCall: util.applyWarlockModePatches, 
 	rngNeeded: false, 

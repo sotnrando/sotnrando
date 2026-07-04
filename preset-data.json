@@ -1342,7 +1342,9 @@
       "a",
       "v"
     ],
-    "incompatibleOptions": [],
+    "incompatibleOptions": [
+      "warlockMode"
+    ],
     "presetJs": "./build/presets/lucky-sevens.js",
     "parent": false
   },
