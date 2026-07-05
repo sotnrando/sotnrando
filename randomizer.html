@@ -245,9 +245,14 @@
                       <input id="zero-relic" type="checkbox" data-store-checkbox="false">
                       <span class="slider"></span>
                     </label>
-                    <new></new>
                     <label for="zero-relic" class="toggle-label">
                       Zero-Dollar Relic
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>Library Shop Relic is free.</span>
+                        </span>
+                      </span>
                     </label>
                   </div>
 
@@ -256,9 +261,14 @@
                       <input id="open-statue" type="checkbox" data-store-checkbox="false">
                       <span class="slider"></span>
                     </label>
-                    <new></new>
                     <label for="open-statue" class="toggle-label">
                       Open Clock Statue
+                      <span class="tooltip-wrapper">
+                        <span class="tooltip-indicator">?</span>
+                        <span class="tooltip hidden">
+                          <span>Statue in Clock Room is always open.</span>
+                        </span>
+                      </span>
                     </label>
                   </div>
                 </div>
@@ -324,7 +334,7 @@
             <div id="tab-goals" class="tab-content active">
               <fieldset id="options" class="spacing">
 
-                <div>
+                <div id="newGoals-dropdown">
                   <label for="newGoals">Change Goals</label>
                   <span class="tooltip-wrapper">
                     <span class="tooltip-indicator">?</span>
@@ -336,9 +346,7 @@
                       </span>
                     </span>
                   </span>
-                </div>
 
-                <div>
                   <select id="newGoals">
                     <option value="default">Default</option>
                     <option value="b">All Bosses</option>
@@ -595,7 +603,17 @@
                         <input id="enemy-drops" type="checkbox" data-store-checkbox="true">
                         <span class="slider"></span>
                       </label>
-                      <label for="enemy-drops" class="toggle-label">Enemy Drops</label>
+                      <label for="enemy-drops" class="toggle-label">
+                        Enemy Drops
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>
+                              Randomize enemy's drop tables.
+                            </span>
+                          </span>
+                        </span>
+                      </label>
                     </div>
 
                     <div class="toggle-container">
@@ -609,7 +627,7 @@
                         <span class="tooltip-wrapper">
                           <span class="tooltip-indicator">?</span>
                           <span class="tooltip hidden">
-                            <span>Randomize all drop items. Enemies no longer have a set drop pattern.</span>
+                            <span>Enemies can drop any item in the game.</span>
                           </span>
                         </span>
                       </label>
@@ -619,7 +637,15 @@
                         <input id="stats" type="checkbox" data-store-checkbox="true" data-custom-change="statsChange">
                         <span class="slider"></span>
                       </label>
-                      <label for="stats" class="toggle-label">Item Stats</label>
+                      <label for="stats" class="toggle-label">
+                        Item Stats
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomize the item stats like Atk, Def, sprite, but NOT name.</span>
+                          </span>
+                        </span>
+                      </label>
                     </div>
 
                     <div class="toggle-container">
@@ -647,7 +673,15 @@
                         <input id="item-locations" type="checkbox" data-store-checkbox="true">
                         <span class="slider"></span>
                       </label>
-                      <label for="item-locations" class="toggle-label">Item Locations</label>
+                      <label for="item-locations" class="toggle-label">
+                        Item Locations
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomize items found on the ground, in static entities, and in the shop.</span>
+                          </span>
+                        </span>
+                      </label>
                     </div>
 
                     <div class="toggle-container">
@@ -655,7 +689,15 @@
                         <input id="starting-equipment" type="checkbox" disabled data-store-checkbox="true">
                         <span class="slider"></span>
                       </label>
-                      <label for="starting-equipment" class="toggle-label disabled">Starting Equipment</label>
+                      <label for="starting-equipment" class="toggle-label disabled">
+                        Starting Equipment
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomize starting equipment for Alucard. Also sets the starting gear in certain presets.</span>
+                          </span>
+                        </span>
+                      </label>
                     </div>
 
                     <div class="toggle-container">
@@ -663,7 +705,15 @@
                         <input id="prologue-rewards" type="checkbox" data-store-checkbox="true">
                         <span class="slider"></span>
                       </label>
-                      <label for="prologue-rewards" class="toggle-label">Prologue Rewards</label>
+                      <label for="prologue-rewards" class="toggle-label">
+                        Prologue Rewards
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomize rewards for completing the prologue in certain ways. Also sets the prologue rewards in certain presets.</span>
+                          </span>
+                        </span>
+                      </label>
                     </div>
 
                     <div class="toggle-container">
@@ -705,12 +755,20 @@
                         <input id="startingStats" type="checkbox" data-store-checkbox="true">
                         <span class="slider"></span>
                       </label>
-                      <label for="startingStats" class="toggle-label">Randomize Starting Stats</label>
+                      <label for="startingStats" class="toggle-label">
+                        Randomize Starting Stats
+                        <span class="tooltip-wrapper">
+                          <span class="tooltip-indicator">?</span>
+                          <span class="tooltip hidden">
+                            <span>Randomize Alucard's starting STR, INT, CON, and LCK. Slider sets what the maximum value for each stat can be.</span>
+                          </span>
+                        </span>
+                      </label>
                     </div>
 
                     <div class="option-row" id="statMaxRow">
-                      <label for="statMax">MAX:</label>
-                      <input type="range" id="statMax" min="5" max="100" value="30" step="5">
+                      <label for="statMax">Maximum Stat Value:</label>
+                      <input type="range" id="statMax" min="5" max="100" value="30" step="5" style="cursor: pointer;">
                       <span id="statMaxCurrentValue"></span>
                       <datalist id="statMaxList"></datalist>
                     </div>
@@ -1044,8 +1102,8 @@
                         <span class="tooltip-wrapper">
                           <span class="tooltip-indicator">?</span>
                           <span class="tooltip hidden">
-                            <span>Allows the player to use Form of Mist at 0 MP cost.
-                              Sets starting stats to 1 except INT which is 99.</span>
+                            <span>Enables Warlock Mode allowing the player to use Mist from
+                              the beginning for free and increasing INT to 99 while lower spell costs.</span>
                           </span>
                         </span>
                       </label>
@@ -1075,7 +1133,7 @@
                         <span class="tooltip-wrapper">
                           <span class="tooltip-indicator">?</span>
                           <span class="tooltip hidden">
-                            <span>All damage is fatal. No matter the source.</span>
+                            <span>Alucard will die if he takes any damage.</span>
                           </span>
                         </span>
                       </label>
@@ -1092,7 +1150,7 @@
                         <span class="tooltip-wrapper">
                           <span class="tooltip-indicator">?</span>
                           <span class="tooltip hidden">
-                            <span>All stats are set to 1. No matter the source.</span>
+                            <span>Forces Alucard to remain at level 1 the entire seed.</span>
                           </span>
                         </span>
                       </label>
@@ -1100,7 +1158,7 @@
 
                   </div> <!-- end left-column-options -->
                   <div class="right-column-options">
-                    
+
                   </div> <!-- end right-column-options -->
                 </div> <!-- end checkboxes -->
               </fieldset>
@@ -1471,6 +1529,31 @@
         window.event.currentTarget.classList.add('active');
       }
     }
+    document.addEventListener('DOMContentLoaded', () => {
+      const startingStats = document.getElementById('startingStats');
+      const statMaxRow = document.getElementById('statMaxRow');
+
+      // Restore saved state
+      const saved = localStorage.getItem('startingStats') === "1";
+      startingStats.checked = saved;
+
+      if (saved) {
+        statMaxRow.classList.add('show');
+      }
+
+      // Toggle visibility
+      startingStats.addEventListener('change', () => {
+        const enabled = startingStats.checked;
+        localStorage.setItem('startingStats', enabled ? "1" : "0");
+
+        if (enabled) {
+          statMaxRow.classList.add('show');
+        } else {
+          statMaxRow.classList.remove('show');
+        }
+      });
+    });
+
   </script>
 
 </body>

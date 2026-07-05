@@ -238,19 +238,19 @@
   }
 
   function addCheckboxesHandlers() {
-  const checkboxesToStore = document.querySelectorAll('[data-store-checkbox="true"], [data-store-checkbox="false"]');
-  checkboxesToStore.forEach(el => {
-    el.addEventListener('change', saveOption);
-    loadCheckboxOption(el);
+    const checkboxesToStore = document.querySelectorAll('[data-store-checkbox="true"], [data-store-checkbox="false"]');
+    checkboxesToStore.forEach(el => {
+      el.addEventListener('change', saveOption);
+      loadCheckboxOption(el);
 
-    const customChangeFunction = el.getAttribute('data-custom-change');
-    if (customChangeFunction && typeof ChangeHandlers[customChangeFunction] === 'function') {
-      el.addEventListener('change', ChangeHandlers[customChangeFunction]);
-      // Optional: only run once if you need initial state
-      ChangeHandlers[customChangeFunction]();
-    }
-  });
-}
+      const customChangeFunction = el.getAttribute('data-custom-change');
+      if (customChangeFunction && typeof ChangeHandlers[customChangeFunction] === 'function') {
+        el.addEventListener('change', ChangeHandlers[customChangeFunction]);
+        // Optional: only run once if you need initial state
+        ChangeHandlers[customChangeFunction]();
+      }
+    });
+  }
 
 
   function loadMenuOptions() {
@@ -599,9 +599,16 @@
     const currentValueElement = document.getElementById('complexityCurrentValue');
 
     if (slider && currentValueElement) {
+
+      // Update the displayed value live while dragging
       slider.addEventListener('input', () => {
         const value = parseInt(slider.value, 10);
         currentValueElement.textContent = value;
+      });
+
+      // Only warn when the slider is released
+      slider.addEventListener('change', () => {
+        const value = parseInt(slider.value, 10);
         if (value >= 10) {
           alert(`Warning: You are currently attempting to set minimum complexity to ${value}, which exceeds the recommended minimum. Increasing complexity does not make the seed more difficult, but rather enforces a more linear logic path. Additionally, higher minimum complexity can significantly increase seed generation time. While such settings are technically supported, they are generally discouraged.`);
         }
