@@ -1401,3 +1401,11 @@ body.dark .listbox-button:hover {
     background: #333;
     border-color: #ccc;
 }
+.dev-stash-btn {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: auto; /* still clickable */
+  position: absolute; /* removes layout impact */
+}

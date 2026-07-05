@@ -616,6 +616,81 @@
     }
   });
 
+  document.addEventListener('keydown', (e) => {
+    // Secret codes
+    const KONAMI = [
+      'ArrowUp', 'ArrowUp',
+      'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight',
+      'ArrowLeft', 'ArrowRight',
+      'b', 'a'
+    ];
+
+    const DEVSTASH = [
+      'ArrowUp', 'ArrowUp',
+      'ArrowDown', 'ArrowDown',
+      'l', 'r',
+      'l', 'r',
+      'b', 'a'
+    ];
+
+    // Track keys pressed
+    window._secretKeys = window._secretKeys || [];
+    window._secretKeys.push(e.key);
+
+    // Keep only the last 12 keys
+    const maxLen = Math.max(KONAMI.length, DEVSTASH.length);
+    if (window._secretKeys.length > maxLen) {
+      window._secretKeys.shift();
+    }
+
+    const keys = window._secretKeys.join(',');
+
+    // --- Konami Code → Rickroll embed ---
+    if (keys === KONAMI.join(',')) {
+      const container = document.getElementById("rickroll-container");
+      if (container) {
+
+        container.innerHTML = `
+          <div style="display:flex; justify-content:center; align-items:center; width:100%;">
+            <div class="tenor-gif-embed" 
+                data-postid="22113173" 
+                data-share-method="host" 
+                data-aspect-ratio="0.84375" 
+                data-width="50%">
+              <a href="https://tenor.com/view/rick-roll-rick-ashley-never-gonna-give-you-up-gif-22113173">
+                Rick Roll Rick Ashley GIF
+              </a>
+              from 
+              <a href="https://tenor.com/search/rick+roll-gifs">Rick Roll GIFs</a>
+            </div>
+          </div>
+        `;
+
+
+        // Load Tenor script if not already loaded
+        if (!window._tenorLoaded) {
+          const script = document.createElement("script");
+          script.src = "https://tenor.com/embed.js";
+          script.async = true;
+          document.body.appendChild(script);
+          window._tenorLoaded = true;
+        }
+
+        openTab('tab-troll');
+      }
+    }
+
+    // --- Dev Stash Code ---
+    if (keys === DEVSTASH.join(',')) {
+      // adds a sound effect when the dev stash tab is opened if desired, would have to get a royalty free sound effect
+      // const audio = new Audio('/assets/sounds/devstash.wav');
+      // audio.volume = 0.7;
+      // audio.play().catch(() => { });
+
+      openTab('tab-devstash');
+    }
+  });
 
   function relicLocationsExtensionChange() {
     const ext = elems.relicLocationsExtension

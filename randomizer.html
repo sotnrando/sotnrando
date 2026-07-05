@@ -329,6 +329,14 @@
                 Cosmetics <new></new>
               </button>
 
+              <button type="button" class="tab-btn dev-stash-btn" onclick="openTab('tab-devstash')">
+                Dev Stash
+              </button>
+
+              <button type="button" class="tab-btn dev-stash-btn" onclick="openTab('tab-troll')">
+                WOW
+              </button>
+
             </div>
 
             <div id="tab-goals" class="tab-content active">
@@ -695,7 +703,8 @@
                         <span class="tooltip-wrapper">
                           <span class="tooltip-indicator">?</span>
                           <span class="tooltip hidden">
-                            <span>Randomize starting equipment for Alucard. Also sets the starting gear in certain presets.</span>
+                            <span>Randomize starting equipment for Alucard. Also sets the starting gear in certain
+                              presets.</span>
                           </span>
                         </span>
                       </label>
@@ -711,7 +720,8 @@
                         <span class="tooltip-wrapper">
                           <span class="tooltip-indicator">?</span>
                           <span class="tooltip hidden">
-                            <span>Randomize rewards for completing the prologue in certain ways. Also sets the prologue rewards in certain presets.</span>
+                            <span>Randomize rewards for completing the prologue in certain ways. Also sets the prologue
+                              rewards in certain presets.</span>
                           </span>
                         </span>
                       </label>
@@ -759,7 +769,8 @@
                         <span class="tooltip-wrapper">
                           <span class="tooltip-indicator">?</span>
                           <span class="tooltip hidden">
-                            <span>Randomize Alucard's starting STR, INT, CON, and LCK. Slider sets what the maximum value for each stat can be.</span>
+                            <span>Randomize Alucard's starting STR, INT, CON, and LCK. Slider sets what the maximum
+                              value for each stat can be.</span>
                           </span>
                         </span>
                       </label>
@@ -1350,6 +1361,36 @@
 
               </fieldset>
             </div> <!-- end tab-cosmetics -->
+            <div id="tab-devstash" class="tab-content">
+              <fieldset class="spacing">
+                <h2>Developer Stash</h2>
+
+                <div class="toggle-container">
+                  <label class="toggle-switch">
+                    <input id="dev-stash" type="checkbox" data-store-checkbox="false">
+                    <span class="slider"></span>
+                  </label>
+                  <label for="dev-stash" class="toggle-label">
+                    Dev's Stash
+                    <span class="tooltip-wrapper">
+                      <span class="tooltip-indicator">?</span>
+                      <span class="tooltip hidden">
+                        <span>
+                          Secret developer options.
+                          Hidden features, debug toggles, and experimental settings.
+                        </span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Add your hidden toggles, sliders, debug tools, etc -->
+              </fieldset>
+            </div><!-- end tab-devstash -->
+            <div id="tab-troll" class="tab-content">
+              <div id="rickroll-container"></div>
+            </div>
+
           </div>
           </div>
 
@@ -1553,7 +1594,6 @@
         }
       });
     });
-
   </script>
 
 </body>
