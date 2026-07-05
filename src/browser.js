@@ -869,27 +869,60 @@
   }
 
   function getFormOptions() {
-    const preset = sotnRando.presets[elems.presetId.selectedIndex];
+    try {
+      // 1. Resolve preset by ID
+      const selectedId = elems.presetId.value;
+      const preset = sotnRando.presets.find(p => p.id === selectedId);
 
-    const options = {
-      preset: preset.id,
-      relicLocations: getFormRelicLocations()
-    };
-
-    // Read every checkbox directly from elems
-    for (const [key, elem] of Object.entries(elems)) {
-      if (!elem) continue;
-
-      // Only process checkboxes
-      if (elem instanceof HTMLInputElement && elem.type === "checkbox") {
-        options[key] = elem.checked;
+      if (!preset) {
+        console.warn("Preset not found:", selectedId);
+        return {};
       }
+
+      // 2. Base options object
+      const options = {
+        preset: preset.id,
+        relicLocations: getFormRelicLocations()
+      };
+
+      // 3. Pull option metadata from options_array.js
+      const optionsMeta = sotnRando.optionsArray;
+
+      // Structured keys that should preserve preset-defined objects
+      const STRUCTURED_KEYS = [
+        "startingEquipment",
+        "enemyDrops",
+        "itemLocations",
+        "prologueRewards"
+      ];
+
+      // 4. Build options using longId for each option
+      optionsMeta.forEach(opt => {
+        const longId = opt.longId;
+        const el = elems[longId];
+
+        // Preset-defined value
+        const presetValue = preset.options()[longId];
+
+        // If preset defines structured data, preserve it
+        if (STRUCTURED_KEYS.includes(longId) && typeof presetValue === "object") {
+          options[longId] = presetValue;
+          return;
+        }
+
+        // Otherwise, read from the DOM checkbox
+        if (el && el.type === "checkbox") {
+          options[longId] = el.checked;
+        }
+      });
+
+      return options;
+
+    } catch (err) {
+      console.error("Error in getFormOptions:", err);
+      return {};
     }
-
-    return options;
   }
-
-
 
   function deleteOriginalComplexity(options, newComplexity) {
     let relicLocations = options.relicLocations;
