@@ -909,6 +909,10 @@
 	requiredOptions: [
 	],
 	incompatiblePresets: [
+		"bounty-hunter",
+		"target-confirmed",
+		"rampage",
+		"hitman"
 	], 
 	functionCall: util.applyCornucopiaModePatches, 
 	rngNeeded: false, 

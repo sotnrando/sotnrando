@@ -46,6 +46,7 @@
   "spikeRoomRando": true,
   "zeroDollarRelicMode": true,
   "openClockStatueMode": true,
+  "cornucopiaMode": true,
 
   "complexityGoal": {
     "min": 1,
