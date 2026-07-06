@@ -878,7 +878,7 @@
  	argvFlag: "bool",
 	autoBuild: true
   }, {
-	name: "Instant Death.", 
+	name: "Instant Death", 
 	longId: "instantDeathMode", 
 	shortId: "instantDeath", 
 	htmlElement: "insta-death", 

@@ -96,67 +96,47 @@ BrowserUtils.toKebabCase = function toKebabCase(str) {
 }
 
 BrowserUtils.getCurrentOptions = function getCurrentOptions() {
-    const keys = [
-        'tournamentMode',
-        'colorrandoMode',
-        'magicmaxMode',
-        'antiFreezeMode',
-        'mypurseMode',
-        'iwsMode',
-        'fastwarpMode',
-        'itemNameRandoMode',
-        'noprologueMode',
-        'unlockedMode',
-        'surpriseMode',
-        'enemyStatRandoMode',
-        'shopPriceRandoMode',
-        'startRoomRandoMode',
-        'startRoomRando2ndMode',
-        'dominoMode',
-        'rlbcMode',
-        'immunityPotionMode',
-        'godspeedMode',
-        'libraryShortcut',
-        'elemChaosMode',
-        'singleHitGearMode',
-        'revCastleTeleportRando',
-        'zeroDollarRelicMode',
-        'openClockStatueMode',
-        'spikeRoomRando',
-        'lycanMode',
-        'warlockMode',
-        'cornucopiaMode',
-        'instantDeathMode',
-        'levelOneMode',
-        'easyMode',
-        'devStashMode',
-        'seasonalPhrasesMode',
-        'music',
-        'bossMusicSeparation',
-        'music',
-        'appendSeed',
-        'excludeSongsOption',
-        'itemLocations',
-        'stats',
-        'prologueRewards',
-        'startingEquipment',
-        'accessibilityPatches'
-    ]
+    const options = {};
 
-    const options = {}
-    keys.forEach(key => {
-        const input = document.getElementById(BrowserUtils.toKebabCase(key))
-        options[key] = input?.checked ?? false
-    })
+    try {
+        const optionsMeta = sotnRando.optionsArray;
 
-    options.preset = document.getElementById('preset-id')?.selectedOptions?.[0]?.text || 'Unknown'
-    options.complexity = document.getElementById('complexity')?.value || 'Not selected'
-    options.goal = document.getElementById('newGoals')?.selectedOptions?.[0]?.text || 'Unknown'
-    options.extension = [...document.querySelectorAll('input[name="extension"]')]
-        .find(r => r.checked)?.value || 'None'
+        optionsMeta.forEach(opt => {
+            const longId = opt.longId;
+            const displayName = opt.name;
+            const elemId = BrowserUtils.toKebabCase(longId);
+            const input = document.getElementById(elemId);
 
-    return options
-}
+            // Store using the DISPLAY NAME
+            options[displayName] = input?.checked ?? false;
+        });
+
+        // Preset name
+        options.preset =
+            document.getElementById("preset-id")?.selectedOptions?.[0]?.text ||
+            "Unknown";
+
+        // Complexity
+        options.complexity =
+            document.getElementById("complexity")?.value || "Not selected";
+
+        // Goal
+        options.goal =
+            document.getElementById("newGoals")?.selectedOptions?.[0]?.text ||
+            "Unknown";
+
+        // Extension radio group
+        options.extension =
+            [...document.querySelectorAll('input[name="extension"]')]
+                .find(r => r.checked)?.value || "None";
+
+    } catch (err) {
+        console.error("Error in getCurrentOptions:", err);
+    }
+
+    return options;
+};
+
 
 BrowserUtils.formatOptionsLog = function formatOptionsLog(options) {
     const enabled = []
@@ -332,23 +312,23 @@ BrowserUtils.ChangeHandlers = {
         }
     },
     enemyStatRandoModeChange: function enemyStatRandoModeChange() {
-    if (elems.enemyStatRandoMode.checked) {
-        // Enemy Stats ON → allow Elemental Chaos
-        elems.elemChaosMode.disabled = false;
-    } else {
-        // Enemy Stats OFF → force Elemental Chaos OFF + disabled
-        elems.elemChaosMode.checked = false;
-        elems.elemChaosMode.disabled = true;
-    }
-},
+        if (elems.enemyStatRandoMode.checked) {
+            // Enemy Stats ON → allow Elemental Chaos
+            elems.elemChaosMode.disabled = false;
+        } else {
+            // Enemy Stats OFF → force Elemental Chaos OFF + disabled
+            elems.elemChaosMode.checked = false;
+            elems.elemChaosMode.disabled = true;
+        }
+    },
 
-elemChaosModeChange: function elemChaosModeChange() {
-    if (elems.elemChaosMode.checked) {
-        // If user tries to turn on Elemental Chaos,
-        // make sure Enemy Stats is ON
-        elems.enemyStatRandoMode.checked = true;
-    }
-},
+    elemChaosModeChange: function elemChaosModeChange() {
+        if (elems.elemChaosMode.checked) {
+            // If user tries to turn on Elemental Chaos,
+            // make sure Enemy Stats is ON
+            elems.enemyStatRandoMode.checked = true;
+        }
+    },
 
     spoilersChange: function spoilersChange() {
         if (elems.showSpoilers.checked && info) {
