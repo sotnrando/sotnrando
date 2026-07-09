@@ -135,6 +135,40 @@ To create a URL that allows others to use your preset:
 $ node randomize -rn -f presets/mypreset
 ```
 
+### PSP EBOOT mode
+
+You can generate a PSP EBOOT.PBP file directly from a randomized disc image. This
+allows you to play the randomized game on PSP via the built-in PS1 Classics (POPS)
+emulator:
+
+```shell
+$ node randomize -i sotn.bin -o randomized.bin --psp-eboot EBOOT.PBP
+```
+
+This will create an EBOOT.PBP file that can be placed on a PSP with PS1 emulation
+support. You will need a `DATA.PSP` payload file in your project root, or you can
+specify a custom path:
+
+```shell
+$ node randomize -i sotn.bin -o randomized.bin --psp-eboot EBOOT.PBP --data-psp /path/to/DATA.PSP
+```
+
+#### Compression
+
+By default, the EBOOT is created without ISO compression. You can enable zlib
+compression using the `--compression-level` option (0-9, where 0 is no compression
+and 9 is maximum compression):
+
+```shell
+$ node randomize -i sotn.bin -o randomized.bin --psp-eboot EBOOT.PBP --compression-level 6
+```
+
+Higher compression levels result in smaller EBOOT files but take longer to compress.
+Level 6 is a good balance between compression and speed. Compression is implemented
+identically to [popstationr](https://github.com/pseiler/popstationr) — each
+0x9300-byte sector is compressed independently with raw deflate, and sectors that
+don't compress smaller are stored uncompressed.
+
 ## Console
 
 Randomized disc images can be played on all consoles that run game backups.

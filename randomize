@@ -9,6 +9,7 @@ const relics = require('./src/relics')
 const util = require('./src/util')
 const core_randomizer = require('./src/core_randomizer')
 const options_array = require('./src/options_array')
+const { createEboot } = require('./src/psx_to_psp_eboot')
 let version = require('./package.json').version
 
 // Suppress all deprecation warnings
@@ -513,6 +514,23 @@ let yargs = require('yargs')
     type: 'string',
     requiresArg: true,
   })
+  .option('data-psp', {
+    describe: 'Path to DATA.PSP payload used when building a PSP EBOOT.PBP',
+    type: 'string',
+    requiresArg: true,
+    implies: ['psp-eboot'],
+  })
+  .option('psp-eboot', {
+    describe: 'Path to write PSP EBOOT.PBP output generated from randomized .bin data',
+    type: 'string',
+    requiresArg: true,
+  })
+  .option('compression-level', {
+    describe: 'zlib compression level for PSP EBOOT (0=store, 1-9=deflate; default 0)',
+    type: 'number',
+    requiresArg: true,
+    implies: ['psp-eboot'],
+  })
   .option('seed', {
     alias: 's',
     describe: 'Randomization seed',
@@ -675,6 +693,11 @@ if ('easy' in argv) {
   }
 }
 if ('debug' in argv) {console.log('randomize | Checking for help flags')}
+if ('pspEboot' in argv && !('inBin' in argv)) {
+  yargs.showHelp()
+  console.error('\n--psp-eboot requires --in-bin so the CLI can build an EBOOT from randomized disc data')
+  process.exit(1)
+}
 // Check for help.
 if ('help' in argv) {
   if (!argv.help) {
@@ -1126,6 +1149,7 @@ function showSpoilers(info, startTime) {
   }
 }
 
+
 function fileOutputHandler(check, s, r) {
   if ('out' in argv) {
     if ('inBin' in argv) {
@@ -1150,6 +1174,19 @@ function fileOutputHandler(check, s, r) {
   // Write randomized bin.
   if (typeof(fd) === 'object') {
     fs.writeFileSync(argv.out, fd)
+  }
+
+  if ('pspEboot' in argv) {
+    const isoBuffer = (typeof(fd) === 'object')
+      ? fd
+      : fs.readFileSync(argv.inBin)
+    const compressionLevel = ('compressionLevel' in argv)
+      ? argv.compressionLevel
+      : 0
+    createEboot(isoBuffer, argv.pspEboot, undefined, undefined, {
+      dataPspPath: argv.dataPsp,
+      compressionLevel: compressionLevel
+    })
   }
 }
 
