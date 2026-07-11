@@ -332,21 +332,16 @@
   }
 
   function presetIdChange() {
-
     // 1. Resolve selected preset from the ACTIVE dropdown elements, NOT the raw array
     const optionsMeta = sotnRando.optionsArray;
     let idx = elems.presetId.selectedIndex;
     if (idx < 0) idx = 0;
-
     // Always fallback to reading the actual string .value attribute of the sorted list option
-    const id = elems.presetId.options
-      ? elems.presetId.options[idx].value
-      : (elems.presetId.childNodes[idx] ? elems.presetId.childNodes[idx].value : "casual");
-
+    const id = elems.presetId.options ? elems.presetId.options[idx].value : (elems.presetId.childNodes[idx] ? elems.presetId.childNodes[idx].value : "casual");
     // Dynamically find the matching data structure via its unique ID tag
     const preset = sotnRando.presets.find(p => p.id === id) || sotnRando.presets[0];
 
-    // 2. Update preset metadata UI 
+    // 2. Update preset metadata UI
     elems.presetDescription.innerText = preset.description;
     elems.presetAuthor.innerText = preset.author;
     elems.presetKnowledgeCheck.innerText = preset.knowledgeCheck;
@@ -359,15 +354,13 @@
     elems.presetTransformEarly.innerText = preset.transformEarly;
     elems.presetTransformFocus.innerText = preset.transformFocus;
     elems.presetWinCondition.innerText = preset.winCondition;
-
     localStorage.setItem("presetId", preset.id);
 
-    // 3. Compute complexity 
+    // 3. Compute complexity
     const options = preset.options();
     let complexity = Object.keys(options.relicLocations || {}).reduce((acc, key) => {
       return /^[0-9]+(-[0-9]+)?/.test(key) ? key.split("-").shift() : acc;
     }, 1);
-
     adjustMaxComplexity();
     elems.complexity.value = complexity;
     elems.complexityCurrentValue.innerText = `(${complexity})`;
@@ -376,12 +369,10 @@
     const presetData = presetDataJson.find(p => p.id === preset.id);
     if (presetData) {
       const { defaultGoal, compatibleGoals } = presetData;
-
       // Set default goal
       elems.newGoals.value = defaultGoal || "default";
       localStorage.setItem("newGoals", elems.newGoals.value);
       newGoalsLock = elems.newGoals.value;
-
       // Enable only compatible goals
       const goalOptions = elems.newGoals.options;
       for (let i = 0; i < goalOptions.length; i++) {
@@ -390,88 +381,78 @@
       }
     }
 
-    // 5. Apply preset options (data-driven) 
+    // 5. Apply preset options (data-driven)
     function applyOptions(options) {
       const userPersistent = ["tournamentMode", "showSpoilers", "seasonalPhrasesMode", "bossMusicSeparation"];
 
+      // First, sync the standard options metadata checkboxes
       optionsMeta.forEach(opt => {
         if (userPersistent.includes(opt.longId)) return; // skip these entirely
-
         const el = elems[opt.longId];
         if (!el) return;
-
         const presetValue = options[opt.longId];
 
         // Only apply checkbox logic to checkboxes
         if (el.type === "checkbox") {
-
-          const isStructured =
-            opt.longId === "startingEquipment" ||
-            opt.longId === "enemyDrops" ||
-            opt.longId === "itemLocations" ||
-            opt.longId === "prologueRewards";
-
+          const isStructured = opt.longId === "startingEquipment" || opt.longId === "enemyDrops" || opt.longId === "itemLocations" || opt.longId === "prologueRewards";
           if (isStructured && typeof presetValue === "object") {
             el.checked = true;
             return;
           }
-
           if (!(opt.longId in options)) {
             el.checked = false;
             return;
           }
-
           el.checked = !!presetValue;
         }
-
-        // Sliders, selects, radios, etc. should NOT be auto-checked
       });
+      const extSet = elems.relicLocationsExtension;
+      if (extSet) {
+        const ext = options.relicLocations?.extension;
+        extSet.guarded.checked = (ext === sotnRando.constants.EXTENSION.GUARDED);
+        extSet.guardedplus.checked = (ext === sotnRando.constants.EXTENSION.GUARDEDPLUS);
+        extSet.equipment.checked = (ext === sotnRando.constants.EXTENSION.EQUIPMENT);
+        extSet.scenic.checked = (ext === sotnRando.constants.EXTENSION.SCENIC);
+        extSet.extended.checked = (ext === sotnRando.constants.EXTENSION.EXTENDED);
+        extSet.classic.checked = !ext;
+      }
     }
-
-
     applyOptions(options);
     relicLocationsExtensionChange();
 
-    // 6. Enforce required/incompatible options 
+    // 6. Enforce required/incompatible options
     function enforceDependencies() {
       optionsMeta.forEach(opt => {
         const el = elems[opt.longId];
         if (!el) return;
         const isOn = el.checked;
-
         opt.requiredOptions.forEach(req => {
           const reqEl = elems[req];
           if (!reqEl || reqEl._presetLocked) return;
-
           if (isOn) {
             if (req === "startingStats" && !preset.options().startingStats) {
               return;
             }
-
             reqEl.checked = true;
             reqEl.disabled = true;
           } else {
             reqEl.disabled = false;
           }
         });
-
         opt.incompatibleOptions.forEach(bad => {
           const badEl = elems[bad];
           if (isOn && badEl && !badEl._presetLocked) badEl.checked = false;
         });
       });
     }
-
     enforceDependencies();
 
-    // 7. Disable AND uncheck options based on preset incompatibilities 
+    // 7. Disable AND uncheck options based on preset incompatibilities
     function applyPresetLocks() {
       optionsMeta.forEach(opt => {
         const el = elems[opt.longId];
         if (!el) return;
-
         const incompatible = opt.incompatiblePresets.includes(preset.id);
-
         if (incompatible) {
           el.checked = false;
           el.disabled = true;
@@ -481,53 +462,38 @@
         }
       });
     }
-
     applyPresetLocks();
 
     // 8. Disable options incompatible with preset's enabled options
     function applyOptionLocks() {
       const presetOptions = preset.options();
-
       optionsMeta.forEach(opt => {
         const el = elems[opt.longId];
         if (!el) return;
-
         if (el._presetLocked) return;
-
         let shouldDisable = false;
-
         for (const enabledOptId of Object.keys(presetOptions)) {
           const enabledMeta = optionsMeta.find(o => o.longId === enabledOptId);
           if (!enabledMeta) continue;
-
           if (enabledMeta.incompatibleOptions.includes(opt.longId)) {
             shouldDisable = true;
             break;
           }
         }
-
         el.disabled = shouldDisable;
       });
     }
-
     applyOptionLocks();
 
-    // 9. Tournament Mode auto-lock 
-    const isTeLocked =
-      /-spr[0-9]{2}te$/.test(preset.id) ||
-      /-win[0-9]{2}te$/.test(preset.id) ||
-      /-aut[0-9]{2}te$/.test(preset.id) ||
-      /-sum[0-9]{2}te$/.test(preset.id);
-
+    // 9. Tournament Mode auto-lock
+    const isTeLocked = /-spr[0-9]{2}te$/.test(preset.id) || /-win[0-9]{2}te$/.test(preset.id) || /-aut[0-9]{2}te$/.test(preset.id) || /-sum[0-9]{2}te$/.test(preset.id);
     if (isTeLocked) {
       elems.tournamentMode.checked = true;
-
       optionsMeta.forEach(opt => {
         const el = elems[opt.longId];
         if (!el || el._presetLocked) return;
         el.disabled = true;
       });
-
       document.querySelectorAll("input[type='radio']").forEach(r => r.disabled = true);
     } else {
       optionsMeta.forEach(opt => {
@@ -535,12 +501,9 @@
         if (!el || el._presetLocked) return;
         el.disabled = false;
       });
-
       document.querySelectorAll("input[type='radio']").forEach(r => r.disabled = false);
     }
-
     ChangeHandlers.tournamentModeChange();
-    // FINAL ENFORCEMENT: Elemental Chaos only allowed if Enemy Stats is ON
     if (!elems.enemyStatRandoMode.checked) {
       elems.elemChaosMode.checked = false;
       elems.elemChaosMode.disabled = true;
