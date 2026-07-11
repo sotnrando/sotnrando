@@ -392,7 +392,11 @@
 
     // 5. Apply preset options (data-driven) 
     function applyOptions(options) {
+      const userPersistent = ["tournamentMode", "showSpoilers", "seasonalPhrasesMode", "bossMusicSeparation"];
+
       optionsMeta.forEach(opt => {
+        if (userPersistent.includes(opt.longId)) return; // skip these entirely
+
         const el = elems[opt.longId];
         if (!el) return;
 
@@ -545,6 +549,7 @@
     }
     elems.seasonalPhrasesMode.checked = true;
     elems.bossMusicSeparation.checked = true;
+    elems.showSpoilers.checked = true;
   }
 
   function complexityChange() {
