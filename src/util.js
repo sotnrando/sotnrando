@@ -3799,8 +3799,26 @@
     if ('easyMode' in json) {
       builder.easyMode(json.easyMode)
     }
-    if ('devStashMode' in json) {
-      builder.devStashMode(json.devStashMode)
+    if ('fourBeastMode' in json) {
+      builder.fourBeastMode(json.fourBeastMode)
+    }
+    if ('forbRouteShortMode' in json) {
+      builder.forbRouteShortMode(json.forbRouteShortMode)
+    }
+    if ('maxMasaMode' in json) {
+      builder.maxMasaMode(json.maxMasaMode)
+    }
+    if ('brawnySwordMode' in json) {
+      builder.brawnySwordMode(json.brawnySwordMode)
+    }
+    if ('trapDoorMode' in json) {
+      builder.trapDoorMode(json.trapDoorMode)
+    }
+    if ('betterCrossMode' in json) {
+      builder.betterCrossMode(json.betterCrossMode)
+    }
+    if ('darkEIFMode' in json) {
+      builder.darkEIFMode(json.darkEIFMode)
     }
     if ('seasonalPhrasesMode' in json) {
       builder.seasonalPhrasesMode(json.seasonalPhrasesMode)
@@ -4205,8 +4223,26 @@
     if ('easyMode' in preset) {
       this.easy = preset.easyMode
     }
-    if ('devStashMode' in preset) {
-      this.devStash = preset.devStashMode
+    if ('fourBeastMode' in preset) {
+      this.fourBeast = preset.fourBeastMode
+    }
+    if ('forbRouteShortMode' in preset) {
+      this.forbRouteShort = preset.forbRouteShortMode
+    }
+    if ('maxMasaMode' in preset) {
+      this.maxMasa = preset.maxMasaMode
+    }
+    if ('brawnySwordMode' in preset) {
+      this.brawnySword = preset.brawnySwordMode
+    }
+    if ('trapDoorMode' in preset) {
+      this.trapDoor = preset.trapDoorMode
+    }
+    if ('betterCrossMode' in preset) {
+      this.betterCross = preset.betterCrossMode
+    }
+    if ('darkEIFMode' in preset) {
+      this.darkEIF = preset.darkEIFMode
     }
     if ('seasonalPhrasesMode' in preset) {
       this.seasonalPhrases = preset.seasonalPhrasesMode
@@ -5067,28 +5103,6 @@
       assert.oneOf(typeof(ssMax), ['boolean', 'number'])
       this.startStatRando = ssMax
     }
-
-  // Enable Simplified Inputs
-  // PresetBuilder.prototype.easyMode = function easyMode(enabled) {
-  //   this.easy = enabled
-  // }
-
-  // // Enable Dev's Stash
-  // PresetBuilder.prototype.devStashMode = function devStashMode(enabled) {
-  //   this.devStash = enabled
-  // }
-
-  // // Enable Seasonal Phrases
-  // PresetBuilder.prototype.seasonalPhrasesMode =
-  //   function seasonalPhrasesMode(enabled) {
-  //     this.seasonalPhrases = enabled
-  //   }
-
-  // // Enable boss music separation
-  // PresetBuilder.prototype.bossMusicSeparation =
-  //   function bossMusicSeparation(enabled) {
-  //     this.bossMusic = enabled
-  //   }
 
   // Write a character.
   PresetBuilder.prototype.writeChar = function writeChar(address, value) {
@@ -10503,7 +10517,7 @@
     return data
   }
 
-  function applyDevsStashPatches() {
+  function applyFourBeastsPatches() {
     // console.log('dev's stash')
 
     const data = new checked()
@@ -10686,6 +10700,15 @@
     offset = data.writeWord(offset, 0xac800000)
     offset = data.writeWord(offset, 0x03e00008)
     data.writeWord(offset, 0x00000000)
+
+    return data
+  }
+
+  function applyForbiddenRouteShortcutPatches() {
+    // console.log('dev's stash')
+
+    const data = new checked()
+    let offset
 
     // Apply Forbidden Route Shortcut
     offset = 0x49153b8
@@ -10877,10 +10900,28 @@
     offset = data.writeWord(offset, 0x00300011)
     data.writeShort(offset, 0x0013)
 
+    return data
+  }
+
+  function applyMuramasaMaxPatches() {
+    // console.log('dev's stash')
+
+    const data = new checked()
+    let offset
+
     // Max Attack Muramasa by eldri7ch
     offset = 0x10d250
     offset = data.writeWord(offset, 0x3c04000e)
     data.writeWord(offset, 0x34846000)
+    
+    return data
+  }
+
+  function applySwordOfBrawnPatches() {
+    // console.log('dev's stash')
+
+    const data = new checked()
+    let offset
 
     //Sword of Dawn Scaling by MottZilla
     offset = 0x3b428f8
@@ -10902,6 +10943,15 @@
     offset = 0x3b4219c
     offset = data.writeWord(offset, 0x0c05f314)
     data.writeWord(offset, 0x00000000)
+
+    return data
+  }
+
+  function applyEntranceTrapDoorPatches() {
+    // console.log('dev's stash')
+
+    const data = new checked()
+    let offset
 
     // Entrance Trap Door Tiles and Platforms by eldri7ch
     data.writeWord(0x540f22a, 0x05270526)
@@ -10927,6 +10977,15 @@
     // Entrance Trap Door Entity Slot Fix by MottZilla
     data.writeChar(0x53f8eb8, 0x12)
     data.writeChar(0x53f97a6, 0x12)
+
+    return data
+  }
+
+  function applyBetterCrossPatches() {
+    // console.log('dev's stash')
+
+    const data = new checked()
+    let offset
     
     // Holy Cross Fixes
     offset = 0x000b1036
@@ -10935,10 +10994,17 @@
     data.writeChar(offset, 0x82)  // heals hp with orbs
     offset = 0x000b102a
     data.writeChar(offset, 0x32)  // costs 50 Hearts
+    
+    return data
+  }
+
+  function applyDarkShieldEIFPatches() {
+    // console.log('dev's stash')
+
+    const data = new checked()
 
     // Fix Dark Shield enemy i-frames
-    offset = 0x03ceab34
-    data.writeWord(offset, 0x3402000a)
+    data.writeWord(0x03ceab34, 0x3402000a)
 
     return data
   }
@@ -13114,7 +13180,13 @@
     applySwordBuffPatches: applySwordBuffPatches,
     applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,
-    applyDevsStashPatches: applyDevsStashPatches,
+    applyFourBeastsPatches: applyFourBeastsPatches,
+    applyForbiddenRouteShortcutPatches: applyForbiddenRouteShortcutPatches,
+    applyMuramasaMaxPatches: applyMuramasaMaxPatches,
+    applySwordOfBrawnPatches: applySwordOfBrawnPatches,
+    applyEntranceTrapDoorPatches: applyEntranceTrapDoorPatches,
+    applyBetterCrossPatches: applyBetterCrossPatches,
+    applyDarkShieldEIFPatches: applyDarkShieldEIFPatches,
     applyMapColor: applyMapColor,
     applyNewGoals: applyNewGoals,
     applyAlucardPalette: applyAlucardPalette,

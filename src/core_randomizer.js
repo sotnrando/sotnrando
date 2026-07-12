@@ -473,12 +473,6 @@ async function randomize(
         debugMessage(debugEnabled, indivOpt.name + ' | ' + optFlag)
         optFlag = false
       })
-
-      // Dev's stash: Extra Items or unfinished features
-      if (options.devStashMode || applied.devStashMode) {
-        // Apply extra items that aren't fully implement yet.
-        check.apply(util.applyListOfNames())
-      }
       
       // Colors the map
       if (mapColor && mapColor !== 'default') {

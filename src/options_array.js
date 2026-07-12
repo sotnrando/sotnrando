@@ -940,20 +940,163 @@
     argvFlag: "bool",
 	autoBuild: false
   }, {
-	name: "Dev's Stash", 
-	longId: "devStashMode", 
-	shortId: "devStash", 
-	htmlElement: "dev-stash", 
-	cliArg: "dev", 
-	longDescript: "Developer's Stash. Could be anything unincorporated, fun, or just weird.", 
-	shortDescript: "Developer's Stash.", 
+	name: "Four Beasts Spell", 
+	longId: "fourBeastMode", 
+	shortId: "fourBeast", 
+	htmlElement: "four-beast", 
+	cliArg: "4b", 
+	longDescript: "Enables the use of Four Beasts spell from the Sega Saturn version.", 
+	shortDescript: "Enables the use of Four Beasts spell.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "battle-mage"
+	], 
+	functionCall: util.applyFourBeastsPatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: false
+  }, {
+	name: "Forbidden Route Shortcut", 
+	longId: "forbRouteShortMode", 
+	shortId: "forbRouteShort", 
+	htmlElement: "forbidden-shortcut", 
+	cliArg: "frs", 
+	longDescript: "Opens a shortcut in Marble Gallery 'Forbidden Route', the red area with Plate lord and Ctulhu.", 
+	shortDescript: "Opens a shortcut in Marble Gallery 'Forbidden Route'.", 
 	incompatibleOptions: [
 	],
 	requiredOptions: [
 	],
 	incompatiblePresets: [
 	], 
-	functionCall: util.applyDevsStashPatches, 
+	functionCall: util.applyForbiddenRouteShortcutPatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: false
+  }, {
+	name: "Maximum Muramasa", 
+	longId: "maxMasaMode", 
+	shortId: "maxMasa", 
+	htmlElement: "max-masa", 
+	cliArg: "mm", 
+	longDescript: "Maximizes the attack on the Muramasa.", 
+	shortDescript: "Maximizes the attack on the Muramasa.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "boss-rush"
+	], 
+	functionCall: util.applyMuramasaMaxPatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: false
+  }, {
+	name: "Sword of Brawn", 
+	longId: "brawnySwordMode", 
+	shortId: "brawnySword", 
+	htmlElement: "brawn-sword", 
+	cliArg: "sod", 
+	longDescript: "Allows the Dawn Warriors summoned by Sword of Dawn to have their strength scaled with Alucard's STR stat.", 
+	shortDescript: "Dawn Warriors have their damage scaled.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applySwordOfBrawnPatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: false
+  }, {
+	name: "Entrance Trap Door", 
+	longId: "trapDoorMode", 
+	shortId: "trapDoor", 
+	htmlElement: "trap-door", 
+	cliArg: "td", 
+	longDescript: "Allows Jewel of Open to open the trap door in the entrance of the castle.", 
+	shortDescript: "Entrance trap door opens with Jewel of Open.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applyEntranceTrapDoorPatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: false
+  }, {
+	name: "Enhanced Cross Subweapon", 
+	longId: "betterCrossMode", 
+	shortId: "betterCross", 
+	htmlElement: "better-x", 
+	cliArg: "bx", 
+	longDescript: "Reduces the cost of the Cross subweapon for Alucard to 50 hearts and lets it return health.", 
+	shortDescript: "Cross costs 50 and restores health.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applyBetterCrossPatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: false
+  }, {
+	name: "Enhanced Dark Shield Spell", 
+	longId: "darkEIFMode", 
+	shortId: "darkEIF", 
+	htmlElement: "dark-shield", 
+	cliArg: "dse", 
+	longDescript: "Reduces the enemy invincibility frames granted by the Shield Rod spell with the Dark Shield from 80 to 10.", 
+	shortDescript: "Reduces enemy i-frames for the Dark Shield spell.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applyDarkShieldEIFPatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: false
+  }, {
+	name: "A List of Names", 
+	longId: "nameListMode", 
+	shortId: "nameList", 
+	htmlElement: "name-list", 
+	cliArg: "nl", 
+	longDescript: "Updates the names of the enemies in the game to match earlier and later entries as well as translations.", 
+	shortDescript: "Normalizes names from other CV games and the JP version.", 
+	incompatibleOptions: [
+	  "enemyStatRandoMode"
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	  "bounty-hunter",
+	  "target-confirmed",
+	  "hitman",
+	  "chaos-lite",
+	  "rampage",
+	  "battle-mage",
+	  "max-rando"
+	], 
+	functionCall: util.applyListOfNames, 
 	rngNeeded: false, 
 	simple: true,
  	argvFlag: "bool",
@@ -977,7 +1120,8 @@
 // 	functionCall: null, 
 // 	rngNeeded: false, 
 // 	simple: true,
-//  argvFlag: "bool" "char" "opt"
+//  argvFlag: "bool" "char" "opt",
+//	autoBuild: false
 //   }
   ]
 
