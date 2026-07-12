@@ -1409,3 +1409,8 @@ body.dark .listbox-button:hover {
   pointer-events: auto; /* still clickable */
   position: absolute; /* removes layout impact */
 }
+#tab-devstash h2{
+    width: 100%;
+    text-align: center;
+    margin:0 auto;
+}

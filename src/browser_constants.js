@@ -133,7 +133,15 @@ BrowserConstants.elems = {
     excludeSongsOption: document.getElementById('excludeSongsOption'),
     includeList: document.getElementById('includeList'),
     excludeList: document.getElementById('excludeList'),
-    logo: document.getElementById('pageLogo')
+    logo: document.getElementById('pageLogo'),
+    fourBeastMode: document.getElementById('four-beast'),
+    forbRouteShortMode: document.getElementById('forbidden-shortcut'),
+    maxMasaMode: document.getElementById('max-masa'),
+    brawnySwordMode: document.getElementById('brawn-sword'),
+    trapDoorMode: document.getElementById('trap-door'),
+    betterCrossMode: document.getElementById('better-x'),
+    darkEIFMode: document.getElementById('dark-shield'),
+    nameListMode: document.getElementById('name-list')
 }
 
 Object.assign(window, BrowserConstants);
