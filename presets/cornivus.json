@@ -18,7 +18,15 @@
     "castleType": "Normal",
     "transformEarly": "Yes",
     "transformFocus": "Wolf",
-    "winCondition": "All Bosses & Vlad Relics"
+    "winCondition": "All Bosses & Vlad Relics",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
+    "listSortFlag": [
+      "Normal"
+    ]
   },
 
   "stats": false,

@@ -104,6 +104,10 @@ BrowserConstants.elems = {
     openClockStatueMode: document.getElementById('open-statue'),
     spikeRoomRando: document.getElementById('spike-room'),
     lycanMode: document.getElementById('lycan-mode'),
+    warlockMode: document.getElementById('warlock-mode'),
+    cornucopiaMode: document.getElementById('cornucopia-mode'),
+    instantDeathMode: document.getElementById('instant-death-mode'),
+    levelOneMode: document.getElementById('level-one-mode'),
     easyMode: document.getElementById('easy-mode'),
     devStashMode: document.getElementById('dev-stash'),
     statMax: document.getElementById('statMax'),
@@ -129,7 +133,15 @@ BrowserConstants.elems = {
     excludeSongsOption: document.getElementById('excludeSongsOption'),
     includeList: document.getElementById('includeList'),
     excludeList: document.getElementById('excludeList'),
-    logo: document.getElementById('pageLogo')
+    logo: document.getElementById('pageLogo'),
+    fourBeastMode: document.getElementById('four-beast'),
+    forbRouteShortMode: document.getElementById('forbidden-shortcut'),
+    maxMasaMode: document.getElementById('max-masa'),
+    brawnySwordMode: document.getElementById('brawn-sword'),
+    trapDoorMode: document.getElementById('trap-door'),
+    betterCrossMode: document.getElementById('better-x'),
+    darkEIFMode: document.getElementById('dark-shield'),
+    nameListMode: document.getElementById('name-list')
 }
 
 Object.assign(window, BrowserConstants);

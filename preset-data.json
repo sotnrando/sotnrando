@@ -17,7 +17,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/casual.js",
+    "parent": true
   },
   {
     "name": "Safe",
@@ -37,7 +51,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "9",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/safe.js",
+    "parent": true
   },
   {
     "name": "Adventure",
@@ -55,7 +83,21 @@
     "winCondition": "Normal",
     "metaExtension": "Equipment",
     "metaComplexity": 9,
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/adventure.js",
+    "parent": false
   },
   {
     "name": "O.G.",
@@ -73,7 +115,21 @@
     "winCondition": "Normal",
     "metaExtension": "Classic",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/og.js",
+    "parent": false
   },
   {
     "name": "Guarded O.G.",
@@ -91,7 +147,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/guarded-og.js",
+    "parent": false
   },
   {
     "name": "Sequence Breaker",
@@ -109,7 +179,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "8",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/sequence-breaker.js",
+    "parent": false
   },
   {
     "name": "Lycanthrope",
@@ -127,7 +211,23 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "lycanMode"
+    ],
+    "presetJs": "./build/presets/lycanthrope.js",
+    "parent": false
   },
   {
     "name": "Warlock",
@@ -145,7 +245,23 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "warlockMode"
+    ],
+    "presetJs": "./build/presets/warlock.js",
+    "parent": false
   },
   {
     "name": "Nimble",
@@ -163,7 +279,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/nimble.js",
+    "parent": true
   },
   {
     "name": "Expedition",
@@ -182,7 +312,21 @@
     "winCondition": "Normal",
     "metaExtension": "Equipment",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/expedition.js",
+    "parent": false
   },
   {
     "name": "Bat-Master",
@@ -201,7 +345,23 @@
     "winCondition": "Normal",
     "metaExtension": "GuardedPlus",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "lycanMode"
+    ],
+    "presetJs": "./build/presets/bat-master.js",
+    "parent": false
   },
   {
     "name": "Glitch Remastered",
@@ -222,7 +382,20 @@
     "winCondition": "Relic Skip",
     "metaExtension": "Scenic",
     "metaComplexity": "5",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [
+      "antiFreezeMode",
+      "zeroDollarRelicMode"
+    ],
+    "presetJs": "./build/presets/glitch.js",
+    "parent": false
   },
   {
     "name": "Scavenger",
@@ -240,7 +413,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "9",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/scavenger.js",
+    "parent": false
   },
   {
     "name": "Empty hand",
@@ -258,7 +445,21 @@
     "winCondition": "April Fools",
     "metaExtension": "Guarded",
     "metaComplexity": "9",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/empty-hand.js",
+    "parent": false
   },
   {
     "name": "Gem farmer",
@@ -276,7 +477,20 @@
     "winCondition": "April Fools",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/gem-farmer.js",
+    "parent": false
   },
   {
     "name": "Third castle",
@@ -294,7 +508,21 @@
     "winCondition": "April Fools",
     "metaExtension": "Guarded",
     "metaComplexity": "9",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/third-castle.js",
+    "parent": false
   },
   {
     "name": "Rat race",
@@ -312,7 +540,22 @@
     "winCondition": "April Fools",
     "metaExtension": "Guarded",
     "metaComplexity": "9",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "zeroDollarRelicMode"
+    ],
+    "presetJs": "./build/presets/rat-race.js",
+    "parent": false
   },
   {
     "name": "Magic Mirror",
@@ -331,7 +574,24 @@
     "winCondition": "Mirror For 2nd Castle",
     "metaExtension": "GuardedPlus",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "startRoomRando2ndMode",
+      "spikeRoomRando"
+    ],
+    "presetJs": "./build/presets/magic-mirror.js",
+    "parent": false
   },
   {
     "name": "Leg Day",
@@ -350,7 +610,22 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "7",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "lycanMode",
+      "warlockMode"
+    ],
+    "presetJs": "./build/presets/leg-day.js",
+    "parent": false
   },
   {
     "name": "Boss Rush",
@@ -369,7 +644,23 @@
     "winCondition": "Complete Boss Rush",
     "metaExtension": "None",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [
+      "unlockedMode",
+      "startRoomRandoMode",
+      "startRoomRando2ndMode",
+      "rlbcMode",
+      "revCastleTeleportRando"
+    ],
+    "presetJs": "./build/presets/boss-rush.js",
+    "parent": false
   },
   {
     "name": "Aperture",
@@ -386,10 +677,24 @@
     "castleType": "Modded",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Vlads and Portal Spell",
+    "winCondition": "Portal Spell",
     "metaExtension": "Guarded",
     "metaComplexity": "8",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/aperture.js",
+    "parent": false
   },
   {
     "name": "Big Toss",
@@ -409,7 +714,23 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "5",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "enemyStatRandoMode",
+      "elemChaosMode",
+      "lycanMode"
+    ],
+    "presetJs": "./build/presets/big-toss.js",
+    "parent": false
   },
   {
     "name": "Bounty Hunter",
@@ -428,7 +749,25 @@
     "winCondition": "Enemies Drop Vlads",
     "metaExtension": "Guarded",
     "metaComplexity": "5",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen",
+      "BountyHunter"
+    ],
+    "defaultGoal": "h",
+    "compatibleGoals": [
+      "h",
+      "t",
+      "w",
+      "x",
+      "y"
+    ],
+    "incompatibleOptions": [
+      "dominoMode",
+      "cornucopiaMode"
+    ],
+    "presetJs": "./build/presets/bounty-hunter.js",
+    "parent": false
   },
   {
     "name": "Target Confirmed",
@@ -447,7 +786,23 @@
     "winCondition": "Enemies Drop Vlads",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen",
+      "BountyHunter"
+    ],
+    "defaultGoal": "t",
+    "compatibleGoals": [
+      "t",
+      "x",
+      "y"
+    ],
+    "incompatibleOptions": [
+      "dominoMode",
+      "cornucopiaMode"
+    ],
+    "presetJs": "./build/presets/target-confirmed.js",
+    "parent": false
   },
   {
     "name": "Hitman",
@@ -466,7 +821,22 @@
     "winCondition": "Enemies Drop Vlads",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "BountyHunter"
+    ],
+    "defaultGoal": "w",
+    "compatibleGoals": [
+      "w",
+      "x",
+      "y"
+    ],
+    "incompatibleOptions": [
+      "dominoMode",
+      "cornucopiaMode"
+    ],
+    "presetJs": "./build/presets/hitman.js",
+    "parent": false
   },
   {
     "name": "Chaos Lite",
@@ -486,7 +856,23 @@
     "winCondition": "April Fools",
     "metaExtension": "Scenic",
     "metaComplexity": "1",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "BountyHunter"
+    ],
+    "defaultGoal": "h",
+    "compatibleGoals": [
+      "h",
+      "t",
+      "w",
+      "x",
+      "y"
+    ],
+    "incompatibleOptions": [
+      "dominoMode"
+    ],
+    "presetJs": "./build/presets/chaos-lite.js",
+    "parent": false
   },
   {
     "name": "Beyond",
@@ -506,7 +892,25 @@
     "winCondition": "Normal",
     "metaExtension": "GuardedPlus",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "startRoomRandoMode",
+      "startRoomRando2ndMode",
+      "rlbcMode"
+    ],
+    "presetJs": "./build/presets/beyond.js",
+    "parent": false
   },
   {
     "name": "Breach",
@@ -526,7 +930,21 @@
     "winCondition": "Portal Spell",
     "metaExtension": "Guarded",
     "metaComplexity": "5",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/breach.js",
+    "parent": false
   },
   {
     "name": "Grand Tour",
@@ -545,7 +963,22 @@
     "winCondition": "Normal",
     "metaExtension": "Scenic",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen",
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/grand-tour.js",
+    "parent": false
   },
   {
     "name": "Crash Course",
@@ -564,7 +997,21 @@
     "winCondition": "Normal",
     "metaExtension": "Scenic",
     "metaComplexity": "7",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/crash-course.js",
+    "parent": false
   },
   {
     "name": "Any Percent",
@@ -584,7 +1031,21 @@
     "winCondition": "Relic Skip",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [
+      "antiFreezeMode",
+      "noprologueMode",
+      "zeroDollarRelicMode"
+    ],
+    "presetJs": "./build/presets/any-percent.js",
+    "parent": false
   },
   {
     "name": "Lookingglass",
@@ -603,7 +1064,23 @@
     "winCondition": "Mirror For 2nd Castle",
     "metaExtension": "Extended",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "startRoomRando2ndMode"
+    ],
+    "presetJs": "./build/presets/lookingglass.js",
+    "parent": false
   },
   {
     "name": "Skinwalker",
@@ -624,7 +1101,21 @@
     "winCondition": "Normal",
     "metaExtension": "Extended",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/skinwalker.js",
+    "parent": false
   },
   {
     "name": "Summoner",
@@ -643,7 +1134,19 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "7",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/summoner.js",
+    "parent": false
   },
   {
     "name": "Agonize 2020",
@@ -663,7 +1166,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/agonize-twtw.js",
+    "parent": false
   },
   {
     "name": "Safe Season 2",
@@ -683,7 +1200,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/safe-stwo.js",
+    "parent": false
   },
   {
     "name": "Open",
@@ -704,7 +1235,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/open.js",
+    "parent": true
   },
   {
     "name": "Brawler",
@@ -723,7 +1268,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "7",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "warlockMode"
+    ],
+    "presetJs": "./build/presets/brawler.js",
+    "parent": false
   },
   {
     "name": "First Castle",
@@ -742,7 +1301,21 @@
     "winCondition": "Vlads and Save Richter",
     "metaExtension": "Guarded",
     "metaComplexity": "5",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [
+      "startRoomRando2ndMode",
+      "rlbcMode",
+      "revCastleTeleportRando"
+    ],
+    "presetJs": "./build/presets/first-castle.js",
+    "parent": false
   },
   {
     "name": "Lucky Sevens",
@@ -760,7 +1333,23 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "7",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "warlockMode"
+    ],
+    "presetJs": "./build/presets/lucky-sevens.js",
+    "parent": false
   },
   {
     "name": "Bingo",
@@ -779,7 +1368,17 @@
     "winCondition": "Meet Bingo Conditions",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/bingo.js",
+    "parent": false
   },
   {
     "name": "Sight-Seer",
@@ -798,7 +1397,21 @@
     "winCondition": "Normal",
     "metaExtension": "Extended",
     "metaComplexity": "7",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/sight-seer.js",
+    "parent": false
   },
   {
     "name": "Cursed Night",
@@ -817,7 +1430,19 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/cursed-night.js",
+    "parent": false
   },
   {
     "name": "Spellbound",
@@ -836,7 +1461,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "9",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/spellbound.js",
+    "parent": false
   },
   {
     "name": "Mobility",
@@ -857,7 +1496,23 @@
     "winCondition": "Mirror For 2nd Castle",
     "metaExtension": "Extended",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "startRoomRando2ndMode"
+    ],
+    "presetJs": "./build/presets/mobility.js",
+    "parent": false
   },
   {
     "name": "Glitchmaster",
@@ -879,7 +1534,20 @@
     "winCondition": "Relic Skip",
     "metaExtension": "Extended",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [
+      "antiFreezeMode",
+      "zeroDollarRelicMode"
+    ],
+    "presetJs": "./build/presets/glitchmaster.js",
+    "parent": false
   },
   {
     "name": "Dog life",
@@ -899,7 +1567,22 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": 9,
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "startRoomRando2ndMode",
+      "lycanMode"
+    ],
+    "presetJs": "./build/presets/dog-life.js",
+    "parent": false
   },
   {
     "name": "Battle Mage",
@@ -918,7 +1601,19 @@
     "winCondition": "Normal",
     "metaExtension": "GuardedPlus",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/battle-mage.js",
+    "parent": false
   },
   {
     "name": "Timeline",
@@ -936,7 +1631,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/timeline.js",
+    "parent": false
   },
   {
     "name": "Chimera",
@@ -954,7 +1663,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/chimera.js",
+    "parent": false
   },
   {
     "name": "Vanilla",
@@ -972,7 +1695,24 @@
     "winCondition": "Normal",
     "metaExtension": "Classic",
     "metaComplexity": "9",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "startRoomRandoMode",
+      "startRoomRando2ndMode"
+    ],
+    "presetJs": "./build/presets/vanilla.js",
+    "parent": false
   },
   {
     "name": "Glitch",
@@ -990,7 +1730,19 @@
     "winCondition": "Relic Skip",
     "metaExtension": "Equipment",
     "metaComplexity": "4",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Deprecated"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [
+      "antiFreezeMode"
+    ],
+    "presetJs": "./build/presets/glitch-legacy.js",
+    "parent": false
   },
   {
     "name": "Oracle",
@@ -1008,7 +1760,19 @@
     "winCondition": "Gold Key",
     "metaExtension": "Guarded",
     "metaComplexity": "9",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [
+      "dominoMode"
+    ],
+    "presetJs": "./build/presets/oracle.js",
+    "parent": false
   },
   {
     "name": "Seeker",
@@ -1027,10 +1791,23 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Vlads and Portal Spell",
+    "winCondition": "Portal Spell",
     "metaExtension": "Guarded",
     "metaComplexity": "7",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [
+      "rlbcMode",
+      "revCastleTeleportRando"
+    ],
+    "presetJs": "./build/presets/seeker.js",
+    "parent": false
   },
   {
     "name": "All Bosses",
@@ -1051,7 +1828,20 @@
     "winCondition": "All Bosses",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/all-bosses.js",
+    "parent": false
   },
   {
     "name": "Nimble Lite",
@@ -1071,7 +1861,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/nimble-lite.js",
+    "parent": true
   },
   {
     "name": "Rampage",
@@ -1092,7 +1896,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "BountyHunter"
+    ],
+    "defaultGoal": "x",
+    "compatibleGoals": [
+      "x",
+      "y"
+    ],
+    "incompatibleOptions": [
+      "dominoMode",
+      "cornucopiaMode"
+    ],
+    "presetJs": "./build/presets/rampage.js",
+    "parent": false
   },
   {
     "name": "Cornivus",
@@ -1112,7 +1930,21 @@
     "winCondition": "All Bosses & Vlad Relics",
     "metaExtension": "Guarded",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/cornivus.js",
+    "parent": false
   },
   {
     "name": "Max Rando",
@@ -1132,7 +1964,21 @@
     "winCondition": "Portal Spell",
     "metaExtension": "Scenic",
     "metaComplexity": "1",
-    "itemStats": "Randomized"
+    "itemStats": "Randomized",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/max-rando.js",
+    "parent": false
   },
   {
     "name": "Mirror Breaker",
@@ -1153,7 +1999,20 @@
     "winCondition": "All Bosses",
     "metaExtension": "GuardedPlus",
     "metaComplexity": "3",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "b",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/mirror-breaker.js",
+    "parent": false
   },
   {
     "name": "Recycler",
@@ -1172,7 +2031,23 @@
     "winCondition": "Six out of Eight Vlads",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [
+      "rlbcMode"
+    ],
+    "presetJs": "./build/presets/recycler.js",
+    "parent": false
   },
   {
     "name": "Anguish 2025",
@@ -1194,7 +2069,21 @@
     "winCondition": "Normal",
     "metaExtension": "Scenic",
     "metaComplexity": "14",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/anguish.js",
+    "parent": false
   },
   {
     "name": "Gear Rush",
@@ -1214,7 +2103,17 @@
     "winCondition": "Timed",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Evergreen"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/gear-rush.js",
+    "parent": false
   },
   {
     "name": "Rampage - Fall 2025 Tournament Edition",
@@ -1236,7 +2135,18 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "BountyHunter"
+    ],
+    "defaultGoal": "x",
+    "compatibleGoals": [
+      "x",
+      "y"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/rampage-aut25te.js",
+    "parent": false
   },
   {
     "name": "Lycanthrope - Spring 2026 Tournament Edition",
@@ -1254,7 +2164,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "8",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Tournament"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/lycanthrope-spr26te.js",
+    "parent": false
   },
   {
     "name": "Nimble Lite - Spring 2026 Tournament Edition",
@@ -1274,7 +2198,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Tournament"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/nimble-lite-spr26te.js",
+    "parent": false
   },
   {
     "name": "Warlock - Spring 2026 Tournament Edition",
@@ -1292,7 +2230,21 @@
     "winCondition": "Normal",
     "metaExtension": "Guarded",
     "metaComplexity": "6",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Tournament"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b",
+      "r",
+      "a",
+      "v"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/warlock-spr26te.js",
+    "parent": false
   },
   {
     "name": "April Fools",
@@ -1312,7 +2264,17 @@
     "winCondition": "April Fools",
     "metaExtension": "Scenic",
     "metaComplexity": "7",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "April Fools"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/april-fools.js",
+    "parent": false
   },
   {
     "name": "Gourmet Race",
@@ -1332,12 +2294,22 @@
     "winCondition": "Collect Food",
     "metaExtension": "Scenic",
     "metaComplexity": "7",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/gourmet-race.js",
+    "parent": false
   },
   {
     "name": "Collector",
     "id": "collector",
-    "description": "Collect 20* Relics to win. Put & symbol at end of file name to do 25 relics. Test build May21st2026",
+    "description": "Collect 20* Relics to win. Put & symbol at end of file name to do 25 relics.",
     "author": [
       "MottZilla"
     ],
@@ -1347,10 +2319,21 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Normal",
+    "winCondition": "20 or 25 Relics",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal",
+      "New"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/collector.js",
+    "parent": false
   },
   {
     "name": "Hoarder",
@@ -1369,6 +2352,17 @@
     "winCondition": "20 or 25 Relics",
     "metaExtension": "Guarded",
     "metaComplexity": "1",
-    "itemStats": "Normal"
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "Normal",
+      "New"
+    ],
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/hoarder.js",
+    "parent": false
   }
 ]

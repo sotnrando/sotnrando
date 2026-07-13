@@ -1,11 +1,13 @@
 #seed-container,
 #preset-dropdown,
 #mapColor-dropdown,
+#newGoals-dropdown,
 #complexity-slider {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 #alucard-palette-dropdown,
 #alucard-liner-dropdown,
@@ -14,6 +16,7 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 
@@ -34,6 +37,15 @@
   width: 100%;
 }
 
+#newGoals-dropdown select,
+#preset-select select{
+  cursor: pointer;
+}
+
+#newGoals-dropdown label {
+  flex-basis: 10%;
+}
+
 #complexity-slider-details {
   display: flex;
   align-items: center;
@@ -41,6 +53,7 @@
 }
 #complexity-slider-details input {
   width: 100%;
+  cursor: pointer;
 }
 
 #newGoals, #preset-select, #mapColor{
@@ -59,7 +72,7 @@
 #preset-description,
 #preset-author {
   text-indent: 1rem;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 #preset-description,
@@ -110,5 +123,50 @@
 
 .meta-data p {
   border-bottom: 1px solid;
-  font-size: 14px;
+  font-size: 18px;
 }
+
+input[type="radio"] {
+  cursor: pointer;
+}
+
+/* Universal dropdown container styling */
+.mapColor-dropdown,
+#alucard-palette-container,
+#alucard-liner-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+/* Label alignment */
+.mapColor-dropdown label,
+#alucard-palette-container label,
+#alucard-liner-container label {
+  flex-basis: 25%;
+  cursor: pointer;
+}
+
+/* Select styling */
+.mapColor-dropdown select,
+#alucard-palette-container select,
+#alucard-liner-container select {
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  border: 1px solid #888;
+  border-radius: 4px;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+/* Hover effect */
+.mapColor-dropdown select:hover,
+#alucard-palette-container select:hover,
+#alucard-liner-container select:hover {
+  border-color: #cfcfcf;
+  background-color: #262626;
+}
+

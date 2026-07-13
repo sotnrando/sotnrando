@@ -5,34 +5,46 @@
 html {
     height: 100%;
 }
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     width: 80vw;
     margin: auto;
-    
-}
-#optionsLogOutput {
-  white-space: pre-wrap;
-  word-break: break-word;
-  max-width: 100%;
-  font-family: monospace;
-  background: #111;
-  color: #eee;
-  padding: 12px;
-  border-radius: 6px;
+
 }
 
-h4{
+#optionsLogOutput {
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-width: 100%;
+    font-family: monospace;
+    background: #111;
+    color: #eee;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+h4 {
     margin-left: 1em;
 }
-.customizations{
+
+#statMaxRow {
+  display: none;
+}
+
+#statMaxRow.show {
+  display: flex;
+}
+
+.customizations {
     width: 100%;
-    div{
+
+    div {
         margin: 3px 0;
     }
 }
 
-.map-color{
+.map-color {
     flex: 0;
     height: 32px;
     width: 48px;
@@ -40,15 +52,15 @@ h4{
     image-rendering: pixelated;
 }
 
-.input-box{
+.input-box {
     margin-top: 1em;
 }
 
-.alucard-display{
-    zoom: 200%; 
-    image-rendering: pixelated; 
-    width:96px; 
-    height:64px;
+.alucard-display {
+    zoom: 200%;
+    image-rendering: pixelated;
+    width: 96px;
+    height: 64px;
 }
 
 #version {
@@ -70,6 +82,7 @@ h4{
     gap: 0.75rem;
     margin-bottom: 0.5rem;
 }
+
 main {
     display: flex;
     flex-direction: column;
@@ -85,14 +98,15 @@ h1 {
     margin-right: auto;
     width: 35%;
     min-width: 400px;
-  }
+}
 
-.center-text{
+.center-text {
     display: block;
     text-align: center;
     padding: 5px;
 }
-.splash-text{
+
+.splash-text {
     display: block;
     text-align: center;
     margin: auto;
@@ -106,11 +120,12 @@ h1 {
 }
 
 @keyframes rainbow {
-    0%{
+    0% {
         background-position: 200% 50%;
     }
-    100%{
-        background-position: 0% 50% ;
+
+    100% {
+        background-position: 0% 50%;
     }
 }
 
@@ -120,29 +135,26 @@ h1 {
 }
 
 .responsive-three-column-grid {
-    display:grid;  
+    display: grid;
 }
 
-.responsive-three-column-grid > * {
-    padding:1rem;
+.responsive-three-column-grid>* {
+    padding: 1rem;
 }
 
-@media (min-width:1600px) {
-    .responsive-three-column-grid {
-        display: grid;
-        grid-auto-rows: 1fr;
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-.left-column-options{
+
+.left-column-options {
     flex-basis: 50%;
-    div{
+
+    div {
         margin: 2px 0;
     }
 }
-.right-column-options{
+
+.right-column-options {
     flex-basis: 50%;
-    div{
+
+    div {
         margin: 2px 0;
     }
 }
@@ -164,24 +176,20 @@ h1 {
     font-size: x-large;
     color: red;
     border: .5em solid rgba(255, 255, 0, .5);
-    border-image: repeating-linear-gradient(
-        -45deg,
-        rgba(0, 0, 0, .5) 0,
-        rgba(0, 0, 0, .5) 15px,
-        rgba(255, 255, 0, .5) 0,
-        rgba(255, 255, 0, .5) 30px
-    ) 15;
+    border-image: repeating-linear-gradient(-45deg,
+            rgba(0, 0, 0, .5) 0,
+            rgba(0, 0, 0, .5) 15px,
+            rgba(255, 255, 0, .5) 0,
+            rgba(255, 255, 0, .5) 30px) 15;
 }
 
 #dev-border.dev {
     border: .5em solid rgba(255, 255, 0, .5);
-    border-image: repeating-linear-gradient(
-        -45deg,
-        rgba(0, 0, 0, .5) 0,
-        rgba(0, 0, 0, .5) 15px,
-        rgba(255, 255, 0, .5) 0,
-        rgba(255, 255, 0, .5) 30px
-    ) 15;
+    border-image: repeating-linear-gradient(-45deg,
+            rgba(0, 0, 0, .5) 0,
+            rgba(0, 0, 0, .5) 15px,
+            rgba(255, 255, 0, .5) 0,
+            rgba(255, 255, 0, .5) 30px) 15;
     position: fixed;
     top: 0;
     right: 0;
@@ -254,7 +262,7 @@ h3 time {
     visibility: hidden;
 }
 
-#loader:before{
+#loader:before {
     display: block;
     position: absolute;
     content: "";
@@ -266,12 +274,30 @@ h3 time {
 }
 
 @keyframes loading {
-    from {left: -200px; width: 30%;}
-    50% {width: 30%;}
-    70% {width: 70%;}
-    80% { left: 50%;}
-    95% {left: 120%;}
-    to {left: 100%;}
+    from {
+        left: -200px;
+        width: 30%;
+    }
+
+    50% {
+        width: 30%;
+    }
+
+    70% {
+        width: 70%;
+    }
+
+    80% {
+        left: 50%;
+    }
+
+    95% {
+        left: 120%;
+    }
+
+    to {
+        left: 100%;
+    }
 }
 
 #fork {
@@ -313,69 +339,81 @@ h3 time {
     width: 100%;
 }
 
-.checkboxes{
-    display:flex;
-    
+.checkboxes {
+    display: flex;
+
 }
 
+.spacing {
+    margin: 1em;
+}
+
+.toggle-container {
+    margin: 0.25rem 0;
+}
 
 .toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 36px;
-  height: 18px;
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 18px;
+    margin-right: 1rem;
 }
 
 .toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0;
-  right: 0; bottom: 0;
-  background-color: #a5a5a5;
-  transition: 0.3s;
-  border-radius: 18px;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #a5a5a5;
+    transition: 0.3s;
+    border-radius: 18px;
 }
 
 .slider::before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 0px;
-  bottom: 0px;
-  background-color: rgb(204, 204, 204);
-  transition: 0.3s;
-  border-radius: 50%;
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 0px;
+    bottom: 0px;
+    background-color: rgb(204, 204, 204);
+    transition: 0.3s;
+    border-radius: 50%;
 }
 
-.toggle-switch input:checked + .slider {
-  background-color: #4CAF50;
+.toggle-switch input:checked+.slider {
+    background-color: #4CAF50;
 }
 
-.toggle-switch input:checked + .slider::before {
-  transform: translateX(18px); 
+.toggle-switch input:checked+.slider::before {
+    transform: translateX(18px);
 }
 
-.toggle-switch input:disabled + .slider {
-  background-color: #424242;
-  cursor: not-allowed;
+.toggle-switch input:disabled+.slider {
+    background-color: #424242;
+    cursor: not-allowed;
 }
 
-.toggle-switch input:disabled + .slider::before {
-  background-color: #a0a0a0;
+.toggle-switch input:disabled+.slider::before {
+    background-color: #a0a0a0;
 }
 
 
 input[type="number"] {
     width: 2.5em;
 }
-new::after{           /* Creates a *New label to mark what is new on the website*/
+
+new::after {
+    /* Creates a *New label to mark what is new on the website*/
     content: "*New";
     color: green;
 }
@@ -383,12 +421,10 @@ new::after{           /* Creates a *New label to mark what is new on the website
 /* Menu mode */
 
 body.blue {
-    background: linear-gradient(
-        180deg,
-        rgba(2,0,36,1) 0%,
-        rgba(0,0,32,1) 11%,
-        rgba(65,65,150,1) 100%
-    ) fixed;
+    background: linear-gradient(180deg,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(0, 0, 32, 1) 11%,
+            rgba(65, 65, 150, 1) 100%) fixed;
 }
 
 .blue {
@@ -417,7 +453,7 @@ body.blue {
 }
 
 .blue select {
-    background: rgb(32,32,75,1);
+    background: rgb(32, 32, 75, 1);
 }
 
 .blue input[type="submit"] {
@@ -471,6 +507,7 @@ body.blue {
         width: 0;
         height: 0;
     }
+
     100% {
         width: 100%;
         height: 9em;
@@ -482,10 +519,12 @@ body.blue {
         width: 98.5%;
         height: 9em;
     }
+
     99% {
         width: 0;
         height: 0;
     }
+
     100% {
         width: 0;
         height: 0;
@@ -497,9 +536,11 @@ body.blue {
     0% {
         background-color: #400000;
     }
+
     50% {
         background-color: #580000;
     }
+
     100% {
         background-color: #400000;
     }
@@ -513,7 +554,7 @@ body.blue {
     overflow: hidden;
 }
 
-.blue .tooltip-wrapper .tooltip > span {
+.blue .tooltip-wrapper .tooltip>span {
     width: 280px;
     padding: 20px;
     display: block;
@@ -528,6 +569,7 @@ body.blue {
         width: 0;
         max-height: 0;
     }
+
     100% {
         width: 320px;
         max-height: 9.5em;
@@ -539,25 +581,24 @@ body.blue {
     color: #999;
 }
 
-.blue .navbar{
-    background-color: rgb(0, 0, 61);
-}
-.blue .menu-list{
+.blue .navbar {
     background-color: rgb(0, 0, 61);
 }
 
-.blue .submenu{
+.blue .menu-list {
+    background-color: rgb(0, 0, 61);
+}
+
+.blue .submenu {
     background-color: rgb(0, 0, 61);
 }
 
 
 .blue .tooltip-wrapper .tooltip {
-    background: linear-gradient(
-        180deg,
-        rgba(2,0,36,1) 0%,
-        rgba(0,0,32,1) 11%,
-        rgba(65,65,150,1) 100%
-    ) fixed;
+    background: linear-gradient(180deg,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(0, 0, 32, 1) 11%,
+            rgba(65, 65, 150, 1) 100%) fixed;
     border: 1px #fff solid;
 }
 
@@ -573,12 +614,10 @@ body.blue {
     animation: expand 2s;
     overflow: hidden;
     border: 1px #fff solid;
-    background: linear-gradient(
-        180deg,
-        rgba(2,0,36,1) 0%,
-        rgba(0,0,32,1) 11%,
-        rgba(65,65,150,1) 100%
-    ) fixed;
+    background: linear-gradient(180deg,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(0, 0, 32, 1) 11%,
+            rgba(65, 65, 150, 1) 100%) fixed;
 }
 
 .blue #notification.hide {
@@ -601,6 +640,7 @@ body.blue {
         width: 0;
         height: 0;
     }
+
     100% {
         width: 12em;
         height: 2em;
@@ -612,6 +652,7 @@ body.blue {
         width: 12em;
         height: 2em;
     }
+
     100% {
         width: 0;
         height: 0;
@@ -632,6 +673,7 @@ body.blue {
         max-width: 0;
         max-height: 0;
     }
+
     100% {
         max-width: 50ex;
         max-height: 11em;
@@ -643,10 +685,12 @@ body.blue {
         max-width: 50ex;
         max-height: 11em;
     }
+
     99.999% {
         max-width: 0;
         max-height: 0;
     }
+
     100% {
         max-width: 0;
         max-height: 0;
@@ -663,6 +707,21 @@ body.blue {
     animation: show-options .5s;
 }
 
+body.blue .mapColor-dropdown select,
+body.blue #alucard-palette-container select,
+body.blue #alucard-liner-container select {
+    background: rgb(32, 32, 75);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+body.blue .mapColor-dropdown select:hover,
+body.blue #alucard-palette-container select:hover,
+body.blue #alucard-liner-container select:hover {
+    background: rgb(36, 36, 84);
+    border-color: #fff;
+}
+
 @keyframes show-options {
     0% {
         max-width: 0;
@@ -670,11 +729,12 @@ body.blue {
         margin-top: 0;
         padding: 0;
         overflow: hidden;
-   }
+    }
+
     100% {
         max-width: 100ex;
         max-height: 15em;
-        
+
     }
 }
 
@@ -686,6 +746,7 @@ body.blue {
         padding: .45em .5em;
         overflow: hidden;
     }
+
     99.999% {
         max-width: 0;
         max-height: 0;
@@ -693,6 +754,7 @@ body.blue {
         padding: 0;
         overflow: hidden;
     }
+
     100% {
         max-width: 0;
         max-height: 0;
@@ -701,6 +763,58 @@ body.blue {
         padding: 0;
         overflow: hidden;
     }
+}
+
+body.blue .tabs-nav {
+    border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+body.blue .tab-btn {
+    background-color: rgb(24, 24, 56);
+    color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.blue .tab-btn:hover {
+    background-color: rgb(36, 36, 84);
+    color: #ffffff;
+}
+
+body.blue .tab-btn.active {
+    background-color: rgb(32, 32, 75);
+    color: #ffffff;
+    border-color: #ffffff rgba(255, 255, 255, 0.4) transparent rgba(255, 255, 255, 0.4);
+    box-shadow: inset 0 2px 0 #4CAF50;
+}
+
+body.blue .goal-wrapper-row select,
+body.blue .custom-block-row select {
+    background: rgb(32, 32, 75, 1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+body.blue .listbox {
+    background: rgb(32, 32, 75);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.blue .listbox:hover,
+body.blue .listbox:focus {
+    background: rgb(36, 36, 84);
+    border-color: #fff;
+}
+
+body.blue .listbox-button {
+    background: rgb(24, 24, 56);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.blue .listbox-button:hover {
+    background: rgb(36, 36, 84);
+    border-color: #fff;
 }
 
 /* Light mode */
@@ -801,9 +915,11 @@ body.blue {
 .light input[type="submit"]:disabled {
     opacity: .4;
 }
+
 .light a:visited {
     color: black;
 }
+
 .light a:link {
     color: black;
 }
@@ -812,25 +928,26 @@ body.blue {
     background-color: beige;
     color: black;
 }
+
 .light .submenu {
     background-color: beige;
     color: black;
 }
-.light .menu-list{
+
+.light .menu-list {
     background-color: beige;
     color: black;
 }
-.light .menu-btn{
+
+.light .menu-btn {
     color: black;
 }
 
 
 .light input[type="submit"]:enabled:hover {
-    background-image: linear-gradient(
-        transparent,
-        rgba(0,0,0,.05) 40%,
-        rgba(0,0,0,.1)
-    );
+    background-image: linear-gradient(transparent,
+            rgba(0, 0, 0, .05) 40%,
+            rgba(0, 0, 0, .1));
 }
 
 .light input[type="submit"].primary {
@@ -855,7 +972,72 @@ body.blue {
     animation: show-options .5s;
 }
 
+body.light .mapColor-dropdown select,
+body.light #alucard-palette-container select,
+body.light #alucard-liner-container select {
+    background: #fff;
+    color: #000;
+    border: 1px solid #aaa;
+}
 
+body.light .mapColor-dropdown select:hover,
+body.light #alucard-palette-container select:hover,
+body.light #alucard-liner-container select:hover {
+    background: #f4f4f4;
+    border-color: #777;
+}
+
+body.light .tabs-nav {
+    border-bottom-color: #aaa;
+}
+
+body.light .tab-btn {
+    background-color: #f0f0f0;
+    color: #555555;
+    border-color: #aaa;
+}
+
+body.light .tab-btn:hover {
+    background-color: #e4e4e4;
+    color: #000000;
+}
+
+body.light .tab-btn.active {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #aaa #aaa transparent #aaa;
+    box-shadow: inset 0 2px 0 #0078e7;
+}
+
+body.light .goal-wrapper-row select,
+body.light .custom-block-row select {
+    background: #fff;
+    color: #000;
+    border: 1px solid #aaa;
+}
+
+body.light .listbox {
+    background: #fff;
+    color: #000;
+    border-color: #aaa;
+}
+
+body.light .listbox:hover,
+body.light .listbox:focus {
+    background: #f4f4f4;
+    border-color: #777;
+}
+
+body.light .listbox-button {
+    background: #f0f0f0;
+    color: #000;
+    border-color: #aaa;
+}
+
+body.light .listbox-button:hover {
+    background: #e4e4e4;
+    border-color: #777;
+}
 
 /* Dark mode */
 
@@ -983,11 +1165,9 @@ body.blue {
 }
 
 .dark input[type="submit"]:enabled:hover {
-    background-image: linear-gradient(
-        transparent,
-        rgba(0,0,0,.05) 40%,
-        rgba(0,0,0,.1)
-    );
+    background-image: linear-gradient(transparent,
+            rgba(0, 0, 0, .05) 40%,
+            rgba(0, 0, 0, .1));
 }
 
 .dark input[type="submit"].primary {
@@ -1011,15 +1191,226 @@ body.blue {
 .dark #options.animate {
     animation: show-options .5s;
 }
-ul{
+
+ul {
     list-style-type: none;
 }
+
 .dark .navbar {
     background-color: #313131;
 }
+
 .dark .submenu {
     background-color: #313131;
 }
+
 .dark .menu-list {
     background-color: #313131;
+}
+
+body.dark .mapColor-dropdown select,
+body.dark #alucard-palette-container select,
+body.dark #alucard-liner-container select {
+    background: #222;
+    color: #fff;
+    border: 1px solid #ccc;
+}
+
+body.dark .mapColor-dropdown select:hover,
+body.dark #alucard-palette-container select:hover,
+body.dark #alucard-liner-container select:hover {
+    background: #2b2b2b;
+    border-color: #fff;
+}
+
+body.dark .tabs-nav {
+    border-bottom-color: #444444;
+}
+
+body.dark .tab-btn {
+    background-color: #1a1a1a;
+    color: #aaaaaa;
+    border-color: #444444;
+}
+
+body.dark .tab-btn:hover {
+    background-color: #2b2b2b;
+    color: #ffffff;
+}
+
+body.dark .tab-btn.active {
+    background-color: #222222;
+    color: #ffffff;
+    border-color: #444444 #444444 transparent #444444;
+    box-shadow: inset 0 2px 0 #0078e7;
+}
+
+body.dark .goal-wrapper-row select,
+body.dark .custom-block-row select {
+    background: #222;
+    color: #fff;
+    border: 1px solid #ccc;
+}
+
+body.dark .listbox {
+    background: #222;
+    color: #fff;
+    border-color: #ccc;
+}
+
+body.dark .listbox:hover,
+body.dark .listbox:focus {
+    background: #2b2b2b;
+    border-color: #fff;
+}
+
+body.dark .listbox-button {
+    background: #1a1a1a;
+    color: #fff;
+    border-color: #444;
+}
+
+body.dark .listbox-button:hover {
+    background: #2b2b2b;
+    border-color: #ccc;
+}
+
+/* Main Tab Navigation Container Bar Base */
+.tabs-nav {
+    display: flex;
+    gap: 6px;
+    padding: 10px 10px 0 10px;
+    margin-top: 1em;
+    border-bottom: 2px solid #ccc;
+}
+
+/* Tab Active Interactive Buttons Base Core */
+.tab-btn {
+    border: 1px solid #ccc;
+    border-bottom: none;
+    padding: 10px 18px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+}
+
+/* Master State Control: Strict Display Visibility Overrides */
+.tab-content {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.tab-content.active {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Linear Alignment Layout Fallbacks */
+.clean-flat-toggles,
+.clean-flat-customs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.goal-wrapper-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #32374a;
+}
+
+.goal-wrapper-row select,
+.custom-block-row select {
+    padding: 4px;
+    border-radius: 4px;
+}
+
+
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Make each wrapper div behave like a column */
+.option-grid>div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Base styling for music selector listboxes */
+.listbox {
+    width: 100%;
+    min-height: 140px;
+    padding: 6px;
+    border: 1px solid #666;
+    border-radius: 6px;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Hover + focus */
+.listbox:hover,
+.listbox:focus {
+    border-color: #cfcfcf;
+    background: #262626;
+}
+
+/* Container spacing */
+.listbox-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+/* Arrow buttons */
+.listbox-button {
+    padding: 6px 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #888;
+    background: #222;
+    color: #eee;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.listbox-button:hover {
+    background: #333;
+    border-color: #ccc;
+}
+.dev-stash-btn {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: auto; /* still clickable */
+  position: absolute; /* removes layout impact */
+}
+#tab-devstash h2{
+    width: 100%;
+    text-align: center;
+    margin:0 auto;
 }

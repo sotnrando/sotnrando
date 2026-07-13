@@ -17,7 +17,14 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Vlads and Save Richter"
+    "winCondition": "Vlads and Save Richter",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "inherits": "open",

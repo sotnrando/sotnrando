@@ -16,7 +16,15 @@
     "castleType": "",
     "transformEarly": "",
     "transformFocus": "",
-    "winCondition": ""
+    "winCondition": "",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "comment": "Build off the Safe preset",

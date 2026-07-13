@@ -18,6 +18,13 @@
   let seed
   let applied
   let override
+  let presetDataJson = [];
+
+  async function loadPresetData() {
+    const res = await fetch('./preset-data.json');
+    presetDataJson = await res.json();
+  }
+
 
   //#endregion
 
@@ -158,135 +165,6 @@
     elems.esMoveToLeft.addEventListener("click", includeSong);
   }
 
-  // function loadOptionsFromUrl() {
-  //   const rs = sotnRando.util.optionsFromUrl(window.location.href);
-  //   options = rs.options;
-  //   const applied = sotnRando.util.Preset.options(options);
-
-  //   seed = rs.seed;
-  //   if (!Number.isNaN(rs.checksum)) expectChecksum = rs.checksum;
-
-  //   // --- Seed handling ---
-  //   if (typeof seed === "string") {
-  //     elems.seed.value = seed;
-  //     seedChange();
-  //     haveChecksum = true;
-  //   }
-  //   if (seed.length) elems.seed.disabled = true;
-
-  //   // --- Preset selection ---
-  //   if (options.preset) {
-  //     const index = sotnRando.presets.findIndex(p => p.id === options.preset);
-  //     elems.presetId.selectedIndex = index >= 0 ? index : 0;
-  //     presetIdChange();
-  //   } else {
-  //     elems.presetId.selectedIndex = 0;
-  //   }
-
-  //   presetChange();
-
-  //   // --- Tournament mode ---
-  //   elems.tournamentMode.checked = options.tournamentMode;
-  //   ChangeHandlers.tournamentModeChange();
-  //   elems.tournamentMode.disabled = true;
-
-  //   // --- Complexity from relicLocations ---
-  //   const relicLoc = typeof applied.relicLocations === "object"
-  //     ? applied.relicLocations
-  //     : safe.options().relicLocations;
-
-  //   Object.keys(relicLoc).forEach(key => {
-  //     if (/^[0-9]+(-[0-9]+)?$/.test(key)) {
-  //       elems.complexity.value = key.split("-")[0];
-  //     }
-  //   });
-
-  //   // --- Helper: assign checkbox + argument field ---
-  //   const assignOption = (name) => {
-  //     elems[name].checked = applied[name];
-
-  //     let arg = "";
-  //     if (typeof options[name] === "object") {
-  //       arg = sotnRando.util.optionsToString({ [name]: options[name] });
-  //     }
-  //     elems[name + "Arg"].value = arg;
-  //   };
-
-  //   assignOption("enemyDrops");
-  //   assignOption("startingEquipment");
-  //   assignOption("itemLocations");
-  //   assignOption("prologueRewards");
-
-  //   // --- Relic locations ---
-  //   elems.relicLocations.checked = !!applied.relicLocations;
-
-  //   let relicLocationsArg = "";
-  //   if (typeof options.relicLocations === "object") {
-  //     const serialized = sotnRando.util.optionsToString({
-  //       relicLocations: {
-  //         ...applied.relicLocations,
-  //         extension: sotnRando.constants.EXTENSION.SCENIC
-  //       }
-  //     });
-
-  //     const scenicStr = sotnRando.util.optionsToString({
-  //       relicLocations: { extension: sotnRando.constants.EXTENSION.SCENIC }
-  //     }).slice(2);
-
-  //     const relicOptions = sotnRando.util.optionsFromString(
-  //       serialized.replace(new RegExp(":?" + scenicStr), "")
-  //     );
-
-  //     if ("extension" in options.relicLocations) {
-  //       relicOptions.relicLocations.extension = options.relicLocations.extension;
-  //     }
-
-  //     relicLocationsArg = sotnRando.util.optionsToString(relicOptions);
-  //   }
-
-  //   elems.relicLocationsArg.value = relicLocationsArg;
-
-  //   // --- Relic extension radios ---
-  //   const ext = applied.relicLocations?.extension;
-  //   const EXT = sotnRando.constants.EXTENSION;
-
-  //   elems.relicLocationsExtension.extended.checked = ext === EXT.EXTENDED;
-  //   elems.relicLocationsExtension.scenic.checked = ext === EXT.SCENIC;
-  //   elems.relicLocationsExtension.guarded.checked = ext === EXT.GUARDED;
-  //   elems.relicLocationsExtension.guardedplus.checked = ext === EXT.GUARDEDPLUS;
-  //   elems.relicLocationsExtension.equipment.checked = ext === EXT.EQUIPMENT;
-  //   elems.relicLocationsExtension.classic.checked = !ext;
-
-  //   relicLocationsExtensionChange();
-
-  //   // --- Writes ---
-  //   elems.writes.value = options.writes
-  //     ? sotnRando.util.optionsToString({ writes: options.writes })
-  //     : "";
-
-  //   // --- Stats, music, turkey ---
-  //   elems.stats.checked = applied.stats;
-  //   ChangeHandlers.statsChange();
-
-  //   elems.music.checked = applied.music;
-  //   elems.turkeyMode.checked = applied.turkeyMode;
-
-  //   // --- Disable UI for seed replay mode ---
-  //   [
-  //     "presetId", "complexity", "enemyDrops", "startingEquipment",
-  //     "itemLocations", "prologueRewards", "stats", "music", "turkeyMode"
-  //   ].forEach(key => elems[key].disabled = true);
-
-  //   elems.relicLocations.disabled = false;
-  //   elems.relicLocationsSet.disabled = false;
-
-  //   elems.clear.classList.remove("hidden");
-
-  //   // --- Clean URL ---
-  //   const baseUrl = url.origin + url.pathname;
-  //   window.history.replaceState({}, document.title, baseUrl);
-  // }
-
   function loadPastOptions() {
     // --- Complexity ---
     loadOption("complexity", complexityChange, 7);
@@ -364,13 +242,16 @@
     checkboxesToStore.forEach(el => {
       el.addEventListener('change', saveOption);
       loadCheckboxOption(el);
-      let customChangeFunction = el.getAttribute('data-custom-change');
-      if (customChangeFunction) {
+
+      const customChangeFunction = el.getAttribute('data-custom-change');
+      if (customChangeFunction && typeof ChangeHandlers[customChangeFunction] === 'function') {
         el.addEventListener('change', ChangeHandlers[customChangeFunction]);
+        // Optional: only run once if you need initial state
         ChangeHandlers[customChangeFunction]();
       }
     });
   }
+
 
   function loadMenuOptions() {
     loadOption('theme', themeChange, 'menu')
@@ -451,113 +332,16 @@
   }
 
   function presetIdChange() {
-    // Refactored for ease of alteration and maintainability -crazy4blades
-    const BH_COMPAT = new Set([
-      "bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "rampage-25te"
-    ]);
-    const BOSS_COMPAT = new Set([
-      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-      "expedition", "bat-master", "glitch", "scavenger", "empty-hand", "third-castle", "magic-mirror", "leg-day",
-      "big-toss", "grand-tour", "crash-course", "any-percent", "lookingglass", "skinwalker", "summoner", "safe-stwo",
-      "open", "brawler", "lucky-sevens", "sight-seer", "cursed-night", "spellbound", "mobility", "glitchmaster",
-      "dog-life", "battle-mage", "timeline", "chimera", "vanilla", "all-bosses", "rampage", "nimble-lite", "oracle",
-      "boss-reflector", "cornivus", "mirror-breaker"
-    ]);
-    const RELIC_COMPAT = new Set([
-      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-      "expedition", "bat-master", "scavenger", "empty-hand", "gem-farmer", "third-castle", "rat-race", "magic-mirror",
-      "bounty-hunter", "target-confirmed", "hitman", "beyond", "grand-tour", "crash-course", "lookingglass", "skinwalker",
-      "summoner", "agonize-twtw", "safe-stwo", "open", "lucky-sevens", "sight-seer", "cursed-night", "spellbound",
-      "mobility", "timeline", "chimera", "vanilla", "nimble-lite", "all-bosses", "cornivus", "mirror-breaker"
-    ]);
-
-    const ALL_TOGGLES = [
-      "antiFreezeMode", "startRoomRando2ndMode", "relicLocations", "relicLocationsSet", "startRoomRandoMode",
-      "unlockedMode", "enemyStatRandoMode", "elemChaosMode", "rlbcMode", "godspeedMode", "dominoMode"
-    ];
-
-    const DISABLE_RULES = [
-      { ids: ["glitch", "glitchmaster", "any-percent"], elems: ["antiFreezeMode","zeroDollarRelicMode"] },
-      { ids: ["rat-race"], elems: ["zeroDollarRelicMode"] },
-      { ids: ["dog-life", "magic-mirror", "mobility", "lookingglass", "boss-rush", "beyond", "first-castle", "vanilla"], elems: ["startRoomRando2ndMode"] },
-      { ids: ["boss-rush", "first-castle", "seeker"], elems: ["relicLocations", "relicLocationsSet"] },
-      { ids: ["boss-rush", "beyond", "vanilla"], elems: ["startRoomRandoMode"] },
-      { ids: ["boss-rush"], elems: ["unlockedMode"] },
-      { ids: ["big-toss"], elems: ["enemyStatRandoMode", "elemChaosMode"] },
-      { ids: ["boss-rush", "first-castle", "beyond", "seeker", "recycler"], elems: ["rlbcMode"] },
-      { ids: ["battle-mage"], elems: ["godspeedMode"] },
-      { ids: ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage", "rampage-25te", "oracle"], elems: ["dominoMode"] }
-    ];
-
-    const BH_GOAL_PRESETS = {
-      h: new Set(["bounty-hunter", "chaos-lite"]),
-      t: new Set(["target-confirmed"]),
-      w: new Set(["hitman"]),
-      x: new Set(["rampage", "rampage-25te"])
-    };
-    const GOAL_PRESETS = {
-      b: new Set(["all-bosses", "mirror-breaker"]),
-      v: new Set(["boss-reflector", "cornivus", "nimble-lite-te"])
-    };
-
-    const enableAll = () => {
-      for (const key of ALL_TOGGLES) {
-        const el = elems[key];
-        if (!el) continue;
-        el.disabled = false;
-      }
-    };
-
-    const computeGoal = (presetId) => {
-      for (const [goal, set] of Object.entries(BH_GOAL_PRESETS)) {
-        if (set.has(presetId)) return goal;
-      }
-      for (const [goal, set] of Object.entries(GOAL_PRESETS)) {
-        if (set.has(presetId)) return goal;
-      }
-      return "default";
-    };
-
-    const validateGoal = (presetId, goal) => {
-      const isBossGoal = goal === "b" || goal === "a" || goal === "v";
-      const isRelicGoal = goal === "r" || goal === "a";
-      const isBhGoal = goal === "h" || goal === "t" || goal === "w" || goal === "x";
-
-      if (isBossGoal && !BOSS_COMPAT.has(presetId)) return "default";
-      if (isRelicGoal && !RELIC_COMPAT.has(presetId)) return "default";
-      if (isBhGoal && !BH_COMPAT.has(presetId)) return "default";
-      return goal;
-    };
-
-    const enforceGoalCompatibility = (presetId) => {
-      const goalOptions = elems.newGoals.options;
-      for (let i = 0; i < goalOptions.length; i++) {
-        const opt = goalOptions[i];
-        const val = opt.value;
-
-        const isBossGoal = val === "b" || val === "a" || val === "v";
-        const isRelicGoal = val === "r" || val === "a";
-        const isBhGoal = val === "h" || val === "t" || val === "w" || val === "x";
-
-        const incompatible =
-          (isBossGoal && !BOSS_COMPAT.has(presetId)) ||
-          (isRelicGoal && !RELIC_COMPAT.has(presetId)) ||
-          (isBhGoal && !BH_COMPAT.has(presetId));
-
-        opt.disabled = incompatible;
-      }
-    };
-
+    // 1. Resolve selected preset from the ACTIVE dropdown elements, NOT the raw array
+    const optionsMeta = sotnRando.optionsArray;
     let idx = elems.presetId.selectedIndex;
     if (idx < 0) idx = 0;
-
-    const id = elems.presetId.options
-      ? elems.presetId.options[idx].value
-      : elems.presetId.childNodes[idx].value;
-
+    // Always fallback to reading the actual string .value attribute of the sorted list option
+    const id = elems.presetId.options ? elems.presetId.options[idx].value : (elems.presetId.childNodes[idx] ? elems.presetId.childNodes[idx].value : "casual");
+    // Dynamically find the matching data structure via its unique ID tag
     const preset = sotnRando.presets.find(p => p.id === id) || sotnRando.presets[0];
 
-    // Metadata
+    // 2. Update preset metadata UI
     elems.presetDescription.innerText = preset.description;
     elems.presetAuthor.innerText = preset.author;
     elems.presetKnowledgeCheck.innerText = preset.knowledgeCheck;
@@ -570,222 +354,165 @@
     elems.presetTransformEarly.innerText = preset.transformEarly;
     elems.presetTransformFocus.innerText = preset.transformFocus;
     elems.presetWinCondition.innerText = preset.winCondition;
-
     localStorage.setItem("presetId", preset.id);
 
-    enableAll();
-
-    let goal = computeGoal(preset.id);
-    goal = validateGoal(preset.id, goal);
-    elems.newGoals.value = goal;
-
-    localStorage.setItem("newGoals", elems.newGoals.value);
-    newGoalsLock = elems.newGoals.value;
-
+    // 3. Compute complexity
     const options = preset.options();
     let complexity = Object.keys(options.relicLocations || {}).reduce((acc, key) => {
       return /^[0-9]+(-[0-9]+)?/.test(key) ? key.split("-").shift() : acc;
     }, 1);
-
     adjustMaxComplexity();
+    elems.complexity.value = complexity;
+    elems.complexityCurrentValue.innerText = `(${complexity})`;
 
-    // Unified logic with corrected disabling behavior
-    function applyOptions(options = {}, presetId) {
-      const STRUCTURED_KEYS = ["startingEquipment", "enemyDrops", "itemLocations"];
+    // 4. GOAL LOGIC (data-driven from preset-data.json)
+    const presetData = presetDataJson.find(p => p.id === preset.id);
+    if (presetData) {
+      const { defaultGoal, compatibleGoals } = presetData;
+      // Set default goal
+      elems.newGoals.value = defaultGoal || "default";
+      localStorage.setItem("newGoals", elems.newGoals.value);
+      newGoalsLock = elems.newGoals.value;
+      // Enable only compatible goals
+      const goalOptions = elems.newGoals.options;
+      for (let i = 0; i < goalOptions.length; i++) {
+        const opt = goalOptions[i];
+        opt.disabled = !compatibleGoals.includes(opt.value);
+      }
+    }
 
-      // Set complexity
-      elems.complexity.value = complexity;
-      elems.complexityCurrentValue.innerText = `(${complexity})`;
+    // 5. Apply preset options (data-driven)
+    function applyOptions(options) {
+      const userPersistent = ["tournamentMode", "showSpoilers", "seasonalPhrasesMode", "bossMusicSeparation"];
 
-      const setCheckDisable = (key, condition) => {
-        const el = elems[key];
+      // First, sync the standard options metadata checkboxes
+      optionsMeta.forEach(opt => {
+        if (userPersistent.includes(opt.longId)) return; // skip these entirely
+        const el = elems[opt.longId];
         if (!el) return;
-        el.checked = !!condition;
-        el.disabled = false; // presets never disable these
-      };
+        const presetValue = options[opt.longId];
 
-      // Basic boolean options
-      setCheckDisable("enemyDrops", options.enemyDrops);
-      setCheckDisable("startingEquipment", options.startingEquipment);
-      setCheckDisable("itemLocations", options.itemLocations);
-      setCheckDisable("prologueRewards", options.prologueRewards);
-
-      // Relic locations
-      elems.relicLocations.checked = !!options.relicLocations;
-
-      const ext = options.relicLocations?.extension;
+        // Only apply checkbox logic to checkboxes
+        if (el.type === "checkbox") {
+          const isStructured = opt.longId === "startingEquipment" || opt.longId === "enemyDrops" || opt.longId === "itemLocations" || opt.longId === "prologueRewards";
+          if (isStructured && typeof presetValue === "object") {
+            el.checked = true;
+            return;
+          }
+          if (!(opt.longId in options)) {
+            el.checked = false;
+            return;
+          }
+          el.checked = !!presetValue;
+        }
+      });
       const extSet = elems.relicLocationsExtension;
       if (extSet) {
-        extSet.guarded.checked = ext === sotnRando.constants.EXTENSION.GUARDED;
-        extSet.guardedplus.checked = ext === sotnRando.constants.EXTENSION.GUARDEDPLUS;
-        extSet.equipment.checked = ext === sotnRando.constants.EXTENSION.EQUIPMENT;
-        extSet.scenic.checked = ext === sotnRando.constants.EXTENSION.SCENIC;
-        extSet.extended.checked = ext === sotnRando.constants.EXTENSION.EXTENDED;
+        const ext = options.relicLocations?.extension;
+        extSet.guarded.checked = (ext === sotnRando.constants.EXTENSION.GUARDED);
+        extSet.guardedplus.checked = (ext === sotnRando.constants.EXTENSION.GUARDEDPLUS);
+        extSet.equipment.checked = (ext === sotnRando.constants.EXTENSION.EQUIPMENT);
+        extSet.scenic.checked = (ext === sotnRando.constants.EXTENSION.SCENIC);
+        extSet.extended.checked = (ext === sotnRando.constants.EXTENSION.EXTENDED);
         extSet.classic.checked = !ext;
       }
-
-      // All toggleable keys
-      const allKeys = [
-        "stats",
-        "music",
-        "turkeyMode",
-        "magicmaxMode",
-        "colorrandoMode",
-        "antiFreezeMode",
-        "mypurseMode",
-        "iwsMode",
-        "fastwarpMode",
-        "itemNameRandoMode",
-        "noprologueMode",
-        "unlockedMode",
-        "surpriseMode",
-        "enemyStatRandoMode",
-        "shopPriceRandoMode",
-        "startRoomRandoMode",
-        "startRoomRando2ndMode",
-        "dominoMode",
-        "rlbcMode",
-        "immunityPotionMode",
-        "godspeedMode",
-        "libraryShortcut",
-        "elemChaosMode",
-        "singleHitGearMode",
-        "revCastleTeleportRando",
-        "zeroDollarRelicMode",
-        "openClockStatueMode",
-        "spikeRoomRando",
-        "lycanMode",
-        "easyMode",
-        "devStashMode",
-        "bossMusicSeparation",
-        "startStatRandoMode"
-      ];
-
-      const keysToRemove = ["music", "bossMusicSeparation"];
-      const filteredKeys = allKeys.filter(key => !keysToRemove.includes(key));
-
-      filteredKeys.forEach(key => {
-        const el = elems[key];
-        if (!el) return;
-
-        const presetValue = options[key];
-
-        // If preset defines structured data, preserve it and lock checkbox ON
-        if (STRUCTURED_KEYS.includes(key) && typeof presetValue === "object") {
-          el.checked = true;
-          return;
-        }
-
-        // If preset does NOT define this key at all, reset it to false
-        if (!(key in options)) {
-          el.checked = false;
-          return;
-        }
-
-        // Normal boolean behavior
-        el.checked = !!presetValue;
-      });
     }
-
-    enforceGoalCompatibility(preset.id);
-    applyOptions(options, preset.id);
+    applyOptions(options);
     relicLocationsExtensionChange();
 
-    const TOURNAMENT_LOCKED = [
-      "accessibilityPatches",
-      "antiFreezeMode",
-      "bossMusicSeparation",
-      "colorrandoMode",
-      "devStashMode",
-      "dominoMode",
-      "easyMode",
-      "elemChaosMode",
-      "enemyDrops",
-      "enemyStatRandoMode",
-      "fastwarpMode",
-      "godspeedMode",
-      "immunityPotionMode",
-      "iwsMode",
-      "itemLocations",
-      "itemNameRandoMode",
-      "itemNames",
-      "itemStats",
-      "libraryShortcut",
-      "lycanMode",
-      "magicmaxMode",
-      "music",
-      "mypurseMode",
-      "newGoals",
-      "noprologueMode",
-      "openClockStatueMode",
-      "prologueRewards",
-      "relicLocations",
-      "relicLocationsSet",
-      "revCastleTeleportRando",
-      "rlbcMode",
-      "shopPriceRandoMode",
-      "showRelicLocations",
-      "showSolutions",
-      "showSpoilers",
-      "showRelics",
-      "showSolutions",
-      "spikeRoomRando",
-      "startingEquipment",
-      "singleHitGearMode",
-      "startStatRandoMode",
-      "startRoomRando2ndMode",
-      "startRoomRandoMode",
-      "stats",
-      "surpriseMode",
-      "tournamentMode",
-      "turkeyMode",
-      "unlockedMode",
-      "zeroDollarRelicMode"
-    ];
+    // 6. Enforce required/incompatible options
+    function enforceDependencies() {
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el) return;
+        const isOn = el.checked;
+        opt.requiredOptions.forEach(req => {
+          const reqEl = elems[req];
+          if (!reqEl || reqEl._presetLocked) return;
+          if (isOn) {
+            if (req === "startingStats" && !preset.options().startingStats) {
+              return;
+            }
+            reqEl.checked = true;
+            reqEl.disabled = true;
+          } else {
+            reqEl.disabled = false;
+          }
+        });
+        opt.incompatibleOptions.forEach(bad => {
+          const badEl = elems[bad];
+          if (isOn && badEl && !badEl._presetLocked) badEl.checked = false;
+        });
+      });
+    }
+    enforceDependencies();
 
-    // TE presets end in -sprXXte, -winXXte, etc.
-    // These enforce tournament-legal settings and lock most UI controls.
-    const isTeLocked =
-      /-spr[0-9]{2}te$/.test(preset.id) ||
-      /-win[0-9]{2}te$/.test(preset.id) ||
-      /-aut[0-9]{2}te$/.test(preset.id) ||
-      /-sum[0-9]{2}te$/.test(preset.id);
+    // 7. Disable AND uncheck options based on preset incompatibilities
+    function applyPresetLocks() {
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el) return;
+        const incompatible = opt.incompatiblePresets.includes(preset.id);
+        if (incompatible) {
+          el.checked = false;
+          el.disabled = true;
+          el._presetLocked = true;
+        } else {
+          el._presetLocked = false;
+        }
+      });
+    }
+    applyPresetLocks();
 
+    // 8. Disable options incompatible with preset's enabled options
+    function applyOptionLocks() {
+      const presetOptions = preset.options();
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el) return;
+        if (el._presetLocked) return;
+        let shouldDisable = false;
+        for (const enabledOptId of Object.keys(presetOptions)) {
+          const enabledMeta = optionsMeta.find(o => o.longId === enabledOptId);
+          if (!enabledMeta) continue;
+          if (enabledMeta.incompatibleOptions.includes(opt.longId)) {
+            shouldDisable = true;
+            break;
+          }
+        }
+        el.disabled = shouldDisable;
+      });
+    }
+    applyOptionLocks();
+
+    // 9. Tournament Mode auto-lock
+    const isTeLocked = /-spr[0-9]{2}te$/.test(preset.id) || /-win[0-9]{2}te$/.test(preset.id) || /-aut[0-9]{2}te$/.test(preset.id) || /-sum[0-9]{2}te$/.test(preset.id);
     if (isTeLocked) {
       elems.tournamentMode.checked = true;
-      // TE: disable all locked keys
-      TOURNAMENT_LOCKED.forEach(key => {
-        const el = elems[key];
-        if (el) el.disabled = true;
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el || el._presetLocked) return;
+        el.disabled = true;
       });
-
-      const allRadios = document.querySelectorAll("input[type='radio']");
-      allRadios.forEach(r => r.disabled = true);
+      document.querySelectorAll("input[type='radio']").forEach(r => r.disabled = true);
     } else {
-      // Non‑TE: re‑enable everything this system controls
-      TOURNAMENT_LOCKED.forEach(key => {
-        const el = elems[key];
-        if (el) el.disabled = false;
+      optionsMeta.forEach(opt => {
+        const el = elems[opt.longId];
+        if (!el || el._presetLocked) return;
+        el.disabled = false;
       });
-
-      const allRadios = document.querySelectorAll("input[type='radio']");
-      allRadios.forEach(r => r.disabled = false);
+      document.querySelectorAll("input[type='radio']").forEach(r => r.disabled = false);
     }
     ChangeHandlers.tournamentModeChange();
-    // Preset-specific UI disable rules.
-    // If a preset appears in `ids`, the listed UI elements in `elems` are disabled.
-    DISABLE_RULES.forEach(rule => {
-      if (rule.ids.includes(preset.id)) {
-        rule.elems.forEach(key => {
-          const el = elems[key];
-          if (!el) return;
-
-          const wasChecked = el.checked;
-          el.disabled = true;
-          el.checked = wasChecked;
-        });
-      }
-    });
+    if (!elems.enemyStatRandoMode.checked) {
+      elems.elemChaosMode.checked = false;
+      elems.elemChaosMode.disabled = true;
+    } else {
+      elems.elemChaosMode.disabled = false;
+    }
+    elems.seasonalPhrasesMode.checked = true;
+    elems.bossMusicSeparation.checked = true;
+    elems.showSpoilers.checked = true;
   }
 
   function complexityChange() {
@@ -840,9 +567,16 @@
     const currentValueElement = document.getElementById('complexityCurrentValue');
 
     if (slider && currentValueElement) {
+
+      // Update the displayed value live while dragging
       slider.addEventListener('input', () => {
         const value = parseInt(slider.value, 10);
         currentValueElement.textContent = value;
+      });
+
+      // Only warn when the slider is released
+      slider.addEventListener('change', () => {
+        const value = parseInt(slider.value, 10);
         if (value >= 10) {
           alert(`Warning: You are currently attempting to set minimum complexity to ${value}, which exceeds the recommended minimum. Increasing complexity does not make the seed more difficult, but rather enforces a more linear logic path. Additionally, higher minimum complexity can significantly increase seed generation time. While such settings are technically supported, they are generally discouraged.`);
         }
@@ -850,6 +584,81 @@
     }
   });
 
+  document.addEventListener('keydown', (e) => {
+    // Secret codes
+    const KONAMI = [
+      'ArrowUp', 'ArrowUp',
+      'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight',
+      'ArrowLeft', 'ArrowRight',
+      'b', 'a'
+    ];
+
+    const DEVSTASH = [
+      'ArrowUp', 'ArrowUp',
+      'ArrowDown', 'ArrowDown',
+      'l', 'r',
+      'l', 'r',
+      'b', 'a'
+    ];
+
+    // Track keys pressed
+    window._secretKeys = window._secretKeys || [];
+    window._secretKeys.push(e.key);
+
+    // Keep only the last 12 keys
+    const maxLen = Math.max(KONAMI.length, DEVSTASH.length);
+    if (window._secretKeys.length > maxLen) {
+      window._secretKeys.shift();
+    }
+
+    const keys = window._secretKeys.join(',');
+
+    // --- Konami Code → Rickroll embed ---
+    if (keys === KONAMI.join(',')) {
+      const container = document.getElementById("rickroll-container");
+      if (container) {
+
+        container.innerHTML = `
+          <div style="display:flex; justify-content:center; align-items:center; width:100%;">
+            <div class="tenor-gif-embed" 
+                data-postid="22113173" 
+                data-share-method="host" 
+                data-aspect-ratio="0.84375" 
+                data-width="50%">
+              <a href="https://tenor.com/view/rick-roll-rick-ashley-never-gonna-give-you-up-gif-22113173">
+                Rick Roll Rick Ashley GIF
+              </a>
+              from 
+              <a href="https://tenor.com/search/rick+roll-gifs">Rick Roll GIFs</a>
+            </div>
+          </div>
+        `;
+
+
+        // Load Tenor script if not already loaded
+        if (!window._tenorLoaded) {
+          const script = document.createElement("script");
+          script.src = "https://tenor.com/embed.js";
+          script.async = true;
+          document.body.appendChild(script);
+          window._tenorLoaded = true;
+        }
+
+        openTab('tab-troll');
+      }
+    }
+
+    // --- Dev Stash Code ---
+    if (keys === DEVSTASH.join(',')) {
+      // adds a sound effect when the dev stash tab is opened if desired, would have to get a royalty free sound effect
+      // const audio = new Audio('/assets/sounds/devstash.wav');
+      // audio.volume = 0.7;
+      // audio.play().catch(() => { });
+
+      openTab('tab-devstash');
+    }
+  });
 
   function relicLocationsExtensionChange() {
     const ext = elems.relicLocationsExtension
@@ -893,58 +702,20 @@
 
   function newGoalsChange() {
     const { presetId, newGoals } = elems;
-    const preset = presetId.value;
-    const goal = newGoals.value;
 
-    const bhCompatible = ["bounty-hunter", "target-confirmed", "hitman", "chaos-lite", "rampage"];
-    const bossCompatible = [
-      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-      "expedition", "bat-master", "glitch", "scavenger", "empty-hand", "third-castle", "magic-mirror", "leg-day",
-      "big-toss", "grand-tour", "crash-course", "any-percent", "lookingglass", "skinwalker", "summoner", "safe-stwo",
-      "open", "brawler", "lucky-sevens", "sight-seer", "cursed-night", "spellbound", "mobility", "glitchmaster",
-      "dog-life", "battle-mage", "timeline", "chimera", "vanilla", "all-bosses", "rampage", "nimble-lite", "oracle",
-      "boss-reflector", "cornivus", "mirror-breaker"
-    ];
-    const relicCompatible = [
-      "casual", "safe", "adventure", "og", "guarded-og", "sequence-breaker", "lycanthrope", "warlock", "nimble",
-      "expedition", "bat-master", "scavenger", "empty-hand", "gem-farmer", "third-castle", "rat-race", "magic-mirror",
-      "bountyhunter", "bountyhuntertc", "hitman", "beyond", "grand-tour", "crash-course", "lookingglass", "skinwalker",
-      "summoner", "agonize-twtw", "safe-stwo", "open", "lucky-sevens", "sight-seer", "cursed-night", "spellbound",
-      "mobility", "timeline", "chimera", "vanilla", "nimble-lite", "all-bosses", "cornivus", "mirror-breaker"
-    ];
+    // Get preset data from preset-data.json
+    const presetData = presetDataJson.find(p => p.id === presetId.value);
+    if (!presetData) return;
 
-    const isCompatible = {
-      abrsr: bossCompatible.includes(preset) && relicCompatible.includes(preset),
-      vladBoss: !["oracle", "glitch", "glitchmaster", "any-percent"].includes(preset),
-      allBoss: bossCompatible.includes(preset),
-      allRelic: relicCompatible.includes(preset),
-      bhNorm: bhCompatible.includes(preset),
-      bhAdvanced: ["target-confirmed"].includes(preset),
-      bhHitman: ["hitman"].includes(preset),
-      bhBoss: ["rampage"].includes(preset)
+    const { defaultGoal, compatibleGoals } = presetData;
 
-    };
-
-    if (goal in isCompatible && !isCompatible[goal]) {
-      newGoals.value = "default";
+    // If user selects a goal that is not compatible, revert to default
+    if (!compatibleGoals.includes(newGoals.value)) {
+      newGoals.value = defaultGoal || "default";
     }
 
-    const autoAssign = [
-      { goal: "bhNorm", presets: ["chaos-lite", "bounty-hunter"] },
-      { goal: "bhAdvanced", presets: ["target-confirmed"] },
-      { goal: "bhHitman", presets: ["hitman"] },
-      { goal: "bhBoss", presets: ["rampage"] },
-      { goal: "allBoss", presets: ["all-bosses", "mirror-breaker"], exclude: ["abrsr", "vladBoss"] },
-      { goal: "vladBoss", presets: ["boss-reflector", "cornivus"] }
-    ];
-
-    for (const { goal, presets, exclude = [] } of autoAssign) {
-      if (newGoals.value !== goal && presets.includes(preset) && !exclude.includes(newGoals.value)) {
-        newGoals.value = goal;
-      }
-    }
-
-    localStorage.setItem('newGoals', newGoals.value);
+    // Save
+    localStorage.setItem("newGoals", newGoals.value);
     newGoalsLock = newGoals.value;
   }
 
@@ -1066,71 +837,59 @@
   }
 
   function getFormOptions() {
-    const options = {
-      preset: sotnRando.presets[elems.presetId.selectedIndex].id,
-      relicLocations: getFormRelicLocations()
-    }
+    try {
+      // 1. Resolve preset by ID
+      const selectedId = elems.presetId.value;
+      const preset = sotnRando.presets.find(p => p.id === selectedId);
 
-    const formOptions = [
-      'tournamentMode',
-      'colorrandoMode',
-      'magicmaxMode',
-      'antiFreezeMode',
-      'mypurseMode',
-      'iwsMode',
-      'fastwarpMode',
-      'itemNameRandoMode',
-      'noprologueMode',
-      'unlockedMode',
-      'surpriseMode',
-      'enemyStatRandoMode',
-      'shopPriceRandoMode',
-      'startRoomRandoMode',
-      'startRoomRando2ndMode',
-      'dominoMode',
-      'rlbcMode',
-      'immunityPotionMode',
-      'godspeedMode',
-      'libraryShortcut',
-      'elemChaosMode',
-      'easyMode',
-      'devStashMode',
-      'seasonalPhrasesMode',
-      'music',
-      'bossMusicSeparation',
-      'singleHitGearMode',
-      'revCastleTeleportRando',
-      'zeroDollarRelicMode',
-      'openClockStatueMode',
-      'spikeRoomRando',
-      'lycanMode',
-      'startStatRandoMode',
-      'turkeyMode',
-      'stats',
-      'accessibilityPatches',
-      'enemyDrops',
-      'itemLocations',
-      'newGoals',
-      'prologueRewards',
-      'startingEquipment'
-    ]
-
-    const STRUCTURED_KEYS = ["startingEquipment", "enemyDrops", "itemLocations", "prologueRewards"];
-
-    formOptions.forEach(key => {
-      const presetValue = sotnRando.presets[elems.presetId.selectedIndex].options()[key];
-
-      // If preset defines structured data, DO NOT override it
-      if (STRUCTURED_KEYS.includes(key) && typeof presetValue === "object") {
-        options[key] = presetValue;   // preserve preset data
-        return;
+      if (!preset) {
+        console.warn("Preset not found:", selectedId);
+        return {};
       }
 
-      // Otherwise use form checkbox
-      options[key] = !!elems[key]?.checked;
-    });
+      // 2. Base options object
+      const options = {
+        preset: preset.id,
+        relicLocations: getFormRelicLocations()
+      };
 
-    return options
+      // 3. Pull option metadata from options_array.js
+      const optionsMeta = sotnRando.optionsArray;
+
+      // Structured keys that should preserve preset-defined objects
+      const STRUCTURED_KEYS = [
+        "startingEquipment",
+        "enemyDrops",
+        "itemLocations",
+        "prologueRewards"
+      ];
+
+      // 4. Build options using longId for each option
+      optionsMeta.forEach(opt => {
+        const longId = opt.longId;
+        const el = elems[longId];
+
+        // Preset-defined value
+        const presetValue = preset.options()[longId];
+
+        // If preset defines structured data, preserve it
+        if (STRUCTURED_KEYS.includes(longId) && typeof presetValue === "object") {
+          options[longId] = presetValue;
+          return;
+        }
+
+        // Otherwise, read from the DOM checkbox
+        if (el && el.type === "checkbox") {
+          options[longId] = el.checked;
+        }
+      });
+
+      return options;
+
+    } catch (err) {
+      console.error("Error in getFormOptions:", err);
+      return {};
+    }
   }
 
   function deleteOriginalComplexity(options, newComplexity) {
@@ -1146,11 +905,11 @@
   }
 
   function clearHandler(event) {
-    event.preventDefault()
-    event.stopPropagation()
-    expectChecksum = undefined
+    event.preventDefault();
+    event.stopPropagation();
+    expectChecksum = undefined;
 
-    // Reset values
+    // Reset simple text fields
     const resetFields = [
       'seed',
       'enemyDropsArg',
@@ -1160,60 +919,40 @@
       'relicLocationsArg',
       'writes',
       'newGoals'
-    ]
-    resetFields.forEach(key => elems[key].value = '')
+    ];
+    resetFields.forEach(key => elems[key].value = '');
 
-    // Enable toggles
-    const clearFields = [
-      'seed',
-      'presetId',
-      'enemyDrops',
-      'startingEquipment',
-      'itemLocations',
-      'prologueRewards',
-      'relicLocations',
-      'relicLocationsSet',
-      'turkeyMode',
-      'magicmaxMode',
-      'colorrandoMode',
-      'antiFreezeMode',
-      'mypurseMode',
-      'iwsMode',
-      'fastwarpMode',
-      'noprologueMode',
-      'unlockedMode',
-      'surpriseMode',
-      'enemyStatRandoMode',
-      'shopPriceRandoMode',
-      'startRoomRandoMode',
-      'startRoomRando2ndMode',
-      'dominoMode',
-      'rlbcMode',
-      'immunityPotionMode',
-      'godspeedMode',
-      'libraryShortcut',
-      'elemChaosMode',
-      'revCastleTeleportRando',
-      'zeroDollarRelicMode',
-      'openClockStatueMode',
-      'spikeRoomRando',
-      'lycanMode',
-      'easyMode',
-      'devStashMode',
-      'seasonalPhrasesMode',
-      'bossMusicSeparation',
-      'singleHitGearMode',
-      'startStatRandoMode',
-      'tournamentMode'
-    ]
-    clearFields.forEach(key => elems[key].disabled = false)
+    // Reset all "opt" fields from optionsArray (enemyDrops, itemLocations, etc.)
+    sotnRando.optionsArray.forEach(opt => {
+      if (opt.argvFlag === "opt" && opt.htmlElement) {
+        if (elems[opt.htmlElement]) {
+          elems[opt.htmlElement].value = "";
+        }
+      }
+    });
 
-    // Special case
-    elems.seasonalPhrasesMode.value = true
-    elems.clear.classList.add('hidden')
+    // Re-enable all UI toggles from optionsArray
+    sotnRando.optionsArray.forEach(opt => {
+      const html = opt.htmlElement;
+      if (!html) return; // skip options without UI elements
 
-    presetChange()
+      if (elems[html]) {
+        elems[html].disabled = false;
+      }
+    });
+
+    // Seasonal phrases special case
+    if (elems.seasonalPhrasesMode) {
+      elems.seasonalPhrasesMode.value = true;
+    }
+
+    // Hide clear button
+    elems.clear.classList.add('hidden');
+
+    // Trigger preset refresh
+    presetChange();
   }
+
 
   function copyHandler(event) {
     event.preventDefault()
@@ -1455,6 +1194,12 @@
     presetIdChange();
     statMaxSlider();
   }
+  loadPresetData().then(() => {
+    // Now safe to initialize everything
+    presetIdChange();
+    // any other startup logic
+  });
+
 
   initializeBrowser();
   //#endregion

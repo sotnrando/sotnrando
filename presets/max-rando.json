@@ -18,7 +18,15 @@
     "castleType": "Normal",
     "transformEarly": "Yes",
     "transformFocus": "None",
-    "winCondition": "Portal Spell"
+    "winCondition": "Portal Spell",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default",
+      "b","r","a","v"
+    ],
+    "listSortFlag": [
+      "Evergreen"
+    ]
   },
 
   "relicLocationsExtension": "scenic",
@@ -36,6 +44,7 @@
   "revCastleTeleportRando": true,
   "startStatRandoMode": 99,
   "spikeRoomRando": true,
+  "cornucopiaMode": true,
 
   "complexityGoal": {
     "min": 1,

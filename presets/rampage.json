@@ -19,7 +19,14 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Normal"
+    "winCondition": "Normal",
+    "defaultGoal": "x",
+    "compatibleGoals": [
+      "x","y"
+    ],
+    "listSortFlag": [
+      "BountyHunter"
+    ]
   },
   
   "stats": false,

@@ -9,6 +9,7 @@ let errors
 let applyAccessibilityPatches
 let randomizeRelics
 let version
+let optionsArray
 
 function isBrowser(){
   return typeof window !== 'undefined' && typeof window.document !== 'undefined'
@@ -24,6 +25,7 @@ function loadRequirements(preset) {
     applyAccessibilityPatches = window.sotnRando.applyAccessibilityPatches
     randomizeRelics = window.sotnRando.randomizeRelics
     constants = window.sotnRando.constants
+    optionsArray = window.sotnRando.optionsArray
   } else {
     util = require('./util')
     presets = require('../build/presets').loadInheritancePresets(preset)
@@ -35,6 +37,7 @@ function loadRequirements(preset) {
     randomizeRelics = require('./randomize_relics')
     NodeWorker = require('worker_threads').Worker
     constants = require('./constants')
+    optionsArray = require('./options_array')
   }
 }
 
@@ -245,7 +248,7 @@ async function randomize(
     try {
       let rng
       let result
-      debugMessage(debugEnabled, 'Randomize stats')
+      debugMessage(debugEnabled, 'Randomize item stats')
       // Randomize stats.
       rng = getRNG(options, seed)
       result = randomizeStats(rng, applied)
@@ -254,7 +257,7 @@ async function randomize(
       debugMessage(debugEnabled, 'Randomize Relics: Assemble Workers')
       // Randomize relics.
       const workers = getWorkers()
-      debugMessage(debugEnabled, 'Randomize Relics:call util function')
+      debugMessage(debugEnabled, 'Randomize Relics: Call util function')
       result = await util.randomizeRelics(
         version,
         applied,
@@ -267,7 +270,7 @@ async function randomize(
       )
 
       util.mergeInfo(info, result.info)
-      debugMessage(debugEnabled, 'Randomize Relics:Write new relic map')
+      debugMessage(debugEnabled, 'Randomize Relics: Write new relic map')
       // Write relics mapping.
       rng = getRNG(options, seed)
       result = randomizeRelics.writeRelics(
@@ -277,7 +280,7 @@ async function randomize(
         newNames,
       )
       check.apply(result.data)
-      debugMessage(debugEnabled, 'Randomize Items: call util function')
+      debugMessage(debugEnabled, 'Randomize Items: Call util function')
       // Randomize items.
       result = await util.randomizeItems(
         version,
@@ -339,6 +342,8 @@ async function randomize(
         case 'v':
         // All bosses and bounties flag
         case 'x':
+        // All bosses, relics and bounties flag
+        case 'y':
           optWrite = optWrite + 0x05
           break
         default:
@@ -353,267 +358,122 @@ async function randomize(
       check.apply(util.randoFuncMaster(optWrite))
       check.apply(util.applySwordBuffPatches())
       let seasonAllowed =
-          options.seasonalPhrasesMode
-          || applied.seasonalPhrasesMode
+        options.seasonalPhrasesMode
+        || applied.seasonalPhrasesMode
       check.apply(util.applySplashText(rng,seasonAllowed))
 
       debugMessage(debugEnabled, 'Apply patches from options')
-      optFlag = false
-      if (options.tournamentMode) {
-        // Apply tournament mode patches.
-        optFlag = true
-        check.apply(util.applyTournamentModePatches())
-      }
-      debugMessage(debugEnabled, 'Tournament Mode | ' + optFlag)
-      optFlag = false
-      // Adds MP Vessel to replace Heart Vessel
-      if (options.magicmaxMode || applied.magicmaxMode) {
-        // Apply magic max mode patches.
-        optFlag = true
-        check.apply(util.applyMagicMaxPatches())
-      }
-      debugMessage(debugEnabled, 'Magicmax Mode | ' + optFlag)
-      optFlag = false
-      // Removes screen freezes on relic / vessel collection and
-      // level-up
-      if (options.antiFreezeMode || applied.antiFreezeMode) {
-        // Apply anti-freeze mode patches.
-        optFlag = true
-        check.apply(util.applyAntiFreezePatches())
-      }
-      debugMessage(debugEnabled, 'Anti-Freeze Mode | ' + optFlag)
-      optFlag = false
-      // Removes Death from Entrance
-      if (options.mypurseMode || applied.mypurseMode) {
-        // Apply Death repellant patches.
-        optFlag = true
-        check.apply(util.applyMyPursePatches())
-      }
-      debugMessage(debugEnabled, 'That\'s my purse! Mode | ' + optFlag)
-      optFlag = false
-      // Makes wing smash essentially infinite
-      if (options.iwsMode || applied.iwsMode) {
-        // Apply infinite wing smashe mode patches.
-        optFlag = true
-        check.apply(util.applyiwsPatches())
-      }
-      debugMessage(debugEnabled, 'Infinite Wing Smash Mode | ' + optFlag)
-      optFlag = false
-      // Quickens teleporter warp animations
-      if (options.fastwarpMode || applied.fastwarpMode) {
-        // Apply fast warp mode patches.
-        optFlag = true
-        check.apply(util.applyfastwarpPatches())
-      }
-      debugMessage(debugEnabled, 'Fast Warps Mode | ' + optFlag)
-      optFlag = false
-      // Removes prologue
-      if (options.noprologueMode || applied.noprologueMode) {
-        // Apply no prologue mode patches.
+
+      // This does not encompass all options , even options listed in the array
+      // it references. Anything not caught by this is completed elsewhere.
+      optionsArray.forEach(function(indivOpt) {
+        // Check if the option is being used
+        if (options[indivOpt.longId] || applied[indivOpt.longId]) {
+          // Check if the option is simple enough to be implemented en masse
+          if (indivOpt.simple === true) {
+            try {
+              // Set the flag to show in debug mode whether the option was enabled
+              optFlag = true
+              // Check if RNG is needed for the option function
+              // Apply the function as described in the array
+              if (indivOpt.rngNeeded === true) {
+                // If the function needs RNG, roll it.
+                rng = getRNG(options, seed)
+                check.apply(indivOpt['functionCall'](rng))
+              } else {
+                // If you were sent here by an error, that means that the option 
+                // is not corectly handled by the options array. Check to make 
+                // sure that all of the parameters are correctly declared and if
+                // the option is actually simple. 
+                // (Simple options don't require additional parameters, don't 
+                // need to detect other option status, etc. Just "true" to turn 
+                // on, maybe need RNG at most.)
+                check.apply(indivOpt['functionCall']())
+              }
+            } catch (err) {
+              console.error('Option function call incorrect for: ' + indivOpt.longId)
+            }
+          // If the option isn't simple enough to be applied en masse but it's
+          // still in the array, run it through this cswitch to make sure it's
+          // applied correctly.
+          } else {
+            // console.log('option not simple')
+            switch (indivOpt.longId) {
+              case "tournamentMode":
+                // Apply tournament mode patches.
+                optFlag = true
+                check.apply(util.applyTournamentModePatches())
+                break
+              case "enemyStatRandoMode":
+                // Apply Enemy Stat Rando mode patches.
+                optFlag = true
+                rng = getRNG(options, seed)
+                let chaosFlag = false
+                if (options.elemChaosMode || applied.elemChaosMode) {
+                  chaosFlag = true
+                }
+                check.apply(util.applyenemyStatRandoPatches(rng,chaosFlag))
+                break
+              case "startRoomRandoMode":
+              case "startRoomRando2ndMode":
+                // Randomizes starting room by eldri7ch & MottZilla
+                // Apply starting room Rando mode patches.
+                optFlag = true
+                rng = getRNG(options, seed)
+                let castleFlag = 0x00
+                if (options.startRoomRandoMode || applied.startRoomRandoMode) {
+                  castleFlag = castleFlag + 0x01
+                }
+                if (options.startRoomRando2ndMode || 
+                      applied.startRoomRando2ndMode) {
+                  castleFlag = castleFlag + 0x10
+                }
+                check.apply(util.applyStartRoomRandoPatches(rng,castleFlag))
+                break
+              case "startStatRandoMode":
+                // Apply the Starting Stats randomizer. 
+                optFlag = true
+                rng = getRNG(options, seed)
+                // Need to confirm if in applied or options.
+                if (options.startStatRandoMode !== undefined) {
+                  if (startStatMax !== null) {
+                    // Special condition to pull from website interface
+                    ssOpt = Number(startStatMax)
+                  } else {
+                    ssOpt = Number(options.startStatRandoMode)
+                  }
+                } else {
+                  if (applied.startStatRandoMode !== undefined) {
+                    ssOpt = Number(applied.startStatRandoMode)
+                  } else {
+                    ssOpt = 0
+                  }
+                }
+                check.apply(util.applyStartStatRandoPatches(rng,ssOpt))
+                break
+              case "seasonalPhrasesMode":
+              case "godspeedMode":
+              case "bossMusicSeparation":
+              case "enemyDrops":
+              case "turkeyMode":
+              case "itemLocations":
+              case "startingEquipment":
+              case "prologueRewards":
+              case "colorrandoMode":
+              case "stats":
+              case "itemNameRandoMode":
+                // Only shows that it was enabled; this is handled elsewhere
+                optFlag = true
+                break
+              default:
+                console.log('Option function call incorrect for: ' + indivOpt.longId)
+            }
+          }
+        }
+        debugMessage(debugEnabled, indivOpt.name + ' | ' + optFlag)
         optFlag = false
-        check.apply(util.applynoprologuePatches())
-      }
-      debugMessage(debugEnabled, 'No Prologue Mode | ' + optFlag)
-      optFlag = false
-      // Unlocks shortcuts
-      if (options.unlockedMode || applied.unlockedMode) {
-        // Apply unlocked mode patches.
-        optFlag = true
-        check.apply(util.applyunlockedPatches())
-      }
-      debugMessage(debugEnabled, 'Unlocked Mode | ' + optFlag)
-      optFlag = false
-      // Hides relics behind the same sprite
-      if (options.surpriseMode || applied.surpriseMode) {
-        // Apply surprise mode patches.
-        optFlag = true
-        check.apply(util.applysurprisePatches())
-      }
-      debugMessage(debugEnabled, 'Surprise Mode | ' + optFlag)
-      optFlag = false
-      // Randomizes enemy stats
-      if (options.enemyStatRandoMode || applied.enemyStatRandoMode) {
-        // Apply Enemy Stat Rando mode patches.
-        optFlag = true
-        rng = getRNG(options, seed)
-        let chaosFlag = false
-        if (options.elemChaosMode || applied.elemChaosMode) {
-          chaosFlag = true
-        }
-        check.apply(util.applyenemyStatRandoPatches(rng,chaosFlag))
-      }
-      debugMessage(debugEnabled, 'Enemy Stat Randomizer Mode | ' + optFlag)
-      optFlag = false
-      // Randomizes shop prices
-      if (options.shopPriceRandoMode || applied.shopPriceRandoMode) {
-        // Apply shop price Rando mode patches.
-        optFlag = true
-        rng = getRNG(options, seed)
-        check.apply(util.applyShopPriceRandoPatches(rng))
-      }
-      debugMessage(debugEnabled, 'Shop Price Randomizer Mode | ' + optFlag)
-      optFlag = false
-      // Randomizes starting room & MottZilla
-      if (options.startRoomRandoMode
-          || applied.startRoomRandoMode
-          || options.startRoomRando2ndMode
-          || applied.startRoomRando2ndMode) {
-        // Apply starting room Rando mode patches.
-        optFlag = true
-        rng = getRNG(options, seed)
-        let castleFlag = 0x00
-        if (options.startRoomRandoMode || applied.startRoomRandoMode) {
-          castleFlag = castleFlag + 0x01
-        }
-        if (options.startRoomRando2ndMode || applied.startRoomRando2ndMode) {
-          castleFlag = castleFlag + 0x10
-        }
-        check.apply(util.applyStartRoomRandoPatches(rng,castleFlag))
-      }
-      debugMessage(debugEnabled, 'Starting Room Randomizer Mode | ' + optFlag)
-      optFlag = false
-      // Guarantees drops
-      if (options.dominoMode || applied.dominoMode) {
-        // Apply guaranteed drops patches.
-        optFlag = true
-        check.apply(util.applyDominoPatches())
-      }
-      debugMessage(debugEnabled, 'Guaranteed Drops Mode | ' + optFlag)
-      optFlag = false
-      // Reverse library cards
-      if (options.rlbcMode || applied.rlbcMode) {
-        // Apply reverse library card patches.
-        optFlag = true
-        check.apply(util.applyRLBCPatches())
-      }
-      debugMessage(debugEnabled, 'Reverse Library Card Mode | ' + optFlag)
-      optFlag = false
-      // Apply resist to immune potion patches.
-      if (options.immunityPotionMode || applied.immunityPotionMode) {
-        // todo: Change this to Resist to Immune Potions 'mode' or option.
-        optFlag = true
-        check.apply(util.applyResistToImmunePotionsPatches())
-      }
-      debugMessage(debugEnabled, 'Immunity Potions Mode | ' + optFlag)
-      optFlag = false
-      // Godspeed shoes
-      if (options.godspeedMode || applied.godspeedMode) {
-        optFlag = true
-      }
-      debugMessage(debugEnabled, 'Godspeed Mode | ' + optFlag)
-      optFlag = false
-      // Library shortcut
-      if (options.libraryShortcut || applied.libraryShortcut) {
-        optFlag = true
-        check.apply(util.applyLibraryShortcutPatches())
-      }
-      debugMessage(debugEnabled, 'Library Shortcut | ' + optFlag)
-      optFlag = false
-      // Elemental chaos
-      if (options.elemChaosMode || applied.elemChaosMode) {
-        optFlag = true
-        rng = getRNG(options, seed)
-        check.apply(util.applyElemChaosPatches(rng))
-      }
-      debugMessage(debugEnabled, 'Elemental Chaos | ' + optFlag)
-      optFlag = false
-      // Single-Hit Gears
-      if (options.singleHitGearMode || applied.singleHitGearMode) {
-        optFlag = true
-        check.apply(util.applySingleHitGearPatches())
-      }
-      debugMessage(debugEnabled, '| Single-Hit Gears | ' + optFlag)
-      optFlag = false
-      // Reverse Castle Teleporter Randomizer
-      if (options.revCastleTeleportRando || applied.revCastleTeleportRando) {
-        optFlag = true
-        check.apply(util.applyReverseCastleTeleporterRandoPatches(rng))
-      }
-      debugMessage(debugEnabled, '| Reverse Castle Teleporter Randomizer | ' + optFlag)
-      optFlag = false
-      // Make Relics Free
-      if (options.zeroDollarRelicMode || applied.zeroDollarRelicMode) {
-        optFlag = true
-        check.apply(util.applyZeroDollarRelicPatches())
-      }
-      debugMessage(debugEnabled, '| Zero-Dollar Relic Mode | ' + optFlag)
-      optFlag = false
-      // Open Clock Room Statue
-      if (options.openClockStatueMode || applied.openClockStatueMode) {
-        optFlag = true
-        check.apply(util.applyOpenClockStatuepatches())
-      }
-      debugMessage(debugEnabled, '| Clock Room Statue Open Mode | ' + optFlag)
-      optFlag = false
-      // Randomize Spike Room
-      if (options.spikeRoomRando || applied.spikeRoomRando) {
-        optFlag = true
-        check.apply(util.applySpikeRoomRandoPatches(rng))
-      }
-      debugMessage(debugEnabled, '| Spike Room Randomizer | ' + optFlag)
-      optFlag = false
-      // Allow Full Wolf Use
-      if (options.lycanMode || applied.lycanMode) {
-        optFlag = true
-        check.apply(util.applyLycanModePatches())
-      }
-      debugMessage(debugEnabled, '| Lycanthrope Mode | ' + optFlag)
-      optFlag = false
-      // Starting Stat Randomizer
-      let ssOpt = 0
-      if (options.startStatRandoMode || applied.startStatRandoMode) {
-        optFlag = true
-        rng = getRNG(options, seed)
-        // Need to confirm if in applied or options.
-        if (options.startStatRandoMode !== undefined) {
-          if (startStatMax !== null) {
-            // Special condition to pull from website interface
-            ssOpt = Number(startStatMax)
-          } else {
-            ssOpt = Number(options.startStatRandoMode)
-          }
-        } else {
-          if (applied.startStatRandoMode !== undefined) {
-            ssOpt = Number(applied.startStatRandoMode)
-          } else {
-            ssOpt = 0
-          }
-        }
-        check.apply(util.applyStartStatRandoPatches(rng,ssOpt))
-      }
-      debugMessage(
-        debugEnabled,
-        '| Starting Stat Randomizer | ' + optFlag + ' | ' + ssOpt
-      )
-      optFlag = false
-      // Simplifies spell inputs and extends i-frames
-      if (options.easyMode || applied.easyMode) {
-        // Apply easy mode patches.
-        optFlag = true
-        check.apply(util.applyEasyModePatches())
-      }
-      debugMessage(debugEnabled, 'Easy Mode | ' + optFlag)
-      optFlag = false
-      // Dev's stash
-      if (options.devStashMode || applied.devStashMode) {
-        optFlag = true
-        check.apply(util.applyDevsStashPatches())
-        check.apply(util.applyListOfNames())
-      }
-      debugMessage(debugEnabled, '| Dev\'s Stash | ' + optFlag)
-      optFlag = false
-      // Seasonal Phrases
-      if (options.seasonalPhrasesMode || applied.seasonalPhrasesMode) {
-        optFlag = true
-      }
-      debugMessage(debugEnabled, 'Seasonal Phrases Mode | ' + optFlag)
-      optFlag = false
-      // Separate boss music
-      if (options.bossMusicSeparation || applied.bossMusicSeparation) {
-        // verify boss music separate.
-        optFlag = true
-      }
-      debugMessage(debugEnabled, 'Boss Music Separator | ' + optFlag)
+      })
+      
       // Colors the map
       if (mapColor && mapColor !== 'default') {
         // Apply map color patches.
@@ -636,6 +496,9 @@ async function randomize(
         } else if (nGoal === 'w') {
           check.apply(util.applyBountyHunterTargets(rng, BH.HITMAN))
         }else if (nGoal === 'x') {
+          check.apply(util.applyNewGoals(nGoal))
+          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
+        }else if (nGoal === 'y') {
           check.apply(util.applyNewGoals(nGoal))
           check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
         } else {

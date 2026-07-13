@@ -2,7 +2,7 @@
   "metadata": {
     "id": "collector",
     "name": "Collector",
-    "description": "Collect 20* Relics to win. Put & symbol at end of file name to do 25 relics. Test build May21st2026",
+    "description": "Collect 20* Relics to win. Put & symbol at end of file name to do 25 relics.",
     "author": [
       "MottZilla"
     ],
@@ -16,7 +16,15 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Normal"
+    "winCondition": "20 or 25 Relics",
+    "defaultGoal": "default",
+    "compatibleGoals": [
+      "default"
+    ],
+    "listSortFlag": [
+      "Normal",
+      "New"
+    ]
   },
 
   "stats": false,

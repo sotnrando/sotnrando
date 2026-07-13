@@ -96,63 +96,47 @@ BrowserUtils.toKebabCase = function toKebabCase(str) {
 }
 
 BrowserUtils.getCurrentOptions = function getCurrentOptions() {
-    const keys = [
-        'tournamentMode', 
-        'colorrandoMode', 
-        'magicmaxMode', 
-        'antiFreezeMode',
-        'mypurseMode', 
-        'iwsMode', 
-        'fastwarpMode', 
-        'itemNameRandoMode',
-        'noprologueMode', 
-        'unlockedMode', 
-        'surpriseMode', 
-        'enemyStatRandoMode',
-        'shopPriceRandoMode', 
-        'startRoomRandoMode', 
-        'startRoomRando2ndMode',
-        'dominoMode', 
-        'rlbcMode', 
-        'immunityPotionMode', 
-        'godspeedMode',
-        'libraryShortcut', 
-        'elemChaosMode', 
-        'singleHitGearMode', 
-        'revCastleTeleportRando', 
-        'zeroDollarRelicMode',
-        'openClockStatueMode', 
-        'spikeRoomRando', 
-        'lycanMode',
-        'easyMode', 
-        'devStashMode',
-        'seasonalPhrasesMode', 
-        'music', 
-        'bossMusicSeparation', 
-        'music', 
-        'appendSeed', 
-        'excludeSongsOption', 
-        'itemLocations', 
-        'stats', 
-        'prologueRewards', 
-        'startingEquipment', 
-        'accessibilityPatches'
-    ]
+    const options = {};
 
-    const options = {}
-    keys.forEach(key => {
-        const input = document.getElementById(BrowserUtils.toKebabCase(key))
-        options[key] = input?.checked ?? false
-    })
+    try {
+        const optionsMeta = sotnRando.optionsArray;
 
-    options.preset = document.getElementById('preset-id')?.selectedOptions?.[0]?.text || 'Unknown'
-    options.complexity = document.getElementById('complexity')?.value || 'Not selected'
-    options.goal = document.getElementById('newGoals')?.selectedOptions?.[0]?.text || 'Unknown'
-    options.extension = [...document.querySelectorAll('input[name="extension"]')]
-        .find(r => r.checked)?.value || 'None'
+        optionsMeta.forEach(opt => {
+            const longId = opt.longId;
+            const displayName = opt.name;
+            const elemId = BrowserUtils.toKebabCase(longId);
+            const input = document.getElementById(elemId);
 
-    return options
-}
+            // Store using the DISPLAY NAME
+            options[displayName] = input?.checked ?? false;
+        });
+
+        // Preset name
+        options.preset =
+            document.getElementById("preset-id")?.selectedOptions?.[0]?.text ||
+            "Unknown";
+
+        // Complexity
+        options.complexity =
+            document.getElementById("complexity")?.value || "Not selected";
+
+        // Goal
+        options.goal =
+            document.getElementById("newGoals")?.selectedOptions?.[0]?.text ||
+            "Unknown";
+
+        // Extension radio group
+        options.extension =
+            [...document.querySelectorAll('input[name="extension"]')]
+                .find(r => r.checked)?.value || "None";
+
+    } catch (err) {
+        console.error("Error in getCurrentOptions:", err);
+    }
+
+    return options;
+};
+
 
 BrowserUtils.formatOptionsLog = function formatOptionsLog(options) {
     const enabled = []
@@ -160,7 +144,7 @@ BrowserUtils.formatOptionsLog = function formatOptionsLog(options) {
 
     Object.entries(options).forEach(([key, val]) => {
         if (['preset', 'complexity', 'extension', 'goal'].includes(key)) return
-        ;(val ? enabled : disabled).push(key)
+            ; (val ? enabled : disabled).push(key)
     })
 
     return [
@@ -238,38 +222,61 @@ BrowserUtils.hideSpoilers = function hideSpoilers() {
 }
 
 BrowserUtils.loadPresets = function loadPresets() {
-    let sortedPresets = sotnRando.presets
-    sortedPresets.sort(function (a, b) {
-        if (!('weight' in a && 'id' in a)) {
-            if (!('weight' in b && 'id' in b)) {
-                return 0
-            }
-            return 1
-        } else if (!('weight' in b && 'id' in b)) {
-            return -1
+    const presets = sotnRando.presets;
+
+    // --- Define our three groups ---
+    const NEW_PRESETS = new Set(["collector", "hoarder"]);
+
+    function isTournamentPreset(id) {
+        return (
+            /-spr26te$/.test(id)
+            // /-win\d+te$/.test(id)
+            // /-aut\d+te$/.test(id)
+            // /-sum\d+te$/.test(id)
+        );
+    }
+
+    // --- Bucket the presets ---
+    const newPresets = [];
+    const tournamentPresets = [];
+    const otherPresets = [];
+
+    presets.forEach(preset => {
+        if (NEW_PRESETS.has(preset.id)) {
+            newPresets.push(preset);
+        } else if (isTournamentPreset(preset.id)) {
+            tournamentPresets.push(preset);
+        } else {
+            otherPresets.push(preset);
         }
-        const weight = a.weight - b.weight
-        if (weight === 0) {
-            if (a.id < b.id) {
-                return -1
-            } else if (a.id > b.id) {
-                return 1
-            }
-        }
-        return weight
     });
 
-    sortedPresets.forEach(function (preset) {
+    // --- Sort alphabetically inside each section ---
+    newPresets.sort((a, b) => a.id.localeCompare(b.id));
+    tournamentPresets.sort((a, b) => a.id.localeCompare(b.id));
+    otherPresets.sort((a, b) => a.id.localeCompare(b.id));
+
+    // --- Combine in the desired order ---
+    const sortedPresets = [
+        ...newPresets,
+        ...tournamentPresets,
+        ...otherPresets
+    ];
+
+    //Overwrite global array so index positions map 1:1
+    sotnRando.presets = sortedPresets;
+
+    // --- Populate dropdown ---
+    sortedPresets.forEach(preset => {
         if (!preset.hidden) {
             if (preset.id === "april-fools" && !isAprilFools) return;
-            const option = document.createElement('option')
-            option.value = preset.id
-            option.innerText = preset.name
-            if (preset.id === "april-fools") option.innerText = "April Fools";
-            elems.presetId.appendChild(option)
+            const option = document.createElement("option");
+            option.value = preset.id;
+            option.innerText = preset.id === "april-fools" ? "April Fools" : preset.name;
+            elems.presetId.appendChild(option);
         }
-    })
-}
+    });
+};
 
 BrowserUtils.cloneItems = function cloneItems(items) {                     //Saves previous selections
     return items.map(function (item) {
@@ -293,7 +300,7 @@ BrowserUtils.ChangeHandlers = {
             elems.easyMode.checked = false
             elems.easyMode.disabled = true
             elems.zeroDollarRelicMode.checked = true
-            elems.openClockStatueMode.checked = true 
+            elems.openClockStatueMode.checked = true
         } else {
             elems.showRelics.disabled = false
             elems.easyMode.disabled = false
@@ -306,17 +313,23 @@ BrowserUtils.ChangeHandlers = {
     },
     enemyStatRandoModeChange: function enemyStatRandoModeChange() {
         if (elems.enemyStatRandoMode.checked) {
-            elems.elemChaosMode.disabled = false
+            // Enemy Stats ON → allow Elemental Chaos
+            elems.elemChaosMode.disabled = false;
         } else {
-            elems.elemChaosMode.checked = false
-            elems.elemChaosMode.disabled = true
+            // Enemy Stats OFF → force Elemental Chaos OFF + disabled
+            elems.elemChaosMode.checked = false;
+            elems.elemChaosMode.disabled = true;
         }
     },
+
     elemChaosModeChange: function elemChaosModeChange() {
-        if (elems.elemChaosMode.checked === true) {
-            elems.enemyStatRandoMode.checked = true
+        if (elems.elemChaosMode.checked) {
+            // If user tries to turn on Elemental Chaos,
+            // make sure Enemy Stats is ON
+            elems.enemyStatRandoMode.checked = true;
         }
     },
+
     spoilersChange: function spoilersChange() {
         if (elems.showSpoilers.checked && info) {
             BrowserUtils.showSpoilers()

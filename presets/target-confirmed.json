@@ -17,7 +17,15 @@
     "castleType": "Normal",
     "transformEarly": "No",
     "transformFocus": "None",
-    "winCondition": "Enemies Drop Vlads"
+    "winCondition": "Enemies Drop Vlads",
+    "defaultGoal": "t",
+    "compatibleGoals": [
+      "t","x","y"
+    ],
+    "listSortFlag": [
+      "Evergreen",
+      "BountyHunter"
+    ]
   },
 
   "inherits": "casual",

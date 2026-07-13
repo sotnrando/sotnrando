@@ -1,6 +1,39 @@
 {
     "changelog": [
         {
+            "date": "July 13, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Fixed some issues with Richter being playable in Boss Rush.",
+                    "Entirely refactored Boss Rush code.",
+                    "'U MAD BRO' - Glitch Logic; 'Mah jimmies' - eldri7ch"
+                ],
+                "Option Updates": [
+                    "Added Warlock Mode.",
+                    "Added Level 1 Mode.",
+                    "Added Instant Death Mode.",
+                    "Added Chaos Drops Mode. Any non-progression item can drop from any non-boss enemy.",
+                    "Added a new goal for the randomizer: All Bosses, Relics, Save Richter, and Bounties.",
+                    "Options has gone through a massive refactor this month. Implementing new features will be much easier and faster from now on."
+                ],
+                "Website Updates": [
+                    "Randomizer page restructured into a cleaner tabular layout for options and presets.",
+                    "Tabular format improves consistency, flexibility, and supports future interface updates.",
+                    "Tabs now include 'Goals', 'Randomization', 'Quality of Life', 'Transform Modes', 'Challenge Options', and 'Cosmetics'.",
+                    "Navigation is more intuitive and overall user experience is improved.",
+                    "'Generate Options Log' button below the Randomize button shows all enabled and disabled options in your current setup.",
+                    "Preset dropdown no longer uses weights and is now alphabetized.",
+                    "Preset dropdown is split into three sections: new, tournament, and all other presets for easier browsing.",
+                    "Goals and goal compatibility now come from preset data instead of being hardcoded.",
+                    "Option compatibility is also now preset-driven for better consistency and future flexibility."
+                ],
+                "Program Updates": [
+                    "Options and Presets are now listed in massive array files where they can be referenced much easier than before. This will allow for more flexibility and consistency as well as enable future updates to the web interface.",
+                    "'Die weight system, you dont belong in this randomizer!' -crazy4blades"
+                ]
+            }
+        },
+        {
             "date": "June 15, 2026",
             "sections": {
                 "Preset Updates": [
@@ -31,6 +64,7 @@
                     "Yasutsuna hitbox now follows Alucard like Masamune et al. It's still spammable."
                 ],
                 "Rando Tools Updates": [
+                    "Added a timer to the bottom of the tracker removing need for LiveSplit with automatic start / stop.",
                     "Updated Co-Op to work through websocket connection, dramatically simplifying how users activate the mode."
                 ]
             }
