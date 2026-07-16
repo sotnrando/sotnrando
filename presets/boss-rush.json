@@ -5162,9 +5162,93 @@
     "type": "word",
     "address": "0xFA244",
     "value": "0x0C03A07F"
-  }, 
-  
-  {
+  }, {
+    "comment": "SectLd",
+    "type": "word",
+    "address": "0xFE824",
+    "value": "0x27BDFFE0"
+  }, {
+    "type": "word",
+    "value": "0x3C020022"
+  }, {
+    "type": "word",
+    "value": "0x34422905"
+  }, {
+    "type": "word",
+    "value": "0x34040002"
+  }, {
+    "type": "word",
+    "value": "0x27A50010"
+  }, {
+    "type": "word",
+    "value": "0x34060000"
+  }, {
+    "type": "word",
+    "value": "0xAFBF0018"
+  }, {
+    "type": "word",
+    "value": "0x0C006578"
+  }, {
+    "type": "word",
+    "value": "0xAFA20010"
+  }, {
+    "type": "word",
+    "value": "0x34040004"
+  }, {
+    "type": "word",
+    "value": "0x3C058000"
+  }, {
+    "type": "word",
+    "value": "0x34A5C000"
+  }, {
+    "type": "word",
+    "value": "0x3C018001"
+  }, {
+    "type": "word",
+    "value": "0x3421C080"
+  }, {
+    "type": "word",
+    "value": "0x0020F809"
+  }, {
+    "type": "word",
+    "value": "0x34060080"
+  }, {
+    "type": "word",
+    "value": "0x34040000"
+  }, {
+    "type": "word",
+    "value": "0x3C018001"
+  }, {
+    "type": "word",
+    "value": "0x3421C188"
+  }, {
+    "type": "word",
+    "value": "0x0020F809"
+  }, {
+    "type": "word",
+    "value": "0x34050000"
+  }, {
+    "type": "word",
+    "value": "0x34020000"
+  }, {
+    "type": "word",
+    "value": "0x8FBF0018"
+  }, {
+    "type": "word",
+    "value": "0x27BD0020"
+  }, {
+    "type": "word",
+    "value": "0x03E00008"
+  }, {
+    "comment": "End of SectLd",
+    "type": "word",
+    "value": "0x00000000"
+  }, {
+    "comment": "SectHK",
+    "type": "word",
+    "address": "0xFA244",
+    "value": "0x0C03A07F"
+  }, {
     "comment": "Teleport not bright as hell",
     "type":    "char",
     "address": "0xFB1F8",

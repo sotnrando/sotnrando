@@ -657,7 +657,8 @@
       "startRoomRandoMode",
       "startRoomRando2ndMode",
       "rlbcMode",
-      "revCastleTeleportRando"
+      "revCastleTeleportRando",
+      "maxMasaMode"
     ],
     "presetJs": "./build/presets/boss-rush.js",
     "parent": false
@@ -764,7 +765,8 @@
     ],
     "incompatibleOptions": [
       "dominoMode",
-      "cornucopiaMode"
+      "cornucopiaMode",
+      "nameListMode"
     ],
     "presetJs": "./build/presets/bounty-hunter.js",
     "parent": false
@@ -799,7 +801,8 @@
     ],
     "incompatibleOptions": [
       "dominoMode",
-      "cornucopiaMode"
+      "cornucopiaMode",
+      "nameListMode"
     ],
     "presetJs": "./build/presets/target-confirmed.js",
     "parent": false
@@ -833,7 +836,8 @@
     ],
     "incompatibleOptions": [
       "dominoMode",
-      "cornucopiaMode"
+      "cornucopiaMode",
+      "nameListMode"
     ],
     "presetJs": "./build/presets/hitman.js",
     "parent": false
@@ -869,7 +873,8 @@
       "y"
     ],
     "incompatibleOptions": [
-      "dominoMode"
+      "dominoMode",
+      "nameListMode"
     ],
     "presetJs": "./build/presets/chaos-lite.js",
     "parent": false
@@ -1611,7 +1616,10 @@
       "b",
       "v"
     ],
-    "incompatibleOptions": [],
+    "incompatibleOptions": [
+      "fourBeastMode",
+      "nameListMode"
+    ],
     "presetJs": "./build/presets/battle-mage.js",
     "parent": false
   },
@@ -1907,7 +1915,8 @@
     ],
     "incompatibleOptions": [
       "dominoMode",
-      "cornucopiaMode"
+      "cornucopiaMode",
+      "nameListMode"
     ],
     "presetJs": "./build/presets/rampage.js",
     "parent": false
@@ -1976,7 +1985,9 @@
       "a",
       "v"
     ],
-    "incompatibleOptions": [],
+    "incompatibleOptions": [
+      "nameListMode"
+    ],
     "presetJs": "./build/presets/max-rando.js",
     "parent": false
   },
