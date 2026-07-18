@@ -505,7 +505,7 @@ async function randomize(
             check.apply(util.applyNewGoals(nGoal))
         }
       }
-      debugMessage(debugEnabled, 'New Goals')
+      debugMessage(debugEnabled, 'New Goals: ' + nGoal)
       if (alucardPalette) { // Changes Alucard's Palette. -Crazy4blades
         // Apply new goal patches.
         check.apply(util.applyAlucardPalette(alucardPalette))

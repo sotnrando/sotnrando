@@ -3263,7 +3263,7 @@
         Object.getOwnPropertyNames(options.relicLocations).forEach(function (key) {
           if (/^[0-9]+(-[0-9]+)?/.test(key)) {
             myOverride = true;
-            console.log({myOverride})
+            // console.log({myOverride})
           }
         })
       }
@@ -3271,7 +3271,7 @@
         Object.getOwnPropertyNames(relicLocations).forEach(function (key) {
           if (/^[0-9]+(-[0-9]+)?/.test(key)) {
             goals = relicLocations[key]
-            console.log({key, goals, relicLocations});
+            // console.log({key, goals, relicLocations});
             delete relicLocations[key]
           }
         })
@@ -8750,7 +8750,7 @@
       randTp = Math.floor(rng() * Math.floor(reverseTeleporterData.length))
     }
     
-    console.log("Selected: " + reverseTeleporterData[randTp].title)
+    // console.log("Selected: " + reverseTeleporterData[randTp].title)
 	
     // If Vanilla then we don't write anything.
     if(reverseTeleporterData[randTp].stage == 0x2B)
