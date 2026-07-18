@@ -481,13 +481,7 @@ async function randomize(
       }
       debugMessage(debugEnabled, 'Map colors')
       // Changes the goals
-      if (options.newGoalsSet || applied.newGoalsSet) {
-        // Apply new goal patches.
-        if (options.newGoalsSet !== undefined){
-          nGoal = options.newGoalsSet
-        } else {
-          nGoal = applied.newGoalsSet
-        }
+      if (nGoal !== null) {
         const BH = constants.BHMODE
         switch (nGoal) {
           case 'h':
