@@ -489,20 +489,20 @@ async function randomize(
           nGoal = applied.newGoalsSet
         }
         const BH = constants.BHMODE
-        if (nGoal === 'h') {
-          check.apply(util.applyBountyHunterTargets(rng, BH.NORMAL))
-        } else if (nGoal === 't') {
-          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
-        } else if (nGoal === 'w') {
-          check.apply(util.applyBountyHunterTargets(rng, BH.HITMAN))
-        }else if (nGoal === 'x') {
-          check.apply(util.applyNewGoals(nGoal))
-          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
-        }else if (nGoal === 'y') {
-          check.apply(util.applyNewGoals(nGoal))
-          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
-        } else {
-          check.apply(util.applyNewGoals(nGoal))
+        switch (nGoal) {
+          case 'h':
+            check.apply(util.applyBountyHunterTargets(rng, BH.NORMAL))
+            break
+          case 'x','y':
+            check.apply(util.applyNewGoals(nGoal))
+          case 't':
+            check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
+            break
+          case 'w':
+            check.apply(util.applyBountyHunterTargets(rng, BH.HITMAN))
+            break
+          default:
+            check.apply(util.applyNewGoals(nGoal))
         }
       }
       debugMessage(debugEnabled, 'New Goals')
