@@ -481,31 +481,25 @@ async function randomize(
       }
       debugMessage(debugEnabled, 'Map colors')
       // Changes the goals
-      if (options.newGoalsSet || applied.newGoalsSet) {
-        // Apply new goal patches.
-        if (options.newGoalsSet !== undefined){
-          nGoal = options.newGoalsSet
-        } else {
-          nGoal = applied.newGoalsSet
-        }
+      if (nGoal !== null) {
         const BH = constants.BHMODE
-        if (nGoal === 'h') {
-          check.apply(util.applyBountyHunterTargets(rng, BH.NORMAL))
-        } else if (nGoal === 't') {
-          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
-        } else if (nGoal === 'w') {
-          check.apply(util.applyBountyHunterTargets(rng, BH.HITMAN))
-        }else if (nGoal === 'x') {
-          check.apply(util.applyNewGoals(nGoal))
-          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
-        }else if (nGoal === 'y') {
-          check.apply(util.applyNewGoals(nGoal))
-          check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
-        } else {
-          check.apply(util.applyNewGoals(nGoal))
+        switch (nGoal) {
+          case 'h':
+            check.apply(util.applyBountyHunterTargets(rng, BH.NORMAL))
+            break
+          case 'x','y':
+            check.apply(util.applyNewGoals(nGoal))
+          case 't':
+            check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
+            break
+          case 'w':
+            check.apply(util.applyBountyHunterTargets(rng, BH.HITMAN))
+            break
+          default:
+            check.apply(util.applyNewGoals(nGoal))
         }
       }
-      debugMessage(debugEnabled, 'New Goals')
+      debugMessage(debugEnabled, 'New Goals: ' + nGoal)
       if (alucardPalette) { // Changes Alucard's Palette. -Crazy4blades
         // Apply new goal patches.
         check.apply(util.applyAlucardPalette(alucardPalette))
