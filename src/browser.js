@@ -163,6 +163,59 @@
     elems.excludeSongsOption.addEventListener("change", showExcludeMenu);
     elems.esMoveToRight.addEventListener("click", excludeSong);
     elems.esMoveToLeft.addEventListener("click", includeSong);
+
+    if (elems.randomPresetBtn) {
+      elems.randomPresetBtn.addEventListener("click", randomPresetHandler);
+    }
+  }
+
+  function randomPresetHandler(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    const dropdown = elems.presetId;
+    if (!dropdown || !dropdown.options || dropdown.options.length <= 1) return;
+
+    // Prevent spam clicking while the loop is running
+    if (window._presetAnimating) return;
+    window._presetAnimating = true;
+
+    const originalIndex = dropdown.selectedIndex;
+    let iterations = 0;
+    const totalFlips = 14; // Number of text changes before stopping
+    let currentSpeed = 20; // Initial delay in milliseconds
+
+    function cycleText() {
+      iterations++;
+
+      if (iterations < totalFlips) {
+        // Rapidly select a random index to change the text view
+        dropdown.selectedIndex = Math.floor(Math.random() * dropdown.options.length);
+
+        // Decelerate the speed to simulate a mechanical slowdown
+        currentSpeed += 12;
+        setTimeout(cycleText, currentSpeed);
+      } else {
+        // Final Selection Phase: Guarantee a fresh preset that differs from the starting one
+        let finalIndex = originalIndex;
+        while (finalIndex === originalIndex) {
+          finalIndex = Math.floor(Math.random() * dropdown.options.length);
+        }
+
+        dropdown.selectedIndex = finalIndex;
+
+        // Main app update logic only at the very end
+        presetIdChange();
+
+        // Re-enable the button
+        window._presetAnimating = false;
+      }
+    }
+
+    // Begin the text loop
+    cycleText();
   }
 
   function loadPastOptions() {
@@ -1070,8 +1123,24 @@
     // If today is april fools, force the april fools preset.
     let selectedPreset
     if (isAprilFools) {
-      elems.presetId.value = "april-fools";
-      presetIdChange();
+      const dropdown = elems.presetId;
+      if (dropdown && dropdown.options) {
+        // Convert options to an array to see if 'april-fools' is a valid option id
+        const optionsArray = Array.from(dropdown.options);
+        const hasAprilFoolsPreset = optionsArray.some(opt => opt.value === "april-fools");
+
+        if (hasAprilFoolsPreset) {
+          // Safe fallback: If the preset exists, use it
+          dropdown.value = "april-fools";
+        } else if (dropdown.options.length > 1) {
+          // Chaos mode: If it doesn't exist, pick a completely random preset index
+          const randomIndex = Math.floor(Math.random() * dropdown.options.length);
+          dropdown.selectedIndex = randomIndex;
+        }
+
+        // Sync the preset so correct preset is generated
+        presetIdChange();
+      }
     }
 
     selectedPreset = elems.presetId.childNodes[elems.presetId.selectedIndex].value
@@ -1083,6 +1152,7 @@
     }
     // Get options.
     let options = getFormOptions()
+    console.log(options, currSeed, selectedPreset)
     const start = new Date().getTime()
     if (elems.output.ppf.checked) {
       CoreRandomizer.randomize(
