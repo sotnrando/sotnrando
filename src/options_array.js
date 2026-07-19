@@ -859,6 +859,31 @@
  	argvFlag: "bool",
 	autoBuild: true
   }, {
+	name: "Nimble Lite Mode", 
+	longId: "nimbleLiteMode", 
+	shortId: "nimbleLite", 
+	htmlElement: "nimble-mode", 
+	cliArg: "nl", 
+	longDescript: "Enables Nimble Lite Mode allowing the player to use Bat, Gravity Boots, and Leap Stone from the beginning for free.", 
+	shortDescript: "Use Bat, Gravity Boots, and Leap Stone for free.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+		"warlock",
+		"nimble",
+		"nimble-lite",
+		"big-toss",
+		"brawler",
+		"leg-day"
+	], 
+	functionCall: util.applyNimbleLiteModePatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
+	autoBuild: true
+  }, {
 	name: "Level 1 Mode", 
 	longId: "levelOneMode", 
 	shortId: "levelOne", 
@@ -1079,7 +1104,7 @@
 	longId: "nameListMode", 
 	shortId: "nameList", 
 	htmlElement: "name-list", 
-	cliArg: "nl", 
+	cliArg: "lon", 
 	longDescript: "Updates the names of the enemies in the game to match earlier and later entries as well as translations.", 
 	shortDescript: "Normalizes names from other CV games and the JP version.", 
 	incompatibleOptions: [

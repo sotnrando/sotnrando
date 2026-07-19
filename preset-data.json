@@ -258,7 +258,8 @@
       "v"
     ],
     "incompatibleOptions": [
-      "warlockMode"
+      "warlockMode",
+      "nimbleLiteMode"
     ],
     "presetJs": "./build/presets/warlock.js",
     "parent": false
@@ -291,7 +292,9 @@
       "a",
       "v"
     ],
-    "incompatibleOptions": [],
+    "incompatibleOptions": [
+      "nimbleLiteMode"
+    ],
     "presetJs": "./build/presets/nimble.js",
     "parent": true
   },
@@ -622,7 +625,8 @@
     ],
     "incompatibleOptions": [
       "lycanMode",
-      "warlockMode"
+      "warlockMode",
+      "nimbleLiteMode"
     ],
     "presetJs": "./build/presets/leg-day.js",
     "parent": false
@@ -728,7 +732,8 @@
     "incompatibleOptions": [
       "enemyStatRandoMode",
       "elemChaosMode",
-      "lycanMode"
+      "lycanMode",
+      "nimbleLiteMode"
     ],
     "presetJs": "./build/presets/big-toss.js",
     "parent": false
@@ -1284,7 +1289,8 @@
       "v"
     ],
     "incompatibleOptions": [
-      "warlockMode"
+      "warlockMode",
+      "nimbleLiteMode"
     ],
     "presetJs": "./build/presets/brawler.js",
     "parent": false
@@ -1881,7 +1887,9 @@
       "a",
       "v"
     ],
-    "incompatibleOptions": [],
+    "incompatibleOptions": [
+      "nimbleLiteMode"
+    ],
     "presetJs": "./build/presets/nimble-lite.js",
     "parent": true
   },

@@ -105,6 +105,7 @@ BrowserConstants.elems = {
     spikeRoomRando: document.getElementById('spike-room'),
     lycanMode: document.getElementById('lycan-mode'),
     warlockMode: document.getElementById('warlock-mode'),
+    nimbleLiteMode: document.getElementById('nimble-mode'),
     cornucopiaMode: document.getElementById('cornucopia-mode'),
     instantDeathMode: document.getElementById('instant-death-mode'),
     levelOneMode: document.getElementById('level-one-mode'),

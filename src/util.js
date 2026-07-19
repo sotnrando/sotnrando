@@ -3129,6 +3129,7 @@
     spikeRoomRando,
     lycanMode,
     warlockMode,
+    nimbleLiteMode,
     levelOneMode,
     instantDeathMode,
     cornucopiaMode,
@@ -3188,6 +3189,7 @@
     this.spikeRoomRando = spikeRoomRando
     this.lycanMode = lycanMode
     this.warlockMode = warlockMode
+    this.nimbleLiteMode = nimbleLiteMode
     this.levelOneMode = levelOneMode
     this.instantDeathMode = instantDeathMode
     this.cornucopiaMode = cornucopiaMode
@@ -3398,6 +3400,8 @@
     this.lycan = false
     // Warlock mode (reduced spell mp, free mist)
     this.warlock = false
+    // Nimble Lite mode (Free Grav and Bat)
+    this.nimbleLite = false
     // Alucard is always level 1
     this.levelone = false
     // Alucard dies in one hit
@@ -3778,6 +3782,9 @@
     }
     if ('warlockMode' in json) {
       builder.warlockMode(json.warlockMode)
+    }
+    if ('nimbleLiteMode' in json) {
+      builder.nimbleLiteMode(json.nimbleLiteMode)
     }
     if ('levelOneMode' in json) {
       builder.levelOneMode(json.levelOneMode)
@@ -4202,6 +4209,9 @@
     }
     if ('warlockMode' in preset) {
       this.warlock = preset.warlockMode
+    }
+    if ('nimbleLiteMode' in preset) {
+      this.nimbleLite = preset.nimbleLiteMode
     }
     if ('levelOneMode' in preset) {
       this.levelOne = preset.levelOneMode
@@ -5074,6 +5084,11 @@
       this.warlock = enabled
     }
   
+  PresetBuilder.prototype.nimbleLiteMode =
+    function nimbleLiteMode(enabled) {
+      this.nimbleLite = enabled
+    }
+  
   PresetBuilder.prototype.levelOneMode =
     function levelOneMode(enabled) {
       this.levelOne = enabled
@@ -5450,6 +5465,7 @@
     const spikeRoom = self.spikeRoom
     const lycan = self.lycan
     const warlock = self.warlock
+    const nimbleLite = self.nimbleLite
     const levelOne = self.levelOne
     const instantDeath = self.instantDeath
     const cornucopia = self.cornucopia
@@ -5509,6 +5525,7 @@
       spikeRoom,
       lycan,
       warlock,
+      nimbleLite,
       levelOne,
       instantDeath,
       cornucopia,
@@ -9854,6 +9871,30 @@
     return data
   }
 
+  function applyNimbleLiteModePatches() {
+    const data = new checked()
+
+    // Enable Leap Stone at the start without relics.
+    data.writeWord(0x0012c7b8,0x00000000)
+
+    // Enable Gravity Boots at the start without relics.
+    data.writeWord(0x0012cb08,0x00000000)
+
+    // Enable Soul of Bat at the start without relics.
+    data.writeWord(0x00118a58,0x00000000)
+
+    // Wing Smash Cost = 0
+    data.writeChar(0x000b52ec,0x00)
+
+    // Gravity Jump Cost = 0
+    data.writeShort(0x00118d3c,0x0000)
+
+    // Soul of Bat Cost = 0
+    data.writeShort(0x00118a70,0x0000)
+
+    return data
+  }
+
   function applyLevelOneModePatches() {
     // Increase experience to reach level 2 to 999,999
     const data = new checked()
@@ -13195,6 +13236,7 @@
     applyLevelOneModePatches: applyLevelOneModePatches,
     applyInstantDeathModePatches: applyInstantDeathModePatches,
     applyWarlockModePatches: applyWarlockModePatches,
+    applyNimbleLiteModePatches: applyNimbleLiteModePatches,
     applyCornucopiaModePatches: applyCornucopiaModePatches,
     applyAlucardLiner: applyAlucardLiner,
     randomizeRelics: randomizeRelics,
