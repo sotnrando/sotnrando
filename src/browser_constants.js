@@ -141,7 +141,8 @@ BrowserConstants.elems = {
     trapDoorMode: document.getElementById('trap-door'),
     betterCrossMode: document.getElementById('better-x'),
     darkEIFMode: document.getElementById('dark-shield'),
-    nameListMode: document.getElementById('name-list')
+    nameListMode: document.getElementById('name-list'),
+    randomPresetBtn: document.getElementById('randomPresetBtn')
 }
 
 Object.assign(window, BrowserConstants);
