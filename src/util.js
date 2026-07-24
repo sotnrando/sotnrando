@@ -13,6 +13,7 @@
   let crypto
   let goals  
   let trackByteM
+  let options_array
 
   if (self) {
     constants = self.sotnRando.constants
@@ -26,6 +27,7 @@
     relics = self.sotnRando.relics
     crypto = self.crypto
     goals = self.goals
+    options_array = self.sotnRando.options_array
   } else {
     constants = require('./constants')
     enemies = require('./enemies')
@@ -1810,6 +1812,9 @@
   }
 
   function optionsToString(options, disableRecurse) {
+    if (!self && !options_array) {
+      options_array = require('./options_array')
+    }
     options = Object.assign({}, options)
     delete options.checkVanilla
     delete options.verbose
@@ -1844,11 +1849,11 @@
 
       // Cycle through iterative options and push the argv if we can.
       options_array.forEach(function(indivOpt) {
-        if (indivOpt.argvFlag === "bool" && indivOpt.shortId in options) {
-          if (options[indivOpt.shortId]) {
+        if (indivOpt.argvFlag === "bool" && indivOpt.longId in options) {
+          if (options[indivOpt.longId]) {
             randomize.push(indivOpt.cliArg)
           }
-          delete options[indivOpt.shortId]
+          delete options[indivOpt.longId]
         }
       })
       
