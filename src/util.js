@@ -11052,29 +11052,43 @@
     // Start writing the code - code by MottZilla
     // Title Screen Display Text through Debug
     offset = 0x4398ad0
-    offset = data.writeWord(offset, 0x3c04801b)
-    offset = data.writeWord(offset, 0x34844880)
-    offset = data.writeWord(offset, 0x0c004657)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x2404ffff)
-    offset = data.writeWord(offset, 0x0c0045bf)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x34040020)
-    offset = data.writeWord(offset, 0x3c058003)
-    offset = data.writeWord(offset, 0xa0a4b768)
-    // y position for text
-    offset = data.writeWord(offset, 0x340400c1)
-    offset = data.writeWord(offset, 0xa0a4b76a)
-    offset = data.writeWord(offset, 0x3c028009)
-    offset = data.writeWord(offset, 0x94427494)
-    offset = data.writeWord(offset, 0x0806d200)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x00007845)
+    offset = data.writeWord(offset,0x3c04801b)
+    offset = data.writeWord(offset,0x348448a8)
+    offset = data.writeWord(offset,0x0c004657)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x2404ffff)
+    offset = data.writeWord(offset,0x0c0045bf)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x34040020)
+    offset = data.writeWord(offset,0x3c058003)
+    offset = data.writeWord(offset,0xa0a4b768)
+    // Y position for text (c1)
+    offset = data.writeWord(offset,0x340400c1)
+    offset = data.writeWord(offset,0xa0a4b76a)
+    offset = data.writeWord(offset,0x3c028009)
+    offset = data.writeWord(offset,0x94427494)
+    offset = data.writeWord(offset,0x0806d200)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x040f809)
+    offset = data.writeWord(offset,0x3404063d)
+    offset = data.writeWord(offset,0x3c048002)
+    offset = data.writeWord(offset,0x3484b768)
+    offset = data.writeWord(offset,0x34050008)
+    offset = data.writeWord(offset,0x34060080)
+    offset = data.writeWord(offset,0xa4850000)
+    offset = data.writeWord(offset,0xa4860002)
+    offset = data.writeWord(offset,0x0806d208)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x07845)
     // Write Text Hook
     offset = 0x439895c
     offset = data.writeWord(offset, 0x0806d20e)
+    offset = data.writeWord(offset, 0x00000000)
+    // Write Text Position Reset Hook
+    offset = 0x4398aac
+    offset = data.writeWord(offset, 0x0806D220)
     offset = data.writeWord(offset, 0x00000000)
     // Write the new X pos for the text
     offset = 0x4398af0
@@ -11104,7 +11118,7 @@
       i++
     }
     // perform the write
-    offset = 0x4398b18
+    offset = 0x4398b40
     // add an additional termination 0x00 in case the past one failed
     strHex[strLength + 1] = 0x00
     // actually write the text we need
