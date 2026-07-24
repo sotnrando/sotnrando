@@ -13,6 +13,7 @@
   let crypto
   let goals  
   let trackByteM
+  let options_array
 
   if (self) {
     constants = self.sotnRando.constants
@@ -26,6 +27,7 @@
     relics = self.sotnRando.relics
     crypto = self.crypto
     goals = self.goals
+    options_array = self.sotnRando.options_array
   } else {
     constants = require('./constants')
     enemies = require('./enemies')
@@ -1810,6 +1812,9 @@
   }
 
   function optionsToString(options, disableRecurse) {
+    if (!self && !options_array) {
+      options_array = require('./options_array')
+    }
     options = Object.assign({}, options)
     delete options.checkVanilla
     delete options.verbose
@@ -1844,11 +1849,11 @@
 
       // Cycle through iterative options and push the argv if we can.
       options_array.forEach(function(indivOpt) {
-        if (indivOpt.argvFlag === "bool" && indivOpt.shortId in options) {
-          if (options[indivOpt.shortId]) {
+        if (indivOpt.argvFlag === "bool" && indivOpt.longId in options) {
+          if (options[indivOpt.longId]) {
             randomize.push(indivOpt.cliArg)
           }
-          delete options[indivOpt.shortId]
+          delete options[indivOpt.longId]
         }
       })
       
@@ -11088,29 +11093,43 @@
     // Start writing the code - code by MottZilla
     // Title Screen Display Text through Debug
     offset = 0x4398ad0
-    offset = data.writeWord(offset, 0x3c04801b)
-    offset = data.writeWord(offset, 0x34844880)
-    offset = data.writeWord(offset, 0x0c004657)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x2404ffff)
-    offset = data.writeWord(offset, 0x0c0045bf)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x34040020)
-    offset = data.writeWord(offset, 0x3c058003)
-    offset = data.writeWord(offset, 0xa0a4b768)
-    // y position for text
-    offset = data.writeWord(offset, 0x340400c1)
-    offset = data.writeWord(offset, 0xa0a4b76a)
-    offset = data.writeWord(offset, 0x3c028009)
-    offset = data.writeWord(offset, 0x94427494)
-    offset = data.writeWord(offset, 0x0806d200)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x00007845)
+    offset = data.writeWord(offset,0x3c04801b)
+    offset = data.writeWord(offset,0x348448a8)
+    offset = data.writeWord(offset,0x0c004657)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x2404ffff)
+    offset = data.writeWord(offset,0x0c0045bf)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x34040020)
+    offset = data.writeWord(offset,0x3c058003)
+    offset = data.writeWord(offset,0xa0a4b768)
+    // Y position for text (c1)
+    offset = data.writeWord(offset,0x340400c1)
+    offset = data.writeWord(offset,0xa0a4b76a)
+    offset = data.writeWord(offset,0x3c028009)
+    offset = data.writeWord(offset,0x94427494)
+    offset = data.writeWord(offset,0x0806d200)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x040f809)
+    offset = data.writeWord(offset,0x3404063d)
+    offset = data.writeWord(offset,0x3c048002)
+    offset = data.writeWord(offset,0x3484b768)
+    offset = data.writeWord(offset,0x34050008)
+    offset = data.writeWord(offset,0x34060080)
+    offset = data.writeWord(offset,0xa4850000)
+    offset = data.writeWord(offset,0xa4860002)
+    offset = data.writeWord(offset,0x0806d208)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x07845)
     // Write Text Hook
     offset = 0x439895c
     offset = data.writeWord(offset, 0x0806d20e)
+    offset = data.writeWord(offset, 0x00000000)
+    // Write Text Position Reset Hook
+    offset = 0x4398aac
+    offset = data.writeWord(offset, 0x0806D220)
     offset = data.writeWord(offset, 0x00000000)
     // Write the new X pos for the text
     offset = 0x4398af0
@@ -11140,7 +11159,7 @@
       i++
     }
     // perform the write
-    offset = 0x4398b18
+    offset = 0x4398b40
     // add an additional termination 0x00 in case the past one failed
     strHex[strLength + 1] = 0x00
     // actually write the text we need
