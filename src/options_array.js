@@ -887,7 +887,7 @@
 	name: "Level 1 Mode", 
 	longId: "levelOneMode", 
 	shortId: "levelOne", 
-	htmlElement: "level-one", 
+	htmlElement: "level-one-mode", 
 	cliArg: "l1", 
 	longDescript: "Forces Alucard to remain at level 1 the entire seed.", 
 	shortDescript: "Alucard remains level 1.", 
