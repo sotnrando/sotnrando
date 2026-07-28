@@ -1126,6 +1126,25 @@
 	simple: true,
  	argvFlag: "bool",
 	autoBuild: false
+  }, {
+	name: "Rainbow Robe", 
+	longId: "rainbowMantleMode", 
+	shortId: "rainbowMantle", 
+	htmlElement: "rainbow-mantle", 
+	cliArg: "rm", 
+	longDescript: "Replaces Elven cloak with the Rainbow robe from the Sega Saturn version.", 
+	shortDescript: "Replaces Elven cloak with the Rainbow robe.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applyRainbowMantlePatches, 
+	rngNeeded: false, 
+	simple: false,
+	argvFlag: "bool",
+	autoBuild: true
   }
 
 //   , {
