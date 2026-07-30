@@ -415,6 +415,7 @@ input[type="number"] {
 recomp::after {
     /* Adds a cross (†) after anything compatible with the recompilation project */
     content: "†";
+    font-size: 10px;
 }
 
 new::after {
