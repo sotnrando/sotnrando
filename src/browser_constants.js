@@ -143,7 +143,7 @@ BrowserConstants.elems = {
     betterCrossMode: document.getElementById('better-x'),
     darkEIFMode: document.getElementById('dark-shield'),
     nameListMode: document.getElementById('name-list'),
-    rainbowMantle: document.getElementsById('rainbow-mantle'),
+    rainbowMantle: document.getElementById('rainbow-mantle'),
     randomPresetBtn: document.getElementById('randomPresetBtn')
 }
 
