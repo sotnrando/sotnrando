@@ -493,7 +493,8 @@ async function randomize(
           case 'h':
             check.apply(util.applyBountyHunterTargets(rng, BH.NORMAL))
             break
-          case 'x','y':
+          case 'x':
+          case 'y':
             check.apply(util.applyNewGoals(nGoal))
           case 't':
             check.apply(util.applyBountyHunterTargets(rng, BH.TARGET_CONFIRMED))
