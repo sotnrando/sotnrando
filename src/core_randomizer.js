@@ -210,6 +210,7 @@ async function randomize(
     let checksum
     let startTime
     let optFlag
+    let isPride = (new Date().getMonth() + 1) === 6;
     await getVersion()
     startTime = performance.now()
     loadRequirements(presetName)
@@ -355,6 +356,10 @@ async function randomize(
       if (godSpeedShoes || options.godspeedMode || applied.godspeedMode) {
         optWrite = optWrite + 0x80000000
       }
+      if (options.rainbowMantleMode || applied.rainbowMantleMode || isPride) {
+        optWrite = optWrite + 0x01000000
+        check.apply(util.applyRainbowMantlePatches())
+      }
       check.apply(util.randoFuncMaster(optWrite))
       check.apply(util.applySwordBuffPatches())
       let seasonAllowed =
@@ -462,6 +467,7 @@ async function randomize(
               case "colorrandoMode":
               case "stats":
               case "itemNameRandoMode":
+              case "rainbowMantleMode":
                 // Only shows that it was enabled; this is handled elsewhere
                 optFlag = true
                 break

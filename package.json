@@ -3,18 +3,18 @@
   "version": "26.07.13",
   "description": "This is a romhacking tool to randomize some things about `Castlevania: Symphony of the Night`.",
   "dependencies": {
-    "colors": "^1.4.0",
-    "hygen": "^6.2.11",
-    "npm-force-resolutions": "^0.0.10",
-    "seedrandom": "^3.0.1",
-    "yargs": "^17.7.2"
+    "colors": "1.4.0",
+    "hygen": "6.2.11",
+    "npm-force-resolutions": "0.0.10",
+    "seedrandom": "3.0.5",
+    "yargs": "17.7.2"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/3snowp7im/SotN-Randomizer.git"
   },
   "resolutions": {
-    "brace-expansion": "1.1.13"
+    "brace-expansion": "1.1.18"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
