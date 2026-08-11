@@ -10180,7 +10180,7 @@
     data.writeChar(0x000B4A7D,0x07)
 
     // replace the sprite
-	offset = 0xDE19C
+	offset = 0xDE3CC
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x00)
 	offset = data.writeWord(offset,0x11000000)
