@@ -10180,9 +10180,50 @@
     data.writeChar(0x000B4A7D,0x07)
 
     // replace the sprite
-
+	offset = 0xDE19C
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x11000000)
+	offset = data.writeWord(offset,0x011111)
+	offset = data.writeWord(offset,0x32100000)
+	offset = data.writeWord(offset,0x0625144)
+	offset = data.writeWord(offset,0x77260000)
+	offset = data.writeWord(offset,0x062887)
+	offset = data.writeWord(offset,0x72600000)
+	offset = data.writeWord(offset,0x062977)
+	offset = data.writeWord(offset,0x26000000)
+	offset = data.writeWord(offset,0x06585)
+	offset = data.writeWord(offset,0x62600000)
+	offset = data.writeWord(offset,0x069266)
+	offset = data.writeWord(offset,0x69600000)
+	offset = data.writeWord(offset,0x0642977)
+	offset = data.writeWord(offset,0x75a60000)
+	offset = data.writeWord(offset,0x0639577)
+	offset = data.writeWord(offset,0x7b526000)
+	offset = data.writeWord(offset,0x06a2acc)
+	offset = data.writeWord(offset,0xc7bd2600)
+	offset = data.writeWord(offset,0x062a8cc)
+	offset = data.writeWord(offset,0xcc7bd600)
+	offset = data.writeWord(offset,0x06d28cc)
+	offset = data.writeWord(offset,0xcc75b600)
+	offset = data.writeWord(offset,0x062d5cc)
+	offset = data.writeWord(offset,0x7b8b6000)
+	offset = data.writeWord(offset,0x06b2b57)
+	offset = data.writeWord(offset,0x66660000)
+	offset = data.writeWord(offset,0x066666)
+	offset = data.writeWord(offset,0x00)
+	offset = data.writeWord(offset,0x00)
+	  
     //replace the palette data for the sprite
-
+	offset = 0xEE8FC
+	offset = data.writeWord(offset,0x14470000)
+	offset = data.writeWord(offset,0x512f5194)
+	offset = data.writeWord(offset,0x56153ccc)
+	offset = data.writeWord(offset,0x24a21c44)
+	offset = data.writeWord(offset,0x26fe72fc)
+	offset = data.writeWord(offset,0x3da40ace)
+	offset = data.writeWord(offset,0x4ea03506)
+	offset = data.writeWord(offset,0x00)
     return data
   }
 
