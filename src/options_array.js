@@ -945,6 +945,27 @@
  	argvFlag: "bool",
 	autoBuild: true
   }, {
+	name: "Music Randomizer",
+	longId: "music",
+	shortId: "music",
+	htmlElement: "music",
+	// Parsed from the options string, not a standalone CLI flag.
+	// The '-m' alias is already taken by --mapcolor.
+	cliArg: "opt m",
+	longDescript: "Randomize the music tracks played throughout the game.",
+	shortDescript: "Shuffle the music tracks.",
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	],
+	functionCall: null,
+	rngNeeded: true,
+	simple: false,
+	argvFlag: "opt",
+	autoBuild: false
+  }, {
 	name: "Separate Boss Music", 
 	longId: "bossMusicSeparation", 
 	shortId: "bossMusic", 
@@ -955,7 +976,6 @@
 	incompatibleOptions: [
 	],
 	requiredOptions: [
-	  "music"
 	],
 	incompatiblePresets: [
 	], 

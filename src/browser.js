@@ -436,7 +436,7 @@
 
     // 5. Apply preset options (data-driven)
     function applyOptions(options) {
-      const userPersistent = ["tournamentMode", "showSpoilers", "seasonalPhrasesMode", "bossMusicSeparation"];
+      const userPersistent = ["tournamentMode", "showSpoilers", "seasonalPhrasesMode", "music", "bossMusicSeparation"];
 
       // First, sync the standard options metadata checkboxes
       optionsMeta.forEach(opt => {
@@ -564,7 +564,9 @@
       elems.elemChaosMode.disabled = false;
     }
     elems.seasonalPhrasesMode.checked = true;
-    elems.bossMusicSeparation.checked = true;
+    // Boss Music Separation and Exclude Songs follow the music randomizer.
+    // Runs after the disable loops above so the gate wins.
+    ChangeHandlers.musicChange();
     elems.showSpoilers.checked = true;
   }
 

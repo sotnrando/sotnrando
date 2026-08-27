@@ -388,6 +388,20 @@ BrowserUtils.ChangeHandlers = {
             elems.itemNameRandoMode.checked = false
             elems.itemNameRandoMode.disabled = true
         }
+    },
+    musicChange: function musicChange() {
+        // Separate Boss Music and Exclude Songs only mean anything while the
+        // music randomizer is on, so they follow it.
+        if (elems.music.checked) {
+            elems.bossMusicSeparation.disabled = false
+            elems.excludeSongsOption.disabled = false
+        } else {
+            elems.bossMusicSeparation.checked = false
+            elems.bossMusicSeparation.disabled = true
+            elems.excludeSongsOption.checked = false
+            elems.excludeSongsOption.disabled = true
+            elems.excludeSongsMenu.hidden = true
+        }
     }
 }
 //#endregion
