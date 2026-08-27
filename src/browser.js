@@ -115,7 +115,7 @@
     });
 
     // --- Map color preview ---
-    mapColorSelect.addEventListener("click", updateMapColorPreview);
+    mapColorSelect.addEventListener("change", updateMapColorPreview);
 
     // --- Drag & Drop ---
     body.addEventListener("dragover", dragOverListener);
