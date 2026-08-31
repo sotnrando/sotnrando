@@ -92,7 +92,8 @@
     "april-fools",
     "gourmet-race",
     "collector",
-    "hoarder"
+    "hoarder",
+    "beyond-confirmed-sum26te"
   ],
   "engines": {
     "node": ">=15"

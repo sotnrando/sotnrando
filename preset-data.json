@@ -2383,5 +2383,35 @@
     "incompatibleOptions": [],
     "presetJs": "./build/presets/hoarder.js",
     "parent": false
+  },
+  {
+    "name": "Beyond Confirmed TID3BIT3 5up3rcl34n Tournament Edition",
+    "id": "beyond-confirmed-sum26te",
+    "description": "Bounty Hunter variant. Vlad drop rates are much higher, Familiar Cards are required before the drop is unlocked. Min Complexity increased to 9 and relic extension changed to Extended. Many new item changes for flavor.",
+    "author": [
+      "eldri7ch",
+      "MottZilla"
+    ],
+    "knowledgeCheck": "Enemy Locations",
+    "timeFrame": "Normal",
+    "moddedLevel": "Heavily",
+    "castleType": "Normal",
+    "transformEarly": "No",
+    "transformFocus": "None",
+    "winCondition": "Enemies Drop Vlads",
+    "metaExtension": "Extended",
+    "metaComplexity": "9",
+    "itemStats": "Normal",
+    "listSortFlag": [
+      "BountyHunter"
+    ],
+    "defaultGoal": "x",
+    "compatibleGoals": [
+      "x",
+      "y"
+    ],
+    "incompatibleOptions": [],
+    "presetJs": "./build/presets/beyond-confirmed-sum26te.js",
+    "parent": false
   }
 ]
