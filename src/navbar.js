@@ -52,6 +52,7 @@ function loadNavbar() {
             <li><a href="https://github.com/sotnrando/SotnRandoTools/releases">Rando Tools</a></li>
             <li><a href="/mapcompare.html">200.6% Map Tool</a></li>
             <li><a href="https://wec-codes.forumotion.com/h8-sotn-map">Relic Map</a></li>
+            <li><a href="https://github.com/ndsmith201/SOTNPresetGenerator/releases">Preset Generator</a></li>
         </ul>
         </li>
     </ul>
