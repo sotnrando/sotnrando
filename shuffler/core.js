@@ -5677,23 +5677,26 @@
         if (shufflerOptions?.rewardShuffler?.on ?? false) {
             const seed = shufflerOptions.rewardShuffler.seed ?? (seedName + '.rewardShuffler.' + analysis.solverAttemptId)
             let questRewards
-            switch (shufflerOptions.rewardShuffler.method) {
-                case 'chained':
-                    questRewards = rewardShuffler.assignChainedRewards(seed, analysis)
-                    // if (questRewards.invalidated) {
-                    //     analysis.invalidated = true
-                    // }
-                    break
-                case 'layered':
-                    questRewards = rewardShuffler.assignLayeredRewards(seed, analysis)
-                    // if (questRewards.invalidated) {
-                    //     analysis.invalidated = true
-                    // }
-                    break
-                case 'unbiased':
-                default:
-                    questRewards = rewardShuffler.shuffleRewards(seed)
-                    break
+            while (questRewards?.invalidated ?? true) {
+                console.log('seed:', seed)
+                switch (shufflerOptions.rewardShuffler.method) {
+                    case 'chained':
+                        questRewards = rewardShuffler.assignChainedRewards(seed, analysis)
+                        // if (questRewards.invalidated) {
+                        //     analysis.invalidated = true
+                        // }
+                        break
+                    case 'layered':
+                        questRewards = rewardShuffler.assignLayeredRewards(seed, analysis)
+                        // if (questRewards.invalidated) {
+                        //     analysis.invalidated = true
+                        // }
+                        break
+                    case 'unbiased':
+                    default:
+                        questRewards = rewardShuffler.assignUnbiasedRewards(seed)
+                        break
+                }
             }
             console.log('questRewards.invalidated:', questRewards.invalidated)
             analysis.locationRewards = questRewards.locations
