@@ -23,7 +23,7 @@
     const LOCATIONS = {
         locationBatCard: {
             defaultValue: 'relicBatCard',
-            validRewardTypes: [ 'relic', ],
+            validRewardTypes: ['relic',],
             forbiddenRewards: [],
             // TODO(sestren): Allow replacing with an item (dropUnusedItem1, dropUnusedItem2)
             writes: {
@@ -42,7 +42,7 @@
         },
         locationCubeOfZoe: {
             defaultValue: 'relicCubeOfZoe',
-            validRewardTypes: [ 'relic', ],
+            validRewardTypes: ['relic',],
             forbiddenRewards: [
                 'relicSoulOfBat',
                 // 'relicGravityBoots',
@@ -78,7 +78,7 @@
         },
         locationDemonCard: {
             defaultValue: 'relicDemonCard',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -139,7 +139,7 @@
         },
         locationEchoOfBat: {
             defaultValue: 'relicEchoOfBat',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -200,7 +200,7 @@
         },
         locationFireOfBat: {
             defaultValue: 'relicFireOfBat',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -261,7 +261,7 @@
         },
         locationForceOfEcho: {
             defaultValue: 'relicForceOfEcho',
-            validRewardTypes: [ 'relic', ],
+            validRewardTypes: ['relic',],
             forbiddenRewards: [
                 'itemGoldRing',
                 'itemSilverRing',
@@ -302,7 +302,7 @@
         },
         locationFormOfMist: {
             defaultValue: 'relicFormOfMist',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -363,7 +363,7 @@
         },
         locationGasCloud: {
             defaultValue: 'relicGasCloud',
-            validRewardTypes: [ 'relic', ],
+            validRewardTypes: ['relic',],
             forbiddenRewards: [
                 'itemGoldRing',
                 'itemSilverRing',
@@ -404,7 +404,7 @@
         },
         locationGhostCard: {
             defaultValue: 'relicGhostCard',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -465,7 +465,7 @@
         },
         locationJewelOfOpen: {
             defaultValue: 'relicJewelOfOpen',
-            validRewardTypes: [ 'relic', ],
+            validRewardTypes: ['relic',],
             forbiddenRewards: [],
             writes: {
                 relic: [
@@ -492,7 +492,7 @@
         },
         locationPowerOfMist: {
             defaultValue: 'relicPowerOfMist',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [
                 'relicSoulOfBat',
             ],
@@ -555,7 +555,7 @@
         },
         locationGravityBoots: {
             defaultValue: 'relicGravityBoots',
-            validRewardTypes: [ 'relic', ],
+            validRewardTypes: ['relic',],
             forbiddenRewards: [],
             writes: {
                 relic: [
@@ -584,7 +584,7 @@
         },
         locationHolySymbol: {
             defaultValue: 'relicHolySymbol',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -646,7 +646,7 @@
         },
         locationLeapStone: {
             defaultValue: 'relicLeapStone',
-            validRewardTypes: [ 'relic', ],
+            validRewardTypes: ['relic',],
             forbiddenRewards: [],
             writes: {
                 relic: [
@@ -675,7 +675,7 @@
         },
         locationMermanStatue: {
             defaultValue: 'relicMermanStatue',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -737,7 +737,7 @@
         },
         locationPowerOfWolf: {
             defaultValue: 'relicPowerOfWolf',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [
                 'relicSoulOfBat',
             ],
@@ -809,7 +809,7 @@
         },
         locationSkillOfWolf: {
             defaultValue: 'relicSkillOfWolf',
-            validRewardTypes: [ 'relic', ],
+            validRewardTypes: ['relic',],
             forbiddenRewards: [],
             // TODO(sestren): Allow replacing with an item (dropUnusedItem1, dropUnusedItem2)
             writes: {
@@ -828,7 +828,7 @@
         },
         locationSoulOfBat: {
             defaultValue: 'relicSoulOfBat',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [
                 'relicFormOfMist',
             ],
@@ -891,7 +891,7 @@
         },
         locationSoulOfWolf: {
             defaultValue: 'relicSoulOfWolf',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -952,7 +952,7 @@
         },
         locationSpiritOrb: {
             defaultValue: 'relicSpiritOrb',
-            validRewardTypes: [ 'relic', ],
+            validRewardTypes: ['relic',],
             forbiddenRewards: [],
             writes: {
                 relic: [
@@ -981,7 +981,7 @@
         },
         locationSwordCard: {
             defaultValue: 'relicSwordCard',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -1042,7 +1042,7 @@
         },
         locationFaerieCard: {
             defaultValue: 'relicFaerieCard',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [
                 'relicSoulOfBat',
             ],
@@ -1105,7 +1105,7 @@
         },
         locationFaerieScroll: {
             defaultValue: 'relicFaerieScroll',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -1166,7 +1166,7 @@
         },
         locationSpikeBreaker: {
             defaultValue: 'itemSpikeBreaker',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -1226,7 +1226,7 @@
         },
         locationSilverRing: {
             defaultValue: 'itemSilverRing',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -1286,7 +1286,7 @@
         },
         locationGoldRing: {
             defaultValue: 'itemGoldRing',
-            validRewardTypes: [ 'item', 'relic', ],
+            validRewardTypes: ['item', 'relic',],
             forbiddenRewards: [],
             writes: {
                 item: [
@@ -1469,7 +1469,7 @@
         return result
     }
 
-    function getReachableChecks(edges, prospectiveState, locationRewards, availableChecks=[]) {
+    function getReachableChecks(edges, prospectiveState, locationRewards, availableChecks = []) {
         const result = []
         Object.entries(edges)
         .filter(([currentNodeName, nextNodeNames]) => {
@@ -1534,7 +1534,7 @@
             debugInfo: {
                 attemptCounter: 0,
             },
-            invalidated: false,
+            valid: true,
             locations: {},
         }
         settings.locationRewards = {}
@@ -1669,7 +1669,7 @@
                 currentLayerRewards.push(rewards.main.pop())
                 counts.main += 1
                 if (availableChecks.length < currentLayerRewards.length) {
-                    result.invalidated = true
+                    result.valid = false
                     return result
                 }
                 while (
@@ -1699,7 +1699,7 @@
                         counts.bonus += 1
                         continue
                     }
-                    result.invalidated = true
+                    result.valid = false
                     return result
                 }
             }
@@ -1729,7 +1729,7 @@
             currentLayerRewards
             .forEach((rewardName) => {
                 if (availableChecks.length < 1) {
-                    result.invalidated = true
+                    result.valid = false
                     return
                 }
                 common.shuffleArray(rng, availableChecks)
@@ -1751,7 +1751,7 @@
                     return validRewardType
                 })
                 if (locationName === undefined) {
-                    result.invalidated = true
+                    result.valid = false
                     return
                 }
                 result.locations[locationName] = rewardName
@@ -1765,7 +1765,7 @@
                 }
                 availableChecks.splice(availableChecks.indexOf(locationName), 1)
             })
-            if (result.invalidated) {
+            if (!result.valid) {
                 return result
             }
         }
@@ -1779,7 +1779,7 @@
             debugInfo: {
                 attemptCounter: 0,
             },
-            invalidated: false,
+            valid: true,
             locations: {},
         }
         // Second Castle checks are forced to be filler Bat upgrades
@@ -1936,7 +1936,7 @@
                 const mainCount = 1
                 if (prospectiveRewards.length < mainCount) {
                     // console.log('--> 1943 (prospectiveRewards.length < mainCount)')
-                    result.invalidated = true
+                    result.valid = false
                     return result
                 }
                 prospectiveRewards.sort((rewardA, rewardB) => {
@@ -1952,7 +1952,7 @@
                 }
                 if (availableChecks.length < currentLayerRewards.length) {
                     // console.log(`--> 1969 (availableChecks.length (${availableChecks.length}) < currentLayerRewards.length (${currentLayerRewards.length}))`)
-                    result.invalidated = true
+                    result.valid = false
                     return result
                 }
                 while (
@@ -1988,7 +1988,7 @@
                     //     assignments: assignments,
                     //     rewards: rewards,
                     // })
-                    result.invalidated = true
+                    result.valid = false
                     return result
                 }
                 switch (progressionStatus) {
@@ -2009,7 +2009,7 @@
             .forEach((rewardName) => {
                 if (availableChecks.length < 1) {
                     // console.log('--> 2049 (availableChecks.length < 1)')
-                    result.invalidated = true
+                    result.valid = false
                     return
                 }
                 rewards.progression.set(rewardName, true)
@@ -2033,7 +2033,7 @@
                 })
                 if (locationName === undefined) {
                     // console.log('--> 2073 (locationName === undefined)')
-                    result.invalidated = true
+                    result.valid = false
                     return
                 }
                 result.locations[locationName] = rewardName
@@ -2047,8 +2047,8 @@
                 }
                 availableChecks.splice(availableChecks.indexOf(locationName), 1)
             })
-            if (result.invalidated) {
-                // console.log('--> 2089 (result.invalidated)')
+            if (!result.valid) {
+                // console.log('--> 2089 (result.valid)')
                 return result
             }
         }
@@ -2058,7 +2058,7 @@
             rewards.filler.length > 0
         ) {
             // console.log('--> 2099 (rewards.xxx.length > 0)')
-            result.invalidated = true
+            result.valid = false
         }
         console.log('layers:', debug.layers)
         return result
@@ -2070,7 +2070,7 @@
             debugInfo: {
                 attemptCounter: 0,
             },
-            invalidated: false,
+            valid: true,
         }
         const locationNames = Object.keys(LOCATIONS).toSorted()
         let validInd = false

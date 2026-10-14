@@ -83,6 +83,15 @@ const argv = yargs(process.argv.slice(2))
                 describe: 'If supplied, this seed is always used for supplying randomness to the reward shuffler',
                 type: 'string',
             })
+        // Room shuffler options
+            .option('roomShuffler.on', {
+                describe: 'Whether or not to shuffle how rooms within a stage connect. If disabled, all other options in this category are ignored.',
+                type: 'boolean',
+            })
+            .option('roomShuffler.seed', {
+                describe: 'If supplied, this seed is always used for supplying randomness to the room shuffler',
+                type: 'string',
+            })
         // Stage shuffler options
             .option('stageShuffler.on', {
                 describe: 'Whether or not to shuffle the connections between stages (aka, teleporters). If disabled, all other options in this category are ignored.',
@@ -138,6 +147,15 @@ const argv = yargs(process.argv.slice(2))
                 }
                 if ('method' in argv.rewardShuffler) {
                     shufflerOptions.rewardShuffler.method = argv.rewardShuffler.method
+                }
+            }
+            if ('roomShuffler' in argv) {
+                shufflerOptions.roomShuffler = {}
+                if (('on' in argv.roomShuffler)) {
+                    shufflerOptions.roomShuffler.on = argv.roomShuffler.on
+                }
+                if ('seed' in argv.roomShuffler) {
+                    shufflerOptions.roomShuffler.seed = argv.roomShuffler.seed
                 }
             }
             if ('stageShuffler' in argv) {

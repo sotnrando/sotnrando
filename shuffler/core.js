@@ -1,5 +1,6 @@
 (function (self) {
     // let seedrandom
+    let common
     let musicShuffler
     let wordGenerator
     let rewardShuffler
@@ -8,6 +9,7 @@
 
     if (self) {
         // seedrandom = Math.seedrandom
+        common = self.sotnShuffler.common
         musicShuffler = self.sotnShuffler.musicShuffler
         rewardShuffler = self.sotnShuffler.rewardShuffler
         roomShuffler = self.sotnShuffler.roomShuffler
@@ -15,12 +17,16 @@
         wordGenerator = self.sotnShuffler.wordGenerator
     } else {
         // seedrandom = require('seedrandom')
+        common = require('./common')
         musicShuffler = require('./music-shuffler')
         rewardShuffler = require('./reward-shuffler')
         roomShuffler = require('./room-shuffler')
         stageShuffler = require('./stage-shuffler')
         wordGenerator = require('./word-generator')
     }
+
+    const MIN_MAP_COL = 1
+    const MIN_MAP_ROW = 5
 
     const PATCHES = {
         assignUniqueIdToRelicAfterDrawbridge: {
@@ -5640,6 +5646,22 @@
         }
     }
 
+    const STAGE_NAMES = [
+        'abandonedMine', // b71e5049
+        'alchemyLaboratory', // 3b71a88a
+        'castleEntrance', // c26a5062
+        'castleKeep', // c3d8062f
+        'catacombs', // ac96a224
+        'clockTower', // cc096706
+        'colosseum', // b1e56d5c
+        'longLibrary', // b7ef913a
+        'marbleGallery', // 5c9eb714
+        'olroxsQuarters', // 1925cd80
+        'outerWall', // 3b2daaad
+        'royalChapel', // 1c76841f
+        'undergroundCaverns', // 0c4c1b6d
+    ]
+
     function getChangesFromOptions(shufflerOptions, extractionData) {
         const result = []
         // Determine seed name
@@ -5658,51 +5680,137 @@
             const songChanges = musicShuffler.shuffleSongs(seed)
             result.push(musicShuffler.getSongChanges(songChanges))
         }
-        // ...
+        // Some modules (those that modify or depend on logic) must be run inside a loop because the solver might need to verify them
         const analysis = {
             locationRewards: rewardShuffler.getVanillaRewardLocations(),
+            prospectiveChanges: [],
             roomPositions: roomShuffler.getVanillaRoomPositions(extractionData),
-            solverAttemptId: 0,
+            seeds: {},
+            solver: {
+                attempts: 0,
+                mapChanged: false,
+                valid: false,
+            },
             stageLinks: stageShuffler.getVanillaStageLinks(),
+            stageNodeGroups: {},
         }
-        // Shuffle stages
-        if (shufflerOptions?.stageShuffler?.on ?? false) {
-            const seed = shufflerOptions.stageShuffler.seed ?? (seedName + '.stageShuffler.' + analysis.solverAttemptId)
-            analysis.stageLinks = stageShuffler.shuffleStages(seed).links
-            result.push(
-                stageShuffler.getTeleporterChanges(extractionData, analysis.stageLinks)
-            )
-        }
-        // Shuffle rewards
-        if (shufflerOptions?.rewardShuffler?.on ?? false) {
-            const seed = shufflerOptions.rewardShuffler.seed ?? (seedName + '.rewardShuffler.' + analysis.solverAttemptId)
-            let questRewards
-            while (questRewards?.invalidated ?? true) {
-                console.log('seed:', seed)
+        // Loop until solver is valid
+        while (!analysis.solver.valid) {
+            analysis.prospectiveChanges.length = 0
+            analysis.solver.attempts += 1
+            analysis.solver.mapChanged = false
+            analysis.solver.valid = true
+            console.log('analysis.solver.attempts:', analysis.solver.attempts)
+            // Shuffle stages
+            if (shufflerOptions?.stageShuffler?.on ?? false) {
+                console.log(' ... Shuffle stages')
+                analysis.seeds.stageShuffler = shufflerOptions.stageShuffler.seed ?? (seedName + '.stageShuffler.' + analysis.solver.attempts)
+                analysis.stageLinks = stageShuffler.shuffleStages(analysis.seeds.stageShuffler).links
+                analysis.prospectiveChanges.push(
+                    stageShuffler.getTeleporterChanges(extractionData, analysis.stageLinks)
+                )
+                analysis.solver.mapChanged = true
+            }
+            // TODO(sestren): Shuffle rooms
+                // console.log(' ... Shuffle rooms')
+            // ...
+            // Redraw map
+            if (analysis.solver.mapChanged) {
+                console.log(' ... Redraw map')
+                if (
+                    (shufflerOptions?.stageShuffler?.on ?? false) &&
+                    !(shufflerOptions?.roomShuffler?.on ?? false)
+                ) {
+                    STAGE_NAMES
+                    .forEach((stageName) => {
+                        analysis.stageNodeGroups[stageName] = roomShuffler.getVanillaNodeGroupForStage(extractionData, stageName)
+                    })
+                }
+                // Attach warpRooms to the stages they lead to
+                Object.entries(analysis.stageLinks)
+                .filter(([teleporterSource, teleporterTarget]) => {
+                    return teleporterSource.startsWith('fromWarpRoomsTo')
+                })
+                .forEach(([teleporterSource, teleporterTarget]) => {
+                    const stageName = common.TELEPORTERS[teleporterTarget].sourceStage
+                    const targetStage = common.TELEPORTERS[teleporterTarget].targetStage
+                    const roomName = 'loadingRoomTo' + targetStage.at(0).toUpperCase() + targetStage.slice(1)
+                    // NOTE(sestren): Centering on the loading room is a reliable way to match the rooms without having to know the direction
+                    let matchingRoomCount = 0
+                    analysis.stageNodeGroups[stageName].rooms
+                    .filter((roomInfo) => {
+                        return (roomInfo.stage === stageName) && (roomInfo.room === roomName)
+                    })
+                    .forEach((roomInfo) => {
+                        matchingRoomCount += 1
+                        const rowOffset = roomInfo.row
+                        const columnOffset = roomInfo.column - 1
+                        const warpRoomGroupName = 'warpRoomTo' + teleporterSource.split('WarpRoomsTo').at(1)
+                        const warpRoomGroup = roomShuffler.NODE_GROUPS.warpRooms[warpRoomGroupName]
+                        analysis.stageNodeGroups[stageName] = roomShuffler.combineNodeGroups(
+                            analysis.stageNodeGroups[stageName], warpRoomGroup, rowOffset, columnOffset, { allowOverlaps: true }
+                        )
+                    })
+                    if (matchingRoomCount < 1)  {
+                        throw Error(`Room not found for stage '${stageName}' and room '${roomName}'`)
+                    }
+                })
+                analysis.seeds.stageArranger = seedName + '.stageArranger'
+                analysis.roomPositions = roomShuffler.arrangeStages(analysis.seeds.stageArranger, analysis.stageNodeGroups).rooms
+                // Move Forest Cutscene in Castle Entrance out of the way
+                analysis.roomPositions.push(
+                    {
+                        stage: "castleEntrance",
+                        room: "forestCutscene",
+                        row: 0,
+                        column: 2,
+                    },
+                    {
+                        stage: "castleEntrance",
+                        room: "unknownRoom19",
+                        row: 0,
+                        column: 20,
+                    },
+                )
+                analysis.prospectiveChanges.push(
+                    roomShuffler.getRoomChanges(analysis.roomPositions, MIN_MAP_ROW, MIN_MAP_COL)
+                )
+            }
+            // Shuffle rewards
+            if (shufflerOptions?.rewardShuffler?.on ?? false) {
+                console.log(' ... Shuffle rewards')
+                analysis.seeds.rewardShuffler = shufflerOptions.rewardShuffler.seed ?? (seedName + '.rewardShuffler.' + analysis.solver.attempts)
+                let questRewards
+                // TODO(sestren): Add maxAttempts to quest reward solving
                 switch (shufflerOptions.rewardShuffler.method) {
                     case 'chained':
-                        questRewards = rewardShuffler.assignChainedRewards(seed, analysis)
-                        // if (questRewards.invalidated) {
-                        //     analysis.invalidated = true
-                        // }
+                        questRewards = rewardShuffler.assignChainedRewards(analysis.seeds.rewardShuffler, analysis)
                         break
                     case 'layered':
-                        questRewards = rewardShuffler.assignLayeredRewards(seed, analysis)
-                        // if (questRewards.invalidated) {
-                        //     analysis.invalidated = true
-                        // }
+                        questRewards = rewardShuffler.assignLayeredRewards(analysis.seeds.rewardShuffler, analysis)
                         break
                     case 'unbiased':
                     default:
-                        questRewards = rewardShuffler.assignUnbiasedRewards(seed)
+                        questRewards = rewardShuffler.assignUnbiasedRewards(analysis.seeds.rewardShuffler)
                         break
                 }
+                // console.log('questRewards.valid:', questRewards.valid)
+                analysis.locationRewards = questRewards.locations
+                analysis.prospectiveChanges.push(rewardShuffler.getRewardChanges(questRewards.locations))
+                if (!questRewards.valid) {
+                    analysis.solver.valid = false
+                }
             }
-            console.log('questRewards.invalidated:', questRewards.invalidated)
-            analysis.locationRewards = questRewards.locations
-            result.push(rewardShuffler.getRewardChanges(questRewards.locations))
         }
+        // TODO(sestren): Add hints
+        // ...
+        // Promote prospective changes
+        analysis.prospectiveChanges
+        .forEach((prospectiveChange) => {
+            result.push(prospectiveChange)
+        })
         // Apply patches
+        console.log('Apply patches')
         if (shufflerOptions?.patcher?.on ?? false) {
             const patcherList = shufflerOptions?.patcher?.list ?? []
             patcherList
