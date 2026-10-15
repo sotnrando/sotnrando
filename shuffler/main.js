@@ -51,6 +51,21 @@ const argv = yargs(process.argv.slice(2))
                 describe: 'Seed to provide for randomization',
                 type: 'string',
             })
+        // Hinter options
+            .option('hinter.seedName', {
+                describe: 'Whether or not to display the seed value on the file select screen',
+                type: 'boolean',
+            })
+            .option('hinter.options', {
+                describe: 'Whether or not to display a hash value of the options used on the file select screen',
+                type: 'boolean',
+                // The hash value can be used to demonstrate that two separate PPFs were very likely generated with the same options.
+                // It is only meant to help in catching accidental options changes, and may not help in catching well-crafted, malicious ones.
+            })
+            .option('hinter.stageLinks', {
+                describe: 'Whether or not to add a label identifying each pair of loading rooms on the castle map; will only apply to loading room pairs that do not occupy the same map position already',
+                type: 'boolean',
+            })
         // Music shuffler options
             .option('musicShuffler.on', {
                 describe: 'Whether or not to enable shuffling of in-game music; if disabled, all other options in this category are ignored',
@@ -126,6 +141,18 @@ const argv = yargs(process.argv.slice(2))
                 }
                 if ('list' in argv.patcher) {
                     shufflerOptions.patcher.list = argv.patcher.list
+                }
+            }
+            if ('hinter' in argv) {
+                shufflerOptions.hinter = {}
+                if (('seedName' in argv.hinter)) {
+                    shufflerOptions.hinter.seedName = argv.hinter.seedName
+                }
+                if (('options' in argv.hinter)) {
+                    shufflerOptions.hinter.options = argv.hinter.options
+                }
+                if (('stageLinks' in argv.hinter)) {
+                    shufflerOptions.hinter.stageLinks = argv.hinter.stageLinks
                 }
             }
             if ('musicShuffler' in argv) {

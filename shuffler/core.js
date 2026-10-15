@@ -5748,9 +5748,9 @@
                 // console.log('debug:', inspect(debug, { depth: 4 }))
                 analysis.solver.mapChanged = true
             }
-            // Redraw map
+            // Rearrange stages
             if (analysis.solver.mapChanged) {
-                console.log(' ... Redraw map')
+                console.log(' ... Rearrange stages')
                 if (
                     (shufflerOptions?.stageShuffler?.on ?? false) &&
                     !(shufflerOptions?.roomShuffler?.on ?? false)
@@ -5809,6 +5809,7 @@
                 analysis.prospectiveChanges.push(
                     roomShuffler.getRoomChanges(analysis.roomPositions, MIN_MAP_ROW, MIN_MAP_COL)
                 )
+                // BUG(sestren): Castle map wasn't redrawn!!
             }
             // Shuffle rewards
             if (shufflerOptions?.rewardShuffler?.on ?? false) {
@@ -5836,8 +5837,171 @@
                 }
             }
         }
-        // TODO(sestren): Add hints
-        // ...
+        // Redraw map
+        if (analysis.solver.mapChanged) {
+            console.log(' ... Redraw map')
+            // Add labels to map
+            let mapPixels = roomShuffler.MAP_PIXELS
+            if (shufflerOptions.hinter?.stageLinks && (
+                (shufflerOptions.stageShuffler?.on ?? false) || (shufflerOptions.roomShuffler?.on ?? false)
+            )) {
+                mapPixels = roomShuffler.getMapPixels(analysis.stageLinks, analysis.roomPositions)
+            }
+            const mapGrid = []
+            for (let row = 0; row < 256; row++) {
+                const rowData = '0'.repeat(256)
+                mapGrid.push(rowData)
+            }
+            analysis.roomPositions
+            .filter((roomInfo) => {
+                return (
+                    roomInfo.stage in mapPixels &&
+                    roomInfo.room in mapPixels[roomInfo.stage]
+                )
+            })
+            .forEach((roomInfo) => {
+                for (let fillIndex = 0; fillIndex < mapPixels[roomInfo.stage][roomInfo.room].length; fillIndex++) {
+                    const fillData = mapPixels[roomInfo.stage][roomInfo.room].at(fillIndex)
+                    switch (fillData.command) {
+                        case 'fillRect':
+                            const pixelRow = 4 * (MIN_MAP_ROW + roomInfo.row) + fillData.parameters.top
+                            const pixelColumn = 4 * (MIN_MAP_COL + roomInfo.column) + fillData.parameters.left
+                            for (let rowOffset = 0; rowOffset < fillData.parameters.rows; rowOffset++) {
+                                const leftSide = mapGrid.at(pixelRow + rowOffset).slice(0, pixelColumn)
+                                const rightSide = mapGrid.at(pixelRow + rowOffset).slice(pixelColumn + fillData.parameters.columns)
+                                mapGrid[pixelRow + rowOffset] = leftSide + fillData.parameters.colorIndex.repeat(fillData.parameters.columns) + rightSide
+                            }
+                            break
+                        case 'drawGlyph':
+                            fillData.parameters.glyph
+                            .forEach((rowData, rowOffset) => {
+                                Array.from(rowData)
+                                .forEach((char, colOffset) => {
+                                    if (char === '.') {
+                                        return
+                                    }
+                                    const pixelRow = 4 * (MIN_MAP_ROW + roomInfo.row) + rowOffset + fillData.parameters.top
+                                    const pixelColumn = 4 * (MIN_MAP_COL + roomInfo.column) + colOffset + fillData.parameters.left
+                                    const leftSide = mapGrid.at(pixelRow).slice(0, pixelColumn)
+                                    const rightSide = mapGrid.at(pixelRow).slice(pixelColumn + 1)
+                                    mapGrid[pixelRow] = leftSide + fillData.parameters.colorIndex + rightSide
+                                })
+                            })
+                            break
+                        default:
+                            console.log(`WARNING: Unknown value for command property: ${fillData.command}`)
+                            break
+                    }
+                }
+            })
+            const mapChanges = {
+                authors: [
+                    'Sestren',
+                ],
+                changes: [
+                    {
+                        changeType: 'merge',
+                        merge: {
+                            'castleMap.data=': mapGrid,
+                        },
+                    },
+                ],
+                description: [
+                    'Draw customized castle map',
+                ],
+            }
+            analysis.prospectiveChanges.push(mapChanges)
+            // Recalculate castle map reveals
+            const cellsToReveal = new Map()
+            let minRevealRow = 63
+            let minRevealColumn = 63
+            let maxRevealRow = 0
+            let maxRevealColumn = 0
+            for (let row = 0; row < mapGrid.length; row++) {
+                for (let column = 0; column < mapGrid.at(row).length; column++) {
+                    if (mapGrid.at(row).at(column) !== '0') {
+                        const revealRow = Math.floor(row / 4)
+                        const revealColumn = Math.floor(column / 4)
+                        const cellToReveal = [revealRow, revealColumn].join(',')
+                        cellsToReveal.set(cellToReveal, true)
+                        minRevealRow = Math.min(minRevealRow, revealRow)
+                        minRevealColumn = Math.min(minRevealColumn, revealColumn)
+                        maxRevealRow = Math.max(maxRevealRow, revealRow)
+                        maxRevealColumn = Math.max(maxRevealColumn, revealColumn)
+                    }
+                }
+            }
+            const bytesPerRow = Math.ceil((1 + maxRevealColumn - minRevealColumn) / 8)
+            const revealRows = Math.min(64, (1 + maxRevealRow - minRevealRow), Math.floor(2432 / (8 * bytesPerRow)))
+            const castleMapReveals = {
+                bytesPerRow: bytesPerRow,
+                grid: [],
+                left: Math.max(0, 1 + maxRevealColumn - (bytesPerRow * 8)),
+                rows: revealRows,
+                top: Math.max(0, 1 + maxRevealRow - revealRows),
+            }
+            for (let row = 0; row < revealRows; row++) {
+                castleMapReveals.grid.push(' '.repeat(8 * bytesPerRow))
+            }
+            cellsToReveal
+            .forEach((value, key) => {
+                const coordinate = key.split(',')
+                const row = coordinate.at(0) - castleMapReveals.top
+                const column = coordinate.at(1) - castleMapReveals.left
+                if (
+                    (row >= 0) &&
+                    (row < castleMapReveals.rows) &&
+                    (column >= 0) &&
+                    (column < (8 * bytesPerRow))
+                ) {
+                    const leftSide = castleMapReveals.grid.at(row).slice(0, column)
+                    const rightSide = castleMapReveals.grid.at(row).slice(column + 1)
+                    castleMapReveals.grid[row] = leftSide + '#' + rightSide
+                }
+            })
+            const mapRevealChanges = {
+                authors: [
+                    'Sestren',
+                ],
+                changes: [
+                    {
+                        changeType: 'merge',
+                        merge: {
+                            'castleMapReveals.data=': castleMapReveals,
+                        },
+                    }
+                ],
+                description: [
+                    'Reveal customized map when purchased in the shop',
+                ],
+            }
+            analysis.prospectiveChanges.push(mapRevealChanges)
+        }
+        // Add hints to the file select menu
+        if (shufflerOptions.hinter?.seedName || shufflerOptions.hinter?.options) {
+            const hintMessages = [
+                (shufflerOptions.hinter?.seedName) ? seedName : '',
+                (shufflerOptions.hinter?.options) ? common.hashedObject(shufflerOptions, ['seed', ]) : '',
+            ]
+            const hintChanges = {
+                authors: [
+                    'Sestren',
+                ],
+                changes: [
+                    {
+                        changeType: 'merge',
+                        merge: {
+                            'messages.richterModeInstructions1.data=': hintMessages.at(0),
+                            'messages.richterModeInstructions2.data=': hintMessages.at(1),
+                        },
+                    },
+                ],
+                description: [
+                    'Display hints on the file select screen',
+                ],
+            }
+            analysis.prospectiveChanges.push(hintChanges)
+        }
         // Promote prospective changes
         analysis.prospectiveChanges
         .forEach((prospectiveChange) => {

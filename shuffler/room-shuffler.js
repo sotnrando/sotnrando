@@ -9231,26 +9231,26 @@
         .filter(([sourceTeleporterName, targetTeleporterName]) => {
             // TODO(sestren): Don't draw labels if the loading rooms overlap (not just for Warp Rooms, will need roomPositions)
             return ![
-                TELEPORTERS[sourceTeleporterName].sourceStage,
-                TELEPORTERS[targetTeleporterName].sourceStage,
+                common.TELEPORTERS[sourceTeleporterName].sourceStage,
+                common.TELEPORTERS[targetTeleporterName].sourceStage,
             ].includes('warpRooms')
         })
         .forEach(([sourceTeleporterName, targetTeleporterName]) => {
             const charIndex = Math.floor(assignments.size / 2)
             const glyphName = chars.at(charIndex)
             if (!assignments.has(sourceTeleporterName)) {
-                const sourceStage = TELEPORTERS[sourceTeleporterName].sourceStage
-                const targetStage = TELEPORTERS[sourceTeleporterName].targetStage
-                const joinedStage = TELEPORTERS[targetTeleporterName].sourceStage
+                const sourceStage = common.TELEPORTERS[sourceTeleporterName].sourceStage
+                const targetStage = common.TELEPORTERS[sourceTeleporterName].targetStage
+                const joinedStage = common.TELEPORTERS[targetTeleporterName].sourceStage
                 const targetRoom = 'loadingRoomTo' + targetStage.at(0).toUpperCase() + targetStage.slice(1)
                 result[sourceStage][targetRoom].push(fillRect(COLORS.loadingRoom, 1, 1, 3, 3))
                 result[sourceStage][targetRoom].push(drawGlyph(COLORS[joinedStage], glyphName, 1, 1))
                 assignments.set(sourceTeleporterName, glyphName)
             }
             if (!assignments.has(targetTeleporterName)) {
-                const sourceStage = TELEPORTERS[targetTeleporterName].sourceStage
-                const targetStage = TELEPORTERS[targetTeleporterName].targetStage
-                const joinedStage = TELEPORTERS[sourceTeleporterName].sourceStage
+                const sourceStage = common.TELEPORTERS[targetTeleporterName].sourceStage
+                const targetStage = common.TELEPORTERS[targetTeleporterName].targetStage
+                const joinedStage = common.TELEPORTERS[sourceTeleporterName].sourceStage
                 const targetRoom = 'loadingRoomTo' + targetStage.at(0).toUpperCase() + targetStage.slice(1)
                 result[sourceStage][targetRoom].push(fillRect(COLORS.loadingRoom, 1, 1, 3, 3))
                 result[sourceStage][targetRoom].push(drawGlyph(COLORS[joinedStage], glyphName, 1, 1))

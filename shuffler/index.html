@@ -12,6 +12,31 @@
                             <div>
                                 <input name="seed" type="text" placeholder="Optional" />
                             </div>
+                            <div>
+                                <input name="hinter.seedName" type="checkbox" checked />
+                                <label for="hinter.seedName">Show seed name on file select screen?</label>
+                            </div>
+                            <div>
+                                <input name="hinter.options" type="checkbox" checked />
+                                <label for="hinter.options">Show options checksum on file select screen?</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="div_mapShuffler">
+                        <fieldset>
+                            <legend>Map Shuffler</legend>
+                            <div>
+                                <input name="roomShuffler.on" type="checkbox" checked />
+                                <label for="roomShuffler.on">Shuffle rooms?</label>
+                            </div>
+                            <div>
+                                <input name="stageShuffler.on" type="checkbox" checked />
+                                <label for="stageShuffler.on">Shuffle stages?</label>
+                            </div>
+                            <div>
+                                <input name="hinter.stageLinks" type="checkbox" checked />
+                                <label for="hinter.stageLinks">Show stage links on loading rooms on the map?</label>
+                            </div>
                         </fieldset>
                     </div>
                     <div id="div_musicShuffler">
@@ -23,7 +48,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div id="div_seed">
+                    <div id="div_rewardShuffler">
                         <fieldset>
                             <legend>Reward Shuffler</legend>
                             <div>
@@ -40,24 +65,6 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div id="div_seed">
-                        <fieldset>
-                            <legend>Room Shuffler</legend>
-                            <div>
-                                <input name="roomShuffler.on" type="checkbox" checked />
-                                <label for="roomShuffler.on">Shuffle rooms?</label>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div id="div_seed">
-                        <fieldset>
-                            <legend>Stage Shuffler</legend>
-                            <div>
-                                <input name="stageShuffler.on" type="checkbox" checked />
-                                <label for="stageShuffler.on">Shuffle stages?</label>
-                            </div>
-                        </fieldset>
-                    </div>
                     <div id="div_toggles">
                         <fieldset>
                             <legend>Patches</legend>
@@ -66,7 +73,7 @@
                                 <label for="patcher.list=assignUniqueIdToRelicAfterDrawbridge">Assign Unique ID to Relic After Drawbridge?</label>
                             </div>
                             <div>
-                                <input name="patcher.list" value="enableDebugMode" type="checkbox" />
+                                <input name="patcher.list" value="enableDebugMode" type="checkbox" checked />
                                 <label for="enableDebugMode">Enable Debug Mode?</label>
                             </div>
                             <div>
@@ -119,11 +126,11 @@
                         <fieldset>
                             <legend>Clock Face Display</legend>
                             <div>
-                                <input type="radio" name="clockFaceDisplay" value="minutesAndSeconds" />
+                                <input type="radio" name="clockFaceDisplay" value="minutesAndSeconds" checked />
                                 <label for="minutesAndSeconds">Custom (Minutes and Seconds)</label>
                             </div>
                             <div>
-                                <input type="radio" name="clockFaceDisplay" value="hoursAndMinutes" checked />
+                                <input type="radio" name="clockFaceDisplay" value="hoursAndMinutes" />
                                 <label for="hoursAndMinutes">Normal (Hours and Minutes)</label>
                             </div>
                         </fieldset>
