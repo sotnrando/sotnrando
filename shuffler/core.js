@@ -5711,9 +5711,43 @@
                 )
                 analysis.solver.mapChanged = true
             }
-            // TODO(sestren): Shuffle rooms
-                // console.log(' ... Shuffle rooms')
-            // ...
+            // Shuffle rooms
+            if (shufflerOptions?.roomShuffler?.on ?? false) {
+                console.log(' ... Shuffle rooms')
+                analysis.seeds.roomShuffler = shufflerOptions.roomShuffler.seed ?? (seedName + '.roomShuffler.' + analysis.solver.attempts)
+                analysis.seeds.stages = {}
+                STAGE_NAMES
+                .forEach((stageName) => {
+                    let stageAttemptCount = 0
+                    while (true) {
+                        stageAttemptCount += 1
+                        const stageSeed = analysis.seeds.roomShuffler + '.' + stageName + '.' + stageAttemptCount
+                        // console.log('stageSeed:', stageSeed)
+                        const shuffledRooms = roomShuffler.shuffleRooms(stageSeed, stageName, true)
+                        let validInd = true
+                        if (stageName in roomShuffler.VALIDATIONS) {
+                            // console.log('stageName:', stageName)
+                            validInd = roomShuffler.VALIDATIONS[stageName]
+                            .every((validation) => {
+                                const logic = common.getLogic({
+                                    solverAttemptId: analysis.solver.attempts,
+                                    locationRewards: {},
+                                    stageLinks: {},
+                                    roomPositions: shuffledRooms.rooms,
+                                }, true)
+                                return common.validate(logic, validation)
+                            })
+                        }
+                        if (validInd) {
+                            analysis.stageNodeGroups[stageName] = shuffledRooms
+                            analysis.seeds.stages[stageName] = stageSeed
+                            break
+                        }
+                    }
+                })
+                // console.log('debug:', inspect(debug, { depth: 4 }))
+                analysis.solver.mapChanged = true
+            }
             // Redraw map
             if (analysis.solver.mapChanged) {
                 console.log(' ... Redraw map')
@@ -5782,17 +5816,17 @@
                 analysis.seeds.rewardShuffler = shufflerOptions.rewardShuffler.seed ?? (seedName + '.rewardShuffler.' + analysis.solver.attempts)
                 let questRewards
                 // TODO(sestren): Add maxAttempts to quest reward solving
-                switch (shufflerOptions.rewardShuffler.method) {
-                    case 'chained':
-                        questRewards = rewardShuffler.assignChainedRewards(analysis.seeds.rewardShuffler, analysis)
-                        break
+                switch (shufflerOptions.rewardShuffler.method ?? 'chained') {
+                    case 'unbiased':
+                        questRewards = rewardShuffler.assignUnbiasedRewards(analysis.seeds.rewardShuffler)
                     case 'layered':
                         questRewards = rewardShuffler.assignLayeredRewards(analysis.seeds.rewardShuffler, analysis)
                         break
-                    case 'unbiased':
-                    default:
-                        questRewards = rewardShuffler.assignUnbiasedRewards(analysis.seeds.rewardShuffler)
+                    case 'chained':
+                        questRewards = rewardShuffler.assignChainedRewards(analysis.seeds.rewardShuffler, analysis)
                         break
+                    default:
+                        throw Error(`Invalid reward shuffling method: '${shufflerOptions.rewardShuffler.method}'`)
                 }
                 // console.log('questRewards.valid:', questRewards.valid)
                 analysis.locationRewards = questRewards.locations

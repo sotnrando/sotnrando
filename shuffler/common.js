@@ -15779,6 +15779,23 @@
         return result
     }
 
+    function validate(logic, validation) {
+        if (validation.debug ?? false) {
+            console.log('logic:', JSON.stringify(logic, null, 4))
+        }
+        let goalFound = findGoal(logic, validation.startingState, validation.goalState)
+        let result = true
+        switch (validation.goalType) {
+            case 'required':
+                result = (goalFound !== null)
+                break
+            case 'forbidden':
+                result = (goalFound === null)
+                break
+        }
+        return result
+    }
+
     function hashedState(state, simple=false) {
         // Example: abandonedMine.bend.main.b8e6fb7c
         const elements = []
@@ -16025,6 +16042,7 @@
         getLogic: getLogic,
         shuffleArray: shuffleArray,
         updateStateWithOutcome: updateStateWithOutcome,
+        validate: validate,
     }
     if (self) {
         self.sotnShuffler = Object.assign(self.sotnShuffler || {}, {

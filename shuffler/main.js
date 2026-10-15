@@ -77,7 +77,7 @@ const argv = yargs(process.argv.slice(2))
             .option('rewardShuffler.method', {
                 describe: 'TODO(sestren): Describe rewardShuffler.method',
                 type: 'string',
-                default: 'unbiased',
+                default: 'chained',
             })
             .option('rewardShuffler.seed', {
                 describe: 'If supplied, this seed is always used for supplying randomness to the reward shuffler',

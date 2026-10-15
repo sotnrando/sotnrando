@@ -6,20 +6,6 @@
         <div>
             <form id="shufflerOptions">
                 <div id="options">
-                <!--
-                    <div id="div_seed">
-                        <label for="seed">Seed</label>
-                        <input id="seed" type="text" placeholder="Optional" value="" />
-                    </div>
-                    <div id="div_roomShuffler">
-                        <label for="roomShuffler.on">Shuffle rooms?</label>
-                        <input id="roomShuffler.on" type="checkbox" checked />
-                    </div>
-                    <div id="div_stageShuffler">
-                        <label for="stageShuffler.on">Shuffle stages?</label>
-                        <input id="stageShuffler.on" type="checkbox" checked />
-                    </div>
-                -->
                     <div id="div_seed">
                         <fieldset>
                             <legend>Seed</legend>
@@ -46,9 +32,9 @@
                             </div>
                             <div>
                                 <select name="rewardShuffler.method">
-                                    <option value="unbiased">Unbiased</option>
-                                    <option value="layered">Layered</option>
                                     <option value="chained">Chained</option>
+                                    <option value="layered">Layered</option>
+                                    <option value="unbiased">Unbiased</option>
                                 </select>
                                 <label for="rewardShuffler.method">Method</label>
                             </div>
@@ -249,6 +235,14 @@
                             result.rewardShuffler = {}
                         }
                         result.rewardShuffler.method = element.at(1)
+                        break
+                    case 'roomShuffler.on':
+                        if (!('roomShuffler' in result)) {
+                            result.roomShuffler = {}
+                        }
+                        if (!('on' in result.roomShuffler)) {
+                            result.roomShuffler.on = true
+                        }
                         break
                     case 'seed':
                         if (element.at(1).length > 0) {
