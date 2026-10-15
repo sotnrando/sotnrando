@@ -16040,6 +16040,8 @@
         TELEPORTERS: TELEPORTERS,
         getEdges: getEdges,
         getLogic: getLogic,
+        hashedObject: hashedObject,
+        hashedText: hashedText,
         shuffleArray: shuffleArray,
         updateStateWithOutcome: updateStateWithOutcome,
         validate: validate,

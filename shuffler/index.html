@@ -162,7 +162,7 @@
             return result
         }
 
-        function generatePPF(extractionData, changesToApply) {
+        function generatePPF(extractionData, changesToApply, ppfDescription) {
             // Start with a blank patch file
             let patchData = BinPatcher.maskNodes(structuredClone(extractionData), 'data')
             // Apply changes to patch file
@@ -173,7 +173,7 @@
                 }
             })
             // Convert patch file to PPF
-            const result = BinPatcher.toPPF(patchData, 'Test')
+            const result = BinPatcher.toPPF(patchData, ppfDescription)
             return result
         }
 
@@ -273,6 +273,7 @@
                 digestMessage(buffer)
                 .then((digestHex) => {
                     console.log('Digest of disc image', digestHex)
+                    data.binDigest = digestHex
                     data.extraction = getExtractionFromBin(buffer)
                     const link = document.getElementById('downloadExtractionLink')
                     link.innerHTML = 'Download extraction.json'
@@ -293,7 +294,11 @@
             // document.getElementById('seed').value = getSeedName(seed)
             let changesToApply = sotnShuffler.core.getChangesFromOptions(shufflerOptions, data.extraction)
             changesToApply = changesToApply.concat(BinPatcher.getDefaultChangeDependencies())
-            const ppfData = generatePPF(data.extraction, changesToApply)
+            const seed = '--------'
+            const version = [1, 0, 0]
+            const shortDescription = sotnShuffler.core.getShortDescription(data.binDigest.toString('hex'), shufflerOptions, seed, version)
+            console.log('shortDescription:', shortDescription)
+            const ppfData = generatePPF(data.extraction, changesToApply, shortDescription)
             console.log('ppfData.length:', ppfData.length)
             // Create link to downloadable PPF
             const link = document.getElementById('downloadPPFLink')

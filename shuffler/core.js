@@ -5855,8 +5855,39 @@
         return result
     }
 
+    function getShortDescription(binDigestHex, shufflerOptions, seed, version) {
+        //   - Max description length on a PPF is 50 characters
+        //   - 00000000011111111112222222222333333333344444444445
+        //     12345687901234568790123456879012345687901234568790
+        //   - sotn 12.34.56 12345678 12345678 12345678 12345678 
+        //   - aaaa vvvvvvvv bbbbbbbb rrrrrrrr ssssssss tttttttt 
+        //   - a=Abbreviation
+        //   - v=Hash of generator version (e.g., '01.00.00')
+        //   - b=Hash of bin digest
+        //   - r=Hash of args (excluding initial seed)
+        //   - s=Hash of initial seed
+        //   - t=Hex of Unix time seed was generated
+        const unixTimeInSeconds = Math.floor(Date.now() / 1000)
+        const versionString = [
+            (version.at(0) % 0x100).toString(16).padStart(2, '0'),
+            (version.at(1) % 0x100).toString(16).padStart(2, '0'),
+            (version.at(2) % 0x100).toString(16).padStart(2, '0'),
+        ].join('.')
+        const pieces = [
+            'sotn',
+            versionString.slice(0, 8),
+            common.hashedText(binDigestHex),
+            common.hashedObject(shufflerOptions, ['seed', ]),
+            common.hashedText(seed),
+            unixTimeInSeconds.toString(16).padStart(8, '0').slice(0, 8),
+        ]
+        const result = pieces.join(' ') + ' '
+        return result
+    }
+
     const exports = {
         getChangesFromOptions: getChangesFromOptions,
+        getShortDescription: getShortDescription,
     }
     if (self) {
         self.sotnShuffler = Object.assign(self.sotnShuffler || {}, {

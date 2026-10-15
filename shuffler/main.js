@@ -12,7 +12,7 @@ function getExtractionFromBin(buffer) {
     return result
 }
 
-function generatePPF(extractionData, changesToApply) {
+function generatePPF(extractionData, changesToApply, ppfDescription) {
     // Start with a blank patch file
     let patchData = BinPatcher.maskNodes(extractionData, 'data')
     // Apply changes to patch file
@@ -23,7 +23,7 @@ function generatePPF(extractionData, changesToApply) {
         }
     })
     // Convert patch file to PPF
-    const result = BinPatcher.toPPF(patchData, 'Test')
+    const result = BinPatcher.toPPF(patchData, ppfDescription)
     return result
 }
 
@@ -111,8 +111,8 @@ const argv = yargs(process.argv.slice(2))
             const buffer = Buffer.alloc(binFileSize)
             fs.readSync(binFile, buffer, 0, binFileSize)
             fs.closeSync(binFile)
-            const digest = crypto.createHash('sha256').update(buffer).digest()
-            console.log('Digest of disc image', digest.toString('hex'))
+            const binDigest = crypto.createHash('sha256').update(buffer).digest()
+            console.log('Digest of disc image', binDigest.toString('hex'))
             const extractionData = getExtractionFromBin(buffer)
             // Generate shuffler options from args
             const shufflerOptions = {}
@@ -170,20 +170,12 @@ const argv = yargs(process.argv.slice(2))
             // Generate PPF from shuffler options
             let changesToApply = core.getChangesFromOptions(shufflerOptions, extractionData)
             changesToApply = changesToApply.concat(SotnPatcher.getDefaultChangeDependencies())
-            const ppfData = generatePPF(extractionData, changesToApply)
+            const seed = '--------'
+            const version = [1, 0, 0]
+            const shortDescription = core.getShortDescription(binDigest.toString('hex'), shufflerOptions, seed, version)
+            console.log('shortDescription:', shortDescription)
+            const ppfData = generatePPF(extractionData, changesToApply, shortDescription)
             fs.writeFileSync(argv.out, ppfData)
-            // TODO(sestren): Add debug data to PPF description
-            //   - Max description length on a PPF is 50 characters
-            //   -          11111111112222222222333333333344444444445
-            //   - 12345687901234568790123456879012345687901234568790
-            //   - sotn 12345678 12345678 12345678 12345678 12345678 
-            //   - aaaa gggggggg rrrrrrrr ssssssss tttttttt vvvvvvvv 
-            //   - a=Abbreviation
-            //   - g=Hash of game name
-            //   - r=Hash of args (excluding initial seed)
-            //   - s=Hash of initial seed
-            //   - t=Hex of Unix time seed was generated
-            //   - v=Hash of generator ID and generator version (e.g., SOTN-Shuffler v1.0.0)
         }
     })
     .demandCommand(1)
