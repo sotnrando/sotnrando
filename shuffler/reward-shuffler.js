@@ -1546,6 +1546,7 @@
             positionX: 136,
             positionY: 640,
             time: 120.0,
+            // techniqueLogicalRisks: true,
             techniqueSolveBoxPuzzle: true,
         }
         // 26 locations in total
@@ -1805,10 +1806,10 @@
         // 24 locations in total
         // Goal is to follow the chain of progression to Flight, then find both Rings
         const minimumLayers = {
-            relicGravityBoots: 2,
+            relicGravityBoots: 3,
             // relicLeapStone: 2,
-            relicPowerOfMist: 2,
-            relicSoulOfBat: 2,
+            relicPowerOfMist: 3,
+            relicSoulOfBat: 3,
         }
         const rewardPriorities = {
             itemSpikeBreaker: 0.9,
