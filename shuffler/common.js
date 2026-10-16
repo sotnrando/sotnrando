@@ -2,10 +2,23 @@
 
     // NOTE(sestren): self.sotnShuffler can't be assigned at the start
 
+    // The following costs are referenced in LOGIC and ROOMS_INFO and denote how long a particular action takes (in seconds)
+    // TODO(sestren): Replace each reference to COST_UNKNOWN with its own value that is more accurate to real gameplay
     const COST_PICKUP_ITEM = 1.0
     const COST_PICKUP_RELIC = 3.0
     const COST_QUICKGRAB_RELIC = 2.5
     const COST_UNKNOWN = 2.0
+    const DISTANCE_TILE = 16
+    // NOTE(sestren): Travelling through vertical screen transitions has to account for the top and bottom "gutters" and a small shift
+    const DISTANCE_VERTICAL_SCREEN_TRANSITION = 44
+    const DISTANCE_JUMP_FULL = 72
+    const DISTANCE_JUMP = 4 * DISTANCE_TILE // Rounded down to account for suboptimal player inputs
+    const DISTANCE_SECOND_JUMP = 55
+    const DISTANCE_DOUBLE_JUMP = DISTANCE_JUMP + DISTANCE_SECOND_JUMP
+    const DISTANCE_DOUBLE_JUMP_PRECISE = DISTANCE_JUMP_FULL + DISTANCE_SECOND_JUMP
+    const DISTANCE_GRAVITY_JUMP = 24 * DISTANCE_TILE // Rounded down to 384 from 387
+    // NOTE(sestren): Hitting the top of the camera as it scrolls upward during a gravity jump results in a much shorter height gain
+    const DISTANCE_GRAVITY_JUMP_HINDERED = 18 * DISTANCE_TILE // Rounded down to 288 from 291
 
     const LOGIC = {
         locations: {
@@ -1691,6 +1704,8 @@
         },
     }
 
+    // In SOTN, it is possible when leaving a room that the player will overlap with more than one other room.
+    // Of the rooms that the player overlaps, the first one that shows up in the priority list is the one they will be sent to.
     const ROOM_PRIORITY = {
         abandonedMine: [
             'wolfsHeadColumn',
@@ -2170,7 +2185,9 @@
                             positionY: 1024 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('doubleJump', 'main', COST_UNKNOWN),
+                            getMovement('poweredMist', 'main', COST_UNKNOWN),
                         ],
                     },
                     toBehindDemonBlock: {
@@ -2402,7 +2419,9 @@
                             positionY: 256 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('doubleJump', 'main', COST_UNKNOWN),
+                            getMovement('poweredMist', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -2577,7 +2596,7 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'layer0', COST_UNKNOWN),
+                            getMovement('basicRisky', 'layer0', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
                             // getMovement('risingUppercut', 'layer0', COST_UNKNOWN),
                             getMovement('batForm', 'layer0', COST_UNKNOWN),
@@ -2602,7 +2621,7 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'layer1', COST_UNKNOWN),
+                            getMovement('basicRisky', 'layer1', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
                             // getMovement('risingUppercut', 'layer1', COST_UNKNOWN),
                             getMovement('batForm', 'layer1', COST_UNKNOWN),
@@ -2627,7 +2646,7 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'layer2', COST_UNKNOWN),
+                            getMovement('basicRisky', 'layer2', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
                             // getMovement('risingUppercut', 'layer2', COST_UNKNOWN),
                             getMovement('batForm', 'layer2', COST_UNKNOWN),
@@ -2652,7 +2671,7 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'layer3', COST_UNKNOWN),
+                            getMovement('basicRisky', 'layer3', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
                             // getMovement('risingUppercut', 'layer3', COST_UNKNOWN),
                             getMovement('batForm', 'layer3', COST_UNKNOWN),
@@ -3445,7 +3464,9 @@
                             positionY: 256 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -3611,7 +3632,9 @@
                             positionY: 512 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
                     toUpperRightLedge: {
@@ -4176,7 +4199,7 @@
                     exitTop: {
                         outcome: {
                             positionX: 128,
-                            positionY: 0 - 56,
+                            positionY: 0 - 56, // TODO(sestren): Add velocityY
                         },
                         requirements: [
                             getMovement('jump', 'upperLedge', 0.7),
@@ -4408,7 +4431,7 @@
                     exitTop: {
                         outcome: {
                             positionX: 128,
-                            positionY: 0 - 56,
+                            positionY: 0 - 56, // TODO(sestren): Add velocityY
                         },
                         requirements: [
                             getMovement('batForm', 'holeInCeiling', COST_UNKNOWN),
@@ -4650,7 +4673,7 @@
                     exitTop: {
                         outcome: {
                             positionX: 128,
-                            positionY: 0 - 56,
+                            positionY: 0 - 56, // TODO(sestren): Add velocityY
                         },
                         requirements: [
                             getMovement('batForm', 'highIntheAir', COST_UNKNOWN),
@@ -5846,7 +5869,9 @@
                             positionY: 512 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('basicRisky', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('batForm', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'holeInFloor', COST_UNKNOWN),
                         ],
                     },
                     toHoleInCeiling: {
@@ -6142,7 +6167,9 @@
                             // section: 'main',
                         },
                         requirements: [
-                            getMovement('fall', 'upperLedges', COST_UNKNOWN),
+                            getMovement('basicRisky', 'upperLedges', COST_UNKNOWN),
+                            getMovement('batForm', 'upperLedges', COST_UNKNOWN),
+                            getMovement('gravityJump', 'upperLedges', COST_UNKNOWN),
                         ],
                     },
                     toUpperLedges: {
@@ -6957,7 +6984,9 @@
                             positionY: 256 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('gravityJump', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -6983,7 +7012,7 @@
                     exitTop: { // TODO(sestren): Put logic here
                         outcome: {
                             positionX: 1072,
-                            positionY: 0 - 24,
+                            positionY: 0 - 24, // TODO(sestren): Add velocityY
                         },
                         requirements: [
                             getMovement('batForm', 'main', COST_UNKNOWN),
@@ -7476,6 +7505,7 @@
                     getRegion('main', 0, 1104, 1536, 176),
                 ],
                 commands: {
+                    // TODO(sestren): Add return logic - Flight
                     exitLeftUpper: {
                         outcome: {
                             positionX: 0 - 8,
@@ -8777,7 +8807,15 @@
                             // section: 'upperLevel',
                         },
                         requirements: [
-                            getMovement('fall', 'topRightLedge', COST_UNKNOWN),
+                            // Moving downward, chance of return not guaranteed
+                            getMovement('basicRisky', 'topRightLedge', COST_UNKNOWN),
+                            // Moving downward, chance of return guaranteed
+                            // getMovement('risingUppercut', 'topRightLedge', COST_UNKNOWN),
+                            getMovement('batForm', 'topRightLedge', COST_UNKNOWN),
+                            getMovement('doubleJump', 'topRightLedge', COST_UNKNOWN),
+                            getMovement('gravityJump', 'topRightLedge', COST_UNKNOWN),
+                            getMovement('poweredMist', 'topRightLedge', COST_UNKNOWN),
+                            getMovement('wolfMistRise', 'topRightLedge', COST_UNKNOWN),
                             // getMovement('risingUppercut', 'middleLevel', COST_UNKNOWN),
                             getMovement('batForm', 'middleLevel', COST_UNKNOWN),
                             getMovement('doubleJump', 'middleLevel', COST_UNKNOWN),
@@ -8793,7 +8831,15 @@
                             // section: 'middleLevel',
                         },
                         requirements: [
-                            getMovement('fall', 'upperLevel', COST_UNKNOWN),
+                            // Moving downward, chance of return not guaranteed
+                            getMovement('basicRisky', 'upperLevel', COST_UNKNOWN),
+                            // Moving downward, chance of return guaranteed
+                            // getMovement('risingUppercut', 'upperLevel', COST_UNKNOWN),
+                            getMovement('batForm', 'upperLevel', COST_UNKNOWN),
+                            getMovement('doubleJump', 'upperLevel', COST_UNKNOWN),
+                            getMovement('gravityJump', 'upperLevel', COST_UNKNOWN),
+                            getMovement('poweredMist', 'upperLevel', COST_UNKNOWN),
+                            getMovement('wolfMistRise', 'upperLevel', COST_UNKNOWN),
                             // getMovement('risingUppercut', 'lowerLevel', COST_UNKNOWN),
                             getMovement('batForm', 'lowerLevel', COST_UNKNOWN),
                             getMovement('doubleJump', 'lowerLevel', COST_UNKNOWN),
@@ -8809,7 +8855,15 @@
                             // section: 'lowerLevel',
                         },
                         requirements: [
-                            getMovement('fall', 'middleLevel', COST_UNKNOWN),
+                            // Moving downward, chance of return not guaranteed
+                            getMovement('basicRisky', 'middleLevel', COST_UNKNOWN),
+                            // Moving downward, chance of return guaranteed
+                            // getMovement('risingUppercut', 'middleLevel', COST_UNKNOWN),
+                            getMovement('batForm', 'middleLevel', COST_UNKNOWN),
+                            getMovement('doubleJump', 'middleLevel', COST_UNKNOWN),
+                            getMovement('gravityJump', 'middleLevel', COST_UNKNOWN),
+                            getMovement('poweredMist', 'middleLevel', COST_UNKNOWN),
+                            getMovement('wolfMistRise', 'middleLevel', COST_UNKNOWN),
                             // getMovement('risingUppercut', 'main', COST_UNKNOWN),
                             getMovement('batForm', 'main', COST_UNKNOWN),
                             getMovement('doubleJump', 'main', COST_UNKNOWN),
@@ -8825,7 +8879,15 @@
                             // section: 'main',
                         },
                         requirements: [
-                            getMovement('fall', 'lowerLevel', COST_UNKNOWN),
+                            // Moving downward, chance of return not guaranteed
+                            getMovement('basicRisky', 'lowerLevel', COST_UNKNOWN),
+                            // Moving downward, chance of return guaranteed
+                            // getMovement('risingUppercut', 'lowerLevel', COST_UNKNOWN),
+                            getMovement('batForm', 'lowerLevel', COST_UNKNOWN),
+                            getMovement('doubleJump', 'lowerLevel', COST_UNKNOWN),
+                            getMovement('gravityJump', 'lowerLevel', COST_UNKNOWN),
+                            getMovement('poweredMist', 'lowerLevel', COST_UNKNOWN),
+                            getMovement('wolfMistRise', 'lowerLevel', COST_UNKNOWN),
                             getMovement('mistForm', 'behindMistGate', COST_UNKNOWN),
                         ],
                     },
@@ -9072,8 +9134,14 @@
                             // section: 'main',
                         },
                         requirements: [
-                            getMovement('fall', 'upperLeftLedge', COST_UNKNOWN),
-                            getMovement('fall', 'middleLeftLedge', COST_UNKNOWN),
+                            getMovement('basicRisky', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('batForm', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('gravityJump', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('basicRisky', 'middleLeftLedge', COST_UNKNOWN),
+                            getMovement('batForm', 'middleLeftLedge', COST_UNKNOWN),
+                            getMovement('gravityJump', 'middleLeftLedge', COST_UNKNOWN),
+                            getMovement('doubleJump', 'middleLeftLedge', COST_UNKNOWN),
+                            getMovement('poweredMist', 'middleLeftLedge', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -9240,9 +9308,14 @@
                             positionY: 0 - 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
+                    exitTopWithJump: getUpwardMovement('jump', 'main', COST_UNKNOWN, 128, 80),
+                    exitTopWithDoubleJump: getUpwardMovement('doubleJump', 'main', COST_UNKNOWN, 128, 80),
+                    exitTopWithPoweredMist: getUpwardMovement('poweredMist', 'main', COST_UNKNOWN, 128, 80),
+                    exitTopWithGravityJump: getUpwardMovement('gravityJump', 'main', COST_UNKNOWN, 128, 80),
                     exitRight: {
                         outcome: {
                             positionX: 256 + 8,
@@ -9250,20 +9323,6 @@
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
-                        ],
-                    },
-                    exitTopWithExtraHeight: {
-                        outcome: {
-                            positionX: 128,
-                            positionY: 0 - 64,
-                        },
-                        requirements: [
-                            getMovement('batForm', 'main', COST_UNKNOWN),
-                            getMovement('doubleJump', 'main', COST_UNKNOWN),
-                            getMovement('gravityJump', 'main', COST_UNKNOWN),
-                            // getMovement('risingUppercut', 'main', COST_UNKNOWN),
-                            getMovement('poweredMistLong', 'main', COST_UNKNOWN),
-                            getMovement('wolfMistRise', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -9283,23 +9342,14 @@
                             positionY: 0 - 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
-                        ],
-                    },
-                    exitTopWithExtraHeight: {
-                        outcome: {
-                            positionX: 128,
-                            positionY: 0 - 64,
-                        },
-                        requirements: [
                             getMovement('batForm', 'main', COST_UNKNOWN),
-                            getMovement('doubleJump', 'main', COST_UNKNOWN),
-                            getMovement('gravityJump', 'main', COST_UNKNOWN),
-                            // getMovement('risingUppercut', 'main', COST_UNKNOWN),
-                            getMovement('poweredMistLong', 'main', COST_UNKNOWN),
-                            getMovement('wolfMistRise', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
+                    exitTopWithJump: getUpwardMovement('jump', 'main', COST_UNKNOWN, 128, 80),
+                    exitTopWithDoubleJump: getUpwardMovement('doubleJump', 'main', COST_UNKNOWN, 128, 80),
+                    exitTopWithPoweredMist: getUpwardMovement('poweredMist', 'main', COST_UNKNOWN, 128, 80),
+                    exitTopWithGravityJump: getUpwardMovement('gravityJump', 'main', COST_UNKNOWN, 128, 80),
                 },
             },
             blueDoorRoom: {
@@ -9633,9 +9683,14 @@
                             positionY: 0 - 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
+                    exitTopWithJump: getUpwardMovement('jump', 'main', COST_UNKNOWN, 128, 48),
+                    exitTopWithDoubleJump: getUpwardMovement('doubleJump', 'main', COST_UNKNOWN, 128, 48),
+                    exitTopWithPoweredMist: getUpwardMovement('poweredMist', 'main', COST_UNKNOWN, 128, 48),
+                    exitTopWithGravityJump: getUpwardMovement('gravityJump', 'main', COST_UNKNOWN, 128, 48),
                     exitLeft: {
                         outcome: {
                             positionX: 0 - 8,
@@ -9751,7 +9806,7 @@
                         requirements: [
                             getMovement('batForm', 'pit', COST_UNKNOWN),
                             getMovement('multipleGravityJumps', 'pit', COST_UNKNOWN),
-                            getMovement('poweredMist', 'pit', COST_UNKNOWN),
+                            getMovement('poweredMistLong', 'pit', COST_UNKNOWN),
                         ],
                     },
                     toPit: {
@@ -10180,7 +10235,7 @@
                     height: 512,
                 },
                 regions: [
-                    getRegion('pit', 576, 480, 128, 32),
+                    getRegion('pit', 576, 480, 96, 32),
                     getRegion('main', 0, 0, 768, 512),
                 ],
                 commands: {
@@ -10217,19 +10272,25 @@
                             positionY: 512 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'pit', COST_UNKNOWN),
+                            getMovement('basicRisky', 'pit', COST_UNKNOWN),
+                            getMovement('batForm', 'pit', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'pit', COST_UNKNOWN),
                         ],
                     },
                     toMain: {
                         outcome: {
                             positionX: 752,
                             positionY: 384,
+                            verticalClimb: 0,
                             // section: 'main',
                         },
                         requirements: [
                             {
                                 section: 'pit',
                                 statusPressurePlateInMarbleGalleryActivated: true,
+                                verticalClimb: {
+                                    minimum: 64 - 24,
+                                },
                                 costs: {
                                     time: COST_UNKNOWN,
                                 },
@@ -10375,19 +10436,25 @@
                             positionY: 256 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'pit', COST_UNKNOWN),
+                            getMovement('basicRisky', 'pit', COST_UNKNOWN),
+                            getMovement('batForm', 'pit', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'pit', COST_UNKNOWN),
                         ],
                     },
                     toMain: {
                         outcome: {
                             positionX: 320,
                             positionY: 160,
+                            verticalClimb: 0,
                             // section: 'main',
                         },
                         requirements: [
                             {
                                 section: 'pit',
                                 statusPressurePlateInMarbleGalleryActivated: true,
+                                verticalClimb: {
+                                    minimum: 64 - 24,
+                                },
                                 costs: {
                                     time: COST_UNKNOWN,
                                 },
@@ -11075,6 +11142,7 @@
                     getRegion('main', 0, 0, 1536, 1024),
                 ],
                 commands: {
+                    // TODO(sestren): Add return logic - Flight
                     exitTop: {
                         outcome: {
                             positionX: 1392,
@@ -11139,6 +11207,7 @@
                     getRegion('main', 0, 0, 1536, 256),
                 ],
                 commands: {
+                    // TODO(sestren): Add return logic - Flight
                     exitBottomLeft: {
                         outcome: {
                             positionX: 112,
@@ -11464,7 +11533,10 @@
                             positionY: 2304 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('mistForm', 'main', COST_UNKNOWN),
+                            getMovement('gravityJump', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -13003,12 +13075,9 @@
                             positionY: 256 + 24,
                         },
                         requirements: [
-                            {
-                                section: 'beneathBridge',
-                                costs: {
-                                    time: COST_UNKNOWN,
-                                },
-                            },
+                            getMovement('basicRisky', 'beneathBridge', COST_UNKNOWN),
+                            getMovement('batForm', 'beneathBridge', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'beneathBridge', COST_UNKNOWN),
                         ],
                     },
                     toMain: {
@@ -13132,7 +13201,9 @@
                             positionY: 256 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -13220,7 +13291,9 @@
                             positionY: 768 + 24,
                         },
                         requirements: [
-                            getMovement('fall', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -13462,7 +13535,9 @@
                             positionY: 2816 + 24,
                         },
                         requirements: [
-                            getMovement('fall', 'pit', COST_UNKNOWN),
+                            getMovement('basicRisky', 'pit', COST_UNKNOWN),
+                            getMovement('batForm', 'pit', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'pit', COST_UNKNOWN),
                         ],
                     },
                     toMain: {
@@ -13789,7 +13864,9 @@
                             positionY: 256 + 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -14110,7 +14187,9 @@
                             positionY: 2304 + 24,
                         },
                         requirements: [
-                            getMovement('fall', 'main', COST_UNKNOWN),
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -14207,15 +14286,16 @@
                 commands: {},
             },
             waterfall: {
-                // TODO(sestren): Add flight logic
                 roomInfo: {
                     width: 512,
                     height: 1536,
                 },
                 regions: [
+                    // TODO(sestren): Add more regions and logic?
                     getRegion('main', 0, 0, 512, 1536),
                 ],
                 commands: {
+                    // TODO(sestren): Add return logic - Flight
                     exitLeftUpper: {
                         outcome: {
                             positionX: 0 - 8,
@@ -15670,6 +15750,43 @@
             default:
                 result.UNKNOWN_MOVEMENT_REQUIREMENT = true
                 break
+        }
+        return result
+    }
+
+    function getUpwardMovement(requirementName, section, time, positionX, positionY) {
+        let currentPositionY = positionY
+        let deltaY = 0
+        switch (requirementName) {
+            // case 'bladeDash':
+            case 'jump':
+                deltaY = DISTANCE_JUMP_FULL
+                break
+            case 'doubleJump':
+                deltaY = DISTANCE_DOUBLE_JUMP
+                break
+            case 'gravityJump':
+                deltaY = DISTANCE_GRAVITY_JUMP
+                break
+            case 'poweredMistForm':
+                deltaY = DISTANCE_DOUBLE_JUMP
+                break
+            default:
+                break
+        }
+        currentPositionY -= deltaY
+        if (currentPositionY < DISTANCE_TILE) {
+            currentPositionY -= DISTANCE_VERTICAL_SCREEN_TRANSITION
+        }
+        const result = {
+            outcome: {
+                positionX: positionX,
+                positionY: 0 - 24,
+                verticalClimb: Math.max(currentPositionY - 24, 0),
+            },
+            requirements: [
+                getMovement(requirementName, section, time),
+            ],
         }
         return result
     }
