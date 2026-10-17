@@ -1,0 +1,318 @@
+<html>
+    <head>
+        <title>SOTN Shuffler</title>
+    </head>
+    <body>
+        <div>
+            <form id="shufflerOptions">
+                <div id="options">
+                    <div id="div_seed">
+                        <fieldset>
+                            <legend>Seed</legend>
+                            <div>
+                                <input name="seed" type="text" placeholder="Optional" />
+                            </div>
+                            <div>
+                                <input name="hinter.seedName" type="checkbox" checked />
+                                <label for="hinter.seedName">Show seed name on file select screen?</label>
+                            </div>
+                            <div>
+                                <input name="hinter.options" type="checkbox" checked />
+                                <label for="hinter.options">Show options checksum on file select screen?</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="div_mapShuffler">
+                        <fieldset>
+                            <legend>Map Shuffler</legend>
+                            <div>
+                                <input name="roomShuffler.on" type="checkbox" checked />
+                                <label for="roomShuffler.on">Shuffle rooms?</label>
+                            </div>
+                            <div>
+                                <input name="stageShuffler.on" type="checkbox" checked />
+                                <label for="stageShuffler.on">Shuffle stages?</label>
+                            </div>
+                            <div>
+                                <input name="hinter.stageLinks" type="checkbox" checked />
+                                <label for="hinter.stageLinks">Show stage links on loading rooms on the map?</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="div_musicShuffler">
+                        <fieldset>
+                            <legend>Music Shuffler</legend>
+                            <div>
+                                <input name="musicShuffler.on" type="checkbox" checked />
+                                <label for="musicShuffler.on">Shuffle music?</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="div_rewardShuffler">
+                        <fieldset>
+                            <legend>Reward Shuffler</legend>
+                            <div>
+                                <input name="rewardShuffler.on" type="checkbox" checked />
+                                <label for="rewardShuffler.on">Shuffle rewards?</label>
+                            </div>
+                            <div>
+                                <select name="rewardShuffler.method">
+                                    <option value="chained">Chained</option>
+                                    <option value="layered">Layered</option>
+                                    <option value="unbiased">Unbiased</option>
+                                </select>
+                                <label for="rewardShuffler.method">Method</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="div_toggles">
+                        <fieldset>
+                            <legend>Patches</legend>
+                            <div>
+                                <input name="patcher.list" value="assignUniqueIdToRelicAfterDrawbridge" type="checkbox" checked />
+                                <label for="patcher.list=assignUniqueIdToRelicAfterDrawbridge">Assign Unique ID to Relic After Drawbridge?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="enableDebugMode" type="checkbox" checked />
+                                <label for="enableDebugMode">Enable Debug Mode?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="normalizeAbandonedMine" type="checkbox" checked />
+                                <label for="normalizeAbandonedMine">Normalize Abandoned Mine?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="normalizeAlchemyLaboratory" type="checkbox" checked />
+                                <label for="normalizeAlchemyLaboratory">Normalize Alchemy Laboratory?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="normalizeCastleEntrance" type="checkbox" checked />
+                                <label for="normalizeCastleEntrance">Normalize Castle Entrance?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="normalizeClockTower" type="checkbox" checked />
+                                <label for="normalizeClockTower">Normalize Clock Tower?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="normalizeLongLibrary" type="checkbox" checked />
+                                <label for="normalizeLongLibrary">Normalize Long Library?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="normalizeMarbleGallery" type="checkbox" checked />
+                                <label for="normalizeMarbleGallery">Normalize Marble Gallery?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="normalizeOlroxsQuarters" type="checkbox" checked />
+                                <label for="normalizeOlroxsQuarters">Normalize Olrox's Quarters?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="normalizeUndergroundCaverns" type="checkbox" checked />
+                                <label for="normalizeUndergroundCaverns">Normalize Underground Caverns?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="preventSoftlocksAfterDefeatingScylla" type="checkbox" checked />
+                                <label for="preventSoftlocksAfterDefeatingScylla">Prevent Softlocks After Defeating Scylla?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="simplifyGearPuzzle" type="checkbox" checked />
+                                <label for="simplifyGearPuzzle">Simplify Gear Puzzle?</label>
+                            </div>
+                            <div>
+                                <input name="patcher.list" value="useCustomColorsOnTheMap" type="checkbox" checked />
+                                <label for="useCustomColorsOnTheMap">Use Custom Colors on the Map?</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="div_clockFaceType">
+                        <fieldset>
+                            <legend>Clock Face Display</legend>
+                            <div>
+                                <input type="radio" name="clockFaceDisplay" value="minutesAndSeconds" checked />
+                                <label for="minutesAndSeconds">Custom (Minutes and Seconds)</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="clockFaceDisplay" value="hoursAndMinutes" />
+                                <label for="hoursAndMinutes">Normal (Hours and Minutes)</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <br>
+            </form>
+            <div>
+                <label for="binFile">Choose SOTN BIN file</label>
+                <input id="binFile" type="file" accept=".bin">
+                <p><a id="downloadExtractionLink"></a></p>
+            </div>
+            <div>
+                <input id="generateButton" type="submit" value="Generate" />
+                <p><a id="downloadPPFLink"></a></p>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/seedrandom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@sestren/bin-patcher@1.0.0/dist/bin-patcher.js"></script>
+    <!-- common.js must be imported before anything dependent on it -->
+    <script src="common.js"></script>
+    <script src="music-shuffler.js"></script>
+    <script src="reward-shuffler.js"></script>
+    <script src="room-shuffler.js"></script>
+    <script src="stage-shuffler.js"></script>
+    <script src="word-generator.js"></script>
+    <script src="core.js"></script>
+    <!-- core.js must be imported after anything it depends on -->
+    <script>
+        let data = {}
+
+        function getExtractionFromBin(buffer) {
+            const bin = new BinPatcher.GameData(buffer)
+            const result = BinPatcher.processBinary(bin).extraction
+            return result
+        }
+
+        function generatePPF(extractionData, changesToApply, ppfDescription) {
+            // Start with a blank patch file
+            let patchData = BinPatcher.maskNodes(structuredClone(extractionData), 'data')
+            // Apply changes to patch file
+            changesToApply
+            .forEach((changesData) => {
+                for (const changeData of changesData.changes) {
+                    BinPatcher.applyChange(patchData, changeData)
+                }
+            })
+            // Convert patch file to PPF
+            const result = BinPatcher.toPPF(patchData, ppfDescription)
+            return result
+        }
+
+        async function digestMessage(data) {
+            const hashBuffer = await window.crypto.subtle.digest('SHA-256', data)
+            const result = new Uint8Array(hashBuffer).toHex()
+            return result
+        }
+
+        function getShufflerOptions() {
+            const result = {}
+            const formElement = document.getElementById("shufflerOptions")
+            // const submitter = document.getElementById("generateButton")
+            const formData = new FormData(formElement)
+            for (const element of formData) {
+                switch (element.at(0)) {
+                    case 'clockFaceDisplay':
+                        if (!('patcher' in result)) {
+                            result.patcher = {}
+                        }
+                        if (!('on' in result.patcher)) {
+                            result.patcher.on = true
+                        }
+                        if (element.at(1) === 'minutesAndSeconds') {
+                            result.patcher.list.push('showMinutesAndSecondsInClockRoom')
+                        }
+                        break
+                    case 'musicShuffler.on':
+                        if (!('musicShuffler' in result)) {
+                            result.musicShuffler = {}
+                        }
+                        if (!('on' in result.musicShuffler)) {
+                            result.musicShuffler.on = true
+                        }
+                        break
+                    case 'patcher.list':
+                    // case 'patcher.on':
+                        if (!('patcher' in result)) {
+                            result.patcher = {}
+                        }
+                        if (!('on' in result.patcher)) {
+                            result.patcher.on = true
+                        }
+                        if (!('list' in result.patcher)) {
+                            result.patcher.list = []
+                        }
+                        result.patcher.list.push(element.at(1))
+                        break
+                    case 'rewardShuffler.on':
+                        if (!('rewardShuffler' in result)) {
+                            result.rewardShuffler = {}
+                        }
+                        if (!('on' in result.rewardShuffler)) {
+                            result.rewardShuffler.on = true
+                        }
+                        break
+                    case 'rewardShuffler.method':
+                        if (!('rewardShuffler' in result)) {
+                            result.rewardShuffler = {}
+                        }
+                        result.rewardShuffler.method = element.at(1)
+                        break
+                    case 'roomShuffler.on':
+                        if (!('roomShuffler' in result)) {
+                            result.roomShuffler = {}
+                        }
+                        if (!('on' in result.roomShuffler)) {
+                            result.roomShuffler.on = true
+                        }
+                        break
+                    case 'seed':
+                        if (element.at(1).length > 0) {
+                            result.seed = element.at(1)
+                        }
+                        break
+                    case 'stageShuffler.on':
+                        if (!('stageShuffler' in result)) {
+                            result.stageShuffler = {}
+                        }
+                        if (!('on' in result.stageShuffler)) {
+                            result.stageShuffler.on = true
+                        }
+                        break
+                }
+            }
+            return result
+        }
+
+        document.getElementById('binFile')
+        .addEventListener('change', () => {
+            const selectedFile = document.getElementById('binFile').files[0]
+            const reader = new FileReader()
+            reader
+            .addEventListener('load', () => {
+                const buffer = new Uint8Array(reader.result)
+                console.log('selectedFile.size:', selectedFile.size)
+                digestMessage(buffer)
+                .then((digestHex) => {
+                    console.log('Digest of disc image', digestHex)
+                    data.binDigest = digestHex
+                    data.extraction = getExtractionFromBin(buffer)
+                    const link = document.getElementById('downloadExtractionLink')
+                    link.innerHTML = 'Download extraction.json'
+                    link.download = "extraction.json"
+                    const blobData = new Blob([JSON.stringify(data.extraction)], {
+                        type: 'text/plain',
+                    })
+                    link.href = window.URL.createObjectURL(blobData)
+                })
+            })
+            reader.readAsArrayBuffer(selectedFile)
+        })
+        
+        document.getElementById('generateButton')
+        .addEventListener('click', () => {
+            const shufflerOptions = getShufflerOptions()
+            console.log('shufflerOptions:', shufflerOptions)
+            const processedOptions = sotnShuffler.core.processOptions(shufflerOptions, data.extraction)
+            processedOptions.changes = processedOptions.changes.concat(BinPatcher.getDefaultChangeDependencies())
+            const shortDescription = sotnShuffler.core.getShortDescription(data.binDigest.toString('hex'), shufflerOptions, processedOptions.seeds.seedName, sotnShuffler.core.VERSION)
+            console.log('shortDescription:', shortDescription)
+            const ppfData = generatePPF(data.extraction, processedOptions.changes, shortDescription)
+            console.log('ppfData.length:', ppfData.length)
+            // Create link to downloadable PPF
+            const link = document.getElementById('downloadPPFLink')
+            const fileName = processedOptions.seeds.seedName + '.ppf'
+            link.innerHTML = 'Download '+ fileName
+            link.download = fileName
+            const blobData = new Blob([ppfData], {
+                type: 'application/octet-binary',
+            })
+            link.href = window.URL.createObjectURL(blobData)
+        })
+    </script>
+</html>
