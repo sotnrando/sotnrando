@@ -1837,7 +1837,7 @@
             'relicPowerOfMist',
             'relicSoulOfBat',
         ]
-        rewards.bonus = [ // Fixed, out-of-logic (except for Rings and Soul of Wolf)
+        rewards.bonus = [ // Out-of-logic (except for Rings and Soul of Wolf)
             'itemGoldRing',
             'itemSilverRing',
             'relicGasCloud',
