@@ -298,19 +298,17 @@
         .addEventListener('click', () => {
             const shufflerOptions = getShufflerOptions()
             console.log('shufflerOptions:', shufflerOptions)
-            // document.getElementById('seed').value = getSeedName(seed)
-            let changesToApply = sotnShuffler.core.getChangesFromOptions(shufflerOptions, data.extraction)
-            changesToApply = changesToApply.concat(BinPatcher.getDefaultChangeDependencies())
-            const seed = '--------'
-            const version = [1, 0, 0]
-            const shortDescription = sotnShuffler.core.getShortDescription(data.binDigest.toString('hex'), shufflerOptions, seed, version)
+            const processedOptions = sotnShuffler.core.processOptions(shufflerOptions, data.extraction)
+            processedOptions.changes = processedOptions.changes.concat(BinPatcher.getDefaultChangeDependencies())
+            const shortDescription = sotnShuffler.core.getShortDescription(data.binDigest.toString('hex'), shufflerOptions, processedOptions.seeds.seedName, sotnShuffler.core.VERSION)
             console.log('shortDescription:', shortDescription)
-            const ppfData = generatePPF(data.extraction, changesToApply, shortDescription)
+            const ppfData = generatePPF(data.extraction, processedOptions.changes, shortDescription)
             console.log('ppfData.length:', ppfData.length)
             // Create link to downloadable PPF
             const link = document.getElementById('downloadPPFLink')
-            link.innerHTML = 'Download shuffler.ppf'
-            link.download = "shuffler.ppf"
+            const fileName = processedOptions.seeds.seedName + '.ppf'
+            link.innerHTML = 'Download '+ fileName
+            link.download = fileName
             const blobData = new Blob([ppfData], {
                 type: 'application/octet-binary',
             })

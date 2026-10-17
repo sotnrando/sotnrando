@@ -20,6 +20,28 @@
         ],
     }
 
+    // stages.abandonedMine.constants.uniqueItemDrops.dropUnusedItem
+    // stages.olroxsQuarters.constants.uniqueItemDrops.unusedItemDrop1
+    // stages.clockTower.constants.uniqueItemDrops.dropStoneSword
+    // stages.colosseum.constants.uniqueItemDrops.dropUnusedItem
+    // stages.castleKeep.constants.uniqueItemDrops.dropUnusedItem2
+    // stages.castleKeep.constants.uniqueItemDrops.dropUnusedItem1
+    // stages.undergroundCaverns.constants.uniqueItemDrops.dropUnusedItem1
+    // stages.bossScylla.constants.uniqueItemDrops.dropUnusedItem1
+    // stages.undergroundCaverns.constants.uniqueItemDrops.dropUnusedItem2
+    // stages.bossScylla.constants.uniqueItemDrops.dropUnusedItem2
+    // stages.castleEntrance.constants.uniqueItemDrops.dropUnusedItem
+    // stages.castleEntranceRevisited.constants.uniqueItemDrops.dropUnusedItem
+    // stages.longLibrary.constants.uniqueItemDrops.unusedItemDrop1
+    // stages.outerWall.constants.uniqueItemDrops.unusedItemDrop
+    // stages.olroxsQuarters.constants.uniqueItemDrops.unusedItemDrop2
+    // stages.longLibrary.constants.uniqueItemDrops.unusedItemDrop2
+    // stages.longLibrary.constants.uniqueItemDrops.unusedItemDrop3
+    // stages.catacombs.constants.uniqueItemDrops.dropSpikeBreaker
+    // stages.royalChapel.constants.uniqueItemDrops.dropSilverRing
+    // stages.bossScylla.constants.uniqueItemDrops.dropGoldRing
+    // stages.undergroundCaverns.constants.uniqueItemDrops.dropGoldRing
+
     const LOCATIONS = {
         locationBatCard: {
             defaultValue: 'relicBatCard',
@@ -44,7 +66,7 @@
             defaultValue: 'relicCubeOfZoe',
             validRewardTypes: ['relic',],
             forbiddenRewards: [
-                'relicSoulOfBat',
+                // 'relicSoulOfBat',
                 // 'relicGravityBoots',
             ],
             writes: {
@@ -1952,7 +1974,6 @@
                     assignments.main.push(currentLayerRewards.at(-1))
                 }
                 if (availableChecks.length < currentLayerRewards.length) {
-                    // console.log(`--> 1969 (availableChecks.length (${availableChecks.length}) < currentLayerRewards.length (${currentLayerRewards.length}))`)
                     result.valid = false
                     return result
                 }
@@ -1982,7 +2003,6 @@
                             continue
                         }
                     }
-                    // console.log(`--> 1999 (fall-through) at ${progressionStatus}`)
                     // console.log({
                     //     resultLocations: result.locations,
                     //     availableChecks: availableChecks,
@@ -2061,9 +2081,13 @@
             // console.log('--> 2099 (rewards.xxx.length > 0)')
             result.valid = false
         }
+        console.log('startingState:', startingState)
         console.log('layers:', debug.layers)
         return result
     }
+
+    // TODO(sestren): Allow shuffling of minor items
+    // locations, rewards, solverMethod
 
     function assignUnbiasedRewards(seed) {
         const rng = seedrandom(seed)

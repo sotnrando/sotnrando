@@ -44,7 +44,6 @@ const argv = yargs(process.argv.slice(2))
                 describe: 'Path to the output file to create',
                 type: 'string',
                 normalize: true,
-                default: 'seeds/current-seed.ppf',
             })
             .option('seed', {
                 alias: 's',
@@ -117,7 +116,7 @@ const argv = yargs(process.argv.slice(2))
                 type: 'string',
             })
         // The following options must be declared
-            .demandOption(['bin', 'out'])
+            .demandOption(['bin'])
         },
         handler: (argv) => {
             // Create extraction file from BIN
@@ -195,14 +194,19 @@ const argv = yargs(process.argv.slice(2))
                 }
             }
             // Generate PPF from shuffler options
-            let changesToApply = core.getChangesFromOptions(shufflerOptions, extractionData)
-            changesToApply = changesToApply.concat(SotnPatcher.getDefaultChangeDependencies())
-            const seed = '--------'
-            const version = [1, 0, 0]
-            const shortDescription = core.getShortDescription(binDigest.toString('hex'), shufflerOptions, seed, version)
+            const processedOptions = core.processOptions(shufflerOptions, extractionData)
+            processedOptions.changes = processedOptions.changes.concat(SotnPatcher.getDefaultChangeDependencies())
+            const shortDescription = core.getShortDescription(binDigest.toString('hex'), shufflerOptions, processedOptions.seeds.seedName, core.VERSION)
             console.log('shortDescription:', shortDescription)
-            const ppfData = generatePPF(extractionData, changesToApply, shortDescription)
-            fs.writeFileSync(argv.out, ppfData)
+            const ppfData = generatePPF(extractionData, processedOptions.changes, shortDescription)
+            let filePath
+            if ('out' in argv) {
+                filePath = argv.out
+            }
+            else {
+                filePath = processedOptions.seeds.seedName + '.ppf'
+            }
+            fs.writeFileSync(filePath, ppfData)
         }
     })
     .demandCommand(1)
