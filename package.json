@@ -15,7 +15,8 @@
   },
   "scripts": {
     "build-presets": "node tools/build-presets",
-    "postinstall": "npm run build-presets"
+    "postinstall": "npm run build-presets",
+    "test": "node --test **/*.test.js"
   },
   "presets": [
     "casual",

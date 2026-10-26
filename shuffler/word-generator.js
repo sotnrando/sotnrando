@@ -578,13 +578,16 @@
         ],
     }
 
-    function getSeedName(seed) {
+    function getSeedName(seed, words=null) {
+        if (words === null) {
+            words = WORDS
+        }
         const rng = seedrandom(seed)
         const MAX_BYTES = 32
         const MIN_DIGITS = 3
         const MAX_DIGITS = 9
-        const adjective = WORDS.adjectives.at(Math.floor(rng() * WORDS.adjectives.length))
-        const noun = WORDS.nouns.at(Math.floor(rng() * WORDS.nouns.length))
+        const adjective = words.adjectives.at(Math.floor(rng() * words.adjectives.length))
+        const noun = words.nouns.at(Math.floor(rng() * words.nouns.length))
         let result = adjective.at(0).toUpperCase() + adjective.slice(1) + noun.at(0).toUpperCase() + noun.slice(1)
         // NOTE(sestren): The byte count calculation naively assumes that adjectives/nouns will only contain 1-byte characters
         // NOTE(sestren): The byte count calculation includes an additional byte for the null terminator
