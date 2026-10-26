@@ -459,7 +459,8 @@
                 return songName.startsWith('stage')
             })
             .filter(([songName, songInfo]) => {
-                return songInfo.defaultValue !== 'noAudio'
+                // Ignore Warp Rooms and Reverse Warp Rooms, which use silence
+                return songInfo.defaultValue !== 'musicNoAudio'
             })
             .forEach(([songName, songInfo]) => {
                 stageMusic[stageName] = songInfo.defaultValue
@@ -467,7 +468,7 @@
                     songPools.stage.push(songInfo.defaultValue)
                 }
             })
-            // Add boss music to its own pool, do nothing with it for now ...
+            // Add boss music to its own pool, leave it vanilla for now ...
             Object.entries(songsInfo)
             .filter(([songName, songInfo]) => {
                 return songName.startsWith('boss')
@@ -480,6 +481,9 @@
         const duplicateSongPool = common.shuffleArray(rng, songPools.stage).slice(0, songsNeeded)
         const fullSongPool = common.shuffleArray(rng, songPools.stage.concat(duplicateSongPool))
         Object.keys(stageMusic).toSorted()
+        .filter((stageName) => {
+            return SONGS[stageName].defaultValue !== 'musicNoAudio'
+        })
         .forEach((stageName) => {
             stageMusic[stageName] = fullSongPool.pop()
         })
