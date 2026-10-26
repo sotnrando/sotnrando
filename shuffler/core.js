@@ -6006,8 +6006,8 @@
         if (shufflerOptions?.musicShuffler?.on ?? false) {
             console.log(' ... Shuffle music')
             const seed = shufflerOptions.musicShuffler.seed ?? (result.seeds.seedName + '.musicShuffler')
-            const songChanges = musicShuffler.shuffleSongs(seed)
-            result.changes.push(musicShuffler.getSongChanges(songChanges))
+            const randomizedSongs = musicShuffler.randomizeSongs(seed)
+            result.changes.push(musicShuffler.getSongChanges(randomizedSongs))
         }
         // Add hints to the file select menu
         if (shufflerOptions.hinter?.seedName || shufflerOptions.hinter?.options) {
