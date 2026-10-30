@@ -4612,7 +4612,7 @@
                     },
                     toRightSide: {
                         outcome: {
-                            positionX: 80,
+                            positionX: 224,
                             positionY: 128,
                             // section: rightSide,
                         },
@@ -4628,7 +4628,7 @@
                     },
                     toMain: {
                         outcome: {
-                            positionX: 224,
+                            positionX: 80,
                             positionY: 128,
                             statusPassageFromCastleEntranceToUndergroundCavernsOpened: true,
                             // section: main,
@@ -10857,6 +10857,15 @@
                             getMovement('basic', 'main', COST_UNKNOWN),
                         ],
                     },
+                    exitBottom: {
+                        outcome: {
+                            positionX: 384,
+                            positionY: 512 + 24,
+                        },
+                        requirements: [
+                            getMovement('basic', 'main', COST_UNKNOWN),
+                        ],
+                    },
                 },
             },
             hammerAndBladeRoom: {
@@ -14277,23 +14286,24 @@
                 commands: {},
             },
             waterfall: {
+                // TODO(sestren): Add behindWaterfall region and water damage logic
                 roomInfo: {
                     width: 512,
                     height: 1536,
                 },
                 regions: [
-                    // TODO(sestren): Add more regions and logic?
+                    getRegion('upperLeftLedge', 0, 0, 96, 160),
+                    getRegion('upperRightLedge', 208, 0, 304, 240),
                     getRegion('main', 0, 0, 512, 1536),
                 ],
                 commands: {
-                    // TODO(sestren): Add return logic - Flight
                     exitLeftUpper: {
                         outcome: {
                             positionX: 0 - 8,
                             positionY: 128,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basic', 'upperLeftLedge', COST_UNKNOWN),
                         ],
                     },
                     exitRightUpper: {
@@ -14302,7 +14312,7 @@
                             positionY: 128,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basic', 'upperRightLedge', COST_UNKNOWN),
                         ],
                     },
                     exitLeftLower: {
@@ -14321,6 +14331,51 @@
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
+                        ],
+                    },
+                    toUpperLeftLedge: {
+                        outcome: {
+                            positionX: 32,
+                            positionY: 128,
+                            // section: 'upperLeftLedge',
+                        },
+                        requirements: [
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
+                            getMovement('doubleJump', 'upperRightLedge', COST_UNKNOWN),
+                            getMovement('poweredMist', 'upperRightLedge', COST_UNKNOWN),
+                            getMovement('batForm', 'upperRightLedge', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'upperRightLedge', COST_UNKNOWN),
+                        ],
+                    },
+                    toUpperRightLedge: {
+                        outcome: {
+                            positionX: 480,
+                            positionY: 128,
+                            // section: 'upperRightLedge',
+                        },
+                        requirements: [
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
+                            getMovement('doubleJump', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('poweredMist', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('batForm', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'upperLeftLedge', COST_UNKNOWN),
+                        ],
+                    },
+                    toMain: {
+                        outcome: {
+                            positionX: 32,
+                            positionY: 1408,
+                            // section: 'main',
+                        },
+                        requirements: [
+                            getMovement('basicRisky', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('batForm', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('basicRisky', 'upperRightLedge', COST_UNKNOWN),
+                            getMovement('batForm', 'upperRightLedge', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'upperRightLedge', COST_UNKNOWN),
                         ],
                     },
                 },
