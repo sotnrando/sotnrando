@@ -261,7 +261,37 @@ const argv = yargs(process.argv.slice(2))
                 filePath = processedOptions.seeds.seedName + '.ppf'
             }
             fs.writeFileSync(filePath, ppfData)
-        }
+            const debug = {
+                analysis: {
+                    locationRewards: processedOptions.analysis.locationRewards,
+                    roomPositions: processedOptions.analysis.roomPositions,
+                    solver: processedOptions.analysis.solver,
+                    stageLinks: processedOptions.analysis.stageLinks,
+                    stageNodeGroups: processedOptions.analysis.stageNodeGroups,
+                },
+                roomData: {},
+                logic: processedOptions.logic,
+                seeds: processedOptions.seeds,
+                shortDescription: shortDescription,
+            }
+            Object.entries(extractionData.stages)
+            .forEach(([stageName, stageInfo]) => {
+                debug.roomData[stageName] = {}
+                Object.entries(stageInfo.rooms.aliases)
+                .forEach(([roomName, roomIndex]) => {
+                    const roomInfo = stageInfo.rooms.data[roomIndex]
+                    debug.roomData[stageName][roomName] = {
+                        left: roomInfo.left,
+                        top: roomInfo.top,
+                        right: roomInfo.right,
+                        bottom: roomInfo.bottom,
+                        rows: roomInfo._rows,
+                        columns: roomInfo._columns,
+                    }
+                })
+            })
+            fs.writeFileSync(`${processedOptions.seeds.seedName}.json`, JSON.stringify(debug))
+        },
     })
     .demandCommand(1)
     .help()

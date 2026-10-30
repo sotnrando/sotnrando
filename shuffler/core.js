@@ -6049,6 +6049,7 @@
                 result.changes.push(PATCHES[patchName])
             })
         }
+        result.logic = common.getLogic(result.analysis)
         return result
     }
 

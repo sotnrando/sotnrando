@@ -1776,6 +1776,7 @@
 
     function assignChainedRewards(seed, settings) {
         const rng = seedrandom(seed)
+        const logic = common.getLogic(settings)
         let result = {
             debugInfo: {
                 attemptCounter: 0,
@@ -1879,7 +1880,6 @@
         let progressionStatus = 'PRE_FLIGHT'
         while ((rewards.main.length) > 0) {
             debug.layers.push({})
-            const logic = common.getLogic(settings)
             const edges = common.getEdges(logic, startingState)
             const currentLayerRewards = []
             const availableChecks = getReachableChecks(edges, startingState, result.locations)

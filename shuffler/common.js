@@ -3590,15 +3590,15 @@
                 commands: {
                     exitTop: {
                         outcome: {
-                            positionX: 128,
+                            positionX: 104,
                             positionY: 0 - 24,
                         },
                         requirements: [
                             getMovement('batForm', 'main', COST_UNKNOWN),
-                            getMovement('gravityJump', 'main', COST_UNKNOWN),
-                            getMovement('poweredMistLong', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
+                    exitTopWithGravityJump: getUpwardMovement('gravityJump', 'main', COST_UNKNOWN, 104, 176),
                     exitLeft: {
                         outcome: {
                             positionX: 0 - 8,
@@ -3668,21 +3668,6 @@
                         requirements: [
                             getMovement('basic', 'holeInCeiling', COST_UNKNOWN),
                             getMovement('basic', 'upperRightLedge', COST_UNKNOWN),
-                        ],
-                    },
-                    toHoleInCeiling: {
-                        outcome: {
-                            positionX: 128,
-                            positionY: 24,
-                            // section: holeInCeiling,
-                        },
-                        requirements: [
-                            // getMovement('risingUppercut', 'main', COST_UNKNOWN),
-                            getMovement('batForm', 'main', COST_UNKNOWN),
-                            getMovement('doubleJump', 'main', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
-                            getMovement('poweredMist', 'main', COST_UNKNOWN),
-                            getMovement('wolfMistRise', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -5008,6 +4993,7 @@
                         requirements: [
                             {
                                 section: 'upperRightLedge',
+                                // TODO(sestren): Restore the false here?
                                 // statusPassageFromCastleEntranceToMarbleGalleryOpened: false,
                                 costs: {
                                     time: COST_UNKNOWN,
@@ -5054,6 +5040,7 @@
                         requirements: [
                             { // Opening Path
                                 section: 'main',
+                                statusPassageFromCastleEntranceToWarpRoomsOpened: true,
                                 costs: {
                                     time: COST_UNKNOWN,
                                 },
@@ -5083,6 +5070,7 @@
                         requirements: [
                             { // After Opening Path
                                 section: 'main',
+                                // TODO(sestren): Restore the false here?
                                 // statusPassageFromCastleEntranceToWarpRoomsOpened: false,
                                 costs: {
                                     time: COST_UNKNOWN,
@@ -6446,7 +6434,7 @@
                             positionY: 128,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basic', 'leftSide', COST_UNKNOWN),
                         ],
                     },
                     exitRight: {
@@ -6455,7 +6443,7 @@
                             positionY: 128,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basic', 'rightSide', COST_UNKNOWN),
                         ],
                     },
                     toLeftSide: {
@@ -7664,7 +7652,7 @@
                         },
                         requirements: [
                             getMovement('basic', 'lowerLeftLedge', COST_UNKNOWN),
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basic', 'centerArea', COST_UNKNOWN),
                             getMovement('basic', 'middleRightLedge', COST_UNKNOWN),
                         ],
                     },
@@ -8802,8 +8790,8 @@
                     },
                     toUpperLevel: {
                         outcome: {
-                            positionX: 1248,
-                            positionY: 128,
+                            positionX: 848,
+                            positionY: 272,
                             // section: 'upperLevel',
                         },
                         requirements: [
@@ -9254,6 +9242,9 @@
                     getRegion('main', 0, 0, 512, 256),
                 ],
                 commands: {
+                    exitTopLeftWithDoubleJump: getUpwardMovement('doubleJump', 'main', COST_UNKNOWN, 40, 128),
+                    exitTopLeftWithPoweredMist: getUpwardMovement('poweredMist', 'main', COST_UNKNOWN, 40, 128),
+                    exitTopLeftWithGravityJump: getUpwardMovement('gravityJump', 'main', COST_UNKNOWN, 40, 128),
                     exitTopLeft: {
                         // TODO(sestren): Handle candle dive-kick double jump
                         outcome: {
@@ -9261,7 +9252,8 @@
                             positionY: 0 - 24,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('bat', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
                     exitTopRight: {
@@ -9620,7 +9612,7 @@
                             positionY: 256 + 24,
                         },
                         requirements: [
-                            getMovement('pit', 'fall', COST_UNKNOWN),
+                            getMovement('fall', 'pit', COST_UNKNOWN),
                             getMovement('basic', 'main', COST_UNKNOWN),
                         ],
                     },
@@ -10289,7 +10281,7 @@
                                 section: 'pit',
                                 statusPressurePlateInMarbleGalleryActivated: true,
                                 verticalClimb: {
-                                    minimum: 64 - 24,
+                                    minimum: 32 - 24,
                                 },
                                 costs: {
                                     time: COST_UNKNOWN,
@@ -10453,7 +10445,7 @@
                                 section: 'pit',
                                 statusPressurePlateInMarbleGalleryActivated: true,
                                 verticalClimb: {
-                                    minimum: 64 - 24,
+                                    minimum: 32 - 24,
                                 },
                                 costs: {
                                     time: COST_UNKNOWN,
@@ -12248,7 +12240,6 @@
                             // section: 'upperRightLedge',
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
                             getMovement('gravityJump', 'main', COST_UNKNOWN),
                             getMovement('poweredMistLong', 'main', COST_UNKNOWN),
                         ],
@@ -12585,8 +12576,8 @@
                     },
                     toMain: {
                         outcome: {
-                            positionX: 256 + 8,
-                            positionY: 128,
+                            positionX: 128,
+                            positionY: 176,
                             // section: 'main',
                         },
                         requirements: [
@@ -15405,6 +15396,7 @@
                 updateLocation(location, settings)
                 // Process every reward requirement
                 const command = {
+                    commandName: locationName,
                     outcome: Object.assign({}, locationInfo.outcome),
                     requirement: Object.assign({}, locationRequirementInfo),
                 }
@@ -15415,6 +15407,7 @@
                     LOGIC.rewards[rewardName].requirements
                     .forEach((rewardRequirementInfo) => {
                         const command = {
+                            commandName: locationName,
                             outcome: {},
                             requirement: {},
                         }
@@ -15480,6 +15473,7 @@
                 commandInfo.requirements
                 .forEach((requirementInfo) => {
                     const command = {
+                        commandName: commandName,
                         outcome: JSON.parse(JSON.stringify(commandInfo.outcome)),
                         requirement: {},
                     }
@@ -15778,11 +15772,12 @@
         if (currentPositionY < DISTANCE_TILE) {
             currentPositionY -= DISTANCE_VERTICAL_SCREEN_TRANSITION
         }
+        const verticalClimb = -1 * currentPositionY
         const result = {
             outcome: {
                 positionX: positionX,
                 positionY: 0 - 24,
-                verticalClimb: Math.max(currentPositionY - 24, 0),
+                verticalClimb: Math.max(verticalClimb - 24, 0),
             },
             requirements: [
                 getMovement(requirementName, section, time),
@@ -16155,10 +16150,12 @@
         LOGIC: LOGIC,
         NODES: NODES,
         TELEPORTERS: TELEPORTERS,
+        findGoal: findGoal,
         getEdges: getEdges,
         getLogic: getLogic,
         hashedObject: hashedObject,
         hashedText: hashedText,
+        isValidRequirement: isValidRequirement,
         shuffleArray: shuffleArray,
         updateStateWithOutcome: updateStateWithOutcome,
         validate: validate,
