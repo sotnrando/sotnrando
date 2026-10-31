@@ -5028,7 +5028,7 @@
                             positionY: 128,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basic', 'rightSide', COST_UNKNOWN),
                         ],
                     },
                     toRightSide: {
@@ -9627,10 +9627,6 @@
                             getMovement('multipleGravityJumps', 'pit', COST_UNKNOWN),
                             getMovement('poweredMistLong', 'pit', COST_UNKNOWN),
                             getMovement('wolfMistRiseLong', 'pit', COST_UNKNOWN),
-                            getMovement('batForm', 'main', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'pit', COST_UNKNOWN),
-                            getMovement('poweredMistLong', 'main', COST_UNKNOWN),
-                            getMovement('wolfMistRiseLong', 'main', COST_UNKNOWN),
                         ],
                     },
                     toMain: {
@@ -9644,7 +9640,6 @@
                             getMovement('multipleGravityJumps', 'pit', COST_UNKNOWN),
                             getMovement('poweredMistLong', 'pit', COST_UNKNOWN),
                             getMovement('wolfMistRiseLong', 'pit', COST_UNKNOWN),
-                            getMovement('basic', 'leftLedge', COST_UNKNOWN),
                         ],
                     },
                     toPit: {
@@ -9654,8 +9649,12 @@
                             // section: 'pit',
                         },
                         requirements: [
-                            getMovement('fall', 'main', COST_UNKNOWN),
-                            getMovement('basic', 'leftLedge', COST_UNKNOWN),
+                            getMovement('basicRisky', 'leftLedge', COST_UNKNOWN),
+                            getMovement('batForm', 'leftLedge', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'leftLedge', COST_UNKNOWN),
+                            getMovement('poweredMistLong', 'leftLedge', COST_UNKNOWN),
+                            getMovement('wolfMistRiseLong', 'leftLedge', COST_UNKNOWN),
+                            getMovement('basic', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -15817,6 +15816,7 @@
             case 'gravityJump':
                 deltaY = DISTANCE_GRAVITY_JUMP
                 break
+            case 'poweredMist':
             case 'poweredMistForm':
                 deltaY = DISTANCE_DOUBLE_JUMP
                 break
