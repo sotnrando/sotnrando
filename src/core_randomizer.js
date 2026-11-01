@@ -356,6 +356,7 @@ async function randomize(
       if (godSpeedShoes || options.godspeedMode || applied.godspeedMode) {
         optWrite = optWrite + 0x80000000
       }
+      console.log(options.rainbowMantleMode + " & " + applied.rainbowMantleMode + " & " + ispride)
       if (options.rainbowMantleMode || applied.rainbowMantleMode || isPride) {
         optWrite = optWrite + 0x01000000
         check.apply(util.applyRainbowMantlePatches())
