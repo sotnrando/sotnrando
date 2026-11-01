@@ -1161,6 +1161,7 @@
         elems.newGoals.value,
         elems.statMax.value,
         elems.godspeedMode.checked,
+        elems.rainbowMantleMode.checked,
         elems.mapColor.value,
         elems.alucardPalette.value,
         elems.alucardLiner.value,
