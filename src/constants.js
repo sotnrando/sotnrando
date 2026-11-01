@@ -2214,7 +2214,6 @@
     "Fixed logic in Glitch!",
     "It worked on my machine!",
     "Randomizing since 2019!",
-    "Still no room rando!",
     "Left side strong side!",
     "Modified left!",
     "Modified right!",
