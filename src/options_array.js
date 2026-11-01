@@ -1142,7 +1142,7 @@
 	], 
 	functionCall: util.applyRainbowMantlePatches, 
 	rngNeeded: false, 
-	simple: false,
+	simple: true,
 	argvFlag: "bool",
 	autoBuild: true
   }
