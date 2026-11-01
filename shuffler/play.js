@@ -123,7 +123,7 @@ function getCommands(source, currentState) {
     })
     .forEach((command, index) => {
         if (!(commandMap.has(command.commandName))) {
-            const commandId = '1234568790abcdefghijklmnopqrstuvwxyz'.at(commandMap.size)
+            const commandId = '1234567890abcdefghijklmnopqrstuvwxyz'.at(commandMap.size)
             result[commandId] = command
             commandMap.set(command.commandName, [])
             commandMap[command.commandName] = []

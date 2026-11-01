@@ -2183,6 +2183,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 1024 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'main', COST_UNKNOWN),
@@ -2383,6 +2384,7 @@
                     height: 256,
                 },
                 regions: [
+                    getRegion('holeInFloor', 352, 224, 64, 32),
                     getRegion('main', 0, 0, 768, 256),
                 ],
                 commands: {
@@ -2417,11 +2419,14 @@
                         outcome: {
                             positionX: 384,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
-                            getMovement('basicRisky', 'main', COST_UNKNOWN),
-                            getMovement('doubleJump', 'main', COST_UNKNOWN),
-                            getMovement('poweredMist', 'main', COST_UNKNOWN),
+                            // holeInFloor
+                            getMovement('basicRisky', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('batForm', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('doubleJump', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('poweredMist', 'holeInFloor', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -3462,6 +3467,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'main', COST_UNKNOWN),
@@ -3630,6 +3636,7 @@
                         outcome: {
                             positionX: 640,
                             positionY: 512 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'main', COST_UNKNOWN),
@@ -3970,6 +3977,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 768 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('fall', 'main', COST_UNKNOWN),
@@ -4119,6 +4127,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 768 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('fall', 'beneathTrapdoor', COST_UNKNOWN),
@@ -4394,6 +4403,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                             // statusTookLogicalRisk: true,
                         },
                         requirements: [
@@ -4801,6 +4811,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('fall', 'pit', COST_UNKNOWN),
@@ -5324,6 +5335,7 @@
                     height: 256,
                 },
                 regions: [
+                    getRegion('holeInFloor', 144, 224, 64, 32),
                     getRegion('main', 0, 0, 256, 256),
                 ],
                 commands: {
@@ -5340,6 +5352,40 @@
                         outcome: {
                             positionX: 176,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
+                        },
+                        requirements: [
+                            getMovement('basicRisky', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('batForm', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'holeInFloor', COST_UNKNOWN),
+                        ],
+                    },
+                    toMain: {
+                        outcome: {
+                            positionX: 240,
+                            positionY: 128,
+                            verticalClimb: 0,
+                            // section: main,
+                        },
+                        requirements: [
+                            getMovement('batForm', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'holeInFloor', COST_UNKNOWN),
+                            {
+                                section: 'holeInFloor',
+                                verticalClimb: {
+                                    minimum: 32 - 24,
+                                },
+                                costs: {
+                                    time: COST_UNKNOWN,
+                                },
+                            },
+                        ],
+                    },
+                    toHoleInFloor: {
+                        outcome: {
+                            positionX: 176,
+                            positionY: 240,
+                            // section: holeInFloor,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -5353,7 +5399,6 @@
                     height: 512,
                 },
                 regions: [
-                    getRegion('holeInCeiling', 16, 0, 64, 64),
                     getRegion('main', 0, 0, 256, 512),
                 ],
                 commands: {
@@ -5363,9 +5408,11 @@
                             positionY: 0 - 24,
                         },
                         requirements: [
-                            getMovement('basic', 'holeInCeiling', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
                         ],
                     },
+                    exitTopWithGravityJump: getUpwardMovement('gravityJump', 'main', COST_UNKNOWN, 48, 176),
                     exitLeftUpper: {
                         outcome: {
                             positionX: 0 - 8,
@@ -5400,30 +5447,6 @@
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
-                        ],
-                    },
-                    toHoleInCeiling: {
-                        outcome: {
-                            positionX: 48,
-                            positionY: 32,
-                            // section: holeInCeiling,
-                        },
-                        requirements: [
-                            // getMovement('risingUppercut', 'main', COST_UNKNOWN),
-                            getMovement('batForm', 'main', COST_UNKNOWN),
-                            getMovement('gravityJump', 'main', COST_UNKNOWN),
-                            getMovement('poweredMistLong', 'main', COST_UNKNOWN),
-                            getMovement('wolfMistRise', 'main', COST_UNKNOWN),
-                        ],
-                    },
-                    toMain: {
-                        outcome: {
-                            positionX: 48,
-                            positionY: 32,
-                            // section: main,
-                        },
-                        requirements: [
-                            getMovement('basic', 'holeInCeiling', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -5810,8 +5833,8 @@
                     height: 512,
                 },
                 regions: [
-                    getRegion('holeInCeiling', 144, 0, 64, 80),
-                    getRegion('main', 0, 80, 256, 368),
+                    getRegion('holeInCeiling', 144, 0, 64, 64),
+                    getRegion('main', 0, 64, 256, 368),
                     getRegion('holeInFloor', 32, 448, 32, 64),
                 ],
                 commands: {
@@ -5821,9 +5844,15 @@
                             positionY: 0 - 24,
                         },
                         requirements: [
-                            getMovement('basic', 'holeInCeiling', COST_UNKNOWN),
+                            getMovement('batForm', 'holeInCeiling', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'holeInCeiling', COST_UNKNOWN),
+                            getMovement('poweredMistLong', 'holeInCeiling', COST_UNKNOWN),
                         ],
                     },
+                    exitTopWithJump: getUpwardMovement('jump', 'holeInCeiling', COST_UNKNOWN, 176, 64),
+                    exitTopWithDoubleJump: getUpwardMovement('doubleJump', 'holeInCeiling', COST_UNKNOWN, 176, 64),
+                    exitTopWithPoweredMist: getUpwardMovement('poweredMist', 'holeInCeiling', COST_UNKNOWN, 176, 64),
+                    exitTopWithGravityJump: getUpwardMovement('gravityJump', 'holeInCeiling', COST_UNKNOWN, 176, 160),
                     exitLeft: {
                         outcome: {
                             positionX: 0 - 8,
@@ -5855,6 +5884,7 @@
                         outcome: {
                             positionX: 48,
                             positionY: 512 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'holeInFloor', COST_UNKNOWN),
@@ -5880,15 +5910,22 @@
                         outcome: {
                             positionX: 16,
                             positionY: 128,
+                            verticalClimb: 0,
                             // section: main,
                         },
                         requirements: [
-                            getMovement('basic', 'main', COST_UNKNOWN),
+                            getMovement('basic', 'holeInCeiling', COST_UNKNOWN),
                             getMovement('batForm', 'holeInFloor', COST_UNKNOWN),
-                            getMovement('doubleJump', 'holeInFloor', COST_UNKNOWN),
-                            getMovement('gravityJump', 'holeInFloor', COST_UNKNOWN),
-                            getMovement('poweredMist', 'holeInFloor', COST_UNKNOWN),
-                            getMovement('wolfMistRise', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'holeInFloor', COST_UNKNOWN),
+                            {
+                                section: 'holeInFloor',
+                                verticalClimb: {
+                                    minimum: 64 - 24,
+                                },
+                                costs: {
+                                    time: COST_UNKNOWN,
+                                },
+                            },
                         ],
                     },
                     toHoleInFloor: {
@@ -6012,6 +6049,7 @@
                         outcome: {
                             positionX: 400,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -6102,6 +6140,7 @@
                         outcome: {
                             positionX: 392,
                             positionY: 256,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -6970,6 +7009,7 @@
                         outcome: {
                             positionX: 1072,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'main', COST_UNKNOWN),
@@ -7783,6 +7823,7 @@
                         outcome: {
                             positionX: 640,
                             positionY: 512 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -8078,6 +8119,7 @@
                         outcome: {
                             positionX: 416,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -8204,6 +8246,7 @@
                         outcome: {
                             positionX: 384,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -8399,6 +8442,7 @@
                     //     outcome: {
                     //         positionX: 144,
                     //         positionY: 256 + 24,
+                    //         verticalClimb: 0,
                     //     },
                     //     requirements: [
                     //         getMovement('basic', 'pit', COST_UNKNOWN),
@@ -8408,6 +8452,7 @@
                         outcome: {
                             positionX: 896,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -8457,6 +8502,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -8486,6 +8532,7 @@
                         outcome: {
                             positionX: 144,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -9080,6 +9127,7 @@
                         outcome: {
                             positionX: 640,
                             positionY: 768 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -9278,6 +9326,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -9459,6 +9508,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'pit', COST_UNKNOWN),
@@ -9610,6 +9660,7 @@
                         outcome: {
                             positionX: 512,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('fall', 'pit', COST_UNKNOWN),
@@ -9704,6 +9755,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -9783,6 +9835,7 @@
                         outcome: {
                             positionX: 640,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'pit', COST_UNKNOWN),
@@ -10261,6 +10314,7 @@
                         outcome: {
                             positionX: 608,
                             positionY: 512 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'pit', COST_UNKNOWN),
@@ -10425,6 +10479,7 @@
                         outcome: {
                             positionX: 384,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'pit', COST_UNKNOWN),
@@ -10542,6 +10597,7 @@
                         outcome: {
                             positionX: 40,
                             positionY: 512 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'leftPath', COST_UNKNOWN),
@@ -10551,6 +10607,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 512 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -10560,6 +10617,7 @@
                         outcome: {
                             positionX: 216,
                             positionY: 512 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'rightPath', COST_UNKNOWN),
@@ -10860,6 +10918,7 @@
                         outcome: {
                             positionX: 384,
                             positionY: 512 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -11212,6 +11271,7 @@
                         outcome: {
                             positionX: 112,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -11221,6 +11281,7 @@
                         outcome: {
                             positionX: 1424,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -11310,6 +11371,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -11531,6 +11593,7 @@
                         outcome: {
                             positionX: 224,
                             positionY: 2304 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'main', COST_UNKNOWN),
@@ -11572,6 +11635,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -11610,6 +11674,7 @@
                         outcome: {
                             positionX: 176,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -11689,6 +11754,7 @@
                         outcome: {
                             positionX: 400,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -11921,6 +11987,7 @@
                         outcome: {
                             positionX: 224,
                             positionY: 768 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -12010,6 +12077,7 @@
                         outcome: {
                             positionX: 32,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                             statusSecretPlatformInOuterWallActivated: true,
                         },
                         requirements: [
@@ -12066,6 +12134,7 @@
                         outcome: {
                             positionX: 176,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -12138,6 +12207,7 @@
                         outcome: {
                             positionX: 384,
                             positionY: 1792 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -13072,6 +13142,7 @@
                         outcome: {
                             positionX: 896,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'beneathBridge', COST_UNKNOWN),
@@ -13198,6 +13269,7 @@
                         outcome: {
                             positionX: 384,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'main', COST_UNKNOWN),
@@ -13288,6 +13360,7 @@
                         outcome: {
                             positionX: 104,
                             positionY: 768 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'main', COST_UNKNOWN),
@@ -13532,6 +13605,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 2816 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'pit', COST_UNKNOWN),
@@ -13732,6 +13806,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('fall', 'main', COST_UNKNOWN),
@@ -13861,6 +13936,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'main', COST_UNKNOWN),
@@ -14088,6 +14164,7 @@
                         outcome: {
                             positionX: 896,
                             positionY: 256 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basic', 'main', COST_UNKNOWN),
@@ -14184,6 +14261,7 @@
                         outcome: {
                             positionX: 128,
                             positionY: 2304 + 24,
+                            verticalClimb: 0,
                         },
                         requirements: [
                             getMovement('basicRisky', 'main', COST_UNKNOWN),
