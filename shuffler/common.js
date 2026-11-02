@@ -2158,6 +2158,7 @@
                     getRegion('zigZagLedges', 16, 208, 224, 336),
                     getRegion('crumblingStairwell', 16, 544, 208, 160),
                     getRegion('tinyLedges', 16, 704, 208, 144),
+                    getRegion('holeInFloor', 96, 992, 64, 32),
                     getRegion('main', 16, 848, 208, 176),
                 ],
                 commands: {
@@ -2186,9 +2187,7 @@
                             verticalClimb: 0,
                         },
                         requirements: [
-                            getMovement('basicRisky', 'main', COST_UNKNOWN),
-                            getMovement('doubleJump', 'main', COST_UNKNOWN),
-                            getMovement('poweredMist', 'main', COST_UNKNOWN),
+                            getMovement('basic', 'holeInFloor', COST_UNKNOWN),
                         ],
                     },
                     toBehindDemonBlock: {
@@ -2247,10 +2246,11 @@
                         },
                         requirements: [
                             getMovement('basic', 'demonBlock', COST_UNKNOWN),
-                            // getMovement('risingUppercut', 'zigZagLedges', COST_UNKNOWN),
+                            // NOTE(sestren): A precise regular jump will also work to reach upperLeftLedge from zigZagLedges, but for now it is out-of-logic
+                            getMovement('risingUppercut', 'zigZagLedges', COST_UNKNOWN),
                             getMovement('batForm', 'zigZagLedges', COST_UNKNOWN),
                             getMovement('doubleJump', 'zigZagLedges', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'zigZagLedges', COST_UNKNOWN),
+                            getMovement('gravityJump', 'zigZagLedges', COST_UNKNOWN),
                             getMovement('poweredMist', 'zigZagLedges', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'zigZagLedges', COST_UNKNOWN),
                         ],
@@ -2263,19 +2263,19 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('basicRisky', 'upperLeftLedge', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'upperLeftLedge', COST_UNKNOWN),
                             getMovement('batForm', 'upperLeftLedge', COST_UNKNOWN),
                             getMovement('doubleJump', 'upperLeftLedge', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'upperLeftLedge', COST_UNKNOWN),
+                            getMovement('gravityJump', 'upperLeftLedge', COST_UNKNOWN),
                             getMovement('poweredMist', 'upperLeftLedge', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'upperLeftLedge', COST_UNKNOWN),
                             // Moving upward
-                            // getMovement('risingUppercut', 'crumblingStairwell', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('batForm', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('doubleJump', 'crumblingStairwell', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'crumblingStairwell', COST_UNKNOWN),
+                            getMovement('gravityJump', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('poweredMist', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'crumblingStairwell', COST_UNKNOWN),
                         ],
@@ -2289,16 +2289,20 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'zigZagLedges', COST_UNKNOWN),
+                            getMovement('basicRisky', 'zigZagLedges', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'zigZagLedges', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'zigZagLedges', COST_UNKNOWN),
                             getMovement('batForm', 'zigZagLedges', COST_UNKNOWN),
                             getMovement('doubleJump', 'zigZagLedges', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'zigZagLedges', COST_UNKNOWN),
+                            getMovement('gravityJump', 'zigZagLedges', COST_UNKNOWN),
                             getMovement('poweredMist', 'zigZagLedges', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'zigZagLedges', COST_UNKNOWN),
                             // Moving upward
-                            // getMovement('risingUppercut', 'tinyLedges', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'tinyLedges', COST_UNKNOWN),
+                            getMovement('batForm', 'tinyLedges', COST_UNKNOWN),
+                            getMovement('gravityJump', 'tinyLedges', COST_UNKNOWN),
+                            getMovement('poweredMist', 'tinyLedges', COST_UNKNOWN),
+                            getMovement('wolfMistRise', 'tinyLedges', COST_UNKNOWN),
                             {
                                 section: 'tinyLedges',
                                 progressionDoubleJump: true,
@@ -2307,10 +2311,6 @@
                                     time: COST_UNKNOWN,
                                 },
                             },
-                            getMovement('batForm', 'tinyLedges', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'tinyLedges', COST_UNKNOWN),
-                            getMovement('poweredMist', 'tinyLedges', COST_UNKNOWN),
-                            getMovement('wolfMistRise', 'tinyLedges', COST_UNKNOWN),
                         ],
                     },
                     toTinyLedges: {
@@ -2321,19 +2321,19 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'crumblingStairwell', COST_UNKNOWN),
+                            getMovement('basicRisky', 'crumblingStairwell', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'crumblingStairwell', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('batForm', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('doubleJump', 'crumblingStairwell', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'crumblingStairwell', COST_UNKNOWN),
+                            getMovement('gravityJump', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('poweredMist', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'crumblingStairwell', COST_UNKNOWN),
                             // Moving upward
-                            // getMovement('risingUppercut', 'main', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'main', COST_UNKNOWN),
                             getMovement('batForm', 'main', COST_UNKNOWN),
                             getMovement('doubleJump', 'main', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
+                            getMovement('gravityJump', 'main', COST_UNKNOWN),
                             getMovement('poweredMist', 'main', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'main', COST_UNKNOWN),
                         ],
@@ -2346,14 +2346,41 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'tinyLedges', COST_UNKNOWN),
+                            getMovement('basicRisky', 'tinyLedges', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'tinyLedges', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'tinyLedges', COST_UNKNOWN),
                             getMovement('batForm', 'tinyLedges', COST_UNKNOWN),
                             getMovement('doubleJump', 'tinyLedges', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'tinyLedges', COST_UNKNOWN),
+                            getMovement('gravityJump', 'tinyLedges', COST_UNKNOWN),
                             getMovement('poweredMist', 'tinyLedges', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'tinyLedges', COST_UNKNOWN),
+                            {
+                                section: 'holeInFloor',
+                                verticalClimb: {
+                                    minimum: 32 - 24,
+                                },
+                                costs: {
+                                    time: COST_UNKNOWN,
+                                },
+                            },
+                        ],
+                    },
+                    toHoleInFloor: {
+                        outcome: {
+                            positionX: 128,
+                            positionY: 1008,
+                            // section: holeInFloor,
+                        },
+                        requirements: [
+                            // Moving downward, chance of return not guaranteed
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            // Moving downward, chance of return guaranteed
+                            getMovement('risingUppercut', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('doubleJump', 'main', COST_UNKNOWN),
+                            getMovement('gravityJump', 'main', COST_UNKNOWN),
+                            getMovement('poweredMist', 'main', COST_UNKNOWN),
+                            getMovement('wolfMistRise', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -2422,11 +2449,42 @@
                             verticalClimb: 0,
                         },
                         requirements: [
-                            // holeInFloor
-                            getMovement('basicRisky', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('basic', 'holeInFloor', COST_UNKNOWN),
+                        ],
+                    },
+                    toMain: {
+                        outcome: {
+                            positionX: 400,
+                            positionY: 64,
+                            verticalClimb: 0,
+                            // section: main,
+                        },
+                        requirements: [
                             getMovement('batForm', 'holeInFloor', COST_UNKNOWN),
-                            getMovement('doubleJump', 'holeInFloor', COST_UNKNOWN),
-                            getMovement('poweredMist', 'holeInFloor', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'holeInFloor', COST_UNKNOWN),
+                            {
+                                section: 'holeInFloor',
+                                verticalClimb: {
+                                    minimum: 32 - 24,
+                                },
+                                costs: {
+                                    time: COST_UNKNOWN,
+                                },
+                            },
+                        ],
+                    },
+                    toHoleInFloor: {
+                        outcome: {
+                            positionX: 384,
+                            positionY: 240,
+                            // section: holeInFloor,
+                        },
+                        requirements: [
+                            getMovement('basicRisky', 'main', COST_UNKNOWN),
+                            getMovement('batForm', 'main', COST_UNKNOWN),
+                            getMovement('gravityJump', 'main', COST_UNKNOWN),
+                            getMovement('doubleJump', 'main', COST_UNKNOWN),
+                            getMovement('poweredMistForm', 'main', COST_UNKNOWN),
                         ],
                     },
                 },
@@ -2575,9 +2633,14 @@
                             positionY: 0 - 24,
                         },
                         requirements: [
-                            getMovement('basic', 'layer0', COST_UNKNOWN),
+                            getMovement('batForm', 'layer0', COST_UNKNOWN),
+                            getMovement('multipleGravityJumps', 'layer0', COST_UNKNOWN),
                         ],
                     },
+                    exitTopWithJump: getUpwardMovement('jump', 'layer0', COST_UNKNOWN, 128, 80),
+                    exitTopWithDoubleJump: getUpwardMovement('doubleJump', 'layer0', COST_UNKNOWN, 128, 80),
+                    exitTopWithPoweredMist: getUpwardMovement('poweredMist', 'layer0', COST_UNKNOWN, 128, 80),
+                    exitTopWithGravityJump: getUpwardMovement('gravityJump', 'layer0', COST_UNKNOWN, 128, 80),
                     toLayer0: {
                         outcome: {
                             positionX: 128,
@@ -2585,10 +2648,10 @@
                             // section: layer0,
                         },
                         requirements: [
-                            // getMovement('risingUppercut', 'layer1', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer1', COST_UNKNOWN),
                             getMovement('batForm', 'layer1', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer1', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'layer1', COST_UNKNOWN),
+                            getMovement('gravityJump', 'layer1', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer1', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer1', COST_UNKNOWN),
                         ],
@@ -2603,17 +2666,17 @@
                             // Moving downward, chance of return not guaranteed
                             getMovement('basicRisky', 'layer0', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'layer0', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer0', COST_UNKNOWN),
                             getMovement('batForm', 'layer0', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer0', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'layer0', COST_UNKNOWN),
+                            getMovement('gravityJump', 'layer0', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer0', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer0', COST_UNKNOWN),
                             // Moving upward
-                            // getMovement('risingUppercut', 'layer2', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer2', COST_UNKNOWN),
                             getMovement('batForm', 'layer2', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer2', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'layer2', COST_UNKNOWN),
+                            getMovement('gravityJump', 'layer2', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer2', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer2', COST_UNKNOWN),
                         ],
@@ -2628,17 +2691,17 @@
                             // Moving downward, chance of return not guaranteed
                             getMovement('basicRisky', 'layer1', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'layer1', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer1', COST_UNKNOWN),
                             getMovement('batForm', 'layer1', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer1', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'layer1', COST_UNKNOWN),
+                            getMovement('gravityJump', 'layer1', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer1', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer1', COST_UNKNOWN),
                             // Moving upward
-                            // getMovement('risingUppercut', 'layer3', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer3', COST_UNKNOWN),
                             getMovement('batForm', 'layer3', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer3', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'layer3', COST_UNKNOWN),
+                            getMovement('gravityJump', 'layer3', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer3', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer3', COST_UNKNOWN),
                         ],
@@ -2653,17 +2716,17 @@
                             // Moving downward, chance of return not guaranteed
                             getMovement('basicRisky', 'layer2', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'layer2', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer2', COST_UNKNOWN),
                             getMovement('batForm', 'layer2', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer2', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'layer2', COST_UNKNOWN),
+                            getMovement('gravityJump', 'layer2', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer2', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer2', COST_UNKNOWN),
                             // Moving upward
-                            // getMovement('risingUppercut', 'main', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'main', COST_UNKNOWN),
                             getMovement('batForm', 'main', COST_UNKNOWN),
                             getMovement('doubleJump', 'main', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
+                            getMovement('gravityJump', 'main', COST_UNKNOWN),
                             getMovement('poweredMist', 'main', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'main', COST_UNKNOWN),
                         ],
@@ -2678,10 +2741,10 @@
                             // Moving downward, chance of return not guaranteed
                             getMovement('basicRisky', 'layer3', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'layer3', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer3', COST_UNKNOWN),
                             getMovement('batForm', 'layer3', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer3', COST_UNKNOWN),
-                            getMovement('multipleGravityJumps', 'layer3', COST_UNKNOWN),
+                            getMovement('gravityJump', 'layer3', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer3', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer3', COST_UNKNOWN),
                         ],
@@ -2909,16 +2972,16 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'layer0', COST_UNKNOWN),
+                            getMovement('basicRisky', 'layer0', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'layer0', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer0', COST_UNKNOWN),
                             getMovement('batForm', 'layer0', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer0', COST_UNKNOWN),
                             getMovement('multipleGravityJumps', 'layer0', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer0', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer0', COST_UNKNOWN),
                             // Moving upward
-                            // getMovement('risingUppercut', 'layer2', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer2', COST_UNKNOWN),
                             getMovement('batForm', 'layer2', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer2', COST_UNKNOWN),
                             getMovement('multipleGravityJumps', 'layer2', COST_UNKNOWN),
@@ -2934,16 +2997,16 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'layer1', COST_UNKNOWN),
+                            getMovement('basicRisky', 'layer1', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'layer1', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer1', COST_UNKNOWN),
                             getMovement('batForm', 'layer1', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer1', COST_UNKNOWN),
                             getMovement('multipleGravityJumps', 'layer1', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer1', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer1', COST_UNKNOWN),
                             // Moving upward
-                            // getMovement('risingUppercut', 'layer3', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer3', COST_UNKNOWN),
                             getMovement('batForm', 'layer3', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer3', COST_UNKNOWN),
                             getMovement('multipleGravityJumps', 'layer3', COST_UNKNOWN),
@@ -2959,16 +3022,16 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'layer2', COST_UNKNOWN),
+                            getMovement('basicRisky', 'layer2', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'layer2', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer2', COST_UNKNOWN),
                             getMovement('batForm', 'layer2', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer2', COST_UNKNOWN),
                             getMovement('multipleGravityJumps', 'layer2', COST_UNKNOWN),
                             getMovement('poweredMist', 'layer2', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'layer2', COST_UNKNOWN),
                             // Moving upward
-                            // getMovement('risingUppercut', 'main', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'main', COST_UNKNOWN),
                             getMovement('batForm', 'main', COST_UNKNOWN),
                             getMovement('doubleJump', 'main', COST_UNKNOWN),
                             getMovement('multipleGravityJumps', 'main', COST_UNKNOWN),
@@ -2984,9 +3047,9 @@
                         },
                         requirements: [
                             // Moving downward, chance of return not guaranteed
-                            // getMovement('basicRisky', 'layer3', COST_UNKNOWN),
+                            getMovement('basicRisky', 'layer3', COST_UNKNOWN),
                             // Moving downward, chance of return guaranteed
-                            // getMovement('risingUppercut', 'layer3', COST_UNKNOWN),
+                            getMovement('risingUppercut', 'layer3', COST_UNKNOWN),
                             getMovement('batForm', 'layer3', COST_UNKNOWN),
                             getMovement('doubleJump', 'layer3', COST_UNKNOWN),
                             getMovement('multipleGravityJumps', 'layer3', COST_UNKNOWN),
