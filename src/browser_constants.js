@@ -107,6 +107,7 @@ BrowserConstants.elems = {
     warlockMode: document.getElementById('warlock-mode'),
     nimbleLiteMode: document.getElementById('nimble-mode'),
     cornucopiaMode: document.getElementById('cornucopia-mode'),
+    enhancedWeaponsMode: document.getElementById('enhanced-weapons'),
     instantDeathMode: document.getElementById('instant-death-mode'),
     levelOneMode: document.getElementById('level-one-mode'),
     easyMode: document.getElementById('easy-mode'),
@@ -138,10 +139,8 @@ BrowserConstants.elems = {
     fourBeastMode: document.getElementById('four-beast'),
     forbRouteShortMode: document.getElementById('forbidden-shortcut'),
     maxMasaMode: document.getElementById('max-masa'),
-    brawnySwordMode: document.getElementById('brawn-sword'),
     trapDoorMode: document.getElementById('trap-door'),
     betterCrossMode: document.getElementById('better-x'),
-    darkEIFMode: document.getElementById('dark-shield'),
     nameListMode: document.getElementById('name-list'),
     rainbowMantleMode: document.getElementById('rainbow-mantle'),
     randomPresetBtn: document.getElementById('randomPresetBtn')

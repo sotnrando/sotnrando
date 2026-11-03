@@ -362,7 +362,6 @@ async function randomize(
         check.apply(util.applyRainbowMantlePatches())
       }
       check.apply(util.randoFuncMaster(optWrite))
-      check.apply(util.applySwordBuffPatches())
       let seasonAllowed =
         options.seasonalPhrasesMode
         || applied.seasonalPhrasesMode
