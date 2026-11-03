@@ -1,6 +1,46 @@
 {
     "changelog": [
         {
+            "date": "November 9, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Fixed more issues with Richter being playable in Boss Rush.",
+                    "'SacredLucy! Glitch has escaped! Recruit a group of teenagers with attitude!' - eldri7ch"
+                ],
+                "Option Updates": [
+                    "Added Enahnced Weapons Mode.",
+                    "Fixed several issues regarding [redacted]."
+                ],
+                "Website Updates": [
+                    "Added a link to the SymphonyRecomp releases page to the nav bar under Community & News.",
+                    "Added a link to the Preset Generator releases page by the_swarm to the nav bar under Tools."
+                ],
+                "Program Updates": [
+                    "Removed several features from the base randomizer and incorporated them into a new option."
+                ]
+            }
+        },
+        {
+            "date": "August 10, 2026",
+            "sections": {
+                "Preset Updates": [
+                    "Fixed more issues with Richter being playable in Boss Rush.",
+                    "Glitch, the final frontier. These are the voyages of the dev, eldri7ch."
+                ],
+                "Option Updates": [
+                    "Added Nimble Lite Mode.",
+                    "Fixed several issue regarding New Goals."
+                ],
+                "Website Updates": [
+                    "Added a new 'Randomize Preset' Button",
+                    "Added indicators to tell the user if the option for randomizer is compatible with SymphonyRecomp."
+                ],
+                "Program Updates": [
+                    "Added Rainbow Robe as a feature for Pride Month."
+                ]
+            }
+        },
+        {
             "date": "July 13, 2026",
             "sections": {
                 "Preset Updates": [

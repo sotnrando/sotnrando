@@ -42,6 +42,7 @@ function loadNavbar() {
             <li><a href="https://discord.com/invite/dzbKhQDjrs">Long Library Discord</a></li>
             <li><a href="https://www.symphonyrando.fun">Knowledge Database (sr.f)</a></li>
             <li><a href="https://www.speedrun.com/sotn">Speedrun Leaderboards</a></li>
+            <li><a href="https://github.com/BlackLabelHQ/SymphonyRecomp/releases"></a></li>
         </ul>
         </li>
 
