@@ -3415,6 +3415,8 @@
     this.instantDeath = false
     // enemies can drop any item
     this.cornucopia = false
+    // enhance Weapons
+    this.enhancedWeapons = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
@@ -4227,7 +4229,7 @@
       this.cornucopia = preset.cornucopiaMode
     }
     if ('enhancedWeaponsMode' in preset) {
-      this.cornucopia = preset.enhancedWeaponsMode
+      this.enhancedWeapons = preset.enhancedWeaponsMode
     }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
@@ -5475,6 +5477,7 @@
     const levelOne = self.levelOne
     const instantDeath = self.instantDeath
     const cornucopia = self.cornucopia
+    const enhancedWeapons = self.enhancedWeapons
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
     const writes = self.writes
@@ -5535,6 +5538,7 @@
       levelOne,
       instantDeath,
       cornucopia,
+      enhancedWeapons,
       newGoals,
       startStatRando,
       writes,

@@ -1125,7 +1125,7 @@
 	rngNeeded: false, 
 	simple: true,
  	argvFlag: "bool",
-	autoBuild: false
+	autoBuild: true
   }
 
 //   , {
