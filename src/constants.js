@@ -2302,7 +2302,13 @@
     "Definitely a real randomizer!",
     "BUFFER DO NOT DELETE!",
     "Em memoria de Roberto!",
-    "Try Twisted Metal V!"
+    "Try SymphonyRecomp!",
+    "Try The Preset Generator!",
+    "Maximum Power!",
+    "Do you know how to use Echo of Bat!?",
+    "Saturn Maria Exists!",
+    "SOTN zOMGUltimate120FPS8KSTEAMDECK Edition!",
+    "Rose has the hots for Alucard!",
   ]
 
   // Prides splash phrases are considered part of the "Seasonal Phrases" for 

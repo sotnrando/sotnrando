@@ -903,6 +903,8 @@
   }, {
     name: LOCATION.WATERFALL_CAVE,
     extension: EXTENSION.EXTENDED,
+    itemId: 23,
+    tileIndex: 2,
     entity: {
       zones: [ ZONE.NO4 ],
       entities: [ 0x3f6e, 0x5000 ],
