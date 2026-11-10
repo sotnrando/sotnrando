@@ -16,7 +16,8 @@
                     "Added a link to the Preset Generator releases page by the_swarm to the nav bar under Tools."
                 ],
                 "Program Updates": [
-                    "Removed several features from the base randomizer and incorporated them into a new option."
+                    "Removed several features from the base randomizer and incorporated them into a new option.",
+                    "Added Spike Breaker as a requirement to access Twilight Cloak for many presets."
                 ]
             }
         },
