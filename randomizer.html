@@ -301,27 +301,27 @@
             </fieldset>
             <div class="tabs-nav">
               <button type="button" class="tab-btn active" onclick="openTab('tab-goals')">
-                Goals <new></new>
+                Goals
               </button>
 
               <button type="button" class="tab-btn" onclick="openTab('tab-randomizations')">
-                Randomizations <new></new>
+                Randomizations
               </button>
 
               <button type="button" class="tab-btn" onclick="openTab('tab-QoL')">
-                Quality of Life <new></new>
+                Quality of Life
               </button>
 
               <button type="button" class="tab-btn" onclick="openTab('tab-xform')">
-                Transform Modes <new></new>
+                Transform Modes
               </button>
 
               <button type="button" class="tab-btn" onclick="openTab('tab-challenge')">
-                Challenge Options <new></new>
+                Challenge Options
               </button>
 
               <button type="button" class="tab-btn" onclick="openTab('tab-cosmetics')">
-                Cosmetics <new></new>
+                Cosmetics
               </button>
 
               <button type="button" class="tab-btn dev-stash-btn" onclick="openTab('tab-devstash')">
@@ -632,7 +632,6 @@
                           data-custom-change="cornucopiaModeChange">
                         <span class="slider"></span>
                       </label>
-                      <new></new>
                       <label for="cornucopia-mode" class="toggle-label">
                         Chaos Drops
                         <span class="tooltip-wrapper">
@@ -1089,6 +1088,7 @@
                         <input id="enhanced-weapons" type="checkbox" data-store-checkbox="false">
                         <span class="slider"></span>
                       </label>
+                      <new></new>
                       <label for="enhanced-weapons" class="toggle-label">
                         Enhanced Weapons
                         <span class="tooltip-wrapper">
@@ -1157,7 +1157,6 @@
                         <input id="warlock-mode" type="checkbox" data-store-checkbox="false">
                         <span class="slider"></span>
                       </label>
-                      <new></new>
                       <label for="warlock-mode" class="toggle-label">
                         Warlock Mode
                         <span class="tooltip-wrapper">
@@ -1189,7 +1188,6 @@
                           data-custom-change="instantDeathModeChange">
                         <span class="slider"></span>
                       </label>
-                      <new></new>
                       <label for="instant-death-mode" class="toggle-label">
                         Instant Death Mode
                         <span class="tooltip-wrapper">
@@ -1210,7 +1208,6 @@
                           data-custom-change="levelOneModeChange">
                         <span class="slider"></span>
                       </label>
-                      <new></new>
                       <label for="level-one-mode" class="toggle-label">
                         Level One Mode
                         <span class="tooltip-wrapper">
@@ -1316,10 +1313,10 @@
                   <select id="alucardPalette">
                     <option value="default">Default</option>
                     <option value="r">Bloody Tears</option>
-                    <option value="f">Fire Lord *NEW*</option>
+                    <option value="f">Fire Lord</option>
                     <option value="g">Swamp Thing</option>
                     <option value="m">Refreshing Mint</option>
-                    <option value="i">Ice Lord *NEW*</option>
+                    <option value="i">Ice Lord</option>
                     <option value="b">Blue Danube</option>
                     <option value="l">Royal Purple</option>
                     <option value="p">Pink Passion</option>
@@ -1338,8 +1335,8 @@
                     <option value="y">Silver Liner</option>
                     <option value="w">Onyx Liner</option>
                     <option value="v">Coral Liner</option>
-                    <option value="s">Slate Liner *NEW*</option>
-                    <option value="j">Jade Liner *NEW*</option>
+                    <option value="s">Slate Liner</option>
+                    <option value="j">Jade Liner</option>
                   </select>
                 </div>
 
@@ -1620,14 +1617,14 @@
           function renderLatest(entry) {
             const container = document.getElementById("latest-changelog-container");
             container.innerHTML = `
-        <h3>${entry.date}</h3>
-        ${Object.keys(entry.sections).map(sectionName => `
-            <h4>${sectionName}</h4>
-            <ul>
-                ${entry.sections[sectionName].map(item => `<li>${item}</li>`).join("")}
-            </ul>
-        `).join("")}
-    `;
+          <h3>${entry.date}</h3>
+          ${Object.keys(entry.sections).map(sectionName => `
+              <h4>${sectionName}</h4>
+              <ul>
+                  ${entry.sections[sectionName].map(item => `<li>${item}</li>`).join("")}
+              </ul>
+            `).join("")}
+            `;
           }
         </script>
 
