@@ -50,6 +50,15 @@ header {
     color: white;
     text-indent: 20px;
 }
+legend,label {
+    color: white;
+}
+
+fieldset {
+    border: 1px solid white;
+    margin: 1em;
+    padding: 1em;
+}
 
 .right {
     text-align: right;
