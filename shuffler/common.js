@@ -2259,6 +2259,8 @@
                         outcome: {
                             positionX: 216,
                             positionY: 256,
+                            // NOTE(sestren): It is assumed the stairwell is dislodged on the way down from this section
+                            statusStairwellInAbandonedMineDislodged: true,
                             // section: zigZagLedges,
                         },
                         requirements: [
@@ -2278,13 +2280,20 @@
                             getMovement('gravityJump', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('poweredMist', 'crumblingStairwell', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'crumblingStairwell', COST_UNKNOWN),
+                            {
+                                section: 'crumblingStairwell',
+                                progressionDoubleJump: true,
+                                statusStairwellInAbandonedMineDislodged: true,
+                                costs: {
+                                    time: COST_UNKNOWN,
+                                },
+                            },
                         ],
                     },
                     toCrumblingStairwell: {
                         outcome: {
                             positionX: 96,
                             positionY: 656,
-                            statusStairwellInAbandonedMineDislodged: true,
                             // section: crumblingStairwell,
                         },
                         requirements: [
@@ -2303,14 +2312,6 @@
                             getMovement('gravityJump', 'tinyLedges', COST_UNKNOWN),
                             getMovement('poweredMist', 'tinyLedges', COST_UNKNOWN),
                             getMovement('wolfMistRise', 'tinyLedges', COST_UNKNOWN),
-                            {
-                                section: 'tinyLedges',
-                                progressionDoubleJump: true,
-                                statusStairwellInAbandonedMineDislodged: true,
-                                costs: {
-                                    time: COST_UNKNOWN,
-                                },
-                            },
                         ],
                     },
                     toTinyLedges: {
@@ -4583,7 +4584,9 @@
                         ],
                     },
                     fromMainToHoleInCeiling: {
+                        // TODO(sestren): Replace this with verticalClimb instead
                         outcome: {
+                            // NOTE(sestren): This position is wrong
                             positionX: 112,
                             positionY: 176,
                             // section: holeInCeiling,
@@ -7484,6 +7487,7 @@
                         requirements: [
                             {
                                 section: 'main',
+                                // TODO(sestren): Add gear puzzle back into logic
                                 // statusLeftGearRoomSolved: true,
                                 // statusRightGearRoomSolved: true,
                                 costs: {
@@ -7500,6 +7504,7 @@
                         requirements: [
                             {
                                 section: 'secretPassage',
+                                // TODO(sestren): Add gear puzzle back into logic
                                 // statusLeftGearRoomSolved: true,
                                 // statusRightGearRoomSolved: true,
                                 costs: {
@@ -7515,6 +7520,7 @@
                     //     requirements: [
                     //         {
                     //             section: 'main',
+                    //             // TODO(sestren): Add gear puzzle back into logic
                     //             // statusLeftGearRoomSolved: false,
                     //             costs: {
                     //                 time: COST_UNKNOWN,
@@ -7812,7 +7818,7 @@
                     exitLeftLower: {
                         outcome: {
                             positionX: 0 - 8,
-                            positionY: 128,
+                            positionY: 384,
                             // TODO(sestren): Handle breakable wall
                         },
                         requirements: [
@@ -15158,6 +15164,36 @@
         },
     }
 
+    function getRoomsInfo() {
+        const result = {}
+        Object.entries(ROOMS_INFO)
+        .forEach(([stageName, stageInfo]) => {
+            result[stageName] = {}
+            Object.entries(stageInfo)
+            .forEach(([roomName, roomInfo]) => {
+                result[stageName][roomName] = []
+                roomInfo.regions
+                .forEach((regionInfo) => {
+                    result[stageName][roomName].push({
+                        left: regionInfo.requirements.at(0).positionX.minimum,
+                        top: regionInfo.requirements.at(0).positionY.minimum,
+                        right: 1 + regionInfo.requirements.at(0).positionX.maximum,
+                        bottom: 1 + regionInfo.requirements.at(0).positionY.maximum,
+                        section: regionInfo.outcome.section,
+                    })
+                })
+                result[stageName][roomName].push({
+                    left: 0,
+                    top: 0,
+                    right: roomInfo.roomInfo.width,
+                    bottom: roomInfo.roomInfo.height,
+                    section: 'NONE',
+                })
+            })
+        })
+        return result
+    }
+    
     const TELEPORTERS = {
         fromAbandonedMineToCatacombs: { // fromCatacombsToAbandonedMine
             sourceStage: 'abandonedMine',
