@@ -1,8 +1,16 @@
 <html>
     <head>
         <title>SOTN Shuffler</title>
+        <link rel="stylesheet" href="../styles/main.css">
+        <link rel="stylesheet" href="../styles/navbar.css">
     </head>
     <body>
+        <header>
+            <h1>Castlevania: Symphony of the Night</h1>
+            <h3>Map Shuffler</h3>
+        </header>
+        <div id="navbar-container"></div>
+        <script src="/src/navbar.js"></script>
         <div>
             <form id="shufflerOptions">
                 <div id="options">
@@ -142,12 +150,12 @@
                 </div>
                 <br>
             </form>
-            <div>
+            <div style="margin: 0 1em;">
                 <label for="binFile">Choose SOTN BIN file</label>
                 <input id="binFile" type="file" accept=".bin">
                 <p><a id="downloadExtractionLink"></a></p>
             </div>
-            <div>
+            <div style="margin: 0 1em;">
                 <input id="generateButton" type="submit" value="Generate" />
                 <p><a id="downloadPPFLink"></a></p>
             </div>
