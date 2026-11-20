@@ -65,6 +65,7 @@ Most of the knowledge present in the map rando portion of this project is only p
   - [eldri7ch](https://github.com/eldri7ch2)
   - [LuciaRolon](https://github.com/LuciaRolon)
   - [Crazy4Blades](https://github.com/crazy4blades)
+  - [DotChris](https://github.com/DotChris)
 - ToiletPain, Chrisaegrimm, Dark Falz Joker, 一隻綿羊, Jasper, GamshyDrusky, and everyone else in the Long Library Discord for their extensive help during beta testing
 - Dr4gonBlitz, for being a huge inspiration for SOTN speedrunning, and for their continued help and patience during the alpha testing phase of this project
 - The entire SOTN community, for their generosity and kindness

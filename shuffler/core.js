@@ -5728,7 +5728,15 @@
                         stageAttemptCount += 1
                         const stageSeed = result.seeds.roomShuffler + '.' + stageName + '.' + stageAttemptCount
                         // console.log('stageSeed:', stageSeed)
-                        const shuffledRooms = roomShuffler.shuffleRooms(stageSeed, stageName, true)
+                        let applyNormalization = false
+                        if (shufflerOptions?.patcher?.on ?? false) {
+                            const normalizationPatchName = 'normalize' + stageName.at(0).toUpperCase() + stageName.slice(1)
+                            const patcherList = shufflerOptions?.patcher?.list ?? []
+                            if (patcherList.includes(normalizationPatchName)) {
+                                applyNormalization = true
+                            }
+                        }
+                        const shuffledRooms = roomShuffler.shuffleRooms(stageSeed, stageName, applyNormalization)
                         let validInd = true
                         if (stageName in roomShuffler.VALIDATIONS) {
                             // console.log('stageName:', stageName)
