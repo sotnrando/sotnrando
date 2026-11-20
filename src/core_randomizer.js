@@ -458,6 +458,7 @@ async function randomize(
                 break
               case "seasonalPhrasesMode":
               case "godspeedMode":
+              case "music":
               case "bossMusicSeparation":
               case "enemyDrops":
               case "turkeyMode":
