@@ -1044,25 +1044,6 @@
  	argvFlag: "bool",
 	autoBuild: false
   }, {
-	name: "Sword of Brawn", 
-	longId: "brawnySwordMode", 
-	shortId: "brawnySword", 
-	htmlElement: "brawn-sword", 
-	cliArg: "sod", 
-	longDescript: "Allows the Dawn Warriors summoned by Sword of Dawn to have their strength scaled with Alucard's STR stat.", 
-	shortDescript: "Dawn Warriors have their damage scaled.", 
-	incompatibleOptions: [
-	],
-	requiredOptions: [
-	],
-	incompatiblePresets: [
-	], 
-	functionCall: util.applySwordOfBrawnPatches, 
-	rngNeeded: false, 
-	simple: true,
- 	argvFlag: "bool",
-	autoBuild: false
-  }, {
 	name: "Entrance Trap Door", 
 	longId: "trapDoorMode", 
 	shortId: "trapDoor", 
@@ -1096,25 +1077,6 @@
 	incompatiblePresets: [
 	], 
 	functionCall: util.applyBetterCrossPatches, 
-	rngNeeded: false, 
-	simple: true,
- 	argvFlag: "bool",
-	autoBuild: false
-  }, {
-	name: "Enhanced Dark Shield Spell", 
-	longId: "darkEIFMode", 
-	shortId: "darkEIF", 
-	htmlElement: "dark-shield", 
-	cliArg: "dse", 
-	longDescript: "Reduces the enemy invincibility frames granted by the Shield Rod spell with the Dark Shield from 80 to 10.", 
-	shortDescript: "Reduces enemy i-frames for the Dark Shield spell.", 
-	incompatibleOptions: [
-	],
-	requiredOptions: [
-	],
-	incompatiblePresets: [
-	], 
-	functionCall: util.applyDarkShieldEIFPatches, 
 	rngNeeded: false, 
 	simple: true,
  	argvFlag: "bool",
@@ -1164,6 +1126,25 @@
 	rngNeeded: false, 
 	simple: false,
 	argvFlag: "bool",
+	autoBuild: true
+  }, {
+	name: "Enhanced Weapons", 
+	longId: "enhancedWeaponsMode", 
+	shortId: "enhancedWeapons", 
+	htmlElement: "enhanced-weapons", 
+	cliArg: "ew", 
+	longDescript: "Enhances Jewel Sword, Badelaire, Sword of Dawn, Yasutsuna, and Dark Shield Spell.", 
+	shortDescript: "Enhances weapons to make them more viable.", 
+	incompatibleOptions: [
+	],
+	requiredOptions: [
+	],
+	incompatiblePresets: [
+	], 
+	functionCall: util.applyEnhancedWeaponPatches, 
+	rngNeeded: false, 
+	simple: true,
+ 	argvFlag: "bool",
 	autoBuild: true
   }
 

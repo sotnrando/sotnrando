@@ -190,6 +190,7 @@ async function randomize(
   newGoals,
   startStatMax,
   godSpeedShoes,
+  rainbowMantle,
   mapColor,
   alucardPalette,
   alucardLiner,
@@ -356,12 +357,11 @@ async function randomize(
       if (godSpeedShoes || options.godspeedMode || applied.godspeedMode) {
         optWrite = optWrite + 0x80000000
       }
-      if (options.rainbowMantleMode || applied.rainbowMantleMode || isPride) {
+      if (rainbowMantle || options.rainbowMantleMode || applied.rainbowMantleMode || isPride) {
         optWrite = optWrite + 0x01000000
         check.apply(util.applyRainbowMantlePatches())
       }
       check.apply(util.randoFuncMaster(optWrite))
-      check.apply(util.applySwordBuffPatches())
       let seasonAllowed =
         options.seasonalPhrasesMode
         || applied.seasonalPhrasesMode

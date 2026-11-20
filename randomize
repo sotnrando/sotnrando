@@ -1184,6 +1184,7 @@ core_randomizer.randomize(
     getOption('newGoals'),
     null,
     getOption('godspeed'),
+    getOption('rainbowMantle'),
     getOption('mapcolor'),
     getOption('alucardPalette'),
     getOption('alucardLiner'),

@@ -3138,6 +3138,7 @@
     levelOneMode,
     instantDeathMode,
     cornucopiaMode,
+    enhancedWeaponsMode,
     newGoalsSet,
     startStatRandoMode,
     writes,
@@ -3198,6 +3199,7 @@
     this.levelOneMode = levelOneMode
     this.instantDeathMode = instantDeathMode
     this.cornucopiaMode = cornucopiaMode
+    this.enhancedWeaponsMode = enhancedWeaponsMode
     this.newGoalsSet = newGoalsSet
     this.startStatRandoMode = startStatRandoMode
     if (writes) {
@@ -3413,6 +3415,8 @@
     this.instantDeath = false
     // enemies can drop any item
     this.cornucopia = false
+    // enhance Weapons
+    this.enhancedWeapons = false
     // new goals for completion.
     this.newGoals = undefined
     // Starting Stat Randomizer
@@ -3800,6 +3804,9 @@
     if ('cornucopiaMode' in json) {
       builder.cornucopiaMode(json.cornucopiaMode)
     }
+    if ('enhancedWeaponsMode' in json) {
+      builder.enhancedWeaponsMode(json.enhancedWeaponsMode)
+    }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in json) {
       builder.newGoalsSet(json.newGoalsSet)
@@ -3820,17 +3827,11 @@
     if ('maxMasaMode' in json) {
       builder.maxMasaMode(json.maxMasaMode)
     }
-    if ('brawnySwordMode' in json) {
-      builder.brawnySwordMode(json.brawnySwordMode)
-    }
     if ('trapDoorMode' in json) {
       builder.trapDoorMode(json.trapDoorMode)
     }
     if ('betterCrossMode' in json) {
       builder.betterCrossMode(json.betterCrossMode)
-    }
-    if ('darkEIFMode' in json) {
-      builder.darkEIFMode(json.darkEIFMode)
     }
     if ('seasonalPhrasesMode' in json) {
       builder.seasonalPhrasesMode(json.seasonalPhrasesMode)
@@ -4227,6 +4228,9 @@
     if ('cornucopiaMode' in preset) {
       this.cornucopia = preset.cornucopiaMode
     }
+    if ('enhancedWeaponsMode' in preset) {
+      this.enhancedWeapons = preset.enhancedWeaponsMode
+    }
     // ============================= Preset: Argument =========================
     if ('newGoalsSet' in preset) {
       this.newGoals = preset.newGoalsSet
@@ -4247,17 +4251,11 @@
     if ('maxMasaMode' in preset) {
       this.maxMasa = preset.maxMasaMode
     }
-    if ('brawnySwordMode' in preset) {
-      this.brawnySword = preset.brawnySwordMode
-    }
     if ('trapDoorMode' in preset) {
       this.trapDoor = preset.trapDoorMode
     }
     if ('betterCrossMode' in preset) {
       this.betterCross = preset.betterCrossMode
-    }
-    if ('darkEIFMode' in preset) {
-      this.darkEIF = preset.darkEIFMode
     }
     if ('seasonalPhrasesMode' in preset) {
       this.seasonalPhrases = preset.seasonalPhrasesMode
@@ -5109,6 +5107,11 @@
       this.cornucopia = enabled
     }
   
+  PresetBuilder.prototype.enhancedWeaponsMode =
+    function enhancedWeaponsMode(enabled) {
+      this.enhancedWeapons = enabled
+    }
+  
   // ============================== Preset: Argument ==========================
   
   // Assign New Goals
@@ -5474,6 +5477,7 @@
     const levelOne = self.levelOne
     const instantDeath = self.instantDeath
     const cornucopia = self.cornucopia
+    const enhancedWeapons = self.enhancedWeapons
     const newGoals = self.newGoals
     const startStatRando = self.startStatRando
     const writes = self.writes
@@ -5534,6 +5538,7 @@
       levelOne,
       instantDeath,
       cornucopia,
+      enhancedWeapons,
       newGoals,
       startStatRando,
       writes,
@@ -6133,60 +6138,9 @@
   // =========================================================================
   //  #region Randomizer Enhancements
   // =========================================================================
-
-  function applySwordBuffPatches() {
-    const data = new checked()
-    let offset
-
-    // console.log('Jewel Sword')
-    // Jewel Sword Patch Hook - code and idea by eldri7ch
-    data.writeWord(0x0010d2a0, 0x08026236)
-
-    // Badelaire Patch - code by eldri7ch and idea by MottZilla
-    data.writeChar(0x10d238, 0x34)
-
-    // Yasutsuna Hitbox Fix by MottZilla
-    // RIGHT HAND
-    offset = 0x3bfb314
-    offset = data.writeWord(offset, 0x18000024)
-    offset = data.writeWord(offset, 0x00000000)
-
-    offset = 0x3bfb3a8
-    offset = data.writeWord(offset, 0x3c178007)
-    offset = data.writeWord(offset, 0x36f733d8)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x8ef60000)
-    offset = data.writeWord(offset, 0x8ef50004)
-    offset = data.writeWord(offset, 0x96f40014)
-    offset = data.writeWord(offset, 0xae360000)
-    offset = data.writeWord(offset, 0xae350004)
-    offset = data.writeWord(offset, 0xa6340014)
-    offset = data.writeWord(offset, 0x8fbf0030)
-    offset = data.writeWord(offset, 0x8fb7002c)
-    offset = data.writeWord(offset, 0x1800ffd1)
-
-    // LEFT HAND
-    offset = 0x3dd57f4
-    offset = data.writeWord(offset, 0x18000024)
-    offset = data.writeWord(offset, 0x00000000)
-
-    offset = 0x3dd5888
-    offset = data.writeWord(offset, 0x3c178007)
-    offset = data.writeWord(offset, 0x36f733d8)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x8ef60000)
-    offset = data.writeWord(offset, 0x8ef50004)
-    offset = data.writeWord(offset, 0x96f40014)
-    offset = data.writeWord(offset, 0xae360000)
-    offset = data.writeWord(offset, 0xae350004)
-    offset = data.writeWord(offset, 0xa6340014)
-    offset = data.writeWord(offset, 0x8fbf0030)
-    offset = data.writeWord(offset, 0x8fb7002c)
-    offset = data.writeWord(offset, 0x1800ffd1)
-
-    return data
-  }
   
+  // Space saved for Maria Saturn implementation - eldri7ch
+
   // =========================================================================
   // region# Preset: Boolean 
   // =========================================================================
@@ -10180,50 +10134,50 @@
     data.writeChar(0x000B4A7D,0x07)
 
     // replace the sprite
-	offset = 0xDE3CC
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x11000000)
-	offset = data.writeWord(offset,0x011111)
-	offset = data.writeWord(offset,0x32100000)
-	offset = data.writeWord(offset,0x0625144)
-	offset = data.writeWord(offset,0x77260000)
-	offset = data.writeWord(offset,0x062887)
-	offset = data.writeWord(offset,0x72600000)
-	offset = data.writeWord(offset,0x062977)
-	offset = data.writeWord(offset,0x26000000)
-	offset = data.writeWord(offset,0x06585)
-	offset = data.writeWord(offset,0x62600000)
-	offset = data.writeWord(offset,0x069266)
-	offset = data.writeWord(offset,0x69600000)
-	offset = data.writeWord(offset,0x0642977)
-	offset = data.writeWord(offset,0x75a60000)
-	offset = data.writeWord(offset,0x0639577)
-	offset = data.writeWord(offset,0x7b526000)
-	offset = data.writeWord(offset,0x06a2acc)
-	offset = data.writeWord(offset,0xc7bd2600)
-	offset = data.writeWord(offset,0x062a8cc)
-	offset = data.writeWord(offset,0xcc7bd600)
-	offset = data.writeWord(offset,0x06d28cc)
-	offset = data.writeWord(offset,0xcc75b600)
-	offset = data.writeWord(offset,0x062d5cc)
-	offset = data.writeWord(offset,0x7b8b6000)
-	offset = data.writeWord(offset,0x06b2b57)
-	offset = data.writeWord(offset,0x66660000)
-	offset = data.writeWord(offset,0x066666)
-	offset = data.writeWord(offset,0x00)
-	offset = data.writeWord(offset,0x00)
-	  
-    //replace the palette data for the sprite
-	offset = 0xEE8FC
-	offset = data.writeWord(offset,0x14470000)
-	offset = data.writeWord(offset,0x512f5194)
-	offset = data.writeWord(offset,0x56153ccc)
-	offset = data.writeWord(offset,0x24a21c44)
-	offset = data.writeWord(offset,0x26fe72fc)
-	offset = data.writeWord(offset,0x3da40ace)
-	offset = data.writeWord(offset,0x4ea03506)
-	offset = data.writeWord(offset,0x00)
+    offset = 0xDE3CC
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x11000000)
+    offset = data.writeWord(offset,0x011111)
+    offset = data.writeWord(offset,0x32100000)
+    offset = data.writeWord(offset,0x0625144)
+    offset = data.writeWord(offset,0x77260000)
+    offset = data.writeWord(offset,0x062887)
+    offset = data.writeWord(offset,0x72600000)
+    offset = data.writeWord(offset,0x062977)
+    offset = data.writeWord(offset,0x26000000)
+    offset = data.writeWord(offset,0x06585)
+    offset = data.writeWord(offset,0x62600000)
+    offset = data.writeWord(offset,0x069266)
+    offset = data.writeWord(offset,0x69600000)
+    offset = data.writeWord(offset,0x0642977)
+    offset = data.writeWord(offset,0x75a60000)
+    offset = data.writeWord(offset,0x0639577)
+    offset = data.writeWord(offset,0x7b526000)
+    offset = data.writeWord(offset,0x06a2acc)
+    offset = data.writeWord(offset,0xc7bd2600)
+    offset = data.writeWord(offset,0x062a8cc)
+    offset = data.writeWord(offset,0xcc7bd600)
+    offset = data.writeWord(offset,0x06d28cc)
+    offset = data.writeWord(offset,0xcc75b600)
+    offset = data.writeWord(offset,0x062d5cc)
+    offset = data.writeWord(offset,0x7b8b6000)
+    offset = data.writeWord(offset,0x06b2b57)
+    offset = data.writeWord(offset,0x66660000)
+    offset = data.writeWord(offset,0x066666)
+    offset = data.writeWord(offset,0x00)
+    offset = data.writeWord(offset,0x00)
+      
+      //replace the palette data for the sprite
+    offset = 0xEE8FC
+    offset = data.writeWord(offset,0x14470000)
+    offset = data.writeWord(offset,0x512f5194)
+    offset = data.writeWord(offset,0x56153ccc)
+    offset = data.writeWord(offset,0x24a21c44)
+    offset = data.writeWord(offset,0x26fe72fc)
+    offset = data.writeWord(offset,0x3da40ace)
+    offset = data.writeWord(offset,0x4ea03506)
+    offset = data.writeWord(offset,0x00)
     return data
   }
 
@@ -11155,36 +11109,6 @@
     return data
   }
 
-  function applySwordOfBrawnPatches() {
-    // console.log('dev's stash')
-
-    const data = new checked()
-    let offset
-
-    //Sword of Dawn Scaling by MottZilla
-    offset = 0x3b428f8
-    offset = data.writeWord(offset, 0x3c028009)
-    offset = data.writeWord(offset, 0x8c427bd8)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0xa6220040)
-    offset = data.writeWord(offset, 0x00000000)
-    offset = data.writeWord(offset, 0x34020001)
-    offset = data.writeWord(offset, 0x34030004)
-    data.writeWord(offset, 0x03e00008)
-
-    data.writeChar(0xb39b4, 0x0f)
-
-    offset = 0x3b41654
-    offset = data.writeWord(offset, 0x0c05f314)
-    data.writeWord(offset, 0x00000000)
-
-    offset = 0x3b4219c
-    offset = data.writeWord(offset, 0x0c05f314)
-    data.writeWord(offset, 0x00000000)
-
-    return data
-  }
-
   function applyEntranceTrapDoorPatches() {
     // console.log('dev's stash')
 
@@ -11233,17 +11157,6 @@
     offset = 0x000b102a
     data.writeChar(offset, 0x32)  // costs 50 Hearts
     
-    return data
-  }
-
-  function applyDarkShieldEIFPatches() {
-    // console.log('dev's stash')
-
-    const data = new checked()
-
-    // Fix Dark Shield enemy i-frames
-    data.writeWord(0x03ceab34, 0x3402000a)
-
     return data
   }
 
@@ -12561,6 +12474,84 @@
     return data
   }
 
+  function applyEnhancedWeaponPatches() {
+    // console.log('Enhanced Weapon Patches')
+
+    const data = new checked()
+    let offset
+
+    //Sword of Dawn Scaling by MottZilla
+    offset = 0x3b428f8
+    offset = data.writeWord(offset, 0x3c028009)
+    offset = data.writeWord(offset, 0x8c427bd8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0xa6220040)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x34020001)
+    offset = data.writeWord(offset, 0x34030004)
+    data.writeWord(offset, 0x03e00008)
+
+    data.writeChar(0xb39b4, 0x0f)
+
+    offset = 0x3b41654
+    offset = data.writeWord(offset, 0x0c05f314)
+    data.writeWord(offset, 0x00000000)
+
+    offset = 0x3b4219c
+    offset = data.writeWord(offset, 0x0c05f314)
+    data.writeWord(offset, 0x00000000)
+
+    // Fix Dark Shield enemy i-frames
+    data.writeWord(0x03ceab34, 0x3402000a)
+
+    // Jewel Sword Patch Hook - code and idea by eldri7ch
+    data.writeWord(0x0010d2a0, 0x08026236)
+
+    // Badelaire Patch - code by eldri7ch and idea by MottZilla
+    data.writeChar(0x10d238, 0x34)
+
+    // Yasutsuna Hitbox Fix by MottZilla
+    // RIGHT HAND
+    offset = 0x3bfb314
+    offset = data.writeWord(offset, 0x18000024)
+    offset = data.writeWord(offset, 0x00000000)
+
+    offset = 0x3bfb3a8
+    offset = data.writeWord(offset, 0x3c178007)
+    offset = data.writeWord(offset, 0x36f733d8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8ef60000)
+    offset = data.writeWord(offset, 0x8ef50004)
+    offset = data.writeWord(offset, 0x96f40014)
+    offset = data.writeWord(offset, 0xae360000)
+    offset = data.writeWord(offset, 0xae350004)
+    offset = data.writeWord(offset, 0xa6340014)
+    offset = data.writeWord(offset, 0x8fbf0030)
+    offset = data.writeWord(offset, 0x8fb7002c)
+    offset = data.writeWord(offset, 0x1800ffd1)
+
+    // LEFT HAND
+    offset = 0x3dd57f4
+    offset = data.writeWord(offset, 0x18000024)
+    offset = data.writeWord(offset, 0x00000000)
+
+    offset = 0x3dd5888
+    offset = data.writeWord(offset, 0x3c178007)
+    offset = data.writeWord(offset, 0x36f733d8)
+    offset = data.writeWord(offset, 0x00000000)
+    offset = data.writeWord(offset, 0x8ef60000)
+    offset = data.writeWord(offset, 0x8ef50004)
+    offset = data.writeWord(offset, 0x96f40014)
+    offset = data.writeWord(offset, 0xae360000)
+    offset = data.writeWord(offset, 0xae350004)
+    offset = data.writeWord(offset, 0xa6340014)
+    offset = data.writeWord(offset, 0x8fbf0030)
+    offset = data.writeWord(offset, 0x8fb7002c)
+    offset = data.writeWord(offset, 0x1800ffd1)
+
+    return data
+  }
+
   // =========================================================================
   //  #region Website: Argument
   // =========================================================================
@@ -13429,16 +13420,13 @@
     applyOpenClockStatuepatches: applyOpenClockStatuepatches,
     applySpikeRoomRandoPatches: applySpikeRoomRandoPatches,
     applyLycanModePatches: applyLycanModePatches,
-    applySwordBuffPatches: applySwordBuffPatches,
     applyStartStatRandoPatches: applyStartStatRandoPatches,
     applyEasyModePatches: applyEasyModePatches,
     applyFourBeastsPatches: applyFourBeastsPatches,
     applyForbiddenRouteShortcutPatches: applyForbiddenRouteShortcutPatches,
     applyMuramasaMaxPatches: applyMuramasaMaxPatches,
-    applySwordOfBrawnPatches: applySwordOfBrawnPatches,
     applyEntranceTrapDoorPatches: applyEntranceTrapDoorPatches,
     applyBetterCrossPatches: applyBetterCrossPatches,
-    applyDarkShieldEIFPatches: applyDarkShieldEIFPatches,
     applyMapColor: applyMapColor,
     applyNewGoals: applyNewGoals,
     applyAlucardPalette: applyAlucardPalette,
@@ -13450,6 +13438,7 @@
     applyNimbleLiteModePatches: applyNimbleLiteModePatches,
     applyCornucopiaModePatches: applyCornucopiaModePatches,
     applyRainbowMantlePatches: applyRainbowMantlePatches,
+    applyEnhancedWeaponPatches: applyEnhancedWeaponPatches,
     applyAlucardLiner: applyAlucardLiner,
     randomizeRelics: randomizeRelics,
     randomizeItems: randomizeItems,
