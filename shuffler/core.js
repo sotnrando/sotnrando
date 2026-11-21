@@ -5992,29 +5992,29 @@
         // Randomize enemy drops
         if (shufflerOptions?.enemyDropRandomizer?.on ?? false) {
             console.log(' ... Randomize enemy drops')
-            const seed = shufflerOptions.enemyDropRandomizer.seed ?? (result.seeds.seedName + '.enemyDropRandomizer')
-            const enemyDropChanges = enemyDropRandomizer.randomizeEnemyDrops(seed)
+            result.seeds.enemyDropRandomizer = shufflerOptions.enemyDropRandomizer.seed ?? (result.seeds.seedName + '.enemyDropRandomizer')
+            const enemyDropChanges = enemyDropRandomizer.randomizeEnemyDrops(result.seeds.enemyDropRandomizer)
             result.changes.push(enemyDropRandomizer.getEnemyDropChanges(enemyDropChanges))
         }
         // Randomize gear
         if (shufflerOptions?.gearRandomizer?.on ?? false) {
             console.log(' ... Randomize gear')
-            const seed = shufflerOptions.gearRandomizer.seed ?? (result.seeds.seedName + '.gearRandomizer')
-            const gearChanges = gearRandomizer.randomizeGear(seed)
+            result.seeds.gearRandomizer = shufflerOptions.gearRandomizer.seed ?? (result.seeds.seedName + '.gearRandomizer')
+            const gearChanges = gearRandomizer.randomizeGear(result.seeds.gearRandomizer)
             result.changes.push(gearRandomizer.getGearChanges(gearChanges))
         }
         // Randomize items
         if (shufflerOptions?.itemRandomizer?.on ?? false) {
-            console.log(' ... Randomize gear')
-            const seed = shufflerOptions.itemRandomizer.seed ?? (result.seeds.seedName + '.itemRandomizer')
-            const itemsChanges = itemRandomizer.randomizeItems(seed)
+            console.log(' ... Randomize items')
+            result.seeds.itemRandomizer = shufflerOptions.itemRandomizer.seed ?? (result.seeds.seedName + '.itemRandomizer')
+            const itemsChanges = itemRandomizer.randomizeItems(result.seeds.itemRandomizer)
             result.changes.push(itemRandomizer.getItemsChanges(itemsChanges.locations))
         }
         // Shuffle music
         if (shufflerOptions?.musicShuffler?.on ?? false) {
             console.log(' ... Shuffle music')
-            const seed = shufflerOptions.musicShuffler.seed ?? (result.seeds.seedName + '.musicShuffler')
-            const randomizedSongs = musicShuffler.randomizeSongs(seed)
+            result.seeds.musicShuffler = shufflerOptions.musicShuffler.seed ?? (result.seeds.seedName + '.musicShuffler')
+            const randomizedSongs = musicShuffler.randomizeSongs(result.seeds.musicShuffler)
             result.changes.push(musicShuffler.getSongChanges(randomizedSongs))
         }
         // Add hints to the file select menu
