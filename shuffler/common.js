@@ -1118,6 +1118,62 @@
         },
     }
 
+    const LOGIC_FLAGS = {
+        location: [
+            'locationBatCard',
+            'locationCubeOfZoe',
+            'locationDemonCard',
+            'locationEchoOfBat',
+            'locationFaerieCard',
+            'locationFaerieScroll',
+            'locationFireOfBat',
+            'locationForceOfEcho',
+            'locationFormOfMist',
+            'locationGasCloud',
+            'locationGhostCard',
+            'locationGoldRing',
+            'locationGravityBoots',
+            'locationHolySymbol',
+            'locationJewelOfOpen',
+            'locationLeapStone',
+            'locationMermanStatue',
+            'locationPowerOfMist',
+            'locationPowerOfWolf',
+            'locationSilverRing',
+            'locationSkillOfWolf',
+            'locationSoulOfBat',
+            'locationSoulOfWolf',
+            'locationSpikeBreaker',
+            'locationSpiritOrb',
+            'locationSwordCard',
+        ],
+        status: [
+            'statusBarrierInColosseumOpened',
+            'statusBridgeInUndergroundCavernsBroken',
+            'statusButtonInUndergroundCavernsActivated',
+            'statusCannonActivated',
+            'statusDemonSwitchActivated',
+            'statusLightInSpikeMazeActivated',
+            'statusMetDeathInCastleEntrance',
+            'statusPassageFromCastleEntranceToMarbleGalleryOpened',
+            'statusPassageFromCastleEntranceToUndergroundCavernsOpened',
+            'statusPassageFromCastleEntranceToWarpRoomsOpened',
+            'statusPressurePlateInMarbleGalleryActivated',
+            'statusRichterSaved',
+            'statusSecretFloorInClockRoomOpened',
+            'statusSecretPlatformInOuterWallActivated',
+            'statusSecretWallInMermanRoomOpened',
+            'statusStairwellInAbandonedMineDislodged',
+            'statusStatueInRoyalChapelMoved',
+            'statusSuccubusDefeated',
+            'statusTrapdoorAfterDrawbridgeOpened',
+            'statusWarpRoomToAbandonedMineUnlocked',
+            'statusWarpRoomToCastleKeepUnlocked',
+            'statusWarpRoomToOlroxsQuartersUnlocked',
+            'statusWarpRoomToOuterWallUnlocked',
+        ],
+    }
+
     const NODES = {
         abandonedMine: {
             locationDemonCard: {
@@ -16147,7 +16203,7 @@
                         // console.log('nextState:', nextState)
                         throw Error('')
                     }
-                    const nextStateHash = hashedState(nextState)
+                    const nextStateHash = nextState.id
                     if (
                         !map.has(nextStateHash) ||
                         map.get(nextStateHash).time < nextState.time
@@ -16185,6 +16241,38 @@
                 result = (goalFound === null)
                 break
         }
+        return result
+    }
+
+    function getStateIdentifier(state) {
+        const work = {}
+        work.locationValue = LOGIC_FLAGS.location
+        .reduce((accumulator, keyName, keyIndex) => {
+            const currentValue = (state[keyName] ?? false) ? (1 << keyIndex) : 0
+            return accumulator + currentValue
+        }, 0)
+        work.statusValue = LOGIC_FLAGS.status
+        .reduce((accumulator, keyName, keyIndex) => {
+            const currentValue = (state[keyName] ?? false) ? (1 << keyIndex) : 0
+            return accumulator + currentValue
+        }, 0)
+        work.priority = []
+        .concat(LOGIC_FLAGS.location)
+        .concat(LOGIC_FLAGS.status)
+        .reduce((accumulator, locationName) => {
+            const currentValue = (state[locationName] ?? false) ? 1 : 0
+            return accumulator + currentValue
+        }, 0)
+        work.elements = [
+            (state.stage ?? 'NONE'),
+            (state.room ?? 'NONE'),
+            (state.section ?? 'NONE'),
+            (work.priority),
+            (0xFFFFFFFF & work.locationValue).toString(16).padStart(8, '0'),
+            (0xFFFFFFFF & work.statusValue).toString(16).padStart(8, '0'),
+            (state.verticalClimb ?? 0),
+        ]
+        const result = work.elements.join('.')
         return result
     }
 
@@ -16381,7 +16469,7 @@
             .find((requirementInfo) => {
                 const validRequirement = isValidRequirement(location, requirementInfo)
                 if (validRequirement) {
-                    updateStateWithOutcome(location, regionInfo.outcome, simplifyState)
+                    updateStateWithOutcome(location, regionInfo.outcome, { simplifyState: simplifyState })
                     validRegion = true
                 }
                 return validRequirement
@@ -16390,7 +16478,7 @@
         })
     }
 
-    function updateStateWithOutcome(state, outcome, simplifyState=true) {
+    function updateStateWithOutcome(state, outcome, options={}) {
         Object.entries(outcome)
         .forEach(([propertyKey, propertyInfo]) => {
             switch (typeof propertyInfo) {
@@ -16421,8 +16509,11 @@
                     break
             }
         })
-        if (simplifyState) {
+        if (options.simplifyState ?? false) {
             simplify(state)
+        }
+        if (options.updateId ?? true) {
+            state.id = getStateIdentifier(state)
         }
     }
 
