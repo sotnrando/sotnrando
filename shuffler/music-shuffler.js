@@ -1,3 +1,8 @@
+
+// NOTE(sestren): In the vanilla game, most or all boss stages have their initial music set to `musicNoAudio`.
+// NOTE(sestren): In the extraction file, these have the following key pattern, `overlays.bossXXX.musicId`, where XXX is a boss's name.
+// NOTE(sestren): Altering these values to anything other than `musicNoAudio` is not recommended, and in the case of bossDeath, can cause softlocks.
+
 (function (self) {
     let common
     let seedrandom
@@ -353,7 +358,6 @@
                     'intense',
                 ],
                 keys: [
-                    'overlays.bossGranfaloon.musicId',
                     'stages.catacombs.constants.music.boss.data',
                     'stages.catacombs.constants.music.boss2.data',
                 ],
@@ -377,7 +381,6 @@
                     'intense',
                 ],
                 keys: [
-                    'overlays.bossDeath.musicId',
                     'stages.cave.constants.music.boss.data',
                 ],
             },
