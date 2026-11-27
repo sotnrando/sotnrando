@@ -11,7 +11,7 @@ function loadNavbar() {
             <ul class="submenu">
                 <li><a href="/randomizer.html">Randomizer</a></li>
                 <li><a href="/changelog.html">Changelog</a></li>
-                <li><a href="/shuffler/index.html">Shuffler</a></li>
+                <li><a href="/shuffler/index.html">Map Rando</a></li>
             </ul>
         </li>
 
